@@ -12,8 +12,12 @@ function isStatic(obj) {
   return obj.annotation && obj.annotation.static;
 }
 
-function isReadOnly(obj) {
-  return obj.annotation && !obj.annotation.writable;
+function isReadable(obj) {
+  return obj.annotation && obj.annotation.readable;
+}
+
+function isWritable(obj) {
+  return obj.annotation && obj.annotation.writable;
 }
 
 function isPrivate(obj) {
@@ -35,425 +39,291 @@ function isCast(obj) {
 function isEnumString(obj) {
   return obj.annotation && obj.annotation.string === true;
 }
+ 
+const gJerryScriptFuncArgs = `(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  )`;
 
-class JsGenerator {
+class JerryscriptGenerator {
   constructor() {
     this.result = '';
-    this.json = [];
   }
 
-  toJsClassName(name) {
-    name = name.replace(/_t$/, '');
-    name = name.replace(/(^|_)[a-z]/g, r => {
-      if (r.length > 1) {
-        r = r.substr(1);
-      }
+  genJavascriptIncludes() {
+    let result = '';
+    result += '#include "jerryscript.h"\n';
+    result += '#include "jerryscript-ext/handler.h"\n';
 
-      return r.toUpperCase();
-    });
-
-    return name;
+    return result;
   }
-
-  getClassInfo(name) {
-    const json = this.json;
-
-    for (let i = 0; i < json.length; i++) {
-      let iter = json[i];
-      if (iter.type === 'class' && iter.name === name) {
-        return iter;
-      }
-    }
-
-    return null;
-  }
-
-  genClassChain(name) {
-    let str = '';
-    let info = this.getClassInfo(name);
-
-    while (info) {
-      str += '/' + info.name;
-      if (!info.parent) {
-        break;
-      }
-      info = this.getClassInfo(info.parent);
-    }
-
-    return str;
-  }
-
+  
   genDecl(index, type, name) {
-    let str = '';
-    str += `  ${type} ${name} = `;
+    let result = '';
+    result += `  ${type} ${name} = `;
     if (index < 0) {
       if (type.indexOf('*') >= 0) {
-        str += 'NULL;\n';
+        result += 'NULL;\n';
       } else {
-        str += '0;\n';
+        result += '0;\n';
       }
     } else {
       if (type.indexOf('char*') >= 0) {
-        str += `(${type})luaL_checkstring(L, ${index+1});\n`;
+        result += `(${type})jerry_get_utf8_string(args_p[${index}]);\n`;
       } else if (type.indexOf('wchar_t*') >= 0) {
-        str += `(${type})lua_touserdata(L, ${index+1});\n`;
+        result += `(${type})jerry_get_wstring(args_p[${index}]);\n`;
       } else if (type.indexOf('void*') >= 0) {
         if (name !== 'ctx') {
-          str += `(${type})lua_touserdata(L, ${index+1});\n`;
+          result += `(${type})jerry_get_pointer(args_p[${index}], "${type}");\n`;
         } else {
-          str += ' NULL;\n';
+          result += ' NULL;\n';
         }
       } else if (type.indexOf('*') >= 0) {
         const type_name = type.replace(/\*/g, '');
-        str += `(${type})tk_checkudata(L, ${index+1}, "${type_name}");\n`;
+        result += `(${type})jerry_get_pointer(args_p[${index}], "${type}");\n`;
       } else if (type.indexOf('float') >= 0 || type.indexOf('double') >= 0) {
-        str += `(${type})luaL_checknumber(L, ${index+1});\n`;
+        result += `(${type})jerry_get_number_value(args_p[${index}]);\n`;
       } else if (type.indexOf('bool_t') >= 0) {
-        str += `(${type})lua_toboolean(L, ${index+1});\n`;
-      } else if (type.indexOf('func_t') >= 0) {
-        str += `(${type})lua_tocfunction(L, ${index+1});\n`;
+        result += `(${type})jerry_get_boolean_value(args_p[${index}]);\n`;
+      } else if (type.indexOf('func_t') >= 0 || type.indexOf('visit_t') >= 0) {
+        result += `(${type})jerry_get_pointer(args_p[${index}], "${type}");\n`;
       } else {
-        str += `(${type})luaL_checkinteger(L, ${index+1});\n`;
+        result += `(${type})jerry_get_number_value(args_p[${index}]);\n`;
       }
     }
-
-    return str;
-  }
-
-  genParamsDecl(m) {
-    let str = '';
-    let returnType = m.return.type;
-
-    if (returnType != 'void') {
-      str = this.genDecl(-1, returnType, 'ret');
-    }
-
-    m.params.forEach((iter, index) => {
-      str += this.genDecl(index, iter.type, iter.name);
-    })
-
-    return str;
-  }
-
-  genReturnData(type, name) {
-    let str = '';
-    if (type.indexOf('char*') >= 0) {
-      str = `  lua_pushstring(L,(char*)(${name}));\n\n`;
-      str += '  return 1;\n';
-    } else if (type.indexOf('wchar_t*') >= 0) {
-      str = `  lua_pushlightuserdata(L,(void*)(${name}));\n\n`;
-      str += '  return 1;\n';
-    } else if (type.indexOf('*') >= 0) {
-      const typeName = type.replace(/\*/g, "");
-      str += `  return tk_newuserdata(L, (void*)${name}, "${this.genClassChain(typeName)}", "awtk.${typeName}");\n`;
-    } else if (type.indexOf('int') >= 0) {
-      str = `  lua_pushinteger(L,(lua_Integer)(${name}));\n\n`;
-      str += '  return 1;\n';
-    } else if (type.indexOf('bool_t') >= 0) {
-      str = `  lua_pushboolean(L,(lua_Integer)(${name}));\n\n`;
-      str += '  return 1;\n';
-    } else {
-      str = `  lua_pushnumber(L,(lua_Number)(${name}));\n\n`;
-      str += '  return 1;\n';
-    }
-
-    return str;
-  }
-
-  genCallMethod(cls, m) {
-    const ret_type = m.return.type;
-    let str = ret_type == 'void' ? '  ' : '  ret = '
-    str += `(${ret_type})${m.name}(`;
-    m.params.forEach((iter, index) => {
-      if (index > 0) {
-        str += ', ' + iter.name;
-      } else {
-        str += iter.name;
-      }
-    })
-
-    str += ');\n';
-
-    str += '\n';
-    if (ret_type == 'void') {
-      str += '  return 0;\n';
-    } else {
-      if (isConstructor(m) || isCast(m)) {
-        str += this.genReturnData(`${cls.name}*`, 'ret');
-      } else {
-        str += this.genReturnData(ret_type, 'ret');
-      }
-    }
-
-    return str;
-  }
-
-  genMethod(cls, m) {
-    const args_nr = m.params.length;
-    let str = `static int wrap_${m.name}(lua_State* L) {\n`;
-    str += this.genParamsDecl(m);
-    str += this.genCallMethod(cls, m);
-    str += '}\n\n';
-
-    return str;
-  }
-
-  genSetProperty(index, cls, p) {
-    let str = '';
-    if (index === 0) {
-      str += `  if(strcmp(name, "${p.name}") == 0) {\n`;
-    } else {
-      str += `  else if(strcmp(name, "${p.name}") == 0) {\n`;
-    }
-    if (p.readonly) {
-      str += `    log_debug("${p.name} is readonly\\n");\n`;
-      str += `    return 0;\n`;
-    } else {
-      str += '  ' + this.genDecl(2, p.type, p.name);
-      str += `    obj->${p.name} = ${p.name};\n`;
-      str += `    return 1;\n`;
-    }
-    str += '  }\n';
-
-    return str;
-  }
-
-  genGetProperty(index, cls, p) {
-    let str = '';
-    if (index === 0) {
-      str += `  if(strcmp(name, "${p.name}") == 0) {\n`;
-    } else {
-      str += `  else if(strcmp(name, "${p.name}") == 0) {\n`;
-    }
-    str += '  ';
-    str += this.genReturnData(p.type, `obj->${p.name}`);
-    str += '  }\n';
-
-    return str;
-  }
-
-  methodToShortName(clsName, m) {
-    const methodName = m.alias || m.name;
-
-    return methodName.replace(clsName.replace(/_t$/, '') + "_", '')
-  }
-
-  genSetProp(cls) {
-    let str = '';
-    const clsName = cls.name;
-
-    str += `static int wrap_${clsName}_set_prop(lua_State* L) {\n`;
-    str += this.genDecl(0, cls.name + '*', "obj");
-    str += this.genDecl(1, "const char*", "name");
-    str += '  (void)obj;\n';
-    str += '  (void)name;\n';
-
-    let hasSetProps = false;
-    cls.properties.forEach((p, index) => {
-      if (!isReadOnly(p) && !isFake(p)) {
-        str += this.genSetProperty(index, cls, p);
-        hasSetProps = true;
-      }
-    });
-
-    if (hasSetProps) {
-      str += `  else {\n`;
-    }
-    if (cls.parent) {
-      str += `    return wrap_${cls.parent}_set_prop(L);\n`;
-    } else if (hasSetProps) {
-      str += `    log_debug("%s: not supported %s\\n", __FUNCTION__, name);\n`;
-      str += `    return 0;\n`;
-    }
-    if (hasSetProps) {
-      str += `  }\n`;
-    } else if(!cls.parent) {
-      str += `  log_debug("%s: not supported %s\\n", __FUNCTION__, name);\n`;
-      str += `  return 0;\n`;
-    }
-
-    str += `}\n\n`;
-
-    return str;
-  }
-
-  genGetProp(cls) {
-    let str = '';
-    const clsName = cls.name;
-
-    str += `static int wrap_${clsName}_get_prop(lua_State* L) {\n`;
-    str += this.genDecl(0, cls.name + '*', "obj");
-    str += this.genDecl(1, "const char*", "name");
-    str += `  const luaL_Reg* ret = find_member(${cls.name}_member_funcs, name);\n\n`;
-
-    str += '  (void)obj;\n';
-    str += '  (void)name;\n';
-    str += '  if(ret) {\n';
-    str += '    lua_pushcfunction(L, ret->func);\n';
-    str += '    return 1;\n';
-    str += '  }\n';
-
-    cls.properties.forEach((p, index) => {
-      if (!isFake(p)) {
-        str += this.genGetProperty(index, cls, p);
-      }
-    });
-
-    str += `  else {\n`;
-    if (cls.parent) {
-      str += `    return wrap_${cls.parent}_get_prop(L);\n`;
-    } else {
-      if (cls.name === 'widget_t') {
-        str += `    widget_t* child = widget_lookup(obj, name, FALSE);\n`;
-        str += `    if(child != NULL) {\n`;
-        str += `      return tk_newuserdata(L, (void*)child, "/widget_t", "awtk.widget_t");\n`;
-        str += `    }\n`;
-      }
-      str += `    log_debug("%s: not supported %s\\n", __FUNCTION__, name);\n`;
-      str += `    return 0;\n`;
-    }
-    str += `  }\n`;
-
-    str += `}\n\n`;
-
-    return str;
-  }
-
-  genClassInit(cls) {
-    let str = '';
-    const clsName = cls.name;
-
-    str += `static void ${cls.name}_init(lua_State* L) {\n`;
-    str += '  static const struct luaL_Reg static_funcs[] = {\n'
-    cls.methods.forEach(m => {
-      const name = this.methodToShortName(cls.name, m);
-      if (isConstructor(m) || isStatic(m) || isCast(m)) {
-        str += `    {"${name}", wrap_${m.name}},\n`;
-      }
-    });
-
-    str += `    {NULL, NULL}\n`;
-    str += '  };\n\n'
-
-
-    if (!isFake(cls)) {
-      str += '  static const struct luaL_Reg index_funcs[] = {\n'
-      str += `    {"__index", wrap_${clsName}_get_prop},\n`;
-      str += `    {"__newindex", wrap_${clsName}_set_prop},\n`;
-      str += `    {NULL, NULL}\n`;
-      str += '  };\n\n'
-
-      str += `  luaL_newmetatable(L, "awtk.${cls.name}");\n`;
-      str += `  lua_pushstring(L, "__index");\n`;
-      str += '  lua_pushvalue(L, -2);\n';
-      str += '  lua_settable(L, -3);\n';
-      str += `  luaL_openlib(L, NULL, index_funcs, 0);\n`;
-    }
-
-    str += `  luaL_openlib(L, "${this.toJsClassName(cls.name)}", static_funcs, 0);\n`;
-
-    str += '  lua_settop(L, 0);\n';
-    str += '}\n';
-
-    return str;
-  }
-
-  genMethods(cls) {
-    let str = '';
-    const clsName = cls.name;
-
-    cls.methods.forEach(m => {
-      if (!isPrivate(m) && !isCustom(m)) {
-        str += this.genMethod(cls, m);
-      }
-    });
-
-    if (!cls.annotation.fake) {
-      str += `\nstatic const struct luaL_Reg ${cls.name}_member_funcs[] = {\n`
-      cls.methods.forEach(m => {
-        const name = this.methodToShortName(cls.name, m);
-        if (!isConstructor(m) && !isStatic(m) && !isCast(m)) {
-          str += `  {"${name}", wrap_${m.name}},\n`;
-        }
-      });
-      str += `  {NULL, NULL}\n`;
-      str += '};\n\n'
-    }
-
-    return str;
-  }
-
-  genClass(cls) {
-    let str = '';
-
-    str += this.genMethods(cls);
-    if (!cls.annotation.fake) {
-      str += this.genSetProp(cls);
-      str += this.genGetProp(cls);
-    }
-    str += this.genClassInit(cls);
-
-    return str;
-  }
-
-  genEnum(cls) {
-    let str = `static void ${cls.name}_init(lua_State* L) {\n`;
-    let isConstString = isEnumString(cls);
-
-    str += '  lua_newtable(L);\n';
-    str += `  lua_setglobal(L, "${this.toJsClassName(cls.name)}");\n`;
-    str += `  lua_getglobal(L, "${this.toJsClassName(cls.name)}");\n\n`;
-
-    const clsNamePrefix = cls.prefix;
-    cls.consts.forEach(iter => {
-      const name = iter.name.replace(clsNamePrefix, "");
-
-      str += `  lua_pushstring(L, "${name}");\n`
-      if(isConstString) {
-        str += `  lua_pushstring(L, ${iter.name});\n`;
-      } else {
-        str += `  lua_pushinteger(L, ${iter.name});\n`;
-      }
-      str += `  lua_settable(L, -3); \n\n`;
-    });
-
-    str += '}\n\n';
-
-    return str;
-  }
-
-  genOne(cls) {
-    if (cls.type == 'class') {
-      return this.genClass(cls);
-    } else if (cls.type == 'enum') {
-      return this.genEnum(cls);
-    } else {
-      return '';
-    }
-  }
-
-  genInit(json) {
-    let result = '';
 
     return result;
   }
 
-  genGlobals(json) {
-    let str = '';
+  genParamsDecl(m) {
+    let result = '';
+    let returnType = m.return.type;
+
+    if (returnType != 'void') {
+      result = this.genDecl(-1, returnType, 'ret');
+    }
+
+    m.params.forEach((iter, index) => {
+      result += this.genDecl(index, iter.type, iter.name);
+    })
+
+    return result;
+  }
+
+  genReturnData(type, name) {
+    let result = '\n';
+    if (type.indexOf('char*') >= 0) {
+      result += `  return jerry_create_string_from_utf8((const jerry_char_t*)${name});\n`;
+    } else if (type.indexOf('wchar_t*') >= 0) {
+      result += `  return jerry_create_string_from_wstring(${name});\n`;
+    } else if (type.indexOf('*') >= 0) {
+      const typeName = type.replace(/\*/g, "");
+      result += `  return jerry_create_pointer(${name}, "${type}");\n`;
+    } else if (type.indexOf('int') >= 0) {
+      result += `  return jerry_create_number(${name});;\n`;
+    } else if (type.indexOf('bool_t') >= 0) {
+      result += `  return jerry_create_boolean(${name});;\n`;
+    } else {
+      result += `  return jerry_create_number(${name});;\n`;
+    }
+
+    return result;
+  }
+
+  genCallMethod(cls, m) {
+    const ret_type = m.return.type;
+    let result = ret_type == 'void' ? '  ' : '  ret = '
+    result += `(${ret_type})${m.name}(`;
+    m.params.forEach((iter, index) => {
+      if (index > 0) {
+        result += ', ' + iter.name;
+      } else {
+        result += iter.name;
+      }
+    })
+
+    result += ');\n';
+
+    result += '\n';
+    if (ret_type == 'void') {
+      result += '  return 0;\n';
+    } else {
+      if (isConstructor(m) || isCast(m)) {
+        result += this.genReturnData(`${cls.name}*`, 'ret');
+      } else {
+        result += this.genReturnData(ret_type, 'ret');
+      }
+    }
+
+    return result;
+  }
+
+  genFuncImpl(cls, m) {
+    let result = '';
+    const name = m.name;
+    result += `jerry_value_t wrap_${name}` + gJerryScriptFuncArgs + ' {\n'; 
+    result += this.genParamsDecl(m);
+    result += this.genCallMethod(cls, m);
+    result += '};\n\n'
+
+    return result;
+  }
+  
+  genOneClass(cls) {
+    let result = '';
+    let isConstString = isEnumString(cls);
+    if(cls.methods) {
+      cls.methods.forEach(iter => {
+        result += this.genFuncImpl(cls, iter);
+      });
+    }
+
+    if(cls.properties) {
+      cls.properties.forEach((p) => {
+        if (isWritable(p)) {
+          result += this.genSetProperty(cls, p);
+        }
+
+        if (isReadable(p)) {
+          result += this.genGetProperty(cls, p);
+        }
+      });
+    }
+
+    if(cls.consts) {
+      cls.consts.forEach(iter => {
+        const name = iter.name;
+        result += `jerry_value_t get_${name}` + gJerryScriptFuncArgs + ' {\n'; 
+        if(isConstString) {
+          result += `  return jerry_create_string_from_utf8((const jerry_char_t*)${name});\n`;
+        } else {
+          result += `  return jerry_create_number(${name});\n`;
+        }
+        result += '}\n\n'
+      });
+    }
+
+    result += `ret_t ${cls.name}_init(void) {\n`;
+    if(cls.methods) {
+      cls.methods.forEach(iter => {
+        const name = iter.name;
+        result += `  jerryx_handler_register_global((const jerry_char_t*)"${name}", wrap_${name});\n`;
+      });
+    }
+
+    if(cls.properties) {
+      cls.properties.forEach((p) => {
+        if (isWritable(p)) {
+          const name = this.getSetPropertyFuncName(cls, p);
+          result += `  jerryx_handler_register_global((const jerry_char_t*)"${name}", wrap_${name});\n`;
+        }
+
+        if (isReadable(p)) {
+          const name = this.getGetPropertyFuncName(cls, p);
+          result += `  jerryx_handler_register_global((const jerry_char_t*)"${name}", wrap_${name});\n`;
+        }
+      });
+    }
+    if(cls.consts) {
+      cls.consts.forEach(iter => {
+        const name = iter.name;
+        result += `  jerryx_handler_register_global((const jerry_char_t*)"${name}", get_${name});\n`;
+      });
+    }
+
+    result += '\n return RET_OK;\n';
+    result += '}\n\n';
+
+    return result;
+  }
+
+ 
+  getSetPropertyFuncName(cls, p) {
+    return `${cls.name}_set_prop_${p.name}`;
+  }
+  
+  getGetPropertyFuncName(cls, p) {
+    return `${cls.name}_get_prop_${p.name}`;
+  }
+
+  genSetProperty(cls, p) {
+    let result = '';
+    const type = p.type;
+    const name = p.name;
+    const funcName = this.getSetPropertyFuncName(cls, p);
+
+    result += `jerry_value_t wrap_${funcName}` + gJerryScriptFuncArgs + ' {\n'; 
+    result += this.genDecl(0, cls.name+'*', 'obj');
+    result += this.genDecl(1, type, name);
+    result += `  obj->${name} = ${name};\n`;
+    result += '  return jerry_create_number(RET_OK);\n'
+    result += '};\n\n'
+
+    return result;
+  }
+  
+  genGetProperty(cls, p) {
+    let result = '';
+    const type = p.type;
+    const name = p.name;
+    const funcName = this.getGetPropertyFuncName(cls, p);
+
+    result += `jerry_value_t wrap_${funcName}` + gJerryScriptFuncArgs + ' {\n'; 
+    result += this.genDecl(0, cls.name+'*', 'obj');
+    result += this.genReturnData(type, `obj->${name}`);
+    result += '};\n\n'
+
+    return result;
+  }
+
+  genOne(cls) {
+    if (cls.type == 'class' || cls.type == 'enum') {
+      return this.genOneClass(cls);
+    } else {
+      return '';
+    }
+  }
+  
+  genIncludes(json) {
+    let result = '/*XXX: GENERATED CODE, DONT EDIT IT.*/\n';
+  
+    result += '#include "base/utf8.h"\n';
+    result += '#include "base/mem.h"\n';
+    result += this.genJavascriptIncludes();
 
     json.forEach(iter => {
-      if (iter.type == 'method') {
+      if (result.indexOf(iter.header) <= 0) {
+        result += `#include "${iter.header}"\n`;
       }
     });
 
-    return str;
+    result += `#include "custom.c"\n\n`;
+
+    return result;
+  }
+
+
+  genInit(json) {
+    let result = 'ret_t awtk_js_init(void) {\n';
+    
+    json.forEach(cls => {
+      if (cls.type == 'class' || cls.type == 'enum') {
+          result += `  ${cls.name}_init();\n`;
+      }
+    });
+    result += '\n  return RET_OK;\n';
+    result += '}\n\n';
+
+    return result;
   }
 
   filterScriptableJson(ojson) {
     let json = ojson.filter(isScriptable);
 
     json.forEach(iter => {
-      if (iter.methods) {
+      if (iter.methods && iter.methods.length) {
         iter.methods = iter.methods.filter(isScriptable);
       }
 
@@ -468,10 +338,8 @@ class JsGenerator {
   }
 
   genJsonAll(ojson) {
-    let result = '';
     let json = this.filterScriptableJson(ojson);
-    this.json = json;
-    result += this.genGlobals(json);
+    let result = this.genIncludes(json);
 
     json.forEach(iter => {
       result += this.genOne(iter);
@@ -483,8 +351,7 @@ class JsGenerator {
   }
 
   genAll(filename) {
-    const json = JSON.parse(fs.readFileSync(filename).toString());
-    this.genJsonAll(json);
+    this.genJsonAll(JSON.parse(fs.readFileSync(filename).toString()));
   }
 
   saveResult(filename) {
@@ -492,13 +359,13 @@ class JsGenerator {
   }
 
   static gen() {
-    const gen = new JsGenerator();
+    const gen = new JerryscriptGenerator();
     const input = '../../../awtk/tools/idl_gen/idl.json';
-    const output = '../../src/awtk.js';
+    const output = '../../src/jerryscript/tk_jerryscript.c';
 
     gen.genAll(input);
     gen.saveResult(output);
   }
 }
 
-JsGenerator.gen();
+JerryscriptGenerator.gen();
