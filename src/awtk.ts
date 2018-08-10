@@ -963,7 +963,7 @@ class ResourceManager {
    this.nativeObj = nativeObj;
  }
 
- static resource_manager() {
+ static instance() {
    return new ResourceManager(resource_manager());
  }
 
@@ -999,7 +999,7 @@ class Tklocale {
    this.nativeObj = nativeObj;
  }
 
- static tklocale() {
+ static instance() {
    return new Tklocale(tklocale());
  }
 
@@ -1043,7 +1043,7 @@ class ImageManager {
    this.nativeObj = nativeObj;
  }
 
- static image_manager() {
+ static instance() {
    return new ImageManager(image_manager());
  }
 
@@ -1067,7 +1067,7 @@ class Value {
    this.nativeObj = nativeObj;
  }
 
- set_bool(value) {
+ setBool(value) {
    return value_set_bool(this.nativeObj, value);
  }
 
@@ -1075,7 +1075,7 @@ class Value {
    return value_bool(this.nativeObj);
  }
 
- set_int8(value) {
+ setInt8(value) {
    return value_set_int8(this.nativeObj, value);
  }
 
@@ -1083,7 +1083,7 @@ class Value {
    return value_int8(this.nativeObj);
  }
 
- set_uint8(value) {
+ setUint8(value) {
    return value_set_uint8(this.nativeObj, value);
  }
 
@@ -1091,7 +1091,7 @@ class Value {
    return value_uint8(this.nativeObj);
  }
 
- set_int16(value) {
+ setInt16(value) {
    return value_set_int16(this.nativeObj, value);
  }
 
@@ -1099,7 +1099,7 @@ class Value {
    return value_int16(this.nativeObj);
  }
 
- set_uint16(value) {
+ setUint16(value) {
    return value_set_uint16(this.nativeObj, value);
  }
 
@@ -1107,7 +1107,7 @@ class Value {
    return value_uint16(this.nativeObj);
  }
 
- set_int32(value) {
+ setInt32(value) {
    return value_set_int32(this.nativeObj, value);
  }
 
@@ -1115,11 +1115,11 @@ class Value {
    return value_int32(this.nativeObj);
  }
 
- set_uint32(value) {
+ setUint32(value) {
    return value_set_uint32(this.nativeObj, value);
  }
 
- set_int64(value) {
+ setInt64(value) {
    return value_set_int64(this.nativeObj, value);
  }
 
@@ -1127,7 +1127,7 @@ class Value {
    return value_int64(this.nativeObj);
  }
 
- set_uint64(value) {
+ setUint64(value) {
    return value_set_uint64(this.nativeObj, value);
  }
 
@@ -1135,7 +1135,7 @@ class Value {
    return value_uint64(this.nativeObj);
  }
 
- set_float(value) {
+ setFloat(value) {
    return value_set_float(this.nativeObj, value);
  }
 
@@ -1143,7 +1143,7 @@ class Value {
    return value_float(this.nativeObj);
  }
 
- set_double(value) {
+ setDouble(value) {
    return value_set_double(this.nativeObj, value);
  }
 
@@ -1151,7 +1151,7 @@ class Value {
    return value_double(this.nativeObj);
  }
 
- set_str(value) {
+ setStr(value) {
    return value_set_str(this.nativeObj, value);
  }
 
@@ -1159,7 +1159,7 @@ class Value {
    return value_str(this.nativeObj);
  }
 
- is_null() {
+ isNull() {
    return value_is_null(this.nativeObj);
  }
 
@@ -1167,7 +1167,7 @@ class Value {
    return value_int(this.nativeObj);
  }
 
- set_int(value) {
+ setInt(value) {
    return value_set_int(this.nativeObj, value);
  }
 
@@ -1227,15 +1227,15 @@ class Widget {
    this.nativeObj = nativeObj;
  }
 
- count_children() {
+ countChildren() {
    return widget_count_children(this.nativeObj);
  }
 
- get_child(index) {
+ getChild(index) {
    return widget_get_child(this.nativeObj, index);
  }
 
- index_of() {
+ indexOf() {
    return widget_index_of(this.nativeObj);
  }
 
@@ -1247,47 +1247,47 @@ class Widget {
    return widget_resize(this.nativeObj, w, h);
  }
 
- move_resize(x, y, w, h) {
+ moveResize(x, y, w, h) {
    return widget_move_resize(this.nativeObj, x, y, w, h);
  }
 
- set_value(value) {
+ setValue(value) {
    return widget_set_value(this.nativeObj, value);
  }
 
- set_text(text) {
+ setText(text) {
    return widget_set_text(this.nativeObj, text);
  }
 
- use_style(style) {
+ useStyle(style) {
    return widget_use_style(this.nativeObj, style);
  }
 
- set_text_utf8(text) {
+ setTextUtf8(text) {
    return widget_set_text_utf8(this.nativeObj, text);
  }
 
- set_tr_text(text) {
+ setTrText(text) {
    return widget_set_tr_text(this.nativeObj, text);
  }
 
- get_value() {
+ getValue() {
    return widget_get_value(this.nativeObj);
  }
 
- get_text() {
+ getText() {
    return widget_get_text(this.nativeObj);
  }
 
- set_name(name) {
+ setName(name) {
    return widget_set_name(this.nativeObj, name);
  }
 
- set_enable(enable) {
+ setEnable(enable) {
    return widget_set_enable(this.nativeObj, enable);
  }
 
- set_focused(focused) {
+ setFocused(focused) {
    return widget_set_focused(this.nativeObj, focused);
  }
 
@@ -1295,11 +1295,11 @@ class Widget {
    return widget_lookup(this.nativeObj, name, recursive);
  }
 
- lookup_by_type(type, recursive) {
+ lookupByType(type, recursive) {
    return widget_lookup_by_type(this.nativeObj, type, recursive);
  }
 
- set_visible(visible, recursive) {
+ setVisible(visible, recursive) {
    return widget_set_visible(this.nativeObj, visible, recursive);
  }
 
@@ -1311,11 +1311,11 @@ class Widget {
    return widget_off(this.nativeObj, id);
  }
 
- invalidate_force() {
+ invalidateForce() {
    return widget_invalidate_force(this.nativeObj);
  }
 
- set_prop_str(name, v) {
+ setPropStr(name, v) {
    return widget_set_prop_str(this.nativeObj, name, v);
  }
 
@@ -1323,11 +1323,11 @@ class Widget {
    return widget_foreach(this.nativeObj, visit, ctx);
  }
 
- get_window() {
+ getWindow() {
    return widget_get_window(this.nativeObj);
  }
 
- get_type() {
+ getType() {
    return widget_get_type(this.nativeObj);
  }
 
@@ -1339,11 +1339,11 @@ class Widget {
    return widget_equal(this.nativeObj, other);
  }
 
- set_self_layout_params(x, y, w, h) {
+ setSelfLayoutParams(x, y, w, h) {
    return widget_set_self_layout_params(this.nativeObj, x, y, w, h);
  }
 
- set_children_layout_params(params) {
+ setChildrenLayoutParams(params) {
    return widget_set_children_layout_params(this.nativeObj, params);
  }
 
@@ -1371,7 +1371,7 @@ class Widget {
    return widget_t_get_prop_h(this.nativeObj);
  }
 
- get style_name() {
+ get styleName() {
    return widget_t_get_prop_style_name(this.nativeObj);
  }
 
@@ -1391,7 +1391,7 @@ class Widget {
    return widget_t_get_prop_name(this.nativeObj);
  }
 
- get tr_text() {
+ get trText() {
    return widget_t_get_prop_tr_text(this.nativeObj);
  }
 
@@ -1455,11 +1455,11 @@ class ListViewH extends Widget {
    return new ListViewH(list_view_h_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
- set_item_width(item_width) {
+ setItemWidth(item_width) {
    return list_view_h_set_item_width(this.nativeObj, item_width);
  }
 
- set_spacing(spacing) {
+ setSpacing(spacing) {
    return list_view_h_set_spacing(this.nativeObj, spacing);
  }
 
@@ -1467,7 +1467,7 @@ class ListViewH extends Widget {
    return new ListViewH(list_view_h_cast(widget));
  }
 
- get item_width() {
+ get itemWidth() {
    return list_view_h_t_get_prop_item_width(this.nativeObj);
  }
 
@@ -1487,15 +1487,15 @@ class ListView extends Widget {
    return new ListView(list_view_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
- set_item_height(item_height) {
+ setItemHeight(item_height) {
    return list_view_set_item_height(this.nativeObj, item_height);
  }
 
- set_default_item_height(default_item_height) {
+ setDefaultItemHeight(default_item_height) {
    return list_view_set_default_item_height(this.nativeObj, default_item_height);
  }
 
- set_auto_hide_scroll_bar(auto_hide_scroll_bar) {
+ setAutoHideScrollBar(auto_hide_scroll_bar) {
    return list_view_set_auto_hide_scroll_bar(this.nativeObj, auto_hide_scroll_bar);
  }
 
@@ -1503,15 +1503,15 @@ class ListView extends Widget {
    return new ListView(list_view_cast(widget));
  }
 
- get item_height() {
+ get itemHeight() {
    return list_view_t_get_prop_item_height(this.nativeObj);
  }
 
- get default_item_height() {
+ get defaultItemHeight() {
    return list_view_t_get_prop_default_item_height(this.nativeObj);
  }
 
- get auto_hide_scroll_bar() {
+ get autoHideScrollBar() {
    return list_view_t_get_prop_auto_hide_scroll_bar(this.nativeObj);
  }
 
@@ -1531,43 +1531,43 @@ class ComboBox extends Widget {
    return new ComboBox(combo_box_cast(widget));
  }
 
- set_open_window(open_window) {
+ setOpenWindow(open_window) {
    return combo_box_set_open_window(this.nativeObj, open_window);
  }
 
- reset_options() {
+ resetOptions() {
    return combo_box_reset_options(this.nativeObj);
  }
 
- count_options() {
+ countOptions() {
    return combo_box_count_options(this.nativeObj);
  }
 
- set_selected_index(index) {
+ setSelectedIndex(index) {
    return combo_box_set_selected_index(this.nativeObj, index);
  }
 
- append_option(value, text) {
+ appendOption(value, text) {
    return combo_box_append_option(this.nativeObj, value, text);
  }
 
- set_options(options) {
+ setOptions(options) {
    return combo_box_set_options(this.nativeObj, options);
  }
 
- get_value() {
+ getValue() {
    return combo_box_get_value(this.nativeObj);
  }
 
- get_text() {
+ getText() {
    return combo_box_get_text(this.nativeObj);
  }
 
- get open_window() {
+ get openWindow() {
    return combo_box_t_get_prop_open_window(this.nativeObj);
  }
 
- get selected_index() {
+ get selectedIndex() {
    return combo_box_t_get_prop_selected_index(this.nativeObj);
  }
 
@@ -1599,15 +1599,15 @@ class Popup extends Widget {
    return popup_t_get_prop_theme(this.nativeObj);
  }
 
- get anim_hint() {
+ get animHint() {
    return popup_t_get_prop_anim_hint(this.nativeObj);
  }
 
- get close_when_click() {
+ get closeWhenClick() {
    return popup_t_get_prop_close_when_click(this.nativeObj);
  }
 
- get close_when_click_outside() {
+ get closeWhenClickOutside() {
    return popup_t_get_prop_close_when_click_outside(this.nativeObj);
  }
 
@@ -1627,15 +1627,15 @@ class ProgressBar extends Widget {
    return new ProgressBar(progress_bar_cast(widget));
  }
 
- set_value(value) {
+ setValue(value) {
    return progress_bar_set_value(this.nativeObj, value);
  }
 
- set_vertical(vertical) {
+ setVertical(vertical) {
    return progress_bar_set_vertical(this.nativeObj, vertical);
  }
 
- set_show_text(show_text) {
+ setShowText(show_text) {
    return progress_bar_set_show_text(this.nativeObj, show_text);
  }
 
@@ -1647,7 +1647,7 @@ class ProgressBar extends Widget {
    return progress_bar_t_get_prop_vertical(this.nativeObj);
  }
 
- get show_text() {
+ get showText() {
    return progress_bar_t_get_prop_show_text(this.nativeObj);
  }
 
@@ -1695,7 +1695,7 @@ class Dialog extends Widget {
    return new Dialog(dialog_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
- static create_simple(parent, x, y, w, h) {
+ static createSimple(parent, x, y, w, h) {
    return new Dialog(dialog_create_simple(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
@@ -1707,7 +1707,7 @@ class Dialog extends Widget {
    return new Dialog(dialog_open(name));
  }
 
- set_title(title) {
+ setTitle(title) {
    return dialog_set_title(this.nativeObj, title);
  }
 
@@ -1735,23 +1735,23 @@ class Dragger extends Widget {
    return new Dragger(dragger_cast(widget));
  }
 
- set_range(x_min, y_min, x_max, y_max) {
+ setRange(x_min, y_min, x_max, y_max) {
    return dragger_set_range(this.nativeObj, x_min, y_min, x_max, y_max);
  }
 
- get x_min() {
+ get xMin() {
    return dragger_t_get_prop_x_min(this.nativeObj);
  }
 
- get y_min() {
+ get yMin() {
    return dragger_t_get_prop_y_min(this.nativeObj);
  }
 
- get x_max() {
+ get xMax() {
    return dragger_t_get_prop_x_max(this.nativeObj);
  }
 
- get y_max() {
+ get yMax() {
    return dragger_t_get_prop_y_max(this.nativeObj);
  }
 
@@ -1771,43 +1771,43 @@ class Edit extends Widget {
    return new Edit(edit_cast(widget));
  }
 
- get_int() {
+ getInt() {
    return edit_get_int(this.nativeObj);
  }
 
- get_double() {
+ getDouble() {
    return edit_get_double(this.nativeObj);
  }
 
- set_text_limit(min, max) {
+ setTextLimit(min, max) {
    return edit_set_text_limit(this.nativeObj, min, max);
  }
 
- set_int_limit(min, max, step) {
+ setIntLimit(min, max, step) {
    return edit_set_int_limit(this.nativeObj, min, max, step);
  }
 
- set_float_limit(min, max, step) {
+ setFloatLimit(min, max, step) {
    return edit_set_float_limit(this.nativeObj, min, max, step);
  }
 
- set_readonly(readonly) {
+ setReadonly(readonly) {
    return edit_set_readonly(this.nativeObj, readonly);
  }
 
- set_auto_fix(auto_fix) {
+ setAutoFix(auto_fix) {
    return edit_set_auto_fix(this.nativeObj, auto_fix);
  }
 
- set_input_type(type) {
+ setInputType(type) {
    return edit_set_input_type(this.nativeObj, type);
  }
 
- set_input_tips(tips) {
+ setInputTips(tips) {
    return edit_set_input_tips(this.nativeObj, tips);
  }
 
- set_password_visible(password_visible) {
+ setPasswordVisible(password_visible) {
    return edit_set_password_visible(this.nativeObj, password_visible);
  }
 
@@ -1815,27 +1815,27 @@ class Edit extends Widget {
    return edit_t_get_prop_readonly(this.nativeObj);
  }
 
- get password_visible() {
+ get passwordVisible() {
    return edit_t_get_prop_password_visible(this.nativeObj);
  }
 
- get auto_fix() {
+ get autoFix() {
    return edit_t_get_prop_auto_fix(this.nativeObj);
  }
 
- get top_margin() {
+ get topMargin() {
    return edit_t_get_prop_top_margin(this.nativeObj);
  }
 
- get bottom_margin() {
+ get bottomMargin() {
    return edit_t_get_prop_bottom_margin(this.nativeObj);
  }
 
- get left_margin() {
+ get leftMargin() {
    return edit_t_get_prop_left_margin(this.nativeObj);
  }
 
- get right_margin() {
+ get rightMargin() {
    return edit_t_get_prop_right_margin(this.nativeObj);
  }
 
@@ -1859,43 +1859,43 @@ class ScrollBar extends Widget {
    return new ScrollBar(scroll_bar_cast(widget));
  }
 
- static create_mobile(parent, x, y, w, h) {
+ static createMobile(parent, x, y, w, h) {
    return new ScrollBar(scroll_bar_create_mobile(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
- static create_desktop(parent, x, y, w, h) {
+ static createDesktop(parent, x, y, w, h) {
    return new ScrollBar(scroll_bar_create_desktop(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
- set_params(virtual_size, row) {
+ setParams(virtual_size, row) {
    return scroll_bar_set_params(this.nativeObj, virtual_size, row);
  }
 
- scroll_to(value, duration) {
+ scrollTo(value, duration) {
    return scroll_bar_scroll_to(this.nativeObj, value, duration);
  }
 
- set_value(value) {
+ setValue(value) {
    return scroll_bar_set_value(this.nativeObj, value);
  }
 
- add_delta(delta) {
+ addDelta(delta) {
    return scroll_bar_add_delta(this.nativeObj, delta);
  }
 
- scroll_delta(delta) {
+ scrollDelta(delta) {
    return scroll_bar_scroll_delta(this.nativeObj, delta);
  }
 
- set_value_only(value) {
+ setValueOnly(value) {
    return scroll_bar_set_value_only(this.nativeObj, value);
  }
 
- is_mobile() {
+ isMobile() {
    return scroll_bar_is_mobile(this.nativeObj);
  }
 
- get virtual_size() {
+ get virtualSize() {
    return scroll_bar_t_get_prop_virtual_size(this.nativeObj);
  }
 
@@ -1927,35 +1927,35 @@ class ScrollView extends Widget {
    return new ScrollView(scroll_view_cast(widget));
  }
 
- set_virtual_w(w) {
+ setVirtualW(w) {
    return scroll_view_set_virtual_w(this.nativeObj, w);
  }
 
- set_virtual_h(h) {
+ setVirtualH(h) {
    return scroll_view_set_virtual_h(this.nativeObj, h);
  }
 
- set_xslidable(xslidable) {
+ setXslidable(xslidable) {
    return scroll_view_set_xslidable(this.nativeObj, xslidable);
  }
 
- set_yslidable(yslidable) {
+ setYslidable(yslidable) {
    return scroll_view_set_yslidable(this.nativeObj, yslidable);
  }
 
- set_offset(xoffset, yoffset) {
+ setOffset(xoffset, yoffset) {
    return scroll_view_set_offset(this.nativeObj, xoffset, yoffset);
  }
 
- scroll_to(xoffset_end, yoffset_end, duration) {
+ scrollTo(xoffset_end, yoffset_end, duration) {
    return scroll_view_scroll_to(this.nativeObj, xoffset_end, yoffset_end, duration);
  }
 
- get virtual_w() {
+ get virtualW() {
    return scroll_view_t_get_prop_virtual_w(this.nativeObj);
  }
 
- get virtual_h() {
+ get virtualH() {
    return scroll_view_t_get_prop_virtual_h(this.nativeObj);
  }
 
@@ -1991,15 +1991,15 @@ class SlideView extends Widget {
    return new SlideView(slide_view_cast(widget));
  }
 
- set_auto_play(auto_play) {
+ setAutoPlay(auto_play) {
    return slide_view_set_auto_play(this.nativeObj, auto_play);
  }
 
- set_active(index) {
+ setActive(index) {
    return slide_view_set_active(this.nativeObj, index);
  }
 
- set_vertical(vertical) {
+ setVertical(vertical) {
    return slide_view_set_vertical(this.nativeObj, vertical);
  }
 
@@ -2007,7 +2007,7 @@ class SlideView extends Widget {
    return slide_view_t_get_prop_vertical(this.nativeObj);
  }
 
- get auto_play() {
+ get autoPlay() {
    return slide_view_t_get_prop_auto_play(this.nativeObj);
  }
 
@@ -2027,23 +2027,23 @@ class Slider extends Widget {
    return new Slider(slider_cast(widget));
  }
 
- set_value(value) {
+ setValue(value) {
    return slider_set_value(this.nativeObj, value);
  }
 
- set_min(min) {
+ setMin(min) {
    return slider_set_min(this.nativeObj, min);
  }
 
- set_max(max) {
+ setMax(max) {
    return slider_set_max(this.nativeObj, max);
  }
 
- set_step(step) {
+ setStep(step) {
    return slider_set_step(this.nativeObj, step);
  }
 
- set_vertical(vertical) {
+ setVertical(vertical) {
    return slider_set_vertical(this.nativeObj, vertical);
  }
 
@@ -2119,15 +2119,15 @@ class TabButton extends Widget {
    return new TabButton(tab_button_cast(widget));
  }
 
- set_value(value) {
+ setValue(value) {
    return tab_button_set_value(this.nativeObj, value);
  }
 
- set_icon(name) {
+ setIcon(name) {
    return tab_button_set_icon(this.nativeObj, name);
  }
 
- set_active_icon(name) {
+ setActiveIcon(name) {
    return tab_button_set_active_icon(this.nativeObj, name);
  }
 
@@ -2135,7 +2135,7 @@ class TabButton extends Widget {
    return tab_button_t_get_prop_value(this.nativeObj);
  }
 
- get active_icon() {
+ get activeIcon() {
    return tab_button_t_get_prop_active_icon(this.nativeObj);
  }
 
@@ -2191,7 +2191,7 @@ class Button extends Widget {
    return new Button(button_cast(widget));
  }
 
- set_repeat(repeat) {
+ setRepeat(repeat) {
    return button_set_repeat(this.nativeObj, repeat);
  }
 
@@ -2383,11 +2383,11 @@ class RichText extends Widget {
    return new RichText(rich_text_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
- set_text(text) {
+ setText(text) {
    return rich_text_set_text(this.nativeObj, text);
  }
 
- get line_gap() {
+ get lineGap() {
    return rich_text_t_get_prop_line_gap(this.nativeObj);
  }
 
@@ -2403,11 +2403,11 @@ class CheckButton extends Widget {
    return new CheckButton(check_button_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
- static create_radio(parent, x, y, w, h) {
+ static createRadio(parent, x, y, w, h) {
    return new CheckButton(check_button_create_radio(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
- set_value(value) {
+ setValue(value) {
    return check_button_set_value(this.nativeObj, value);
  }
 
@@ -2431,47 +2431,47 @@ class Image extends Widget {
    return new Image(image_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
- set_image_name(name) {
+ setImageName(name) {
    return image_set_image_name(this.nativeObj, name);
  }
 
- set_draw_type(draw_type) {
+ setDrawType(draw_type) {
    return image_set_draw_type(this.nativeObj, draw_type);
  }
 
- set_rotation(rotation) {
+ setRotation(rotation) {
    return image_set_rotation(this.nativeObj, rotation);
  }
 
- set_scale(scale_x, scale_y) {
+ setScale(scale_x, scale_y) {
    return image_set_scale(this.nativeObj, scale_x, scale_y);
  }
 
- set_anchor(anchor_x, anchor_y) {
+ setAnchor(anchor_x, anchor_y) {
    return image_set_anchor(this.nativeObj, anchor_x, anchor_y);
  }
 
- set_selected(selected) {
+ setSelected(selected) {
    return image_set_selected(this.nativeObj, selected);
  }
 
- set_selectable(selectable) {
+ setSelectable(selectable) {
    return image_set_selectable(this.nativeObj, selectable);
  }
 
- set_clickable(clickable) {
+ setClickable(clickable) {
    return image_set_clickable(this.nativeObj, clickable);
  }
 
- get anchor_x() {
+ get anchorX() {
    return image_t_get_prop_anchor_x(this.nativeObj);
  }
 
- get anchor_y() {
+ get anchorY() {
    return image_t_get_prop_anchor_y(this.nativeObj);
  }
 
- get scale_x() {
+ get scaleX() {
    return image_t_get_prop_scale_x(this.nativeObj);
  }
 
@@ -2483,7 +2483,7 @@ class WindowManager extends Widget {
    super(nativeObj);
  }
 
- static window_manager() {
+ static instance() {
    return new WindowManager(window_manager());
  }
 
@@ -2491,11 +2491,11 @@ class WindowManager extends Widget {
    return new WindowManager(window_manager_cast(widget));
  }
 
- set_show_fps(show_fps) {
+ setShowFps(show_fps) {
    return window_manager_set_show_fps(this.nativeObj, show_fps);
  }
 
- get show_fps() {
+ get showFps() {
    return window_manager_t_get_prop_show_fps(this.nativeObj);
  }
 
@@ -2519,7 +2519,7 @@ class Window extends Widget {
    return new Window(window_open(name));
  }
 
- static open_and_close(name, to_close) {
+ static openAndClose(name, to_close) {
    return new Window(window_open_and_close(name, to_close));
  }
 
@@ -2531,7 +2531,7 @@ class Window extends Widget {
    return window_t_get_prop_theme(this.nativeObj);
  }
 
- get anim_hint() {
+ get animHint() {
    return window_t_get_prop_anim_hint(this.nativeObj);
  }
 
@@ -2551,11 +2551,11 @@ class ComboBoxItem extends Widget {
    return new ComboBoxItem(combo_box_item_cast(widget));
  }
 
- set_selected(selected) {
+ setSelected(selected) {
    return combo_box_item_set_selected(this.nativeObj, selected);
  }
 
- set_value(value) {
+ setValue(value) {
    return combo_box_item_set_value(this.nativeObj, value);
  }
 
@@ -2583,11 +2583,11 @@ class Pages extends Widget {
    return new Pages(pages_cast(widget));
  }
 
- set_active(index) {
+ setActive(index) {
    return pages_set_active(this.nativeObj, index);
  }
 
- set_active_by_name(name) {
+ setActiveByName(name) {
    return pages_set_active_by_name(this.nativeObj, name);
  }
 

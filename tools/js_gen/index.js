@@ -163,11 +163,25 @@ class JerryscriptGenerator {
     return result;
   }
 
-  toFuncName(cls, m) {
-    let prefix = cls.name.replace(/_t$/, '');
-    let name = m.name.replace(prefix + '_', '');
+  camelCase(name) {
+    if (name.indexOf('_') > 0) {
+      name = name.replace(/(_)[a-z]/g, r => {
+        if (r.length > 1) {
+          r = r.substr(1);
+        }
+
+        return r.toUpperCase();
+      });
+    }
 
     return name;
+  }
+
+  toFuncName(clsName, mName) {
+    let prefix = clsName.replace(/_t$/, '');
+    let name = mName.replace(prefix + '_', '');
+
+    return this.camelCase(name);
   }
 
   genParamListOrg(m) {
@@ -216,7 +230,7 @@ class JerryscriptGenerator {
 
   genFuncImpl(cls, m) {
     let result = '';
-    const name = this.toFuncName(cls, m);
+    const name = this.toFuncName(cls.name, m.alias || m.name);
 
     if (isConstructor(m) || isCast(m) || isStatic(m)) {
       result += ' static'
@@ -290,7 +304,7 @@ class JerryscriptGenerator {
 
   genSetProperty(cls, p) {
     let result = '';
-    const name = p.name;
+    const name = this.toFuncName(cls.name, p.name);
     const funcName = this.getSetPropertyFuncName(cls, p);
 
     result += ` set ${name}(value) {\n`;
@@ -303,7 +317,7 @@ class JerryscriptGenerator {
   genGetProperty(cls, p) {
     let result = '';
     const type = p.type;
-    const name = p.name;
+    const name = this.toFuncName(cls.name, p.name);
     const funcName = this.getGetPropertyFuncName(cls, p);
 
     result += ` get ${name}() {\n`;

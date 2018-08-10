@@ -389,7 +389,7 @@ var ResourceManager = /** @class */ (function () {
     function ResourceManager(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    ResourceManager.resource_manager = function () {
+    ResourceManager.instance = function () {
         return new ResourceManager(resource_manager());
     };
     ResourceManager.prototype.ref = function (type, name) {
@@ -416,7 +416,7 @@ var Tklocale = /** @class */ (function () {
     function Tklocale(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    Tklocale.tklocale = function () {
+    Tklocale.instance = function () {
         return new Tklocale(tklocale());
     };
     Tklocale.prototype.tr = function (text) {
@@ -449,7 +449,7 @@ var ImageManager = /** @class */ (function () {
     function ImageManager(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    ImageManager.image_manager = function () {
+    ImageManager.instance = function () {
         return new ImageManager(image_manager());
     };
     ImageManager.prototype.load = function (name, image) {
@@ -467,82 +467,82 @@ var Value = /** @class */ (function () {
     function Value(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    Value.prototype.set_bool = function (value) {
+    Value.prototype.setBool = function (value) {
         return value_set_bool(this.nativeObj, value);
     };
     Value.prototype.bool = function () {
         return value_bool(this.nativeObj);
     };
-    Value.prototype.set_int8 = function (value) {
+    Value.prototype.setInt8 = function (value) {
         return value_set_int8(this.nativeObj, value);
     };
     Value.prototype.int8 = function () {
         return value_int8(this.nativeObj);
     };
-    Value.prototype.set_uint8 = function (value) {
+    Value.prototype.setUint8 = function (value) {
         return value_set_uint8(this.nativeObj, value);
     };
     Value.prototype.uint8 = function () {
         return value_uint8(this.nativeObj);
     };
-    Value.prototype.set_int16 = function (value) {
+    Value.prototype.setInt16 = function (value) {
         return value_set_int16(this.nativeObj, value);
     };
     Value.prototype.int16 = function () {
         return value_int16(this.nativeObj);
     };
-    Value.prototype.set_uint16 = function (value) {
+    Value.prototype.setUint16 = function (value) {
         return value_set_uint16(this.nativeObj, value);
     };
     Value.prototype.uint16 = function () {
         return value_uint16(this.nativeObj);
     };
-    Value.prototype.set_int32 = function (value) {
+    Value.prototype.setInt32 = function (value) {
         return value_set_int32(this.nativeObj, value);
     };
     Value.prototype.int32 = function () {
         return value_int32(this.nativeObj);
     };
-    Value.prototype.set_uint32 = function (value) {
+    Value.prototype.setUint32 = function (value) {
         return value_set_uint32(this.nativeObj, value);
     };
-    Value.prototype.set_int64 = function (value) {
+    Value.prototype.setInt64 = function (value) {
         return value_set_int64(this.nativeObj, value);
     };
     Value.prototype.int64 = function () {
         return value_int64(this.nativeObj);
     };
-    Value.prototype.set_uint64 = function (value) {
+    Value.prototype.setUint64 = function (value) {
         return value_set_uint64(this.nativeObj, value);
     };
     Value.prototype.uint64 = function () {
         return value_uint64(this.nativeObj);
     };
-    Value.prototype.set_float = function (value) {
+    Value.prototype.setFloat = function (value) {
         return value_set_float(this.nativeObj, value);
     };
     Value.prototype.float = function () {
         return value_float(this.nativeObj);
     };
-    Value.prototype.set_double = function (value) {
+    Value.prototype.setDouble = function (value) {
         return value_set_double(this.nativeObj, value);
     };
     Value.prototype.double = function () {
         return value_double(this.nativeObj);
     };
-    Value.prototype.set_str = function (value) {
+    Value.prototype.setStr = function (value) {
         return value_set_str(this.nativeObj, value);
     };
     Value.prototype.str = function () {
         return value_str(this.nativeObj);
     };
-    Value.prototype.is_null = function () {
+    Value.prototype.isNull = function () {
         return value_is_null(this.nativeObj);
     };
     Value.prototype.int = function () {
         return value_int(this.nativeObj);
     };
-    Value.prototype.set_int = function (value) {
+    Value.prototype.setInt = function (value) {
         return value_set_int(this.nativeObj, value);
     };
     Value.create = function () {
@@ -603,13 +603,13 @@ var Widget = /** @class */ (function () {
     function Widget(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    Widget.prototype.count_children = function () {
+    Widget.prototype.countChildren = function () {
         return widget_count_children(this.nativeObj);
     };
-    Widget.prototype.get_child = function (index) {
+    Widget.prototype.getChild = function (index) {
         return widget_get_child(this.nativeObj, index);
     };
-    Widget.prototype.index_of = function () {
+    Widget.prototype.indexOf = function () {
         return widget_index_of(this.nativeObj);
     };
     Widget.prototype.move = function (x, y) {
@@ -618,46 +618,46 @@ var Widget = /** @class */ (function () {
     Widget.prototype.resize = function (w, h) {
         return widget_resize(this.nativeObj, w, h);
     };
-    Widget.prototype.move_resize = function (x, y, w, h) {
+    Widget.prototype.moveResize = function (x, y, w, h) {
         return widget_move_resize(this.nativeObj, x, y, w, h);
     };
-    Widget.prototype.set_value = function (value) {
+    Widget.prototype.setValue = function (value) {
         return widget_set_value(this.nativeObj, value);
     };
-    Widget.prototype.set_text = function (text) {
+    Widget.prototype.setText = function (text) {
         return widget_set_text(this.nativeObj, text);
     };
-    Widget.prototype.use_style = function (style) {
+    Widget.prototype.useStyle = function (style) {
         return widget_use_style(this.nativeObj, style);
     };
-    Widget.prototype.set_text_utf8 = function (text) {
+    Widget.prototype.setTextUtf8 = function (text) {
         return widget_set_text_utf8(this.nativeObj, text);
     };
-    Widget.prototype.set_tr_text = function (text) {
+    Widget.prototype.setTrText = function (text) {
         return widget_set_tr_text(this.nativeObj, text);
     };
-    Widget.prototype.get_value = function () {
+    Widget.prototype.getValue = function () {
         return widget_get_value(this.nativeObj);
     };
-    Widget.prototype.get_text = function () {
+    Widget.prototype.getText = function () {
         return widget_get_text(this.nativeObj);
     };
-    Widget.prototype.set_name = function (name) {
+    Widget.prototype.setName = function (name) {
         return widget_set_name(this.nativeObj, name);
     };
-    Widget.prototype.set_enable = function (enable) {
+    Widget.prototype.setEnable = function (enable) {
         return widget_set_enable(this.nativeObj, enable);
     };
-    Widget.prototype.set_focused = function (focused) {
+    Widget.prototype.setFocused = function (focused) {
         return widget_set_focused(this.nativeObj, focused);
     };
     Widget.prototype.lookup = function (name, recursive) {
         return widget_lookup(this.nativeObj, name, recursive);
     };
-    Widget.prototype.lookup_by_type = function (type, recursive) {
+    Widget.prototype.lookupByType = function (type, recursive) {
         return widget_lookup_by_type(this.nativeObj, type, recursive);
     };
-    Widget.prototype.set_visible = function (visible, recursive) {
+    Widget.prototype.setVisible = function (visible, recursive) {
         return widget_set_visible(this.nativeObj, visible, recursive);
     };
     Widget.prototype.on = function (type, on_event, ctx) {
@@ -666,19 +666,19 @@ var Widget = /** @class */ (function () {
     Widget.prototype.off = function (id) {
         return widget_off(this.nativeObj, id);
     };
-    Widget.prototype.invalidate_force = function () {
+    Widget.prototype.invalidateForce = function () {
         return widget_invalidate_force(this.nativeObj);
     };
-    Widget.prototype.set_prop_str = function (name, v) {
+    Widget.prototype.setPropStr = function (name, v) {
         return widget_set_prop_str(this.nativeObj, name, v);
     };
     Widget.prototype.foreach = function (visit, ctx) {
         return widget_foreach(this.nativeObj, visit, ctx);
     };
-    Widget.prototype.get_window = function () {
+    Widget.prototype.getWindow = function () {
         return widget_get_window(this.nativeObj);
     };
-    Widget.prototype.get_type = function () {
+    Widget.prototype.getType = function () {
         return widget_get_type(this.nativeObj);
     };
     Widget.prototype.clone = function (parent) {
@@ -687,10 +687,10 @@ var Widget = /** @class */ (function () {
     Widget.prototype.equal = function (other) {
         return widget_equal(this.nativeObj, other);
     };
-    Widget.prototype.set_self_layout_params = function (x, y, w, h) {
+    Widget.prototype.setSelfLayoutParams = function (x, y, w, h) {
         return widget_set_self_layout_params(this.nativeObj, x, y, w, h);
     };
-    Widget.prototype.set_children_layout_params = function (params) {
+    Widget.prototype.setChildrenLayoutParams = function (params) {
         return widget_set_children_layout_params(this.nativeObj, params);
     };
     Widget.prototype.layout = function () {
@@ -727,7 +727,7 @@ var Widget = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Widget.prototype, "style_name", {
+    Object.defineProperty(Widget.prototype, "styleName", {
         get: function () {
             return widget_t_get_prop_style_name(this.nativeObj);
         },
@@ -758,7 +758,7 @@ var Widget = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Widget.prototype, "tr_text", {
+    Object.defineProperty(Widget.prototype, "trText", {
         get: function () {
             return widget_t_get_prop_tr_text(this.nativeObj);
         },
@@ -825,16 +825,16 @@ var ListViewH = /** @class */ (function (_super) {
     ListViewH.create = function (parent, x, y, w, h) {
         return new ListViewH(list_view_h_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    ListViewH.prototype.set_item_width = function (item_width) {
+    ListViewH.prototype.setItemWidth = function (item_width) {
         return list_view_h_set_item_width(this.nativeObj, item_width);
     };
-    ListViewH.prototype.set_spacing = function (spacing) {
+    ListViewH.prototype.setSpacing = function (spacing) {
         return list_view_h_set_spacing(this.nativeObj, spacing);
     };
     ListViewH.cast = function (widget) {
         return new ListViewH(list_view_h_cast(widget));
     };
-    Object.defineProperty(ListViewH.prototype, "item_width", {
+    Object.defineProperty(ListViewH.prototype, "itemWidth", {
         get: function () {
             return list_view_h_t_get_prop_item_width(this.nativeObj);
         },
@@ -858,33 +858,33 @@ var ListView = /** @class */ (function (_super) {
     ListView.create = function (parent, x, y, w, h) {
         return new ListView(list_view_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    ListView.prototype.set_item_height = function (item_height) {
+    ListView.prototype.setItemHeight = function (item_height) {
         return list_view_set_item_height(this.nativeObj, item_height);
     };
-    ListView.prototype.set_default_item_height = function (default_item_height) {
+    ListView.prototype.setDefaultItemHeight = function (default_item_height) {
         return list_view_set_default_item_height(this.nativeObj, default_item_height);
     };
-    ListView.prototype.set_auto_hide_scroll_bar = function (auto_hide_scroll_bar) {
+    ListView.prototype.setAutoHideScrollBar = function (auto_hide_scroll_bar) {
         return list_view_set_auto_hide_scroll_bar(this.nativeObj, auto_hide_scroll_bar);
     };
     ListView.cast = function (widget) {
         return new ListView(list_view_cast(widget));
     };
-    Object.defineProperty(ListView.prototype, "item_height", {
+    Object.defineProperty(ListView.prototype, "itemHeight", {
         get: function () {
             return list_view_t_get_prop_item_height(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ListView.prototype, "default_item_height", {
+    Object.defineProperty(ListView.prototype, "defaultItemHeight", {
         get: function () {
             return list_view_t_get_prop_default_item_height(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ListView.prototype, "auto_hide_scroll_bar", {
+    Object.defineProperty(ListView.prototype, "autoHideScrollBar", {
         get: function () {
             return list_view_t_get_prop_auto_hide_scroll_bar(this.nativeObj);
         },
@@ -904,38 +904,38 @@ var ComboBox = /** @class */ (function (_super) {
     ComboBox.cast = function (widget) {
         return new ComboBox(combo_box_cast(widget));
     };
-    ComboBox.prototype.set_open_window = function (open_window) {
+    ComboBox.prototype.setOpenWindow = function (open_window) {
         return combo_box_set_open_window(this.nativeObj, open_window);
     };
-    ComboBox.prototype.reset_options = function () {
+    ComboBox.prototype.resetOptions = function () {
         return combo_box_reset_options(this.nativeObj);
     };
-    ComboBox.prototype.count_options = function () {
+    ComboBox.prototype.countOptions = function () {
         return combo_box_count_options(this.nativeObj);
     };
-    ComboBox.prototype.set_selected_index = function (index) {
+    ComboBox.prototype.setSelectedIndex = function (index) {
         return combo_box_set_selected_index(this.nativeObj, index);
     };
-    ComboBox.prototype.append_option = function (value, text) {
+    ComboBox.prototype.appendOption = function (value, text) {
         return combo_box_append_option(this.nativeObj, value, text);
     };
-    ComboBox.prototype.set_options = function (options) {
+    ComboBox.prototype.setOptions = function (options) {
         return combo_box_set_options(this.nativeObj, options);
     };
-    ComboBox.prototype.get_value = function () {
+    ComboBox.prototype.getValue = function () {
         return combo_box_get_value(this.nativeObj);
     };
-    ComboBox.prototype.get_text = function () {
+    ComboBox.prototype.getText = function () {
         return combo_box_get_text(this.nativeObj);
     };
-    Object.defineProperty(ComboBox.prototype, "open_window", {
+    Object.defineProperty(ComboBox.prototype, "openWindow", {
         get: function () {
             return combo_box_t_get_prop_open_window(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ComboBox.prototype, "selected_index", {
+    Object.defineProperty(ComboBox.prototype, "selectedIndex", {
         get: function () {
             return combo_box_t_get_prop_selected_index(this.nativeObj);
         },
@@ -976,21 +976,21 @@ var Popup = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Popup.prototype, "anim_hint", {
+    Object.defineProperty(Popup.prototype, "animHint", {
         get: function () {
             return popup_t_get_prop_anim_hint(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Popup.prototype, "close_when_click", {
+    Object.defineProperty(Popup.prototype, "closeWhenClick", {
         get: function () {
             return popup_t_get_prop_close_when_click(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Popup.prototype, "close_when_click_outside", {
+    Object.defineProperty(Popup.prototype, "closeWhenClickOutside", {
         get: function () {
             return popup_t_get_prop_close_when_click_outside(this.nativeObj);
         },
@@ -1010,13 +1010,13 @@ var ProgressBar = /** @class */ (function (_super) {
     ProgressBar.cast = function (widget) {
         return new ProgressBar(progress_bar_cast(widget));
     };
-    ProgressBar.prototype.set_value = function (value) {
+    ProgressBar.prototype.setValue = function (value) {
         return progress_bar_set_value(this.nativeObj, value);
     };
-    ProgressBar.prototype.set_vertical = function (vertical) {
+    ProgressBar.prototype.setVertical = function (vertical) {
         return progress_bar_set_vertical(this.nativeObj, vertical);
     };
-    ProgressBar.prototype.set_show_text = function (show_text) {
+    ProgressBar.prototype.setShowText = function (show_text) {
         return progress_bar_set_show_text(this.nativeObj, show_text);
     };
     Object.defineProperty(ProgressBar.prototype, "value", {
@@ -1033,7 +1033,7 @@ var ProgressBar = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ProgressBar.prototype, "show_text", {
+    Object.defineProperty(ProgressBar.prototype, "showText", {
         get: function () {
             return progress_bar_t_get_prop_show_text(this.nativeObj);
         },
@@ -1076,7 +1076,7 @@ var Dialog = /** @class */ (function (_super) {
     Dialog.create = function (parent, x, y, w, h) {
         return new Dialog(dialog_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    Dialog.create_simple = function (parent, x, y, w, h) {
+    Dialog.createSimple = function (parent, x, y, w, h) {
         return new Dialog(dialog_create_simple(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Dialog.cast = function (widget) {
@@ -1085,7 +1085,7 @@ var Dialog = /** @class */ (function (_super) {
     Dialog.open = function (name) {
         return new Dialog(dialog_open(name));
     };
-    Dialog.prototype.set_title = function (title) {
+    Dialog.prototype.setTitle = function (title) {
         return dialog_set_title(this.nativeObj, title);
     };
     Dialog.prototype.modal = function () {
@@ -1107,31 +1107,31 @@ var Dragger = /** @class */ (function (_super) {
     Dragger.cast = function (widget) {
         return new Dragger(dragger_cast(widget));
     };
-    Dragger.prototype.set_range = function (x_min, y_min, x_max, y_max) {
+    Dragger.prototype.setRange = function (x_min, y_min, x_max, y_max) {
         return dragger_set_range(this.nativeObj, x_min, y_min, x_max, y_max);
     };
-    Object.defineProperty(Dragger.prototype, "x_min", {
+    Object.defineProperty(Dragger.prototype, "xMin", {
         get: function () {
             return dragger_t_get_prop_x_min(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Dragger.prototype, "y_min", {
+    Object.defineProperty(Dragger.prototype, "yMin", {
         get: function () {
             return dragger_t_get_prop_y_min(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Dragger.prototype, "x_max", {
+    Object.defineProperty(Dragger.prototype, "xMax", {
         get: function () {
             return dragger_t_get_prop_x_max(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Dragger.prototype, "y_max", {
+    Object.defineProperty(Dragger.prototype, "yMax", {
         get: function () {
             return dragger_t_get_prop_y_max(this.nativeObj);
         },
@@ -1151,34 +1151,34 @@ var Edit = /** @class */ (function (_super) {
     Edit.cast = function (widget) {
         return new Edit(edit_cast(widget));
     };
-    Edit.prototype.get_int = function () {
+    Edit.prototype.getInt = function () {
         return edit_get_int(this.nativeObj);
     };
-    Edit.prototype.get_double = function () {
+    Edit.prototype.getDouble = function () {
         return edit_get_double(this.nativeObj);
     };
-    Edit.prototype.set_text_limit = function (min, max) {
+    Edit.prototype.setTextLimit = function (min, max) {
         return edit_set_text_limit(this.nativeObj, min, max);
     };
-    Edit.prototype.set_int_limit = function (min, max, step) {
+    Edit.prototype.setIntLimit = function (min, max, step) {
         return edit_set_int_limit(this.nativeObj, min, max, step);
     };
-    Edit.prototype.set_float_limit = function (min, max, step) {
+    Edit.prototype.setFloatLimit = function (min, max, step) {
         return edit_set_float_limit(this.nativeObj, min, max, step);
     };
-    Edit.prototype.set_readonly = function (readonly) {
+    Edit.prototype.setReadonly = function (readonly) {
         return edit_set_readonly(this.nativeObj, readonly);
     };
-    Edit.prototype.set_auto_fix = function (auto_fix) {
+    Edit.prototype.setAutoFix = function (auto_fix) {
         return edit_set_auto_fix(this.nativeObj, auto_fix);
     };
-    Edit.prototype.set_input_type = function (type) {
+    Edit.prototype.setInputType = function (type) {
         return edit_set_input_type(this.nativeObj, type);
     };
-    Edit.prototype.set_input_tips = function (tips) {
+    Edit.prototype.setInputTips = function (tips) {
         return edit_set_input_tips(this.nativeObj, tips);
     };
-    Edit.prototype.set_password_visible = function (password_visible) {
+    Edit.prototype.setPasswordVisible = function (password_visible) {
         return edit_set_password_visible(this.nativeObj, password_visible);
     };
     Object.defineProperty(Edit.prototype, "readonly", {
@@ -1188,42 +1188,42 @@ var Edit = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Edit.prototype, "password_visible", {
+    Object.defineProperty(Edit.prototype, "passwordVisible", {
         get: function () {
             return edit_t_get_prop_password_visible(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Edit.prototype, "auto_fix", {
+    Object.defineProperty(Edit.prototype, "autoFix", {
         get: function () {
             return edit_t_get_prop_auto_fix(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Edit.prototype, "top_margin", {
+    Object.defineProperty(Edit.prototype, "topMargin", {
         get: function () {
             return edit_t_get_prop_top_margin(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Edit.prototype, "bottom_margin", {
+    Object.defineProperty(Edit.prototype, "bottomMargin", {
         get: function () {
             return edit_t_get_prop_bottom_margin(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Edit.prototype, "left_margin", {
+    Object.defineProperty(Edit.prototype, "leftMargin", {
         get: function () {
             return edit_t_get_prop_left_margin(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Edit.prototype, "right_margin", {
+    Object.defineProperty(Edit.prototype, "rightMargin", {
         get: function () {
             return edit_t_get_prop_right_margin(this.nativeObj);
         },
@@ -1250,34 +1250,34 @@ var ScrollBar = /** @class */ (function (_super) {
     ScrollBar.cast = function (widget) {
         return new ScrollBar(scroll_bar_cast(widget));
     };
-    ScrollBar.create_mobile = function (parent, x, y, w, h) {
+    ScrollBar.createMobile = function (parent, x, y, w, h) {
         return new ScrollBar(scroll_bar_create_mobile(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    ScrollBar.create_desktop = function (parent, x, y, w, h) {
+    ScrollBar.createDesktop = function (parent, x, y, w, h) {
         return new ScrollBar(scroll_bar_create_desktop(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    ScrollBar.prototype.set_params = function (virtual_size, row) {
+    ScrollBar.prototype.setParams = function (virtual_size, row) {
         return scroll_bar_set_params(this.nativeObj, virtual_size, row);
     };
-    ScrollBar.prototype.scroll_to = function (value, duration) {
+    ScrollBar.prototype.scrollTo = function (value, duration) {
         return scroll_bar_scroll_to(this.nativeObj, value, duration);
     };
-    ScrollBar.prototype.set_value = function (value) {
+    ScrollBar.prototype.setValue = function (value) {
         return scroll_bar_set_value(this.nativeObj, value);
     };
-    ScrollBar.prototype.add_delta = function (delta) {
+    ScrollBar.prototype.addDelta = function (delta) {
         return scroll_bar_add_delta(this.nativeObj, delta);
     };
-    ScrollBar.prototype.scroll_delta = function (delta) {
+    ScrollBar.prototype.scrollDelta = function (delta) {
         return scroll_bar_scroll_delta(this.nativeObj, delta);
     };
-    ScrollBar.prototype.set_value_only = function (value) {
+    ScrollBar.prototype.setValueOnly = function (value) {
         return scroll_bar_set_value_only(this.nativeObj, value);
     };
-    ScrollBar.prototype.is_mobile = function () {
+    ScrollBar.prototype.isMobile = function () {
         return scroll_bar_is_mobile(this.nativeObj);
     };
-    Object.defineProperty(ScrollBar.prototype, "virtual_size", {
+    Object.defineProperty(ScrollBar.prototype, "virtualSize", {
         get: function () {
             return scroll_bar_t_get_prop_virtual_size(this.nativeObj);
         },
@@ -1318,32 +1318,32 @@ var ScrollView = /** @class */ (function (_super) {
     ScrollView.cast = function (widget) {
         return new ScrollView(scroll_view_cast(widget));
     };
-    ScrollView.prototype.set_virtual_w = function (w) {
+    ScrollView.prototype.setVirtualW = function (w) {
         return scroll_view_set_virtual_w(this.nativeObj, w);
     };
-    ScrollView.prototype.set_virtual_h = function (h) {
+    ScrollView.prototype.setVirtualH = function (h) {
         return scroll_view_set_virtual_h(this.nativeObj, h);
     };
-    ScrollView.prototype.set_xslidable = function (xslidable) {
+    ScrollView.prototype.setXslidable = function (xslidable) {
         return scroll_view_set_xslidable(this.nativeObj, xslidable);
     };
-    ScrollView.prototype.set_yslidable = function (yslidable) {
+    ScrollView.prototype.setYslidable = function (yslidable) {
         return scroll_view_set_yslidable(this.nativeObj, yslidable);
     };
-    ScrollView.prototype.set_offset = function (xoffset, yoffset) {
+    ScrollView.prototype.setOffset = function (xoffset, yoffset) {
         return scroll_view_set_offset(this.nativeObj, xoffset, yoffset);
     };
-    ScrollView.prototype.scroll_to = function (xoffset_end, yoffset_end, duration) {
+    ScrollView.prototype.scrollTo = function (xoffset_end, yoffset_end, duration) {
         return scroll_view_scroll_to(this.nativeObj, xoffset_end, yoffset_end, duration);
     };
-    Object.defineProperty(ScrollView.prototype, "virtual_w", {
+    Object.defineProperty(ScrollView.prototype, "virtualW", {
         get: function () {
             return scroll_view_t_get_prop_virtual_w(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ScrollView.prototype, "virtual_h", {
+    Object.defineProperty(ScrollView.prototype, "virtualH", {
         get: function () {
             return scroll_view_t_get_prop_virtual_h(this.nativeObj);
         },
@@ -1391,13 +1391,13 @@ var SlideView = /** @class */ (function (_super) {
     SlideView.cast = function (widget) {
         return new SlideView(slide_view_cast(widget));
     };
-    SlideView.prototype.set_auto_play = function (auto_play) {
+    SlideView.prototype.setAutoPlay = function (auto_play) {
         return slide_view_set_auto_play(this.nativeObj, auto_play);
     };
-    SlideView.prototype.set_active = function (index) {
+    SlideView.prototype.setActive = function (index) {
         return slide_view_set_active(this.nativeObj, index);
     };
-    SlideView.prototype.set_vertical = function (vertical) {
+    SlideView.prototype.setVertical = function (vertical) {
         return slide_view_set_vertical(this.nativeObj, vertical);
     };
     Object.defineProperty(SlideView.prototype, "vertical", {
@@ -1407,7 +1407,7 @@ var SlideView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(SlideView.prototype, "auto_play", {
+    Object.defineProperty(SlideView.prototype, "autoPlay", {
         get: function () {
             return slide_view_t_get_prop_auto_play(this.nativeObj);
         },
@@ -1427,19 +1427,19 @@ var Slider = /** @class */ (function (_super) {
     Slider.cast = function (widget) {
         return new Slider(slider_cast(widget));
     };
-    Slider.prototype.set_value = function (value) {
+    Slider.prototype.setValue = function (value) {
         return slider_set_value(this.nativeObj, value);
     };
-    Slider.prototype.set_min = function (min) {
+    Slider.prototype.setMin = function (min) {
         return slider_set_min(this.nativeObj, min);
     };
-    Slider.prototype.set_max = function (max) {
+    Slider.prototype.setMax = function (max) {
         return slider_set_max(this.nativeObj, max);
     };
-    Slider.prototype.set_step = function (step) {
+    Slider.prototype.setStep = function (step) {
         return slider_set_step(this.nativeObj, step);
     };
-    Slider.prototype.set_vertical = function (vertical) {
+    Slider.prototype.setVertical = function (vertical) {
         return slider_set_vertical(this.nativeObj, vertical);
     };
     Object.defineProperty(Slider.prototype, "value", {
@@ -1523,13 +1523,13 @@ var TabButton = /** @class */ (function (_super) {
     TabButton.cast = function (widget) {
         return new TabButton(tab_button_cast(widget));
     };
-    TabButton.prototype.set_value = function (value) {
+    TabButton.prototype.setValue = function (value) {
         return tab_button_set_value(this.nativeObj, value);
     };
-    TabButton.prototype.set_icon = function (name) {
+    TabButton.prototype.setIcon = function (name) {
         return tab_button_set_icon(this.nativeObj, name);
     };
-    TabButton.prototype.set_active_icon = function (name) {
+    TabButton.prototype.setActiveIcon = function (name) {
         return tab_button_set_active_icon(this.nativeObj, name);
     };
     Object.defineProperty(TabButton.prototype, "value", {
@@ -1539,7 +1539,7 @@ var TabButton = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TabButton.prototype, "active_icon", {
+    Object.defineProperty(TabButton.prototype, "activeIcon", {
         get: function () {
             return tab_button_t_get_prop_active_icon(this.nativeObj);
         },
@@ -1592,7 +1592,7 @@ var Button = /** @class */ (function (_super) {
     Button.cast = function (widget) {
         return new Button(button_cast(widget));
     };
-    Button.prototype.set_repeat = function (repeat) {
+    Button.prototype.setRepeat = function (repeat) {
         return button_set_repeat(this.nativeObj, repeat);
     };
     Object.defineProperty(Button.prototype, "repeat", {
@@ -1828,10 +1828,10 @@ var RichText = /** @class */ (function (_super) {
     RichText.create = function (parent, x, y, w, h) {
         return new RichText(rich_text_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    RichText.prototype.set_text = function (text) {
+    RichText.prototype.setText = function (text) {
         return rich_text_set_text(this.nativeObj, text);
     };
-    Object.defineProperty(RichText.prototype, "line_gap", {
+    Object.defineProperty(RichText.prototype, "lineGap", {
         get: function () {
             return rich_text_t_get_prop_line_gap(this.nativeObj);
         },
@@ -1848,10 +1848,10 @@ var CheckButton = /** @class */ (function (_super) {
     CheckButton.create = function (parent, x, y, w, h) {
         return new CheckButton(check_button_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    CheckButton.create_radio = function (parent, x, y, w, h) {
+    CheckButton.createRadio = function (parent, x, y, w, h) {
         return new CheckButton(check_button_create_radio(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    CheckButton.prototype.set_value = function (value) {
+    CheckButton.prototype.setValue = function (value) {
         return check_button_set_value(this.nativeObj, value);
     };
     CheckButton.cast = function (widget) {
@@ -1874,45 +1874,45 @@ var Image = /** @class */ (function (_super) {
     Image.create = function (parent, x, y, w, h) {
         return new Image(image_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    Image.prototype.set_image_name = function (name) {
+    Image.prototype.setImageName = function (name) {
         return image_set_image_name(this.nativeObj, name);
     };
-    Image.prototype.set_draw_type = function (draw_type) {
+    Image.prototype.setDrawType = function (draw_type) {
         return image_set_draw_type(this.nativeObj, draw_type);
     };
-    Image.prototype.set_rotation = function (rotation) {
+    Image.prototype.setRotation = function (rotation) {
         return image_set_rotation(this.nativeObj, rotation);
     };
-    Image.prototype.set_scale = function (scale_x, scale_y) {
+    Image.prototype.setScale = function (scale_x, scale_y) {
         return image_set_scale(this.nativeObj, scale_x, scale_y);
     };
-    Image.prototype.set_anchor = function (anchor_x, anchor_y) {
+    Image.prototype.setAnchor = function (anchor_x, anchor_y) {
         return image_set_anchor(this.nativeObj, anchor_x, anchor_y);
     };
-    Image.prototype.set_selected = function (selected) {
+    Image.prototype.setSelected = function (selected) {
         return image_set_selected(this.nativeObj, selected);
     };
-    Image.prototype.set_selectable = function (selectable) {
+    Image.prototype.setSelectable = function (selectable) {
         return image_set_selectable(this.nativeObj, selectable);
     };
-    Image.prototype.set_clickable = function (clickable) {
+    Image.prototype.setClickable = function (clickable) {
         return image_set_clickable(this.nativeObj, clickable);
     };
-    Object.defineProperty(Image.prototype, "anchor_x", {
+    Object.defineProperty(Image.prototype, "anchorX", {
         get: function () {
             return image_t_get_prop_anchor_x(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Image.prototype, "anchor_y", {
+    Object.defineProperty(Image.prototype, "anchorY", {
         get: function () {
             return image_t_get_prop_anchor_y(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Image.prototype, "scale_x", {
+    Object.defineProperty(Image.prototype, "scaleX", {
         get: function () {
             return image_t_get_prop_scale_x(this.nativeObj);
         },
@@ -1926,16 +1926,16 @@ var WindowManager = /** @class */ (function (_super) {
     function WindowManager(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    WindowManager.window_manager = function () {
+    WindowManager.instance = function () {
         return new WindowManager(window_manager());
     };
     WindowManager.cast = function (widget) {
         return new WindowManager(window_manager_cast(widget));
     };
-    WindowManager.prototype.set_show_fps = function (show_fps) {
+    WindowManager.prototype.setShowFps = function (show_fps) {
         return window_manager_set_show_fps(this.nativeObj, show_fps);
     };
-    Object.defineProperty(WindowManager.prototype, "show_fps", {
+    Object.defineProperty(WindowManager.prototype, "showFps", {
         get: function () {
             return window_manager_t_get_prop_show_fps(this.nativeObj);
         },
@@ -1958,7 +1958,7 @@ var Window = /** @class */ (function (_super) {
     Window.open = function (name) {
         return new Window(window_open(name));
     };
-    Window.open_and_close = function (name, to_close) {
+    Window.openAndClose = function (name, to_close) {
         return new Window(window_open_and_close(name, to_close));
     };
     Window.prototype.close = function () {
@@ -1971,7 +1971,7 @@ var Window = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Window.prototype, "anim_hint", {
+    Object.defineProperty(Window.prototype, "animHint", {
         get: function () {
             return window_t_get_prop_anim_hint(this.nativeObj);
         },
@@ -1991,10 +1991,10 @@ var ComboBoxItem = /** @class */ (function (_super) {
     ComboBoxItem.cast = function (widget) {
         return new ComboBoxItem(combo_box_item_cast(widget));
     };
-    ComboBoxItem.prototype.set_selected = function (selected) {
+    ComboBoxItem.prototype.setSelected = function (selected) {
         return combo_box_item_set_selected(this.nativeObj, selected);
     };
-    ComboBoxItem.prototype.set_value = function (value) {
+    ComboBoxItem.prototype.setValue = function (value) {
         return combo_box_item_set_value(this.nativeObj, value);
     };
     Object.defineProperty(ComboBoxItem.prototype, "value", {
@@ -2024,10 +2024,10 @@ var Pages = /** @class */ (function (_super) {
     Pages.cast = function (widget) {
         return new Pages(pages_cast(widget));
     };
-    Pages.prototype.set_active = function (index) {
+    Pages.prototype.setActive = function (index) {
         return pages_set_active(this.nativeObj, index);
     };
-    Pages.prototype.set_active_by_name = function (name) {
+    Pages.prototype.setActiveByName = function (name) {
         return pages_set_active_by_name(this.nativeObj, name);
     };
     Object.defineProperty(Pages.prototype, "active", {
