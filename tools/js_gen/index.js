@@ -39,7 +39,7 @@ function isCast(obj) {
 function isEnumString(obj) {
   return obj.annotation && obj.annotation.string === true;
 }
- 
+
 const gJerryScriptFuncArgs = `(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -52,15 +52,33 @@ class JerryscriptGenerator {
     this.result = '';
   }
 
-  genJavascriptIncludes() {
-    let result = '';
-    result += '#include "jerryscript.h"\n';
-    result += '#include "jerryscript-ext/handler.h"\n';
+  toClassName(name) {
+    name = name.replace(/_t$/, '');
+    name = name.replace(/(^|_)[a-z]/g, r => {
+      if (r.length > 1) {
+        r = r.substr(1);
+      }
 
-    return result;
+      return r.toUpperCase();
+    });
+
+    return name;
   }
-  
-  genDecl(index, type, name) {
+
+  getClassInfo(name) {
+    const json = this.json;
+
+    for (let i = 0; i < json.length; i++) {
+      let iter = json[i];
+      if (iter.type === 'class' && iter.name === name) {
+        return iter;
+      }
+    }
+
+    return null;
+  }
+
+  genParamDecl(index, type, name) {
     let result = '';
     result += `  ${type} ${name} = `;
     if (index < 0) {
@@ -102,11 +120,11 @@ class JerryscriptGenerator {
     let returnType = m.return.type;
 
     if (returnType != 'void') {
-      result = this.genDecl(-1, returnType, 'ret');
+      result = this.genParamDecl(-1, returnType, 'ret');
     }
 
     m.params.forEach((iter, index) => {
-      result += this.genDecl(index, iter.type, iter.name);
+      result += this.genParamDecl(index, iter.type, iter.name);
     })
 
     return result;
@@ -133,54 +151,112 @@ class JerryscriptGenerator {
   }
 
   genCallMethod(cls, m) {
-    const ret_type = m.return.type;
-    let result = ret_type == 'void' ? '  ' : '  ret = '
-    result += `(${ret_type})${m.name}(`;
-    m.params.forEach((iter, index) => {
-      if (index > 0) {
-        result += ', ' + iter.name;
-      } else {
-        result += iter.name;
-      }
-    })
+    let result = `${m.name}${this.genParamList(m, true)}`;
+    let clsName = this.toClassName(cls.name);
 
-    result += ');\n';
-
-    result += '\n';
-    if (ret_type == 'void') {
-      result += '  return 0;\n';
+    if (isConstructor(m) || isCast(m)) {
+      result = `   return new ${clsName}(${result});\n`;
     } else {
-      if (isConstructor(m) || isCast(m)) {
-        result += this.genReturnData(`${cls.name}*`, 'ret');
-      } else {
-        result += this.genReturnData(ret_type, 'ret');
-      }
+      result = `   return ${result};\n`;
     }
 
     return result;
   }
 
+  toFuncName(cls, m) {
+    let prefix = cls.name.replace(/_t$/, '');
+    let name = m.name.replace(prefix + '_', '');
+
+    return name;
+  }
+
+  genParamListOrg(m) {
+    let result = '';
+    m.params.forEach((iter, index) => {
+      if (index === 0) {
+        result += iter.name;
+      } else {
+        if (result) {
+          result += ', ';
+        }
+        result += iter.name;
+      }
+    });
+
+    return '(' + result + ')';
+  }
+
+  genParamList(m, call) {
+    let result = '';
+    let isNormalMethod = !isCast(m) && !isStatic(m) && !isConstructor(m);
+
+    m.params.forEach((iter, index) => {
+      if (index === 0) {
+        if (isNormalMethod) {
+          if (call) {
+            result += 'this.nativeObj';
+          }
+        } else {
+          if (call && iter.name === 'parent') {
+            result += 'parent ? parent.nativeObj : null';
+          } else {
+            result += iter.name;
+          }
+        }
+      } else {
+        if (result) {
+          result += ', ';
+        }
+        result += iter.name;
+      }
+    });
+
+    return '(' + result + ')';
+  }
+
   genFuncImpl(cls, m) {
     let result = '';
-    const name = m.name;
-    result += `jerry_value_t wrap_${name}` + gJerryScriptFuncArgs + ' {\n'; 
-    result += this.genParamsDecl(m);
+    const name = this.toFuncName(cls, m);
+
+    if (isConstructor(m) || isCast(m) || isStatic(m)) {
+      result += ' static'
+    }
+
+    result += ` ${name}${this.genParamList(m, false)} {\n`;
     result += this.genCallMethod(cls, m);
-    result += '};\n\n'
+    result += ' }\n\n'
 
     return result;
   }
-  
+
   genOneClass(cls) {
     let result = '';
     let isConstString = isEnumString(cls);
-    if(cls.methods) {
+    let clsName = this.toClassName(cls.name);
+
+    result = `class ${clsName}`;
+    if (cls.parent) {
+      result += ` extends ${this.toClassName(cls.parent)} {\n`
+    } else {
+      result += ' {\n';
+    }
+
+    result += ' public nativeObj;\n';
+    result += ' constructor(nativeObj) {\n';
+    if (cls.parent) {
+      result += '   super(nativeObj);\n';
+    } else {
+      result += '   this.nativeObj = nativeObj;\n';
+    }
+    result += ' }\n\n';
+
+    if (cls.methods) {
       cls.methods.forEach(iter => {
         result += this.genFuncImpl(cls, iter);
       });
     }
 
-    if(cls.properties) {
+    if (cls.properties) {
       cls.properties.forEach((p) => {
         if (isWritable(p)) {
           result += this.genSetProperty(cls, p);
@@ -192,88 +268,47 @@ class JerryscriptGenerator {
       });
     }
 
-    if(cls.consts) {
+    if (cls.consts) {
       cls.consts.forEach(iter => {
         const name = iter.name;
-        result += `jerry_value_t get_${name}` + gJerryScriptFuncArgs + ' {\n'; 
-        if(isConstString) {
-          result += `  return jerry_create_string_from_utf8((const jerry_char_t*)${name});\n`;
-        } else {
-          result += `  return jerry_create_number(${name});\n`;
-        }
-        result += '}\n\n'
+        result += ` public  static ${name} = ${name}();\n`
       });
     }
 
-    result += `ret_t ${cls.name}_init(void) {\n`;
-    if(cls.methods) {
-      cls.methods.forEach(iter => {
-        const name = iter.name;
-        result += `  jerryx_handler_register_global((const jerry_char_t*)"${name}", wrap_${name});\n`;
-      });
-    }
-
-    if(cls.properties) {
-      cls.properties.forEach((p) => {
-        if (isWritable(p)) {
-          const name = this.getSetPropertyFuncName(cls, p);
-          result += `  jerryx_handler_register_global((const jerry_char_t*)"${name}", wrap_${name});\n`;
-        }
-
-        if (isReadable(p)) {
-          const name = this.getGetPropertyFuncName(cls, p);
-          result += `  jerryx_handler_register_global((const jerry_char_t*)"${name}", wrap_${name});\n`;
-        }
-      });
-    }
-    if(cls.consts) {
-      cls.consts.forEach(iter => {
-        const name = iter.name;
-        result += `  jerryx_handler_register_global((const jerry_char_t*)"${name}", get_${name});\n`;
-      });
-    }
-
-    result += '\n return RET_OK;\n';
     result += '}\n\n';
-
     return result;
   }
 
- 
+
   getSetPropertyFuncName(cls, p) {
     return `${cls.name}_set_prop_${p.name}`;
   }
-  
+
   getGetPropertyFuncName(cls, p) {
     return `${cls.name}_get_prop_${p.name}`;
   }
 
   genSetProperty(cls, p) {
     let result = '';
-    const type = p.type;
     const name = p.name;
     const funcName = this.getSetPropertyFuncName(cls, p);
 
-    result += `jerry_value_t wrap_${funcName}` + gJerryScriptFuncArgs + ' {\n'; 
-    result += this.genDecl(0, cls.name+'*', 'obj');
-    result += this.genDecl(1, type, name);
-    result += `  obj->${name} = ${name};\n`;
-    result += '  return jerry_create_number(RET_OK);\n'
-    result += '};\n\n'
+    result += ` set ${name}(value) {\n`;
+    result += `   ${funcName}(this.nativeObj, value);\n`;
+    result += ' }\n\n'
 
     return result;
   }
-  
+
   genGetProperty(cls, p) {
     let result = '';
     const type = p.type;
     const name = p.name;
     const funcName = this.getGetPropertyFuncName(cls, p);
 
-    result += `jerry_value_t wrap_${funcName}` + gJerryScriptFuncArgs + ' {\n'; 
-    result += this.genDecl(0, cls.name+'*', 'obj');
-    result += this.genReturnData(type, `obj->${name}`);
-    result += '};\n\n'
+    result += ` get ${name}() {\n`;
+    result += `   return ${funcName}(this.nativeObj);\n`;
+    result += ' }\n\n'
 
     return result;
   }
@@ -284,39 +319,6 @@ class JerryscriptGenerator {
     } else {
       return '';
     }
-  }
-  
-  genIncludes(json) {
-    let result = '/*XXX: GENERATED CODE, DONT EDIT IT.*/\n';
-  
-    result += '#include "base/utf8.h"\n';
-    result += '#include "base/mem.h"\n';
-    result += this.genJavascriptIncludes();
-
-    json.forEach(iter => {
-      if (result.indexOf(iter.header) <= 0) {
-        result += `#include "${iter.header}"\n`;
-      }
-    });
-
-    result += `#include "custom.c"\n\n`;
-
-    return result;
-  }
-
-
-  genInit(json) {
-    let result = 'ret_t awtk_js_init(void) {\n';
-    
-    json.forEach(cls => {
-      if (cls.type == 'class' || cls.type == 'enum') {
-          result += `  ${cls.name}_init();\n`;
-      }
-    });
-    result += '\n  return RET_OK;\n';
-    result += '}\n\n';
-
-    return result;
   }
 
   filterScriptableJson(ojson) {
@@ -334,18 +336,77 @@ class JerryscriptGenerator {
 
     fs.writeFileSync('filter.json', JSON.stringify(json, null, '  '));
 
+    return this.reorderJson(json);
+  }
+
+  reorderJson(json) {
+    json.sort((a, b) => {
+      if (a.type !== 'class') {
+        return -1;
+      }
+
+      if (a.parent && b.parent) {
+        return 0;
+      }
+
+      if (a.parent) {
+        return 1;
+      }
+
+      if (b.parent) {
+        return -1;
+      }
+
+      return 0;
+    });
+
     return json;
   }
 
+  genFuncsDecl(json) {
+    let result = '';
+
+    json.forEach(cls => {
+      if (cls.methods) {
+        cls.methods.forEach(m => {
+          result += `declare function ${m.name}${this.genParamListOrg(m)};\n`
+        });
+      }
+
+      if (cls.properties) {
+        cls.properties.forEach(p => {
+          if (isReadable(p)) {
+            const funcName = this.getGetPropertyFuncName(cls, p);
+            result += `declare function ${funcName}(nativeObj);\n`;
+          }
+
+          if (isWritable(p)) {
+            const funcName = this.getSetPropertyFuncName(cls, p);
+            result += `declare function ${funcName}(nativeObj, value);\n`;
+          }
+        });
+      }
+
+      if (cls.consts) {
+        cls.consts.forEach(c => {
+          const name = c.name;
+          result += `declare function ${name}();\n`
+        });
+      }
+    });
+
+    return result;
+  }
+
   genJsonAll(ojson) {
+    let result = '';
     let json = this.filterScriptableJson(ojson);
-    let result = this.genIncludes(json);
+
+    result += this.genFuncsDecl(json);
 
     json.forEach(iter => {
       result += this.genOne(iter);
     });
-
-    result += this.genInit(json);
 
     this.result = result;
   }
@@ -361,7 +422,7 @@ class JerryscriptGenerator {
   static gen() {
     const gen = new JerryscriptGenerator();
     const input = '../../../awtk/tools/idl_gen/idl.json';
-    const output = '../../src/jerryscript/tk_jerryscript.c';
+    const output = '../../src/awtk.ts';
 
     gen.genAll(input);
     gen.saveResult(output);

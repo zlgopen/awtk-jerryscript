@@ -84,7 +84,7 @@ jerry-core/preinstall:
 jerry-core/CMakeFiles/jerry-core.dir/all:
 	$(MAKE) -f jerry-core/CMakeFiles/jerry-core.dir/build.make jerry-core/CMakeFiles/jerry-core.dir/depend
 	$(MAKE) -f jerry-core/CMakeFiles/jerry-core.dir/build.make jerry-core/CMakeFiles/jerry-core.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles --progress-num=2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83 "Built target jerry-core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles --progress-num=4,5 "Built target jerry-core"
 .PHONY : jerry-core/CMakeFiles/jerry-core.dir/all
 
 # Include target in all.
@@ -94,7 +94,7 @@ all: jerry-core/CMakeFiles/jerry-core.dir/all
 
 # Build rule for subdir invocation for target.
 jerry-core/CMakeFiles/jerry-core.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 82
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 jerry-core/CMakeFiles/jerry-core.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 0
 .PHONY : jerry-core/CMakeFiles/jerry-core.dir/rule
@@ -141,7 +141,7 @@ jerry-port/default/preinstall:
 jerry-port/default/CMakeFiles/jerry-port-default-minimal.dir/all: jerry-core/CMakeFiles/jerry-core.dir/all
 	$(MAKE) -f jerry-port/default/CMakeFiles/jerry-port-default-minimal.dir/build.make jerry-port/default/CMakeFiles/jerry-port-default-minimal.dir/depend
 	$(MAKE) -f jerry-port/default/CMakeFiles/jerry-port-default-minimal.dir/build.make jerry-port/default/CMakeFiles/jerry-port-default-minimal.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles --progress-num=96,97,98,99,100 "Built target jerry-port-default-minimal"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles --progress-num=26,27,28,29,30,31,32 "Built target jerry-port-default-minimal"
 .PHONY : jerry-port/default/CMakeFiles/jerry-port-default-minimal.dir/all
 
 # Include target in all.
@@ -151,7 +151,7 @@ all: jerry-port/default/CMakeFiles/jerry-port-default-minimal.dir/all
 
 # Build rule for subdir invocation for target.
 jerry-port/default/CMakeFiles/jerry-port-default-minimal.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 87
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 jerry-port/default/CMakeFiles/jerry-port-default-minimal.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 0
 .PHONY : jerry-port/default/CMakeFiles/jerry-port-default-minimal.dir/rule
@@ -178,7 +178,7 @@ clean: jerry-port/default/CMakeFiles/jerry-port-default-minimal.dir/clean
 jerry-port/default/CMakeFiles/jerry-port-default.dir/all: jerry-core/CMakeFiles/jerry-core.dir/all
 	$(MAKE) -f jerry-port/default/CMakeFiles/jerry-port-default.dir/build.make jerry-port/default/CMakeFiles/jerry-port-default.dir/depend
 	$(MAKE) -f jerry-port/default/CMakeFiles/jerry-port-default.dir/build.make jerry-port/default/CMakeFiles/jerry-port-default.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles --progress-num=92,93,94,95 "Built target jerry-port-default"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles --progress-num=19,20,21,22,23,24,25 "Built target jerry-port-default"
 .PHONY : jerry-port/default/CMakeFiles/jerry-port-default.dir/all
 
 # Include target in all.
@@ -188,7 +188,7 @@ all: jerry-port/default/CMakeFiles/jerry-port-default.dir/all
 
 # Build rule for subdir invocation for target.
 jerry-port/default/CMakeFiles/jerry-port-default.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 86
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 jerry-port/default/CMakeFiles/jerry-port-default.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 0
 .PHONY : jerry-port/default/CMakeFiles/jerry-port-default.dir/rule
@@ -233,7 +233,7 @@ jerry-ext/preinstall:
 jerry-ext/CMakeFiles/jerry-ext.dir/all: jerry-core/CMakeFiles/jerry-core.dir/all
 	$(MAKE) -f jerry-ext/CMakeFiles/jerry-ext.dir/build.make jerry-ext/CMakeFiles/jerry-ext.dir/depend
 	$(MAKE) -f jerry-ext/CMakeFiles/jerry-ext.dir/build.make jerry-ext/CMakeFiles/jerry-ext.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles --progress-num=84,85,86,87,88,89,90,91 "Built target jerry-ext"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles --progress-num=6,7,8,9,10,11,12,13,14,15,16,17,18 "Built target jerry-ext"
 .PHONY : jerry-ext/CMakeFiles/jerry-ext.dir/all
 
 # Include target in all.
@@ -243,7 +243,7 @@ all: jerry-ext/CMakeFiles/jerry-ext.dir/all
 
 # Build rule for subdir invocation for target.
 jerry-ext/CMakeFiles/jerry-ext.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 90
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 15
 	$(MAKE) -f CMakeFiles/Makefile2 jerry-ext/CMakeFiles/jerry-ext.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 0
 .PHONY : jerry-ext/CMakeFiles/jerry-ext.dir/rule
@@ -290,7 +290,7 @@ jerry-main/CMakeFiles/jerry.dir/all: jerry-port/default/CMakeFiles/jerry-port-de
 jerry-main/CMakeFiles/jerry.dir/all: jerry-ext/CMakeFiles/jerry-ext.dir/all
 	$(MAKE) -f jerry-main/CMakeFiles/jerry.dir/build.make jerry-main/CMakeFiles/jerry.dir/depend
 	$(MAKE) -f jerry-main/CMakeFiles/jerry.dir/build.make jerry-main/CMakeFiles/jerry.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles --progress-num=1 "Built target jerry"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles --progress-num=1,2,3 "Built target jerry"
 .PHONY : jerry-main/CMakeFiles/jerry.dir/all
 
 # Include target in all.
@@ -300,7 +300,7 @@ all: jerry-main/CMakeFiles/jerry.dir/all
 
 # Build rule for subdir invocation for target.
 jerry-main/CMakeFiles/jerry.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 95
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 25
 	$(MAKE) -f CMakeFiles/Makefile2 jerry-main/CMakeFiles/jerry.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jim/Share/lab/gui/awtk/awtk-stm32f429igtx-raw/awtk-js/3rd/build/jerryscript/CMakeFiles 0
 .PHONY : jerry-main/CMakeFiles/jerry.dir/rule
