@@ -10,7 +10,6 @@
 .sconsign.dblite
 lib
 tags
-bin/runLua*
+bin/run*
 filter.json
 .vscode
-bin/runScript
