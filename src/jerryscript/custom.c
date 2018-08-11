@@ -93,12 +93,14 @@ static ret_t call_on_event(void* ctx, event_t* e) {
   jerry_release_value(args[0]);
   jerry_release_value(this_value);
 
-  return RET_OK;
+  return (ret_t)jerry_get_number_value(res);
 }
 
 jerry_value_t wrap_widget_on(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                              const jerry_value_t args_p[], const jerry_length_t args_cnt) {
   int32_t ret = 0;
+  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
+
   if (args_cnt >= 2) {
     widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
     event_type_t type = (event_type_t)jerry_get_number_value(args_p[1]);
@@ -114,6 +116,7 @@ jerry_value_t wrap_widget_on(const jerry_value_t func_obj_val, const jerry_value
 jerry_value_t wrap_widget_off(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                               const jerry_value_t args_p[], const jerry_length_t args_cnt) {
   ret_t ret = RET_FAIL;
+  return_value_if_fail(args_cnt >= 1, jerry_create_undefined());
 
   if (args_cnt >= 1) {
     widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
@@ -132,72 +135,164 @@ jerry_value_t wrap_widget_off(const jerry_value_t func_obj_val, const jerry_valu
 
 jerry_value_t wrap_tklocale_on(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  uint32_t ret = 0;
-  tklocale_t* tklocale = (tklocale_t*)jerry_get_pointer(args_p[0], "tklocale_t*");
-  event_type_t type = (event_type_t)jerry_get_number_value(args_p[1]);
-  event_func_t on_event = (event_func_t)jerry_get_pointer(args_p[2], "event_func_t");
-  void* ctx = NULL;
-  ret = (uint32_t)tklocale_on(tklocale, type, on_event, ctx);
+  int32_t ret = 0;
+  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
+
+  if (args_cnt >= 2) {
+    tklocale_t* tklocale = (tklocale_t*)jerry_get_pointer(args_p[0], "tklocale_t*");
+    event_type_t type = (event_type_t)jerry_get_number_value(args_p[1]);
+    jerry_value_t on_event = jerry_acquire_value(args_p[2]);
+
+    void* ctx = (int32_t*)NULL + (int32_t)on_event;
+    ret = (uint32_t)tklocale_on(tklocale, type, call_on_event, ctx);
+  }
 
   return jerry_create_number(ret);
 }
 
 jerry_value_t wrap_tklocale_off(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                 const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  ret_t ret = 0;
-  tklocale_t* tklocale = (tklocale_t*)jerry_get_pointer(args_p[0], "tklocale_t*");
-  uint32_t id = (uint32_t)jerry_get_number_value(args_p[1]);
-  ret = (ret_t)tklocale_off(tklocale, id);
+  ret_t ret = RET_FAIL;
+  return_value_if_fail(args_cnt >= 1, jerry_create_undefined());
+
+  if (args_cnt >= 1) {
+    tklocale_t* tklocale = (tklocale_t*)jerry_get_pointer(args_p[0], "tklocale_t*");
+    uint32_t id = (uint32_t)jerry_get_number_value(args_p[1]);
+    emitter_item_t* item = emitter_find(tklocale->emitter, id);
+
+    if (item) {
+      jerry_value_t func = (char*)(item->ctx) - (char*)NULL;
+      ret = (ret_t)tklocale_off(tklocale, id);
+      jerry_release_value(func);
+    }
+  }
 
   return jerry_create_number(ret);
 }
 
+static ret_t call_on_timer(const timer_info_t* timer) {
+  jerry_value_t res;
+  jerry_value_t args[1];
+  jerry_value_t this_value = jerry_create_undefined();
+  jerry_value_t func = (jerry_value_t)((int32_t*)timer->ctx - (int32_t*)NULL);
+
+  args[0] = jerry_create_undefined();
+  res = jerry_call_function(func, this_value, args, 1);
+
+  jerry_release_value(args[0]);
+  jerry_release_value(this_value);
+
+  return (ret_t)jerry_get_number_value(res);
+}
+
 jerry_value_t wrap_timer_add(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                              const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  uint32_t ret = 0;
-  timer_func_t on_timer = (timer_func_t)jerry_get_pointer(args_p[0], "timer_func_t");
-  void* ctx = NULL;
-  uint32_t duration_ms = (uint32_t)jerry_get_number_value(args_p[2]);
-  ret = (uint32_t)timer_add(on_timer, ctx, duration_ms);
+  int32_t ret = 0;
+  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
+
+  if (args_cnt >= 2) {
+    jerry_value_t on_timer = jerry_acquire_value(args_p[0]);
+    uint32_t duration_ms = (uint32_t)jerry_get_number_value(args_p[1]);
+    void* ctx = (int32_t*)NULL + (int32_t)on_timer;
+
+    ret = (uint32_t)timer_add(call_on_timer, ctx, duration_ms);
+  }
 
   return jerry_create_number(ret);
 }
 
 jerry_value_t wrap_timer_remove(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                 const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  ret_t ret = 0;
-  uint32_t timer_id = (uint32_t)jerry_get_number_value(args_p[0]);
-  ret = (ret_t)timer_remove(timer_id);
+  ret_t ret = RET_FAIL;
+  return_value_if_fail(args_cnt >= 1, jerry_create_undefined());
+
+  if (args_cnt >= 1) {
+    uint32_t timer_id = (uint32_t)jerry_get_number_value(args_p[0]);
+    const timer_info_t* timer = timer_find(timer_id);
+    if (timer != NULL) {
+      uint32_t func = (char*)(timer->ctx) - (char*)NULL;
+      ret = (ret_t)timer_remove(timer_id);
+      jerry_release_value(func);
+    }
+  }
 
   return jerry_create_number(ret);
 }
 
+static ret_t call_on_idle(const idle_info_t* idle) {
+  jerry_value_t res;
+  jerry_value_t args[1];
+  jerry_value_t this_value = jerry_create_undefined();
+  jerry_value_t func = (jerry_value_t)((int32_t*)idle->ctx - (int32_t*)NULL);
+
+  args[0] = jerry_create_undefined();
+  res = jerry_call_function(func, this_value, args, 1);
+
+  jerry_release_value(args[0]);
+  jerry_release_value(this_value);
+
+  return (ret_t)jerry_get_number_value(res);
+}
+
 jerry_value_t wrap_idle_add(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                             const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  uint32_t ret = 0;
-  idle_func_t on_idle = (idle_func_t)jerry_get_pointer(args_p[0], "idle_func_t");
-  void* ctx = NULL;
-  ret = (uint32_t)idle_add(on_idle, ctx);
+  int32_t ret = 0;
+  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
+
+  if (args_cnt >= 1) {
+    jerry_value_t on_idle = jerry_acquire_value(args_p[0]);
+    void* ctx = (int32_t*)NULL + (int32_t)on_idle;
+
+    ret = (uint32_t)idle_add(call_on_idle, ctx);
+  }
 
   return jerry_create_number(ret);
 }
 
 jerry_value_t wrap_idle_remove(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  ret_t ret = 0;
-  uint32_t idle_id = (uint32_t)jerry_get_number_value(args_p[0]);
-  ret = (ret_t)idle_remove(idle_id);
+  ret_t ret = RET_FAIL;
+  return_value_if_fail(args_cnt >= 1, jerry_create_undefined());
+
+  if (args_cnt >= 1) {
+    uint32_t idle_id = (uint32_t)jerry_get_number_value(args_p[0]);
+    const idle_info_t* idle = idle_find(idle_id);
+    uint32_t func = (char*)(idle->ctx) - (char*)NULL;
+
+    ret = (ret_t)idle_remove(idle_id);
+    jerry_release_value(func);
+  }
 
   return jerry_create_number(ret);
 }
 
+static ret_t call_visit(void* ctx, void* data) {
+  jerry_value_t res;
+  jerry_value_t args[1];
+  jerry_value_t func = (jerry_value_t)((int32_t*)ctx - (int32_t*)NULL);
+  jerry_value_t this_value = jerry_create_undefined();
+
+  args[0] = jerry_create_pointer(data, "widget_t*");
+  res = jerry_call_function(func, this_value, args, 1);
+
+  jerry_release_value(args[0]);
+  jerry_release_value(this_value);
+
+  return (ret_t)jerry_get_number_value(res);
+}
+
 jerry_value_t wrap_widget_foreach(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                   const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  ret_t ret = 0;
-  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
-  tk_visit_t visit = (tk_visit_t)jerry_get_pointer(args_p[1], "tk_visit_t");
-  void* ctx = NULL;
-  ret = (ret_t)widget_foreach(widget, visit, ctx);
+  ret_t ret = RET_OK;
+
+  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
+  if (args_cnt >= 2) i {
+      widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+      jerry_value_t func = args_p[1];
+      void* ctx = (int32_t*)NULL + (int32_t)func;
+
+      ret = (ret_t)widget_foreach(widget, call_visit, ctx);
+    }
 
   return jerry_create_number(ret);
 }

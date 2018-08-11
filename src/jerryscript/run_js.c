@@ -209,7 +209,7 @@ int main(int argc, char* argv[]) {
 
   jerry_init(JERRY_INIT_EMPTY);
   jerryx_handler_register_global((const jerry_char_t*)"print", jerryx_handler_print);
-  
+
   awtk_js_init();
   jerry_value_t parsed_code = parse_file(script_file);
 
