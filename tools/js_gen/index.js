@@ -285,7 +285,8 @@ class JerryscriptGenerator {
     if (cls.consts) {
       cls.consts.forEach(iter => {
         const name = iter.name;
-        result += ` public  static ${name} = ${name}();\n`
+        const shortName = name.replace(cls.prefix, "");
+        result += ` public static ${shortName} = ${name}();\n`
       });
     }
 

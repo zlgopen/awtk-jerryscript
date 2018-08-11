@@ -218,11 +218,11 @@ declare function IMAGE_DRAW_SCALE_H();
 declare function IMAGE_DRAW_REPEAT();
 declare function IMAGE_DRAW_REPEAT_X();
 declare function IMAGE_DRAW_REPEAT_Y();
-declare function IMAGE_DRAW_9PATCH();
-declare function IMAGE_DRAW_3PATCH_X();
-declare function IMAGE_DRAW_3PATCH_Y();
-declare function IMAGE_DRAW_3PATCH_X_SCALE_Y();
-declare function IMAGE_DRAW_3PATCH_Y_SCALE_X();
+declare function IMAGE_DRAW_PATCH9();
+declare function IMAGE_DRAW_PATCH3_X();
+declare function IMAGE_DRAW_PATCH3_Y();
+declare function IMAGE_DRAW_PATCH3_X_SCALE_Y();
+declare function IMAGE_DRAW_PATCH3_Y_SCALE_X();
 declare function WIDGET_STATE_NONE();
 declare function WIDGET_STATE_NORMAL();
 declare function WIDGET_STATE_PRESSED();
@@ -574,10 +574,10 @@ class BitmapFormat {
    this.nativeObj = nativeObj;
  }
 
- public  static BITMAP_FMT_NONE = BITMAP_FMT_NONE();
- public  static BITMAP_FMT_RGBA = BITMAP_FMT_RGBA();
- public  static BITMAP_FMT_BGRA = BITMAP_FMT_BGRA();
- public  static BITMAP_FMT_RGB565 = BITMAP_FMT_RGB565();
+ public static NONE = BITMAP_FMT_NONE();
+ public static RGBA = BITMAP_FMT_RGBA();
+ public static BGRA = BITMAP_FMT_BGRA();
+ public static RGB565 = BITMAP_FMT_RGB565();
 }
 
 class InputType {
@@ -586,15 +586,15 @@ class InputType {
    this.nativeObj = nativeObj;
  }
 
- public  static INPUT_TEXT = INPUT_TEXT();
- public  static INPUT_INT = INPUT_INT();
- public  static INPUT_UINT = INPUT_UINT();
- public  static INPUT_HEX = INPUT_HEX();
- public  static INPUT_FLOAT = INPUT_FLOAT();
- public  static INPUT_UFLOAT = INPUT_UFLOAT();
- public  static INPUT_EMAIL = INPUT_EMAIL();
- public  static INPUT_PASSWORD = INPUT_PASSWORD();
- public  static INPUT_PHONE = INPUT_PHONE();
+ public static TEXT = INPUT_TEXT();
+ public static INT = INPUT_INT();
+ public static UINT = INPUT_UINT();
+ public static HEX = INPUT_HEX();
+ public static FLOAT = INPUT_FLOAT();
+ public static UFLOAT = INPUT_UFLOAT();
+ public static EMAIL = INPUT_EMAIL();
+ public static PASSWORD = INPUT_PASSWORD();
+ public static PHONE = INPUT_PHONE();
 }
 
 class BitmapFlag {
@@ -603,10 +603,10 @@ class BitmapFlag {
    this.nativeObj = nativeObj;
  }
 
- public  static BITMAP_FLAG_NONE = BITMAP_FLAG_NONE();
- public  static BITMAP_FLAG_OPAQUE = BITMAP_FLAG_OPAQUE();
- public  static BITMAP_FLAG_IMMUTABLE = BITMAP_FLAG_IMMUTABLE();
- public  static BITMAP_FLAG_TEXTURE = BITMAP_FLAG_TEXTURE();
+ public static NONE = BITMAP_FLAG_NONE();
+ public static OPAQUE = BITMAP_FLAG_OPAQUE();
+ public static IMMUTABLE = BITMAP_FLAG_IMMUTABLE();
+ public static TEXTURE = BITMAP_FLAG_TEXTURE();
 }
 
 class ResourceType {
@@ -615,14 +615,14 @@ class ResourceType {
    this.nativeObj = nativeObj;
  }
 
- public  static RESOURCE_TYPE_NONE = RESOURCE_TYPE_NONE();
- public  static RESOURCE_TYPE_FONT = RESOURCE_TYPE_FONT();
- public  static RESOURCE_TYPE_IMAGE = RESOURCE_TYPE_IMAGE();
- public  static RESOURCE_TYPE_THEME = RESOURCE_TYPE_THEME();
- public  static RESOURCE_TYPE_UI = RESOURCE_TYPE_UI();
- public  static RESOURCE_TYPE_XML = RESOURCE_TYPE_XML();
- public  static RESOURCE_TYPE_STRINGS = RESOURCE_TYPE_STRINGS();
- public  static RESOURCE_TYPE_DATA = RESOURCE_TYPE_DATA();
+ public static NONE = RESOURCE_TYPE_NONE();
+ public static FONT = RESOURCE_TYPE_FONT();
+ public static IMAGE = RESOURCE_TYPE_IMAGE();
+ public static THEME = RESOURCE_TYPE_THEME();
+ public static UI = RESOURCE_TYPE_UI();
+ public static XML = RESOURCE_TYPE_XML();
+ public static STRINGS = RESOURCE_TYPE_STRINGS();
+ public static DATA = RESOURCE_TYPE_DATA();
 }
 
 class EventType {
@@ -631,54 +631,54 @@ class EventType {
    this.nativeObj = nativeObj;
  }
 
- public  static EVT_NONE = EVT_NONE();
- public  static EVT_POINTER_DOWN = EVT_POINTER_DOWN();
- public  static EVT_POINTER_DOWN_ABORT = EVT_POINTER_DOWN_ABORT();
- public  static EVT_POINTER_MOVE = EVT_POINTER_MOVE();
- public  static EVT_POINTER_UP = EVT_POINTER_UP();
- public  static EVT_WHEEL = EVT_WHEEL();
- public  static EVT_CONTEXT_MENU = EVT_CONTEXT_MENU();
- public  static EVT_POINTER_ENTER = EVT_POINTER_ENTER();
- public  static EVT_POINTER_LEAVE = EVT_POINTER_LEAVE();
- public  static EVT_LONG_PRESS = EVT_LONG_PRESS();
- public  static EVT_CLICK = EVT_CLICK();
- public  static EVT_FOCUS = EVT_FOCUS();
- public  static EVT_BLUR = EVT_BLUR();
- public  static EVT_KEY_DOWN = EVT_KEY_DOWN();
- public  static EVT_KEY_REPEAT = EVT_KEY_REPEAT();
- public  static EVT_KEY_UP = EVT_KEY_UP();
- public  static EVT_DESTROY = EVT_DESTROY();
- public  static EVT_WILL_MOVE = EVT_WILL_MOVE();
- public  static EVT_MOVE = EVT_MOVE();
- public  static EVT_WILL_RESIZE = EVT_WILL_RESIZE();
- public  static EVT_RESIZE = EVT_RESIZE();
- public  static EVT_WILL_MOVE_RESIZE = EVT_WILL_MOVE_RESIZE();
- public  static EVT_MOVE_RESIZE = EVT_MOVE_RESIZE();
- public  static EVT_PROP_WILL_CHANGE = EVT_PROP_WILL_CHANGE();
- public  static EVT_PROP_CHANGED = EVT_PROP_CHANGED();
- public  static EVT_VALUE_WILL_CHANGE = EVT_VALUE_WILL_CHANGE();
- public  static EVT_VALUE_CHANGED = EVT_VALUE_CHANGED();
- public  static EVT_VALUE_CHANGING = EVT_VALUE_CHANGING();
- public  static EVT_PAINT = EVT_PAINT();
- public  static EVT_BEFORE_PAINT = EVT_BEFORE_PAINT();
- public  static EVT_AFTER_PAINT = EVT_AFTER_PAINT();
- public  static EVT_LOCALE_CHANGED = EVT_LOCALE_CHANGED();
- public  static EVT_ANIM_START = EVT_ANIM_START();
- public  static EVT_ANIM_STOP = EVT_ANIM_STOP();
- public  static EVT_ANIM_ONCE = EVT_ANIM_ONCE();
- public  static EVT_ANIM_END = EVT_ANIM_END();
- public  static EVT_WINDOW_LOAD = EVT_WINDOW_LOAD();
- public  static EVT_WINDOW_OPEN = EVT_WINDOW_OPEN();
- public  static EVT_WINDOW_CLOSE = EVT_WINDOW_CLOSE();
- public  static EVT_IM_COMMIT = EVT_IM_COMMIT();
- public  static EVT_IM_SHOW_CANDIDATES = EVT_IM_SHOW_CANDIDATES();
- public  static EVT_IM_ACTION = EVT_IM_ACTION();
- public  static EVT_IM_ACTION_INFO = EVT_IM_ACTION_INFO();
- public  static EVT_DRAG_START = EVT_DRAG_START();
- public  static EVT_DRAG = EVT_DRAG();
- public  static EVT_DRAG_END = EVT_DRAG_END();
- public  static EVT_REQ_START = EVT_REQ_START();
- public  static EVT_USER_START = EVT_USER_START();
+ public static NONE = EVT_NONE();
+ public static POINTER_DOWN = EVT_POINTER_DOWN();
+ public static POINTER_DOWN_ABORT = EVT_POINTER_DOWN_ABORT();
+ public static POINTER_MOVE = EVT_POINTER_MOVE();
+ public static POINTER_UP = EVT_POINTER_UP();
+ public static WHEEL = EVT_WHEEL();
+ public static CONTEXT_MENU = EVT_CONTEXT_MENU();
+ public static POINTER_ENTER = EVT_POINTER_ENTER();
+ public static POINTER_LEAVE = EVT_POINTER_LEAVE();
+ public static LONG_PRESS = EVT_LONG_PRESS();
+ public static CLICK = EVT_CLICK();
+ public static FOCUS = EVT_FOCUS();
+ public static BLUR = EVT_BLUR();
+ public static KEY_DOWN = EVT_KEY_DOWN();
+ public static KEY_REPEAT = EVT_KEY_REPEAT();
+ public static KEY_UP = EVT_KEY_UP();
+ public static DESTROY = EVT_DESTROY();
+ public static WILL_MOVE = EVT_WILL_MOVE();
+ public static MOVE = EVT_MOVE();
+ public static WILL_RESIZE = EVT_WILL_RESIZE();
+ public static RESIZE = EVT_RESIZE();
+ public static WILL_MOVE_RESIZE = EVT_WILL_MOVE_RESIZE();
+ public static MOVE_RESIZE = EVT_MOVE_RESIZE();
+ public static PROP_WILL_CHANGE = EVT_PROP_WILL_CHANGE();
+ public static PROP_CHANGED = EVT_PROP_CHANGED();
+ public static VALUE_WILL_CHANGE = EVT_VALUE_WILL_CHANGE();
+ public static VALUE_CHANGED = EVT_VALUE_CHANGED();
+ public static VALUE_CHANGING = EVT_VALUE_CHANGING();
+ public static PAINT = EVT_PAINT();
+ public static BEFORE_PAINT = EVT_BEFORE_PAINT();
+ public static AFTER_PAINT = EVT_AFTER_PAINT();
+ public static LOCALE_CHANGED = EVT_LOCALE_CHANGED();
+ public static ANIM_START = EVT_ANIM_START();
+ public static ANIM_STOP = EVT_ANIM_STOP();
+ public static ANIM_ONCE = EVT_ANIM_ONCE();
+ public static ANIM_END = EVT_ANIM_END();
+ public static WINDOW_LOAD = EVT_WINDOW_LOAD();
+ public static WINDOW_OPEN = EVT_WINDOW_OPEN();
+ public static WINDOW_CLOSE = EVT_WINDOW_CLOSE();
+ public static IM_COMMIT = EVT_IM_COMMIT();
+ public static IM_SHOW_CANDIDATES = EVT_IM_SHOW_CANDIDATES();
+ public static IM_ACTION = EVT_IM_ACTION();
+ public static IM_ACTION_INFO = EVT_IM_ACTION_INFO();
+ public static DRAG_START = EVT_DRAG_START();
+ public static DRAG = EVT_DRAG();
+ public static DRAG_END = EVT_DRAG_END();
+ public static REQ_START = EVT_REQ_START();
+ public static USER_START = EVT_USER_START();
 }
 
 class AlignV {
@@ -687,10 +687,10 @@ class AlignV {
    this.nativeObj = nativeObj;
  }
 
- public  static ALIGN_V_NONE = ALIGN_V_NONE();
- public  static ALIGN_V_MIDDLE = ALIGN_V_MIDDLE();
- public  static ALIGN_V_TOP = ALIGN_V_TOP();
- public  static ALIGN_V_BOTTOM = ALIGN_V_BOTTOM();
+ public static NONE = ALIGN_V_NONE();
+ public static MIDDLE = ALIGN_V_MIDDLE();
+ public static TOP = ALIGN_V_TOP();
+ public static BOTTOM = ALIGN_V_BOTTOM();
 }
 
 class AlignH {
@@ -699,10 +699,10 @@ class AlignH {
    this.nativeObj = nativeObj;
  }
 
- public  static ALIGN_H_NONE = ALIGN_H_NONE();
- public  static ALIGN_H_CENTER = ALIGN_H_CENTER();
- public  static ALIGN_H_LEFT = ALIGN_H_LEFT();
- public  static ALIGN_H_RIGHT = ALIGN_H_RIGHT();
+ public static NONE = ALIGN_H_NONE();
+ public static CENTER = ALIGN_H_CENTER();
+ public static LEFT = ALIGN_H_LEFT();
+ public static RIGHT = ALIGN_H_RIGHT();
 }
 
 class ValueType {
@@ -711,21 +711,21 @@ class ValueType {
    this.nativeObj = nativeObj;
  }
 
- public  static VALUE_TYPE_INVALID = VALUE_TYPE_INVALID();
- public  static VALUE_TYPE_BOOL = VALUE_TYPE_BOOL();
- public  static VALUE_TYPE_INT8 = VALUE_TYPE_INT8();
- public  static VALUE_TYPE_UINT8 = VALUE_TYPE_UINT8();
- public  static VALUE_TYPE_INT16 = VALUE_TYPE_INT16();
- public  static VALUE_TYPE_UINT16 = VALUE_TYPE_UINT16();
- public  static VALUE_TYPE_INT32 = VALUE_TYPE_INT32();
- public  static VALUE_TYPE_UINT32 = VALUE_TYPE_UINT32();
- public  static VALUE_TYPE_INT64 = VALUE_TYPE_INT64();
- public  static VALUE_TYPE_UINT64 = VALUE_TYPE_UINT64();
- public  static VALUE_TYPE_POINTER = VALUE_TYPE_POINTER();
- public  static VALUE_TYPE_FLOAT = VALUE_TYPE_FLOAT();
- public  static VALUE_TYPE_DOUBLE = VALUE_TYPE_DOUBLE();
- public  static VALUE_TYPE_STRING = VALUE_TYPE_STRING();
- public  static VALUE_TYPE_WSTRING = VALUE_TYPE_WSTRING();
+ public static INVALID = VALUE_TYPE_INVALID();
+ public static BOOL = VALUE_TYPE_BOOL();
+ public static INT8 = VALUE_TYPE_INT8();
+ public static UINT8 = VALUE_TYPE_UINT8();
+ public static INT16 = VALUE_TYPE_INT16();
+ public static UINT16 = VALUE_TYPE_UINT16();
+ public static INT32 = VALUE_TYPE_INT32();
+ public static UINT32 = VALUE_TYPE_UINT32();
+ public static INT64 = VALUE_TYPE_INT64();
+ public static UINT64 = VALUE_TYPE_UINT64();
+ public static POINTER = VALUE_TYPE_POINTER();
+ public static FLOAT = VALUE_TYPE_FLOAT();
+ public static DOUBLE = VALUE_TYPE_DOUBLE();
+ public static STRING = VALUE_TYPE_STRING();
+ public static WSTRING = VALUE_TYPE_WSTRING();
 }
 
 class WidgetProp {
@@ -734,81 +734,81 @@ class WidgetProp {
    this.nativeObj = nativeObj;
  }
 
- public  static WIDGET_PROP_X = WIDGET_PROP_X();
- public  static WIDGET_PROP_Y = WIDGET_PROP_Y();
- public  static WIDGET_PROP_W = WIDGET_PROP_W();
- public  static WIDGET_PROP_H = WIDGET_PROP_H();
- public  static WIDGET_PROP_MIN_W = WIDGET_PROP_MIN_W();
- public  static WIDGET_PROP_MAX_W = WIDGET_PROP_MAX_W();
- public  static WIDGET_PROP_LAYOUT_W = WIDGET_PROP_LAYOUT_W();
- public  static WIDGET_PROP_LAYOUT_H = WIDGET_PROP_LAYOUT_H();
- public  static WIDGET_PROP_VIRTUAL_W = WIDGET_PROP_VIRTUAL_W();
- public  static WIDGET_PROP_VIRTUAL_H = WIDGET_PROP_VIRTUAL_H();
- public  static WIDGET_PROP_NAME = WIDGET_PROP_NAME();
- public  static WIDGET_PROP_VALUE = WIDGET_PROP_VALUE();
- public  static WIDGET_PROP_TEXT = WIDGET_PROP_TEXT();
- public  static WIDGET_PROP_TR_TEXT = WIDGET_PROP_TR_TEXT();
- public  static WIDGET_PROP_STYLE = WIDGET_PROP_STYLE();
- public  static WIDGET_PROP_ENABLE = WIDGET_PROP_ENABLE();
- public  static WIDGET_PROP_MARGIN = WIDGET_PROP_MARGIN();
- public  static WIDGET_PROP_SPACING = WIDGET_PROP_SPACING();
- public  static WIDGET_PROP_LEFT_MARGIN = WIDGET_PROP_LEFT_MARGIN();
- public  static WIDGET_PROP_RIGHT_MARGIN = WIDGET_PROP_RIGHT_MARGIN();
- public  static WIDGET_PROP_TOP_MARGIN = WIDGET_PROP_TOP_MARGIN();
- public  static WIDGET_PROP_BOTTOM_MARGIN = WIDGET_PROP_BOTTOM_MARGIN();
- public  static WIDGET_PROP_STEP = WIDGET_PROP_STEP();
- public  static WIDGET_PROP_VISIBLE = WIDGET_PROP_VISIBLE();
- public  static WIDGET_PROP_ANIM_HINT = WIDGET_PROP_ANIM_HINT();
- public  static WIDGET_PROP_OPEN_ANIM_HINT = WIDGET_PROP_OPEN_ANIM_HINT();
- public  static WIDGET_PROP_CLOSE_ANIM_HINT = WIDGET_PROP_CLOSE_ANIM_HINT();
- public  static WIDGET_PROP_MIN = WIDGET_PROP_MIN();
- public  static WIDGET_PROP_TIPS = WIDGET_PROP_TIPS();
- public  static WIDGET_PROP_INPUT_TYPE = WIDGET_PROP_INPUT_TYPE();
- public  static WIDGET_PROP_READONLY = WIDGET_PROP_READONLY();
- public  static WIDGET_PROP_PASSWORD_VISIBLE = WIDGET_PROP_PASSWORD_VISIBLE();
- public  static WIDGET_PROP_ACTIVE = WIDGET_PROP_ACTIVE();
- public  static WIDGET_PROP_VERTICAL = WIDGET_PROP_VERTICAL();
- public  static WIDGET_PROP_SHOW_TEXT = WIDGET_PROP_SHOW_TEXT();
- public  static WIDGET_PROP_XOFFSET = WIDGET_PROP_XOFFSET();
- public  static WIDGET_PROP_YOFFSET = WIDGET_PROP_YOFFSET();
- public  static WIDGET_PROP_AUTO_PLAY = WIDGET_PROP_AUTO_PLAY();
- public  static WIDGET_PROP_AUTO_FIX = WIDGET_PROP_AUTO_FIX();
- public  static WIDGET_PROP_X_MIN = WIDGET_PROP_X_MIN();
- public  static WIDGET_PROP_X_MAX = WIDGET_PROP_X_MAX();
- public  static WIDGET_PROP_Y_MIN = WIDGET_PROP_Y_MIN();
- public  static WIDGET_PROP_Y_MAX = WIDGET_PROP_Y_MAX();
- public  static WIDGET_PROP_MAX = WIDGET_PROP_MAX();
- public  static WIDGET_PROP_ROW = WIDGET_PROP_ROW();
- public  static WIDGET_PROP_THEME = WIDGET_PROP_THEME();
- public  static WIDGET_PROP_SCRIPT = WIDGET_PROP_SCRIPT();
- public  static WIDGET_PROP_ITEM_WIDTH = WIDGET_PROP_ITEM_WIDTH();
- public  static WIDGET_PROP_ITEM_HEIGHT = WIDGET_PROP_ITEM_HEIGHT();
- public  static WIDGET_PROP_DEFAULT_ITEM_HEIGHT = WIDGET_PROP_DEFAULT_ITEM_HEIGHT();
- public  static WIDGET_PROP_XSLIDABLE = WIDGET_PROP_XSLIDABLE();
- public  static WIDGET_PROP_YSLIDABLE = WIDGET_PROP_YSLIDABLE();
- public  static WIDGET_PROP_REPEAT = WIDGET_PROP_REPEAT();
- public  static WIDGET_PROP_ANIMATABLE = WIDGET_PROP_ANIMATABLE();
- public  static WIDGET_PROP_AUTO_HIDE_SCROLL_BAR = WIDGET_PROP_AUTO_HIDE_SCROLL_BAR();
- public  static WIDGET_PROP_IMAGE = WIDGET_PROP_IMAGE();
- public  static WIDGET_PROP_DRAW_TYPE = WIDGET_PROP_DRAW_TYPE();
- public  static WIDGET_PROP_SELECTABLE = WIDGET_PROP_SELECTABLE();
- public  static WIDGET_PROP_CLICKABLE = WIDGET_PROP_CLICKABLE();
- public  static WIDGET_PROP_SCALE_X = WIDGET_PROP_SCALE_X();
- public  static WIDGET_PROP_SCALE_Y = WIDGET_PROP_SCALE_Y();
- public  static WIDGET_PROP_ANCHOR_X = WIDGET_PROP_ANCHOR_X();
- public  static WIDGET_PROP_ANCHOR_Y = WIDGET_PROP_ANCHOR_Y();
- public  static WIDGET_PROP_ROTATION = WIDGET_PROP_ROTATION();
- public  static WIDGET_PROP_SUB_THEME = WIDGET_PROP_SUB_THEME();
- public  static WIDGET_PROP_COMPACT = WIDGET_PROP_COMPACT();
- public  static WIDGET_PROP_ICON = WIDGET_PROP_ICON();
- public  static WIDGET_PROP_OPTIONS = WIDGET_PROP_OPTIONS();
- public  static WIDGET_PROP_SELECTED = WIDGET_PROP_SELECTED();
- public  static WIDGET_PROP_ACTIVE_ICON = WIDGET_PROP_ACTIVE_ICON();
- public  static WIDGET_PROP_OPEN_WINDOW = WIDGET_PROP_OPEN_WINDOW();
- public  static WIDGET_PROP_SELECTED_INDEX = WIDGET_PROP_SELECTED_INDEX();
- public  static WIDGET_PROP_CLOSE_WHEN_CLICK = WIDGET_PROP_CLOSE_WHEN_CLICK();
- public  static WIDGET_PROP_CLOSE_WHEN_CLICK_OUTSIDE = WIDGET_PROP_CLOSE_WHEN_CLICK_OUTSIDE();
- public  static WIDGET_PROP_LINE_GAP = WIDGET_PROP_LINE_GAP();
+ public static X = WIDGET_PROP_X();
+ public static Y = WIDGET_PROP_Y();
+ public static W = WIDGET_PROP_W();
+ public static H = WIDGET_PROP_H();
+ public static MIN_W = WIDGET_PROP_MIN_W();
+ public static MAX_W = WIDGET_PROP_MAX_W();
+ public static LAYOUT_W = WIDGET_PROP_LAYOUT_W();
+ public static LAYOUT_H = WIDGET_PROP_LAYOUT_H();
+ public static VIRTUAL_W = WIDGET_PROP_VIRTUAL_W();
+ public static VIRTUAL_H = WIDGET_PROP_VIRTUAL_H();
+ public static NAME = WIDGET_PROP_NAME();
+ public static VALUE = WIDGET_PROP_VALUE();
+ public static TEXT = WIDGET_PROP_TEXT();
+ public static TR_TEXT = WIDGET_PROP_TR_TEXT();
+ public static STYLE = WIDGET_PROP_STYLE();
+ public static ENABLE = WIDGET_PROP_ENABLE();
+ public static MARGIN = WIDGET_PROP_MARGIN();
+ public static SPACING = WIDGET_PROP_SPACING();
+ public static LEFT_MARGIN = WIDGET_PROP_LEFT_MARGIN();
+ public static RIGHT_MARGIN = WIDGET_PROP_RIGHT_MARGIN();
+ public static TOP_MARGIN = WIDGET_PROP_TOP_MARGIN();
+ public static BOTTOM_MARGIN = WIDGET_PROP_BOTTOM_MARGIN();
+ public static STEP = WIDGET_PROP_STEP();
+ public static VISIBLE = WIDGET_PROP_VISIBLE();
+ public static ANIM_HINT = WIDGET_PROP_ANIM_HINT();
+ public static OPEN_ANIM_HINT = WIDGET_PROP_OPEN_ANIM_HINT();
+ public static CLOSE_ANIM_HINT = WIDGET_PROP_CLOSE_ANIM_HINT();
+ public static MIN = WIDGET_PROP_MIN();
+ public static TIPS = WIDGET_PROP_TIPS();
+ public static INPUT_TYPE = WIDGET_PROP_INPUT_TYPE();
+ public static READONLY = WIDGET_PROP_READONLY();
+ public static PASSWORD_VISIBLE = WIDGET_PROP_PASSWORD_VISIBLE();
+ public static ACTIVE = WIDGET_PROP_ACTIVE();
+ public static VERTICAL = WIDGET_PROP_VERTICAL();
+ public static SHOW_TEXT = WIDGET_PROP_SHOW_TEXT();
+ public static XOFFSET = WIDGET_PROP_XOFFSET();
+ public static YOFFSET = WIDGET_PROP_YOFFSET();
+ public static AUTO_PLAY = WIDGET_PROP_AUTO_PLAY();
+ public static AUTO_FIX = WIDGET_PROP_AUTO_FIX();
+ public static X_MIN = WIDGET_PROP_X_MIN();
+ public static X_MAX = WIDGET_PROP_X_MAX();
+ public static Y_MIN = WIDGET_PROP_Y_MIN();
+ public static Y_MAX = WIDGET_PROP_Y_MAX();
+ public static MAX = WIDGET_PROP_MAX();
+ public static ROW = WIDGET_PROP_ROW();
+ public static THEME = WIDGET_PROP_THEME();
+ public static SCRIPT = WIDGET_PROP_SCRIPT();
+ public static ITEM_WIDTH = WIDGET_PROP_ITEM_WIDTH();
+ public static ITEM_HEIGHT = WIDGET_PROP_ITEM_HEIGHT();
+ public static DEFAULT_ITEM_HEIGHT = WIDGET_PROP_DEFAULT_ITEM_HEIGHT();
+ public static XSLIDABLE = WIDGET_PROP_XSLIDABLE();
+ public static YSLIDABLE = WIDGET_PROP_YSLIDABLE();
+ public static REPEAT = WIDGET_PROP_REPEAT();
+ public static ANIMATABLE = WIDGET_PROP_ANIMATABLE();
+ public static AUTO_HIDE_SCROLL_BAR = WIDGET_PROP_AUTO_HIDE_SCROLL_BAR();
+ public static IMAGE = WIDGET_PROP_IMAGE();
+ public static DRAW_TYPE = WIDGET_PROP_DRAW_TYPE();
+ public static SELECTABLE = WIDGET_PROP_SELECTABLE();
+ public static CLICKABLE = WIDGET_PROP_CLICKABLE();
+ public static SCALE_X = WIDGET_PROP_SCALE_X();
+ public static SCALE_Y = WIDGET_PROP_SCALE_Y();
+ public static ANCHOR_X = WIDGET_PROP_ANCHOR_X();
+ public static ANCHOR_Y = WIDGET_PROP_ANCHOR_Y();
+ public static ROTATION = WIDGET_PROP_ROTATION();
+ public static SUB_THEME = WIDGET_PROP_SUB_THEME();
+ public static COMPACT = WIDGET_PROP_COMPACT();
+ public static ICON = WIDGET_PROP_ICON();
+ public static OPTIONS = WIDGET_PROP_OPTIONS();
+ public static SELECTED = WIDGET_PROP_SELECTED();
+ public static ACTIVE_ICON = WIDGET_PROP_ACTIVE_ICON();
+ public static OPEN_WINDOW = WIDGET_PROP_OPEN_WINDOW();
+ public static SELECTED_INDEX = WIDGET_PROP_SELECTED_INDEX();
+ public static CLOSE_WHEN_CLICK = WIDGET_PROP_CLOSE_WHEN_CLICK();
+ public static CLOSE_WHEN_CLICK_OUTSIDE = WIDGET_PROP_CLOSE_WHEN_CLICK_OUTSIDE();
+ public static LINE_GAP = WIDGET_PROP_LINE_GAP();
 }
 
 class WidgetType {
@@ -817,45 +817,45 @@ class WidgetType {
    this.nativeObj = nativeObj;
  }
 
- public  static WIDGET_TYPE_NONE = WIDGET_TYPE_NONE();
- public  static WIDGET_TYPE_WINDOW_MANAGER = WIDGET_TYPE_WINDOW_MANAGER();
- public  static WIDGET_TYPE_NORMAL_WINDOW = WIDGET_TYPE_NORMAL_WINDOW();
- public  static WIDGET_TYPE_TOOL_BAR = WIDGET_TYPE_TOOL_BAR();
- public  static WIDGET_TYPE_DIALOG = WIDGET_TYPE_DIALOG();
- public  static WIDGET_TYPE_POPUP = WIDGET_TYPE_POPUP();
- public  static WIDGET_TYPE_SPRITE = WIDGET_TYPE_SPRITE();
- public  static WIDGET_TYPE_KEYBOARD = WIDGET_TYPE_KEYBOARD();
- public  static WIDGET_TYPE_DND = WIDGET_TYPE_DND();
- public  static WIDGET_TYPE_LABEL = WIDGET_TYPE_LABEL();
- public  static WIDGET_TYPE_BUTTON = WIDGET_TYPE_BUTTON();
- public  static WIDGET_TYPE_IMAGE = WIDGET_TYPE_IMAGE();
- public  static WIDGET_TYPE_EDIT = WIDGET_TYPE_EDIT();
- public  static WIDGET_TYPE_PROGRESS_BAR = WIDGET_TYPE_PROGRESS_BAR();
- public  static WIDGET_TYPE_GROUP_BOX = WIDGET_TYPE_GROUP_BOX();
- public  static WIDGET_TYPE_CHECK_BUTTON = WIDGET_TYPE_CHECK_BUTTON();
- public  static WIDGET_TYPE_RADIO_BUTTON = WIDGET_TYPE_RADIO_BUTTON();
- public  static WIDGET_TYPE_DIALOG_TITLE = WIDGET_TYPE_DIALOG_TITLE();
- public  static WIDGET_TYPE_DIALOG_CLIENT = WIDGET_TYPE_DIALOG_CLIENT();
- public  static WIDGET_TYPE_SLIDER = WIDGET_TYPE_SLIDER();
- public  static WIDGET_TYPE_VIEW = WIDGET_TYPE_VIEW();
- public  static WIDGET_TYPE_COMBO_BOX = WIDGET_TYPE_COMBO_BOX();
- public  static WIDGET_TYPE_COMBO_BOX_ITEM = WIDGET_TYPE_COMBO_BOX_ITEM();
- public  static WIDGET_TYPE_SLIDE_VIEW = WIDGET_TYPE_SLIDE_VIEW();
- public  static WIDGET_TYPE_PAGES = WIDGET_TYPE_PAGES();
- public  static WIDGET_TYPE_TAB_BUTTON = WIDGET_TYPE_TAB_BUTTON();
- public  static WIDGET_TYPE_TAB_CONTROL = WIDGET_TYPE_TAB_CONTROL();
- public  static WIDGET_TYPE_TAB_BUTTON_GROUP = WIDGET_TYPE_TAB_BUTTON_GROUP();
- public  static WIDGET_TYPE_BUTTON_GROUP = WIDGET_TYPE_BUTTON_GROUP();
- public  static WIDGET_TYPE_CANDIDATES = WIDGET_TYPE_CANDIDATES();
- public  static WIDGET_TYPE_SPIN_BOX = WIDGET_TYPE_SPIN_BOX();
- public  static WIDGET_TYPE_DRAGGER = WIDGET_TYPE_DRAGGER();
- public  static WIDGET_TYPE_SCROLL_BAR = WIDGET_TYPE_SCROLL_BAR();
- public  static WIDGET_TYPE_SCROLL_BAR_DESKTOP = WIDGET_TYPE_SCROLL_BAR_DESKTOP();
- public  static WIDGET_TYPE_SCROLL_BAR_MOBILE = WIDGET_TYPE_SCROLL_BAR_MOBILE();
- public  static WIDGET_TYPE_SCROLL_VIEW = WIDGET_TYPE_SCROLL_VIEW();
- public  static WIDGET_TYPE_LIST_VIEW = WIDGET_TYPE_LIST_VIEW();
- public  static WIDGET_TYPE_LIST_VIEW_H = WIDGET_TYPE_LIST_VIEW_H();
- public  static WIDGET_TYPE_LIST_ITEM = WIDGET_TYPE_LIST_ITEM();
+ public static NONE = WIDGET_TYPE_NONE();
+ public static WINDOW_MANAGER = WIDGET_TYPE_WINDOW_MANAGER();
+ public static NORMAL_WINDOW = WIDGET_TYPE_NORMAL_WINDOW();
+ public static TOOL_BAR = WIDGET_TYPE_TOOL_BAR();
+ public static DIALOG = WIDGET_TYPE_DIALOG();
+ public static POPUP = WIDGET_TYPE_POPUP();
+ public static SPRITE = WIDGET_TYPE_SPRITE();
+ public static KEYBOARD = WIDGET_TYPE_KEYBOARD();
+ public static DND = WIDGET_TYPE_DND();
+ public static LABEL = WIDGET_TYPE_LABEL();
+ public static BUTTON = WIDGET_TYPE_BUTTON();
+ public static IMAGE = WIDGET_TYPE_IMAGE();
+ public static EDIT = WIDGET_TYPE_EDIT();
+ public static PROGRESS_BAR = WIDGET_TYPE_PROGRESS_BAR();
+ public static GROUP_BOX = WIDGET_TYPE_GROUP_BOX();
+ public static CHECK_BUTTON = WIDGET_TYPE_CHECK_BUTTON();
+ public static RADIO_BUTTON = WIDGET_TYPE_RADIO_BUTTON();
+ public static DIALOG_TITLE = WIDGET_TYPE_DIALOG_TITLE();
+ public static DIALOG_CLIENT = WIDGET_TYPE_DIALOG_CLIENT();
+ public static SLIDER = WIDGET_TYPE_SLIDER();
+ public static VIEW = WIDGET_TYPE_VIEW();
+ public static COMBO_BOX = WIDGET_TYPE_COMBO_BOX();
+ public static COMBO_BOX_ITEM = WIDGET_TYPE_COMBO_BOX_ITEM();
+ public static SLIDE_VIEW = WIDGET_TYPE_SLIDE_VIEW();
+ public static PAGES = WIDGET_TYPE_PAGES();
+ public static TAB_BUTTON = WIDGET_TYPE_TAB_BUTTON();
+ public static TAB_CONTROL = WIDGET_TYPE_TAB_CONTROL();
+ public static TAB_BUTTON_GROUP = WIDGET_TYPE_TAB_BUTTON_GROUP();
+ public static BUTTON_GROUP = WIDGET_TYPE_BUTTON_GROUP();
+ public static CANDIDATES = WIDGET_TYPE_CANDIDATES();
+ public static SPIN_BOX = WIDGET_TYPE_SPIN_BOX();
+ public static DRAGGER = WIDGET_TYPE_DRAGGER();
+ public static SCROLL_BAR = WIDGET_TYPE_SCROLL_BAR();
+ public static SCROLL_BAR_DESKTOP = WIDGET_TYPE_SCROLL_BAR_DESKTOP();
+ public static SCROLL_BAR_MOBILE = WIDGET_TYPE_SCROLL_BAR_MOBILE();
+ public static SCROLL_VIEW = WIDGET_TYPE_SCROLL_VIEW();
+ public static LIST_VIEW = WIDGET_TYPE_LIST_VIEW();
+ public static LIST_VIEW_H = WIDGET_TYPE_LIST_VIEW_H();
+ public static LIST_ITEM = WIDGET_TYPE_LIST_ITEM();
 }
 
 class ImageDrawType {
@@ -864,21 +864,21 @@ class ImageDrawType {
    this.nativeObj = nativeObj;
  }
 
- public  static IMAGE_DRAW_DEFAULT = IMAGE_DRAW_DEFAULT();
- public  static IMAGE_DRAW_CENTER = IMAGE_DRAW_CENTER();
- public  static IMAGE_DRAW_ICON = IMAGE_DRAW_ICON();
- public  static IMAGE_DRAW_SCALE = IMAGE_DRAW_SCALE();
- public  static IMAGE_DRAW_SCALE_AUTO = IMAGE_DRAW_SCALE_AUTO();
- public  static IMAGE_DRAW_SCALE_W = IMAGE_DRAW_SCALE_W();
- public  static IMAGE_DRAW_SCALE_H = IMAGE_DRAW_SCALE_H();
- public  static IMAGE_DRAW_REPEAT = IMAGE_DRAW_REPEAT();
- public  static IMAGE_DRAW_REPEAT_X = IMAGE_DRAW_REPEAT_X();
- public  static IMAGE_DRAW_REPEAT_Y = IMAGE_DRAW_REPEAT_Y();
- public  static IMAGE_DRAW_9PATCH = IMAGE_DRAW_9PATCH();
- public  static IMAGE_DRAW_3PATCH_X = IMAGE_DRAW_3PATCH_X();
- public  static IMAGE_DRAW_3PATCH_Y = IMAGE_DRAW_3PATCH_Y();
- public  static IMAGE_DRAW_3PATCH_X_SCALE_Y = IMAGE_DRAW_3PATCH_X_SCALE_Y();
- public  static IMAGE_DRAW_3PATCH_Y_SCALE_X = IMAGE_DRAW_3PATCH_Y_SCALE_X();
+ public static DEFAULT = IMAGE_DRAW_DEFAULT();
+ public static CENTER = IMAGE_DRAW_CENTER();
+ public static ICON = IMAGE_DRAW_ICON();
+ public static SCALE = IMAGE_DRAW_SCALE();
+ public static SCALE_AUTO = IMAGE_DRAW_SCALE_AUTO();
+ public static SCALE_W = IMAGE_DRAW_SCALE_W();
+ public static SCALE_H = IMAGE_DRAW_SCALE_H();
+ public static REPEAT = IMAGE_DRAW_REPEAT();
+ public static REPEAT_X = IMAGE_DRAW_REPEAT_X();
+ public static REPEAT_Y = IMAGE_DRAW_REPEAT_Y();
+ public static PATCH9 = IMAGE_DRAW_PATCH9();
+ public static PATCH3_X = IMAGE_DRAW_PATCH3_X();
+ public static PATCH3_Y = IMAGE_DRAW_PATCH3_Y();
+ public static PATCH3_X_SCALE_Y = IMAGE_DRAW_PATCH3_X_SCALE_Y();
+ public static PATCH3_Y_SCALE_X = IMAGE_DRAW_PATCH3_Y_SCALE_X();
 }
 
 class WidgetState {
@@ -887,17 +887,17 @@ class WidgetState {
    this.nativeObj = nativeObj;
  }
 
- public  static WIDGET_STATE_NONE = WIDGET_STATE_NONE();
- public  static WIDGET_STATE_NORMAL = WIDGET_STATE_NORMAL();
- public  static WIDGET_STATE_PRESSED = WIDGET_STATE_PRESSED();
- public  static WIDGET_STATE_OVER = WIDGET_STATE_OVER();
- public  static WIDGET_STATE_DISABLE = WIDGET_STATE_DISABLE();
- public  static WIDGET_STATE_FOCUSED = WIDGET_STATE_FOCUSED();
- public  static WIDGET_STATE_CHECKED = WIDGET_STATE_CHECKED();
- public  static WIDGET_STATE_UNCHECKED = WIDGET_STATE_UNCHECKED();
- public  static WIDGET_STATE_EMPTY = WIDGET_STATE_EMPTY();
- public  static WIDGET_STATE_ERROR = WIDGET_STATE_ERROR();
- public  static WIDGET_STATE_SELECTED = WIDGET_STATE_SELECTED();
+ public static STATE_NONE = WIDGET_STATE_NONE();
+ public static STATE_NORMAL = WIDGET_STATE_NORMAL();
+ public static STATE_PRESSED = WIDGET_STATE_PRESSED();
+ public static STATE_OVER = WIDGET_STATE_OVER();
+ public static STATE_DISABLE = WIDGET_STATE_DISABLE();
+ public static STATE_FOCUSED = WIDGET_STATE_FOCUSED();
+ public static STATE_CHECKED = WIDGET_STATE_CHECKED();
+ public static STATE_UNCHECKED = WIDGET_STATE_UNCHECKED();
+ public static STATE_EMPTY = WIDGET_STATE_EMPTY();
+ public static STATE_ERROR = WIDGET_STATE_ERROR();
+ public static STATE_SELECTED = WIDGET_STATE_SELECTED();
 }
 
 class Ret {
@@ -906,19 +906,19 @@ class Ret {
    this.nativeObj = nativeObj;
  }
 
- public  static RET_OK = RET_OK();
- public  static RET_OOM = RET_OOM();
- public  static RET_FAIL = RET_FAIL();
- public  static RET_NOT_IMPL = RET_NOT_IMPL();
- public  static RET_QUIT = RET_QUIT();
- public  static RET_FOUND = RET_FOUND();
- public  static RET_REMOVE = RET_REMOVE();
- public  static RET_REPEAT = RET_REPEAT();
- public  static RET_NOT_FOUND = RET_NOT_FOUND();
- public  static RET_DONE = RET_DONE();
- public  static RET_STOP = RET_STOP();
- public  static RET_CONTINUE = RET_CONTINUE();
- public  static RET_BAD_PARAMS = RET_BAD_PARAMS();
+ public static OK = RET_OK();
+ public static OOM = RET_OOM();
+ public static FAIL = RET_FAIL();
+ public static NOT_IMPL = RET_NOT_IMPL();
+ public static QUIT = RET_QUIT();
+ public static FOUND = RET_FOUND();
+ public static REMOVE = RET_REMOVE();
+ public static REPEAT = RET_REPEAT();
+ public static NOT_FOUND = RET_NOT_FOUND();
+ public static DONE = RET_DONE();
+ public static STOP = RET_STOP();
+ public static CONTINUE = RET_CONTINUE();
+ public static BAD_PARAMS = RET_BAD_PARAMS();
 }
 
 class Bitmap {

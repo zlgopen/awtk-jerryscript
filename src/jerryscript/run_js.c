@@ -11,29 +11,11 @@
 
 ret_t awtk_js_init(void);
 
-/**
- * Maximum size of source code
- */
 #define JERRY_BUFFER_SIZE (1048576)
-
-/**
- * Maximum size of snapshots buffer
- */
 #define JERRY_SNAPSHOT_BUFFER_SIZE (JERRY_BUFFER_SIZE / sizeof (uint32_t))
-
-/**
- * Standalone Jerry exit codes
- */
-#define JERRY_STANDALONE_EXIT_CODE_OK   (0)
-#define JERRY_STANDALONE_EXIT_CODE_FAIL (1)
-
-/**
- * Context size of the SYNTAX_ERROR
- */
 #define SYNTAX_ERROR_CONTEXT_SIZE 2
 
 static uint8_t buffer[ JERRY_BUFFER_SIZE ];
-
 
 /**
  * Print error value
@@ -233,8 +215,10 @@ static jerry_value_t parse_file(const char* filename) {
   return_value_if_fail(script != NULL, parsed_code);
 
   fs_read_file_part(awtk_js, script, awtk_size, 0);
-  fs_read_file_part(filename, script+awtk_size, file_size, 0);
-  script[script_size] = '\0';
+  script[awtk_size] = '\n';
+
+  fs_read_file_part(filename, script+awtk_size+1, file_size, 0);
+  script[script_size+1] = '\0';
   
   parsed_code = jerry_parse (NULL, 0, (jerry_char_t*)script, script_size, JERRY_PARSE_NO_OPTS);
 

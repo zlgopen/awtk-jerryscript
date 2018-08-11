@@ -163,10 +163,12 @@ class JerryscriptGenerator {
   genFuncImpl(cls, m) {
     let result = '';
     const name = m.name;
-    result += `jerry_value_t wrap_${name}` + gJerryScriptFuncArgs + ' {\n';
-    result += this.genParamsDecl(m);
-    result += this.genCallMethod(cls, m);
-    result += '};\n\n'
+    if(!isCustom(m)) {
+      result += `jerry_value_t wrap_${name}` + gJerryScriptFuncArgs + ' {\n';
+      result += this.genParamsDecl(m);
+      result += this.genCallMethod(cls, m);
+      result += '};\n\n'
+    }
 
     return result;
   }
