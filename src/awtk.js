@@ -624,13 +624,10 @@ var Widget = /** @class */ (function () {
     Widget.prototype.setValue = function (value) {
         return widget_set_value(this.nativeObj, value);
     };
-    Widget.prototype.setText = function (text) {
-        return widget_set_text(this.nativeObj, text);
-    };
     Widget.prototype.useStyle = function (style) {
         return widget_use_style(this.nativeObj, style);
     };
-    Widget.prototype.setTextUtf8 = function (text) {
+    Widget.prototype.setText = function (text) {
         return widget_set_text_utf8(this.nativeObj, text);
     };
     Widget.prototype.setTrText = function (text) {

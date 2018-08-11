@@ -96,7 +96,7 @@ class JerryscriptGenerator {
 
     return result;
   }
-
+  
   genParamsDecl(m) {
     let result = '';
     let returnType = m.return.type;
@@ -131,6 +131,29 @@ class JerryscriptGenerator {
 
     return result;
   }
+  
+  freeParam(index, type, name) {
+    let result = '';
+
+    if (type.indexOf('char*') >= 0) {
+      result += `  TKMEM_FREE(${name});\n`;
+    } else if (type.indexOf('wchar_t*') >= 0) {
+      result += `  TKMEM_FREE(${name});\n`;
+    }
+
+    return result;
+  }
+  
+  freeParams(m) {
+    let result = '';
+
+    m.params.forEach((iter, index) => {
+      result += this.freeParam(index, iter.type, iter.name);
+    })
+
+    return result;
+  }
+
 
   genCallMethod(cls, m) {
     const ret_type = m.return.type;
@@ -145,8 +168,8 @@ class JerryscriptGenerator {
     })
 
     result += ');\n';
+    result += this.freeParams(m);
 
-    result += '\n';
     if (ret_type == 'void') {
       result += '  return 0;\n';
     } else {

@@ -307,7 +307,6 @@ declare function widget_move(widget, x, y);
 declare function widget_resize(widget, w, h);
 declare function widget_move_resize(widget, x, y, w, h);
 declare function widget_set_value(widget, value);
-declare function widget_set_text(widget, text);
 declare function widget_use_style(widget, style);
 declare function widget_set_text_utf8(widget, text);
 declare function widget_set_tr_text(widget, text);
@@ -1255,15 +1254,11 @@ class Widget {
    return widget_set_value(this.nativeObj, value);
  }
 
- setText(text) {
-   return widget_set_text(this.nativeObj, text);
- }
-
  useStyle(style) {
    return widget_use_style(this.nativeObj, style);
  }
 
- setTextUtf8(text) {
+ setText(text) {
    return widget_set_text_utf8(this.nativeObj, text);
  }
 
