@@ -1,5 +1,5 @@
 
-function application_init() {
+function applicationInit() {
   var win = Window.create(null, 0, 0, 0, 0);
   var label = Label.create(win, 0, 0, 0, 0);
 
@@ -10,4 +10,4 @@ function application_init() {
   win.layout();
 }
 
-application_init()
+applicationInit()

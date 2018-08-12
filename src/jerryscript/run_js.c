@@ -198,6 +198,9 @@ static jerry_value_t parse_file(const char* filename) {
 
   parsed_code = jerry_parse(NULL, 0, (jerry_char_t*)script, script_size, JERRY_PARSE_NO_OPTS);
 
+  fs_write_file("awtk_all.js", script, script_size);
+  TKMEM_FREE(script);
+
   return parsed_code;
 }
 

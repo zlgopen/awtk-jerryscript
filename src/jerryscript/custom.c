@@ -286,7 +286,7 @@ jerry_value_t wrap_widget_foreach(const jerry_value_t func_obj_val, const jerry_
   ret_t ret = RET_OK;
 
   return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
-  if (args_cnt >= 2) i {
+  if (args_cnt >= 2) {
       widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
       jerry_value_t func = args_p[1];
       void* ctx = (int32_t*)NULL + (int32_t)func;
