@@ -156,6 +156,8 @@ class JerryscriptGenerator {
 
     if (isConstructor(m) || isCast(m)) {
       result = `   return new ${clsName}(${result});\n`;
+    } else if(m.return.type === 'widget_t*') {
+      result = `   return new Widget(${result});\n`;
     } else {
       result = `   return ${result};\n`;
     }

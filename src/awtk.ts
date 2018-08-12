@@ -396,6 +396,8 @@ declare function dialog_title_cast(widget);
 declare function dialog_create(parent, x, y, w, h);
 declare function dialog_create_simple(parent, x, y, w, h);
 declare function dialog_cast(widget);
+declare function dialog_get_title(widget);
+declare function dialog_get_client(widget);
 declare function dialog_open(name);
 declare function dialog_set_title(widget, title);
 declare function dialog_modal(widget);
@@ -1231,7 +1233,7 @@ class Widget {
  }
 
  getChild(index) {
-   return widget_get_child(this.nativeObj, index);
+   return new Widget(widget_get_child(this.nativeObj, index));
  }
 
  indexOf() {
@@ -1287,11 +1289,11 @@ class Widget {
  }
 
  lookup(name, recursive) {
-   return widget_lookup(this.nativeObj, name, recursive);
+   return new Widget(widget_lookup(this.nativeObj, name, recursive));
  }
 
  lookupByType(type, recursive) {
-   return widget_lookup_by_type(this.nativeObj, type, recursive);
+   return new Widget(widget_lookup_by_type(this.nativeObj, type, recursive));
  }
 
  setVisible(visible, recursive) {
@@ -1319,7 +1321,7 @@ class Widget {
  }
 
  getWindow() {
-   return widget_get_window(this.nativeObj);
+   return new Widget(widget_get_window(this.nativeObj));
  }
 
  getType() {
@@ -1327,7 +1329,7 @@ class Widget {
  }
 
  clone(parent) {
-   return widget_clone(this.nativeObj, parent);
+   return new Widget(widget_clone(this.nativeObj, parent));
  }
 
  equal(other) {
@@ -1698,6 +1700,14 @@ class Dialog extends Widget {
    return new Dialog(dialog_cast(widget));
  }
 
+ getTitle() {
+   return new Widget(dialog_get_title(this.nativeObj));
+ }
+
+ getClient() {
+   return new Widget(dialog_get_client(this.nativeObj));
+ }
+
  static open(name) {
    return new Dialog(dialog_open(name));
  }
@@ -1731,7 +1741,7 @@ class Dragger extends Widget {
  }
 
  setRange(x_min, y_min, x_max, y_max) {
-   return dragger_set_range(this.nativeObj, x_min, y_min, x_max, y_max);
+   return new Widget(dragger_set_range(this.nativeObj, x_min, y_min, x_max, y_max));
  }
 
  get xMin() {

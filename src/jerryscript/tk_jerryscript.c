@@ -834,6 +834,24 @@ jerry_value_t wrap_dialog_cast(const jerry_value_t func_obj_val, const jerry_val
   return jerry_create_pointer(ret, "dialog_t*");
 };
 
+jerry_value_t wrap_dialog_get_title(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                    const jerry_value_t args_p[], const jerry_length_t args_cnt) {
+  widget_t* ret = NULL;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (widget_t*)dialog_get_title(widget);
+
+  return jerry_create_pointer(ret, "widget_t*");
+};
+
+jerry_value_t wrap_dialog_get_client(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                     const jerry_value_t args_p[], const jerry_length_t args_cnt) {
+  widget_t* ret = NULL;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (widget_t*)dialog_get_client(widget);
+
+  return jerry_create_pointer(ret, "widget_t*");
+};
+
 jerry_value_t wrap_dialog_open(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                const jerry_value_t args_p[], const jerry_length_t args_cnt) {
   widget_t* ret = NULL;
@@ -882,6 +900,8 @@ ret_t dialog_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"dialog_create_simple",
                                  wrap_dialog_create_simple);
   jerryx_handler_register_global((const jerry_char_t*)"dialog_cast", wrap_dialog_cast);
+  jerryx_handler_register_global((const jerry_char_t*)"dialog_get_title", wrap_dialog_get_title);
+  jerryx_handler_register_global((const jerry_char_t*)"dialog_get_client", wrap_dialog_get_client);
   jerryx_handler_register_global((const jerry_char_t*)"dialog_open", wrap_dialog_open);
   jerryx_handler_register_global((const jerry_char_t*)"dialog_set_title", wrap_dialog_set_title);
   jerryx_handler_register_global((const jerry_char_t*)"dialog_modal", wrap_dialog_modal);

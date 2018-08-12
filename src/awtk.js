@@ -607,7 +607,7 @@ var Widget = /** @class */ (function () {
         return widget_count_children(this.nativeObj);
     };
     Widget.prototype.getChild = function (index) {
-        return widget_get_child(this.nativeObj, index);
+        return new Widget(widget_get_child(this.nativeObj, index));
     };
     Widget.prototype.indexOf = function () {
         return widget_index_of(this.nativeObj);
@@ -649,10 +649,10 @@ var Widget = /** @class */ (function () {
         return widget_set_focused(this.nativeObj, focused);
     };
     Widget.prototype.lookup = function (name, recursive) {
-        return widget_lookup(this.nativeObj, name, recursive);
+        return new Widget(widget_lookup(this.nativeObj, name, recursive));
     };
     Widget.prototype.lookupByType = function (type, recursive) {
-        return widget_lookup_by_type(this.nativeObj, type, recursive);
+        return new Widget(widget_lookup_by_type(this.nativeObj, type, recursive));
     };
     Widget.prototype.setVisible = function (visible, recursive) {
         return widget_set_visible(this.nativeObj, visible, recursive);
@@ -673,13 +673,13 @@ var Widget = /** @class */ (function () {
         return widget_foreach(this.nativeObj, visit, ctx);
     };
     Widget.prototype.getWindow = function () {
-        return widget_get_window(this.nativeObj);
+        return new Widget(widget_get_window(this.nativeObj));
     };
     Widget.prototype.getType = function () {
         return widget_get_type(this.nativeObj);
     };
     Widget.prototype.clone = function (parent) {
-        return widget_clone(this.nativeObj, parent);
+        return new Widget(widget_clone(this.nativeObj, parent));
     };
     Widget.prototype.equal = function (other) {
         return widget_equal(this.nativeObj, other);
@@ -1079,6 +1079,12 @@ var Dialog = /** @class */ (function (_super) {
     Dialog.cast = function (widget) {
         return new Dialog(dialog_cast(widget));
     };
+    Dialog.prototype.getTitle = function () {
+        return new Widget(dialog_get_title(this.nativeObj));
+    };
+    Dialog.prototype.getClient = function () {
+        return new Widget(dialog_get_client(this.nativeObj));
+    };
     Dialog.open = function (name) {
         return new Dialog(dialog_open(name));
     };
@@ -1105,7 +1111,7 @@ var Dragger = /** @class */ (function (_super) {
         return new Dragger(dragger_cast(widget));
     };
     Dragger.prototype.setRange = function (x_min, y_min, x_max, y_max) {
-        return dragger_set_range(this.nativeObj, x_min, y_min, x_max, y_max);
+        return new Widget(dragger_set_range(this.nativeObj, x_min, y_min, x_max, y_max));
     };
     Object.defineProperty(Dragger.prototype, "xMin", {
         get: function () {
