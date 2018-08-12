@@ -297,6 +297,7 @@ declare function value_set_int(v, value);
 declare function value_create();
 declare function value_destroy(v);
 declare function value_t_get_prop_type(nativeObj);
+declare function event_cast(event);
 declare function event_t_get_prop_type(nativeObj);
 declare function event_t_get_prop_time(nativeObj);
 declare function event_t_get_prop_target(nativeObj);
@@ -330,6 +331,7 @@ declare function widget_equal(widget, other);
 declare function widget_set_self_layout_params(widget, x, y, w, h);
 declare function widget_set_children_layout_params(widget, params);
 declare function widget_layout(widget);
+declare function widget_cast(widget);
 declare function widget_destroy(widget);
 declare function widget_t_get_prop_x(nativeObj);
 declare function widget_t_get_prop_y(nativeObj);
@@ -1208,6 +1210,10 @@ class Event {
    this.nativeObj = nativeObj;
  }
 
+ static cast(event) {
+   return new Event(event_cast(event));
+ }
+
  get type() {
    return event_t_get_prop_type(this.nativeObj);
  }
@@ -1346,6 +1352,10 @@ class Widget {
 
  layout() {
    return widget_layout(this.nativeObj);
+ }
+
+ static cast(widget) {
+   return new Widget(widget_cast(widget));
  }
 
  destroy() {

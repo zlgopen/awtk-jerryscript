@@ -866,7 +866,7 @@ jerry_value_t wrap_dialog_set_title(const jerry_value_t func_obj_val, const jerr
                                     const jerry_value_t args_p[], const jerry_length_t args_cnt) {
   ret_t ret = 0;
   widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
-  wchar_t* title = (wchar_t*)jerry_get_wstring(args_p[1]);
+  char* title = (char*)jerry_get_utf8_string(args_p[1]);
   ret = (ret_t)dialog_set_title(widget, title);
   TKMEM_FREE(title);
 
@@ -1563,6 +1563,15 @@ ret_t event_type_t_init(void) {
   return RET_OK;
 }
 
+jerry_value_t wrap_event_cast(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                              const jerry_value_t args_p[], const jerry_length_t args_cnt) {
+  event_t* ret = NULL;
+  event_t* event = (event_t*)jerry_get_pointer(args_p[0], "event_t*");
+  ret = (event_t*)event_cast(event);
+
+  return jerry_create_pointer(ret, "event_t*");
+};
+
 jerry_value_t wrap_event_t_get_prop_type(const jerry_value_t func_obj_val,
                                          const jerry_value_t this_p, const jerry_value_t args_p[],
                                          const jerry_length_t args_cnt) {
@@ -1590,6 +1599,7 @@ jerry_value_t wrap_event_t_get_prop_target(const jerry_value_t func_obj_val,
 };
 
 ret_t event_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"event_cast", wrap_event_cast);
   jerryx_handler_register_global((const jerry_char_t*)"event_t_get_prop_type",
                                  wrap_event_t_get_prop_type);
   jerryx_handler_register_global((const jerry_char_t*)"event_t_get_prop_time",
@@ -5591,6 +5601,15 @@ jerry_value_t wrap_widget_layout(const jerry_value_t func_obj_val, const jerry_v
   ;
 };
 
+jerry_value_t wrap_widget_cast(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                               const jerry_value_t args_p[], const jerry_length_t args_cnt) {
+  widget_t* ret = NULL;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (widget_t*)widget_cast(widget);
+
+  return jerry_create_pointer(ret, "widget_t*");
+};
+
 jerry_value_t wrap_widget_destroy(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                   const jerry_value_t args_p[], const jerry_length_t args_cnt) {
   ret_t ret = 0;
@@ -5735,6 +5754,7 @@ ret_t widget_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_children_layout_params",
                                  wrap_widget_set_children_layout_params);
   jerryx_handler_register_global((const jerry_char_t*)"widget_layout", wrap_widget_layout);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_cast", wrap_widget_cast);
   jerryx_handler_register_global((const jerry_char_t*)"widget_destroy", wrap_widget_destroy);
   jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_x",
                                  wrap_widget_t_get_prop_x);
