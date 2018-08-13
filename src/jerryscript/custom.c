@@ -84,7 +84,7 @@ jerry_value_t jerry_create_pointer(const void* ptr, const char* type) {
 static ret_t call_on_event(void* ctx, event_t* e) {
   jerry_value_t res;
   jerry_value_t args[1];
-  jerry_value_t func = (jerry_value_t)((int32_t*)ctx - (int32_t*)NULL);
+  jerry_value_t func = (jerry_value_t)((char*)ctx - (char*)NULL);
   jerry_value_t this_value = jerry_create_undefined();
 
   args[0] = jerry_create_pointer(e, "event_t");
@@ -94,6 +94,15 @@ static ret_t call_on_event(void* ctx, event_t* e) {
   jerry_release_value(this_value);
 
   return (ret_t)jerry_get_number_value(res);
+}
+
+static ret_t emitter_item_on_destroy(void* data) {
+  emitter_item_t* item = (emitter_item_t*)data;
+
+  uint32_t func = (char*)(item->ctx) - (char*)NULL;
+  jerry_release_value(func);
+
+  return RET_OK;
 }
 
 jerry_value_t wrap_widget_on(const jerry_value_t func_obj_val, const jerry_value_t this_p,
@@ -106,28 +115,9 @@ jerry_value_t wrap_widget_on(const jerry_value_t func_obj_val, const jerry_value
     event_type_t type = (event_type_t)jerry_get_number_value(args_p[1]);
     jerry_value_t on_event = jerry_acquire_value(args_p[2]);
 
-    void* ctx = (int32_t*)NULL + (int32_t)on_event;
+    void* ctx = (char*)NULL + (int32_t)on_event;
     ret = (int32_t)widget_on(widget, type, call_on_event, ctx);
-  }
-
-  return jerry_create_number(ret);
-}
-
-jerry_value_t wrap_widget_off(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                              const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  ret_t ret = RET_FAIL;
-  return_value_if_fail(args_cnt >= 1, jerry_create_undefined());
-
-  if (args_cnt >= 1) {
-    widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
-    int32_t id = (int32_t)jerry_get_number_value(args_p[1]);
-    emitter_item_t* item = emitter_find(widget->emitter, id);
-
-    if (item) {
-      jerry_value_t func = (char*)(item->ctx) - (char*)NULL;
-      ret = (ret_t)widget_off(widget, id);
-      jerry_release_value(func);
-    }
+    emitter_set_on_destroy(widget->emitter, ret, emitter_item_on_destroy, NULL);
   }
 
   return jerry_create_number(ret);
@@ -143,38 +133,28 @@ jerry_value_t wrap_tklocale_on(const jerry_value_t func_obj_val, const jerry_val
     event_type_t type = (event_type_t)jerry_get_number_value(args_p[1]);
     jerry_value_t on_event = jerry_acquire_value(args_p[2]);
 
-    void* ctx = (int32_t*)NULL + (int32_t)on_event;
+    void* ctx = (char*)NULL + (int32_t)on_event;
     ret = (uint32_t)tklocale_on(tklocale, type, call_on_event, ctx);
+    emitter_set_on_destroy(tklocale->emitter, ret, emitter_item_on_destroy, NULL);
   }
 
   return jerry_create_number(ret);
 }
 
-jerry_value_t wrap_tklocale_off(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                                const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  ret_t ret = RET_FAIL;
-  return_value_if_fail(args_cnt >= 1, jerry_create_undefined());
+static ret_t timer_info_on_destroy(void* data) {
+  timer_info_t* item = (timer_info_t*)data;
 
-  if (args_cnt >= 1) {
-    tklocale_t* tklocale = (tklocale_t*)jerry_get_pointer(args_p[0], "tklocale_t*");
-    uint32_t id = (uint32_t)jerry_get_number_value(args_p[1]);
-    emitter_item_t* item = emitter_find(tklocale->emitter, id);
+  uint32_t func = (char*)(item->ctx) - (char*)NULL;
+  jerry_release_value(func);
 
-    if (item) {
-      jerry_value_t func = (char*)(item->ctx) - (char*)NULL;
-      ret = (ret_t)tklocale_off(tklocale, id);
-      jerry_release_value(func);
-    }
-  }
-
-  return jerry_create_number(ret);
+  return RET_OK;
 }
 
 static ret_t call_on_timer(const timer_info_t* timer) {
   jerry_value_t res;
   jerry_value_t args[1];
   jerry_value_t this_value = jerry_create_undefined();
-  jerry_value_t func = (jerry_value_t)((int32_t*)timer->ctx - (int32_t*)NULL);
+  jerry_value_t func = (jerry_value_t)((char*)timer->ctx - (char*)NULL);
 
   args[0] = jerry_create_undefined();
   res = jerry_call_function(func, this_value, args, 1);
@@ -193,37 +173,30 @@ jerry_value_t wrap_timer_add(const jerry_value_t func_obj_val, const jerry_value
   if (args_cnt >= 2) {
     jerry_value_t on_timer = jerry_acquire_value(args_p[0]);
     uint32_t duration_ms = (uint32_t)jerry_get_number_value(args_p[1]);
-    void* ctx = (int32_t*)NULL + (int32_t)on_timer;
+    void* ctx = (char*)NULL + (int32_t)on_timer;
 
     ret = (uint32_t)timer_add(call_on_timer, ctx, duration_ms);
+    timer_set_on_destroy(ret, timer_info_on_destroy, NULL);
   }
 
   return jerry_create_number(ret);
 }
 
-jerry_value_t wrap_timer_remove(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                                const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  ret_t ret = RET_FAIL;
-  return_value_if_fail(args_cnt >= 1, jerry_create_undefined());
+static ret_t idle_info_on_destroy(void* data) {
+  idle_info_t* item = (idle_info_t*)data;
 
-  if (args_cnt >= 1) {
-    uint32_t timer_id = (uint32_t)jerry_get_number_value(args_p[0]);
-    const timer_info_t* timer = timer_find(timer_id);
-    if (timer != NULL) {
-      uint32_t func = (char*)(timer->ctx) - (char*)NULL;
-      ret = (ret_t)timer_remove(timer_id);
-      jerry_release_value(func);
-    }
-  }
+  uint32_t func = (char*)(item->ctx) - (char*)NULL;
+  jerry_release_value(func);
 
-  return jerry_create_number(ret);
+  return RET_OK;
+  ;
 }
 
 static ret_t call_on_idle(const idle_info_t* idle) {
   jerry_value_t res;
   jerry_value_t args[1];
   jerry_value_t this_value = jerry_create_undefined();
-  jerry_value_t func = (jerry_value_t)((int32_t*)idle->ctx - (int32_t*)NULL);
+  jerry_value_t func = (jerry_value_t)((char*)idle->ctx - (char*)NULL);
 
   args[0] = jerry_create_undefined();
   res = jerry_call_function(func, this_value, args, 1);
@@ -241,26 +214,10 @@ jerry_value_t wrap_idle_add(const jerry_value_t func_obj_val, const jerry_value_
 
   if (args_cnt >= 1) {
     jerry_value_t on_idle = jerry_acquire_value(args_p[0]);
-    void* ctx = (int32_t*)NULL + (int32_t)on_idle;
+    void* ctx = (char*)NULL + (int32_t)on_idle;
 
     ret = (uint32_t)idle_add(call_on_idle, ctx);
-  }
-
-  return jerry_create_number(ret);
-}
-
-jerry_value_t wrap_idle_remove(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                               const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  ret_t ret = RET_FAIL;
-  return_value_if_fail(args_cnt >= 1, jerry_create_undefined());
-
-  if (args_cnt >= 1) {
-    uint32_t idle_id = (uint32_t)jerry_get_number_value(args_p[0]);
-    const idle_info_t* idle = idle_find(idle_id);
-    uint32_t func = (char*)(idle->ctx) - (char*)NULL;
-
-    ret = (ret_t)idle_remove(idle_id);
-    jerry_release_value(func);
+    idle_set_on_destroy(ret, idle_info_on_destroy, NULL);
   }
 
   return jerry_create_number(ret);
@@ -269,7 +226,7 @@ jerry_value_t wrap_idle_remove(const jerry_value_t func_obj_val, const jerry_val
 static ret_t call_visit(void* ctx, void* data) {
   jerry_value_t res;
   jerry_value_t args[1];
-  jerry_value_t func = (jerry_value_t)((int32_t*)ctx - (int32_t*)NULL);
+  jerry_value_t func = (jerry_value_t)((char*)ctx - (char*)NULL);
   jerry_value_t this_value = jerry_create_undefined();
 
   args[0] = jerry_create_pointer(data, "widget_t*");
@@ -289,7 +246,7 @@ jerry_value_t wrap_widget_foreach(const jerry_value_t func_obj_val, const jerry_
   if (args_cnt >= 2) {
     widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
     jerry_value_t func = args_p[1];
-    void* ctx = (int32_t*)NULL + (int32_t)func;
+    void* ctx = (char*)NULL + (int32_t)func;
 
     ret = (ret_t)widget_foreach(widget, call_visit, ctx);
   }

@@ -1956,6 +1956,16 @@ ret_t group_box_t_init(void) {
   return RET_OK;
 }
 
+jerry_value_t wrap_idle_remove(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                               const jerry_value_t args_p[], const jerry_length_t args_cnt) {
+  ret_t ret = 0;
+  uint32_t idle_id = (uint32_t)jerry_get_number_value(args_p[0]);
+  ret = (ret_t)idle_remove(idle_id);
+
+  return jerry_create_number(ret);
+  ;
+};
+
 ret_t idle_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"idle_add", wrap_idle_add);
   jerryx_handler_register_global((const jerry_char_t*)"idle_remove", wrap_idle_remove);
@@ -3717,6 +3727,16 @@ ret_t tab_control_t_init(void) {
   return RET_OK;
 }
 
+jerry_value_t wrap_timer_remove(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                const jerry_value_t args_p[], const jerry_length_t args_cnt) {
+  ret_t ret = 0;
+  uint32_t timer_id = (uint32_t)jerry_get_number_value(args_p[0]);
+  ret = (ret_t)timer_remove(timer_id);
+
+  return jerry_create_number(ret);
+  ;
+};
+
 ret_t timer_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"timer_add", wrap_timer_add);
   jerryx_handler_register_global((const jerry_char_t*)"timer_remove", wrap_timer_remove);
@@ -3752,6 +3772,17 @@ jerry_value_t wrap_tklocale_change(const jerry_value_t func_obj_val, const jerry
   ret = (ret_t)tklocale_change(tklocale, language, country);
   TKMEM_FREE(language);
   TKMEM_FREE(country);
+
+  return jerry_create_number(ret);
+  ;
+};
+
+jerry_value_t wrap_tklocale_off(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                const jerry_value_t args_p[], const jerry_length_t args_cnt) {
+  ret_t ret = 0;
+  tklocale_t* tklocale = (tklocale_t*)jerry_get_pointer(args_p[0], "tklocale_t*");
+  uint32_t id = (uint32_t)jerry_get_number_value(args_p[1]);
+  ret = (ret_t)tklocale_off(tklocale, id);
 
   return jerry_create_number(ret);
   ;
@@ -5487,6 +5518,17 @@ jerry_value_t wrap_widget_set_visible(const jerry_value_t func_obj_val, const je
   bool_t visible = (bool_t)jerry_get_boolean_value(args_p[1]);
   bool_t recursive = (bool_t)jerry_get_boolean_value(args_p[2]);
   ret = (ret_t)widget_set_visible(widget, visible, recursive);
+
+  return jerry_create_number(ret);
+  ;
+};
+
+jerry_value_t wrap_widget_off(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                              const jerry_value_t args_p[], const jerry_length_t args_cnt) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  int32_t id = (int32_t)jerry_get_number_value(args_p[1]);
+  ret = (ret_t)widget_off(widget, id);
 
   return jerry_create_number(ret);
   ;
