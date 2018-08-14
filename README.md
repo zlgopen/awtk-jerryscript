@@ -6,9 +6,7 @@ awtk js bindings.
 
 ```
 git clone https://github.com/zlgopen/awtk.git
-
 git clone https://github.com/zlgopen/awtk-js.git
-
 cd awtk-js
 ```
 
@@ -16,14 +14,15 @@ cd awtk-js
 ## 二、更新绑定
 
 ```
-cd tools/js_gen/
+cd tools/js_gen
 node index.js 
+node jerryscript.js
 ```
 
 ## 三、编译
 
 ```
-cd 3rd/;./build.sh; cd-
+cd 3rd/;./build.sh; 
 ```
 
 ```
