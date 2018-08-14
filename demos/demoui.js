@@ -8,7 +8,7 @@ var sPreloadRes = [
 ]
 
 function strContains(str, substr) {
-  return str.indexOf(substr) >= 0;
+  return str && str.indexOf(substr) >= 0;
 }
 
 function installOne(w) { 
@@ -39,7 +39,7 @@ function installOne(w) {
     iter.on(EventType.CLICK, function(evt) {
       Tklocale.instance().change('en', 'US');
     })
-  } else if(strContains(widgetName, 'showFps')) {
+  } else if(strContains(widgetName, 'show_fps')) {
     iter.on(EventType.CLICK, function(evt) {
       var wm = WindowManager.instance();
       print(wm.showFps)

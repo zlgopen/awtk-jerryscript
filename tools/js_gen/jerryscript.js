@@ -115,7 +115,7 @@ class JerryscriptGenerator {
   genReturnData(type, name) {
     let result = '\n';
     if (type.indexOf('char*') >= 0) {
-      result += `  return jerry_create_string_from_utf8((const jerry_char_t*)${name});\n`;
+      result += `  return jerry_create_string_from_utf8((const jerry_char_t*)(${name} != NULL ? ${name} : ""));\n`;
     } else if (type.indexOf('wchar_t*') >= 0) {
       result += `  return jerry_create_string_from_wstring(${name});\n`;
     } else if (type.indexOf('*') >= 0) {

@@ -172,7 +172,7 @@ jerry_value_t wrap_bitmap_t_get_prop_name(const jerry_value_t func_obj_val,
                                           const jerry_length_t args_cnt) {
   bitmap_t* obj = (bitmap_t*)jerry_get_pointer(args_p[0], "bitmap_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->name);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(obj->name != NULL ? obj->name : ""));
 };
 
 ret_t bitmap_t_init(void) {
@@ -663,7 +663,7 @@ jerry_value_t wrap_combo_box_get_text(const jerry_value_t func_obj_val, const je
   widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
   ret = (char*)combo_box_get_text(widget);
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)ret);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(ret != NULL ? ret : ""));
 };
 
 jerry_value_t wrap_combo_box_t_get_prop_open_window(const jerry_value_t func_obj_val,
@@ -672,7 +672,8 @@ jerry_value_t wrap_combo_box_t_get_prop_open_window(const jerry_value_t func_obj
                                                     const jerry_length_t args_cnt) {
   combo_box_t* obj = (combo_box_t*)jerry_get_pointer(args_p[0], "combo_box_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->open_window);
+  return jerry_create_string_from_utf8(
+      (const jerry_char_t*)(obj->open_window != NULL ? obj->open_window : ""));
 };
 
 jerry_value_t wrap_combo_box_t_get_prop_selected_index(const jerry_value_t func_obj_val,
@@ -701,7 +702,8 @@ jerry_value_t wrap_combo_box_t_get_prop_options(const jerry_value_t func_obj_val
                                                 const jerry_length_t args_cnt) {
   combo_box_t* obj = (combo_box_t*)jerry_get_pointer(args_p[0], "combo_box_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->options);
+  return jerry_create_string_from_utf8(
+      (const jerry_char_t*)(obj->options != NULL ? obj->options : ""));
 };
 
 ret_t combo_box_t_init(void) {
@@ -1218,7 +1220,7 @@ jerry_value_t wrap_edit_t_get_prop_tips(const jerry_value_t func_obj_val,
                                         const jerry_length_t args_cnt) {
   edit_t* obj = (edit_t*)jerry_get_pointer(args_p[0], "edit_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->tips);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(obj->tips != NULL ? obj->tips : ""));
 };
 
 ret_t edit_t_init(void) {
@@ -1702,7 +1704,7 @@ jerry_value_t wrap_prop_change_event_t_get_prop_name(const jerry_value_t func_ob
   prop_change_event_t* obj =
       (prop_change_event_t*)jerry_get_pointer(args_p[0], "prop_change_event_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->name);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(obj->name != NULL ? obj->name : ""));
 };
 
 jerry_value_t wrap_prop_change_event_t_get_prop_value(const jerry_value_t func_obj_val,
@@ -2561,7 +2563,7 @@ jerry_value_t wrap_popup_t_get_prop_theme(const jerry_value_t func_obj_val,
                                           const jerry_length_t args_cnt) {
   popup_t* obj = (popup_t*)jerry_get_pointer(args_p[0], "popup_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->theme);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(obj->theme != NULL ? obj->theme : ""));
 };
 
 jerry_value_t wrap_popup_t_get_prop_anim_hint(const jerry_value_t func_obj_val,
@@ -2570,7 +2572,8 @@ jerry_value_t wrap_popup_t_get_prop_anim_hint(const jerry_value_t func_obj_val,
                                               const jerry_length_t args_cnt) {
   popup_t* obj = (popup_t*)jerry_get_pointer(args_p[0], "popup_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->anim_hint);
+  return jerry_create_string_from_utf8(
+      (const jerry_char_t*)(obj->anim_hint != NULL ? obj->anim_hint : ""));
 };
 
 jerry_value_t wrap_popup_t_get_prop_close_when_click(const jerry_value_t func_obj_val,
@@ -2810,7 +2813,7 @@ jerry_value_t wrap_resource_info_t_get_prop_name(const jerry_value_t func_obj_va
                                                  const jerry_length_t args_cnt) {
   resource_info_t* obj = (resource_info_t*)jerry_get_pointer(args_p[0], "resource_info_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->name);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(obj->name != NULL ? obj->name : ""));
 };
 
 ret_t resource_info_t_init(void) {
@@ -3666,7 +3669,8 @@ jerry_value_t wrap_tab_button_t_get_prop_active_icon(const jerry_value_t func_ob
                                                      const jerry_length_t args_cnt) {
   tab_button_t* obj = (tab_button_t*)jerry_get_pointer(args_p[0], "tab_button_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->active_icon);
+  return jerry_create_string_from_utf8(
+      (const jerry_char_t*)(obj->active_icon != NULL ? obj->active_icon : ""));
 };
 
 jerry_value_t wrap_tab_button_t_get_prop_icon(const jerry_value_t func_obj_val,
@@ -3675,7 +3679,7 @@ jerry_value_t wrap_tab_button_t_get_prop_icon(const jerry_value_t func_obj_val,
                                               const jerry_length_t args_cnt) {
   tab_button_t* obj = (tab_button_t*)jerry_get_pointer(args_p[0], "tab_button_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->icon);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(obj->icon != NULL ? obj->icon : ""));
 };
 
 ret_t tab_button_t_init(void) {
@@ -3760,7 +3764,7 @@ jerry_value_t wrap_tklocale_tr(const jerry_value_t func_obj_val, const jerry_val
   ret = (char*)tklocale_tr(tklocale, text);
   TKMEM_FREE(text);
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)ret);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(ret != NULL ? ret : ""));
 };
 
 jerry_value_t wrap_tklocale_change(const jerry_value_t func_obj_val, const jerry_value_t this_p,
@@ -4261,7 +4265,7 @@ jerry_value_t wrap_value_str(const jerry_value_t func_obj_val, const jerry_value
   value_t* v = (value_t*)jerry_get_pointer(args_p[0], "value_t*");
   ret = (const char*)value_str(v);
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)ret);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(ret != NULL ? ret : ""));
 };
 
 jerry_value_t wrap_value_is_null(const jerry_value_t func_obj_val, const jerry_value_t this_p,
@@ -5575,7 +5579,7 @@ jerry_value_t wrap_widget_get_type(const jerry_value_t func_obj_val, const jerry
   widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
   ret = (char*)widget_get_type(widget);
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)ret);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(ret != NULL ? ret : ""));
 };
 
 jerry_value_t wrap_widget_clone(const jerry_value_t func_obj_val, const jerry_value_t this_p,
@@ -5704,7 +5708,8 @@ jerry_value_t wrap_widget_t_get_prop_style_name(const jerry_value_t func_obj_val
                                                 const jerry_length_t args_cnt) {
   widget_t* obj = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->style_name);
+  return jerry_create_string_from_utf8(
+      (const jerry_char_t*)(obj->style_name != NULL ? obj->style_name : ""));
 };
 
 jerry_value_t wrap_widget_t_get_prop_enable(const jerry_value_t func_obj_val,
@@ -5742,7 +5747,7 @@ jerry_value_t wrap_widget_t_get_prop_name(const jerry_value_t func_obj_val,
                                           const jerry_length_t args_cnt) {
   widget_t* obj = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->name);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(obj->name != NULL ? obj->name : ""));
 };
 
 jerry_value_t wrap_widget_t_get_prop_tr_text(const jerry_value_t func_obj_val,
@@ -5751,7 +5756,8 @@ jerry_value_t wrap_widget_t_get_prop_tr_text(const jerry_value_t func_obj_val,
                                              const jerry_length_t args_cnt) {
   widget_t* obj = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->tr_text);
+  return jerry_create_string_from_utf8(
+      (const jerry_char_t*)(obj->tr_text != NULL ? obj->tr_text : ""));
 };
 
 ret_t widget_t_init(void) {
@@ -5934,7 +5940,7 @@ jerry_value_t wrap_window_t_get_prop_theme(const jerry_value_t func_obj_val,
                                            const jerry_length_t args_cnt) {
   window_t* obj = (window_t*)jerry_get_pointer(args_p[0], "window_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->theme);
+  return jerry_create_string_from_utf8((const jerry_char_t*)(obj->theme != NULL ? obj->theme : ""));
 };
 
 jerry_value_t wrap_window_t_get_prop_anim_hint(const jerry_value_t func_obj_val,
@@ -5943,7 +5949,8 @@ jerry_value_t wrap_window_t_get_prop_anim_hint(const jerry_value_t func_obj_val,
                                                const jerry_length_t args_cnt) {
   window_t* obj = (window_t*)jerry_get_pointer(args_p[0], "window_t*");
 
-  return jerry_create_string_from_utf8((const jerry_char_t*)obj->anim_hint);
+  return jerry_create_string_from_utf8(
+      (const jerry_char_t*)(obj->anim_hint != NULL ? obj->anim_hint : ""));
 };
 
 ret_t window_t_init(void) {

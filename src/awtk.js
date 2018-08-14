@@ -1962,7 +1962,6 @@ var Window = /** @class */ (function (_super) {
         return new Window(window_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     Window.cast = function (widget) {
-        print('Window.cast');
         return new Window(window_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Window.open = function (name) {
