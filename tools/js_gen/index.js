@@ -78,6 +78,12 @@ class JerryscriptGenerator {
     return null;
   }
 
+  isClassName(name) {
+    name = name.replace("*", "");
+
+    return this.getClassInfo(name) !== null;
+  }
+
   genParamDecl(index, type, name) {
     let result = '';
     result += `  ${type} ${name} = `;
@@ -156,7 +162,7 @@ class JerryscriptGenerator {
 
     if (isConstructor(m) || isCast(m)) {
       result = `   return new ${clsName}(${result});\n`;
-    } else if(m.return.type === 'widget_t*') {
+    } else if (m.return.type === 'widget_t*') {
       result = `   return new Widget(${result});\n`;
     } else {
       result = `   return ${result};\n`;
@@ -213,8 +219,9 @@ class JerryscriptGenerator {
             result += 'this.nativeObj';
           }
         } else {
-          if (call && iter.name === 'parent') {
-            result += 'parent ? parent.nativeObj : null';
+          if (call && this.isClassName(iter.type)) {
+            const name = iter.name;
+            result += `${name} ? (${name}.nativeObj || ${name}) : null`;
           } else {
             result += iter.name;
           }
@@ -223,7 +230,12 @@ class JerryscriptGenerator {
         if (result) {
           result += ', ';
         }
-        result += iter.name;
+        if (call && this.isClassName(iter.type)) {
+          const name = iter.name;
+          result += `${name} ? (${name}.nativeObj || ${name}) : null`;
+        } else {
+          result += iter.name;
+        }
       }
     });
 
@@ -418,6 +430,7 @@ class JerryscriptGenerator {
   genJsonAll(ojson) {
     let result = '';
     let json = this.filterScriptableJson(ojson);
+    this.json = json;
 
     result += this.genFuncsDecl(json);
 

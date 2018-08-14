@@ -96,7 +96,7 @@ class JerryscriptGenerator {
 
     return result;
   }
-  
+
   genParamsDecl(m) {
     let result = '';
     let returnType = m.return.type;
@@ -131,7 +131,7 @@ class JerryscriptGenerator {
 
     return result;
   }
-  
+
   freeParam(index, type, name) {
     let result = '';
 
@@ -143,7 +143,7 @@ class JerryscriptGenerator {
 
     return result;
   }
-  
+
   freeParams(m) {
     let result = '';
 
@@ -186,7 +186,7 @@ class JerryscriptGenerator {
   genFuncImpl(cls, m) {
     let result = '';
     const name = m.name;
-    if(!isCustom(m)) {
+    if (!isCustom(m)) {
       result += `jerry_value_t wrap_${name}` + gJerryScriptFuncArgs + ' {\n';
       result += this.genParamsDecl(m);
       result += this.genCallMethod(cls, m);
@@ -304,11 +304,15 @@ class JerryscriptGenerator {
     return result;
   }
 
+  genOneGlobalMethod(m) {
+    return this.genFuncImpl({}, m);
+  }
+
   genOne(cls) {
     if (cls.type == 'class' || cls.type == 'enum') {
       return this.genOneClass(cls);
-    } else {
-      return '';
+    } else if (cls.type == 'method') {
+      return this.genOneGlobalMethod(cls);
     }
   }
 

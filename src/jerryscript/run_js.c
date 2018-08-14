@@ -25,6 +25,8 @@
 #include "jerryscript-ext/handler.h"
 
 #include "awtk.h"
+#include "ext_widgets/ext_widgets.h"
+
 #include "base/fs.h"
 #include "base/mem.h"
 #include "demos/resource.h"
@@ -214,6 +216,7 @@ int main(int argc, char* argv[]) {
   jerryx_handler_register_global((const jerry_char_t*)"print", jerryx_handler_print);
 
   awtk_js_init();
+  tk_ext_widgets_init();
   jerry_value_t parsed_code = parse_file(script_file);
 
   if (!jerry_value_is_error(parsed_code)) {

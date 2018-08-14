@@ -5961,6 +5961,16 @@ ret_t window_t_init(void) {
   return RET_OK;
 }
 
+jerry_value_t wrap_tk_ext_widgets_init(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                       const jerry_value_t args_p[],
+                                       const jerry_length_t args_cnt) {
+  ret_t ret = 0;
+  ret = (ret_t)tk_ext_widgets_init();
+
+  return jerry_create_number(ret);
+  ;
+};
+
 jerry_value_t wrap_rich_text_create(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                     const jerry_value_t args_p[], const jerry_length_t args_cnt) {
   widget_t* ret = NULL;

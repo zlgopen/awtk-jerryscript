@@ -396,7 +396,7 @@ var ResourceManager = /** @class */ (function () {
         return resource_manager_ref(this.nativeObj, type, name);
     };
     ResourceManager.prototype.unref = function (info) {
-        return resource_manager_unref(this.nativeObj, info);
+        return resource_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
     };
     return ResourceManager;
 }());
@@ -453,7 +453,7 @@ var ImageManager = /** @class */ (function () {
         return new ImageManager(image_manager());
     };
     ImageManager.prototype.load = function (name, image) {
-        return image_manager_load(this.nativeObj, name, image);
+        return image_manager_load(this.nativeObj, name, image ? (image.nativeObj || image) : null);
     };
     return ImageManager;
 }());
@@ -576,6 +576,9 @@ var Event = /** @class */ (function () {
     function Event(nativeObj) {
         this.nativeObj = nativeObj;
     }
+    Event.cast = function (event) {
+        return new Event(event_cast(event ? (event.nativeObj || event) : null));
+    };
     Object.defineProperty(Event.prototype, "type", {
         get: function () {
             return event_t_get_prop_type(this.nativeObj);
@@ -679,10 +682,10 @@ var Widget = /** @class */ (function () {
         return widget_get_type(this.nativeObj);
     };
     Widget.prototype.clone = function (parent) {
-        return new Widget(widget_clone(this.nativeObj, parent));
+        return new Widget(widget_clone(this.nativeObj, parent ? (parent.nativeObj || parent) : null));
     };
     Widget.prototype.equal = function (other) {
-        return widget_equal(this.nativeObj, other);
+        return widget_equal(this.nativeObj, other ? (other.nativeObj || other) : null);
     };
     Widget.prototype.setSelfLayoutParams = function (x, y, w, h) {
         return widget_set_self_layout_params(this.nativeObj, x, y, w, h);
@@ -692,6 +695,9 @@ var Widget = /** @class */ (function () {
     };
     Widget.prototype.layout = function () {
         return widget_layout(this.nativeObj);
+    };
+    Widget.cast = function (widget) {
+        return new Widget(widget_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Widget.prototype.destroy = function () {
         return widget_destroy(this.nativeObj);
@@ -797,7 +803,7 @@ var Label = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     Label.create = function (parent, x, y, w, h) {
-        return new Label(label_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new Label(label_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     return Label;
 }(Widget));
@@ -807,10 +813,10 @@ var ListItem = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     ListItem.create = function (parent, x, y, w, h) {
-        return new ListItem(list_item_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new ListItem(list_item_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     ListItem.cast = function (widget) {
-        return new ListItem(list_item_cast(widget));
+        return new ListItem(list_item_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return ListItem;
 }(Widget));
@@ -820,7 +826,7 @@ var ListViewH = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     ListViewH.create = function (parent, x, y, w, h) {
-        return new ListViewH(list_view_h_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new ListViewH(list_view_h_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     ListViewH.prototype.setItemWidth = function (item_width) {
         return list_view_h_set_item_width(this.nativeObj, item_width);
@@ -829,7 +835,7 @@ var ListViewH = /** @class */ (function (_super) {
         return list_view_h_set_spacing(this.nativeObj, spacing);
     };
     ListViewH.cast = function (widget) {
-        return new ListViewH(list_view_h_cast(widget));
+        return new ListViewH(list_view_h_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(ListViewH.prototype, "itemWidth", {
         get: function () {
@@ -853,7 +859,7 @@ var ListView = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     ListView.create = function (parent, x, y, w, h) {
-        return new ListView(list_view_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new ListView(list_view_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     ListView.prototype.setItemHeight = function (item_height) {
         return list_view_set_item_height(this.nativeObj, item_height);
@@ -865,7 +871,7 @@ var ListView = /** @class */ (function (_super) {
         return list_view_set_auto_hide_scroll_bar(this.nativeObj, auto_hide_scroll_bar);
     };
     ListView.cast = function (widget) {
-        return new ListView(list_view_cast(widget));
+        return new ListView(list_view_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(ListView.prototype, "itemHeight", {
         get: function () {
@@ -896,10 +902,10 @@ var ComboBox = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     ComboBox.create = function (parent, x, y, w, h) {
-        return new ComboBox(combo_box_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new ComboBox(combo_box_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     ComboBox.cast = function (widget) {
-        return new ComboBox(combo_box_cast(widget));
+        return new ComboBox(combo_box_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ComboBox.prototype.setOpenWindow = function (open_window) {
         return combo_box_set_open_window(this.nativeObj, open_window);
@@ -961,10 +967,10 @@ var Popup = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     Popup.create = function (parent, x, y, w, h) {
-        return new Popup(popup_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new Popup(popup_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     Popup.cast = function (widget) {
-        return new Popup(popup_cast(widget));
+        return new Popup(popup_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(Popup.prototype, "theme", {
         get: function () {
@@ -1002,10 +1008,10 @@ var ProgressBar = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     ProgressBar.create = function (parent, x, y, w, h) {
-        return new ProgressBar(progress_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new ProgressBar(progress_bar_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     ProgressBar.cast = function (widget) {
-        return new ProgressBar(progress_bar_cast(widget));
+        return new ProgressBar(progress_bar_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ProgressBar.prototype.setValue = function (value) {
         return progress_bar_set_value(this.nativeObj, value);
@@ -1045,10 +1051,10 @@ var DialogClient = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     DialogClient.create = function (parent, x, y, w, h) {
-        return new DialogClient(dialog_client_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new DialogClient(dialog_client_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     DialogClient.cast = function (widget) {
-        return new DialogClient(dialog_client_cast(widget));
+        return new DialogClient(dialog_client_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return DialogClient;
 }(Widget));
@@ -1058,10 +1064,10 @@ var DialogTitle = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     DialogTitle.create = function (parent, x, y, w, h) {
-        return new DialogTitle(dialog_title_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new DialogTitle(dialog_title_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     DialogTitle.cast = function (widget) {
-        return new DialogTitle(dialog_title_cast(widget));
+        return new DialogTitle(dialog_title_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return DialogTitle;
 }(Widget));
@@ -1071,13 +1077,13 @@ var Dialog = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     Dialog.create = function (parent, x, y, w, h) {
-        return new Dialog(dialog_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new Dialog(dialog_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     Dialog.createSimple = function (parent, x, y, w, h) {
-        return new Dialog(dialog_create_simple(parent ? parent.nativeObj : null, x, y, w, h));
+        return new Dialog(dialog_create_simple(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     Dialog.cast = function (widget) {
-        return new Dialog(dialog_cast(widget));
+        return new Dialog(dialog_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Dialog.prototype.getTitle = function () {
         return new Widget(dialog_get_title(this.nativeObj));
@@ -1105,10 +1111,10 @@ var Dragger = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     Dragger.create = function (parent, x, y, w, h) {
-        return new Dragger(dragger_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new Dragger(dragger_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     Dragger.cast = function (widget) {
-        return new Dragger(dragger_cast(widget));
+        return new Dragger(dragger_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Dragger.prototype.setRange = function (x_min, y_min, x_max, y_max) {
         return new Widget(dragger_set_range(this.nativeObj, x_min, y_min, x_max, y_max));
@@ -1149,10 +1155,10 @@ var Edit = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     Edit.create = function (parent, x, y, w, h) {
-        return new Edit(edit_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new Edit(edit_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     Edit.cast = function (widget) {
-        return new Edit(edit_cast(widget));
+        return new Edit(edit_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Edit.prototype.getInt = function () {
         return edit_get_int(this.nativeObj);
@@ -1248,16 +1254,16 @@ var ScrollBar = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     ScrollBar.create = function (parent, x, y, w, h) {
-        return new ScrollBar(scroll_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new ScrollBar(scroll_bar_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     ScrollBar.cast = function (widget) {
-        return new ScrollBar(scroll_bar_cast(widget));
+        return new ScrollBar(scroll_bar_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ScrollBar.createMobile = function (parent, x, y, w, h) {
-        return new ScrollBar(scroll_bar_create_mobile(parent ? parent.nativeObj : null, x, y, w, h));
+        return new ScrollBar(scroll_bar_create_mobile(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     ScrollBar.createDesktop = function (parent, x, y, w, h) {
-        return new ScrollBar(scroll_bar_create_desktop(parent ? parent.nativeObj : null, x, y, w, h));
+        return new ScrollBar(scroll_bar_create_desktop(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     ScrollBar.prototype.setParams = function (virtual_size, row) {
         return scroll_bar_set_params(this.nativeObj, virtual_size, row);
@@ -1316,10 +1322,10 @@ var ScrollView = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     ScrollView.create = function (parent, x, y, w, h) {
-        return new ScrollView(scroll_view_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new ScrollView(scroll_view_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     ScrollView.cast = function (widget) {
-        return new ScrollView(scroll_view_cast(widget));
+        return new ScrollView(scroll_view_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ScrollView.prototype.setVirtualW = function (w) {
         return scroll_view_set_virtual_w(this.nativeObj, w);
@@ -1389,10 +1395,10 @@ var SlideView = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     SlideView.create = function (parent, x, y, w, h) {
-        return new SlideView(slide_view_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new SlideView(slide_view_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     SlideView.cast = function (widget) {
-        return new SlideView(slide_view_cast(widget));
+        return new SlideView(slide_view_cast(widget ? (widget.nativeObj || widget) : null));
     };
     SlideView.prototype.setAutoPlay = function (auto_play) {
         return slide_view_set_auto_play(this.nativeObj, auto_play);
@@ -1425,10 +1431,10 @@ var Slider = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     Slider.create = function (parent, x, y, w, h) {
-        return new Slider(slider_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new Slider(slider_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     Slider.cast = function (widget) {
-        return new Slider(slider_cast(widget));
+        return new Slider(slider_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Slider.prototype.setValue = function (value) {
         return slider_set_value(this.nativeObj, value);
@@ -1488,10 +1494,10 @@ var SpinBox = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     SpinBox.create = function (parent, x, y, w, h) {
-        return new SpinBox(spin_box_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new SpinBox(spin_box_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     SpinBox.cast = function (widget) {
-        return new SpinBox(spin_box_cast(widget));
+        return new SpinBox(spin_box_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return SpinBox;
 }(Edit));
@@ -1501,10 +1507,10 @@ var TabButtonGroup = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     TabButtonGroup.create = function (parent, x, y, w, h) {
-        return new TabButtonGroup(tab_button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new TabButtonGroup(tab_button_group_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     TabButtonGroup.cast = function (widget) {
-        return new TabButtonGroup(tab_button_group_cast(widget));
+        return new TabButtonGroup(tab_button_group_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(TabButtonGroup.prototype, "compact", {
         get: function () {
@@ -1521,10 +1527,10 @@ var TabButton = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     TabButton.create = function (parent, x, y, w, h) {
-        return new TabButton(tab_button_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new TabButton(tab_button_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     TabButton.cast = function (widget) {
-        return new TabButton(tab_button_cast(widget));
+        return new TabButton(tab_button_cast(widget ? (widget.nativeObj || widget) : null));
     };
     TabButton.prototype.setValue = function (value) {
         return tab_button_set_value(this.nativeObj, value);
@@ -1564,10 +1570,10 @@ var TabControl = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     TabControl.create = function (parent, x, y, w, h) {
-        return new TabControl(tab_control_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new TabControl(tab_control_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     TabControl.cast = function (widget) {
-        return new TabControl(tab_control_cast(widget));
+        return new TabControl(tab_control_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return TabControl;
 }(Widget));
@@ -1577,10 +1583,10 @@ var ButtonGroup = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     ButtonGroup.create = function (parent, x, y, w, h) {
-        return new ButtonGroup(button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new ButtonGroup(button_group_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     ButtonGroup.cast = function (widget) {
-        return new ButtonGroup(button_group_cast(widget));
+        return new ButtonGroup(button_group_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return ButtonGroup;
 }(Widget));
@@ -1590,10 +1596,10 @@ var Button = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     Button.create = function (parent, x, y, w, h) {
-        return new Button(button_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new Button(button_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     Button.cast = function (widget) {
-        return new Button(button_cast(widget));
+        return new Button(button_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Button.prototype.setRepeat = function (repeat) {
         return button_set_repeat(this.nativeObj, repeat);
@@ -1613,7 +1619,7 @@ var WheelEvent = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     WheelEvent.cast = function (event) {
-        return new WheelEvent(wheel_event_cast(event));
+        return new WheelEvent(wheel_event_cast(event ? (event.nativeObj || event) : null));
     };
     Object.defineProperty(WheelEvent.prototype, "dx", {
         get: function () {
@@ -1658,7 +1664,7 @@ var PropChangeEvent = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     PropChangeEvent.cast = function (event) {
-        return new PropChangeEvent(prop_change_event_cast(event));
+        return new PropChangeEvent(prop_change_event_cast(event ? (event.nativeObj || event) : null));
     };
     Object.defineProperty(PropChangeEvent.prototype, "name", {
         get: function () {
@@ -1682,7 +1688,7 @@ var PointerEvent = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     PointerEvent.cast = function (event) {
-        return new PointerEvent(pointer_event_cast(event));
+        return new PointerEvent(pointer_event_cast(event ? (event.nativeObj || event) : null));
     };
     Object.defineProperty(PointerEvent.prototype, "x", {
         get: function () {
@@ -1741,7 +1747,7 @@ var KeyEvent = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     KeyEvent.cast = function (event) {
-        return new KeyEvent(key_event_cast(event));
+        return new KeyEvent(key_event_cast(event ? (event.nativeObj || event) : null));
     };
     Object.defineProperty(KeyEvent.prototype, "key", {
         get: function () {
@@ -1786,7 +1792,7 @@ var PaintEvent = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     PaintEvent.cast = function (event) {
-        return new PaintEvent(paint_event_cast(event));
+        return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
     };
     Object.defineProperty(PaintEvent.prototype, "c", {
         get: function () {
@@ -1803,10 +1809,10 @@ var View = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     View.create = function (parent, x, y, w, h) {
-        return new View(view_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new View(view_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     View.cast = function (widget) {
-        return new View(view_cast(widget));
+        return new View(view_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return View;
 }(Widget));
@@ -1816,10 +1822,10 @@ var GroupBox = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     GroupBox.create = function (parent, x, y, w, h) {
-        return new GroupBox(group_box_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new GroupBox(group_box_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     GroupBox.cast = function (widget) {
-        return new GroupBox(group_box_cast(widget));
+        return new GroupBox(group_box_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return GroupBox;
 }(Widget));
@@ -1829,7 +1835,7 @@ var RichText = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     RichText.create = function (parent, x, y, w, h) {
-        return new RichText(rich_text_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new RichText(rich_text_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     RichText.prototype.setText = function (text) {
         return rich_text_set_text(this.nativeObj, text);
@@ -1849,16 +1855,16 @@ var CheckButton = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     CheckButton.create = function (parent, x, y, w, h) {
-        return new CheckButton(check_button_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new CheckButton(check_button_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     CheckButton.createRadio = function (parent, x, y, w, h) {
-        return new CheckButton(check_button_create_radio(parent ? parent.nativeObj : null, x, y, w, h));
+        return new CheckButton(check_button_create_radio(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     CheckButton.prototype.setValue = function (value) {
         return check_button_set_value(this.nativeObj, value);
     };
     CheckButton.cast = function (widget) {
-        return new CheckButton(check_button_cast(widget));
+        return new CheckButton(check_button_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(CheckButton.prototype, "value", {
         get: function () {
@@ -1875,7 +1881,7 @@ var Image = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     Image.create = function (parent, x, y, w, h) {
-        return new Image(image_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new Image(image_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     Image.prototype.setImageName = function (name) {
         return image_set_image_name(this.nativeObj, name);
@@ -1933,7 +1939,7 @@ var WindowManager = /** @class */ (function (_super) {
         return new WindowManager(window_manager());
     };
     WindowManager.cast = function (widget) {
-        return new WindowManager(window_manager_cast(widget));
+        return new WindowManager(window_manager_cast(widget ? (widget.nativeObj || widget) : null));
     };
     WindowManager.prototype.setShowFps = function (show_fps) {
         return window_manager_set_show_fps(this.nativeObj, show_fps);
@@ -1953,16 +1959,17 @@ var Window = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     Window.create = function (parent, x, y, w, h) {
-        return new Window(window_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new Window(window_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     Window.cast = function (widget) {
-        return new Window(window_cast(widget));
+        print('Window.cast');
+        return new Window(window_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Window.open = function (name) {
         return new Window(window_open(name));
     };
     Window.openAndClose = function (name, to_close) {
-        return new Window(window_open_and_close(name, to_close));
+        return new Window(window_open_and_close(name, to_close ? (to_close.nativeObj || to_close) : null));
     };
     Window.prototype.close = function () {
         return window_close(this.nativeObj);
@@ -1989,10 +1996,10 @@ var ComboBoxItem = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     ComboBoxItem.create = function (parent, x, y, w, h) {
-        return new ComboBoxItem(combo_box_item_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new ComboBoxItem(combo_box_item_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     ComboBoxItem.cast = function (widget) {
-        return new ComboBoxItem(combo_box_item_cast(widget));
+        return new ComboBoxItem(combo_box_item_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ComboBoxItem.prototype.setSelected = function (selected) {
         return combo_box_item_set_selected(this.nativeObj, selected);
@@ -2022,10 +2029,10 @@ var Pages = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     Pages.create = function (parent, x, y, w, h) {
-        return new Pages(pages_create(parent ? parent.nativeObj : null, x, y, w, h));
+        return new Pages(pages_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     Pages.cast = function (widget) {
-        return new Pages(pages_cast(widget));
+        return new Pages(pages_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Pages.prototype.setActive = function (index) {
         return pages_set_active(this.nativeObj, index);
