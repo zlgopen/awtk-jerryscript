@@ -187,7 +187,6 @@ class JerryscriptGenerator {
 
   genOneClass(cls) {
     let result = '';
-    let isConstString = isEnumString(cls);
     let clsName = this.toClassName(cls.name);
 
     result = `class ${clsName}`;
@@ -197,16 +196,14 @@ class JerryscriptGenerator {
       result += ' {\n';
     }
 
-    if(cls.type === 'class') {
-      result += ' public nativeObj;\n';
-      result += ' constructor(nativeObj) {\n';
-      if (cls.parent) {
-        result += '   super(nativeObj);\n';
-      } else {
-        result += '   this.nativeObj = nativeObj;\n';
-      }
-      result += ' }\n\n';
+    result += ' public nativeObj;\n';
+    result += ' constructor(nativeObj) {\n';
+    if (cls.parent) {
+      result += '   super(nativeObj);\n';
+    } else {
+      result += '   this.nativeObj = nativeObj;\n';
     }
+    result += ' }\n\n';
 
     if (cls.methods) {
       cls.methods.forEach(iter => {
@@ -272,9 +269,28 @@ class JerryscriptGenerator {
     return result;
   }
 
+  genOneEnum(cls) {
+    let clsName = this.toClassName(cls.name);
+    let result = `enum ${clsName} {\n`;
+
+    if (cls.consts) {
+      cls.consts.forEach(iter => {
+        const name = iter.name;
+        const shortName = name.replace(cls.prefix, "");
+        result += ` ${shortName} = ${name}(),\n`
+      });
+    }
+    
+    result += `};\n\n`;
+
+    return result;
+  }
+
   genOne(cls) {
-    if (cls.type == 'class' || cls.type == 'enum') {
+    if (cls.type === 'class') {
       return this.genOneClass(cls);
+    } else if(cls.type === 'enum') {
+      return this.genOneEnum(cls);
     } else {
       return '';
     }
@@ -363,7 +379,7 @@ class JerryscriptGenerator {
     this.json = json;
 
     result += this.genFuncsDecl(json);
-
+    result += '\n';
     json.forEach(iter => {
       result += this.genOne(iter);
     });

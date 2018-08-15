@@ -144,18 +144,55 @@ class Bitmap {
 
 4.常量的封装
 
-常量作为类的静态成员变量，
+常量封装为枚举，幸运的是，Typescript枚举可以是数字类型，也可以是字符串类型，实现起来非常方便。
+
 ```
-class AlignV {
- public static NONE = ALIGN_V_NONE();
- public static MIDDLE = ALIGN_V_MIDDLE();
- public static TOP = ALIGN_V_TOP();
- public static BOTTOM = ALIGN_V_BOTTOM();
-}
+enum AlignV {
+ NONE = ALIGN_V_NONE(),
+ MIDDLE = ALIGN_V_MIDDLE(),
+ TOP = ALIGN_V_TOP(),
+ BOTTOM = ALIGN_V_BOTTOM(),
+};
 ```
+
+```
+enum WidgetProp {
+ X = WIDGET_PROP_X(),
+ Y = WIDGET_PROP_Y(),
+ W = WIDGET_PROP_W(),
+ H = WIDGET_PROP_H(),
+ ...
+};
+```
+
 ### 四、自动代码产生器
 
 所有代码均由自动代码产生器根据awtk的IDL生成，具体请参考：tools/js_gen；
 
 * index.js负责产生引擎无关的代码。
 * jerryscript.js负责产生jerryscript相关的代码。
+
+### 五、使用示例
+
+```
+function applicationInit() {
+  var win = Window.create(null, 0, 0, 0, 0); 
+  var ok = Button.create(win, 0, 0, 0, 0); 
+
+  ok.setText("ok");
+  ok.setSelfLayoutParams("center", "middle", "50%", "30");
+
+  ok.on(EventType.CLICK, function(evt) {
+    var e = PointerEvent.cast(evt);
+    print("on click: " + e.x + " " + e.y);
+
+    return Ret.OK;
+  }); 
+
+  win.layout();
+}
+
+applicationInit()
+```
+
+更多示例请参考: demos
