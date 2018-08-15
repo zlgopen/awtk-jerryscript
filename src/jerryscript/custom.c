@@ -48,6 +48,14 @@ jerry_value_t jerry_create_string_from_wstring(const wchar_t* wstr) {
   return ret;
 }
 
+jerry_value_t jerry_create_str(const char* str) {
+  if(str == NULL) {
+    str = "";
+  }
+
+  return jerry_create_string_from_utf8((jerry_char_t*)str);
+}
+
 void* jerry_get_pointer(jerry_value_t v, const char* type) {
   char str[64];
   void* p = NULL;

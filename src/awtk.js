@@ -12,8 +12,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var BitmapFormat = /** @class */ (function () {
-    function BitmapFormat(nativeObj) {
-        this.nativeObj = nativeObj;
+    function BitmapFormat() {
     }
     BitmapFormat.NONE = BITMAP_FMT_NONE();
     BitmapFormat.RGBA = BITMAP_FMT_RGBA();
@@ -22,8 +21,7 @@ var BitmapFormat = /** @class */ (function () {
     return BitmapFormat;
 }());
 var InputType = /** @class */ (function () {
-    function InputType(nativeObj) {
-        this.nativeObj = nativeObj;
+    function InputType() {
     }
     InputType.TEXT = INPUT_TEXT();
     InputType.INT = INPUT_INT();
@@ -37,8 +35,7 @@ var InputType = /** @class */ (function () {
     return InputType;
 }());
 var BitmapFlag = /** @class */ (function () {
-    function BitmapFlag(nativeObj) {
-        this.nativeObj = nativeObj;
+    function BitmapFlag() {
     }
     BitmapFlag.NONE = BITMAP_FLAG_NONE();
     BitmapFlag.OPAQUE = BITMAP_FLAG_OPAQUE();
@@ -47,8 +44,7 @@ var BitmapFlag = /** @class */ (function () {
     return BitmapFlag;
 }());
 var ResourceType = /** @class */ (function () {
-    function ResourceType(nativeObj) {
-        this.nativeObj = nativeObj;
+    function ResourceType() {
     }
     ResourceType.NONE = RESOURCE_TYPE_NONE();
     ResourceType.FONT = RESOURCE_TYPE_FONT();
@@ -61,8 +57,7 @@ var ResourceType = /** @class */ (function () {
     return ResourceType;
 }());
 var EventType = /** @class */ (function () {
-    function EventType(nativeObj) {
-        this.nativeObj = nativeObj;
+    function EventType() {
     }
     EventType.NONE = EVT_NONE();
     EventType.POINTER_DOWN = EVT_POINTER_DOWN();
@@ -114,19 +109,15 @@ var EventType = /** @class */ (function () {
     EventType.USER_START = EVT_USER_START();
     return EventType;
 }());
-var AlignV = /** @class */ (function () {
-    function AlignV(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    AlignV.NONE = ALIGN_V_NONE();
-    AlignV.MIDDLE = ALIGN_V_MIDDLE();
-    AlignV.TOP = ALIGN_V_TOP();
-    AlignV.BOTTOM = ALIGN_V_BOTTOM();
-    return AlignV;
-}());
+var AlignV;
+(function (AlignV) {
+    AlignV[AlignV["NONE"] = ALIGN_V_NONE()] = "NONE";
+    AlignV[AlignV["MIDDLE"] = ALIGN_V_MIDDLE()] = "MIDDLE";
+    AlignV[AlignV["TOP"] = ALIGN_V_TOP()] = "TOP";
+    AlignV[AlignV["BOTTOM"] = ALIGN_V_BOTTOM()] = "BOTTOM";
+})(AlignV || (AlignV = {}));
 var AlignH = /** @class */ (function () {
-    function AlignH(nativeObj) {
-        this.nativeObj = nativeObj;
+    function AlignH() {
     }
     AlignH.NONE = ALIGN_H_NONE();
     AlignH.CENTER = ALIGN_H_CENTER();
@@ -135,8 +126,7 @@ var AlignH = /** @class */ (function () {
     return AlignH;
 }());
 var ValueType = /** @class */ (function () {
-    function ValueType(nativeObj) {
-        this.nativeObj = nativeObj;
+    function ValueType() {
     }
     ValueType.INVALID = VALUE_TYPE_INVALID();
     ValueType.BOOL = VALUE_TYPE_BOOL();
@@ -156,8 +146,7 @@ var ValueType = /** @class */ (function () {
     return ValueType;
 }());
 var WidgetProp = /** @class */ (function () {
-    function WidgetProp(nativeObj) {
-        this.nativeObj = nativeObj;
+    function WidgetProp() {
     }
     WidgetProp.X = WIDGET_PROP_X();
     WidgetProp.Y = WIDGET_PROP_Y();
@@ -237,8 +226,7 @@ var WidgetProp = /** @class */ (function () {
     return WidgetProp;
 }());
 var WidgetType = /** @class */ (function () {
-    function WidgetType(nativeObj) {
-        this.nativeObj = nativeObj;
+    function WidgetType() {
     }
     WidgetType.NONE = WIDGET_TYPE_NONE();
     WidgetType.WINDOW_MANAGER = WIDGET_TYPE_WINDOW_MANAGER();
@@ -282,8 +270,7 @@ var WidgetType = /** @class */ (function () {
     return WidgetType;
 }());
 var ImageDrawType = /** @class */ (function () {
-    function ImageDrawType(nativeObj) {
-        this.nativeObj = nativeObj;
+    function ImageDrawType() {
     }
     ImageDrawType.DEFAULT = IMAGE_DRAW_DEFAULT();
     ImageDrawType.CENTER = IMAGE_DRAW_CENTER();
@@ -303,8 +290,7 @@ var ImageDrawType = /** @class */ (function () {
     return ImageDrawType;
 }());
 var WidgetState = /** @class */ (function () {
-    function WidgetState(nativeObj) {
-        this.nativeObj = nativeObj;
+    function WidgetState() {
     }
     WidgetState.STATE_NONE = WIDGET_STATE_NONE();
     WidgetState.STATE_NORMAL = WIDGET_STATE_NORMAL();
@@ -320,8 +306,7 @@ var WidgetState = /** @class */ (function () {
     return WidgetState;
 }());
 var Ret = /** @class */ (function () {
-    function Ret(nativeObj) {
-        this.nativeObj = nativeObj;
+    function Ret() {
     }
     Ret.OK = RET_OK();
     Ret.OOM = RET_OOM();

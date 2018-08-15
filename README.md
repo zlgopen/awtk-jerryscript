@@ -35,3 +35,9 @@ scons
 ./bin/runScript demos/xxxx.js
 ```
 
+> 请把xxxx.js换成具体的js文件。
+
+## 文档
+
+[js绑定原理与示例](docs/binding_js.md)
+

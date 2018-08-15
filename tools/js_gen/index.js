@@ -84,78 +84,6 @@ class JerryscriptGenerator {
     return this.getClassInfo(name) !== null;
   }
 
-  genParamDecl(index, type, name) {
-    let result = '';
-    result += `  ${type} ${name} = `;
-    if (index < 0) {
-      if (type.indexOf('*') >= 0) {
-        result += 'NULL;\n';
-      } else {
-        result += '0;\n';
-      }
-    } else {
-      if (type.indexOf('char*') >= 0) {
-        result += `(${type})jerry_get_utf8_string(args_p[${index}]);\n`;
-      } else if (type.indexOf('wchar_t*') >= 0) {
-        result += `(${type})jerry_get_wstring(args_p[${index}]);\n`;
-      } else if (type.indexOf('void*') >= 0) {
-        if (name !== 'ctx') {
-          result += `(${type})jerry_get_pointer(args_p[${index}], "${type}");\n`;
-        } else {
-          result += ' NULL;\n';
-        }
-      } else if (type.indexOf('*') >= 0) {
-        const type_name = type.replace(/\*/g, '');
-        result += `(${type})jerry_get_pointer(args_p[${index}], "${type}");\n`;
-      } else if (type.indexOf('float') >= 0 || type.indexOf('double') >= 0) {
-        result += `(${type})jerry_get_number_value(args_p[${index}]);\n`;
-      } else if (type.indexOf('bool_t') >= 0) {
-        result += `(${type})jerry_get_boolean_value(args_p[${index}]);\n`;
-      } else if (type.indexOf('func_t') >= 0 || type.indexOf('visit_t') >= 0) {
-        result += `(${type})jerry_get_pointer(args_p[${index}], "${type}");\n`;
-      } else {
-        result += `(${type})jerry_get_number_value(args_p[${index}]);\n`;
-      }
-    }
-
-    return result;
-  }
-
-  genParamsDecl(m) {
-    let result = '';
-    let returnType = m.return.type;
-
-    if (returnType != 'void') {
-      result = this.genParamDecl(-1, returnType, 'ret');
-    }
-
-    m.params.forEach((iter, index) => {
-      result += this.genParamDecl(index, iter.type, iter.name);
-    })
-
-    return result;
-  }
-
-  genReturnData(type, name) {
-    let result = '\n';
-    if (type.indexOf('char*') >= 0) {
-      result += `  return jerry_create_string_from_utf8((const jerry_char_t*)${name});\n`;
-    } else if (type.indexOf('wchar_t*') >= 0) {
-      result += `  return jerry_create_string_from_wstring(${name});\n`;
-    } else if (type.indexOf('*') >= 0) {
-      const typeName = type.replace(/\*/g, "");
-      result += `  return jerry_create_pointer(${name}, "${type}");\n`;
-    } else if (type.indexOf('int') >= 0) {
-      result += `  return jerry_create_number(${name});;\n`;
-    } else if (type.indexOf('bool_t') >= 0) {
-      result += `  return jerry_create_boolean(${name});;\n`;
-    } else {
-      result += `  return jerry_create_number(${name});;\n`;
-    }
-
-    return result;
-  }
-
   genCallMethod(cls, m) {
     let result = `${m.name}${this.genParamList(m, true)}`;
     let clsName = this.toClassName(cls.name);
@@ -269,14 +197,16 @@ class JerryscriptGenerator {
       result += ' {\n';
     }
 
-    result += ' public nativeObj;\n';
-    result += ' constructor(nativeObj) {\n';
-    if (cls.parent) {
-      result += '   super(nativeObj);\n';
-    } else {
-      result += '   this.nativeObj = nativeObj;\n';
+    if(cls.type === 'class') {
+      result += ' public nativeObj;\n';
+      result += ' constructor(nativeObj) {\n';
+      if (cls.parent) {
+        result += '   super(nativeObj);\n';
+      } else {
+        result += '   this.nativeObj = nativeObj;\n';
+      }
+      result += ' }\n\n';
     }
-    result += ' }\n\n';
 
     if (cls.methods) {
       cls.methods.forEach(iter => {

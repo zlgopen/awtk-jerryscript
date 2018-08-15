@@ -115,18 +115,18 @@ class JerryscriptGenerator {
   genReturnData(type, name) {
     let result = '\n';
     if (type.indexOf('char*') >= 0) {
-      result += `  return jerry_create_string_from_utf8((const jerry_char_t*)(${name} != NULL ? ${name} : ""));\n`;
+      result += `  return jerry_create_str(${name});\n`;
     } else if (type.indexOf('wchar_t*') >= 0) {
       result += `  return jerry_create_string_from_wstring(${name});\n`;
     } else if (type.indexOf('*') >= 0) {
       const typeName = type.replace(/\*/g, "");
       result += `  return jerry_create_pointer(${name}, "${type}");\n`;
     } else if (type.indexOf('int') >= 0) {
-      result += `  return jerry_create_number(${name});;\n`;
+      result += `  return jerry_create_number(${name});\n`;
     } else if (type.indexOf('bool_t') >= 0) {
-      result += `  return jerry_create_boolean(${name});;\n`;
+      result += `  return jerry_create_boolean(${name});\n`;
     } else {
-      result += `  return jerry_create_number(${name});;\n`;
+      result += `  return jerry_create_number(${name});\n`;
     }
 
     return result;
@@ -190,7 +190,7 @@ class JerryscriptGenerator {
       result += `jerry_value_t wrap_${name}` + gJerryScriptFuncArgs + ' {\n';
       result += this.genParamsDecl(m);
       result += this.genCallMethod(cls, m);
-      result += '};\n\n'
+      result += '}\n\n'
     }
 
     return result;
@@ -222,7 +222,7 @@ class JerryscriptGenerator {
         const name = iter.name;
         result += `jerry_value_t get_${name}` + gJerryScriptFuncArgs + ' {\n';
         if (isConstString) {
-          result += `  return jerry_create_string_from_utf8((const jerry_char_t*)${name});\n`;
+          result += `  return jerry_create_str(${name});\n`;
         } else {
           result += `  return jerry_create_number(${name});\n`;
         }
@@ -299,7 +299,7 @@ class JerryscriptGenerator {
     result += `jerry_value_t wrap_${funcName}` + gJerryScriptFuncArgs + ' {\n';
     result += this.genParamDecl(0, cls.name + '*', 'obj');
     result += this.genReturnData(type, `obj->${name}`);
-    result += '};\n\n'
+    result += '}\n\n'
 
     return result;
   }

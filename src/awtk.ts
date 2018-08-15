@@ -572,11 +572,6 @@ declare function pages_set_active(widget, index);
 declare function pages_set_active_by_name(widget, name);
 declare function pages_t_get_prop_active(nativeObj);
 class BitmapFormat {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static NONE = BITMAP_FMT_NONE();
  public static RGBA = BITMAP_FMT_RGBA();
  public static BGRA = BITMAP_FMT_BGRA();
@@ -584,11 +579,6 @@ class BitmapFormat {
 }
 
 class InputType {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static TEXT = INPUT_TEXT();
  public static INT = INPUT_INT();
  public static UINT = INPUT_UINT();
@@ -601,11 +591,6 @@ class InputType {
 }
 
 class BitmapFlag {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static NONE = BITMAP_FLAG_NONE();
  public static OPAQUE = BITMAP_FLAG_OPAQUE();
  public static IMMUTABLE = BITMAP_FLAG_IMMUTABLE();
@@ -613,11 +598,6 @@ class BitmapFlag {
 }
 
 class ResourceType {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static NONE = RESOURCE_TYPE_NONE();
  public static FONT = RESOURCE_TYPE_FONT();
  public static IMAGE = RESOURCE_TYPE_IMAGE();
@@ -629,11 +609,6 @@ class ResourceType {
 }
 
 class EventType {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static NONE = EVT_NONE();
  public static POINTER_DOWN = EVT_POINTER_DOWN();
  public static POINTER_DOWN_ABORT = EVT_POINTER_DOWN_ABORT();
@@ -685,11 +660,6 @@ class EventType {
 }
 
 class AlignV {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static NONE = ALIGN_V_NONE();
  public static MIDDLE = ALIGN_V_MIDDLE();
  public static TOP = ALIGN_V_TOP();
@@ -697,11 +667,6 @@ class AlignV {
 }
 
 class AlignH {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static NONE = ALIGN_H_NONE();
  public static CENTER = ALIGN_H_CENTER();
  public static LEFT = ALIGN_H_LEFT();
@@ -709,11 +674,6 @@ class AlignH {
 }
 
 class ValueType {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static INVALID = VALUE_TYPE_INVALID();
  public static BOOL = VALUE_TYPE_BOOL();
  public static INT8 = VALUE_TYPE_INT8();
@@ -732,11 +692,6 @@ class ValueType {
 }
 
 class WidgetProp {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static X = WIDGET_PROP_X();
  public static Y = WIDGET_PROP_Y();
  public static W = WIDGET_PROP_W();
@@ -815,11 +770,6 @@ class WidgetProp {
 }
 
 class WidgetType {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static NONE = WIDGET_TYPE_NONE();
  public static WINDOW_MANAGER = WIDGET_TYPE_WINDOW_MANAGER();
  public static NORMAL_WINDOW = WIDGET_TYPE_NORMAL_WINDOW();
@@ -862,11 +812,6 @@ class WidgetType {
 }
 
 class ImageDrawType {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static DEFAULT = IMAGE_DRAW_DEFAULT();
  public static CENTER = IMAGE_DRAW_CENTER();
  public static ICON = IMAGE_DRAW_ICON();
@@ -885,11 +830,6 @@ class ImageDrawType {
 }
 
 class WidgetState {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static STATE_NONE = WIDGET_STATE_NONE();
  public static STATE_NORMAL = WIDGET_STATE_NORMAL();
  public static STATE_PRESSED = WIDGET_STATE_PRESSED();
@@ -904,11 +844,6 @@ class WidgetState {
 }
 
 class Ret {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
  public static OK = RET_OK();
  public static OOM = RET_OOM();
  public static FAIL = RET_FAIL();
