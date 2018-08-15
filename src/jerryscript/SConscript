@@ -4,7 +4,7 @@ import sys
 env=DefaultEnvironment().Clone()
 BIN_DIR=os.environ['BIN_DIR'];
 
-env['LIBS'] = ['resource', 'jerry-ext', 'jerry-core', 'jerry-port-default'] + env['LIBS']
+env['LIBS'] = ['resource', 'jerryscript'] + env['LIBS']
 env.Program(os.path.join(BIN_DIR, 'runScript'), ["run_js.c", 'tk_jerryscript.c'])
 
 
