@@ -1,7 +1,3 @@
-declare function BITMAP_FMT_NONE();
-declare function BITMAP_FMT_RGBA();
-declare function BITMAP_FMT_BGRA();
-declare function BITMAP_FMT_RGB565();
 declare function INPUT_TEXT();
 declare function INPUT_INT();
 declare function INPUT_UINT();
@@ -11,10 +7,10 @@ declare function INPUT_UFLOAT();
 declare function INPUT_EMAIL();
 declare function INPUT_PASSWORD();
 declare function INPUT_PHONE();
-declare function BITMAP_FLAG_NONE();
-declare function BITMAP_FLAG_OPAQUE();
-declare function BITMAP_FLAG_IMMUTABLE();
-declare function BITMAP_FLAG_TEXTURE();
+declare function BITMAP_FMT_NONE();
+declare function BITMAP_FMT_RGBA();
+declare function BITMAP_FMT_BGRA();
+declare function BITMAP_FMT_RGB565();
 declare function RESOURCE_TYPE_NONE();
 declare function RESOURCE_TYPE_FONT();
 declare function RESOURCE_TYPE_IMAGE();
@@ -23,6 +19,10 @@ declare function RESOURCE_TYPE_UI();
 declare function RESOURCE_TYPE_XML();
 declare function RESOURCE_TYPE_STRINGS();
 declare function RESOURCE_TYPE_DATA();
+declare function BITMAP_FLAG_NONE();
+declare function BITMAP_FLAG_OPAQUE();
+declare function BITMAP_FLAG_IMMUTABLE();
+declare function BITMAP_FLAG_TEXTURE();
 declare function EVT_NONE();
 declare function EVT_POINTER_DOWN();
 declare function EVT_POINTER_DOWN_ABORT();
@@ -247,13 +247,10 @@ declare function RET_DONE();
 declare function RET_STOP();
 declare function RET_CONTINUE();
 declare function RET_BAD_PARAMS();
-declare function bitmap_create();
-declare function bitmap_destroy(bitmap);
-declare function bitmap_t_get_prop_w(nativeObj);
-declare function bitmap_t_get_prop_h(nativeObj);
-declare function bitmap_t_get_prop_flags(nativeObj);
-declare function bitmap_t_get_prop_format(nativeObj);
-declare function bitmap_t_get_prop_name(nativeObj);
+declare function event_cast(event);
+declare function event_t_get_prop_type(nativeObj);
+declare function event_t_get_prop_time(nativeObj);
+declare function event_t_get_prop_target(nativeObj);
 declare function resource_manager();
 declare function resource_manager_ref(rm, type, name);
 declare function resource_manager_unref(rm, info);
@@ -297,10 +294,13 @@ declare function value_set_int(v, value);
 declare function value_create();
 declare function value_destroy(v);
 declare function value_t_get_prop_type(nativeObj);
-declare function event_cast(event);
-declare function event_t_get_prop_type(nativeObj);
-declare function event_t_get_prop_time(nativeObj);
-declare function event_t_get_prop_target(nativeObj);
+declare function bitmap_create();
+declare function bitmap_destroy(bitmap);
+declare function bitmap_t_get_prop_w(nativeObj);
+declare function bitmap_t_get_prop_h(nativeObj);
+declare function bitmap_t_get_prop_flags(nativeObj);
+declare function bitmap_t_get_prop_format(nativeObj);
+declare function bitmap_t_get_prop_name(nativeObj);
 declare function widget_count_children(widget);
 declare function widget_get_child(widget, index);
 declare function widget_index_of(widget);
@@ -308,6 +308,7 @@ declare function widget_move(widget, x, y);
 declare function widget_resize(widget, w, h);
 declare function widget_move_resize(widget, x, y, w, h);
 declare function widget_set_value(widget, value);
+declare function widget_add_value(widget, delta);
 declare function widget_use_style(widget, style);
 declare function widget_set_text_utf8(widget, text);
 declare function widget_set_tr_text(widget, text);
@@ -316,6 +317,7 @@ declare function widget_get_text(widget);
 declare function widget_set_name(widget, name);
 declare function widget_set_enable(widget, enable);
 declare function widget_set_focused(widget, focused);
+declare function widget_child(widget, path);
 declare function widget_lookup(widget, name, recursive);
 declare function widget_lookup_by_type(widget, type, recursive);
 declare function widget_set_visible(widget, visible, recursive);
@@ -572,13 +574,6 @@ declare function pages_set_active(widget, index);
 declare function pages_set_active_by_name(widget, name);
 declare function pages_t_get_prop_active(nativeObj);
 
-enum BitmapFormat {
- NONE = BITMAP_FMT_NONE(),
- RGBA = BITMAP_FMT_RGBA(),
- BGRA = BITMAP_FMT_BGRA(),
- RGB565 = BITMAP_FMT_RGB565(),
-};
-
 enum InputType {
  TEXT = INPUT_TEXT(),
  INT = INPUT_INT(),
@@ -591,11 +586,11 @@ enum InputType {
  PHONE = INPUT_PHONE(),
 };
 
-enum BitmapFlag {
- NONE = BITMAP_FLAG_NONE(),
- OPAQUE = BITMAP_FLAG_OPAQUE(),
- IMMUTABLE = BITMAP_FLAG_IMMUTABLE(),
- TEXTURE = BITMAP_FLAG_TEXTURE(),
+enum BitmapFormat {
+ NONE = BITMAP_FMT_NONE(),
+ RGBA = BITMAP_FMT_RGBA(),
+ BGRA = BITMAP_FMT_BGRA(),
+ RGB565 = BITMAP_FMT_RGB565(),
 };
 
 enum ResourceType {
@@ -607,6 +602,13 @@ enum ResourceType {
  XML = RESOURCE_TYPE_XML(),
  STRINGS = RESOURCE_TYPE_STRINGS(),
  DATA = RESOURCE_TYPE_DATA(),
+};
+
+enum BitmapFlag {
+ NONE = BITMAP_FLAG_NONE(),
+ OPAQUE = BITMAP_FLAG_OPAQUE(),
+ IMMUTABLE = BITMAP_FLAG_IMMUTABLE(),
+ TEXTURE = BITMAP_FLAG_TEXTURE(),
 };
 
 enum EventType {
@@ -860,38 +862,26 @@ enum Ret {
  BAD_PARAMS = RET_BAD_PARAMS(),
 };
 
-class Bitmap {
+class Event {
  public nativeObj;
  constructor(nativeObj) {
    this.nativeObj = nativeObj;
  }
 
- static create() {
-   return new Bitmap(bitmap_create());
+ static cast(event) {
+   return new Event(event_cast(event ? (event.nativeObj || event) : null));
  }
 
- destroy() {
-   return bitmap_destroy(this.nativeObj);
+ get type() {
+   return event_t_get_prop_type(this.nativeObj);
  }
 
- get w() {
-   return bitmap_t_get_prop_w(this.nativeObj);
+ get time() {
+   return event_t_get_prop_time(this.nativeObj);
  }
 
- get h() {
-   return bitmap_t_get_prop_h(this.nativeObj);
- }
-
- get flags() {
-   return bitmap_t_get_prop_flags(this.nativeObj);
- }
-
- get format() {
-   return bitmap_t_get_prop_format(this.nativeObj);
- }
-
- get name() {
-   return bitmap_t_get_prop_name(this.nativeObj);
+ get target() {
+   return event_t_get_prop_target(this.nativeObj);
  }
 
 }
@@ -1140,26 +1130,38 @@ class Rect {
 
 }
 
-class Event {
+class Bitmap {
  public nativeObj;
  constructor(nativeObj) {
    this.nativeObj = nativeObj;
  }
 
- static cast(event) {
-   return new Event(event_cast(event ? (event.nativeObj || event) : null));
+ static create() {
+   return new Bitmap(bitmap_create());
  }
 
- get type() {
-   return event_t_get_prop_type(this.nativeObj);
+ destroy() {
+   return bitmap_destroy(this.nativeObj);
  }
 
- get time() {
-   return event_t_get_prop_time(this.nativeObj);
+ get w() {
+   return bitmap_t_get_prop_w(this.nativeObj);
  }
 
- get target() {
-   return event_t_get_prop_target(this.nativeObj);
+ get h() {
+   return bitmap_t_get_prop_h(this.nativeObj);
+ }
+
+ get flags() {
+   return bitmap_t_get_prop_flags(this.nativeObj);
+ }
+
+ get format() {
+   return bitmap_t_get_prop_format(this.nativeObj);
+ }
+
+ get name() {
+   return bitmap_t_get_prop_name(this.nativeObj);
  }
 
 }
@@ -1198,6 +1200,10 @@ class Widget {
    return widget_set_value(this.nativeObj, value);
  }
 
+ addValue(delta) {
+   return widget_add_value(this.nativeObj, delta);
+ }
+
  useStyle(style) {
    return widget_use_style(this.nativeObj, style);
  }
@@ -1228,6 +1234,10 @@ class Widget {
 
  setFocused(focused) {
    return widget_set_focused(this.nativeObj, focused);
+ }
+
+ child(path) {
+   return new Widget(widget_child(this.nativeObj, path));
  }
 
  lookup(name, recursive) {

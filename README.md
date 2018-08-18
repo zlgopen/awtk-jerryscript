@@ -15,9 +15,8 @@ git clone https://github.com/jerryscript-project/jerryscript.git 3rd/jerryscript
 ## 二、更新绑定
 
 ```
-cd tools/js_gen
-node index.js 
-node jerryscript.js
+cd tools/js_gen; node index.js; node jerryscript.js; cd -
+cd src; tsc; cd -
 ```
 
 ## 三、编译

@@ -49,7 +49,7 @@ jerry_value_t jerry_create_string_from_wstring(const wchar_t* wstr) {
 }
 
 jerry_value_t jerry_create_str(const char* str) {
-  if(str == NULL) {
+  if (str == NULL) {
     str = "";
   }
 

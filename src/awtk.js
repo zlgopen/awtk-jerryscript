@@ -11,14 +11,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var BitmapFormat;
-(function (BitmapFormat) {
-    BitmapFormat[BitmapFormat["NONE"] = BITMAP_FMT_NONE()] = "NONE";
-    BitmapFormat[BitmapFormat["RGBA"] = BITMAP_FMT_RGBA()] = "RGBA";
-    BitmapFormat[BitmapFormat["BGRA"] = BITMAP_FMT_BGRA()] = "BGRA";
-    BitmapFormat[BitmapFormat["RGB565"] = BITMAP_FMT_RGB565()] = "RGB565";
-})(BitmapFormat || (BitmapFormat = {}));
-;
 var InputType;
 (function (InputType) {
     InputType[InputType["TEXT"] = INPUT_TEXT()] = "TEXT";
@@ -32,13 +24,13 @@ var InputType;
     InputType[InputType["PHONE"] = INPUT_PHONE()] = "PHONE";
 })(InputType || (InputType = {}));
 ;
-var BitmapFlag;
-(function (BitmapFlag) {
-    BitmapFlag[BitmapFlag["NONE"] = BITMAP_FLAG_NONE()] = "NONE";
-    BitmapFlag[BitmapFlag["OPAQUE"] = BITMAP_FLAG_OPAQUE()] = "OPAQUE";
-    BitmapFlag[BitmapFlag["IMMUTABLE"] = BITMAP_FLAG_IMMUTABLE()] = "IMMUTABLE";
-    BitmapFlag[BitmapFlag["TEXTURE"] = BITMAP_FLAG_TEXTURE()] = "TEXTURE";
-})(BitmapFlag || (BitmapFlag = {}));
+var BitmapFormat;
+(function (BitmapFormat) {
+    BitmapFormat[BitmapFormat["NONE"] = BITMAP_FMT_NONE()] = "NONE";
+    BitmapFormat[BitmapFormat["RGBA"] = BITMAP_FMT_RGBA()] = "RGBA";
+    BitmapFormat[BitmapFormat["BGRA"] = BITMAP_FMT_BGRA()] = "BGRA";
+    BitmapFormat[BitmapFormat["RGB565"] = BITMAP_FMT_RGB565()] = "RGB565";
+})(BitmapFormat || (BitmapFormat = {}));
 ;
 var ResourceType;
 (function (ResourceType) {
@@ -51,6 +43,14 @@ var ResourceType;
     ResourceType[ResourceType["STRINGS"] = RESOURCE_TYPE_STRINGS()] = "STRINGS";
     ResourceType[ResourceType["DATA"] = RESOURCE_TYPE_DATA()] = "DATA";
 })(ResourceType || (ResourceType = {}));
+;
+var BitmapFlag;
+(function (BitmapFlag) {
+    BitmapFlag[BitmapFlag["NONE"] = BITMAP_FLAG_NONE()] = "NONE";
+    BitmapFlag[BitmapFlag["OPAQUE"] = BITMAP_FLAG_OPAQUE()] = "OPAQUE";
+    BitmapFlag[BitmapFlag["IMMUTABLE"] = BITMAP_FLAG_IMMUTABLE()] = "IMMUTABLE";
+    BitmapFlag[BitmapFlag["TEXTURE"] = BITMAP_FLAG_TEXTURE()] = "TEXTURE";
+})(BitmapFlag || (BitmapFlag = {}));
 ;
 var EventType;
 (function (EventType) {
@@ -312,52 +312,35 @@ var Ret;
     Ret[Ret["BAD_PARAMS"] = RET_BAD_PARAMS()] = "BAD_PARAMS";
 })(Ret || (Ret = {}));
 ;
-var Bitmap = /** @class */ (function () {
-    function Bitmap(nativeObj) {
+var Event = /** @class */ (function () {
+    function Event(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    Bitmap.create = function () {
-        return new Bitmap(bitmap_create());
+    Event.cast = function (event) {
+        return new Event(event_cast(event ? (event.nativeObj || event) : null));
     };
-    Bitmap.prototype.destroy = function () {
-        return bitmap_destroy(this.nativeObj);
-    };
-    Object.defineProperty(Bitmap.prototype, "w", {
+    Object.defineProperty(Event.prototype, "type", {
         get: function () {
-            return bitmap_t_get_prop_w(this.nativeObj);
+            return event_t_get_prop_type(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Bitmap.prototype, "h", {
+    Object.defineProperty(Event.prototype, "time", {
         get: function () {
-            return bitmap_t_get_prop_h(this.nativeObj);
+            return event_t_get_prop_time(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Bitmap.prototype, "flags", {
+    Object.defineProperty(Event.prototype, "target", {
         get: function () {
-            return bitmap_t_get_prop_flags(this.nativeObj);
+            return event_t_get_prop_target(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Bitmap.prototype, "format", {
-        get: function () {
-            return bitmap_t_get_prop_format(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Bitmap.prototype, "name", {
-        get: function () {
-            return bitmap_t_get_prop_name(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Bitmap;
+    return Event;
 }());
 var ResourceManager = /** @class */ (function () {
     function ResourceManager(nativeObj) {
@@ -546,35 +529,52 @@ var Rect = /** @class */ (function () {
     }
     return Rect;
 }());
-var Event = /** @class */ (function () {
-    function Event(nativeObj) {
+var Bitmap = /** @class */ (function () {
+    function Bitmap(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    Event.cast = function (event) {
-        return new Event(event_cast(event ? (event.nativeObj || event) : null));
+    Bitmap.create = function () {
+        return new Bitmap(bitmap_create());
     };
-    Object.defineProperty(Event.prototype, "type", {
+    Bitmap.prototype.destroy = function () {
+        return bitmap_destroy(this.nativeObj);
+    };
+    Object.defineProperty(Bitmap.prototype, "w", {
         get: function () {
-            return event_t_get_prop_type(this.nativeObj);
+            return bitmap_t_get_prop_w(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Event.prototype, "time", {
+    Object.defineProperty(Bitmap.prototype, "h", {
         get: function () {
-            return event_t_get_prop_time(this.nativeObj);
+            return bitmap_t_get_prop_h(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Event.prototype, "target", {
+    Object.defineProperty(Bitmap.prototype, "flags", {
         get: function () {
-            return event_t_get_prop_target(this.nativeObj);
+            return bitmap_t_get_prop_flags(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    return Event;
+    Object.defineProperty(Bitmap.prototype, "format", {
+        get: function () {
+            return bitmap_t_get_prop_format(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "name", {
+        get: function () {
+            return bitmap_t_get_prop_name(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Bitmap;
 }());
 var Widget = /** @class */ (function () {
     function Widget(nativeObj) {
@@ -601,6 +601,9 @@ var Widget = /** @class */ (function () {
     Widget.prototype.setValue = function (value) {
         return widget_set_value(this.nativeObj, value);
     };
+    Widget.prototype.addValue = function (delta) {
+        return widget_add_value(this.nativeObj, delta);
+    };
     Widget.prototype.useStyle = function (style) {
         return widget_use_style(this.nativeObj, style);
     };
@@ -624,6 +627,9 @@ var Widget = /** @class */ (function () {
     };
     Widget.prototype.setFocused = function (focused) {
         return widget_set_focused(this.nativeObj, focused);
+    };
+    Widget.prototype.child = function (path) {
+        return new Widget(widget_child(this.nativeObj, path));
     };
     Widget.prototype.lookup = function (name, recursive) {
         return new Widget(widget_lookup(this.nativeObj, name, recursive));
