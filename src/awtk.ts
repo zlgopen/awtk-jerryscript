@@ -14,7 +14,7 @@ declare function BITMAP_FMT_RGB565();
 declare function RESOURCE_TYPE_NONE();
 declare function RESOURCE_TYPE_FONT();
 declare function RESOURCE_TYPE_IMAGE();
-declare function RESOURCE_TYPE_THEME();
+declare function RESOURCE_TYPE_STYLE();
 declare function RESOURCE_TYPE_UI();
 declare function RESOURCE_TYPE_XML();
 declare function RESOURCE_TYPE_STRINGS();
@@ -317,7 +317,7 @@ declare function widget_get_text(widget);
 declare function widget_set_name(widget, name);
 declare function widget_set_enable(widget, enable);
 declare function widget_set_focused(widget, focused);
-declare function widget_child(widget, path);
+declare function widget_child(widget, name);
 declare function widget_lookup(widget, name, recursive);
 declare function widget_lookup_by_type(widget, type, recursive);
 declare function widget_set_visible(widget, visible, recursive);
@@ -597,7 +597,7 @@ enum ResourceType {
  NONE = RESOURCE_TYPE_NONE(),
  FONT = RESOURCE_TYPE_FONT(),
  IMAGE = RESOURCE_TYPE_IMAGE(),
- THEME = RESOURCE_TYPE_THEME(),
+ STYLE = RESOURCE_TYPE_STYLE(),
  UI = RESOURCE_TYPE_UI(),
  XML = RESOURCE_TYPE_XML(),
  STRINGS = RESOURCE_TYPE_STRINGS(),
@@ -1236,8 +1236,8 @@ class Widget {
    return widget_set_focused(this.nativeObj, focused);
  }
 
- child(path) {
-   return new Widget(widget_child(this.nativeObj, path));
+ child(name) {
+   return new Widget(widget_child(this.nativeObj, name));
  }
 
  lookup(name, recursive) {

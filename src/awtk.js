@@ -37,7 +37,7 @@ var ResourceType;
     ResourceType[ResourceType["NONE"] = RESOURCE_TYPE_NONE()] = "NONE";
     ResourceType[ResourceType["FONT"] = RESOURCE_TYPE_FONT()] = "FONT";
     ResourceType[ResourceType["IMAGE"] = RESOURCE_TYPE_IMAGE()] = "IMAGE";
-    ResourceType[ResourceType["THEME"] = RESOURCE_TYPE_THEME()] = "THEME";
+    ResourceType[ResourceType["STYLE"] = RESOURCE_TYPE_STYLE()] = "STYLE";
     ResourceType[ResourceType["UI"] = RESOURCE_TYPE_UI()] = "UI";
     ResourceType[ResourceType["XML"] = RESOURCE_TYPE_XML()] = "XML";
     ResourceType[ResourceType["STRINGS"] = RESOURCE_TYPE_STRINGS()] = "STRINGS";
@@ -628,8 +628,8 @@ var Widget = /** @class */ (function () {
     Widget.prototype.setFocused = function (focused) {
         return widget_set_focused(this.nativeObj, focused);
     };
-    Widget.prototype.child = function (path) {
-        return new Widget(widget_child(this.nativeObj, path));
+    Widget.prototype.child = function (name) {
+        return new Widget(widget_child(this.nativeObj, name));
     };
     Widget.prototype.lookup = function (name, recursive) {
         return new Widget(widget_lookup(this.nativeObj, name, recursive));

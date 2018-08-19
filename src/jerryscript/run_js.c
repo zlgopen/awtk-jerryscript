@@ -209,7 +209,7 @@ static jerry_value_t parse_file(const char* filename) {
 int main(int argc, char* argv[]) {
   const char* script_file = argc == 2 ? argv[1] : "./demos/demoui.js";
 
-  tk_init(320, 480);
+  tk_init(320, 480, APP_SIMULATOR, NULL, RES_ROOT);
   resource_init();
 
   jerry_init(JERRY_INIT_EMPTY);
