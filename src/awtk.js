@@ -11,107 +11,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var InputType;
-(function (InputType) {
-    InputType[InputType["TEXT"] = INPUT_TEXT()] = "TEXT";
-    InputType[InputType["INT"] = INPUT_INT()] = "INT";
-    InputType[InputType["UINT"] = INPUT_UINT()] = "UINT";
-    InputType[InputType["HEX"] = INPUT_HEX()] = "HEX";
-    InputType[InputType["FLOAT"] = INPUT_FLOAT()] = "FLOAT";
-    InputType[InputType["UFLOAT"] = INPUT_UFLOAT()] = "UFLOAT";
-    InputType[InputType["EMAIL"] = INPUT_EMAIL()] = "EMAIL";
-    InputType[InputType["PASSWORD"] = INPUT_PASSWORD()] = "PASSWORD";
-    InputType[InputType["PHONE"] = INPUT_PHONE()] = "PHONE";
-})(InputType || (InputType = {}));
-;
-var BitmapFormat;
-(function (BitmapFormat) {
-    BitmapFormat[BitmapFormat["NONE"] = BITMAP_FMT_NONE()] = "NONE";
-    BitmapFormat[BitmapFormat["RGBA"] = BITMAP_FMT_RGBA()] = "RGBA";
-    BitmapFormat[BitmapFormat["BGRA"] = BITMAP_FMT_BGRA()] = "BGRA";
-    BitmapFormat[BitmapFormat["RGB565"] = BITMAP_FMT_RGB565()] = "RGB565";
-})(BitmapFormat || (BitmapFormat = {}));
-;
-var ResourceType;
-(function (ResourceType) {
-    ResourceType[ResourceType["NONE"] = RESOURCE_TYPE_NONE()] = "NONE";
-    ResourceType[ResourceType["FONT"] = RESOURCE_TYPE_FONT()] = "FONT";
-    ResourceType[ResourceType["IMAGE"] = RESOURCE_TYPE_IMAGE()] = "IMAGE";
-    ResourceType[ResourceType["STYLE"] = RESOURCE_TYPE_STYLE()] = "STYLE";
-    ResourceType[ResourceType["UI"] = RESOURCE_TYPE_UI()] = "UI";
-    ResourceType[ResourceType["XML"] = RESOURCE_TYPE_XML()] = "XML";
-    ResourceType[ResourceType["STRINGS"] = RESOURCE_TYPE_STRINGS()] = "STRINGS";
-    ResourceType[ResourceType["DATA"] = RESOURCE_TYPE_DATA()] = "DATA";
-})(ResourceType || (ResourceType = {}));
-;
-var BitmapFlag;
-(function (BitmapFlag) {
-    BitmapFlag[BitmapFlag["NONE"] = BITMAP_FLAG_NONE()] = "NONE";
-    BitmapFlag[BitmapFlag["OPAQUE"] = BITMAP_FLAG_OPAQUE()] = "OPAQUE";
-    BitmapFlag[BitmapFlag["IMMUTABLE"] = BITMAP_FLAG_IMMUTABLE()] = "IMMUTABLE";
-    BitmapFlag[BitmapFlag["TEXTURE"] = BITMAP_FLAG_TEXTURE()] = "TEXTURE";
-})(BitmapFlag || (BitmapFlag = {}));
-;
-var EventType;
-(function (EventType) {
-    EventType[EventType["NONE"] = EVT_NONE()] = "NONE";
-    EventType[EventType["POINTER_DOWN"] = EVT_POINTER_DOWN()] = "POINTER_DOWN";
-    EventType[EventType["POINTER_DOWN_ABORT"] = EVT_POINTER_DOWN_ABORT()] = "POINTER_DOWN_ABORT";
-    EventType[EventType["POINTER_MOVE"] = EVT_POINTER_MOVE()] = "POINTER_MOVE";
-    EventType[EventType["POINTER_UP"] = EVT_POINTER_UP()] = "POINTER_UP";
-    EventType[EventType["WHEEL"] = EVT_WHEEL()] = "WHEEL";
-    EventType[EventType["CONTEXT_MENU"] = EVT_CONTEXT_MENU()] = "CONTEXT_MENU";
-    EventType[EventType["POINTER_ENTER"] = EVT_POINTER_ENTER()] = "POINTER_ENTER";
-    EventType[EventType["POINTER_LEAVE"] = EVT_POINTER_LEAVE()] = "POINTER_LEAVE";
-    EventType[EventType["LONG_PRESS"] = EVT_LONG_PRESS()] = "LONG_PRESS";
-    EventType[EventType["CLICK"] = EVT_CLICK()] = "CLICK";
-    EventType[EventType["FOCUS"] = EVT_FOCUS()] = "FOCUS";
-    EventType[EventType["BLUR"] = EVT_BLUR()] = "BLUR";
-    EventType[EventType["KEY_DOWN"] = EVT_KEY_DOWN()] = "KEY_DOWN";
-    EventType[EventType["KEY_REPEAT"] = EVT_KEY_REPEAT()] = "KEY_REPEAT";
-    EventType[EventType["KEY_UP"] = EVT_KEY_UP()] = "KEY_UP";
-    EventType[EventType["DESTROY"] = EVT_DESTROY()] = "DESTROY";
-    EventType[EventType["WILL_MOVE"] = EVT_WILL_MOVE()] = "WILL_MOVE";
-    EventType[EventType["MOVE"] = EVT_MOVE()] = "MOVE";
-    EventType[EventType["WILL_RESIZE"] = EVT_WILL_RESIZE()] = "WILL_RESIZE";
-    EventType[EventType["RESIZE"] = EVT_RESIZE()] = "RESIZE";
-    EventType[EventType["WILL_MOVE_RESIZE"] = EVT_WILL_MOVE_RESIZE()] = "WILL_MOVE_RESIZE";
-    EventType[EventType["MOVE_RESIZE"] = EVT_MOVE_RESIZE()] = "MOVE_RESIZE";
-    EventType[EventType["PROP_WILL_CHANGE"] = EVT_PROP_WILL_CHANGE()] = "PROP_WILL_CHANGE";
-    EventType[EventType["PROP_CHANGED"] = EVT_PROP_CHANGED()] = "PROP_CHANGED";
-    EventType[EventType["VALUE_WILL_CHANGE"] = EVT_VALUE_WILL_CHANGE()] = "VALUE_WILL_CHANGE";
-    EventType[EventType["VALUE_CHANGED"] = EVT_VALUE_CHANGED()] = "VALUE_CHANGED";
-    EventType[EventType["VALUE_CHANGING"] = EVT_VALUE_CHANGING()] = "VALUE_CHANGING";
-    EventType[EventType["PAINT"] = EVT_PAINT()] = "PAINT";
-    EventType[EventType["BEFORE_PAINT"] = EVT_BEFORE_PAINT()] = "BEFORE_PAINT";
-    EventType[EventType["AFTER_PAINT"] = EVT_AFTER_PAINT()] = "AFTER_PAINT";
-    EventType[EventType["LOCALE_CHANGED"] = EVT_LOCALE_CHANGED()] = "LOCALE_CHANGED";
-    EventType[EventType["ANIM_START"] = EVT_ANIM_START()] = "ANIM_START";
-    EventType[EventType["ANIM_STOP"] = EVT_ANIM_STOP()] = "ANIM_STOP";
-    EventType[EventType["ANIM_ONCE"] = EVT_ANIM_ONCE()] = "ANIM_ONCE";
-    EventType[EventType["ANIM_END"] = EVT_ANIM_END()] = "ANIM_END";
-    EventType[EventType["WINDOW_LOAD"] = EVT_WINDOW_LOAD()] = "WINDOW_LOAD";
-    EventType[EventType["WINDOW_OPEN"] = EVT_WINDOW_OPEN()] = "WINDOW_OPEN";
-    EventType[EventType["WINDOW_CLOSE"] = EVT_WINDOW_CLOSE()] = "WINDOW_CLOSE";
-    EventType[EventType["IM_COMMIT"] = EVT_IM_COMMIT()] = "IM_COMMIT";
-    EventType[EventType["IM_SHOW_CANDIDATES"] = EVT_IM_SHOW_CANDIDATES()] = "IM_SHOW_CANDIDATES";
-    EventType[EventType["IM_ACTION"] = EVT_IM_ACTION()] = "IM_ACTION";
-    EventType[EventType["IM_ACTION_INFO"] = EVT_IM_ACTION_INFO()] = "IM_ACTION_INFO";
-    EventType[EventType["DRAG_START"] = EVT_DRAG_START()] = "DRAG_START";
-    EventType[EventType["DRAG"] = EVT_DRAG()] = "DRAG";
-    EventType[EventType["DRAG_END"] = EVT_DRAG_END()] = "DRAG_END";
-    EventType[EventType["REQ_START"] = EVT_REQ_START()] = "REQ_START";
-    EventType[EventType["USER_START"] = EVT_USER_START()] = "USER_START";
-})(EventType || (EventType = {}));
-;
-var AlignV;
-(function (AlignV) {
-    AlignV[AlignV["NONE"] = ALIGN_V_NONE()] = "NONE";
-    AlignV[AlignV["MIDDLE"] = ALIGN_V_MIDDLE()] = "MIDDLE";
-    AlignV[AlignV["TOP"] = ALIGN_V_TOP()] = "TOP";
-    AlignV[AlignV["BOTTOM"] = ALIGN_V_BOTTOM()] = "BOTTOM";
-})(AlignV || (AlignV = {}));
-;
 var AlignH;
 (function (AlignH) {
     AlignH[AlignH["NONE"] = ALIGN_H_NONE()] = "NONE";
@@ -138,6 +37,26 @@ var ValueType;
     ValueType[ValueType["STRING"] = VALUE_TYPE_STRING()] = "STRING";
     ValueType[ValueType["WSTRING"] = VALUE_TYPE_WSTRING()] = "WSTRING";
 })(ValueType || (ValueType = {}));
+;
+var ResourceType;
+(function (ResourceType) {
+    ResourceType[ResourceType["NONE"] = RESOURCE_TYPE_NONE()] = "NONE";
+    ResourceType[ResourceType["FONT"] = RESOURCE_TYPE_FONT()] = "FONT";
+    ResourceType[ResourceType["IMAGE"] = RESOURCE_TYPE_IMAGE()] = "IMAGE";
+    ResourceType[ResourceType["STYLE"] = RESOURCE_TYPE_STYLE()] = "STYLE";
+    ResourceType[ResourceType["UI"] = RESOURCE_TYPE_UI()] = "UI";
+    ResourceType[ResourceType["XML"] = RESOURCE_TYPE_XML()] = "XML";
+    ResourceType[ResourceType["STRINGS"] = RESOURCE_TYPE_STRINGS()] = "STRINGS";
+    ResourceType[ResourceType["DATA"] = RESOURCE_TYPE_DATA()] = "DATA";
+})(ResourceType || (ResourceType = {}));
+;
+var AlignV;
+(function (AlignV) {
+    AlignV[AlignV["NONE"] = ALIGN_V_NONE()] = "NONE";
+    AlignV[AlignV["MIDDLE"] = ALIGN_V_MIDDLE()] = "MIDDLE";
+    AlignV[AlignV["TOP"] = ALIGN_V_TOP()] = "TOP";
+    AlignV[AlignV["BOTTOM"] = ALIGN_V_BOTTOM()] = "BOTTOM";
+})(AlignV || (AlignV = {}));
 ;
 var WidgetProp;
 (function (WidgetProp) {
@@ -216,6 +135,8 @@ var WidgetProp;
     WidgetProp[WidgetProp["CLOSE_WHEN_CLICK"] = WIDGET_PROP_CLOSE_WHEN_CLICK()] = "CLOSE_WHEN_CLICK";
     WidgetProp[WidgetProp["CLOSE_WHEN_CLICK_OUTSIDE"] = WIDGET_PROP_CLOSE_WHEN_CLICK_OUTSIDE()] = "CLOSE_WHEN_CLICK_OUTSIDE";
     WidgetProp[WidgetProp["LINE_GAP"] = WIDGET_PROP_LINE_GAP()] = "LINE_GAP";
+    WidgetProp[WidgetProp["BG_COLOR"] = WIDGET_PROP_BG_COLOR()] = "BG_COLOR";
+    WidgetProp[WidgetProp["BORDER_COLOR"] = WIDGET_PROP_BORDER_COLOR()] = "BORDER_COLOR";
 })(WidgetProp || (WidgetProp = {}));
 ;
 var WidgetType;
@@ -259,7 +180,59 @@ var WidgetType;
     WidgetType[WidgetType["LIST_VIEW"] = WIDGET_TYPE_LIST_VIEW()] = "LIST_VIEW";
     WidgetType[WidgetType["LIST_VIEW_H"] = WIDGET_TYPE_LIST_VIEW_H()] = "LIST_VIEW_H";
     WidgetType[WidgetType["LIST_ITEM"] = WIDGET_TYPE_LIST_ITEM()] = "LIST_ITEM";
+    WidgetType[WidgetType["COLOR_PICKER"] = WIDGET_TYPE_COLOR_PICKER()] = "COLOR_PICKER";
+    WidgetType[WidgetType["COLOR_COMPONENT"] = WIDGET_TYPE_COLOR_COMPONENT()] = "COLOR_COMPONENT";
+    WidgetType[WidgetType["COLOR_TILE"] = WIDGET_TYPE_COLOR_TILE()] = "COLOR_TILE";
 })(WidgetType || (WidgetType = {}));
+;
+var WidgetState;
+(function (WidgetState) {
+    WidgetState[WidgetState["STATE_NONE"] = WIDGET_STATE_NONE()] = "STATE_NONE";
+    WidgetState[WidgetState["STATE_NORMAL"] = WIDGET_STATE_NORMAL()] = "STATE_NORMAL";
+    WidgetState[WidgetState["STATE_PRESSED"] = WIDGET_STATE_PRESSED()] = "STATE_PRESSED";
+    WidgetState[WidgetState["STATE_OVER"] = WIDGET_STATE_OVER()] = "STATE_OVER";
+    WidgetState[WidgetState["STATE_DISABLE"] = WIDGET_STATE_DISABLE()] = "STATE_DISABLE";
+    WidgetState[WidgetState["STATE_FOCUSED"] = WIDGET_STATE_FOCUSED()] = "STATE_FOCUSED";
+    WidgetState[WidgetState["STATE_CHECKED"] = WIDGET_STATE_CHECKED()] = "STATE_CHECKED";
+    WidgetState[WidgetState["STATE_UNCHECKED"] = WIDGET_STATE_UNCHECKED()] = "STATE_UNCHECKED";
+    WidgetState[WidgetState["STATE_EMPTY"] = WIDGET_STATE_EMPTY()] = "STATE_EMPTY";
+    WidgetState[WidgetState["STATE_ERROR"] = WIDGET_STATE_ERROR()] = "STATE_ERROR";
+    WidgetState[WidgetState["STATE_SELECTED"] = WIDGET_STATE_SELECTED()] = "STATE_SELECTED";
+})(WidgetState || (WidgetState = {}));
+;
+var BitmapFlag;
+(function (BitmapFlag) {
+    BitmapFlag[BitmapFlag["NONE"] = BITMAP_FLAG_NONE()] = "NONE";
+    BitmapFlag[BitmapFlag["OPAQUE"] = BITMAP_FLAG_OPAQUE()] = "OPAQUE";
+    BitmapFlag[BitmapFlag["IMMUTABLE"] = BITMAP_FLAG_IMMUTABLE()] = "IMMUTABLE";
+    BitmapFlag[BitmapFlag["TEXTURE"] = BITMAP_FLAG_TEXTURE()] = "TEXTURE";
+    BitmapFlag[BitmapFlag["CHANGED"] = BITMAP_FLAG_CHANGED()] = "CHANGED";
+})(BitmapFlag || (BitmapFlag = {}));
+;
+var Ret;
+(function (Ret) {
+    Ret[Ret["OK"] = RET_OK()] = "OK";
+    Ret[Ret["OOM"] = RET_OOM()] = "OOM";
+    Ret[Ret["FAIL"] = RET_FAIL()] = "FAIL";
+    Ret[Ret["NOT_IMPL"] = RET_NOT_IMPL()] = "NOT_IMPL";
+    Ret[Ret["QUIT"] = RET_QUIT()] = "QUIT";
+    Ret[Ret["FOUND"] = RET_FOUND()] = "FOUND";
+    Ret[Ret["REMOVE"] = RET_REMOVE()] = "REMOVE";
+    Ret[Ret["REPEAT"] = RET_REPEAT()] = "REPEAT";
+    Ret[Ret["NOT_FOUND"] = RET_NOT_FOUND()] = "NOT_FOUND";
+    Ret[Ret["DONE"] = RET_DONE()] = "DONE";
+    Ret[Ret["STOP"] = RET_STOP()] = "STOP";
+    Ret[Ret["CONTINUE"] = RET_CONTINUE()] = "CONTINUE";
+    Ret[Ret["BAD_PARAMS"] = RET_BAD_PARAMS()] = "BAD_PARAMS";
+})(Ret || (Ret = {}));
+;
+var BitmapFormat;
+(function (BitmapFormat) {
+    BitmapFormat[BitmapFormat["NONE"] = BITMAP_FMT_NONE()] = "NONE";
+    BitmapFormat[BitmapFormat["RGBA"] = BITMAP_FMT_RGBA()] = "RGBA";
+    BitmapFormat[BitmapFormat["BGRA"] = BITMAP_FMT_BGRA()] = "BGRA";
+    BitmapFormat[BitmapFormat["RGB565"] = BITMAP_FMT_RGB565()] = "RGB565";
+})(BitmapFormat || (BitmapFormat = {}));
 ;
 var ImageDrawType;
 (function (ImageDrawType) {
@@ -280,38 +253,90 @@ var ImageDrawType;
     ImageDrawType[ImageDrawType["PATCH3_Y_SCALE_X"] = IMAGE_DRAW_PATCH3_Y_SCALE_X()] = "PATCH3_Y_SCALE_X";
 })(ImageDrawType || (ImageDrawType = {}));
 ;
-var WidgetState;
-(function (WidgetState) {
-    WidgetState[WidgetState["STATE_NONE"] = WIDGET_STATE_NONE()] = "STATE_NONE";
-    WidgetState[WidgetState["STATE_NORMAL"] = WIDGET_STATE_NORMAL()] = "STATE_NORMAL";
-    WidgetState[WidgetState["STATE_PRESSED"] = WIDGET_STATE_PRESSED()] = "STATE_PRESSED";
-    WidgetState[WidgetState["STATE_OVER"] = WIDGET_STATE_OVER()] = "STATE_OVER";
-    WidgetState[WidgetState["STATE_DISABLE"] = WIDGET_STATE_DISABLE()] = "STATE_DISABLE";
-    WidgetState[WidgetState["STATE_FOCUSED"] = WIDGET_STATE_FOCUSED()] = "STATE_FOCUSED";
-    WidgetState[WidgetState["STATE_CHECKED"] = WIDGET_STATE_CHECKED()] = "STATE_CHECKED";
-    WidgetState[WidgetState["STATE_UNCHECKED"] = WIDGET_STATE_UNCHECKED()] = "STATE_UNCHECKED";
-    WidgetState[WidgetState["STATE_EMPTY"] = WIDGET_STATE_EMPTY()] = "STATE_EMPTY";
-    WidgetState[WidgetState["STATE_ERROR"] = WIDGET_STATE_ERROR()] = "STATE_ERROR";
-    WidgetState[WidgetState["STATE_SELECTED"] = WIDGET_STATE_SELECTED()] = "STATE_SELECTED";
-})(WidgetState || (WidgetState = {}));
+var InputType;
+(function (InputType) {
+    InputType[InputType["TEXT"] = INPUT_TEXT()] = "TEXT";
+    InputType[InputType["INT"] = INPUT_INT()] = "INT";
+    InputType[InputType["UINT"] = INPUT_UINT()] = "UINT";
+    InputType[InputType["HEX"] = INPUT_HEX()] = "HEX";
+    InputType[InputType["FLOAT"] = INPUT_FLOAT()] = "FLOAT";
+    InputType[InputType["UFLOAT"] = INPUT_UFLOAT()] = "UFLOAT";
+    InputType[InputType["EMAIL"] = INPUT_EMAIL()] = "EMAIL";
+    InputType[InputType["PASSWORD"] = INPUT_PASSWORD()] = "PASSWORD";
+    InputType[InputType["PHONE"] = INPUT_PHONE()] = "PHONE";
+})(InputType || (InputType = {}));
 ;
-var Ret;
-(function (Ret) {
-    Ret[Ret["OK"] = RET_OK()] = "OK";
-    Ret[Ret["OOM"] = RET_OOM()] = "OOM";
-    Ret[Ret["FAIL"] = RET_FAIL()] = "FAIL";
-    Ret[Ret["NOT_IMPL"] = RET_NOT_IMPL()] = "NOT_IMPL";
-    Ret[Ret["QUIT"] = RET_QUIT()] = "QUIT";
-    Ret[Ret["FOUND"] = RET_FOUND()] = "FOUND";
-    Ret[Ret["REMOVE"] = RET_REMOVE()] = "REMOVE";
-    Ret[Ret["REPEAT"] = RET_REPEAT()] = "REPEAT";
-    Ret[Ret["NOT_FOUND"] = RET_NOT_FOUND()] = "NOT_FOUND";
-    Ret[Ret["DONE"] = RET_DONE()] = "DONE";
-    Ret[Ret["STOP"] = RET_STOP()] = "STOP";
-    Ret[Ret["CONTINUE"] = RET_CONTINUE()] = "CONTINUE";
-    Ret[Ret["BAD_PARAMS"] = RET_BAD_PARAMS()] = "BAD_PARAMS";
-})(Ret || (Ret = {}));
+var EventType;
+(function (EventType) {
+    EventType[EventType["NONE"] = EVT_NONE()] = "NONE";
+    EventType[EventType["POINTER_DOWN"] = EVT_POINTER_DOWN()] = "POINTER_DOWN";
+    EventType[EventType["POINTER_DOWN_ABORT"] = EVT_POINTER_DOWN_ABORT()] = "POINTER_DOWN_ABORT";
+    EventType[EventType["POINTER_MOVE"] = EVT_POINTER_MOVE()] = "POINTER_MOVE";
+    EventType[EventType["POINTER_UP"] = EVT_POINTER_UP()] = "POINTER_UP";
+    EventType[EventType["WHEEL"] = EVT_WHEEL()] = "WHEEL";
+    EventType[EventType["CONTEXT_MENU"] = EVT_CONTEXT_MENU()] = "CONTEXT_MENU";
+    EventType[EventType["POINTER_ENTER"] = EVT_POINTER_ENTER()] = "POINTER_ENTER";
+    EventType[EventType["POINTER_LEAVE"] = EVT_POINTER_LEAVE()] = "POINTER_LEAVE";
+    EventType[EventType["LONG_PRESS"] = EVT_LONG_PRESS()] = "LONG_PRESS";
+    EventType[EventType["CLICK"] = EVT_CLICK()] = "CLICK";
+    EventType[EventType["FOCUS"] = EVT_FOCUS()] = "FOCUS";
+    EventType[EventType["BLUR"] = EVT_BLUR()] = "BLUR";
+    EventType[EventType["KEY_DOWN"] = EVT_KEY_DOWN()] = "KEY_DOWN";
+    EventType[EventType["KEY_REPEAT"] = EVT_KEY_REPEAT()] = "KEY_REPEAT";
+    EventType[EventType["KEY_UP"] = EVT_KEY_UP()] = "KEY_UP";
+    EventType[EventType["DESTROY"] = EVT_DESTROY()] = "DESTROY";
+    EventType[EventType["WILL_MOVE"] = EVT_WILL_MOVE()] = "WILL_MOVE";
+    EventType[EventType["MOVE"] = EVT_MOVE()] = "MOVE";
+    EventType[EventType["WILL_RESIZE"] = EVT_WILL_RESIZE()] = "WILL_RESIZE";
+    EventType[EventType["RESIZE"] = EVT_RESIZE()] = "RESIZE";
+    EventType[EventType["WILL_MOVE_RESIZE"] = EVT_WILL_MOVE_RESIZE()] = "WILL_MOVE_RESIZE";
+    EventType[EventType["MOVE_RESIZE"] = EVT_MOVE_RESIZE()] = "MOVE_RESIZE";
+    EventType[EventType["PROP_WILL_CHANGE"] = EVT_PROP_WILL_CHANGE()] = "PROP_WILL_CHANGE";
+    EventType[EventType["PROP_CHANGED"] = EVT_PROP_CHANGED()] = "PROP_CHANGED";
+    EventType[EventType["VALUE_WILL_CHANGE"] = EVT_VALUE_WILL_CHANGE()] = "VALUE_WILL_CHANGE";
+    EventType[EventType["VALUE_CHANGED"] = EVT_VALUE_CHANGED()] = "VALUE_CHANGED";
+    EventType[EventType["VALUE_CHANGING"] = EVT_VALUE_CHANGING()] = "VALUE_CHANGING";
+    EventType[EventType["PAINT"] = EVT_PAINT()] = "PAINT";
+    EventType[EventType["BEFORE_PAINT"] = EVT_BEFORE_PAINT()] = "BEFORE_PAINT";
+    EventType[EventType["AFTER_PAINT"] = EVT_AFTER_PAINT()] = "AFTER_PAINT";
+    EventType[EventType["LOCALE_CHANGED"] = EVT_LOCALE_CHANGED()] = "LOCALE_CHANGED";
+    EventType[EventType["ANIM_START"] = EVT_ANIM_START()] = "ANIM_START";
+    EventType[EventType["ANIM_STOP"] = EVT_ANIM_STOP()] = "ANIM_STOP";
+    EventType[EventType["ANIM_ONCE"] = EVT_ANIM_ONCE()] = "ANIM_ONCE";
+    EventType[EventType["ANIM_END"] = EVT_ANIM_END()] = "ANIM_END";
+    EventType[EventType["WINDOW_LOAD"] = EVT_WINDOW_LOAD()] = "WINDOW_LOAD";
+    EventType[EventType["WINDOW_WILL_OPEN"] = EVT_WINDOW_WILL_OPEN()] = "WINDOW_WILL_OPEN";
+    EventType[EventType["WINDOW_OPEN"] = EVT_WINDOW_OPEN()] = "WINDOW_OPEN";
+    EventType[EventType["WINDOW_CLOSE"] = EVT_WINDOW_CLOSE()] = "WINDOW_CLOSE";
+    EventType[EventType["IM_COMMIT"] = EVT_IM_COMMIT()] = "IM_COMMIT";
+    EventType[EventType["IM_SHOW_CANDIDATES"] = EVT_IM_SHOW_CANDIDATES()] = "IM_SHOW_CANDIDATES";
+    EventType[EventType["IM_ACTION"] = EVT_IM_ACTION()] = "IM_ACTION";
+    EventType[EventType["IM_ACTION_INFO"] = EVT_IM_ACTION_INFO()] = "IM_ACTION_INFO";
+    EventType[EventType["DRAG_START"] = EVT_DRAG_START()] = "DRAG_START";
+    EventType[EventType["DRAG"] = EVT_DRAG()] = "DRAG";
+    EventType[EventType["DRAG_END"] = EVT_DRAG_END()] = "DRAG_END";
+    EventType[EventType["REQ_START"] = EVT_REQ_START()] = "REQ_START";
+    EventType[EventType["USER_START"] = EVT_USER_START()] = "USER_START";
+})(EventType || (EventType = {}));
 ;
+var Point = /** @class */ (function () {
+    function Point(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    return Point;
+}());
+var Timer = /** @class */ (function () {
+    function Timer(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Timer.add = function (on_timer, ctx, duration_ms) {
+        return timer_add(on_timer, ctx, duration_ms);
+    };
+    Timer.remove = function (timer_id) {
+        return timer_remove(timer_id);
+    };
+    return Timer;
+}());
 var Event = /** @class */ (function () {
     function Event(nativeObj) {
         this.nativeObj = nativeObj;
@@ -342,33 +367,6 @@ var Event = /** @class */ (function () {
     });
     return Event;
 }());
-var ResourceManager = /** @class */ (function () {
-    function ResourceManager(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    ResourceManager.instance = function () {
-        return new ResourceManager(resource_manager());
-    };
-    ResourceManager.prototype.ref = function (type, name) {
-        return resource_manager_ref(this.nativeObj, type, name);
-    };
-    ResourceManager.prototype.unref = function (info) {
-        return resource_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
-    };
-    return ResourceManager;
-}());
-var Timer = /** @class */ (function () {
-    function Timer(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    Timer.add = function (on_timer, ctx, duration_ms) {
-        return timer_add(on_timer, ctx, duration_ms);
-    };
-    Timer.remove = function (timer_id) {
-        return timer_remove(timer_id);
-    };
-    return Timer;
-}());
 var Tklocale = /** @class */ (function () {
     function Tklocale(nativeObj) {
         this.nativeObj = nativeObj;
@@ -389,145 +387,6 @@ var Tklocale = /** @class */ (function () {
         return tklocale_off(this.nativeObj, id);
     };
     return Tklocale;
-}());
-var Idle = /** @class */ (function () {
-    function Idle(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    Idle.add = function (on_idle, ctx) {
-        return idle_add(on_idle, ctx);
-    };
-    Idle.remove = function (idle_id) {
-        return idle_remove(idle_id);
-    };
-    return Idle;
-}());
-var ImageManager = /** @class */ (function () {
-    function ImageManager(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    ImageManager.instance = function () {
-        return new ImageManager(image_manager());
-    };
-    ImageManager.prototype.load = function (name, image) {
-        return image_manager_load(this.nativeObj, name, image ? (image.nativeObj || image) : null);
-    };
-    return ImageManager;
-}());
-var Canvas = /** @class */ (function () {
-    function Canvas(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    return Canvas;
-}());
-var Value = /** @class */ (function () {
-    function Value(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    Value.prototype.setBool = function (value) {
-        return value_set_bool(this.nativeObj, value);
-    };
-    Value.prototype.bool = function () {
-        return value_bool(this.nativeObj);
-    };
-    Value.prototype.setInt8 = function (value) {
-        return value_set_int8(this.nativeObj, value);
-    };
-    Value.prototype.int8 = function () {
-        return value_int8(this.nativeObj);
-    };
-    Value.prototype.setUint8 = function (value) {
-        return value_set_uint8(this.nativeObj, value);
-    };
-    Value.prototype.uint8 = function () {
-        return value_uint8(this.nativeObj);
-    };
-    Value.prototype.setInt16 = function (value) {
-        return value_set_int16(this.nativeObj, value);
-    };
-    Value.prototype.int16 = function () {
-        return value_int16(this.nativeObj);
-    };
-    Value.prototype.setUint16 = function (value) {
-        return value_set_uint16(this.nativeObj, value);
-    };
-    Value.prototype.uint16 = function () {
-        return value_uint16(this.nativeObj);
-    };
-    Value.prototype.setInt32 = function (value) {
-        return value_set_int32(this.nativeObj, value);
-    };
-    Value.prototype.int32 = function () {
-        return value_int32(this.nativeObj);
-    };
-    Value.prototype.setUint32 = function (value) {
-        return value_set_uint32(this.nativeObj, value);
-    };
-    Value.prototype.setInt64 = function (value) {
-        return value_set_int64(this.nativeObj, value);
-    };
-    Value.prototype.int64 = function () {
-        return value_int64(this.nativeObj);
-    };
-    Value.prototype.setUint64 = function (value) {
-        return value_set_uint64(this.nativeObj, value);
-    };
-    Value.prototype.uint64 = function () {
-        return value_uint64(this.nativeObj);
-    };
-    Value.prototype.setFloat = function (value) {
-        return value_set_float(this.nativeObj, value);
-    };
-    Value.prototype.float = function () {
-        return value_float(this.nativeObj);
-    };
-    Value.prototype.setDouble = function (value) {
-        return value_set_double(this.nativeObj, value);
-    };
-    Value.prototype.double = function () {
-        return value_double(this.nativeObj);
-    };
-    Value.prototype.setStr = function (value) {
-        return value_set_str(this.nativeObj, value);
-    };
-    Value.prototype.str = function () {
-        return value_str(this.nativeObj);
-    };
-    Value.prototype.isNull = function () {
-        return value_is_null(this.nativeObj);
-    };
-    Value.prototype.int = function () {
-        return value_int(this.nativeObj);
-    };
-    Value.prototype.setInt = function (value) {
-        return value_set_int(this.nativeObj, value);
-    };
-    Value.create = function () {
-        return new Value(value_create());
-    };
-    Value.prototype.destroy = function () {
-        return value_destroy(this.nativeObj);
-    };
-    Object.defineProperty(Value.prototype, "type", {
-        get: function () {
-            return value_t_get_prop_type(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Value;
-}());
-var Point = /** @class */ (function () {
-    function Point(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    return Point;
-}());
-var Rect = /** @class */ (function () {
-    function Rect(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    return Rect;
 }());
 var Bitmap = /** @class */ (function () {
     function Bitmap(nativeObj) {
@@ -750,6 +609,118 @@ var Widget = /** @class */ (function () {
     });
     return Widget;
 }());
+var Value = /** @class */ (function () {
+    function Value(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Value.prototype.setBool = function (value) {
+        return value_set_bool(this.nativeObj, value);
+    };
+    Value.prototype.bool = function () {
+        return value_bool(this.nativeObj);
+    };
+    Value.prototype.setInt8 = function (value) {
+        return value_set_int8(this.nativeObj, value);
+    };
+    Value.prototype.int8 = function () {
+        return value_int8(this.nativeObj);
+    };
+    Value.prototype.setUint8 = function (value) {
+        return value_set_uint8(this.nativeObj, value);
+    };
+    Value.prototype.uint8 = function () {
+        return value_uint8(this.nativeObj);
+    };
+    Value.prototype.setInt16 = function (value) {
+        return value_set_int16(this.nativeObj, value);
+    };
+    Value.prototype.int16 = function () {
+        return value_int16(this.nativeObj);
+    };
+    Value.prototype.setUint16 = function (value) {
+        return value_set_uint16(this.nativeObj, value);
+    };
+    Value.prototype.uint16 = function () {
+        return value_uint16(this.nativeObj);
+    };
+    Value.prototype.setInt32 = function (value) {
+        return value_set_int32(this.nativeObj, value);
+    };
+    Value.prototype.int32 = function () {
+        return value_int32(this.nativeObj);
+    };
+    Value.prototype.setUint32 = function (value) {
+        return value_set_uint32(this.nativeObj, value);
+    };
+    Value.prototype.setInt64 = function (value) {
+        return value_set_int64(this.nativeObj, value);
+    };
+    Value.prototype.int64 = function () {
+        return value_int64(this.nativeObj);
+    };
+    Value.prototype.setUint64 = function (value) {
+        return value_set_uint64(this.nativeObj, value);
+    };
+    Value.prototype.uint64 = function () {
+        return value_uint64(this.nativeObj);
+    };
+    Value.prototype.setFloat = function (value) {
+        return value_set_float(this.nativeObj, value);
+    };
+    Value.prototype.float = function () {
+        return value_float(this.nativeObj);
+    };
+    Value.prototype.setDouble = function (value) {
+        return value_set_double(this.nativeObj, value);
+    };
+    Value.prototype.double = function () {
+        return value_double(this.nativeObj);
+    };
+    Value.prototype.setStr = function (value) {
+        return value_set_str(this.nativeObj, value);
+    };
+    Value.prototype.str = function () {
+        return value_str(this.nativeObj);
+    };
+    Value.prototype.isNull = function () {
+        return value_is_null(this.nativeObj);
+    };
+    Value.prototype.int = function () {
+        return value_int(this.nativeObj);
+    };
+    Value.prototype.setInt = function (value) {
+        return value_set_int(this.nativeObj, value);
+    };
+    Value.create = function () {
+        return new Value(value_create());
+    };
+    Value.prototype.destroy = function () {
+        return value_destroy(this.nativeObj);
+    };
+    Object.defineProperty(Value.prototype, "type", {
+        get: function () {
+            return value_t_get_prop_type(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Value;
+}());
+var ResourceManager = /** @class */ (function () {
+    function ResourceManager(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    ResourceManager.instance = function () {
+        return new ResourceManager(resource_manager());
+    };
+    ResourceManager.prototype.ref = function (type, name) {
+        return resource_manager_ref(this.nativeObj, type, name);
+    };
+    ResourceManager.prototype.unref = function (info) {
+        return resource_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
+    };
+    return ResourceManager;
+}());
 var ResourceInfo = /** @class */ (function () {
     function ResourceInfo(nativeObj) {
         this.nativeObj = nativeObj;
@@ -777,6 +748,577 @@ var ResourceInfo = /** @class */ (function () {
     });
     return ResourceInfo;
 }());
+var Idle = /** @class */ (function () {
+    function Idle(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Idle.add = function (on_idle, ctx) {
+        return idle_add(on_idle, ctx);
+    };
+    Idle.remove = function (idle_id) {
+        return idle_remove(idle_id);
+    };
+    return Idle;
+}());
+var ImageManager = /** @class */ (function () {
+    function ImageManager(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    ImageManager.instance = function () {
+        return new ImageManager(image_manager());
+    };
+    ImageManager.prototype.load = function (name, image) {
+        return image_manager_load(this.nativeObj, name, image ? (image.nativeObj || image) : null);
+    };
+    return ImageManager;
+}());
+var Canvas = /** @class */ (function () {
+    function Canvas(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    return Canvas;
+}());
+var Rect = /** @class */ (function () {
+    function Rect(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    return Rect;
+}());
+var ButtonGroup = /** @class */ (function (_super) {
+    __extends(ButtonGroup, _super);
+    function ButtonGroup(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    ButtonGroup.create = function (parent, x, y, w, h) {
+        return new ButtonGroup(button_group_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    ButtonGroup.cast = function (widget) {
+        return new ButtonGroup(button_group_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    return ButtonGroup;
+}(Widget));
+var Button = /** @class */ (function (_super) {
+    __extends(Button, _super);
+    function Button(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    Button.create = function (parent, x, y, w, h) {
+        return new Button(button_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    Button.cast = function (widget) {
+        return new Button(button_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    Button.prototype.setRepeat = function (repeat) {
+        return button_set_repeat(this.nativeObj, repeat);
+    };
+    Object.defineProperty(Button.prototype, "repeat", {
+        get: function () {
+            return button_t_get_prop_repeat(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Button;
+}(Widget));
+var CheckButton = /** @class */ (function (_super) {
+    __extends(CheckButton, _super);
+    function CheckButton(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    CheckButton.create = function (parent, x, y, w, h) {
+        return new CheckButton(check_button_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    CheckButton.createRadio = function (parent, x, y, w, h) {
+        return new CheckButton(check_button_create_radio(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    CheckButton.prototype.setValue = function (value) {
+        return check_button_set_value(this.nativeObj, value);
+    };
+    CheckButton.cast = function (widget) {
+        return new CheckButton(check_button_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    Object.defineProperty(CheckButton.prototype, "value", {
+        get: function () {
+            return check_button_t_get_prop_value(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return CheckButton;
+}(Widget));
+var ColorPicker = /** @class */ (function (_super) {
+    __extends(ColorPicker, _super);
+    function ColorPicker(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    ColorPicker.create = function (parent, x, y, w, h) {
+        return new ColorPicker(color_picker_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    ColorPicker.prototype.setColor = function (color) {
+        return color_picker_set_color(this.nativeObj, color);
+    };
+    ColorPicker.cast = function (widget) {
+        return new ColorPicker(color_picker_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    Object.defineProperty(ColorPicker.prototype, "value", {
+        get: function () {
+            return color_picker_t_get_prop_value(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ColorPicker;
+}(Widget));
+var ColorTile = /** @class */ (function (_super) {
+    __extends(ColorTile, _super);
+    function ColorTile(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    ColorTile.create = function (parent, x, y, w, h) {
+        return new ColorTile(color_tile_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    ColorTile.cast = function (widget) {
+        return new ColorTile(color_tile_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    ColorTile.prototype.setBgColor = function (color) {
+        return color_tile_set_bg_color(this.nativeObj, color);
+    };
+    Object.defineProperty(ColorTile.prototype, "bgColor", {
+        get: function () {
+            return color_tile_t_get_prop_bg_color(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ColorTile.prototype, "borderColor", {
+        get: function () {
+            return color_tile_t_get_prop_border_color(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ColorTile;
+}(Widget));
+var ComboBoxItem = /** @class */ (function (_super) {
+    __extends(ComboBoxItem, _super);
+    function ComboBoxItem(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    ComboBoxItem.create = function (parent, x, y, w, h) {
+        return new ComboBoxItem(combo_box_item_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    ComboBoxItem.cast = function (widget) {
+        return new ComboBoxItem(combo_box_item_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    ComboBoxItem.prototype.setSelected = function (selected) {
+        return combo_box_item_set_selected(this.nativeObj, selected);
+    };
+    ComboBoxItem.prototype.setValue = function (value) {
+        return combo_box_item_set_value(this.nativeObj, value);
+    };
+    Object.defineProperty(ComboBoxItem.prototype, "value", {
+        get: function () {
+            return combo_box_item_t_get_prop_value(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComboBoxItem.prototype, "selected", {
+        get: function () {
+            return combo_box_item_t_get_prop_selected(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ComboBoxItem;
+}(Widget));
+var ComboBox = /** @class */ (function (_super) {
+    __extends(ComboBox, _super);
+    function ComboBox(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    ComboBox.create = function (parent, x, y, w, h) {
+        return new ComboBox(combo_box_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    ComboBox.cast = function (widget) {
+        return new ComboBox(combo_box_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    ComboBox.prototype.setOpenWindow = function (open_window) {
+        return combo_box_set_open_window(this.nativeObj, open_window);
+    };
+    ComboBox.prototype.resetOptions = function () {
+        return combo_box_reset_options(this.nativeObj);
+    };
+    ComboBox.prototype.countOptions = function () {
+        return combo_box_count_options(this.nativeObj);
+    };
+    ComboBox.prototype.setSelectedIndex = function (index) {
+        return combo_box_set_selected_index(this.nativeObj, index);
+    };
+    ComboBox.prototype.appendOption = function (value, text) {
+        return combo_box_append_option(this.nativeObj, value, text);
+    };
+    ComboBox.prototype.setOptions = function (options) {
+        return combo_box_set_options(this.nativeObj, options);
+    };
+    ComboBox.prototype.getValue = function () {
+        return combo_box_get_value(this.nativeObj);
+    };
+    ComboBox.prototype.getText = function () {
+        return combo_box_get_text(this.nativeObj);
+    };
+    Object.defineProperty(ComboBox.prototype, "openWindow", {
+        get: function () {
+            return combo_box_t_get_prop_open_window(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComboBox.prototype, "selectedIndex", {
+        get: function () {
+            return combo_box_t_get_prop_selected_index(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComboBox.prototype, "value", {
+        get: function () {
+            return combo_box_t_get_prop_value(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComboBox.prototype, "options", {
+        get: function () {
+            return combo_box_t_get_prop_options(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ComboBox;
+}(Widget));
+var DialogClient = /** @class */ (function (_super) {
+    __extends(DialogClient, _super);
+    function DialogClient(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    DialogClient.create = function (parent, x, y, w, h) {
+        return new DialogClient(dialog_client_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    DialogClient.cast = function (widget) {
+        return new DialogClient(dialog_client_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    return DialogClient;
+}(Widget));
+var Dialog = /** @class */ (function (_super) {
+    __extends(Dialog, _super);
+    function Dialog(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    Dialog.create = function (parent, x, y, w, h) {
+        return new Dialog(dialog_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    Dialog.createSimple = function (parent, x, y, w, h) {
+        return new Dialog(dialog_create_simple(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    Dialog.cast = function (widget) {
+        return new Dialog(dialog_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    Dialog.prototype.getTitle = function () {
+        return new Widget(dialog_get_title(this.nativeObj));
+    };
+    Dialog.prototype.getClient = function () {
+        return new Widget(dialog_get_client(this.nativeObj));
+    };
+    Dialog.open = function (name) {
+        return new Dialog(dialog_open(name));
+    };
+    Dialog.prototype.setTitle = function (title) {
+        return dialog_set_title(this.nativeObj, title);
+    };
+    Dialog.prototype.modal = function () {
+        return dialog_modal(this.nativeObj);
+    };
+    Dialog.prototype.quit = function (code) {
+        return dialog_quit(this.nativeObj, code);
+    };
+    return Dialog;
+}(Widget));
+var DialogTitle = /** @class */ (function (_super) {
+    __extends(DialogTitle, _super);
+    function DialogTitle(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    DialogTitle.create = function (parent, x, y, w, h) {
+        return new DialogTitle(dialog_title_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    DialogTitle.cast = function (widget) {
+        return new DialogTitle(dialog_title_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    return DialogTitle;
+}(Widget));
+var Dragger = /** @class */ (function (_super) {
+    __extends(Dragger, _super);
+    function Dragger(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    Dragger.create = function (parent, x, y, w, h) {
+        return new Dragger(dragger_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    Dragger.cast = function (widget) {
+        return new Dragger(dragger_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    Dragger.prototype.setRange = function (x_min, y_min, x_max, y_max) {
+        return new Widget(dragger_set_range(this.nativeObj, x_min, y_min, x_max, y_max));
+    };
+    Object.defineProperty(Dragger.prototype, "xMin", {
+        get: function () {
+            return dragger_t_get_prop_x_min(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Dragger.prototype, "yMin", {
+        get: function () {
+            return dragger_t_get_prop_y_min(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Dragger.prototype, "xMax", {
+        get: function () {
+            return dragger_t_get_prop_x_max(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Dragger.prototype, "yMax", {
+        get: function () {
+            return dragger_t_get_prop_y_max(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Dragger;
+}(Widget));
+var Edit = /** @class */ (function (_super) {
+    __extends(Edit, _super);
+    function Edit(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    Edit.create = function (parent, x, y, w, h) {
+        return new Edit(edit_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    Edit.cast = function (widget) {
+        return new Edit(edit_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    Edit.prototype.getInt = function () {
+        return edit_get_int(this.nativeObj);
+    };
+    Edit.prototype.getDouble = function () {
+        return edit_get_double(this.nativeObj);
+    };
+    Edit.prototype.setInt = function (value) {
+        return edit_set_int(this.nativeObj, value);
+    };
+    Edit.prototype.setDouble = function (value) {
+        return edit_set_double(this.nativeObj, value);
+    };
+    Edit.prototype.setTextLimit = function (min, max) {
+        return edit_set_text_limit(this.nativeObj, min, max);
+    };
+    Edit.prototype.setIntLimit = function (min, max, step) {
+        return edit_set_int_limit(this.nativeObj, min, max, step);
+    };
+    Edit.prototype.setFloatLimit = function (min, max, step) {
+        return edit_set_float_limit(this.nativeObj, min, max, step);
+    };
+    Edit.prototype.setReadonly = function (readonly) {
+        return edit_set_readonly(this.nativeObj, readonly);
+    };
+    Edit.prototype.setAutoFix = function (auto_fix) {
+        return edit_set_auto_fix(this.nativeObj, auto_fix);
+    };
+    Edit.prototype.setInputType = function (type) {
+        return edit_set_input_type(this.nativeObj, type);
+    };
+    Edit.prototype.setInputTips = function (tips) {
+        return edit_set_input_tips(this.nativeObj, tips);
+    };
+    Edit.prototype.setPasswordVisible = function (password_visible) {
+        return edit_set_password_visible(this.nativeObj, password_visible);
+    };
+    Object.defineProperty(Edit.prototype, "readonly", {
+        get: function () {
+            return edit_t_get_prop_readonly(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Edit.prototype, "passwordVisible", {
+        get: function () {
+            return edit_t_get_prop_password_visible(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Edit.prototype, "autoFix", {
+        get: function () {
+            return edit_t_get_prop_auto_fix(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Edit.prototype, "topMargin", {
+        get: function () {
+            return edit_t_get_prop_top_margin(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Edit.prototype, "bottomMargin", {
+        get: function () {
+            return edit_t_get_prop_bottom_margin(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Edit.prototype, "leftMargin", {
+        get: function () {
+            return edit_t_get_prop_left_margin(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Edit.prototype, "rightMargin", {
+        get: function () {
+            return edit_t_get_prop_right_margin(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Edit.prototype, "tips", {
+        get: function () {
+            return edit_t_get_prop_tips(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Edit;
+}(Widget));
+var GroupBox = /** @class */ (function (_super) {
+    __extends(GroupBox, _super);
+    function GroupBox(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    GroupBox.create = function (parent, x, y, w, h) {
+        return new GroupBox(group_box_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    GroupBox.cast = function (widget) {
+        return new GroupBox(group_box_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    return GroupBox;
+}(Widget));
+var Image = /** @class */ (function (_super) {
+    __extends(Image, _super);
+    function Image(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    Image.create = function (parent, x, y, w, h) {
+        return new Image(image_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    Image.prototype.setImageName = function (name) {
+        return image_set_image_name(this.nativeObj, name);
+    };
+    Image.prototype.setDrawType = function (draw_type) {
+        return image_set_draw_type(this.nativeObj, draw_type);
+    };
+    Image.prototype.setRotation = function (rotation) {
+        return image_set_rotation(this.nativeObj, rotation);
+    };
+    Image.prototype.setScale = function (scale_x, scale_y) {
+        return image_set_scale(this.nativeObj, scale_x, scale_y);
+    };
+    Image.prototype.setAnchor = function (anchor_x, anchor_y) {
+        return image_set_anchor(this.nativeObj, anchor_x, anchor_y);
+    };
+    Image.prototype.setSelected = function (selected) {
+        return image_set_selected(this.nativeObj, selected);
+    };
+    Image.prototype.setSelectable = function (selectable) {
+        return image_set_selectable(this.nativeObj, selectable);
+    };
+    Image.prototype.setClickable = function (clickable) {
+        return image_set_clickable(this.nativeObj, clickable);
+    };
+    Object.defineProperty(Image.prototype, "anchorX", {
+        get: function () {
+            return image_t_get_prop_anchor_x(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Image.prototype, "anchorY", {
+        get: function () {
+            return image_t_get_prop_anchor_y(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Image.prototype, "scaleX", {
+        get: function () {
+            return image_t_get_prop_scale_x(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Image;
+}(Widget));
+var KeyEvent = /** @class */ (function (_super) {
+    __extends(KeyEvent, _super);
+    function KeyEvent(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    KeyEvent.cast = function (event) {
+        return new KeyEvent(key_event_cast(event ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(KeyEvent.prototype, "key", {
+        get: function () {
+            return key_event_t_get_prop_key(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KeyEvent.prototype, "alt", {
+        get: function () {
+            return key_event_t_get_prop_alt(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KeyEvent.prototype, "ctrl", {
+        get: function () {
+            return key_event_t_get_prop_ctrl(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KeyEvent.prototype, "shift", {
+        get: function () {
+            return key_event_t_get_prop_shift(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KeyEvent.prototype, "caplock", {
+        get: function () {
+            return key_event_t_get_prop_caplock(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return KeyEvent;
+}(Event));
 var Label = /** @class */ (function (_super) {
     __extends(Label, _super);
     function Label(nativeObj) {
@@ -876,71 +1418,108 @@ var ListView = /** @class */ (function (_super) {
     });
     return ListView;
 }(Widget));
-var ComboBox = /** @class */ (function (_super) {
-    __extends(ComboBox, _super);
-    function ComboBox(nativeObj) {
+var Pages = /** @class */ (function (_super) {
+    __extends(Pages, _super);
+    function Pages(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    ComboBox.create = function (parent, x, y, w, h) {
-        return new ComboBox(combo_box_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    Pages.create = function (parent, x, y, w, h) {
+        return new Pages(pages_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
-    ComboBox.cast = function (widget) {
-        return new ComboBox(combo_box_cast(widget ? (widget.nativeObj || widget) : null));
+    Pages.cast = function (widget) {
+        return new Pages(pages_cast(widget ? (widget.nativeObj || widget) : null));
     };
-    ComboBox.prototype.setOpenWindow = function (open_window) {
-        return combo_box_set_open_window(this.nativeObj, open_window);
+    Pages.prototype.setActive = function (index) {
+        return pages_set_active(this.nativeObj, index);
     };
-    ComboBox.prototype.resetOptions = function () {
-        return combo_box_reset_options(this.nativeObj);
+    Pages.prototype.setActiveByName = function (name) {
+        return pages_set_active_by_name(this.nativeObj, name);
     };
-    ComboBox.prototype.countOptions = function () {
-        return combo_box_count_options(this.nativeObj);
-    };
-    ComboBox.prototype.setSelectedIndex = function (index) {
-        return combo_box_set_selected_index(this.nativeObj, index);
-    };
-    ComboBox.prototype.appendOption = function (value, text) {
-        return combo_box_append_option(this.nativeObj, value, text);
-    };
-    ComboBox.prototype.setOptions = function (options) {
-        return combo_box_set_options(this.nativeObj, options);
-    };
-    ComboBox.prototype.getValue = function () {
-        return combo_box_get_value(this.nativeObj);
-    };
-    ComboBox.prototype.getText = function () {
-        return combo_box_get_text(this.nativeObj);
-    };
-    Object.defineProperty(ComboBox.prototype, "openWindow", {
+    Object.defineProperty(Pages.prototype, "active", {
         get: function () {
-            return combo_box_t_get_prop_open_window(this.nativeObj);
+            return pages_t_get_prop_active(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ComboBox.prototype, "selectedIndex", {
-        get: function () {
-            return combo_box_t_get_prop_selected_index(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComboBox.prototype, "value", {
-        get: function () {
-            return combo_box_t_get_prop_value(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComboBox.prototype, "options", {
-        get: function () {
-            return combo_box_t_get_prop_options(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ComboBox;
+    return Pages;
 }(Widget));
+var PaintEvent = /** @class */ (function (_super) {
+    __extends(PaintEvent, _super);
+    function PaintEvent(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    PaintEvent.cast = function (event) {
+        return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(PaintEvent.prototype, "c", {
+        get: function () {
+            return paint_event_t_get_prop_c(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return PaintEvent;
+}(Event));
+var PointerEvent = /** @class */ (function (_super) {
+    __extends(PointerEvent, _super);
+    function PointerEvent(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    PointerEvent.cast = function (event) {
+        return new PointerEvent(pointer_event_cast(event ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(PointerEvent.prototype, "x", {
+        get: function () {
+            return pointer_event_t_get_prop_x(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PointerEvent.prototype, "y", {
+        get: function () {
+            return pointer_event_t_get_prop_y(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PointerEvent.prototype, "button", {
+        get: function () {
+            return pointer_event_t_get_prop_button(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PointerEvent.prototype, "pressed", {
+        get: function () {
+            return pointer_event_t_get_prop_pressed(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PointerEvent.prototype, "alt", {
+        get: function () {
+            return pointer_event_t_get_prop_alt(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PointerEvent.prototype, "ctrl", {
+        get: function () {
+            return pointer_event_t_get_prop_ctrl(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PointerEvent.prototype, "shift", {
+        get: function () {
+            return pointer_event_t_get_prop_shift(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return PointerEvent;
+}(Event));
 var Popup = /** @class */ (function (_super) {
     __extends(Popup, _super);
     function Popup(nativeObj) {
@@ -1025,208 +1604,49 @@ var ProgressBar = /** @class */ (function (_super) {
     });
     return ProgressBar;
 }(Widget));
-var DialogClient = /** @class */ (function (_super) {
-    __extends(DialogClient, _super);
-    function DialogClient(nativeObj) {
+var PropChangeEvent = /** @class */ (function (_super) {
+    __extends(PropChangeEvent, _super);
+    function PropChangeEvent(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    DialogClient.create = function (parent, x, y, w, h) {
-        return new DialogClient(dialog_client_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    PropChangeEvent.cast = function (event) {
+        return new PropChangeEvent(prop_change_event_cast(event ? (event.nativeObj || event) : null));
     };
-    DialogClient.cast = function (widget) {
-        return new DialogClient(dialog_client_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    return DialogClient;
-}(Widget));
-var DialogTitle = /** @class */ (function (_super) {
-    __extends(DialogTitle, _super);
-    function DialogTitle(nativeObj) {
+    Object.defineProperty(PropChangeEvent.prototype, "name", {
+        get: function () {
+            return prop_change_event_t_get_prop_name(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PropChangeEvent.prototype, "value", {
+        get: function () {
+            return prop_change_event_t_get_prop_value(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return PropChangeEvent;
+}(Event));
+var RichText = /** @class */ (function (_super) {
+    __extends(RichText, _super);
+    function RichText(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    DialogTitle.create = function (parent, x, y, w, h) {
-        return new DialogTitle(dialog_title_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    RichText.create = function (parent, x, y, w, h) {
+        return new RichText(rich_text_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
-    DialogTitle.cast = function (widget) {
-        return new DialogTitle(dialog_title_cast(widget ? (widget.nativeObj || widget) : null));
+    RichText.prototype.setText = function (text) {
+        return rich_text_set_text(this.nativeObj, text);
     };
-    return DialogTitle;
-}(Widget));
-var Dialog = /** @class */ (function (_super) {
-    __extends(Dialog, _super);
-    function Dialog(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    Dialog.create = function (parent, x, y, w, h) {
-        return new Dialog(dialog_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    Dialog.createSimple = function (parent, x, y, w, h) {
-        return new Dialog(dialog_create_simple(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    Dialog.cast = function (widget) {
-        return new Dialog(dialog_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    Dialog.prototype.getTitle = function () {
-        return new Widget(dialog_get_title(this.nativeObj));
-    };
-    Dialog.prototype.getClient = function () {
-        return new Widget(dialog_get_client(this.nativeObj));
-    };
-    Dialog.open = function (name) {
-        return new Dialog(dialog_open(name));
-    };
-    Dialog.prototype.setTitle = function (title) {
-        return dialog_set_title(this.nativeObj, title);
-    };
-    Dialog.prototype.modal = function () {
-        return dialog_modal(this.nativeObj);
-    };
-    Dialog.prototype.quit = function (code) {
-        return dialog_quit(this.nativeObj, code);
-    };
-    return Dialog;
-}(Widget));
-var Dragger = /** @class */ (function (_super) {
-    __extends(Dragger, _super);
-    function Dragger(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    Dragger.create = function (parent, x, y, w, h) {
-        return new Dragger(dragger_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    Dragger.cast = function (widget) {
-        return new Dragger(dragger_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    Dragger.prototype.setRange = function (x_min, y_min, x_max, y_max) {
-        return new Widget(dragger_set_range(this.nativeObj, x_min, y_min, x_max, y_max));
-    };
-    Object.defineProperty(Dragger.prototype, "xMin", {
+    Object.defineProperty(RichText.prototype, "lineGap", {
         get: function () {
-            return dragger_t_get_prop_x_min(this.nativeObj);
+            return rich_text_t_get_prop_line_gap(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Dragger.prototype, "yMin", {
-        get: function () {
-            return dragger_t_get_prop_y_min(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Dragger.prototype, "xMax", {
-        get: function () {
-            return dragger_t_get_prop_x_max(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Dragger.prototype, "yMax", {
-        get: function () {
-            return dragger_t_get_prop_y_max(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Dragger;
-}(Widget));
-var Edit = /** @class */ (function (_super) {
-    __extends(Edit, _super);
-    function Edit(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    Edit.create = function (parent, x, y, w, h) {
-        return new Edit(edit_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    Edit.cast = function (widget) {
-        return new Edit(edit_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    Edit.prototype.getInt = function () {
-        return edit_get_int(this.nativeObj);
-    };
-    Edit.prototype.getDouble = function () {
-        return edit_get_double(this.nativeObj);
-    };
-    Edit.prototype.setTextLimit = function (min, max) {
-        return edit_set_text_limit(this.nativeObj, min, max);
-    };
-    Edit.prototype.setIntLimit = function (min, max, step) {
-        return edit_set_int_limit(this.nativeObj, min, max, step);
-    };
-    Edit.prototype.setFloatLimit = function (min, max, step) {
-        return edit_set_float_limit(this.nativeObj, min, max, step);
-    };
-    Edit.prototype.setReadonly = function (readonly) {
-        return edit_set_readonly(this.nativeObj, readonly);
-    };
-    Edit.prototype.setAutoFix = function (auto_fix) {
-        return edit_set_auto_fix(this.nativeObj, auto_fix);
-    };
-    Edit.prototype.setInputType = function (type) {
-        return edit_set_input_type(this.nativeObj, type);
-    };
-    Edit.prototype.setInputTips = function (tips) {
-        return edit_set_input_tips(this.nativeObj, tips);
-    };
-    Edit.prototype.setPasswordVisible = function (password_visible) {
-        return edit_set_password_visible(this.nativeObj, password_visible);
-    };
-    Object.defineProperty(Edit.prototype, "readonly", {
-        get: function () {
-            return edit_t_get_prop_readonly(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Edit.prototype, "passwordVisible", {
-        get: function () {
-            return edit_t_get_prop_password_visible(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Edit.prototype, "autoFix", {
-        get: function () {
-            return edit_t_get_prop_auto_fix(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Edit.prototype, "topMargin", {
-        get: function () {
-            return edit_t_get_prop_top_margin(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Edit.prototype, "bottomMargin", {
-        get: function () {
-            return edit_t_get_prop_bottom_margin(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Edit.prototype, "leftMargin", {
-        get: function () {
-            return edit_t_get_prop_left_margin(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Edit.prototype, "rightMargin", {
-        get: function () {
-            return edit_t_get_prop_right_margin(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Edit.prototype, "tips", {
-        get: function () {
-            return edit_t_get_prop_tips(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Edit;
+    return RichText;
 }(Widget));
 var ScrollBar = /** @class */ (function (_super) {
     __extends(ScrollBar, _super);
@@ -1557,41 +1977,18 @@ var TabControl = /** @class */ (function (_super) {
     };
     return TabControl;
 }(Widget));
-var ButtonGroup = /** @class */ (function (_super) {
-    __extends(ButtonGroup, _super);
-    function ButtonGroup(nativeObj) {
+var View = /** @class */ (function (_super) {
+    __extends(View, _super);
+    function View(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    ButtonGroup.create = function (parent, x, y, w, h) {
-        return new ButtonGroup(button_group_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    View.create = function (parent, x, y, w, h) {
+        return new View(view_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
-    ButtonGroup.cast = function (widget) {
-        return new ButtonGroup(button_group_cast(widget ? (widget.nativeObj || widget) : null));
+    View.cast = function (widget) {
+        return new View(view_cast(widget ? (widget.nativeObj || widget) : null));
     };
-    return ButtonGroup;
-}(Widget));
-var Button = /** @class */ (function (_super) {
-    __extends(Button, _super);
-    function Button(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    Button.create = function (parent, x, y, w, h) {
-        return new Button(button_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    Button.cast = function (widget) {
-        return new Button(button_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    Button.prototype.setRepeat = function (repeat) {
-        return button_set_repeat(this.nativeObj, repeat);
-    };
-    Object.defineProperty(Button.prototype, "repeat", {
-        get: function () {
-            return button_t_get_prop_repeat(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Button;
+    return View;
 }(Widget));
 var WheelEvent = /** @class */ (function (_super) {
     __extends(WheelEvent, _super);
@@ -1638,278 +2035,6 @@ var WheelEvent = /** @class */ (function (_super) {
     });
     return WheelEvent;
 }(Event));
-var PropChangeEvent = /** @class */ (function (_super) {
-    __extends(PropChangeEvent, _super);
-    function PropChangeEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    PropChangeEvent.cast = function (event) {
-        return new PropChangeEvent(prop_change_event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(PropChangeEvent.prototype, "name", {
-        get: function () {
-            return prop_change_event_t_get_prop_name(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PropChangeEvent.prototype, "value", {
-        get: function () {
-            return prop_change_event_t_get_prop_value(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return PropChangeEvent;
-}(Event));
-var PointerEvent = /** @class */ (function (_super) {
-    __extends(PointerEvent, _super);
-    function PointerEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    PointerEvent.cast = function (event) {
-        return new PointerEvent(pointer_event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(PointerEvent.prototype, "x", {
-        get: function () {
-            return pointer_event_t_get_prop_x(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PointerEvent.prototype, "y", {
-        get: function () {
-            return pointer_event_t_get_prop_y(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PointerEvent.prototype, "button", {
-        get: function () {
-            return pointer_event_t_get_prop_button(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PointerEvent.prototype, "pressed", {
-        get: function () {
-            return pointer_event_t_get_prop_pressed(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PointerEvent.prototype, "alt", {
-        get: function () {
-            return pointer_event_t_get_prop_alt(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PointerEvent.prototype, "ctrl", {
-        get: function () {
-            return pointer_event_t_get_prop_ctrl(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PointerEvent.prototype, "shift", {
-        get: function () {
-            return pointer_event_t_get_prop_shift(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return PointerEvent;
-}(Event));
-var KeyEvent = /** @class */ (function (_super) {
-    __extends(KeyEvent, _super);
-    function KeyEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    KeyEvent.cast = function (event) {
-        return new KeyEvent(key_event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(KeyEvent.prototype, "key", {
-        get: function () {
-            return key_event_t_get_prop_key(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(KeyEvent.prototype, "alt", {
-        get: function () {
-            return key_event_t_get_prop_alt(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(KeyEvent.prototype, "ctrl", {
-        get: function () {
-            return key_event_t_get_prop_ctrl(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(KeyEvent.prototype, "shift", {
-        get: function () {
-            return key_event_t_get_prop_shift(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(KeyEvent.prototype, "caplock", {
-        get: function () {
-            return key_event_t_get_prop_caplock(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return KeyEvent;
-}(Event));
-var PaintEvent = /** @class */ (function (_super) {
-    __extends(PaintEvent, _super);
-    function PaintEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    PaintEvent.cast = function (event) {
-        return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(PaintEvent.prototype, "c", {
-        get: function () {
-            return paint_event_t_get_prop_c(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return PaintEvent;
-}(Event));
-var View = /** @class */ (function (_super) {
-    __extends(View, _super);
-    function View(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    View.create = function (parent, x, y, w, h) {
-        return new View(view_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    View.cast = function (widget) {
-        return new View(view_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    return View;
-}(Widget));
-var GroupBox = /** @class */ (function (_super) {
-    __extends(GroupBox, _super);
-    function GroupBox(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    GroupBox.create = function (parent, x, y, w, h) {
-        return new GroupBox(group_box_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    GroupBox.cast = function (widget) {
-        return new GroupBox(group_box_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    return GroupBox;
-}(Widget));
-var RichText = /** @class */ (function (_super) {
-    __extends(RichText, _super);
-    function RichText(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    RichText.create = function (parent, x, y, w, h) {
-        return new RichText(rich_text_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    RichText.prototype.setText = function (text) {
-        return rich_text_set_text(this.nativeObj, text);
-    };
-    Object.defineProperty(RichText.prototype, "lineGap", {
-        get: function () {
-            return rich_text_t_get_prop_line_gap(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return RichText;
-}(Widget));
-var CheckButton = /** @class */ (function (_super) {
-    __extends(CheckButton, _super);
-    function CheckButton(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    CheckButton.create = function (parent, x, y, w, h) {
-        return new CheckButton(check_button_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    CheckButton.createRadio = function (parent, x, y, w, h) {
-        return new CheckButton(check_button_create_radio(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    CheckButton.prototype.setValue = function (value) {
-        return check_button_set_value(this.nativeObj, value);
-    };
-    CheckButton.cast = function (widget) {
-        return new CheckButton(check_button_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    Object.defineProperty(CheckButton.prototype, "value", {
-        get: function () {
-            return check_button_t_get_prop_value(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return CheckButton;
-}(Widget));
-var Image = /** @class */ (function (_super) {
-    __extends(Image, _super);
-    function Image(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    Image.create = function (parent, x, y, w, h) {
-        return new Image(image_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    Image.prototype.setImageName = function (name) {
-        return image_set_image_name(this.nativeObj, name);
-    };
-    Image.prototype.setDrawType = function (draw_type) {
-        return image_set_draw_type(this.nativeObj, draw_type);
-    };
-    Image.prototype.setRotation = function (rotation) {
-        return image_set_rotation(this.nativeObj, rotation);
-    };
-    Image.prototype.setScale = function (scale_x, scale_y) {
-        return image_set_scale(this.nativeObj, scale_x, scale_y);
-    };
-    Image.prototype.setAnchor = function (anchor_x, anchor_y) {
-        return image_set_anchor(this.nativeObj, anchor_x, anchor_y);
-    };
-    Image.prototype.setSelected = function (selected) {
-        return image_set_selected(this.nativeObj, selected);
-    };
-    Image.prototype.setSelectable = function (selectable) {
-        return image_set_selectable(this.nativeObj, selectable);
-    };
-    Image.prototype.setClickable = function (clickable) {
-        return image_set_clickable(this.nativeObj, clickable);
-    };
-    Object.defineProperty(Image.prototype, "anchorX", {
-        get: function () {
-            return image_t_get_prop_anchor_x(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "anchorY", {
-        get: function () {
-            return image_t_get_prop_anchor_y(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "scaleX", {
-        get: function () {
-            return image_t_get_prop_scale_x(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Image;
-}(Widget));
 var WindowManager = /** @class */ (function (_super) {
     __extends(WindowManager, _super);
     function WindowManager(nativeObj) {
@@ -1968,64 +2093,5 @@ var Window = /** @class */ (function (_super) {
         configurable: true
     });
     return Window;
-}(Widget));
-var ComboBoxItem = /** @class */ (function (_super) {
-    __extends(ComboBoxItem, _super);
-    function ComboBoxItem(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    ComboBoxItem.create = function (parent, x, y, w, h) {
-        return new ComboBoxItem(combo_box_item_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    ComboBoxItem.cast = function (widget) {
-        return new ComboBoxItem(combo_box_item_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    ComboBoxItem.prototype.setSelected = function (selected) {
-        return combo_box_item_set_selected(this.nativeObj, selected);
-    };
-    ComboBoxItem.prototype.setValue = function (value) {
-        return combo_box_item_set_value(this.nativeObj, value);
-    };
-    Object.defineProperty(ComboBoxItem.prototype, "value", {
-        get: function () {
-            return combo_box_item_t_get_prop_value(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComboBoxItem.prototype, "selected", {
-        get: function () {
-            return combo_box_item_t_get_prop_selected(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ComboBoxItem;
-}(Widget));
-var Pages = /** @class */ (function (_super) {
-    __extends(Pages, _super);
-    function Pages(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    Pages.create = function (parent, x, y, w, h) {
-        return new Pages(pages_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    Pages.cast = function (widget) {
-        return new Pages(pages_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    Pages.prototype.setActive = function (index) {
-        return pages_set_active(this.nativeObj, index);
-    };
-    Pages.prototype.setActiveByName = function (name) {
-        return pages_set_active_by_name(this.nativeObj, name);
-    };
-    Object.defineProperty(Pages.prototype, "active", {
-        get: function () {
-            return pages_t_get_prop_active(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Pages;
 }(Widget));
 //# sourceMappingURL=awtk.js.map

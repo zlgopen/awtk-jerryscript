@@ -321,7 +321,7 @@ class JerryscriptGenerator {
       }
 
       if (a.parent && b.parent) {
-        return 0;
+        return a.name.localeCompare(b.name);
       }
 
       if (a.parent) {
