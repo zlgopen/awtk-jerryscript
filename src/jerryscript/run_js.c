@@ -29,7 +29,7 @@
 
 #include "base/fs.h"
 #include "base/mem.h"
-#include "demos/resource.h"
+#include "demos/assets.h"
 
 extern ret_t awtk_js_init(void);
 
@@ -210,7 +210,7 @@ int main(int argc, char* argv[]) {
   const char* script_file = argc == 2 ? argv[1] : "./demos/demoui.js";
 
   tk_init(320, 480, APP_SIMULATOR, NULL, RES_ROOT);
-  resource_init();
+  assets_init();
 
   jerry_init(JERRY_INIT_EMPTY);
   jerryx_handler_register_global((const jerry_char_t*)"print", jerryx_handler_print);

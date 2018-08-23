@@ -131,19 +131,19 @@ jerry_value_t wrap_widget_on(const jerry_value_t func_obj_val, const jerry_value
   return jerry_create_number(ret);
 }
 
-jerry_value_t wrap_tklocale_on(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+jerry_value_t wrap_locale_info_on(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                const jerry_value_t args_p[], const jerry_length_t args_cnt) {
   int32_t ret = 0;
   return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
 
   if (args_cnt >= 2) {
-    tklocale_t* tklocale = (tklocale_t*)jerry_get_pointer(args_p[0], "tklocale_t*");
+    locale_info_t* locale_info = (locale_info_t*)jerry_get_pointer(args_p[0], "locale_info_t*");
     event_type_t type = (event_type_t)jerry_get_number_value(args_p[1]);
     jerry_value_t on_event = jerry_acquire_value(args_p[2]);
 
     void* ctx = (char*)NULL + (int32_t)on_event;
-    ret = (uint32_t)tklocale_on(tklocale, type, call_on_event, ctx);
-    emitter_set_on_destroy(tklocale->emitter, ret, emitter_item_on_destroy, NULL);
+    ret = (uint32_t)locale_info_on(locale_info, type, call_on_event, ctx);
+    emitter_set_on_destroy(locale_info->emitter, ret, emitter_item_on_destroy, NULL);
   }
 
   return jerry_create_number(ret);
