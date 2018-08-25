@@ -1,10 +1,10 @@
 
 var sPreloadRes = [
-  {type : ResourceType.IMAGE, name : "bg800x480"},
-  {type : ResourceType.IMAGE, name : "earth"},
-  {type : ResourceType.IMAGE, name : "dialogTitle"},
-  {type : ResourceType.IMAGE, name : "rgb"},
-  {type : ResourceType.IMAGE, name : "rgba"}
+  {type : AssetType.IMAGE, name : "bg800x480"},
+  {type : AssetType.IMAGE, name : "earth"},
+  {type : AssetType.IMAGE, name : "dialogTitle"},
+  {type : AssetType.IMAGE, name : "rgb"},
+  {type : AssetType.IMAGE, name : "rgba"}
 ]
 
 function strContains(str, substr) {
@@ -104,7 +104,7 @@ function showPreloadResWindow() {
       var type = sPreloadRes[finish].type;
       var name = sPreloadRes[finish].name;
 
-      if(type == ResourceType.IMAGE) {
+      if(type == AssetType.IMAGE) {
         ImageManager.instance().load(name, bitmap);
       }
 
