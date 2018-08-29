@@ -183,8 +183,8 @@ static void print_unhandled_exception(jerry_value_t error_value) /**< error valu
 static jerry_value_t parse_file(const char* filename) {
   char* script = NULL;
   const char* awtk_js = "src/awtk.js";
-  int32_t awtk_size = fs_file_size(awtk_js);
-  int32_t file_size = fs_file_size(filename);
+  int32_t awtk_size = file_get_size(awtk_js);
+  int32_t file_size = file_get_size(filename);
   int32_t script_size = awtk_size + file_size;
   jerry_value_t parsed_code = jerry_create_undefined();
 
@@ -192,15 +192,15 @@ static jerry_value_t parse_file(const char* filename) {
   script = TKMEM_ALLOC(script_size + 1);
   return_value_if_fail(script != NULL, parsed_code);
 
-  fs_read_file_part(awtk_js, script, awtk_size, 0);
+  file_read_part(awtk_js, script, awtk_size, 0);
   script[awtk_size] = '\n';
 
-  fs_read_file_part(filename, script + awtk_size + 1, file_size, 0);
+  file_read_part(filename, script + awtk_size + 1, file_size, 0);
   script[script_size + 1] = '\0';
 
   parsed_code = jerry_parse(NULL, 0, (jerry_char_t*)script, script_size, JERRY_PARSE_NO_OPTS);
 
-  fs_write_file("awtk_all.js", script, script_size);
+  file_write("awtk_all.js", script, script_size);
   TKMEM_FREE(script);
 
   return parsed_code;
