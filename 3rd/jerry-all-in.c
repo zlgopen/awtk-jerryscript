@@ -81,6 +81,7 @@
 #include "jerryscript/jerry-core/ecma/builtin-objects/typedarray/ecma-builtin-uint8array.c"
 #include "jerryscript/jerry-core/ecma/builtin-objects/typedarray/ecma-builtin-uint8clampedarray-prototype.c"
 #include "jerryscript/jerry-core/ecma/builtin-objects/typedarray/ecma-builtin-uint8clampedarray.c"
+#include "jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-helpers-sort.c"
 #include "jerryscript/jerry-core/ecma/operations/ecma-array-object.c"
 #include "jerryscript/jerry-core/ecma/operations/ecma-arraybuffer-object.c"
 #include "jerryscript/jerry-core/ecma/operations/ecma-boolean-object.c"
