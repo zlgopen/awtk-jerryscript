@@ -13,32 +13,6 @@ declare function IMAGE_DRAW_PATCH3_X();
 declare function IMAGE_DRAW_PATCH3_Y();
 declare function IMAGE_DRAW_PATCH3_X_SCALE_Y();
 declare function IMAGE_DRAW_PATCH3_Y_SCALE_X();
-declare function ALIGN_H_NONE();
-declare function ALIGN_H_CENTER();
-declare function ALIGN_H_LEFT();
-declare function ALIGN_H_RIGHT();
-declare function ALIGN_V_NONE();
-declare function ALIGN_V_MIDDLE();
-declare function ALIGN_V_TOP();
-declare function ALIGN_V_BOTTOM();
-declare function RET_OK();
-declare function RET_OOM();
-declare function RET_FAIL();
-declare function RET_NOT_IMPL();
-declare function RET_QUIT();
-declare function RET_FOUND();
-declare function RET_REMOVE();
-declare function RET_REPEAT();
-declare function RET_NOT_FOUND();
-declare function RET_DONE();
-declare function RET_STOP();
-declare function RET_CONTINUE();
-declare function RET_BAD_PARAMS();
-declare function BITMAP_FLAG_NONE();
-declare function BITMAP_FLAG_OPAQUE();
-declare function BITMAP_FLAG_IMMUTABLE();
-declare function BITMAP_FLAG_TEXTURE();
-declare function BITMAP_FLAG_CHANGED();
 declare function WIDGET_TYPE_NONE();
 declare function WIDGET_TYPE_WINDOW_MANAGER();
 declare function WIDGET_TYPE_NORMAL_WINDOW();
@@ -87,6 +61,43 @@ declare function WIDGET_TYPE_GRID();
 declare function WIDGET_TYPE_ROW();
 declare function WIDGET_TYPE_COLUMN();
 declare function WIDGET_TYPE_CALIBRATION_WIN();
+declare function VALUE_TYPE_INVALID();
+declare function VALUE_TYPE_BOOL();
+declare function VALUE_TYPE_INT8();
+declare function VALUE_TYPE_UINT8();
+declare function VALUE_TYPE_INT16();
+declare function VALUE_TYPE_UINT16();
+declare function VALUE_TYPE_INT32();
+declare function VALUE_TYPE_UINT32();
+declare function VALUE_TYPE_INT64();
+declare function VALUE_TYPE_UINT64();
+declare function VALUE_TYPE_POINTER();
+declare function VALUE_TYPE_FLOAT();
+declare function VALUE_TYPE_DOUBLE();
+declare function VALUE_TYPE_STRING();
+declare function VALUE_TYPE_WSTRING();
+declare function ALIGN_H_NONE();
+declare function ALIGN_H_CENTER();
+declare function ALIGN_H_LEFT();
+declare function ALIGN_H_RIGHT();
+declare function BITMAP_FLAG_NONE();
+declare function BITMAP_FLAG_OPAQUE();
+declare function BITMAP_FLAG_IMMUTABLE();
+declare function BITMAP_FLAG_TEXTURE();
+declare function BITMAP_FLAG_CHANGED();
+declare function RET_OK();
+declare function RET_OOM();
+declare function RET_FAIL();
+declare function RET_NOT_IMPL();
+declare function RET_QUIT();
+declare function RET_FOUND();
+declare function RET_REMOVE();
+declare function RET_REPEAT();
+declare function RET_NOT_FOUND();
+declare function RET_DONE();
+declare function RET_STOP();
+declare function RET_CONTINUE();
+declare function RET_BAD_PARAMS();
 declare function WIDGET_STATE_NONE();
 declare function WIDGET_STATE_NORMAL();
 declare function WIDGET_STATE_PRESSED();
@@ -173,6 +184,10 @@ declare function ASSET_TYPE_UI();
 declare function ASSET_TYPE_XML();
 declare function ASSET_TYPE_STRINGS();
 declare function ASSET_TYPE_DATA();
+declare function ALIGN_V_NONE();
+declare function ALIGN_V_MIDDLE();
+declare function ALIGN_V_TOP();
+declare function ALIGN_V_BOTTOM();
 declare function WIDGET_PROP_X();
 declare function WIDGET_PROP_Y();
 declare function WIDGET_PROP_W();
@@ -184,6 +199,7 @@ declare function WIDGET_PROP_LAYOUT_H();
 declare function WIDGET_PROP_VIRTUAL_W();
 declare function WIDGET_PROP_VIRTUAL_H();
 declare function WIDGET_PROP_NAME();
+declare function WIDGET_PROP_CURSOR();
 declare function WIDGET_PROP_VALUE();
 declare function WIDGET_PROP_TEXT();
 declare function WIDGET_PROP_TR_TEXT();
@@ -197,6 +213,7 @@ declare function WIDGET_PROP_TOP_MARGIN();
 declare function WIDGET_PROP_BOTTOM_MARGIN();
 declare function WIDGET_PROP_STEP();
 declare function WIDGET_PROP_VISIBLE();
+declare function WIDGET_PROP_ANIMATION();
 declare function WIDGET_PROP_ANIM_HINT();
 declare function WIDGET_PROP_OPEN_ANIM_HINT();
 declare function WIDGET_PROP_CLOSE_ANIM_HINT();
@@ -251,94 +268,8 @@ declare function WIDGET_PROP_LINE_GAP();
 declare function WIDGET_PROP_BG_COLOR();
 declare function WIDGET_PROP_BORDER_COLOR();
 declare function WIDGET_PROP_DELAY();
-declare function assets_manager();
-declare function assets_manager_ref(rm, type, name);
-declare function assets_manager_unref(rm, info);
-declare function VALUE_TYPE_INVALID();
-declare function VALUE_TYPE_BOOL();
-declare function VALUE_TYPE_INT8();
-declare function VALUE_TYPE_UINT8();
-declare function VALUE_TYPE_INT16();
-declare function VALUE_TYPE_UINT16();
-declare function VALUE_TYPE_INT32();
-declare function VALUE_TYPE_UINT32();
-declare function VALUE_TYPE_INT64();
-declare function VALUE_TYPE_UINT64();
-declare function VALUE_TYPE_POINTER();
-declare function VALUE_TYPE_FLOAT();
-declare function VALUE_TYPE_DOUBLE();
-declare function VALUE_TYPE_STRING();
-declare function VALUE_TYPE_WSTRING();
-declare function asset_info_t_get_prop_type(nativeObj);
-declare function asset_info_t_get_prop_subtype(nativeObj);
-declare function asset_info_t_get_prop_is_in_rom(nativeObj);
-declare function asset_info_t_get_prop_size(nativeObj);
-declare function asset_info_t_get_prop_refcount(nativeObj);
-declare function asset_info_t_get_prop_name(nativeObj);
-declare function widget_count_children(widget);
-declare function widget_get_child(widget, index);
-declare function widget_index_of(widget);
-declare function widget_move(widget, x, y);
-declare function widget_resize(widget, w, h);
-declare function widget_move_resize(widget, x, y, w, h);
-declare function widget_set_value(widget, value);
-declare function widget_add_value(widget, delta);
-declare function widget_use_style(widget, style);
-declare function widget_set_text_utf8(widget, text);
-declare function widget_set_tr_text(widget, text);
-declare function widget_get_value(widget);
-declare function widget_get_text(widget);
-declare function widget_set_name(widget, name);
-declare function widget_set_enable(widget, enable);
-declare function widget_set_focused(widget, focused);
-declare function widget_child(widget, name);
-declare function widget_lookup(widget, name, recursive);
-declare function widget_lookup_by_type(widget, type, recursive);
-declare function widget_set_visible(widget, visible, recursive);
-declare function widget_on(widget, type, on_event, ctx);
-declare function widget_off(widget, id);
-declare function widget_invalidate_force(widget);
-declare function widget_set_prop_str(widget, name, v);
-declare function widget_foreach(widget, visit, ctx);
-declare function widget_get_window(widget);
-declare function widget_get_type(widget);
-declare function widget_clone(widget, parent);
-declare function widget_equal(widget, other);
-declare function widget_set_self_layout_params(widget, x, y, w, h);
-declare function widget_set_children_layout_params(widget, params);
-declare function widget_layout(widget);
-declare function widget_cast(widget);
-declare function widget_destroy(widget);
-declare function widget_t_get_prop_x(nativeObj);
-declare function widget_t_get_prop_y(nativeObj);
-declare function widget_t_get_prop_w(nativeObj);
-declare function widget_t_get_prop_h(nativeObj);
-declare function widget_t_get_prop_name(nativeObj);
-declare function widget_t_get_prop_tr_text(nativeObj);
-declare function widget_t_get_prop_style_name(nativeObj);
-declare function widget_t_get_prop_enable(nativeObj);
-declare function widget_t_get_prop_visible(nativeObj);
-declare function widget_t_set_prop_visible(nativeObj, value);
-declare function bitmap_create();
-declare function bitmap_destroy(bitmap);
-declare function bitmap_t_get_prop_w(nativeObj);
-declare function bitmap_t_get_prop_h(nativeObj);
-declare function bitmap_t_get_prop_flags(nativeObj);
-declare function bitmap_t_get_prop_format(nativeObj);
-declare function bitmap_t_get_prop_name(nativeObj);
-declare function event_cast(event);
-declare function event_t_get_prop_type(nativeObj);
-declare function event_t_get_prop_time(nativeObj);
-declare function event_t_get_prop_target(nativeObj);
-declare function locale_info();
-declare function locale_info_tr(locale_info, text);
-declare function locale_info_change(locale_info, language, country);
-declare function locale_info_on(locale_info, type, on_event, ctx);
-declare function locale_info_off(locale_info, id);
 declare function timer_add(on_timer, ctx, duration_ms);
 declare function timer_remove(timer_id);
-declare function image_manager();
-declare function image_manager_load(imm, name, image);
 declare function value_set_bool(v, value);
 declare function value_bool(v);
 declare function value_set_int8(v, value);
@@ -368,8 +299,85 @@ declare function value_set_int(v, value);
 declare function value_create();
 declare function value_destroy(v);
 declare function value_t_get_prop_type(nativeObj);
+declare function widget_count_children(widget);
+declare function widget_get_child(widget, index);
+declare function widget_index_of(widget);
+declare function widget_move(widget, x, y);
+declare function widget_resize(widget, w, h);
+declare function widget_move_resize(widget, x, y, w, h);
+declare function widget_set_value(widget, value);
+declare function widget_add_value(widget, delta);
+declare function widget_use_style(widget, style);
+declare function widget_set_text_utf8(widget, text);
+declare function widget_set_tr_text(widget, text);
+declare function widget_get_value(widget);
+declare function widget_get_text(widget);
+declare function widget_set_name(widget, name);
+declare function widget_set_cursor(widget, cursor);
+declare function widget_set_animation(widget, animation);
+declare function widget_set_enable(widget, enable);
+declare function widget_set_focused(widget, focused);
+declare function widget_child(widget, name);
+declare function widget_lookup(widget, name, recursive);
+declare function widget_lookup_by_type(widget, type, recursive);
+declare function widget_set_visible(widget, visible, recursive);
+declare function widget_on(widget, type, on_event, ctx);
+declare function widget_off(widget, id);
+declare function widget_invalidate_force(widget);
+declare function widget_set_prop_str(widget, name, v);
+declare function widget_foreach(widget, visit, ctx);
+declare function widget_get_window(widget);
+declare function widget_get_window_manager(widget);
+declare function widget_get_type(widget);
+declare function widget_clone(widget, parent);
+declare function widget_equal(widget, other);
+declare function widget_set_self_layout_params(widget, x, y, w, h);
+declare function widget_set_children_layout_params(widget, params);
+declare function widget_layout(widget);
+declare function widget_cast(widget);
+declare function widget_destroy(widget);
+declare function widget_t_get_prop_x(nativeObj);
+declare function widget_t_get_prop_y(nativeObj);
+declare function widget_t_get_prop_w(nativeObj);
+declare function widget_t_get_prop_h(nativeObj);
+declare function widget_t_get_prop_name(nativeObj);
+declare function widget_t_get_prop_tr_text(nativeObj);
+declare function widget_t_get_prop_style(nativeObj);
+declare function widget_t_get_prop_animation(nativeObj);
+declare function widget_t_get_prop_enable(nativeObj);
+declare function widget_t_get_prop_visible(nativeObj);
+declare function widget_t_set_prop_visible(nativeObj, value);
+declare function asset_info_t_get_prop_type(nativeObj);
+declare function asset_info_t_get_prop_subtype(nativeObj);
+declare function asset_info_t_get_prop_is_in_rom(nativeObj);
+declare function asset_info_t_get_prop_size(nativeObj);
+declare function asset_info_t_get_prop_refcount(nativeObj);
+declare function asset_info_t_get_prop_name(nativeObj);
+declare function event_cast(event);
+declare function event_t_get_prop_type(nativeObj);
+declare function event_t_get_prop_time(nativeObj);
+declare function event_t_get_prop_target(nativeObj);
+declare function locale_info();
+declare function locale_info_tr(locale_info, text);
+declare function locale_info_change(locale_info, language, country);
+declare function locale_info_on(locale_info, type, on_event, ctx);
+declare function locale_info_off(locale_info, id);
+declare function bitmap_create();
+declare function bitmap_create_ex(w, h, format);
+declare function bitmap_get_bpp(bitmap);
+declare function bitmap_destroy(bitmap);
+declare function bitmap_t_get_prop_w(nativeObj);
+declare function bitmap_t_get_prop_h(nativeObj);
+declare function bitmap_t_get_prop_flags(nativeObj);
+declare function bitmap_t_get_prop_format(nativeObj);
+declare function bitmap_t_get_prop_name(nativeObj);
+declare function image_manager();
+declare function image_manager_load(imm, name, image);
 declare function idle_add(on_idle, ctx);
 declare function idle_remove(idle_id);
+declare function assets_manager();
+declare function assets_manager_ref(rm, type, name);
+declare function assets_manager_unref(rm, info);
 declare function app_bar_create(parent, x, y, w, h);
 declare function app_bar_cast(widget);
 declare function button_group_create(parent, x, y, w, h);
@@ -486,7 +494,7 @@ declare function image_animation_t_get_prop_auto_play(nativeObj);
 declare function image_animation_t_get_prop_interval(nativeObj);
 declare function image_animation_t_get_prop_delay(nativeObj);
 declare function image_create(parent, x, y, w, h);
-declare function image_set_image_name(widget, name);
+declare function image_set_image(widget, name);
 declare function image_set_draw_type(widget, draw_type);
 declare function image_set_rotation(widget, rotation);
 declare function image_set_scale(widget, scale_x, scale_y);
@@ -497,6 +505,13 @@ declare function image_set_clickable(widget, clickable);
 declare function image_t_get_prop_anchor_x(nativeObj);
 declare function image_t_get_prop_anchor_y(nativeObj);
 declare function image_t_get_prop_scale_x(nativeObj);
+declare function image_t_get_prop_scale_y(nativeObj);
+declare function image_t_get_prop_rotation(nativeObj);
+declare function image_t_get_prop_clickable(nativeObj);
+declare function image_t_get_prop_selectable(nativeObj);
+declare function image_t_get_prop_image(nativeObj);
+declare function image_t_get_prop_draw_type(nativeObj);
+declare function image_t_get_prop_selected(nativeObj);
 declare function key_event_cast(event);
 declare function key_event_t_get_prop_key(nativeObj);
 declare function key_event_t_get_prop_alt(nativeObj);
@@ -537,8 +552,6 @@ declare function pointer_event_t_get_prop_ctrl(nativeObj);
 declare function pointer_event_t_get_prop_shift(nativeObj);
 declare function popup_create(parent, x, y, w, h);
 declare function popup_cast(widget);
-declare function popup_t_get_prop_theme(nativeObj);
-declare function popup_t_get_prop_anim_hint(nativeObj);
 declare function popup_t_get_prop_close_when_click(nativeObj);
 declare function popup_t_get_prop_close_when_click_outside(nativeObj);
 declare function progress_bar_create(parent, x, y, w, h);
@@ -668,17 +681,17 @@ declare function wheel_event_t_get_prop_dy(nativeObj);
 declare function wheel_event_t_get_prop_alt(nativeObj);
 declare function wheel_event_t_get_prop_ctrl(nativeObj);
 declare function wheel_event_t_get_prop_shift(nativeObj);
+declare function window_base_t_get_prop_theme(nativeObj);
 declare function window_manager();
 declare function window_manager_cast(widget);
 declare function window_manager_set_show_fps(widget, show_fps);
+declare function window_manager_set_cursor(widget, cursor);
 declare function window_manager_t_get_prop_show_fps(nativeObj);
 declare function window_create(parent, x, y, w, h);
-declare function window_cast(widget);
 declare function window_open(name);
 declare function window_open_and_close(name, to_close);
 declare function window_close(widget);
-declare function window_t_get_prop_theme(nativeObj);
-declare function window_t_get_prop_anim_hint(nativeObj);
+declare function window_cast(widget);
 
 enum ImageDrawType {
  DEFAULT = IMAGE_DRAW_DEFAULT(),
@@ -696,44 +709,6 @@ enum ImageDrawType {
  PATCH3_Y = IMAGE_DRAW_PATCH3_Y(),
  PATCH3_X_SCALE_Y = IMAGE_DRAW_PATCH3_X_SCALE_Y(),
  PATCH3_Y_SCALE_X = IMAGE_DRAW_PATCH3_Y_SCALE_X(),
-};
-
-enum AlignH {
- NONE = ALIGN_H_NONE(),
- CENTER = ALIGN_H_CENTER(),
- LEFT = ALIGN_H_LEFT(),
- RIGHT = ALIGN_H_RIGHT(),
-};
-
-enum AlignV {
- NONE = ALIGN_V_NONE(),
- MIDDLE = ALIGN_V_MIDDLE(),
- TOP = ALIGN_V_TOP(),
- BOTTOM = ALIGN_V_BOTTOM(),
-};
-
-enum Ret {
- OK = RET_OK(),
- OOM = RET_OOM(),
- FAIL = RET_FAIL(),
- NOT_IMPL = RET_NOT_IMPL(),
- QUIT = RET_QUIT(),
- FOUND = RET_FOUND(),
- REMOVE = RET_REMOVE(),
- REPEAT = RET_REPEAT(),
- NOT_FOUND = RET_NOT_FOUND(),
- DONE = RET_DONE(),
- STOP = RET_STOP(),
- CONTINUE = RET_CONTINUE(),
- BAD_PARAMS = RET_BAD_PARAMS(),
-};
-
-enum BitmapFlag {
- NONE = BITMAP_FLAG_NONE(),
- OPAQUE = BITMAP_FLAG_OPAQUE(),
- IMMUTABLE = BITMAP_FLAG_IMMUTABLE(),
- TEXTURE = BITMAP_FLAG_TEXTURE(),
- CHANGED = BITMAP_FLAG_CHANGED(),
 };
 
 enum WidgetType {
@@ -785,6 +760,55 @@ enum WidgetType {
  ROW = WIDGET_TYPE_ROW(),
  COLUMN = WIDGET_TYPE_COLUMN(),
  CALIBRATION_WIN = WIDGET_TYPE_CALIBRATION_WIN(),
+};
+
+enum ValueType {
+ INVALID = VALUE_TYPE_INVALID(),
+ BOOL = VALUE_TYPE_BOOL(),
+ INT8 = VALUE_TYPE_INT8(),
+ UINT8 = VALUE_TYPE_UINT8(),
+ INT16 = VALUE_TYPE_INT16(),
+ UINT16 = VALUE_TYPE_UINT16(),
+ INT32 = VALUE_TYPE_INT32(),
+ UINT32 = VALUE_TYPE_UINT32(),
+ INT64 = VALUE_TYPE_INT64(),
+ UINT64 = VALUE_TYPE_UINT64(),
+ POINTER = VALUE_TYPE_POINTER(),
+ FLOAT = VALUE_TYPE_FLOAT(),
+ DOUBLE = VALUE_TYPE_DOUBLE(),
+ STRING = VALUE_TYPE_STRING(),
+ WSTRING = VALUE_TYPE_WSTRING(),
+};
+
+enum AlignH {
+ NONE = ALIGN_H_NONE(),
+ CENTER = ALIGN_H_CENTER(),
+ LEFT = ALIGN_H_LEFT(),
+ RIGHT = ALIGN_H_RIGHT(),
+};
+
+enum BitmapFlag {
+ NONE = BITMAP_FLAG_NONE(),
+ OPAQUE = BITMAP_FLAG_OPAQUE(),
+ IMMUTABLE = BITMAP_FLAG_IMMUTABLE(),
+ TEXTURE = BITMAP_FLAG_TEXTURE(),
+ CHANGED = BITMAP_FLAG_CHANGED(),
+};
+
+enum Ret {
+ OK = RET_OK(),
+ OOM = RET_OOM(),
+ FAIL = RET_FAIL(),
+ NOT_IMPL = RET_NOT_IMPL(),
+ QUIT = RET_QUIT(),
+ FOUND = RET_FOUND(),
+ REMOVE = RET_REMOVE(),
+ REPEAT = RET_REPEAT(),
+ NOT_FOUND = RET_NOT_FOUND(),
+ DONE = RET_DONE(),
+ STOP = RET_STOP(),
+ CONTINUE = RET_CONTINUE(),
+ BAD_PARAMS = RET_BAD_PARAMS(),
 };
 
 enum WidgetState {
@@ -888,6 +912,13 @@ enum AssetType {
  DATA = ASSET_TYPE_DATA(),
 };
 
+enum AlignV {
+ NONE = ALIGN_V_NONE(),
+ MIDDLE = ALIGN_V_MIDDLE(),
+ TOP = ALIGN_V_TOP(),
+ BOTTOM = ALIGN_V_BOTTOM(),
+};
+
 enum WidgetProp {
  X = WIDGET_PROP_X(),
  Y = WIDGET_PROP_Y(),
@@ -900,6 +931,7 @@ enum WidgetProp {
  VIRTUAL_W = WIDGET_PROP_VIRTUAL_W(),
  VIRTUAL_H = WIDGET_PROP_VIRTUAL_H(),
  NAME = WIDGET_PROP_NAME(),
+ CURSOR = WIDGET_PROP_CURSOR(),
  VALUE = WIDGET_PROP_VALUE(),
  TEXT = WIDGET_PROP_TEXT(),
  TR_TEXT = WIDGET_PROP_TR_TEXT(),
@@ -913,6 +945,7 @@ enum WidgetProp {
  BOTTOM_MARGIN = WIDGET_PROP_BOTTOM_MARGIN(),
  STEP = WIDGET_PROP_STEP(),
  VISIBLE = WIDGET_PROP_VISIBLE(),
+ ANIMATION = WIDGET_PROP_ANIMATION(),
  ANIM_HINT = WIDGET_PROP_ANIM_HINT(),
  OPEN_ANIM_HINT = WIDGET_PROP_OPEN_ANIM_HINT(),
  CLOSE_ANIM_HINT = WIDGET_PROP_CLOSE_ANIM_HINT(),
@@ -969,372 +1002,6 @@ enum WidgetProp {
  DELAY = WIDGET_PROP_DELAY(),
 };
 
-class AssetsManager {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static instance() {
-   return new AssetsManager(assets_manager());
- }
-
- ref(type, name) {
-   return assets_manager_ref(this.nativeObj, type, name);
- }
-
- unref(info) {
-   return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
- }
-
-}
-
-enum ValueType {
- INVALID = VALUE_TYPE_INVALID(),
- BOOL = VALUE_TYPE_BOOL(),
- INT8 = VALUE_TYPE_INT8(),
- UINT8 = VALUE_TYPE_UINT8(),
- INT16 = VALUE_TYPE_INT16(),
- UINT16 = VALUE_TYPE_UINT16(),
- INT32 = VALUE_TYPE_INT32(),
- UINT32 = VALUE_TYPE_UINT32(),
- INT64 = VALUE_TYPE_INT64(),
- UINT64 = VALUE_TYPE_UINT64(),
- POINTER = VALUE_TYPE_POINTER(),
- FLOAT = VALUE_TYPE_FLOAT(),
- DOUBLE = VALUE_TYPE_DOUBLE(),
- STRING = VALUE_TYPE_STRING(),
- WSTRING = VALUE_TYPE_WSTRING(),
-};
-
-class AssetInfo {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- get type() {
-   return asset_info_t_get_prop_type(this.nativeObj);
- }
-
- get subtype() {
-   return asset_info_t_get_prop_subtype(this.nativeObj);
- }
-
- get isInRom() {
-   return asset_info_t_get_prop_is_in_rom(this.nativeObj);
- }
-
- get size() {
-   return asset_info_t_get_prop_size(this.nativeObj);
- }
-
- get refcount() {
-   return asset_info_t_get_prop_refcount(this.nativeObj);
- }
-
- get name() {
-   return asset_info_t_get_prop_name(this.nativeObj);
- }
-
-}
-
-class Widget {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- countChildren() {
-   return widget_count_children(this.nativeObj);
- }
-
- getChild(index) {
-   return new Widget(widget_get_child(this.nativeObj, index));
- }
-
- indexOf() {
-   return widget_index_of(this.nativeObj);
- }
-
- move(x, y) {
-   return widget_move(this.nativeObj, x, y);
- }
-
- resize(w, h) {
-   return widget_resize(this.nativeObj, w, h);
- }
-
- moveResize(x, y, w, h) {
-   return widget_move_resize(this.nativeObj, x, y, w, h);
- }
-
- setValue(value) {
-   return widget_set_value(this.nativeObj, value);
- }
-
- addValue(delta) {
-   return widget_add_value(this.nativeObj, delta);
- }
-
- useStyle(style) {
-   return widget_use_style(this.nativeObj, style);
- }
-
- setText(text) {
-   return widget_set_text_utf8(this.nativeObj, text);
- }
-
- setTrText(text) {
-   return widget_set_tr_text(this.nativeObj, text);
- }
-
- getValue() {
-   return widget_get_value(this.nativeObj);
- }
-
- getText() {
-   return widget_get_text(this.nativeObj);
- }
-
- setName(name) {
-   return widget_set_name(this.nativeObj, name);
- }
-
- setEnable(enable) {
-   return widget_set_enable(this.nativeObj, enable);
- }
-
- setFocused(focused) {
-   return widget_set_focused(this.nativeObj, focused);
- }
-
- child(name) {
-   return new Widget(widget_child(this.nativeObj, name));
- }
-
- lookup(name, recursive) {
-   return new Widget(widget_lookup(this.nativeObj, name, recursive));
- }
-
- lookupByType(type, recursive) {
-   return new Widget(widget_lookup_by_type(this.nativeObj, type, recursive));
- }
-
- setVisible(visible, recursive) {
-   return widget_set_visible(this.nativeObj, visible, recursive);
- }
-
- on(type, on_event, ctx) {
-   return widget_on(this.nativeObj, type, on_event, ctx);
- }
-
- off(id) {
-   return widget_off(this.nativeObj, id);
- }
-
- invalidateForce() {
-   return widget_invalidate_force(this.nativeObj);
- }
-
- setPropStr(name, v) {
-   return widget_set_prop_str(this.nativeObj, name, v);
- }
-
- foreach(visit, ctx) {
-   return widget_foreach(this.nativeObj, visit, ctx);
- }
-
- getWindow() {
-   return new Widget(widget_get_window(this.nativeObj));
- }
-
- getType() {
-   return widget_get_type(this.nativeObj);
- }
-
- clone(parent) {
-   return new Widget(widget_clone(this.nativeObj, parent ? (parent.nativeObj || parent) : null));
- }
-
- equal(other) {
-   return widget_equal(this.nativeObj, other ? (other.nativeObj || other) : null);
- }
-
- setSelfLayoutParams(x, y, w, h) {
-   return widget_set_self_layout_params(this.nativeObj, x, y, w, h);
- }
-
- setChildrenLayoutParams(params) {
-   return widget_set_children_layout_params(this.nativeObj, params);
- }
-
- layout() {
-   return widget_layout(this.nativeObj);
- }
-
- static cast(widget) {
-   return new Widget(widget_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- destroy() {
-   return widget_destroy(this.nativeObj);
- }
-
- get x() {
-   return widget_t_get_prop_x(this.nativeObj);
- }
-
- get y() {
-   return widget_t_get_prop_y(this.nativeObj);
- }
-
- get w() {
-   return widget_t_get_prop_w(this.nativeObj);
- }
-
- get h() {
-   return widget_t_get_prop_h(this.nativeObj);
- }
-
- get name() {
-   return widget_t_get_prop_name(this.nativeObj);
- }
-
- get trText() {
-   return widget_t_get_prop_tr_text(this.nativeObj);
- }
-
- get styleName() {
-   return widget_t_get_prop_style_name(this.nativeObj);
- }
-
- get enable() {
-   return widget_t_get_prop_enable(this.nativeObj);
- }
-
- set visible(value) {
-   widget_t_set_prop_visible(this.nativeObj, value);
- }
-
- get visible() {
-   return widget_t_get_prop_visible(this.nativeObj);
- }
-
-}
-
-class Rect {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
-}
-
-class Point {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
-}
-
-class Canvas {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
-}
-
-class Bitmap {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static create() {
-   return new Bitmap(bitmap_create());
- }
-
- destroy() {
-   return bitmap_destroy(this.nativeObj);
- }
-
- get w() {
-   return bitmap_t_get_prop_w(this.nativeObj);
- }
-
- get h() {
-   return bitmap_t_get_prop_h(this.nativeObj);
- }
-
- get flags() {
-   return bitmap_t_get_prop_flags(this.nativeObj);
- }
-
- get format() {
-   return bitmap_t_get_prop_format(this.nativeObj);
- }
-
- get name() {
-   return bitmap_t_get_prop_name(this.nativeObj);
- }
-
-}
-
-class Event {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static cast(event) {
-   return new Event(event_cast(event ? (event.nativeObj || event) : null));
- }
-
- get type() {
-   return event_t_get_prop_type(this.nativeObj);
- }
-
- get time() {
-   return event_t_get_prop_time(this.nativeObj);
- }
-
- get target() {
-   return event_t_get_prop_target(this.nativeObj);
- }
-
-}
-
-class LocaleInfo {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static instance() {
-   return new LocaleInfo(locale_info());
- }
-
- tr(text) {
-   return locale_info_tr(this.nativeObj, text);
- }
-
- change(language, country) {
-   return locale_info_change(this.nativeObj, language, country);
- }
-
- on(type, on_event, ctx) {
-   return locale_info_on(this.nativeObj, type, on_event, ctx);
- }
-
- off(id) {
-   return locale_info_off(this.nativeObj, id);
- }
-
-}
-
 class Timer {
  public nativeObj;
  constructor(nativeObj) {
@@ -1347,22 +1014,6 @@ class Timer {
 
  static remove(timer_id) {
    return timer_remove(timer_id);
- }
-
-}
-
-class ImageManager {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static instance() {
-   return new ImageManager(image_manager());
- }
-
- load(name, image) {
-   return image_manager_load(this.nativeObj, name, image ? (image.nativeObj || image) : null);
  }
 
 }
@@ -1491,6 +1142,374 @@ class Value {
 
 }
 
+class Widget {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ countChildren() {
+   return widget_count_children(this.nativeObj);
+ }
+
+ getChild(index) {
+   return new Widget(widget_get_child(this.nativeObj, index));
+ }
+
+ indexOf() {
+   return widget_index_of(this.nativeObj);
+ }
+
+ move(x, y) {
+   return widget_move(this.nativeObj, x, y);
+ }
+
+ resize(w, h) {
+   return widget_resize(this.nativeObj, w, h);
+ }
+
+ moveResize(x, y, w, h) {
+   return widget_move_resize(this.nativeObj, x, y, w, h);
+ }
+
+ setValue(value) {
+   return widget_set_value(this.nativeObj, value);
+ }
+
+ addValue(delta) {
+   return widget_add_value(this.nativeObj, delta);
+ }
+
+ useStyle(style) {
+   return widget_use_style(this.nativeObj, style);
+ }
+
+ setText(text) {
+   return widget_set_text_utf8(this.nativeObj, text);
+ }
+
+ setTrText(text) {
+   return widget_set_tr_text(this.nativeObj, text);
+ }
+
+ getValue() {
+   return widget_get_value(this.nativeObj);
+ }
+
+ getText() {
+   return widget_get_text(this.nativeObj);
+ }
+
+ setName(name) {
+   return widget_set_name(this.nativeObj, name);
+ }
+
+ setCursor(cursor) {
+   return widget_set_cursor(this.nativeObj, cursor);
+ }
+
+ setAnimation(animation) {
+   return widget_set_animation(this.nativeObj, animation);
+ }
+
+ setEnable(enable) {
+   return widget_set_enable(this.nativeObj, enable);
+ }
+
+ setFocused(focused) {
+   return widget_set_focused(this.nativeObj, focused);
+ }
+
+ child(name) {
+   return new Widget(widget_child(this.nativeObj, name));
+ }
+
+ lookup(name, recursive) {
+   return new Widget(widget_lookup(this.nativeObj, name, recursive));
+ }
+
+ lookupByType(type, recursive) {
+   return new Widget(widget_lookup_by_type(this.nativeObj, type, recursive));
+ }
+
+ setVisible(visible, recursive) {
+   return widget_set_visible(this.nativeObj, visible, recursive);
+ }
+
+ on(type, on_event, ctx) {
+   return widget_on(this.nativeObj, type, on_event, ctx);
+ }
+
+ off(id) {
+   return widget_off(this.nativeObj, id);
+ }
+
+ invalidateForce() {
+   return widget_invalidate_force(this.nativeObj);
+ }
+
+ setPropStr(name, v) {
+   return widget_set_prop_str(this.nativeObj, name, v);
+ }
+
+ foreach(visit, ctx) {
+   return widget_foreach(this.nativeObj, visit, ctx);
+ }
+
+ getWindow() {
+   return new Widget(widget_get_window(this.nativeObj));
+ }
+
+ getWindowManager() {
+   return new Widget(widget_get_window_manager(this.nativeObj));
+ }
+
+ getType() {
+   return widget_get_type(this.nativeObj);
+ }
+
+ clone(parent) {
+   return new Widget(widget_clone(this.nativeObj, parent ? (parent.nativeObj || parent) : null));
+ }
+
+ equal(other) {
+   return widget_equal(this.nativeObj, other ? (other.nativeObj || other) : null);
+ }
+
+ setSelfLayoutParams(x, y, w, h) {
+   return widget_set_self_layout_params(this.nativeObj, x, y, w, h);
+ }
+
+ setChildrenLayoutParams(params) {
+   return widget_set_children_layout_params(this.nativeObj, params);
+ }
+
+ layout() {
+   return widget_layout(this.nativeObj);
+ }
+
+ static cast(widget) {
+   return new Widget(widget_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ destroy() {
+   return widget_destroy(this.nativeObj);
+ }
+
+ get x() {
+   return widget_t_get_prop_x(this.nativeObj);
+ }
+
+ get y() {
+   return widget_t_get_prop_y(this.nativeObj);
+ }
+
+ get w() {
+   return widget_t_get_prop_w(this.nativeObj);
+ }
+
+ get h() {
+   return widget_t_get_prop_h(this.nativeObj);
+ }
+
+ get name() {
+   return widget_t_get_prop_name(this.nativeObj);
+ }
+
+ get trText() {
+   return widget_t_get_prop_tr_text(this.nativeObj);
+ }
+
+ get style() {
+   return widget_t_get_prop_style(this.nativeObj);
+ }
+
+ get animation() {
+   return widget_t_get_prop_animation(this.nativeObj);
+ }
+
+ get enable() {
+   return widget_t_get_prop_enable(this.nativeObj);
+ }
+
+ set visible(value) {
+   widget_t_set_prop_visible(this.nativeObj, value);
+ }
+
+ get visible() {
+   return widget_t_get_prop_visible(this.nativeObj);
+ }
+
+}
+
+class Canvas {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+}
+
+class Rect {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+}
+
+class Point {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+}
+
+class AssetInfo {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ get type() {
+   return asset_info_t_get_prop_type(this.nativeObj);
+ }
+
+ get subtype() {
+   return asset_info_t_get_prop_subtype(this.nativeObj);
+ }
+
+ get isInRom() {
+   return asset_info_t_get_prop_is_in_rom(this.nativeObj);
+ }
+
+ get size() {
+   return asset_info_t_get_prop_size(this.nativeObj);
+ }
+
+ get refcount() {
+   return asset_info_t_get_prop_refcount(this.nativeObj);
+ }
+
+ get name() {
+   return asset_info_t_get_prop_name(this.nativeObj);
+ }
+
+}
+
+class Event {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static cast(event) {
+   return new Event(event_cast(event ? (event.nativeObj || event) : null));
+ }
+
+ get type() {
+   return event_t_get_prop_type(this.nativeObj);
+ }
+
+ get time() {
+   return event_t_get_prop_time(this.nativeObj);
+ }
+
+ get target() {
+   return event_t_get_prop_target(this.nativeObj);
+ }
+
+}
+
+class LocaleInfo {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static instance() {
+   return new LocaleInfo(locale_info());
+ }
+
+ tr(text) {
+   return locale_info_tr(this.nativeObj, text);
+ }
+
+ change(language, country) {
+   return locale_info_change(this.nativeObj, language, country);
+ }
+
+ on(type, on_event, ctx) {
+   return locale_info_on(this.nativeObj, type, on_event, ctx);
+ }
+
+ off(id) {
+   return locale_info_off(this.nativeObj, id);
+ }
+
+}
+
+class Bitmap {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static create() {
+   return new Bitmap(bitmap_create());
+ }
+
+ static createEx(w, h, format) {
+   return new Bitmap(bitmap_create_ex(w, h, format));
+ }
+
+ getBpp() {
+   return bitmap_get_bpp(this.nativeObj);
+ }
+
+ destroy() {
+   return bitmap_destroy(this.nativeObj);
+ }
+
+ get w() {
+   return bitmap_t_get_prop_w(this.nativeObj);
+ }
+
+ get h() {
+   return bitmap_t_get_prop_h(this.nativeObj);
+ }
+
+ get flags() {
+   return bitmap_t_get_prop_flags(this.nativeObj);
+ }
+
+ get format() {
+   return bitmap_t_get_prop_format(this.nativeObj);
+ }
+
+ get name() {
+   return bitmap_t_get_prop_name(this.nativeObj);
+ }
+
+}
+
+class ImageManager {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static instance() {
+   return new ImageManager(image_manager());
+ }
+
+ load(name, image) {
+   return image_manager_load(this.nativeObj, name, image ? (image.nativeObj || image) : null);
+ }
+
+}
+
 class Idle {
  public nativeObj;
  constructor(nativeObj) {
@@ -1503,6 +1522,26 @@ class Idle {
 
  static remove(idle_id) {
    return idle_remove(idle_id);
+ }
+
+}
+
+class AssetsManager {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static instance() {
+   return new AssetsManager(assets_manager());
+ }
+
+ ref(type, name) {
+   return assets_manager_ref(this.nativeObj, type, name);
+ }
+
+ unref(info) {
+   return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
  }
 
 }
@@ -2121,8 +2160,8 @@ class Image extends Widget {
    return new Image(image_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
  }
 
- setImageName(name) {
-   return image_set_image_name(this.nativeObj, name);
+ setImage(name) {
+   return image_set_image(this.nativeObj, name);
  }
 
  setDrawType(draw_type) {
@@ -2163,6 +2202,34 @@ class Image extends Widget {
 
  get scaleX() {
    return image_t_get_prop_scale_x(this.nativeObj);
+ }
+
+ get scaleY() {
+   return image_t_get_prop_scale_y(this.nativeObj);
+ }
+
+ get rotation() {
+   return image_t_get_prop_rotation(this.nativeObj);
+ }
+
+ get clickable() {
+   return image_t_get_prop_clickable(this.nativeObj);
+ }
+
+ get selectable() {
+   return image_t_get_prop_selectable(this.nativeObj);
+ }
+
+ get image() {
+   return image_t_get_prop_image(this.nativeObj);
+ }
+
+ get drawType() {
+   return image_t_get_prop_draw_type(this.nativeObj);
+ }
+
+ get selected() {
+   return image_t_get_prop_selected(this.nativeObj);
  }
 
 }
@@ -2395,14 +2462,6 @@ class Popup extends Widget {
 
  static cast(widget) {
    return new Popup(popup_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- get theme() {
-   return popup_t_get_prop_theme(this.nativeObj);
- }
-
- get animHint() {
-   return popup_t_get_prop_anim_hint(this.nativeObj);
  }
 
  get closeWhenClick() {
@@ -3059,6 +3118,18 @@ class WheelEvent extends Event {
 
 }
 
+class WindowBase extends Widget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ get theme() {
+   return window_base_t_get_prop_theme(this.nativeObj);
+ }
+
+}
+
 class WindowManager extends Widget {
  public nativeObj;
  constructor(nativeObj) {
@@ -3077,6 +3148,10 @@ class WindowManager extends Widget {
    return window_manager_set_show_fps(this.nativeObj, show_fps);
  }
 
+ setCursor(cursor) {
+   return window_manager_set_cursor(this.nativeObj, cursor);
+ }
+
  get showFps() {
    return window_manager_t_get_prop_show_fps(this.nativeObj);
  }
@@ -3093,10 +3168,6 @@ class Window extends Widget {
    return new Window(window_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
  }
 
- static cast(widget) {
-   return new Window(window_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
  static open(name) {
    return new Window(window_open(name));
  }
@@ -3109,12 +3180,8 @@ class Window extends Widget {
    return window_close(this.nativeObj);
  }
 
- get theme() {
-   return window_t_get_prop_theme(this.nativeObj);
- }
-
- get animHint() {
-   return window_t_get_prop_anim_hint(this.nativeObj);
+ static cast(widget) {
+   return new Window(window_cast(widget ? (widget.nativeObj || widget) : null));
  }
 
 }
