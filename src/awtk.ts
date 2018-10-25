@@ -363,11 +363,12 @@ declare function locale_info_change(locale_info, language, country);
 declare function locale_info_on(locale_info, type, on_event, ctx);
 declare function locale_info_off(locale_info, id);
 declare function bitmap_create();
-declare function bitmap_create_ex(w, h, format);
+declare function bitmap_create_ex(w, h, line_length, format);
 declare function bitmap_get_bpp(bitmap);
 declare function bitmap_destroy(bitmap);
 declare function bitmap_t_get_prop_w(nativeObj);
 declare function bitmap_t_get_prop_h(nativeObj);
+declare function bitmap_t_get_prop_line_length(nativeObj);
 declare function bitmap_t_get_prop_flags(nativeObj);
 declare function bitmap_t_get_prop_format(nativeObj);
 declare function bitmap_t_get_prop_name(nativeObj);
@@ -1460,8 +1461,8 @@ class Bitmap {
    return new Bitmap(bitmap_create());
  }
 
- static createEx(w, h, format) {
-   return new Bitmap(bitmap_create_ex(w, h, format));
+ static createEx(w, h, line_length, format) {
+   return new Bitmap(bitmap_create_ex(w, h, line_length, format));
  }
 
  getBpp() {
@@ -1478,6 +1479,10 @@ class Bitmap {
 
  get h() {
    return bitmap_t_get_prop_h(this.nativeObj);
+ }
+
+ get lineLength() {
+   return bitmap_t_get_prop_line_length(this.nativeObj);
  }
 
  get flags() {

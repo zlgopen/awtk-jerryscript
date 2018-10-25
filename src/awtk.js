@@ -756,8 +756,8 @@ var Bitmap = /** @class */ (function () {
     Bitmap.create = function () {
         return new Bitmap(bitmap_create());
     };
-    Bitmap.createEx = function (w, h, format) {
-        return new Bitmap(bitmap_create_ex(w, h, format));
+    Bitmap.createEx = function (w, h, line_length, format) {
+        return new Bitmap(bitmap_create_ex(w, h, line_length, format));
     };
     Bitmap.prototype.getBpp = function () {
         return bitmap_get_bpp(this.nativeObj);
@@ -775,6 +775,13 @@ var Bitmap = /** @class */ (function () {
     Object.defineProperty(Bitmap.prototype, "h", {
         get: function () {
             return bitmap_t_get_prop_h(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "lineLength", {
+        get: function () {
+            return bitmap_t_get_prop_line_length(this.nativeObj);
         },
         enumerable: true,
         configurable: true

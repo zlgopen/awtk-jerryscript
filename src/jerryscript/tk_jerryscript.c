@@ -496,8 +496,9 @@ jerry_value_t wrap_bitmap_create_ex(
   bitmap_t* ret = NULL;
   uint32_t w = (uint32_t)jerry_get_number_value(args_p[0]);
   uint32_t h = (uint32_t)jerry_get_number_value(args_p[1]);
-  bitmap_format_t format = (bitmap_format_t)jerry_get_number_value(args_p[2]);
-  ret = (bitmap_t*)bitmap_create_ex(w, h, format);
+  uint32_t line_length = (uint32_t)jerry_get_number_value(args_p[2]);
+  bitmap_format_t format = (bitmap_format_t)jerry_get_number_value(args_p[3]);
+  ret = (bitmap_t*)bitmap_create_ex(w, h, line_length, format);
 
   return jerry_create_pointer(ret, "bitmap_t*");
 }
@@ -550,6 +551,17 @@ jerry_value_t wrap_bitmap_t_get_prop_h(
   return jerry_create_number(obj->h);
 }
 
+jerry_value_t wrap_bitmap_t_get_prop_line_length(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  bitmap_t* obj = (bitmap_t*)jerry_get_pointer(args_p[0], "bitmap_t*");
+
+  return jerry_create_number(obj->line_length);
+}
+
 jerry_value_t wrap_bitmap_t_get_prop_flags(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -590,6 +602,7 @@ ret_t bitmap_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_destroy", wrap_bitmap_destroy);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_t_get_prop_w", wrap_bitmap_t_get_prop_w);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_t_get_prop_h", wrap_bitmap_t_get_prop_h);
+  jerryx_handler_register_global((const jerry_char_t*)"bitmap_t_get_prop_line_length", wrap_bitmap_t_get_prop_line_length);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_t_get_prop_flags", wrap_bitmap_t_get_prop_flags);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_t_get_prop_format", wrap_bitmap_t_get_prop_format);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_t_get_prop_name", wrap_bitmap_t_get_prop_name);
