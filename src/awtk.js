@@ -11,25 +11,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var ImageDrawType;
-(function (ImageDrawType) {
-    ImageDrawType[ImageDrawType["DEFAULT"] = IMAGE_DRAW_DEFAULT()] = "DEFAULT";
-    ImageDrawType[ImageDrawType["CENTER"] = IMAGE_DRAW_CENTER()] = "CENTER";
-    ImageDrawType[ImageDrawType["ICON"] = IMAGE_DRAW_ICON()] = "ICON";
-    ImageDrawType[ImageDrawType["SCALE"] = IMAGE_DRAW_SCALE()] = "SCALE";
-    ImageDrawType[ImageDrawType["SCALE_AUTO"] = IMAGE_DRAW_SCALE_AUTO()] = "SCALE_AUTO";
-    ImageDrawType[ImageDrawType["SCALE_W"] = IMAGE_DRAW_SCALE_W()] = "SCALE_W";
-    ImageDrawType[ImageDrawType["SCALE_H"] = IMAGE_DRAW_SCALE_H()] = "SCALE_H";
-    ImageDrawType[ImageDrawType["REPEAT"] = IMAGE_DRAW_REPEAT()] = "REPEAT";
-    ImageDrawType[ImageDrawType["REPEAT_X"] = IMAGE_DRAW_REPEAT_X()] = "REPEAT_X";
-    ImageDrawType[ImageDrawType["REPEAT_Y"] = IMAGE_DRAW_REPEAT_Y()] = "REPEAT_Y";
-    ImageDrawType[ImageDrawType["PATCH9"] = IMAGE_DRAW_PATCH9()] = "PATCH9";
-    ImageDrawType[ImageDrawType["PATCH3_X"] = IMAGE_DRAW_PATCH3_X()] = "PATCH3_X";
-    ImageDrawType[ImageDrawType["PATCH3_Y"] = IMAGE_DRAW_PATCH3_Y()] = "PATCH3_Y";
-    ImageDrawType[ImageDrawType["PATCH3_X_SCALE_Y"] = IMAGE_DRAW_PATCH3_X_SCALE_Y()] = "PATCH3_X_SCALE_Y";
-    ImageDrawType[ImageDrawType["PATCH3_Y_SCALE_X"] = IMAGE_DRAW_PATCH3_Y_SCALE_X()] = "PATCH3_Y_SCALE_X";
-})(ImageDrawType || (ImageDrawType = {}));
-;
 var WidgetType;
 (function (WidgetType) {
     WidgetType[WidgetType["NONE"] = WIDGET_TYPE_NONE()] = "NONE";
@@ -82,24 +63,119 @@ var WidgetType;
     WidgetType[WidgetType["CALIBRATION_WIN"] = WIDGET_TYPE_CALIBRATION_WIN()] = "CALIBRATION_WIN";
 })(WidgetType || (WidgetType = {}));
 ;
-var ValueType;
-(function (ValueType) {
-    ValueType[ValueType["INVALID"] = VALUE_TYPE_INVALID()] = "INVALID";
-    ValueType[ValueType["BOOL"] = VALUE_TYPE_BOOL()] = "BOOL";
-    ValueType[ValueType["INT8"] = VALUE_TYPE_INT8()] = "INT8";
-    ValueType[ValueType["UINT8"] = VALUE_TYPE_UINT8()] = "UINT8";
-    ValueType[ValueType["INT16"] = VALUE_TYPE_INT16()] = "INT16";
-    ValueType[ValueType["UINT16"] = VALUE_TYPE_UINT16()] = "UINT16";
-    ValueType[ValueType["INT32"] = VALUE_TYPE_INT32()] = "INT32";
-    ValueType[ValueType["UINT32"] = VALUE_TYPE_UINT32()] = "UINT32";
-    ValueType[ValueType["INT64"] = VALUE_TYPE_INT64()] = "INT64";
-    ValueType[ValueType["UINT64"] = VALUE_TYPE_UINT64()] = "UINT64";
-    ValueType[ValueType["POINTER"] = VALUE_TYPE_POINTER()] = "POINTER";
-    ValueType[ValueType["FLOAT"] = VALUE_TYPE_FLOAT()] = "FLOAT";
-    ValueType[ValueType["DOUBLE"] = VALUE_TYPE_DOUBLE()] = "DOUBLE";
-    ValueType[ValueType["STRING"] = VALUE_TYPE_STRING()] = "STRING";
-    ValueType[ValueType["WSTRING"] = VALUE_TYPE_WSTRING()] = "WSTRING";
-})(ValueType || (ValueType = {}));
+var WidgetProp;
+(function (WidgetProp) {
+    WidgetProp[WidgetProp["X"] = WIDGET_PROP_X()] = "X";
+    WidgetProp[WidgetProp["Y"] = WIDGET_PROP_Y()] = "Y";
+    WidgetProp[WidgetProp["W"] = WIDGET_PROP_W()] = "W";
+    WidgetProp[WidgetProp["H"] = WIDGET_PROP_H()] = "H";
+    WidgetProp[WidgetProp["MIN_W"] = WIDGET_PROP_MIN_W()] = "MIN_W";
+    WidgetProp[WidgetProp["MAX_W"] = WIDGET_PROP_MAX_W()] = "MAX_W";
+    WidgetProp[WidgetProp["LAYOUT_W"] = WIDGET_PROP_LAYOUT_W()] = "LAYOUT_W";
+    WidgetProp[WidgetProp["LAYOUT_H"] = WIDGET_PROP_LAYOUT_H()] = "LAYOUT_H";
+    WidgetProp[WidgetProp["VIRTUAL_W"] = WIDGET_PROP_VIRTUAL_W()] = "VIRTUAL_W";
+    WidgetProp[WidgetProp["VIRTUAL_H"] = WIDGET_PROP_VIRTUAL_H()] = "VIRTUAL_H";
+    WidgetProp[WidgetProp["NAME"] = WIDGET_PROP_NAME()] = "NAME";
+    WidgetProp[WidgetProp["CURSOR"] = WIDGET_PROP_CURSOR()] = "CURSOR";
+    WidgetProp[WidgetProp["VALUE"] = WIDGET_PROP_VALUE()] = "VALUE";
+    WidgetProp[WidgetProp["TEXT"] = WIDGET_PROP_TEXT()] = "TEXT";
+    WidgetProp[WidgetProp["TR_TEXT"] = WIDGET_PROP_TR_TEXT()] = "TR_TEXT";
+    WidgetProp[WidgetProp["STYLE"] = WIDGET_PROP_STYLE()] = "STYLE";
+    WidgetProp[WidgetProp["ENABLE"] = WIDGET_PROP_ENABLE()] = "ENABLE";
+    WidgetProp[WidgetProp["MARGIN"] = WIDGET_PROP_MARGIN()] = "MARGIN";
+    WidgetProp[WidgetProp["SPACING"] = WIDGET_PROP_SPACING()] = "SPACING";
+    WidgetProp[WidgetProp["LEFT_MARGIN"] = WIDGET_PROP_LEFT_MARGIN()] = "LEFT_MARGIN";
+    WidgetProp[WidgetProp["RIGHT_MARGIN"] = WIDGET_PROP_RIGHT_MARGIN()] = "RIGHT_MARGIN";
+    WidgetProp[WidgetProp["TOP_MARGIN"] = WIDGET_PROP_TOP_MARGIN()] = "TOP_MARGIN";
+    WidgetProp[WidgetProp["BOTTOM_MARGIN"] = WIDGET_PROP_BOTTOM_MARGIN()] = "BOTTOM_MARGIN";
+    WidgetProp[WidgetProp["STEP"] = WIDGET_PROP_STEP()] = "STEP";
+    WidgetProp[WidgetProp["VISIBLE"] = WIDGET_PROP_VISIBLE()] = "VISIBLE";
+    WidgetProp[WidgetProp["ANIMATION"] = WIDGET_PROP_ANIMATION()] = "ANIMATION";
+    WidgetProp[WidgetProp["ANIM_HINT"] = WIDGET_PROP_ANIM_HINT()] = "ANIM_HINT";
+    WidgetProp[WidgetProp["OPEN_ANIM_HINT"] = WIDGET_PROP_OPEN_ANIM_HINT()] = "OPEN_ANIM_HINT";
+    WidgetProp[WidgetProp["CLOSE_ANIM_HINT"] = WIDGET_PROP_CLOSE_ANIM_HINT()] = "CLOSE_ANIM_HINT";
+    WidgetProp[WidgetProp["MIN"] = WIDGET_PROP_MIN()] = "MIN";
+    WidgetProp[WidgetProp["TIPS"] = WIDGET_PROP_TIPS()] = "TIPS";
+    WidgetProp[WidgetProp["INPUT_TYPE"] = WIDGET_PROP_INPUT_TYPE()] = "INPUT_TYPE";
+    WidgetProp[WidgetProp["READONLY"] = WIDGET_PROP_READONLY()] = "READONLY";
+    WidgetProp[WidgetProp["PASSWORD_VISIBLE"] = WIDGET_PROP_PASSWORD_VISIBLE()] = "PASSWORD_VISIBLE";
+    WidgetProp[WidgetProp["ACTIVE"] = WIDGET_PROP_ACTIVE()] = "ACTIVE";
+    WidgetProp[WidgetProp["VERTICAL"] = WIDGET_PROP_VERTICAL()] = "VERTICAL";
+    WidgetProp[WidgetProp["SHOW_TEXT"] = WIDGET_PROP_SHOW_TEXT()] = "SHOW_TEXT";
+    WidgetProp[WidgetProp["XOFFSET"] = WIDGET_PROP_XOFFSET()] = "XOFFSET";
+    WidgetProp[WidgetProp["YOFFSET"] = WIDGET_PROP_YOFFSET()] = "YOFFSET";
+    WidgetProp[WidgetProp["AUTO_PLAY"] = WIDGET_PROP_AUTO_PLAY()] = "AUTO_PLAY";
+    WidgetProp[WidgetProp["AUTO_FIX"] = WIDGET_PROP_AUTO_FIX()] = "AUTO_FIX";
+    WidgetProp[WidgetProp["X_MIN"] = WIDGET_PROP_X_MIN()] = "X_MIN";
+    WidgetProp[WidgetProp["X_MAX"] = WIDGET_PROP_X_MAX()] = "X_MAX";
+    WidgetProp[WidgetProp["Y_MIN"] = WIDGET_PROP_Y_MIN()] = "Y_MIN";
+    WidgetProp[WidgetProp["Y_MAX"] = WIDGET_PROP_Y_MAX()] = "Y_MAX";
+    WidgetProp[WidgetProp["MAX"] = WIDGET_PROP_MAX()] = "MAX";
+    WidgetProp[WidgetProp["ROW"] = WIDGET_PROP_ROW()] = "ROW";
+    WidgetProp[WidgetProp["STATE_FOR_STYLE"] = WIDGET_PROP_STATE_FOR_STYLE()] = "STATE_FOR_STYLE";
+    WidgetProp[WidgetProp["THEME"] = WIDGET_PROP_THEME()] = "THEME";
+    WidgetProp[WidgetProp["STAGE"] = WIDGET_PROP_STAGE()] = "STAGE";
+    WidgetProp[WidgetProp["THEME_DATA"] = WIDGET_PROP_THEME_DATA()] = "THEME_DATA";
+    WidgetProp[WidgetProp["SCRIPT"] = WIDGET_PROP_SCRIPT()] = "SCRIPT";
+    WidgetProp[WidgetProp["ITEM_WIDTH"] = WIDGET_PROP_ITEM_WIDTH()] = "ITEM_WIDTH";
+    WidgetProp[WidgetProp["ITEM_HEIGHT"] = WIDGET_PROP_ITEM_HEIGHT()] = "ITEM_HEIGHT";
+    WidgetProp[WidgetProp["DEFAULT_ITEM_HEIGHT"] = WIDGET_PROP_DEFAULT_ITEM_HEIGHT()] = "DEFAULT_ITEM_HEIGHT";
+    WidgetProp[WidgetProp["XSLIDABLE"] = WIDGET_PROP_XSLIDABLE()] = "XSLIDABLE";
+    WidgetProp[WidgetProp["YSLIDABLE"] = WIDGET_PROP_YSLIDABLE()] = "YSLIDABLE";
+    WidgetProp[WidgetProp["REPEAT"] = WIDGET_PROP_REPEAT()] = "REPEAT";
+    WidgetProp[WidgetProp["ANIMATABLE"] = WIDGET_PROP_ANIMATABLE()] = "ANIMATABLE";
+    WidgetProp[WidgetProp["AUTO_HIDE_SCROLL_BAR"] = WIDGET_PROP_AUTO_HIDE_SCROLL_BAR()] = "AUTO_HIDE_SCROLL_BAR";
+    WidgetProp[WidgetProp["IMAGE"] = WIDGET_PROP_IMAGE()] = "IMAGE";
+    WidgetProp[WidgetProp["DRAW_TYPE"] = WIDGET_PROP_DRAW_TYPE()] = "DRAW_TYPE";
+    WidgetProp[WidgetProp["SELECTABLE"] = WIDGET_PROP_SELECTABLE()] = "SELECTABLE";
+    WidgetProp[WidgetProp["CLICKABLE"] = WIDGET_PROP_CLICKABLE()] = "CLICKABLE";
+    WidgetProp[WidgetProp["SCALE_X"] = WIDGET_PROP_SCALE_X()] = "SCALE_X";
+    WidgetProp[WidgetProp["SCALE_Y"] = WIDGET_PROP_SCALE_Y()] = "SCALE_Y";
+    WidgetProp[WidgetProp["ANCHOR_X"] = WIDGET_PROP_ANCHOR_X()] = "ANCHOR_X";
+    WidgetProp[WidgetProp["ANCHOR_Y"] = WIDGET_PROP_ANCHOR_Y()] = "ANCHOR_Y";
+    WidgetProp[WidgetProp["ROTATION"] = WIDGET_PROP_ROTATION()] = "ROTATION";
+    WidgetProp[WidgetProp["COMPACT"] = WIDGET_PROP_COMPACT()] = "COMPACT";
+    WidgetProp[WidgetProp["ICON"] = WIDGET_PROP_ICON()] = "ICON";
+    WidgetProp[WidgetProp["OPTIONS"] = WIDGET_PROP_OPTIONS()] = "OPTIONS";
+    WidgetProp[WidgetProp["SELECTED"] = WIDGET_PROP_SELECTED()] = "SELECTED";
+    WidgetProp[WidgetProp["CHECKED"] = WIDGET_PROP_CHECKED()] = "CHECKED";
+    WidgetProp[WidgetProp["ACTIVE_ICON"] = WIDGET_PROP_ACTIVE_ICON()] = "ACTIVE_ICON";
+    WidgetProp[WidgetProp["OPEN_WINDOW"] = WIDGET_PROP_OPEN_WINDOW()] = "OPEN_WINDOW";
+    WidgetProp[WidgetProp["SELECTED_INDEX"] = WIDGET_PROP_SELECTED_INDEX()] = "SELECTED_INDEX";
+    WidgetProp[WidgetProp["CLOSE_WHEN_CLICK"] = WIDGET_PROP_CLOSE_WHEN_CLICK()] = "CLOSE_WHEN_CLICK";
+    WidgetProp[WidgetProp["CLOSE_WHEN_CLICK_OUTSIDE"] = WIDGET_PROP_CLOSE_WHEN_CLICK_OUTSIDE()] = "CLOSE_WHEN_CLICK_OUTSIDE";
+    WidgetProp[WidgetProp["LINE_GAP"] = WIDGET_PROP_LINE_GAP()] = "LINE_GAP";
+    WidgetProp[WidgetProp["BG_COLOR"] = WIDGET_PROP_BG_COLOR()] = "BG_COLOR";
+    WidgetProp[WidgetProp["BORDER_COLOR"] = WIDGET_PROP_BORDER_COLOR()] = "BORDER_COLOR";
+    WidgetProp[WidgetProp["DELAY"] = WIDGET_PROP_DELAY()] = "DELAY";
+})(WidgetProp || (WidgetProp = {}));
+;
+var WindowStage;
+(function (WindowStage) {
+    WindowStage[WindowStage["NONE"] = WINDOW_STAGE_NONE()] = "NONE";
+    WindowStage[WindowStage["CREATED"] = WINDOW_STAGE_CREATED()] = "CREATED";
+    WindowStage[WindowStage["OPENED"] = WINDOW_STAGE_OPENED()] = "OPENED";
+    WindowStage[WindowStage["CLOSED"] = WINDOW_STAGE_CLOSED()] = "CLOSED";
+})(WindowStage || (WindowStage = {}));
+;
+var ImageDrawType;
+(function (ImageDrawType) {
+    ImageDrawType[ImageDrawType["DEFAULT"] = IMAGE_DRAW_DEFAULT()] = "DEFAULT";
+    ImageDrawType[ImageDrawType["CENTER"] = IMAGE_DRAW_CENTER()] = "CENTER";
+    ImageDrawType[ImageDrawType["ICON"] = IMAGE_DRAW_ICON()] = "ICON";
+    ImageDrawType[ImageDrawType["SCALE"] = IMAGE_DRAW_SCALE()] = "SCALE";
+    ImageDrawType[ImageDrawType["SCALE_AUTO"] = IMAGE_DRAW_SCALE_AUTO()] = "SCALE_AUTO";
+    ImageDrawType[ImageDrawType["SCALE_W"] = IMAGE_DRAW_SCALE_W()] = "SCALE_W";
+    ImageDrawType[ImageDrawType["SCALE_H"] = IMAGE_DRAW_SCALE_H()] = "SCALE_H";
+    ImageDrawType[ImageDrawType["REPEAT"] = IMAGE_DRAW_REPEAT()] = "REPEAT";
+    ImageDrawType[ImageDrawType["REPEAT_X"] = IMAGE_DRAW_REPEAT_X()] = "REPEAT_X";
+    ImageDrawType[ImageDrawType["REPEAT_Y"] = IMAGE_DRAW_REPEAT_Y()] = "REPEAT_Y";
+    ImageDrawType[ImageDrawType["PATCH9"] = IMAGE_DRAW_PATCH9()] = "PATCH9";
+    ImageDrawType[ImageDrawType["PATCH3_X"] = IMAGE_DRAW_PATCH3_X()] = "PATCH3_X";
+    ImageDrawType[ImageDrawType["PATCH3_Y"] = IMAGE_DRAW_PATCH3_Y()] = "PATCH3_Y";
+    ImageDrawType[ImageDrawType["PATCH3_X_SCALE_Y"] = IMAGE_DRAW_PATCH3_X_SCALE_Y()] = "PATCH3_X_SCALE_Y";
+    ImageDrawType[ImageDrawType["PATCH3_Y_SCALE_X"] = IMAGE_DRAW_PATCH3_Y_SCALE_X()] = "PATCH3_Y_SCALE_X";
+})(ImageDrawType || (ImageDrawType = {}));
 ;
 var AlignH;
 (function (AlignH) {
@@ -109,14 +185,13 @@ var AlignH;
     AlignH[AlignH["RIGHT"] = ALIGN_H_RIGHT()] = "RIGHT";
 })(AlignH || (AlignH = {}));
 ;
-var BitmapFlag;
-(function (BitmapFlag) {
-    BitmapFlag[BitmapFlag["NONE"] = BITMAP_FLAG_NONE()] = "NONE";
-    BitmapFlag[BitmapFlag["OPAQUE"] = BITMAP_FLAG_OPAQUE()] = "OPAQUE";
-    BitmapFlag[BitmapFlag["IMMUTABLE"] = BITMAP_FLAG_IMMUTABLE()] = "IMMUTABLE";
-    BitmapFlag[BitmapFlag["TEXTURE"] = BITMAP_FLAG_TEXTURE()] = "TEXTURE";
-    BitmapFlag[BitmapFlag["CHANGED"] = BITMAP_FLAG_CHANGED()] = "CHANGED";
-})(BitmapFlag || (BitmapFlag = {}));
+var AlignV;
+(function (AlignV) {
+    AlignV[AlignV["NONE"] = ALIGN_V_NONE()] = "NONE";
+    AlignV[AlignV["MIDDLE"] = ALIGN_V_MIDDLE()] = "MIDDLE";
+    AlignV[AlignV["TOP"] = ALIGN_V_TOP()] = "TOP";
+    AlignV[AlignV["BOTTOM"] = ALIGN_V_BOTTOM()] = "BOTTOM";
+})(AlignV || (AlignV = {}));
 ;
 var Ret;
 (function (Ret) {
@@ -134,21 +209,6 @@ var Ret;
     Ret[Ret["CONTINUE"] = RET_CONTINUE()] = "CONTINUE";
     Ret[Ret["BAD_PARAMS"] = RET_BAD_PARAMS()] = "BAD_PARAMS";
 })(Ret || (Ret = {}));
-;
-var WidgetState;
-(function (WidgetState) {
-    WidgetState[WidgetState["STATE_NONE"] = WIDGET_STATE_NONE()] = "STATE_NONE";
-    WidgetState[WidgetState["STATE_NORMAL"] = WIDGET_STATE_NORMAL()] = "STATE_NORMAL";
-    WidgetState[WidgetState["STATE_PRESSED"] = WIDGET_STATE_PRESSED()] = "STATE_PRESSED";
-    WidgetState[WidgetState["STATE_OVER"] = WIDGET_STATE_OVER()] = "STATE_OVER";
-    WidgetState[WidgetState["STATE_DISABLE"] = WIDGET_STATE_DISABLE()] = "STATE_DISABLE";
-    WidgetState[WidgetState["STATE_FOCUSED"] = WIDGET_STATE_FOCUSED()] = "STATE_FOCUSED";
-    WidgetState[WidgetState["STATE_CHECKED"] = WIDGET_STATE_CHECKED()] = "STATE_CHECKED";
-    WidgetState[WidgetState["STATE_UNCHECKED"] = WIDGET_STATE_UNCHECKED()] = "STATE_UNCHECKED";
-    WidgetState[WidgetState["STATE_EMPTY"] = WIDGET_STATE_EMPTY()] = "STATE_EMPTY";
-    WidgetState[WidgetState["STATE_ERROR"] = WIDGET_STATE_ERROR()] = "STATE_ERROR";
-    WidgetState[WidgetState["STATE_SELECTED"] = WIDGET_STATE_SELECTED()] = "STATE_SELECTED";
-})(WidgetState || (WidgetState = {}));
 ;
 var EventType;
 (function (EventType) {
@@ -203,6 +263,15 @@ var EventType;
     EventType[EventType["USER_START"] = EVT_USER_START()] = "USER_START";
 })(EventType || (EventType = {}));
 ;
+var BitmapFlag;
+(function (BitmapFlag) {
+    BitmapFlag[BitmapFlag["NONE"] = BITMAP_FLAG_NONE()] = "NONE";
+    BitmapFlag[BitmapFlag["OPAQUE"] = BITMAP_FLAG_OPAQUE()] = "OPAQUE";
+    BitmapFlag[BitmapFlag["IMMUTABLE"] = BITMAP_FLAG_IMMUTABLE()] = "IMMUTABLE";
+    BitmapFlag[BitmapFlag["TEXTURE"] = BITMAP_FLAG_TEXTURE()] = "TEXTURE";
+    BitmapFlag[BitmapFlag["CHANGED"] = BITMAP_FLAG_CHANGED()] = "CHANGED";
+})(BitmapFlag || (BitmapFlag = {}));
+;
 var InputType;
 (function (InputType) {
     InputType[InputType["TEXT"] = INPUT_TEXT()] = "TEXT";
@@ -241,98 +310,79 @@ var AssetType;
     AssetType[AssetType["DATA"] = ASSET_TYPE_DATA()] = "DATA";
 })(AssetType || (AssetType = {}));
 ;
-var AlignV;
-(function (AlignV) {
-    AlignV[AlignV["NONE"] = ALIGN_V_NONE()] = "NONE";
-    AlignV[AlignV["MIDDLE"] = ALIGN_V_MIDDLE()] = "MIDDLE";
-    AlignV[AlignV["TOP"] = ALIGN_V_TOP()] = "TOP";
-    AlignV[AlignV["BOTTOM"] = ALIGN_V_BOTTOM()] = "BOTTOM";
-})(AlignV || (AlignV = {}));
+var ValueType;
+(function (ValueType) {
+    ValueType[ValueType["INVALID"] = VALUE_TYPE_INVALID()] = "INVALID";
+    ValueType[ValueType["BOOL"] = VALUE_TYPE_BOOL()] = "BOOL";
+    ValueType[ValueType["INT8"] = VALUE_TYPE_INT8()] = "INT8";
+    ValueType[ValueType["UINT8"] = VALUE_TYPE_UINT8()] = "UINT8";
+    ValueType[ValueType["INT16"] = VALUE_TYPE_INT16()] = "INT16";
+    ValueType[ValueType["UINT16"] = VALUE_TYPE_UINT16()] = "UINT16";
+    ValueType[ValueType["INT32"] = VALUE_TYPE_INT32()] = "INT32";
+    ValueType[ValueType["UINT32"] = VALUE_TYPE_UINT32()] = "UINT32";
+    ValueType[ValueType["INT64"] = VALUE_TYPE_INT64()] = "INT64";
+    ValueType[ValueType["UINT64"] = VALUE_TYPE_UINT64()] = "UINT64";
+    ValueType[ValueType["POINTER"] = VALUE_TYPE_POINTER()] = "POINTER";
+    ValueType[ValueType["FLOAT"] = VALUE_TYPE_FLOAT()] = "FLOAT";
+    ValueType[ValueType["DOUBLE"] = VALUE_TYPE_DOUBLE()] = "DOUBLE";
+    ValueType[ValueType["STRING"] = VALUE_TYPE_STRING()] = "STRING";
+    ValueType[ValueType["WSTRING"] = VALUE_TYPE_WSTRING()] = "WSTRING";
+})(ValueType || (ValueType = {}));
 ;
-var WidgetProp;
-(function (WidgetProp) {
-    WidgetProp[WidgetProp["X"] = WIDGET_PROP_X()] = "X";
-    WidgetProp[WidgetProp["Y"] = WIDGET_PROP_Y()] = "Y";
-    WidgetProp[WidgetProp["W"] = WIDGET_PROP_W()] = "W";
-    WidgetProp[WidgetProp["H"] = WIDGET_PROP_H()] = "H";
-    WidgetProp[WidgetProp["MIN_W"] = WIDGET_PROP_MIN_W()] = "MIN_W";
-    WidgetProp[WidgetProp["MAX_W"] = WIDGET_PROP_MAX_W()] = "MAX_W";
-    WidgetProp[WidgetProp["LAYOUT_W"] = WIDGET_PROP_LAYOUT_W()] = "LAYOUT_W";
-    WidgetProp[WidgetProp["LAYOUT_H"] = WIDGET_PROP_LAYOUT_H()] = "LAYOUT_H";
-    WidgetProp[WidgetProp["VIRTUAL_W"] = WIDGET_PROP_VIRTUAL_W()] = "VIRTUAL_W";
-    WidgetProp[WidgetProp["VIRTUAL_H"] = WIDGET_PROP_VIRTUAL_H()] = "VIRTUAL_H";
-    WidgetProp[WidgetProp["NAME"] = WIDGET_PROP_NAME()] = "NAME";
-    WidgetProp[WidgetProp["CURSOR"] = WIDGET_PROP_CURSOR()] = "CURSOR";
-    WidgetProp[WidgetProp["VALUE"] = WIDGET_PROP_VALUE()] = "VALUE";
-    WidgetProp[WidgetProp["TEXT"] = WIDGET_PROP_TEXT()] = "TEXT";
-    WidgetProp[WidgetProp["TR_TEXT"] = WIDGET_PROP_TR_TEXT()] = "TR_TEXT";
-    WidgetProp[WidgetProp["STYLE"] = WIDGET_PROP_STYLE()] = "STYLE";
-    WidgetProp[WidgetProp["ENABLE"] = WIDGET_PROP_ENABLE()] = "ENABLE";
-    WidgetProp[WidgetProp["MARGIN"] = WIDGET_PROP_MARGIN()] = "MARGIN";
-    WidgetProp[WidgetProp["SPACING"] = WIDGET_PROP_SPACING()] = "SPACING";
-    WidgetProp[WidgetProp["LEFT_MARGIN"] = WIDGET_PROP_LEFT_MARGIN()] = "LEFT_MARGIN";
-    WidgetProp[WidgetProp["RIGHT_MARGIN"] = WIDGET_PROP_RIGHT_MARGIN()] = "RIGHT_MARGIN";
-    WidgetProp[WidgetProp["TOP_MARGIN"] = WIDGET_PROP_TOP_MARGIN()] = "TOP_MARGIN";
-    WidgetProp[WidgetProp["BOTTOM_MARGIN"] = WIDGET_PROP_BOTTOM_MARGIN()] = "BOTTOM_MARGIN";
-    WidgetProp[WidgetProp["STEP"] = WIDGET_PROP_STEP()] = "STEP";
-    WidgetProp[WidgetProp["VISIBLE"] = WIDGET_PROP_VISIBLE()] = "VISIBLE";
-    WidgetProp[WidgetProp["ANIMATION"] = WIDGET_PROP_ANIMATION()] = "ANIMATION";
-    WidgetProp[WidgetProp["ANIM_HINT"] = WIDGET_PROP_ANIM_HINT()] = "ANIM_HINT";
-    WidgetProp[WidgetProp["OPEN_ANIM_HINT"] = WIDGET_PROP_OPEN_ANIM_HINT()] = "OPEN_ANIM_HINT";
-    WidgetProp[WidgetProp["CLOSE_ANIM_HINT"] = WIDGET_PROP_CLOSE_ANIM_HINT()] = "CLOSE_ANIM_HINT";
-    WidgetProp[WidgetProp["MIN"] = WIDGET_PROP_MIN()] = "MIN";
-    WidgetProp[WidgetProp["TIPS"] = WIDGET_PROP_TIPS()] = "TIPS";
-    WidgetProp[WidgetProp["INPUT_TYPE"] = WIDGET_PROP_INPUT_TYPE()] = "INPUT_TYPE";
-    WidgetProp[WidgetProp["READONLY"] = WIDGET_PROP_READONLY()] = "READONLY";
-    WidgetProp[WidgetProp["PASSWORD_VISIBLE"] = WIDGET_PROP_PASSWORD_VISIBLE()] = "PASSWORD_VISIBLE";
-    WidgetProp[WidgetProp["ACTIVE"] = WIDGET_PROP_ACTIVE()] = "ACTIVE";
-    WidgetProp[WidgetProp["VERTICAL"] = WIDGET_PROP_VERTICAL()] = "VERTICAL";
-    WidgetProp[WidgetProp["SHOW_TEXT"] = WIDGET_PROP_SHOW_TEXT()] = "SHOW_TEXT";
-    WidgetProp[WidgetProp["XOFFSET"] = WIDGET_PROP_XOFFSET()] = "XOFFSET";
-    WidgetProp[WidgetProp["YOFFSET"] = WIDGET_PROP_YOFFSET()] = "YOFFSET";
-    WidgetProp[WidgetProp["AUTO_PLAY"] = WIDGET_PROP_AUTO_PLAY()] = "AUTO_PLAY";
-    WidgetProp[WidgetProp["AUTO_FIX"] = WIDGET_PROP_AUTO_FIX()] = "AUTO_FIX";
-    WidgetProp[WidgetProp["X_MIN"] = WIDGET_PROP_X_MIN()] = "X_MIN";
-    WidgetProp[WidgetProp["X_MAX"] = WIDGET_PROP_X_MAX()] = "X_MAX";
-    WidgetProp[WidgetProp["Y_MIN"] = WIDGET_PROP_Y_MIN()] = "Y_MIN";
-    WidgetProp[WidgetProp["Y_MAX"] = WIDGET_PROP_Y_MAX()] = "Y_MAX";
-    WidgetProp[WidgetProp["MAX"] = WIDGET_PROP_MAX()] = "MAX";
-    WidgetProp[WidgetProp["ROW"] = WIDGET_PROP_ROW()] = "ROW";
-    WidgetProp[WidgetProp["THEME"] = WIDGET_PROP_THEME()] = "THEME";
-    WidgetProp[WidgetProp["SCRIPT"] = WIDGET_PROP_SCRIPT()] = "SCRIPT";
-    WidgetProp[WidgetProp["ITEM_WIDTH"] = WIDGET_PROP_ITEM_WIDTH()] = "ITEM_WIDTH";
-    WidgetProp[WidgetProp["ITEM_HEIGHT"] = WIDGET_PROP_ITEM_HEIGHT()] = "ITEM_HEIGHT";
-    WidgetProp[WidgetProp["DEFAULT_ITEM_HEIGHT"] = WIDGET_PROP_DEFAULT_ITEM_HEIGHT()] = "DEFAULT_ITEM_HEIGHT";
-    WidgetProp[WidgetProp["XSLIDABLE"] = WIDGET_PROP_XSLIDABLE()] = "XSLIDABLE";
-    WidgetProp[WidgetProp["YSLIDABLE"] = WIDGET_PROP_YSLIDABLE()] = "YSLIDABLE";
-    WidgetProp[WidgetProp["REPEAT"] = WIDGET_PROP_REPEAT()] = "REPEAT";
-    WidgetProp[WidgetProp["ANIMATABLE"] = WIDGET_PROP_ANIMATABLE()] = "ANIMATABLE";
-    WidgetProp[WidgetProp["AUTO_HIDE_SCROLL_BAR"] = WIDGET_PROP_AUTO_HIDE_SCROLL_BAR()] = "AUTO_HIDE_SCROLL_BAR";
-    WidgetProp[WidgetProp["IMAGE"] = WIDGET_PROP_IMAGE()] = "IMAGE";
-    WidgetProp[WidgetProp["DRAW_TYPE"] = WIDGET_PROP_DRAW_TYPE()] = "DRAW_TYPE";
-    WidgetProp[WidgetProp["SELECTABLE"] = WIDGET_PROP_SELECTABLE()] = "SELECTABLE";
-    WidgetProp[WidgetProp["CLICKABLE"] = WIDGET_PROP_CLICKABLE()] = "CLICKABLE";
-    WidgetProp[WidgetProp["SCALE_X"] = WIDGET_PROP_SCALE_X()] = "SCALE_X";
-    WidgetProp[WidgetProp["SCALE_Y"] = WIDGET_PROP_SCALE_Y()] = "SCALE_Y";
-    WidgetProp[WidgetProp["ANCHOR_X"] = WIDGET_PROP_ANCHOR_X()] = "ANCHOR_X";
-    WidgetProp[WidgetProp["ANCHOR_Y"] = WIDGET_PROP_ANCHOR_Y()] = "ANCHOR_Y";
-    WidgetProp[WidgetProp["ROTATION"] = WIDGET_PROP_ROTATION()] = "ROTATION";
-    WidgetProp[WidgetProp["SUB_THEME"] = WIDGET_PROP_SUB_THEME()] = "SUB_THEME";
-    WidgetProp[WidgetProp["COMPACT"] = WIDGET_PROP_COMPACT()] = "COMPACT";
-    WidgetProp[WidgetProp["ICON"] = WIDGET_PROP_ICON()] = "ICON";
-    WidgetProp[WidgetProp["OPTIONS"] = WIDGET_PROP_OPTIONS()] = "OPTIONS";
-    WidgetProp[WidgetProp["SELECTED"] = WIDGET_PROP_SELECTED()] = "SELECTED";
-    WidgetProp[WidgetProp["ACTIVE_ICON"] = WIDGET_PROP_ACTIVE_ICON()] = "ACTIVE_ICON";
-    WidgetProp[WidgetProp["OPEN_WINDOW"] = WIDGET_PROP_OPEN_WINDOW()] = "OPEN_WINDOW";
-    WidgetProp[WidgetProp["SELECTED_INDEX"] = WIDGET_PROP_SELECTED_INDEX()] = "SELECTED_INDEX";
-    WidgetProp[WidgetProp["CLOSE_WHEN_CLICK"] = WIDGET_PROP_CLOSE_WHEN_CLICK()] = "CLOSE_WHEN_CLICK";
-    WidgetProp[WidgetProp["CLOSE_WHEN_CLICK_OUTSIDE"] = WIDGET_PROP_CLOSE_WHEN_CLICK_OUTSIDE()] = "CLOSE_WHEN_CLICK_OUTSIDE";
-    WidgetProp[WidgetProp["LINE_GAP"] = WIDGET_PROP_LINE_GAP()] = "LINE_GAP";
-    WidgetProp[WidgetProp["BG_COLOR"] = WIDGET_PROP_BG_COLOR()] = "BG_COLOR";
-    WidgetProp[WidgetProp["BORDER_COLOR"] = WIDGET_PROP_BORDER_COLOR()] = "BORDER_COLOR";
-    WidgetProp[WidgetProp["DELAY"] = WIDGET_PROP_DELAY()] = "DELAY";
-})(WidgetProp || (WidgetProp = {}));
-;
+var AssetInfo = /** @class */ (function () {
+    function AssetInfo(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Object.defineProperty(AssetInfo.prototype, "type", {
+        get: function () {
+            return asset_info_t_get_prop_type(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AssetInfo.prototype, "subtype", {
+        get: function () {
+            return asset_info_t_get_prop_subtype(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AssetInfo.prototype, "isInRom", {
+        get: function () {
+            return asset_info_t_get_prop_is_in_rom(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AssetInfo.prototype, "size", {
+        get: function () {
+            return asset_info_t_get_prop_size(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AssetInfo.prototype, "refcount", {
+        get: function () {
+            return asset_info_t_get_prop_refcount(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AssetInfo.prototype, "name", {
+        get: function () {
+            return asset_info_t_get_prop_name(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return AssetInfo;
+}());
+var Canvas = /** @class */ (function () {
+    function Canvas(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    return Canvas;
+}());
 var Timer = /** @class */ (function () {
     function Timer(nativeObj) {
         this.nativeObj = nativeObj;
@@ -344,103 +394,6 @@ var Timer = /** @class */ (function () {
         return timer_remove(timer_id);
     };
     return Timer;
-}());
-var Value = /** @class */ (function () {
-    function Value(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    Value.prototype.setBool = function (value) {
-        return value_set_bool(this.nativeObj, value);
-    };
-    Value.prototype.bool = function () {
-        return value_bool(this.nativeObj);
-    };
-    Value.prototype.setInt8 = function (value) {
-        return value_set_int8(this.nativeObj, value);
-    };
-    Value.prototype.int8 = function () {
-        return value_int8(this.nativeObj);
-    };
-    Value.prototype.setUint8 = function (value) {
-        return value_set_uint8(this.nativeObj, value);
-    };
-    Value.prototype.uint8 = function () {
-        return value_uint8(this.nativeObj);
-    };
-    Value.prototype.setInt16 = function (value) {
-        return value_set_int16(this.nativeObj, value);
-    };
-    Value.prototype.int16 = function () {
-        return value_int16(this.nativeObj);
-    };
-    Value.prototype.setUint16 = function (value) {
-        return value_set_uint16(this.nativeObj, value);
-    };
-    Value.prototype.uint16 = function () {
-        return value_uint16(this.nativeObj);
-    };
-    Value.prototype.setInt32 = function (value) {
-        return value_set_int32(this.nativeObj, value);
-    };
-    Value.prototype.int32 = function () {
-        return value_int32(this.nativeObj);
-    };
-    Value.prototype.setUint32 = function (value) {
-        return value_set_uint32(this.nativeObj, value);
-    };
-    Value.prototype.setInt64 = function (value) {
-        return value_set_int64(this.nativeObj, value);
-    };
-    Value.prototype.int64 = function () {
-        return value_int64(this.nativeObj);
-    };
-    Value.prototype.setUint64 = function (value) {
-        return value_set_uint64(this.nativeObj, value);
-    };
-    Value.prototype.uint64 = function () {
-        return value_uint64(this.nativeObj);
-    };
-    Value.prototype.setFloat = function (value) {
-        return value_set_float(this.nativeObj, value);
-    };
-    Value.prototype.float = function () {
-        return value_float(this.nativeObj);
-    };
-    Value.prototype.setDouble = function (value) {
-        return value_set_double(this.nativeObj, value);
-    };
-    Value.prototype.double = function () {
-        return value_double(this.nativeObj);
-    };
-    Value.prototype.setStr = function (value) {
-        return value_set_str(this.nativeObj, value);
-    };
-    Value.prototype.str = function () {
-        return value_str(this.nativeObj);
-    };
-    Value.prototype.isNull = function () {
-        return value_is_null(this.nativeObj);
-    };
-    Value.prototype.int = function () {
-        return value_int(this.nativeObj);
-    };
-    Value.prototype.setInt = function (value) {
-        return value_set_int(this.nativeObj, value);
-    };
-    Value.create = function () {
-        return new Value(value_create());
-    };
-    Value.prototype.destroy = function () {
-        return value_destroy(this.nativeObj);
-    };
-    Object.defineProperty(Value.prototype, "type", {
-        get: function () {
-            return value_t_get_prop_type(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Value;
 }());
 var Widget = /** @class */ (function () {
     function Widget(nativeObj) {
@@ -523,6 +476,18 @@ var Widget = /** @class */ (function () {
     };
     Widget.prototype.setPropStr = function (name, v) {
         return widget_set_prop_str(this.nativeObj, name, v);
+    };
+    Widget.prototype.getPropStr = function (name, defval) {
+        return widget_get_prop_str(this.nativeObj, name, defval);
+    };
+    Widget.prototype.setPropInt = function (name, v) {
+        return widget_set_prop_int(this.nativeObj, name, v);
+    };
+    Widget.prototype.getPropInt = function (name, defval) {
+        return widget_get_prop_int(this.nativeObj, name, defval);
+    };
+    Widget.prototype.isWindowOpened = function () {
+        return widget_is_window_opened(this.nativeObj);
     };
     Widget.prototype.foreach = function (visit, ctx) {
         return widget_foreach(this.nativeObj, visit, ctx);
@@ -632,123 +597,6 @@ var Widget = /** @class */ (function () {
     });
     return Widget;
 }());
-var Canvas = /** @class */ (function () {
-    function Canvas(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    return Canvas;
-}());
-var Rect = /** @class */ (function () {
-    function Rect(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    return Rect;
-}());
-var Point = /** @class */ (function () {
-    function Point(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    return Point;
-}());
-var AssetInfo = /** @class */ (function () {
-    function AssetInfo(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    Object.defineProperty(AssetInfo.prototype, "type", {
-        get: function () {
-            return asset_info_t_get_prop_type(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AssetInfo.prototype, "subtype", {
-        get: function () {
-            return asset_info_t_get_prop_subtype(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AssetInfo.prototype, "isInRom", {
-        get: function () {
-            return asset_info_t_get_prop_is_in_rom(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AssetInfo.prototype, "size", {
-        get: function () {
-            return asset_info_t_get_prop_size(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AssetInfo.prototype, "refcount", {
-        get: function () {
-            return asset_info_t_get_prop_refcount(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AssetInfo.prototype, "name", {
-        get: function () {
-            return asset_info_t_get_prop_name(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return AssetInfo;
-}());
-var Event = /** @class */ (function () {
-    function Event(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    Event.cast = function (event) {
-        return new Event(event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(Event.prototype, "type", {
-        get: function () {
-            return event_t_get_prop_type(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Event.prototype, "time", {
-        get: function () {
-            return event_t_get_prop_time(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Event.prototype, "target", {
-        get: function () {
-            return event_t_get_prop_target(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Event;
-}());
-var LocaleInfo = /** @class */ (function () {
-    function LocaleInfo(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    LocaleInfo.instance = function () {
-        return new LocaleInfo(locale_info());
-    };
-    LocaleInfo.prototype.tr = function (text) {
-        return locale_info_tr(this.nativeObj, text);
-    };
-    LocaleInfo.prototype.change = function (language, country) {
-        return locale_info_change(this.nativeObj, language, country);
-    };
-    LocaleInfo.prototype.on = function (type, on_event, ctx) {
-        return locale_info_on(this.nativeObj, type, on_event, ctx);
-    };
-    LocaleInfo.prototype.off = function (id) {
-        return locale_info_off(this.nativeObj, id);
-    };
-    return LocaleInfo;
-}());
 var Bitmap = /** @class */ (function () {
     function Bitmap(nativeObj) {
         this.nativeObj = nativeObj;
@@ -809,6 +657,211 @@ var Bitmap = /** @class */ (function () {
     });
     return Bitmap;
 }());
+var Style = /** @class */ (function () {
+    function Style(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Style.prototype.notifyWidgetStateChanged = function (widget) {
+        return style_notify_widget_state_changed(this.nativeObj, widget ? (widget.nativeObj || widget) : null);
+    };
+    Style.prototype.isValid = function () {
+        return style_is_valid(this.nativeObj);
+    };
+    Style.prototype.getInt = function (id, defval) {
+        return style_get_int(this.nativeObj, id, defval);
+    };
+    Style.prototype.getStr = function (id, defval) {
+        return style_get_str(this.nativeObj, id, defval);
+    };
+    Style.prototype.getName = function () {
+        return style_get_name(this.nativeObj);
+    };
+    Style.prototype.setName = function (name) {
+        return style_set_name(this.nativeObj, name);
+    };
+    Style.prototype.setInt = function (state, id, val) {
+        return style_set_int(this.nativeObj, state, id, val);
+    };
+    Style.prototype.setStr = function (state, id, val) {
+        return style_set_str(this.nativeObj, state, id, val);
+    };
+    return Style;
+}());
+var Value = /** @class */ (function () {
+    function Value(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Value.prototype.setBool = function (value) {
+        return value_set_bool(this.nativeObj, value);
+    };
+    Value.prototype.bool = function () {
+        return value_bool(this.nativeObj);
+    };
+    Value.prototype.setInt8 = function (value) {
+        return value_set_int8(this.nativeObj, value);
+    };
+    Value.prototype.int8 = function () {
+        return value_int8(this.nativeObj);
+    };
+    Value.prototype.setUint8 = function (value) {
+        return value_set_uint8(this.nativeObj, value);
+    };
+    Value.prototype.uint8 = function () {
+        return value_uint8(this.nativeObj);
+    };
+    Value.prototype.setInt16 = function (value) {
+        return value_set_int16(this.nativeObj, value);
+    };
+    Value.prototype.int16 = function () {
+        return value_int16(this.nativeObj);
+    };
+    Value.prototype.setUint16 = function (value) {
+        return value_set_uint16(this.nativeObj, value);
+    };
+    Value.prototype.uint16 = function () {
+        return value_uint16(this.nativeObj);
+    };
+    Value.prototype.setInt32 = function (value) {
+        return value_set_int32(this.nativeObj, value);
+    };
+    Value.prototype.int32 = function () {
+        return value_int32(this.nativeObj);
+    };
+    Value.prototype.setUint32 = function (value) {
+        return value_set_uint32(this.nativeObj, value);
+    };
+    Value.prototype.setInt64 = function (value) {
+        return value_set_int64(this.nativeObj, value);
+    };
+    Value.prototype.int64 = function () {
+        return value_int64(this.nativeObj);
+    };
+    Value.prototype.setUint64 = function (value) {
+        return value_set_uint64(this.nativeObj, value);
+    };
+    Value.prototype.uint64 = function () {
+        return value_uint64(this.nativeObj);
+    };
+    Value.prototype.setFloat = function (value) {
+        return value_set_float(this.nativeObj, value);
+    };
+    Value.prototype.float = function () {
+        return value_float(this.nativeObj);
+    };
+    Value.prototype.setDouble = function (value) {
+        return value_set_double(this.nativeObj, value);
+    };
+    Value.prototype.double = function () {
+        return value_double(this.nativeObj);
+    };
+    Value.prototype.setStr = function (value) {
+        return value_set_str(this.nativeObj, value);
+    };
+    Value.prototype.str = function () {
+        return value_str(this.nativeObj);
+    };
+    Value.prototype.isNull = function () {
+        return value_is_null(this.nativeObj);
+    };
+    Value.prototype.int = function () {
+        return value_int(this.nativeObj);
+    };
+    Value.prototype.setInt = function (value) {
+        return value_set_int(this.nativeObj, value);
+    };
+    Value.create = function () {
+        return new Value(value_create());
+    };
+    Value.prototype.destroy = function () {
+        return value_destroy(this.nativeObj);
+    };
+    Object.defineProperty(Value.prototype, "type", {
+        get: function () {
+            return value_t_get_prop_type(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Value;
+}());
+var Event = /** @class */ (function () {
+    function Event(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Event.cast = function (event) {
+        return new Event(event_cast(event ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(Event.prototype, "type", {
+        get: function () {
+            return event_t_get_prop_type(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Event.prototype, "time", {
+        get: function () {
+            return event_t_get_prop_time(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Event.prototype, "target", {
+        get: function () {
+            return event_t_get_prop_target(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Event;
+}());
+var Rect = /** @class */ (function () {
+    function Rect(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    return Rect;
+}());
+var Point = /** @class */ (function () {
+    function Point(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    return Point;
+}());
+var LocaleInfo = /** @class */ (function () {
+    function LocaleInfo(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    LocaleInfo.instance = function () {
+        return new LocaleInfo(locale_info());
+    };
+    LocaleInfo.prototype.tr = function (text) {
+        return locale_info_tr(this.nativeObj, text);
+    };
+    LocaleInfo.prototype.change = function (language, country) {
+        return locale_info_change(this.nativeObj, language, country);
+    };
+    LocaleInfo.prototype.on = function (type, on_event, ctx) {
+        return locale_info_on(this.nativeObj, type, on_event, ctx);
+    };
+    LocaleInfo.prototype.off = function (id) {
+        return locale_info_off(this.nativeObj, id);
+    };
+    return LocaleInfo;
+}());
+var AssetsManager = /** @class */ (function () {
+    function AssetsManager(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    AssetsManager.instance = function () {
+        return new AssetsManager(assets_manager());
+    };
+    AssetsManager.prototype.ref = function (type, name) {
+        return assets_manager_ref(this.nativeObj, type, name);
+    };
+    AssetsManager.prototype.unref = function (info) {
+        return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
+    };
+    return AssetsManager;
+}());
 var ImageManager = /** @class */ (function () {
     function ImageManager(nativeObj) {
         this.nativeObj = nativeObj;
@@ -833,21 +886,27 @@ var Idle = /** @class */ (function () {
     };
     return Idle;
 }());
-var AssetsManager = /** @class */ (function () {
-    function AssetsManager(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    AssetsManager.instance = function () {
-        return new AssetsManager(assets_manager());
-    };
-    AssetsManager.prototype.ref = function (type, name) {
-        return assets_manager_ref(this.nativeObj, type, name);
-    };
-    AssetsManager.prototype.unref = function (info) {
-        return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
-    };
-    return AssetsManager;
-}());
+var WidgetState;
+(function (WidgetState) {
+    WidgetState[WidgetState["STATE_NONE"] = WIDGET_STATE_NONE()] = "STATE_NONE";
+    WidgetState[WidgetState["STATE_NORMAL"] = WIDGET_STATE_NORMAL()] = "STATE_NORMAL";
+    WidgetState[WidgetState["STATE_PRESSED"] = WIDGET_STATE_PRESSED()] = "STATE_PRESSED";
+    WidgetState[WidgetState["STATE_OVER"] = WIDGET_STATE_OVER()] = "STATE_OVER";
+    WidgetState[WidgetState["STATE_DISABLE"] = WIDGET_STATE_DISABLE()] = "STATE_DISABLE";
+    WidgetState[WidgetState["STATE_FOCUSED"] = WIDGET_STATE_FOCUSED()] = "STATE_FOCUSED";
+    WidgetState[WidgetState["STATE_CHECKED"] = WIDGET_STATE_CHECKED()] = "STATE_CHECKED";
+    WidgetState[WidgetState["STATE_UNCHECKED"] = WIDGET_STATE_UNCHECKED()] = "STATE_UNCHECKED";
+    WidgetState[WidgetState["STATE_EMPTY"] = WIDGET_STATE_EMPTY()] = "STATE_EMPTY";
+    WidgetState[WidgetState["STATE_ERROR"] = WIDGET_STATE_ERROR()] = "STATE_ERROR";
+    WidgetState[WidgetState["STATE_SELECTED"] = WIDGET_STATE_SELECTED()] = "STATE_SELECTED";
+    WidgetState[WidgetState["STATE_NORMAL_OF_CHECKED"] = WIDGET_STATE_NORMAL_OF_CHECKED()] = "STATE_NORMAL_OF_CHECKED";
+    WidgetState[WidgetState["STATE_PRESSED_OF_CHECKED"] = WIDGET_STATE_PRESSED_OF_CHECKED()] = "STATE_PRESSED_OF_CHECKED";
+    WidgetState[WidgetState["STATE_OVER_OF_CHECKED"] = WIDGET_STATE_OVER_OF_CHECKED()] = "STATE_OVER_OF_CHECKED";
+    WidgetState[WidgetState["STATE_NORMAL_OF_ACTIVE"] = WIDGET_STATE_NORMAL_OF_ACTIVE()] = "STATE_NORMAL_OF_ACTIVE";
+    WidgetState[WidgetState["STATE_PRESSED_OF_ACTIVE"] = WIDGET_STATE_PRESSED_OF_ACTIVE()] = "STATE_PRESSED_OF_ACTIVE";
+    WidgetState[WidgetState["STATE_OVER_OF_ACTIVE"] = WIDGET_STATE_OVER_OF_ACTIVE()] = "STATE_OVER_OF_ACTIVE";
+})(WidgetState || (WidgetState = {}));
+;
 var AppBar = /** @class */ (function (_super) {
     __extends(AppBar, _super);
     function AppBar(nativeObj) {
@@ -1000,8 +1059,8 @@ var ComboBoxItem = /** @class */ (function (_super) {
     ComboBoxItem.cast = function (widget) {
         return new ComboBoxItem(combo_box_item_cast(widget ? (widget.nativeObj || widget) : null));
     };
-    ComboBoxItem.prototype.setSelected = function (selected) {
-        return combo_box_item_set_selected(this.nativeObj, selected);
+    ComboBoxItem.prototype.setChecked = function (checked) {
+        return combo_box_item_set_checked(this.nativeObj, checked);
     };
     ComboBoxItem.prototype.setValue = function (value) {
         return combo_box_item_set_value(this.nativeObj, value);
@@ -1013,9 +1072,9 @@ var ComboBoxItem = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ComboBoxItem.prototype, "selected", {
+    Object.defineProperty(ComboBoxItem.prototype, "checked", {
         get: function () {
-            return combo_box_item_t_get_prop_selected(this.nativeObj);
+            return combo_box_item_t_get_prop_checked(this.nativeObj);
         },
         enumerable: true,
         configurable: true
