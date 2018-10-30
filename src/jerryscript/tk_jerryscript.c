@@ -5627,13 +5627,49 @@ jerry_value_t get_WIDGET_PROP_STAGE(
   return jerry_create_str(WIDGET_PROP_STAGE);
 }
 
-jerry_value_t get_WIDGET_PROP_THEME_DATA(
+jerry_value_t get_WIDGET_PROP_IMAGE_MANAGER(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
     const jerry_value_t args_p[], 
     const jerry_length_t args_cnt
   ) {
-  return jerry_create_str(WIDGET_PROP_THEME_DATA);
+  return jerry_create_str(WIDGET_PROP_IMAGE_MANAGER);
+}
+
+jerry_value_t get_WIDGET_PROP_ASSETS_MANAGER(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(WIDGET_PROP_ASSETS_MANAGER);
+}
+
+jerry_value_t get_WIDGET_PROP_FONT_MANAGER(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(WIDGET_PROP_FONT_MANAGER);
+}
+
+jerry_value_t get_WIDGET_PROP_THEME_OBJ(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(WIDGET_PROP_THEME_OBJ);
+}
+
+jerry_value_t get_WIDGET_PROP_DEFAULT_THEME_OBJ(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(WIDGET_PROP_DEFAULT_THEME_OBJ);
 }
 
 jerry_value_t get_WIDGET_PROP_SCRIPT(
@@ -5975,7 +6011,11 @@ ret_t widget_prop_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_STATE_FOR_STYLE", get_WIDGET_PROP_STATE_FOR_STYLE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_THEME", get_WIDGET_PROP_THEME);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_STAGE", get_WIDGET_PROP_STAGE);
-  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_THEME_DATA", get_WIDGET_PROP_THEME_DATA);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_IMAGE_MANAGER", get_WIDGET_PROP_IMAGE_MANAGER);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ASSETS_MANAGER", get_WIDGET_PROP_ASSETS_MANAGER);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_FONT_MANAGER", get_WIDGET_PROP_FONT_MANAGER);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_THEME_OBJ", get_WIDGET_PROP_THEME_OBJ);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_DEFAULT_THEME_OBJ", get_WIDGET_PROP_DEFAULT_THEME_OBJ);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_SCRIPT", get_WIDGET_PROP_SCRIPT);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ITEM_WIDTH", get_WIDGET_PROP_ITEM_WIDTH);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ITEM_HEIGHT", get_WIDGET_PROP_ITEM_HEIGHT);
@@ -7286,6 +7326,22 @@ jerry_value_t wrap_widget_destroy(
   return jerry_create_number(ret);
 }
 
+jerry_value_t wrap_widget_load_image(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  const char* name = (const char*)jerry_get_utf8_string(args_p[1]);
+  bitmap_t* bitmap = (bitmap_t*)jerry_get_pointer(args_p[2], "bitmap_t*");
+  ret = (ret_t)widget_load_image(widget, name, bitmap);
+  TKMEM_FREE(name);
+
+  return jerry_create_number(ret);
+}
+
 jerry_value_t wrap_widget_t_get_prop_x(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -7450,6 +7506,7 @@ ret_t widget_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_layout", wrap_widget_layout);
   jerryx_handler_register_global((const jerry_char_t*)"widget_cast", wrap_widget_cast);
   jerryx_handler_register_global((const jerry_char_t*)"widget_destroy", wrap_widget_destroy);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_load_image", wrap_widget_load_image);
   jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_x", wrap_widget_t_get_prop_x);
   jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_y", wrap_widget_t_get_prop_y);
   jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_w", wrap_widget_t_get_prop_w);

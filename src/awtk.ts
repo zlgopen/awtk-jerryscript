@@ -96,7 +96,11 @@ declare function WIDGET_PROP_ROW();
 declare function WIDGET_PROP_STATE_FOR_STYLE();
 declare function WIDGET_PROP_THEME();
 declare function WIDGET_PROP_STAGE();
-declare function WIDGET_PROP_THEME_DATA();
+declare function WIDGET_PROP_IMAGE_MANAGER();
+declare function WIDGET_PROP_ASSETS_MANAGER();
+declare function WIDGET_PROP_FONT_MANAGER();
+declare function WIDGET_PROP_THEME_OBJ();
+declare function WIDGET_PROP_DEFAULT_THEME_OBJ();
 declare function WIDGET_PROP_SCRIPT();
 declare function WIDGET_PROP_ITEM_WIDTH();
 declare function WIDGET_PROP_ITEM_HEIGHT();
@@ -313,6 +317,7 @@ declare function widget_set_children_layout_params(widget, params);
 declare function widget_layout(widget);
 declare function widget_cast(widget);
 declare function widget_destroy(widget);
+declare function widget_load_image(widget, name, bitmap);
 declare function widget_t_get_prop_x(nativeObj);
 declare function widget_t_get_prop_y(nativeObj);
 declare function widget_t_get_prop_w(nativeObj);
@@ -821,7 +826,11 @@ enum WidgetProp {
  STATE_FOR_STYLE = WIDGET_PROP_STATE_FOR_STYLE(),
  THEME = WIDGET_PROP_THEME(),
  STAGE = WIDGET_PROP_STAGE(),
- THEME_DATA = WIDGET_PROP_THEME_DATA(),
+ IMAGE_MANAGER = WIDGET_PROP_IMAGE_MANAGER(),
+ ASSETS_MANAGER = WIDGET_PROP_ASSETS_MANAGER(),
+ FONT_MANAGER = WIDGET_PROP_FONT_MANAGER(),
+ THEME_OBJ = WIDGET_PROP_THEME_OBJ(),
+ DEFAULT_THEME_OBJ = WIDGET_PROP_DEFAULT_THEME_OBJ(),
  SCRIPT = WIDGET_PROP_SCRIPT(),
  ITEM_WIDTH = WIDGET_PROP_ITEM_WIDTH(),
  ITEM_HEIGHT = WIDGET_PROP_ITEM_HEIGHT(),
@@ -1248,6 +1257,10 @@ class Widget {
 
  destroy() {
    return widget_destroy(this.nativeObj);
+ }
+
+ loadImage(name, bitmap) {
+   return widget_load_image(this.nativeObj, name, bitmap ? (bitmap.nativeObj || bitmap) : null);
  }
 
  get x() {

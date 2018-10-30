@@ -115,7 +115,11 @@ var WidgetProp;
     WidgetProp[WidgetProp["STATE_FOR_STYLE"] = WIDGET_PROP_STATE_FOR_STYLE()] = "STATE_FOR_STYLE";
     WidgetProp[WidgetProp["THEME"] = WIDGET_PROP_THEME()] = "THEME";
     WidgetProp[WidgetProp["STAGE"] = WIDGET_PROP_STAGE()] = "STAGE";
-    WidgetProp[WidgetProp["THEME_DATA"] = WIDGET_PROP_THEME_DATA()] = "THEME_DATA";
+    WidgetProp[WidgetProp["IMAGE_MANAGER"] = WIDGET_PROP_IMAGE_MANAGER()] = "IMAGE_MANAGER";
+    WidgetProp[WidgetProp["ASSETS_MANAGER"] = WIDGET_PROP_ASSETS_MANAGER()] = "ASSETS_MANAGER";
+    WidgetProp[WidgetProp["FONT_MANAGER"] = WIDGET_PROP_FONT_MANAGER()] = "FONT_MANAGER";
+    WidgetProp[WidgetProp["THEME_OBJ"] = WIDGET_PROP_THEME_OBJ()] = "THEME_OBJ";
+    WidgetProp[WidgetProp["DEFAULT_THEME_OBJ"] = WIDGET_PROP_DEFAULT_THEME_OBJ()] = "DEFAULT_THEME_OBJ";
     WidgetProp[WidgetProp["SCRIPT"] = WIDGET_PROP_SCRIPT()] = "SCRIPT";
     WidgetProp[WidgetProp["ITEM_WIDTH"] = WIDGET_PROP_ITEM_WIDTH()] = "ITEM_WIDTH";
     WidgetProp[WidgetProp["ITEM_HEIGHT"] = WIDGET_PROP_ITEM_HEIGHT()] = "ITEM_HEIGHT";
@@ -521,6 +525,9 @@ var Widget = /** @class */ (function () {
     };
     Widget.prototype.destroy = function () {
         return widget_destroy(this.nativeObj);
+    };
+    Widget.prototype.loadImage = function (name, bitmap) {
+        return widget_load_image(this.nativeObj, name, bitmap ? (bitmap.nativeObj || bitmap) : null);
     };
     Object.defineProperty(Widget.prototype, "x", {
         get: function () {
