@@ -1,3 +1,20 @@
+declare function WIDGET_STATE_NONE();
+declare function WIDGET_STATE_NORMAL();
+declare function WIDGET_STATE_PRESSED();
+declare function WIDGET_STATE_OVER();
+declare function WIDGET_STATE_DISABLE();
+declare function WIDGET_STATE_FOCUSED();
+declare function WIDGET_STATE_CHECKED();
+declare function WIDGET_STATE_UNCHECKED();
+declare function WIDGET_STATE_EMPTY();
+declare function WIDGET_STATE_ERROR();
+declare function WIDGET_STATE_SELECTED();
+declare function WIDGET_STATE_NORMAL_OF_CHECKED();
+declare function WIDGET_STATE_PRESSED_OF_CHECKED();
+declare function WIDGET_STATE_OVER_OF_CHECKED();
+declare function WIDGET_STATE_NORMAL_OF_ACTIVE();
+declare function WIDGET_STATE_PRESSED_OF_ACTIVE();
+declare function WIDGET_STATE_OVER_OF_ACTIVE();
 declare function WIDGET_TYPE_NONE();
 declare function WIDGET_TYPE_WINDOW_MANAGER();
 declare function WIDGET_TYPE_NORMAL_WINDOW();
@@ -133,10 +150,6 @@ declare function WIDGET_PROP_LINE_GAP();
 declare function WIDGET_PROP_BG_COLOR();
 declare function WIDGET_PROP_BORDER_COLOR();
 declare function WIDGET_PROP_DELAY();
-declare function WINDOW_STAGE_NONE();
-declare function WINDOW_STAGE_CREATED();
-declare function WINDOW_STAGE_OPENED();
-declare function WINDOW_STAGE_CLOSED();
 declare function IMAGE_DRAW_DEFAULT();
 declare function IMAGE_DRAW_CENTER();
 declare function IMAGE_DRAW_ICON();
@@ -207,6 +220,7 @@ declare function EVT_AFTER_PAINT();
 declare function EVT_LOCALE_CHANGED();
 declare function EVT_ANIM_START();
 declare function EVT_ANIM_STOP();
+declare function EVT_ANIM_PAUSE();
 declare function EVT_ANIM_ONCE();
 declare function EVT_ANIM_END();
 declare function EVT_WINDOW_LOAD();
@@ -268,6 +282,12 @@ declare function VALUE_TYPE_FLOAT();
 declare function VALUE_TYPE_DOUBLE();
 declare function VALUE_TYPE_STRING();
 declare function VALUE_TYPE_WSTRING();
+declare function WINDOW_STAGE_NONE();
+declare function WINDOW_STAGE_CREATED();
+declare function WINDOW_STAGE_OPENED();
+declare function WINDOW_STAGE_CLOSED();
+declare function date_time_create();
+declare function date_time_destroy(dt);
 declare function asset_info_t_get_prop_type(nativeObj);
 declare function asset_info_t_get_prop_subtype(nativeObj);
 declare function asset_info_t_get_prop_is_in_rom(nativeObj);
@@ -276,6 +296,20 @@ declare function asset_info_t_get_prop_refcount(nativeObj);
 declare function asset_info_t_get_prop_name(nativeObj);
 declare function timer_add(on_timer, ctx, duration_ms);
 declare function timer_remove(timer_id);
+declare function bitmap_create();
+declare function bitmap_create_ex(w, h, line_length, format);
+declare function bitmap_get_bpp(bitmap);
+declare function bitmap_destroy(bitmap);
+declare function bitmap_t_get_prop_w(nativeObj);
+declare function bitmap_t_get_prop_h(nativeObj);
+declare function bitmap_t_get_prop_line_length(nativeObj);
+declare function bitmap_t_get_prop_flags(nativeObj);
+declare function bitmap_t_get_prop_format(nativeObj);
+declare function bitmap_t_get_prop_name(nativeObj);
+declare function style_notify_widget_state_changed(s, widget);
+declare function style_is_valid(s);
+declare function style_get_int(s, id, defval);
+declare function style_get_str(s, id, defval);
 declare function widget_count_children(widget);
 declare function widget_get_child(widget, index);
 declare function widget_index_of(widget);
@@ -292,6 +326,12 @@ declare function widget_get_text(widget);
 declare function widget_set_name(widget, name);
 declare function widget_set_cursor(widget, cursor);
 declare function widget_set_animation(widget, animation);
+declare function widget_create_animator(widget, animation);
+declare function widget_start_animator(widget, name);
+declare function widget_set_animator_time_scale(widget, name, time_scale);
+declare function widget_pause_animator(widget, name);
+declare function widget_stop_animator(widget, name);
+declare function widget_destroy_animator(widget, name);
 declare function widget_set_enable(widget, enable);
 declare function widget_set_focused(widget, focused);
 declare function widget_child(widget, name);
@@ -329,24 +369,15 @@ declare function widget_t_get_prop_animation(nativeObj);
 declare function widget_t_get_prop_enable(nativeObj);
 declare function widget_t_get_prop_visible(nativeObj);
 declare function widget_t_set_prop_visible(nativeObj, value);
-declare function bitmap_create();
-declare function bitmap_create_ex(w, h, line_length, format);
-declare function bitmap_get_bpp(bitmap);
-declare function bitmap_destroy(bitmap);
-declare function bitmap_t_get_prop_w(nativeObj);
-declare function bitmap_t_get_prop_h(nativeObj);
-declare function bitmap_t_get_prop_line_length(nativeObj);
-declare function bitmap_t_get_prop_flags(nativeObj);
-declare function bitmap_t_get_prop_format(nativeObj);
-declare function bitmap_t_get_prop_name(nativeObj);
-declare function style_notify_widget_state_changed(s, widget);
-declare function style_is_valid(s);
-declare function style_get_int(s, id, defval);
-declare function style_get_str(s, id, defval);
-declare function style_get_name(s);
-declare function style_set_name(s, name);
-declare function style_set_int(s, state, id, val);
-declare function style_set_str(s, state, id, val);
+declare function event_cast(event);
+declare function event_t_get_prop_type(nativeObj);
+declare function event_t_get_prop_time(nativeObj);
+declare function event_t_get_prop_target(nativeObj);
+declare function locale_info();
+declare function locale_info_tr(locale_info, text);
+declare function locale_info_change(locale_info, language, country);
+declare function locale_info_on(locale_info, type, on_event, ctx);
+declare function locale_info_off(locale_info, id);
 declare function value_set_bool(v, value);
 declare function value_bool(v);
 declare function value_set_int8(v, value);
@@ -376,39 +407,13 @@ declare function value_set_int(v, value);
 declare function value_create();
 declare function value_destroy(v);
 declare function value_t_get_prop_type(nativeObj);
-declare function event_cast(event);
-declare function event_t_get_prop_type(nativeObj);
-declare function event_t_get_prop_time(nativeObj);
-declare function event_t_get_prop_target(nativeObj);
-declare function locale_info();
-declare function locale_info_tr(locale_info, text);
-declare function locale_info_change(locale_info, language, country);
-declare function locale_info_on(locale_info, type, on_event, ctx);
-declare function locale_info_off(locale_info, id);
-declare function assets_manager();
-declare function assets_manager_ref(rm, type, name);
-declare function assets_manager_unref(rm, info);
 declare function image_manager();
 declare function image_manager_load(imm, name, image);
 declare function idle_add(on_idle, ctx);
 declare function idle_remove(idle_id);
-declare function WIDGET_STATE_NONE();
-declare function WIDGET_STATE_NORMAL();
-declare function WIDGET_STATE_PRESSED();
-declare function WIDGET_STATE_OVER();
-declare function WIDGET_STATE_DISABLE();
-declare function WIDGET_STATE_FOCUSED();
-declare function WIDGET_STATE_CHECKED();
-declare function WIDGET_STATE_UNCHECKED();
-declare function WIDGET_STATE_EMPTY();
-declare function WIDGET_STATE_ERROR();
-declare function WIDGET_STATE_SELECTED();
-declare function WIDGET_STATE_NORMAL_OF_CHECKED();
-declare function WIDGET_STATE_PRESSED_OF_CHECKED();
-declare function WIDGET_STATE_OVER_OF_CHECKED();
-declare function WIDGET_STATE_NORMAL_OF_ACTIVE();
-declare function WIDGET_STATE_PRESSED_OF_ACTIVE();
-declare function WIDGET_STATE_OVER_OF_ACTIVE();
+declare function assets_manager();
+declare function assets_manager_ref(rm, type, name);
+declare function assets_manager_unref(rm, info);
 declare function app_bar_create(parent, x, y, w, h);
 declare function app_bar_cast(widget);
 declare function button_group_create(parent, x, y, w, h);
@@ -466,6 +471,14 @@ declare function dialog_modal(widget);
 declare function dialog_quit(widget, code);
 declare function dialog_title_create(parent, x, y, w, h);
 declare function dialog_title_cast(widget);
+declare function digit_clock_create(parent, x, y, w, h);
+declare function digit_clock_cast(widget);
+declare function digit_clock_set_show_date(widget, show_date);
+declare function digit_clock_set_show_time(widget, show_time);
+declare function digit_clock_set_format(widget, format);
+declare function digit_clock_t_get_prop_show_date(nativeObj);
+declare function digit_clock_t_get_prop_show_time(nativeObj);
+declare function digit_clock_t_get_prop_format(nativeObj);
 declare function dragger_create(parent, x, y, w, h);
 declare function dragger_cast(widget);
 declare function dragger_set_range(widget, x_min, y_min, x_max, y_max);
@@ -651,6 +664,11 @@ declare function slider_t_get_prop_step(nativeObj);
 declare function slider_t_get_prop_vertical(nativeObj);
 declare function spin_box_create(parent, x, y, w, h);
 declare function spin_box_cast(widget);
+declare function style_mutable_get_name(s);
+declare function style_mutable_set_name(s, name);
+declare function style_mutable_set_int(s, state, id, val);
+declare function style_mutable_create(widget);
+declare function style_mutable_t_get_prop_name(nativeObj);
 declare function switch_create(parent, x, y, w, h);
 declare function switch_set_value(widget, value);
 declare function switch_cast(widget);
@@ -723,6 +741,26 @@ declare function window_open(name);
 declare function window_open_and_close(name, to_close);
 declare function window_close(widget);
 declare function window_cast(widget);
+
+enum WidgetState {
+ STATE_NONE = WIDGET_STATE_NONE(),
+ STATE_NORMAL = WIDGET_STATE_NORMAL(),
+ STATE_PRESSED = WIDGET_STATE_PRESSED(),
+ STATE_OVER = WIDGET_STATE_OVER(),
+ STATE_DISABLE = WIDGET_STATE_DISABLE(),
+ STATE_FOCUSED = WIDGET_STATE_FOCUSED(),
+ STATE_CHECKED = WIDGET_STATE_CHECKED(),
+ STATE_UNCHECKED = WIDGET_STATE_UNCHECKED(),
+ STATE_EMPTY = WIDGET_STATE_EMPTY(),
+ STATE_ERROR = WIDGET_STATE_ERROR(),
+ STATE_SELECTED = WIDGET_STATE_SELECTED(),
+ STATE_NORMAL_OF_CHECKED = WIDGET_STATE_NORMAL_OF_CHECKED(),
+ STATE_PRESSED_OF_CHECKED = WIDGET_STATE_PRESSED_OF_CHECKED(),
+ STATE_OVER_OF_CHECKED = WIDGET_STATE_OVER_OF_CHECKED(),
+ STATE_NORMAL_OF_ACTIVE = WIDGET_STATE_NORMAL_OF_ACTIVE(),
+ STATE_PRESSED_OF_ACTIVE = WIDGET_STATE_PRESSED_OF_ACTIVE(),
+ STATE_OVER_OF_ACTIVE = WIDGET_STATE_OVER_OF_ACTIVE(),
+};
 
 enum WidgetType {
  NONE = WIDGET_TYPE_NONE(),
@@ -865,13 +903,6 @@ enum WidgetProp {
  DELAY = WIDGET_PROP_DELAY(),
 };
 
-enum WindowStage {
- NONE = WINDOW_STAGE_NONE(),
- CREATED = WINDOW_STAGE_CREATED(),
- OPENED = WINDOW_STAGE_OPENED(),
- CLOSED = WINDOW_STAGE_CLOSED(),
-};
-
 enum ImageDrawType {
  DEFAULT = IMAGE_DRAW_DEFAULT(),
  CENTER = IMAGE_DRAW_CENTER(),
@@ -955,6 +986,7 @@ enum EventType {
  LOCALE_CHANGED = EVT_LOCALE_CHANGED(),
  ANIM_START = EVT_ANIM_START(),
  ANIM_STOP = EVT_ANIM_STOP(),
+ ANIM_PAUSE = EVT_ANIM_PAUSE(),
  ANIM_ONCE = EVT_ANIM_ONCE(),
  ANIM_END = EVT_ANIM_END(),
  WINDOW_LOAD = EVT_WINDOW_LOAD(),
@@ -1033,6 +1065,29 @@ enum ValueType {
  WSTRING = VALUE_TYPE_WSTRING(),
 };
 
+enum WindowStage {
+ NONE = WINDOW_STAGE_NONE(),
+ CREATED = WINDOW_STAGE_CREATED(),
+ OPENED = WINDOW_STAGE_OPENED(),
+ CLOSED = WINDOW_STAGE_CLOSED(),
+};
+
+class DateTime {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static create() {
+   return new DateTime(date_time_create());
+ }
+
+ destroy() {
+   return date_time_destroy(this.nativeObj);
+ }
+
+}
+
 class AssetInfo {
  public nativeObj;
  constructor(nativeObj) {
@@ -1085,6 +1140,78 @@ class Timer {
 
  static remove(timer_id) {
    return timer_remove(timer_id);
+ }
+
+}
+
+class Bitmap {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static create() {
+   return new Bitmap(bitmap_create());
+ }
+
+ static createEx(w, h, line_length, format) {
+   return new Bitmap(bitmap_create_ex(w, h, line_length, format));
+ }
+
+ getBpp() {
+   return bitmap_get_bpp(this.nativeObj);
+ }
+
+ destroy() {
+   return bitmap_destroy(this.nativeObj);
+ }
+
+ get w() {
+   return bitmap_t_get_prop_w(this.nativeObj);
+ }
+
+ get h() {
+   return bitmap_t_get_prop_h(this.nativeObj);
+ }
+
+ get lineLength() {
+   return bitmap_t_get_prop_line_length(this.nativeObj);
+ }
+
+ get flags() {
+   return bitmap_t_get_prop_flags(this.nativeObj);
+ }
+
+ get format() {
+   return bitmap_t_get_prop_format(this.nativeObj);
+ }
+
+ get name() {
+   return bitmap_t_get_prop_name(this.nativeObj);
+ }
+
+}
+
+class Style {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ notifyWidgetStateChanged(widget) {
+   return style_notify_widget_state_changed(this.nativeObj, widget ? (widget.nativeObj || widget) : null);
+ }
+
+ isValid() {
+   return style_is_valid(this.nativeObj);
+ }
+
+ getInt(id, defval) {
+   return style_get_int(this.nativeObj, id, defval);
+ }
+
+ getStr(id, defval) {
+   return style_get_str(this.nativeObj, id, defval);
  }
 
 }
@@ -1157,6 +1284,30 @@ class Widget {
 
  setAnimation(animation) {
    return widget_set_animation(this.nativeObj, animation);
+ }
+
+ createAnimator(animation) {
+   return widget_create_animator(this.nativeObj, animation);
+ }
+
+ startAnimator(name) {
+   return widget_start_animator(this.nativeObj, name);
+ }
+
+ setAnimatorTimeScale(name, time_scale) {
+   return widget_set_animator_time_scale(this.nativeObj, name, time_scale);
+ }
+
+ pauseAnimator(name) {
+   return widget_pause_animator(this.nativeObj, name);
+ }
+
+ stopAnimator(name) {
+   return widget_stop_animator(this.nativeObj, name);
+ }
+
+ destroyAnimator(name) {
+   return widget_destroy_animator(this.nativeObj, name);
  }
 
  setEnable(enable) {
@@ -1309,90 +1460,70 @@ class Widget {
 
 }
 
-class Bitmap {
+class Event {
  public nativeObj;
  constructor(nativeObj) {
    this.nativeObj = nativeObj;
  }
 
- static create() {
-   return new Bitmap(bitmap_create());
+ static cast(event) {
+   return new Event(event_cast(event ? (event.nativeObj || event) : null));
  }
 
- static createEx(w, h, line_length, format) {
-   return new Bitmap(bitmap_create_ex(w, h, line_length, format));
+ get type() {
+   return event_t_get_prop_type(this.nativeObj);
  }
 
- getBpp() {
-   return bitmap_get_bpp(this.nativeObj);
+ get time() {
+   return event_t_get_prop_time(this.nativeObj);
  }
 
- destroy() {
-   return bitmap_destroy(this.nativeObj);
- }
-
- get w() {
-   return bitmap_t_get_prop_w(this.nativeObj);
- }
-
- get h() {
-   return bitmap_t_get_prop_h(this.nativeObj);
- }
-
- get lineLength() {
-   return bitmap_t_get_prop_line_length(this.nativeObj);
- }
-
- get flags() {
-   return bitmap_t_get_prop_flags(this.nativeObj);
- }
-
- get format() {
-   return bitmap_t_get_prop_format(this.nativeObj);
- }
-
- get name() {
-   return bitmap_t_get_prop_name(this.nativeObj);
+ get target() {
+   return event_t_get_prop_target(this.nativeObj);
  }
 
 }
 
-class Style {
+class Rect {
  public nativeObj;
  constructor(nativeObj) {
    this.nativeObj = nativeObj;
  }
 
- notifyWidgetStateChanged(widget) {
-   return style_notify_widget_state_changed(this.nativeObj, widget ? (widget.nativeObj || widget) : null);
+}
+
+class Point {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
  }
 
- isValid() {
-   return style_is_valid(this.nativeObj);
+}
+
+class LocaleInfo {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
  }
 
- getInt(id, defval) {
-   return style_get_int(this.nativeObj, id, defval);
+ static instance() {
+   return new LocaleInfo(locale_info());
  }
 
- getStr(id, defval) {
-   return style_get_str(this.nativeObj, id, defval);
+ tr(text) {
+   return locale_info_tr(this.nativeObj, text);
  }
 
- getName() {
-   return style_get_name(this.nativeObj);
+ change(language, country) {
+   return locale_info_change(this.nativeObj, language, country);
  }
 
- setName(name) {
-   return style_set_name(this.nativeObj, name);
+ on(type, on_event, ctx) {
+   return locale_info_on(this.nativeObj, type, on_event, ctx);
  }
 
- setInt(state, id, val) {
-   return style_set_int(this.nativeObj, state, id, val);
- }
-
- setStr(state, id, val) {
-   return style_set_str(this.nativeObj, state, id, val);
+ off(id) {
+   return locale_info_off(this.nativeObj, id);
  }
 
 }
@@ -1521,94 +1652,6 @@ class Value {
 
 }
 
-class Event {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static cast(event) {
-   return new Event(event_cast(event ? (event.nativeObj || event) : null));
- }
-
- get type() {
-   return event_t_get_prop_type(this.nativeObj);
- }
-
- get time() {
-   return event_t_get_prop_time(this.nativeObj);
- }
-
- get target() {
-   return event_t_get_prop_target(this.nativeObj);
- }
-
-}
-
-class Rect {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
-}
-
-class Point {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
-}
-
-class LocaleInfo {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static instance() {
-   return new LocaleInfo(locale_info());
- }
-
- tr(text) {
-   return locale_info_tr(this.nativeObj, text);
- }
-
- change(language, country) {
-   return locale_info_change(this.nativeObj, language, country);
- }
-
- on(type, on_event, ctx) {
-   return locale_info_on(this.nativeObj, type, on_event, ctx);
- }
-
- off(id) {
-   return locale_info_off(this.nativeObj, id);
- }
-
-}
-
-class AssetsManager {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static instance() {
-   return new AssetsManager(assets_manager());
- }
-
- ref(type, name) {
-   return assets_manager_ref(this.nativeObj, type, name);
- }
-
- unref(info) {
-   return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
- }
-
-}
-
 class ImageManager {
  public nativeObj;
  constructor(nativeObj) {
@@ -1641,25 +1684,25 @@ class Idle {
 
 }
 
-enum WidgetState {
- STATE_NONE = WIDGET_STATE_NONE(),
- STATE_NORMAL = WIDGET_STATE_NORMAL(),
- STATE_PRESSED = WIDGET_STATE_PRESSED(),
- STATE_OVER = WIDGET_STATE_OVER(),
- STATE_DISABLE = WIDGET_STATE_DISABLE(),
- STATE_FOCUSED = WIDGET_STATE_FOCUSED(),
- STATE_CHECKED = WIDGET_STATE_CHECKED(),
- STATE_UNCHECKED = WIDGET_STATE_UNCHECKED(),
- STATE_EMPTY = WIDGET_STATE_EMPTY(),
- STATE_ERROR = WIDGET_STATE_ERROR(),
- STATE_SELECTED = WIDGET_STATE_SELECTED(),
- STATE_NORMAL_OF_CHECKED = WIDGET_STATE_NORMAL_OF_CHECKED(),
- STATE_PRESSED_OF_CHECKED = WIDGET_STATE_PRESSED_OF_CHECKED(),
- STATE_OVER_OF_CHECKED = WIDGET_STATE_OVER_OF_CHECKED(),
- STATE_NORMAL_OF_ACTIVE = WIDGET_STATE_NORMAL_OF_ACTIVE(),
- STATE_PRESSED_OF_ACTIVE = WIDGET_STATE_PRESSED_OF_ACTIVE(),
- STATE_OVER_OF_ACTIVE = WIDGET_STATE_OVER_OF_ACTIVE(),
-};
+class AssetsManager {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static instance() {
+   return new AssetsManager(assets_manager());
+ }
+
+ ref(type, name) {
+   return assets_manager_ref(this.nativeObj, type, name);
+ }
+
+ unref(info) {
+   return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
+ }
+
+}
 
 class AppBar extends Widget {
  public nativeObj;
@@ -1981,6 +2024,46 @@ class DialogTitle extends Widget {
 
  static cast(widget) {
    return new DialogTitle(dialog_title_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+}
+
+class DigitClock extends Widget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new DigitClock(digit_clock_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+ }
+
+ static cast(widget) {
+   return new DigitClock(digit_clock_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ setShowDate(show_date) {
+   return digit_clock_set_show_date(this.nativeObj, show_date);
+ }
+
+ setShowTime(show_time) {
+   return digit_clock_set_show_time(this.nativeObj, show_time);
+ }
+
+ setFormat(format) {
+   return digit_clock_set_format(this.nativeObj, format);
+ }
+
+ get showDate() {
+   return digit_clock_t_get_prop_show_date(this.nativeObj);
+ }
+
+ get showTime() {
+   return digit_clock_t_get_prop_show_time(this.nativeObj);
+ }
+
+ get format() {
+   return digit_clock_t_get_prop_format(this.nativeObj);
  }
 
 }
@@ -2921,6 +3004,34 @@ class SpinBox extends Edit {
 
  static cast(widget) {
    return new SpinBox(spin_box_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+}
+
+class StyleMutable extends Style {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ getName() {
+   return style_mutable_get_name(this.nativeObj);
+ }
+
+ setName(name) {
+   return style_mutable_set_name(this.nativeObj, name);
+ }
+
+ setInt(state, id, val) {
+   return style_mutable_set_int(this.nativeObj, state, id, val);
+ }
+
+ static create(widget) {
+   return new StyleMutable(style_mutable_create(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ get name() {
+   return style_mutable_t_get_prop_name(this.nativeObj);
  }
 
 }

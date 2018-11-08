@@ -11,6 +11,27 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var WidgetState;
+(function (WidgetState) {
+    WidgetState[WidgetState["STATE_NONE"] = WIDGET_STATE_NONE()] = "STATE_NONE";
+    WidgetState[WidgetState["STATE_NORMAL"] = WIDGET_STATE_NORMAL()] = "STATE_NORMAL";
+    WidgetState[WidgetState["STATE_PRESSED"] = WIDGET_STATE_PRESSED()] = "STATE_PRESSED";
+    WidgetState[WidgetState["STATE_OVER"] = WIDGET_STATE_OVER()] = "STATE_OVER";
+    WidgetState[WidgetState["STATE_DISABLE"] = WIDGET_STATE_DISABLE()] = "STATE_DISABLE";
+    WidgetState[WidgetState["STATE_FOCUSED"] = WIDGET_STATE_FOCUSED()] = "STATE_FOCUSED";
+    WidgetState[WidgetState["STATE_CHECKED"] = WIDGET_STATE_CHECKED()] = "STATE_CHECKED";
+    WidgetState[WidgetState["STATE_UNCHECKED"] = WIDGET_STATE_UNCHECKED()] = "STATE_UNCHECKED";
+    WidgetState[WidgetState["STATE_EMPTY"] = WIDGET_STATE_EMPTY()] = "STATE_EMPTY";
+    WidgetState[WidgetState["STATE_ERROR"] = WIDGET_STATE_ERROR()] = "STATE_ERROR";
+    WidgetState[WidgetState["STATE_SELECTED"] = WIDGET_STATE_SELECTED()] = "STATE_SELECTED";
+    WidgetState[WidgetState["STATE_NORMAL_OF_CHECKED"] = WIDGET_STATE_NORMAL_OF_CHECKED()] = "STATE_NORMAL_OF_CHECKED";
+    WidgetState[WidgetState["STATE_PRESSED_OF_CHECKED"] = WIDGET_STATE_PRESSED_OF_CHECKED()] = "STATE_PRESSED_OF_CHECKED";
+    WidgetState[WidgetState["STATE_OVER_OF_CHECKED"] = WIDGET_STATE_OVER_OF_CHECKED()] = "STATE_OVER_OF_CHECKED";
+    WidgetState[WidgetState["STATE_NORMAL_OF_ACTIVE"] = WIDGET_STATE_NORMAL_OF_ACTIVE()] = "STATE_NORMAL_OF_ACTIVE";
+    WidgetState[WidgetState["STATE_PRESSED_OF_ACTIVE"] = WIDGET_STATE_PRESSED_OF_ACTIVE()] = "STATE_PRESSED_OF_ACTIVE";
+    WidgetState[WidgetState["STATE_OVER_OF_ACTIVE"] = WIDGET_STATE_OVER_OF_ACTIVE()] = "STATE_OVER_OF_ACTIVE";
+})(WidgetState || (WidgetState = {}));
+;
 var WidgetType;
 (function (WidgetType) {
     WidgetType[WidgetType["NONE"] = WIDGET_TYPE_NONE()] = "NONE";
@@ -154,14 +175,6 @@ var WidgetProp;
     WidgetProp[WidgetProp["DELAY"] = WIDGET_PROP_DELAY()] = "DELAY";
 })(WidgetProp || (WidgetProp = {}));
 ;
-var WindowStage;
-(function (WindowStage) {
-    WindowStage[WindowStage["NONE"] = WINDOW_STAGE_NONE()] = "NONE";
-    WindowStage[WindowStage["CREATED"] = WINDOW_STAGE_CREATED()] = "CREATED";
-    WindowStage[WindowStage["OPENED"] = WINDOW_STAGE_OPENED()] = "OPENED";
-    WindowStage[WindowStage["CLOSED"] = WINDOW_STAGE_CLOSED()] = "CLOSED";
-})(WindowStage || (WindowStage = {}));
-;
 var ImageDrawType;
 (function (ImageDrawType) {
     ImageDrawType[ImageDrawType["DEFAULT"] = IMAGE_DRAW_DEFAULT()] = "DEFAULT";
@@ -250,6 +263,7 @@ var EventType;
     EventType[EventType["LOCALE_CHANGED"] = EVT_LOCALE_CHANGED()] = "LOCALE_CHANGED";
     EventType[EventType["ANIM_START"] = EVT_ANIM_START()] = "ANIM_START";
     EventType[EventType["ANIM_STOP"] = EVT_ANIM_STOP()] = "ANIM_STOP";
+    EventType[EventType["ANIM_PAUSE"] = EVT_ANIM_PAUSE()] = "ANIM_PAUSE";
     EventType[EventType["ANIM_ONCE"] = EVT_ANIM_ONCE()] = "ANIM_ONCE";
     EventType[EventType["ANIM_END"] = EVT_ANIM_END()] = "ANIM_END";
     EventType[EventType["WINDOW_LOAD"] = EVT_WINDOW_LOAD()] = "WINDOW_LOAD";
@@ -333,6 +347,26 @@ var ValueType;
     ValueType[ValueType["WSTRING"] = VALUE_TYPE_WSTRING()] = "WSTRING";
 })(ValueType || (ValueType = {}));
 ;
+var WindowStage;
+(function (WindowStage) {
+    WindowStage[WindowStage["NONE"] = WINDOW_STAGE_NONE()] = "NONE";
+    WindowStage[WindowStage["CREATED"] = WINDOW_STAGE_CREATED()] = "CREATED";
+    WindowStage[WindowStage["OPENED"] = WINDOW_STAGE_OPENED()] = "OPENED";
+    WindowStage[WindowStage["CLOSED"] = WINDOW_STAGE_CLOSED()] = "CLOSED";
+})(WindowStage || (WindowStage = {}));
+;
+var DateTime = /** @class */ (function () {
+    function DateTime(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    DateTime.create = function () {
+        return new DateTime(date_time_create());
+    };
+    DateTime.prototype.destroy = function () {
+        return date_time_destroy(this.nativeObj);
+    };
+    return DateTime;
+}());
 var AssetInfo = /** @class */ (function () {
     function AssetInfo(nativeObj) {
         this.nativeObj = nativeObj;
@@ -399,6 +433,84 @@ var Timer = /** @class */ (function () {
     };
     return Timer;
 }());
+var Bitmap = /** @class */ (function () {
+    function Bitmap(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Bitmap.create = function () {
+        return new Bitmap(bitmap_create());
+    };
+    Bitmap.createEx = function (w, h, line_length, format) {
+        return new Bitmap(bitmap_create_ex(w, h, line_length, format));
+    };
+    Bitmap.prototype.getBpp = function () {
+        return bitmap_get_bpp(this.nativeObj);
+    };
+    Bitmap.prototype.destroy = function () {
+        return bitmap_destroy(this.nativeObj);
+    };
+    Object.defineProperty(Bitmap.prototype, "w", {
+        get: function () {
+            return bitmap_t_get_prop_w(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "h", {
+        get: function () {
+            return bitmap_t_get_prop_h(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "lineLength", {
+        get: function () {
+            return bitmap_t_get_prop_line_length(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "flags", {
+        get: function () {
+            return bitmap_t_get_prop_flags(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "format", {
+        get: function () {
+            return bitmap_t_get_prop_format(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "name", {
+        get: function () {
+            return bitmap_t_get_prop_name(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Bitmap;
+}());
+var Style = /** @class */ (function () {
+    function Style(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Style.prototype.notifyWidgetStateChanged = function (widget) {
+        return style_notify_widget_state_changed(this.nativeObj, widget ? (widget.nativeObj || widget) : null);
+    };
+    Style.prototype.isValid = function () {
+        return style_is_valid(this.nativeObj);
+    };
+    Style.prototype.getInt = function (id, defval) {
+        return style_get_int(this.nativeObj, id, defval);
+    };
+    Style.prototype.getStr = function (id, defval) {
+        return style_get_str(this.nativeObj, id, defval);
+    };
+    return Style;
+}());
 var Widget = /** @class */ (function () {
     function Widget(nativeObj) {
         this.nativeObj = nativeObj;
@@ -450,6 +562,24 @@ var Widget = /** @class */ (function () {
     };
     Widget.prototype.setAnimation = function (animation) {
         return widget_set_animation(this.nativeObj, animation);
+    };
+    Widget.prototype.createAnimator = function (animation) {
+        return widget_create_animator(this.nativeObj, animation);
+    };
+    Widget.prototype.startAnimator = function (name) {
+        return widget_start_animator(this.nativeObj, name);
+    };
+    Widget.prototype.setAnimatorTimeScale = function (name, time_scale) {
+        return widget_set_animator_time_scale(this.nativeObj, name, time_scale);
+    };
+    Widget.prototype.pauseAnimator = function (name) {
+        return widget_pause_animator(this.nativeObj, name);
+    };
+    Widget.prototype.stopAnimator = function (name) {
+        return widget_stop_animator(this.nativeObj, name);
+    };
+    Widget.prototype.destroyAnimator = function (name) {
+        return widget_destroy_animator(this.nativeObj, name);
     };
     Widget.prototype.setEnable = function (enable) {
         return widget_set_enable(this.nativeObj, enable);
@@ -604,95 +734,68 @@ var Widget = /** @class */ (function () {
     });
     return Widget;
 }());
-var Bitmap = /** @class */ (function () {
-    function Bitmap(nativeObj) {
+var Event = /** @class */ (function () {
+    function Event(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    Bitmap.create = function () {
-        return new Bitmap(bitmap_create());
+    Event.cast = function (event) {
+        return new Event(event_cast(event ? (event.nativeObj || event) : null));
     };
-    Bitmap.createEx = function (w, h, line_length, format) {
-        return new Bitmap(bitmap_create_ex(w, h, line_length, format));
-    };
-    Bitmap.prototype.getBpp = function () {
-        return bitmap_get_bpp(this.nativeObj);
-    };
-    Bitmap.prototype.destroy = function () {
-        return bitmap_destroy(this.nativeObj);
-    };
-    Object.defineProperty(Bitmap.prototype, "w", {
+    Object.defineProperty(Event.prototype, "type", {
         get: function () {
-            return bitmap_t_get_prop_w(this.nativeObj);
+            return event_t_get_prop_type(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Bitmap.prototype, "h", {
+    Object.defineProperty(Event.prototype, "time", {
         get: function () {
-            return bitmap_t_get_prop_h(this.nativeObj);
+            return event_t_get_prop_time(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Bitmap.prototype, "lineLength", {
+    Object.defineProperty(Event.prototype, "target", {
         get: function () {
-            return bitmap_t_get_prop_line_length(this.nativeObj);
+            return event_t_get_prop_target(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Bitmap.prototype, "flags", {
-        get: function () {
-            return bitmap_t_get_prop_flags(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Bitmap.prototype, "format", {
-        get: function () {
-            return bitmap_t_get_prop_format(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Bitmap.prototype, "name", {
-        get: function () {
-            return bitmap_t_get_prop_name(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Bitmap;
+    return Event;
 }());
-var Style = /** @class */ (function () {
-    function Style(nativeObj) {
+var Rect = /** @class */ (function () {
+    function Rect(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    Style.prototype.notifyWidgetStateChanged = function (widget) {
-        return style_notify_widget_state_changed(this.nativeObj, widget ? (widget.nativeObj || widget) : null);
+    return Rect;
+}());
+var Point = /** @class */ (function () {
+    function Point(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    return Point;
+}());
+var LocaleInfo = /** @class */ (function () {
+    function LocaleInfo(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    LocaleInfo.instance = function () {
+        return new LocaleInfo(locale_info());
     };
-    Style.prototype.isValid = function () {
-        return style_is_valid(this.nativeObj);
+    LocaleInfo.prototype.tr = function (text) {
+        return locale_info_tr(this.nativeObj, text);
     };
-    Style.prototype.getInt = function (id, defval) {
-        return style_get_int(this.nativeObj, id, defval);
+    LocaleInfo.prototype.change = function (language, country) {
+        return locale_info_change(this.nativeObj, language, country);
     };
-    Style.prototype.getStr = function (id, defval) {
-        return style_get_str(this.nativeObj, id, defval);
+    LocaleInfo.prototype.on = function (type, on_event, ctx) {
+        return locale_info_on(this.nativeObj, type, on_event, ctx);
     };
-    Style.prototype.getName = function () {
-        return style_get_name(this.nativeObj);
+    LocaleInfo.prototype.off = function (id) {
+        return locale_info_off(this.nativeObj, id);
     };
-    Style.prototype.setName = function (name) {
-        return style_set_name(this.nativeObj, name);
-    };
-    Style.prototype.setInt = function (state, id, val) {
-        return style_set_int(this.nativeObj, state, id, val);
-    };
-    Style.prototype.setStr = function (state, id, val) {
-        return style_set_str(this.nativeObj, state, id, val);
-    };
-    return Style;
+    return LocaleInfo;
 }());
 var Value = /** @class */ (function () {
     function Value(nativeObj) {
@@ -791,84 +894,6 @@ var Value = /** @class */ (function () {
     });
     return Value;
 }());
-var Event = /** @class */ (function () {
-    function Event(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    Event.cast = function (event) {
-        return new Event(event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(Event.prototype, "type", {
-        get: function () {
-            return event_t_get_prop_type(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Event.prototype, "time", {
-        get: function () {
-            return event_t_get_prop_time(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Event.prototype, "target", {
-        get: function () {
-            return event_t_get_prop_target(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Event;
-}());
-var Rect = /** @class */ (function () {
-    function Rect(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    return Rect;
-}());
-var Point = /** @class */ (function () {
-    function Point(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    return Point;
-}());
-var LocaleInfo = /** @class */ (function () {
-    function LocaleInfo(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    LocaleInfo.instance = function () {
-        return new LocaleInfo(locale_info());
-    };
-    LocaleInfo.prototype.tr = function (text) {
-        return locale_info_tr(this.nativeObj, text);
-    };
-    LocaleInfo.prototype.change = function (language, country) {
-        return locale_info_change(this.nativeObj, language, country);
-    };
-    LocaleInfo.prototype.on = function (type, on_event, ctx) {
-        return locale_info_on(this.nativeObj, type, on_event, ctx);
-    };
-    LocaleInfo.prototype.off = function (id) {
-        return locale_info_off(this.nativeObj, id);
-    };
-    return LocaleInfo;
-}());
-var AssetsManager = /** @class */ (function () {
-    function AssetsManager(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    AssetsManager.instance = function () {
-        return new AssetsManager(assets_manager());
-    };
-    AssetsManager.prototype.ref = function (type, name) {
-        return assets_manager_ref(this.nativeObj, type, name);
-    };
-    AssetsManager.prototype.unref = function (info) {
-        return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
-    };
-    return AssetsManager;
-}());
 var ImageManager = /** @class */ (function () {
     function ImageManager(nativeObj) {
         this.nativeObj = nativeObj;
@@ -893,27 +918,21 @@ var Idle = /** @class */ (function () {
     };
     return Idle;
 }());
-var WidgetState;
-(function (WidgetState) {
-    WidgetState[WidgetState["STATE_NONE"] = WIDGET_STATE_NONE()] = "STATE_NONE";
-    WidgetState[WidgetState["STATE_NORMAL"] = WIDGET_STATE_NORMAL()] = "STATE_NORMAL";
-    WidgetState[WidgetState["STATE_PRESSED"] = WIDGET_STATE_PRESSED()] = "STATE_PRESSED";
-    WidgetState[WidgetState["STATE_OVER"] = WIDGET_STATE_OVER()] = "STATE_OVER";
-    WidgetState[WidgetState["STATE_DISABLE"] = WIDGET_STATE_DISABLE()] = "STATE_DISABLE";
-    WidgetState[WidgetState["STATE_FOCUSED"] = WIDGET_STATE_FOCUSED()] = "STATE_FOCUSED";
-    WidgetState[WidgetState["STATE_CHECKED"] = WIDGET_STATE_CHECKED()] = "STATE_CHECKED";
-    WidgetState[WidgetState["STATE_UNCHECKED"] = WIDGET_STATE_UNCHECKED()] = "STATE_UNCHECKED";
-    WidgetState[WidgetState["STATE_EMPTY"] = WIDGET_STATE_EMPTY()] = "STATE_EMPTY";
-    WidgetState[WidgetState["STATE_ERROR"] = WIDGET_STATE_ERROR()] = "STATE_ERROR";
-    WidgetState[WidgetState["STATE_SELECTED"] = WIDGET_STATE_SELECTED()] = "STATE_SELECTED";
-    WidgetState[WidgetState["STATE_NORMAL_OF_CHECKED"] = WIDGET_STATE_NORMAL_OF_CHECKED()] = "STATE_NORMAL_OF_CHECKED";
-    WidgetState[WidgetState["STATE_PRESSED_OF_CHECKED"] = WIDGET_STATE_PRESSED_OF_CHECKED()] = "STATE_PRESSED_OF_CHECKED";
-    WidgetState[WidgetState["STATE_OVER_OF_CHECKED"] = WIDGET_STATE_OVER_OF_CHECKED()] = "STATE_OVER_OF_CHECKED";
-    WidgetState[WidgetState["STATE_NORMAL_OF_ACTIVE"] = WIDGET_STATE_NORMAL_OF_ACTIVE()] = "STATE_NORMAL_OF_ACTIVE";
-    WidgetState[WidgetState["STATE_PRESSED_OF_ACTIVE"] = WIDGET_STATE_PRESSED_OF_ACTIVE()] = "STATE_PRESSED_OF_ACTIVE";
-    WidgetState[WidgetState["STATE_OVER_OF_ACTIVE"] = WIDGET_STATE_OVER_OF_ACTIVE()] = "STATE_OVER_OF_ACTIVE";
-})(WidgetState || (WidgetState = {}));
-;
+var AssetsManager = /** @class */ (function () {
+    function AssetsManager(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    AssetsManager.instance = function () {
+        return new AssetsManager(assets_manager());
+    };
+    AssetsManager.prototype.ref = function (type, name) {
+        return assets_manager_ref(this.nativeObj, type, name);
+    };
+    AssetsManager.prototype.unref = function (info) {
+        return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
+    };
+    return AssetsManager;
+}());
 var AppBar = /** @class */ (function (_super) {
     __extends(AppBar, _super);
     function AppBar(nativeObj) {
@@ -1212,6 +1231,49 @@ var DialogTitle = /** @class */ (function (_super) {
         return new DialogTitle(dialog_title_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return DialogTitle;
+}(Widget));
+var DigitClock = /** @class */ (function (_super) {
+    __extends(DigitClock, _super);
+    function DigitClock(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    DigitClock.create = function (parent, x, y, w, h) {
+        return new DigitClock(digit_clock_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    DigitClock.cast = function (widget) {
+        return new DigitClock(digit_clock_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    DigitClock.prototype.setShowDate = function (show_date) {
+        return digit_clock_set_show_date(this.nativeObj, show_date);
+    };
+    DigitClock.prototype.setShowTime = function (show_time) {
+        return digit_clock_set_show_time(this.nativeObj, show_time);
+    };
+    DigitClock.prototype.setFormat = function (format) {
+        return digit_clock_set_format(this.nativeObj, format);
+    };
+    Object.defineProperty(DigitClock.prototype, "showDate", {
+        get: function () {
+            return digit_clock_t_get_prop_show_date(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DigitClock.prototype, "showTime", {
+        get: function () {
+            return digit_clock_t_get_prop_show_time(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DigitClock.prototype, "format", {
+        get: function () {
+            return digit_clock_t_get_prop_format(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return DigitClock;
 }(Widget));
 var Dragger = /** @class */ (function (_super) {
     __extends(Dragger, _super);
@@ -2243,6 +2305,32 @@ var SpinBox = /** @class */ (function (_super) {
     };
     return SpinBox;
 }(Edit));
+var StyleMutable = /** @class */ (function (_super) {
+    __extends(StyleMutable, _super);
+    function StyleMutable(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    StyleMutable.prototype.getName = function () {
+        return style_mutable_get_name(this.nativeObj);
+    };
+    StyleMutable.prototype.setName = function (name) {
+        return style_mutable_set_name(this.nativeObj, name);
+    };
+    StyleMutable.prototype.setInt = function (state, id, val) {
+        return style_mutable_set_int(this.nativeObj, state, id, val);
+    };
+    StyleMutable.create = function (widget) {
+        return new StyleMutable(style_mutable_create(widget ? (widget.nativeObj || widget) : null));
+    };
+    Object.defineProperty(StyleMutable.prototype, "name", {
+        get: function () {
+            return style_mutable_t_get_prop_name(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return StyleMutable;
+}(Style));
 var Switch = /** @class */ (function (_super) {
     __extends(Switch, _super);
     function Switch(nativeObj) {
