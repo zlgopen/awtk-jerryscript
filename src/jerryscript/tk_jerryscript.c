@@ -41,6 +41,7 @@
 #include "base/tab_button_group.h"
 #include "base/tab_button.h"
 #include "base/tab_control.h"
+#include "base/time_now.h"
 #include "base/timer.h"
 #include "base/types_def.h"
 #include "base/value.h"
@@ -55,6 +56,7 @@
 #include "ext_widgets/ext_widgets.h"
 #include "guage/guage.h"
 #include "image_animation/image_animation.h"
+#include "progress_circle/progress_circle.h"
 #include "rich_text/rich_text.h"
 #include "scroll_view/list_item.h"
 #include "scroll_view/list_view_h.h"
@@ -4300,6 +4302,37 @@ ret_t tab_control_t_init(void) {
  return RET_OK;
 }
 
+jerry_value_t wrap_time_now_s(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  uint32_t ret = 0;
+  ret = (uint32_t)time_now_s();
+
+  return jerry_create_number(ret);
+}
+
+jerry_value_t wrap_time_now_ms(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  uint32_t ret = 0;
+  ret = (uint32_t)time_now_ms();
+
+  return jerry_create_number(ret);
+}
+
+ret_t time_now_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"time_now_s", wrap_time_now_s);
+  jerryx_handler_register_global((const jerry_char_t*)"time_now_ms", wrap_time_now_ms);
+
+ return RET_OK;
+}
+
 jerry_value_t wrap_timer_remove(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -8291,6 +8324,233 @@ ret_t image_animation_t_init(void) {
  return RET_OK;
 }
 
+jerry_value_t wrap_progress_circle_create(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  widget_t* ret = NULL;
+  widget_t* parent = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  xy_t x = (xy_t)jerry_get_number_value(args_p[1]);
+  xy_t y = (xy_t)jerry_get_number_value(args_p[2]);
+  wh_t w = (wh_t)jerry_get_number_value(args_p[3]);
+  wh_t h = (wh_t)jerry_get_number_value(args_p[4]);
+  ret = (widget_t*)progress_circle_create(parent, x, y, w, h);
+
+  return jerry_create_pointer(ret, "progress_circle_t*");
+}
+
+jerry_value_t wrap_progress_circle_cast(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  widget_t* ret = NULL;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (widget_t*)progress_circle_cast(widget);
+
+  return jerry_create_pointer(ret, "progress_circle_t*");
+}
+
+jerry_value_t wrap_progress_circle_set_value(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  uint32_t value = (uint32_t)jerry_get_number_value(args_p[1]);
+  ret = (ret_t)progress_circle_set_value(widget, value);
+
+  return jerry_create_number(ret);
+}
+
+jerry_value_t wrap_progress_circle_set_max(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  uint32_t max = (uint32_t)jerry_get_number_value(args_p[1]);
+  ret = (ret_t)progress_circle_set_max(widget, max);
+
+  return jerry_create_number(ret);
+}
+
+jerry_value_t wrap_progress_circle_set_line_width(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  uint32_t line_width = (uint32_t)jerry_get_number_value(args_p[1]);
+  ret = (ret_t)progress_circle_set_line_width(widget, line_width);
+
+  return jerry_create_number(ret);
+}
+
+jerry_value_t wrap_progress_circle_set_start_angle(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  int32_t start_angle = (int32_t)jerry_get_number_value(args_p[1]);
+  ret = (ret_t)progress_circle_set_start_angle(widget, start_angle);
+
+  return jerry_create_number(ret);
+}
+
+jerry_value_t wrap_progress_circle_set_unit(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  const char* unit = (const char*)jerry_get_utf8_string(args_p[1]);
+  ret = (ret_t)progress_circle_set_unit(widget, unit);
+  TKMEM_FREE(unit);
+
+  return jerry_create_number(ret);
+}
+
+jerry_value_t wrap_progress_circle_set_show_text(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t show_text = (bool_t)jerry_get_boolean_value(args_p[1]);
+  ret = (ret_t)progress_circle_set_show_text(widget, show_text);
+
+  return jerry_create_number(ret);
+}
+
+jerry_value_t wrap_progress_circle_set_counter_clock_wise(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t counter_clock_wise = (bool_t)jerry_get_boolean_value(args_p[1]);
+  ret = (ret_t)progress_circle_set_counter_clock_wise(widget, counter_clock_wise);
+
+  return jerry_create_number(ret);
+}
+
+jerry_value_t wrap_progress_circle_t_get_prop_value(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  progress_circle_t* obj = (progress_circle_t*)jerry_get_pointer(args_p[0], "progress_circle_t*");
+
+  return jerry_create_number(obj->value);
+}
+
+jerry_value_t wrap_progress_circle_t_get_prop_max(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  progress_circle_t* obj = (progress_circle_t*)jerry_get_pointer(args_p[0], "progress_circle_t*");
+
+  return jerry_create_number(obj->max);
+}
+
+jerry_value_t wrap_progress_circle_t_get_prop_start_angle(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  progress_circle_t* obj = (progress_circle_t*)jerry_get_pointer(args_p[0], "progress_circle_t*");
+
+  return jerry_create_number(obj->start_angle);
+}
+
+jerry_value_t wrap_progress_circle_t_get_prop_line_width(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  progress_circle_t* obj = (progress_circle_t*)jerry_get_pointer(args_p[0], "progress_circle_t*");
+
+  return jerry_create_number(obj->line_width);
+}
+
+jerry_value_t wrap_progress_circle_t_get_prop_unit(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  progress_circle_t* obj = (progress_circle_t*)jerry_get_pointer(args_p[0], "progress_circle_t*");
+
+  return jerry_create_str(obj->unit);
+}
+
+jerry_value_t wrap_progress_circle_t_get_prop_counter_clock_wise(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  progress_circle_t* obj = (progress_circle_t*)jerry_get_pointer(args_p[0], "progress_circle_t*");
+
+  return jerry_create_boolean(obj->counter_clock_wise);
+}
+
+jerry_value_t wrap_progress_circle_t_get_prop_show_text(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  progress_circle_t* obj = (progress_circle_t*)jerry_get_pointer(args_p[0], "progress_circle_t*");
+
+  return jerry_create_boolean(obj->show_text);
+}
+
+ret_t progress_circle_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_create", wrap_progress_circle_create);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_cast", wrap_progress_circle_cast);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_set_value", wrap_progress_circle_set_value);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_set_max", wrap_progress_circle_set_max);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_set_line_width", wrap_progress_circle_set_line_width);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_set_start_angle", wrap_progress_circle_set_start_angle);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_set_unit", wrap_progress_circle_set_unit);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_set_show_text", wrap_progress_circle_set_show_text);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_set_counter_clock_wise", wrap_progress_circle_set_counter_clock_wise);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_t_get_prop_value", wrap_progress_circle_t_get_prop_value);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_t_get_prop_max", wrap_progress_circle_t_get_prop_max);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_t_get_prop_start_angle", wrap_progress_circle_t_get_prop_start_angle);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_t_get_prop_line_width", wrap_progress_circle_t_get_prop_line_width);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_t_get_prop_unit", wrap_progress_circle_t_get_prop_unit);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_t_get_prop_counter_clock_wise", wrap_progress_circle_t_get_prop_counter_clock_wise);
+  jerryx_handler_register_global((const jerry_char_t*)"progress_circle_t_get_prop_show_text", wrap_progress_circle_t_get_prop_show_text);
+
+ return RET_OK;
+}
+
 jerry_value_t wrap_rich_text_create(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -9878,6 +10138,7 @@ ret_t awtk_js_init(void) {
   tab_button_group_t_init();
   tab_button_t_init();
   tab_control_t_init();
+  time_now_t_init();
   timer_t_init();
   ret_t_init();
   align_v_t_init();
@@ -9897,6 +10158,7 @@ ret_t awtk_js_init(void) {
   color_picker_t_init();
   guage_t_init();
   image_animation_t_init();
+  progress_circle_t_init();
   rich_text_t_init();
   list_item_t_init();
   list_view_h_t_init();
