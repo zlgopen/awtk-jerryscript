@@ -231,7 +231,7 @@ jerry_value_t wrap_idle_add(const jerry_value_t func_obj_val, const jerry_value_
   return jerry_create_number(ret);
 }
 
-static ret_t call_visit(void* ctx, void* data) {
+static ret_t call_visit(void* ctx, const void* data) {
   jerry_value_t res;
   jerry_value_t args[1];
   jerry_value_t func = (jerry_value_t)((char*)ctx - (char*)NULL);
