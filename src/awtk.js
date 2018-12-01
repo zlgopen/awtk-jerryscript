@@ -32,6 +32,39 @@ var WidgetState;
     WidgetState[WidgetState["STATE_OVER_OF_ACTIVE"] = WIDGET_STATE_OVER_OF_ACTIVE()] = "STATE_OVER_OF_ACTIVE";
 })(WidgetState || (WidgetState = {}));
 ;
+var WindowStage;
+(function (WindowStage) {
+    WindowStage[WindowStage["NONE"] = WINDOW_STAGE_NONE()] = "NONE";
+    WindowStage[WindowStage["CREATED"] = WINDOW_STAGE_CREATED()] = "CREATED";
+    WindowStage[WindowStage["OPENED"] = WINDOW_STAGE_OPENED()] = "OPENED";
+    WindowStage[WindowStage["CLOSED"] = WINDOW_STAGE_CLOSED()] = "CLOSED";
+})(WindowStage || (WindowStage = {}));
+;
+var ClipBoardDataType;
+(function (ClipBoardDataType) {
+    ClipBoardDataType[ClipBoardDataType["NONE"] = CLIP_BOARD_DATA_TYPE_NONE()] = "NONE";
+    ClipBoardDataType[ClipBoardDataType["TEXT"] = CLIP_BOARD_DATA_TYPE_TEXT()] = "TEXT";
+})(ClipBoardDataType || (ClipBoardDataType = {}));
+;
+var ImageDrawType;
+(function (ImageDrawType) {
+    ImageDrawType[ImageDrawType["DEFAULT"] = IMAGE_DRAW_DEFAULT()] = "DEFAULT";
+    ImageDrawType[ImageDrawType["CENTER"] = IMAGE_DRAW_CENTER()] = "CENTER";
+    ImageDrawType[ImageDrawType["ICON"] = IMAGE_DRAW_ICON()] = "ICON";
+    ImageDrawType[ImageDrawType["SCALE"] = IMAGE_DRAW_SCALE()] = "SCALE";
+    ImageDrawType[ImageDrawType["SCALE_AUTO"] = IMAGE_DRAW_SCALE_AUTO()] = "SCALE_AUTO";
+    ImageDrawType[ImageDrawType["SCALE_W"] = IMAGE_DRAW_SCALE_W()] = "SCALE_W";
+    ImageDrawType[ImageDrawType["SCALE_H"] = IMAGE_DRAW_SCALE_H()] = "SCALE_H";
+    ImageDrawType[ImageDrawType["REPEAT"] = IMAGE_DRAW_REPEAT()] = "REPEAT";
+    ImageDrawType[ImageDrawType["REPEAT_X"] = IMAGE_DRAW_REPEAT_X()] = "REPEAT_X";
+    ImageDrawType[ImageDrawType["REPEAT_Y"] = IMAGE_DRAW_REPEAT_Y()] = "REPEAT_Y";
+    ImageDrawType[ImageDrawType["PATCH9"] = IMAGE_DRAW_PATCH9()] = "PATCH9";
+    ImageDrawType[ImageDrawType["PATCH3_X"] = IMAGE_DRAW_PATCH3_X()] = "PATCH3_X";
+    ImageDrawType[ImageDrawType["PATCH3_Y"] = IMAGE_DRAW_PATCH3_Y()] = "PATCH3_Y";
+    ImageDrawType[ImageDrawType["PATCH3_X_SCALE_Y"] = IMAGE_DRAW_PATCH3_X_SCALE_Y()] = "PATCH3_X_SCALE_Y";
+    ImageDrawType[ImageDrawType["PATCH3_Y_SCALE_X"] = IMAGE_DRAW_PATCH3_Y_SCALE_X()] = "PATCH3_Y_SCALE_X";
+})(ImageDrawType || (ImageDrawType = {}));
+;
 var WidgetType;
 (function (WidgetType) {
     WidgetType[WidgetType["NONE"] = WIDGET_TYPE_NONE()] = "NONE";
@@ -79,197 +112,11 @@ var WidgetType;
     WidgetType[WidgetType["RICH_TEXT"] = WIDGET_TYPE_RICH_TEXT()] = "RICH_TEXT";
     WidgetType[WidgetType["APP_BAR"] = WIDGET_TYPE_APP_BAR()] = "APP_BAR";
     WidgetType[WidgetType["GRID"] = WIDGET_TYPE_GRID()] = "GRID";
+    WidgetType[WidgetType["GRID_ITEM"] = WIDGET_TYPE_GRID_ITEM()] = "GRID_ITEM";
     WidgetType[WidgetType["ROW"] = WIDGET_TYPE_ROW()] = "ROW";
     WidgetType[WidgetType["COLUMN"] = WIDGET_TYPE_COLUMN()] = "COLUMN";
     WidgetType[WidgetType["CALIBRATION_WIN"] = WIDGET_TYPE_CALIBRATION_WIN()] = "CALIBRATION_WIN";
 })(WidgetType || (WidgetType = {}));
-;
-var ClipBoardDataType;
-(function (ClipBoardDataType) {
-    ClipBoardDataType[ClipBoardDataType["NONE"] = CLIP_BOARD_DATA_TYPE_NONE()] = "NONE";
-    ClipBoardDataType[ClipBoardDataType["TEXT"] = CLIP_BOARD_DATA_TYPE_TEXT()] = "TEXT";
-})(ClipBoardDataType || (ClipBoardDataType = {}));
-;
-var WindowStage;
-(function (WindowStage) {
-    WindowStage[WindowStage["NONE"] = WINDOW_STAGE_NONE()] = "NONE";
-    WindowStage[WindowStage["CREATED"] = WINDOW_STAGE_CREATED()] = "CREATED";
-    WindowStage[WindowStage["OPENED"] = WINDOW_STAGE_OPENED()] = "OPENED";
-    WindowStage[WindowStage["CLOSED"] = WINDOW_STAGE_CLOSED()] = "CLOSED";
-})(WindowStage || (WindowStage = {}));
-;
-var ValueType;
-(function (ValueType) {
-    ValueType[ValueType["INVALID"] = VALUE_TYPE_INVALID()] = "INVALID";
-    ValueType[ValueType["BOOL"] = VALUE_TYPE_BOOL()] = "BOOL";
-    ValueType[ValueType["INT8"] = VALUE_TYPE_INT8()] = "INT8";
-    ValueType[ValueType["UINT8"] = VALUE_TYPE_UINT8()] = "UINT8";
-    ValueType[ValueType["INT16"] = VALUE_TYPE_INT16()] = "INT16";
-    ValueType[ValueType["UINT16"] = VALUE_TYPE_UINT16()] = "UINT16";
-    ValueType[ValueType["INT32"] = VALUE_TYPE_INT32()] = "INT32";
-    ValueType[ValueType["UINT32"] = VALUE_TYPE_UINT32()] = "UINT32";
-    ValueType[ValueType["INT64"] = VALUE_TYPE_INT64()] = "INT64";
-    ValueType[ValueType["UINT64"] = VALUE_TYPE_UINT64()] = "UINT64";
-    ValueType[ValueType["POINTER"] = VALUE_TYPE_POINTER()] = "POINTER";
-    ValueType[ValueType["FLOAT"] = VALUE_TYPE_FLOAT()] = "FLOAT";
-    ValueType[ValueType["FLOAT32"] = VALUE_TYPE_FLOAT32()] = "FLOAT32";
-    ValueType[ValueType["DOUBLE"] = VALUE_TYPE_DOUBLE()] = "DOUBLE";
-    ValueType[ValueType["STRING"] = VALUE_TYPE_STRING()] = "STRING";
-    ValueType[ValueType["WSTRING"] = VALUE_TYPE_WSTRING()] = "WSTRING";
-})(ValueType || (ValueType = {}));
-;
-var AlignH;
-(function (AlignH) {
-    AlignH[AlignH["NONE"] = ALIGN_H_NONE()] = "NONE";
-    AlignH[AlignH["CENTER"] = ALIGN_H_CENTER()] = "CENTER";
-    AlignH[AlignH["LEFT"] = ALIGN_H_LEFT()] = "LEFT";
-    AlignH[AlignH["RIGHT"] = ALIGN_H_RIGHT()] = "RIGHT";
-})(AlignH || (AlignH = {}));
-;
-var AlignV;
-(function (AlignV) {
-    AlignV[AlignV["NONE"] = ALIGN_V_NONE()] = "NONE";
-    AlignV[AlignV["MIDDLE"] = ALIGN_V_MIDDLE()] = "MIDDLE";
-    AlignV[AlignV["TOP"] = ALIGN_V_TOP()] = "TOP";
-    AlignV[AlignV["BOTTOM"] = ALIGN_V_BOTTOM()] = "BOTTOM";
-})(AlignV || (AlignV = {}));
-;
-var Ret;
-(function (Ret) {
-    Ret[Ret["OK"] = RET_OK()] = "OK";
-    Ret[Ret["OOM"] = RET_OOM()] = "OOM";
-    Ret[Ret["FAIL"] = RET_FAIL()] = "FAIL";
-    Ret[Ret["NOT_IMPL"] = RET_NOT_IMPL()] = "NOT_IMPL";
-    Ret[Ret["QUIT"] = RET_QUIT()] = "QUIT";
-    Ret[Ret["FOUND"] = RET_FOUND()] = "FOUND";
-    Ret[Ret["REMOVE"] = RET_REMOVE()] = "REMOVE";
-    Ret[Ret["REPEAT"] = RET_REPEAT()] = "REPEAT";
-    Ret[Ret["NOT_FOUND"] = RET_NOT_FOUND()] = "NOT_FOUND";
-    Ret[Ret["DONE"] = RET_DONE()] = "DONE";
-    Ret[Ret["STOP"] = RET_STOP()] = "STOP";
-    Ret[Ret["CONTINUE"] = RET_CONTINUE()] = "CONTINUE";
-    Ret[Ret["BAD_PARAMS"] = RET_BAD_PARAMS()] = "BAD_PARAMS";
-})(Ret || (Ret = {}));
-;
-var ImageDrawType;
-(function (ImageDrawType) {
-    ImageDrawType[ImageDrawType["DEFAULT"] = IMAGE_DRAW_DEFAULT()] = "DEFAULT";
-    ImageDrawType[ImageDrawType["CENTER"] = IMAGE_DRAW_CENTER()] = "CENTER";
-    ImageDrawType[ImageDrawType["ICON"] = IMAGE_DRAW_ICON()] = "ICON";
-    ImageDrawType[ImageDrawType["SCALE"] = IMAGE_DRAW_SCALE()] = "SCALE";
-    ImageDrawType[ImageDrawType["SCALE_AUTO"] = IMAGE_DRAW_SCALE_AUTO()] = "SCALE_AUTO";
-    ImageDrawType[ImageDrawType["SCALE_W"] = IMAGE_DRAW_SCALE_W()] = "SCALE_W";
-    ImageDrawType[ImageDrawType["SCALE_H"] = IMAGE_DRAW_SCALE_H()] = "SCALE_H";
-    ImageDrawType[ImageDrawType["REPEAT"] = IMAGE_DRAW_REPEAT()] = "REPEAT";
-    ImageDrawType[ImageDrawType["REPEAT_X"] = IMAGE_DRAW_REPEAT_X()] = "REPEAT_X";
-    ImageDrawType[ImageDrawType["REPEAT_Y"] = IMAGE_DRAW_REPEAT_Y()] = "REPEAT_Y";
-    ImageDrawType[ImageDrawType["PATCH9"] = IMAGE_DRAW_PATCH9()] = "PATCH9";
-    ImageDrawType[ImageDrawType["PATCH3_X"] = IMAGE_DRAW_PATCH3_X()] = "PATCH3_X";
-    ImageDrawType[ImageDrawType["PATCH3_Y"] = IMAGE_DRAW_PATCH3_Y()] = "PATCH3_Y";
-    ImageDrawType[ImageDrawType["PATCH3_X_SCALE_Y"] = IMAGE_DRAW_PATCH3_X_SCALE_Y()] = "PATCH3_X_SCALE_Y";
-    ImageDrawType[ImageDrawType["PATCH3_Y_SCALE_X"] = IMAGE_DRAW_PATCH3_Y_SCALE_X()] = "PATCH3_Y_SCALE_X";
-})(ImageDrawType || (ImageDrawType = {}));
-;
-var EventType;
-(function (EventType) {
-    EventType[EventType["NONE"] = EVT_NONE()] = "NONE";
-    EventType[EventType["POINTER_DOWN"] = EVT_POINTER_DOWN()] = "POINTER_DOWN";
-    EventType[EventType["POINTER_DOWN_ABORT"] = EVT_POINTER_DOWN_ABORT()] = "POINTER_DOWN_ABORT";
-    EventType[EventType["POINTER_MOVE"] = EVT_POINTER_MOVE()] = "POINTER_MOVE";
-    EventType[EventType["POINTER_UP"] = EVT_POINTER_UP()] = "POINTER_UP";
-    EventType[EventType["WHEEL"] = EVT_WHEEL()] = "WHEEL";
-    EventType[EventType["CONTEXT_MENU"] = EVT_CONTEXT_MENU()] = "CONTEXT_MENU";
-    EventType[EventType["POINTER_ENTER"] = EVT_POINTER_ENTER()] = "POINTER_ENTER";
-    EventType[EventType["POINTER_LEAVE"] = EVT_POINTER_LEAVE()] = "POINTER_LEAVE";
-    EventType[EventType["LONG_PRESS"] = EVT_LONG_PRESS()] = "LONG_PRESS";
-    EventType[EventType["CLICK"] = EVT_CLICK()] = "CLICK";
-    EventType[EventType["FOCUS"] = EVT_FOCUS()] = "FOCUS";
-    EventType[EventType["BLUR"] = EVT_BLUR()] = "BLUR";
-    EventType[EventType["KEY_DOWN"] = EVT_KEY_DOWN()] = "KEY_DOWN";
-    EventType[EventType["KEY_REPEAT"] = EVT_KEY_REPEAT()] = "KEY_REPEAT";
-    EventType[EventType["KEY_UP"] = EVT_KEY_UP()] = "KEY_UP";
-    EventType[EventType["DESTROY"] = EVT_DESTROY()] = "DESTROY";
-    EventType[EventType["WILL_MOVE"] = EVT_WILL_MOVE()] = "WILL_MOVE";
-    EventType[EventType["MOVE"] = EVT_MOVE()] = "MOVE";
-    EventType[EventType["WILL_RESIZE"] = EVT_WILL_RESIZE()] = "WILL_RESIZE";
-    EventType[EventType["RESIZE"] = EVT_RESIZE()] = "RESIZE";
-    EventType[EventType["WILL_MOVE_RESIZE"] = EVT_WILL_MOVE_RESIZE()] = "WILL_MOVE_RESIZE";
-    EventType[EventType["MOVE_RESIZE"] = EVT_MOVE_RESIZE()] = "MOVE_RESIZE";
-    EventType[EventType["PROP_WILL_CHANGE"] = EVT_PROP_WILL_CHANGE()] = "PROP_WILL_CHANGE";
-    EventType[EventType["PROP_CHANGED"] = EVT_PROP_CHANGED()] = "PROP_CHANGED";
-    EventType[EventType["VALUE_WILL_CHANGE"] = EVT_VALUE_WILL_CHANGE()] = "VALUE_WILL_CHANGE";
-    EventType[EventType["VALUE_CHANGED"] = EVT_VALUE_CHANGED()] = "VALUE_CHANGED";
-    EventType[EventType["VALUE_CHANGING"] = EVT_VALUE_CHANGING()] = "VALUE_CHANGING";
-    EventType[EventType["PAINT"] = EVT_PAINT()] = "PAINT";
-    EventType[EventType["BEFORE_PAINT"] = EVT_BEFORE_PAINT()] = "BEFORE_PAINT";
-    EventType[EventType["AFTER_PAINT"] = EVT_AFTER_PAINT()] = "AFTER_PAINT";
-    EventType[EventType["LOCALE_CHANGED"] = EVT_LOCALE_CHANGED()] = "LOCALE_CHANGED";
-    EventType[EventType["ANIM_START"] = EVT_ANIM_START()] = "ANIM_START";
-    EventType[EventType["ANIM_STOP"] = EVT_ANIM_STOP()] = "ANIM_STOP";
-    EventType[EventType["ANIM_PAUSE"] = EVT_ANIM_PAUSE()] = "ANIM_PAUSE";
-    EventType[EventType["ANIM_ONCE"] = EVT_ANIM_ONCE()] = "ANIM_ONCE";
-    EventType[EventType["ANIM_END"] = EVT_ANIM_END()] = "ANIM_END";
-    EventType[EventType["WINDOW_LOAD"] = EVT_WINDOW_LOAD()] = "WINDOW_LOAD";
-    EventType[EventType["WINDOW_WILL_OPEN"] = EVT_WINDOW_WILL_OPEN()] = "WINDOW_WILL_OPEN";
-    EventType[EventType["WINDOW_OPEN"] = EVT_WINDOW_OPEN()] = "WINDOW_OPEN";
-    EventType[EventType["WINDOW_CLOSE"] = EVT_WINDOW_CLOSE()] = "WINDOW_CLOSE";
-    EventType[EventType["IM_COMMIT"] = EVT_IM_COMMIT()] = "IM_COMMIT";
-    EventType[EventType["IM_SHOW_CANDIDATES"] = EVT_IM_SHOW_CANDIDATES()] = "IM_SHOW_CANDIDATES";
-    EventType[EventType["IM_ACTION"] = EVT_IM_ACTION()] = "IM_ACTION";
-    EventType[EventType["IM_ACTION_INFO"] = EVT_IM_ACTION_INFO()] = "IM_ACTION_INFO";
-    EventType[EventType["DRAG_START"] = EVT_DRAG_START()] = "DRAG_START";
-    EventType[EventType["DRAG"] = EVT_DRAG()] = "DRAG";
-    EventType[EventType["DRAG_END"] = EVT_DRAG_END()] = "DRAG_END";
-    EventType[EventType["REQ_START"] = EVT_REQ_START()] = "REQ_START";
-    EventType[EventType["USER_START"] = EVT_USER_START()] = "USER_START";
-})(EventType || (EventType = {}));
-;
-var BitmapFlag;
-(function (BitmapFlag) {
-    BitmapFlag[BitmapFlag["NONE"] = BITMAP_FLAG_NONE()] = "NONE";
-    BitmapFlag[BitmapFlag["OPAQUE"] = BITMAP_FLAG_OPAQUE()] = "OPAQUE";
-    BitmapFlag[BitmapFlag["IMMUTABLE"] = BITMAP_FLAG_IMMUTABLE()] = "IMMUTABLE";
-    BitmapFlag[BitmapFlag["TEXTURE"] = BITMAP_FLAG_TEXTURE()] = "TEXTURE";
-    BitmapFlag[BitmapFlag["CHANGED"] = BITMAP_FLAG_CHANGED()] = "CHANGED";
-})(BitmapFlag || (BitmapFlag = {}));
-;
-var InputType;
-(function (InputType) {
-    InputType[InputType["TEXT"] = INPUT_TEXT()] = "TEXT";
-    InputType[InputType["INT"] = INPUT_INT()] = "INT";
-    InputType[InputType["UINT"] = INPUT_UINT()] = "UINT";
-    InputType[InputType["HEX"] = INPUT_HEX()] = "HEX";
-    InputType[InputType["FLOAT"] = INPUT_FLOAT()] = "FLOAT";
-    InputType[InputType["UFLOAT"] = INPUT_UFLOAT()] = "UFLOAT";
-    InputType[InputType["EMAIL"] = INPUT_EMAIL()] = "EMAIL";
-    InputType[InputType["PASSWORD"] = INPUT_PASSWORD()] = "PASSWORD";
-    InputType[InputType["PHONE"] = INPUT_PHONE()] = "PHONE";
-})(InputType || (InputType = {}));
-;
-var BitmapFormat;
-(function (BitmapFormat) {
-    BitmapFormat[BitmapFormat["NONE"] = BITMAP_FMT_NONE()] = "NONE";
-    BitmapFormat[BitmapFormat["RGBA8888"] = BITMAP_FMT_RGBA8888()] = "RGBA8888";
-    BitmapFormat[BitmapFormat["ABGR8888"] = BITMAP_FMT_ABGR8888()] = "ABGR8888";
-    BitmapFormat[BitmapFormat["BGRA8888"] = BITMAP_FMT_BGRA8888()] = "BGRA8888";
-    BitmapFormat[BitmapFormat["ARGB8888"] = BITMAP_FMT_ARGB8888()] = "ARGB8888";
-    BitmapFormat[BitmapFormat["RGB565"] = BITMAP_FMT_RGB565()] = "RGB565";
-    BitmapFormat[BitmapFormat["BGR565"] = BITMAP_FMT_BGR565()] = "BGR565";
-    BitmapFormat[BitmapFormat["RGB888"] = BITMAP_FMT_RGB888()] = "RGB888";
-    BitmapFormat[BitmapFormat["BGR888"] = BITMAP_FMT_BGR888()] = "BGR888";
-})(BitmapFormat || (BitmapFormat = {}));
-;
-var AssetType;
-(function (AssetType) {
-    AssetType[AssetType["NONE"] = ASSET_TYPE_NONE()] = "NONE";
-    AssetType[AssetType["FONT"] = ASSET_TYPE_FONT()] = "FONT";
-    AssetType[AssetType["IMAGE"] = ASSET_TYPE_IMAGE()] = "IMAGE";
-    AssetType[AssetType["STYLE"] = ASSET_TYPE_STYLE()] = "STYLE";
-    AssetType[AssetType["UI"] = ASSET_TYPE_UI()] = "UI";
-    AssetType[AssetType["XML"] = ASSET_TYPE_XML()] = "XML";
-    AssetType[AssetType["STRINGS"] = ASSET_TYPE_STRINGS()] = "STRINGS";
-    AssetType[AssetType["DATA"] = ASSET_TYPE_DATA()] = "DATA";
-})(AssetType || (AssetType = {}));
 ;
 var WidgetProp;
 (function (WidgetProp) {
@@ -362,135 +209,166 @@ var WidgetProp;
     WidgetProp[WidgetProp["DELAY"] = WIDGET_PROP_DELAY()] = "DELAY";
 })(WidgetProp || (WidgetProp = {}));
 ;
-var Canvas = /** @class */ (function () {
-    function Canvas(nativeObj) {
+var ValueType;
+(function (ValueType) {
+    ValueType[ValueType["INVALID"] = VALUE_TYPE_INVALID()] = "INVALID";
+    ValueType[ValueType["BOOL"] = VALUE_TYPE_BOOL()] = "BOOL";
+    ValueType[ValueType["INT8"] = VALUE_TYPE_INT8()] = "INT8";
+    ValueType[ValueType["UINT8"] = VALUE_TYPE_UINT8()] = "UINT8";
+    ValueType[ValueType["INT16"] = VALUE_TYPE_INT16()] = "INT16";
+    ValueType[ValueType["UINT16"] = VALUE_TYPE_UINT16()] = "UINT16";
+    ValueType[ValueType["INT32"] = VALUE_TYPE_INT32()] = "INT32";
+    ValueType[ValueType["UINT32"] = VALUE_TYPE_UINT32()] = "UINT32";
+    ValueType[ValueType["INT64"] = VALUE_TYPE_INT64()] = "INT64";
+    ValueType[ValueType["UINT64"] = VALUE_TYPE_UINT64()] = "UINT64";
+    ValueType[ValueType["POINTER"] = VALUE_TYPE_POINTER()] = "POINTER";
+    ValueType[ValueType["FLOAT"] = VALUE_TYPE_FLOAT()] = "FLOAT";
+    ValueType[ValueType["FLOAT32"] = VALUE_TYPE_FLOAT32()] = "FLOAT32";
+    ValueType[ValueType["DOUBLE"] = VALUE_TYPE_DOUBLE()] = "DOUBLE";
+    ValueType[ValueType["STRING"] = VALUE_TYPE_STRING()] = "STRING";
+    ValueType[ValueType["WSTRING"] = VALUE_TYPE_WSTRING()] = "WSTRING";
+})(ValueType || (ValueType = {}));
+;
+var AlignH;
+(function (AlignH) {
+    AlignH[AlignH["NONE"] = ALIGN_H_NONE()] = "NONE";
+    AlignH[AlignH["CENTER"] = ALIGN_H_CENTER()] = "CENTER";
+    AlignH[AlignH["LEFT"] = ALIGN_H_LEFT()] = "LEFT";
+    AlignH[AlignH["RIGHT"] = ALIGN_H_RIGHT()] = "RIGHT";
+})(AlignH || (AlignH = {}));
+;
+var AlignV;
+(function (AlignV) {
+    AlignV[AlignV["NONE"] = ALIGN_V_NONE()] = "NONE";
+    AlignV[AlignV["MIDDLE"] = ALIGN_V_MIDDLE()] = "MIDDLE";
+    AlignV[AlignV["TOP"] = ALIGN_V_TOP()] = "TOP";
+    AlignV[AlignV["BOTTOM"] = ALIGN_V_BOTTOM()] = "BOTTOM";
+})(AlignV || (AlignV = {}));
+;
+var BitmapFlag;
+(function (BitmapFlag) {
+    BitmapFlag[BitmapFlag["NONE"] = BITMAP_FLAG_NONE()] = "NONE";
+    BitmapFlag[BitmapFlag["OPAQUE"] = BITMAP_FLAG_OPAQUE()] = "OPAQUE";
+    BitmapFlag[BitmapFlag["IMMUTABLE"] = BITMAP_FLAG_IMMUTABLE()] = "IMMUTABLE";
+    BitmapFlag[BitmapFlag["TEXTURE"] = BITMAP_FLAG_TEXTURE()] = "TEXTURE";
+    BitmapFlag[BitmapFlag["CHANGED"] = BITMAP_FLAG_CHANGED()] = "CHANGED";
+})(BitmapFlag || (BitmapFlag = {}));
+;
+var Ret;
+(function (Ret) {
+    Ret[Ret["OK"] = RET_OK()] = "OK";
+    Ret[Ret["OOM"] = RET_OOM()] = "OOM";
+    Ret[Ret["FAIL"] = RET_FAIL()] = "FAIL";
+    Ret[Ret["NOT_IMPL"] = RET_NOT_IMPL()] = "NOT_IMPL";
+    Ret[Ret["QUIT"] = RET_QUIT()] = "QUIT";
+    Ret[Ret["FOUND"] = RET_FOUND()] = "FOUND";
+    Ret[Ret["REMOVE"] = RET_REMOVE()] = "REMOVE";
+    Ret[Ret["REPEAT"] = RET_REPEAT()] = "REPEAT";
+    Ret[Ret["NOT_FOUND"] = RET_NOT_FOUND()] = "NOT_FOUND";
+    Ret[Ret["DONE"] = RET_DONE()] = "DONE";
+    Ret[Ret["STOP"] = RET_STOP()] = "STOP";
+    Ret[Ret["CONTINUE"] = RET_CONTINUE()] = "CONTINUE";
+    Ret[Ret["BAD_PARAMS"] = RET_BAD_PARAMS()] = "BAD_PARAMS";
+})(Ret || (Ret = {}));
+;
+var BitmapFormat;
+(function (BitmapFormat) {
+    BitmapFormat[BitmapFormat["NONE"] = BITMAP_FMT_NONE()] = "NONE";
+    BitmapFormat[BitmapFormat["RGBA8888"] = BITMAP_FMT_RGBA8888()] = "RGBA8888";
+    BitmapFormat[BitmapFormat["ABGR8888"] = BITMAP_FMT_ABGR8888()] = "ABGR8888";
+    BitmapFormat[BitmapFormat["BGRA8888"] = BITMAP_FMT_BGRA8888()] = "BGRA8888";
+    BitmapFormat[BitmapFormat["ARGB8888"] = BITMAP_FMT_ARGB8888()] = "ARGB8888";
+    BitmapFormat[BitmapFormat["RGB565"] = BITMAP_FMT_RGB565()] = "RGB565";
+    BitmapFormat[BitmapFormat["BGR565"] = BITMAP_FMT_BGR565()] = "BGR565";
+    BitmapFormat[BitmapFormat["RGB888"] = BITMAP_FMT_RGB888()] = "RGB888";
+    BitmapFormat[BitmapFormat["BGR888"] = BITMAP_FMT_BGR888()] = "BGR888";
+})(BitmapFormat || (BitmapFormat = {}));
+;
+var EventType;
+(function (EventType) {
+    EventType[EventType["NONE"] = EVT_NONE()] = "NONE";
+    EventType[EventType["POINTER_DOWN"] = EVT_POINTER_DOWN()] = "POINTER_DOWN";
+    EventType[EventType["POINTER_DOWN_ABORT"] = EVT_POINTER_DOWN_ABORT()] = "POINTER_DOWN_ABORT";
+    EventType[EventType["POINTER_MOVE"] = EVT_POINTER_MOVE()] = "POINTER_MOVE";
+    EventType[EventType["POINTER_UP"] = EVT_POINTER_UP()] = "POINTER_UP";
+    EventType[EventType["WHEEL"] = EVT_WHEEL()] = "WHEEL";
+    EventType[EventType["CONTEXT_MENU"] = EVT_CONTEXT_MENU()] = "CONTEXT_MENU";
+    EventType[EventType["POINTER_ENTER"] = EVT_POINTER_ENTER()] = "POINTER_ENTER";
+    EventType[EventType["POINTER_LEAVE"] = EVT_POINTER_LEAVE()] = "POINTER_LEAVE";
+    EventType[EventType["LONG_PRESS"] = EVT_LONG_PRESS()] = "LONG_PRESS";
+    EventType[EventType["CLICK"] = EVT_CLICK()] = "CLICK";
+    EventType[EventType["FOCUS"] = EVT_FOCUS()] = "FOCUS";
+    EventType[EventType["BLUR"] = EVT_BLUR()] = "BLUR";
+    EventType[EventType["KEY_DOWN"] = EVT_KEY_DOWN()] = "KEY_DOWN";
+    EventType[EventType["KEY_REPEAT"] = EVT_KEY_REPEAT()] = "KEY_REPEAT";
+    EventType[EventType["KEY_UP"] = EVT_KEY_UP()] = "KEY_UP";
+    EventType[EventType["DESTROY"] = EVT_DESTROY()] = "DESTROY";
+    EventType[EventType["WILL_MOVE"] = EVT_WILL_MOVE()] = "WILL_MOVE";
+    EventType[EventType["MOVE"] = EVT_MOVE()] = "MOVE";
+    EventType[EventType["WILL_RESIZE"] = EVT_WILL_RESIZE()] = "WILL_RESIZE";
+    EventType[EventType["RESIZE"] = EVT_RESIZE()] = "RESIZE";
+    EventType[EventType["WILL_MOVE_RESIZE"] = EVT_WILL_MOVE_RESIZE()] = "WILL_MOVE_RESIZE";
+    EventType[EventType["MOVE_RESIZE"] = EVT_MOVE_RESIZE()] = "MOVE_RESIZE";
+    EventType[EventType["PROP_WILL_CHANGE"] = EVT_PROP_WILL_CHANGE()] = "PROP_WILL_CHANGE";
+    EventType[EventType["PROP_CHANGED"] = EVT_PROP_CHANGED()] = "PROP_CHANGED";
+    EventType[EventType["VALUE_WILL_CHANGE"] = EVT_VALUE_WILL_CHANGE()] = "VALUE_WILL_CHANGE";
+    EventType[EventType["VALUE_CHANGED"] = EVT_VALUE_CHANGED()] = "VALUE_CHANGED";
+    EventType[EventType["VALUE_CHANGING"] = EVT_VALUE_CHANGING()] = "VALUE_CHANGING";
+    EventType[EventType["PAINT"] = EVT_PAINT()] = "PAINT";
+    EventType[EventType["BEFORE_PAINT"] = EVT_BEFORE_PAINT()] = "BEFORE_PAINT";
+    EventType[EventType["AFTER_PAINT"] = EVT_AFTER_PAINT()] = "AFTER_PAINT";
+    EventType[EventType["LOCALE_CHANGED"] = EVT_LOCALE_CHANGED()] = "LOCALE_CHANGED";
+    EventType[EventType["ANIM_START"] = EVT_ANIM_START()] = "ANIM_START";
+    EventType[EventType["ANIM_STOP"] = EVT_ANIM_STOP()] = "ANIM_STOP";
+    EventType[EventType["ANIM_PAUSE"] = EVT_ANIM_PAUSE()] = "ANIM_PAUSE";
+    EventType[EventType["ANIM_ONCE"] = EVT_ANIM_ONCE()] = "ANIM_ONCE";
+    EventType[EventType["ANIM_END"] = EVT_ANIM_END()] = "ANIM_END";
+    EventType[EventType["WINDOW_LOAD"] = EVT_WINDOW_LOAD()] = "WINDOW_LOAD";
+    EventType[EventType["WINDOW_WILL_OPEN"] = EVT_WINDOW_WILL_OPEN()] = "WINDOW_WILL_OPEN";
+    EventType[EventType["WINDOW_OPEN"] = EVT_WINDOW_OPEN()] = "WINDOW_OPEN";
+    EventType[EventType["WINDOW_CLOSE"] = EVT_WINDOW_CLOSE()] = "WINDOW_CLOSE";
+    EventType[EventType["IM_COMMIT"] = EVT_IM_COMMIT()] = "IM_COMMIT";
+    EventType[EventType["IM_SHOW_CANDIDATES"] = EVT_IM_SHOW_CANDIDATES()] = "IM_SHOW_CANDIDATES";
+    EventType[EventType["IM_ACTION"] = EVT_IM_ACTION()] = "IM_ACTION";
+    EventType[EventType["IM_ACTION_INFO"] = EVT_IM_ACTION_INFO()] = "IM_ACTION_INFO";
+    EventType[EventType["DRAG_START"] = EVT_DRAG_START()] = "DRAG_START";
+    EventType[EventType["DRAG"] = EVT_DRAG()] = "DRAG";
+    EventType[EventType["DRAG_END"] = EVT_DRAG_END()] = "DRAG_END";
+    EventType[EventType["REQ_START"] = EVT_REQ_START()] = "REQ_START";
+    EventType[EventType["USER_START"] = EVT_USER_START()] = "USER_START";
+})(EventType || (EventType = {}));
+;
+var AssetType;
+(function (AssetType) {
+    AssetType[AssetType["NONE"] = ASSET_TYPE_NONE()] = "NONE";
+    AssetType[AssetType["FONT"] = ASSET_TYPE_FONT()] = "FONT";
+    AssetType[AssetType["IMAGE"] = ASSET_TYPE_IMAGE()] = "IMAGE";
+    AssetType[AssetType["STYLE"] = ASSET_TYPE_STYLE()] = "STYLE";
+    AssetType[AssetType["UI"] = ASSET_TYPE_UI()] = "UI";
+    AssetType[AssetType["XML"] = ASSET_TYPE_XML()] = "XML";
+    AssetType[AssetType["STRINGS"] = ASSET_TYPE_STRINGS()] = "STRINGS";
+    AssetType[AssetType["DATA"] = ASSET_TYPE_DATA()] = "DATA";
+})(AssetType || (AssetType = {}));
+;
+var Point = /** @class */ (function () {
+    function Point(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    return Canvas;
+    return Point;
 }());
-var DateTime = /** @class */ (function () {
-    function DateTime(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    DateTime.create = function () {
-        return new DateTime(date_time_create());
-    };
-    DateTime.prototype.destroy = function () {
-        return date_time_destroy(this.nativeObj);
-    };
-    return DateTime;
-}());
-var Bitmap = /** @class */ (function () {
-    function Bitmap(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    Bitmap.create = function () {
-        return new Bitmap(bitmap_create());
-    };
-    Bitmap.createEx = function (w, h, line_length, format) {
-        return new Bitmap(bitmap_create_ex(w, h, line_length, format));
-    };
-    Bitmap.prototype.getBpp = function () {
-        return bitmap_get_bpp(this.nativeObj);
-    };
-    Bitmap.prototype.destroy = function () {
-        return bitmap_destroy(this.nativeObj);
-    };
-    Object.defineProperty(Bitmap.prototype, "w", {
-        get: function () {
-            return bitmap_t_get_prop_w(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Bitmap.prototype, "h", {
-        get: function () {
-            return bitmap_t_get_prop_h(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Bitmap.prototype, "lineLength", {
-        get: function () {
-            return bitmap_t_get_prop_line_length(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Bitmap.prototype, "flags", {
-        get: function () {
-            return bitmap_t_get_prop_flags(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Bitmap.prototype, "format", {
-        get: function () {
-            return bitmap_t_get_prop_format(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Bitmap.prototype, "name", {
-        get: function () {
-            return bitmap_t_get_prop_name(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Bitmap;
-}());
-var AssetsManager = /** @class */ (function () {
-    function AssetsManager(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    AssetsManager.instance = function () {
-        return new AssetsManager(assets_manager());
-    };
-    AssetsManager.prototype.ref = function (type, name) {
-        return assets_manager_ref(this.nativeObj, type, name);
-    };
-    AssetsManager.prototype.unref = function (info) {
-        return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
-    };
-    return AssetsManager;
-}());
-var Timer = /** @class */ (function () {
-    function Timer(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    Timer.add = function (on_timer, ctx, duration_ms) {
-        return timer_add(on_timer, ctx, duration_ms);
-    };
-    Timer.remove = function (timer_id) {
-        return timer_remove(timer_id);
-    };
-    return Timer;
-}());
-var TimeNow = /** @class */ (function () {
-    function TimeNow(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    TimeNow.s = function () {
-        return time_now_s();
-    };
-    TimeNow.ms = function () {
-        return time_now_ms();
-    };
-    return TimeNow;
-}());
-var ClipBoard = /** @class */ (function () {
-    function ClipBoard(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    ClipBoard.setText = function (text) {
-        return clip_board_set_text(text);
-    };
-    ClipBoard.getText = function () {
-        return clip_board_get_text();
-    };
-    return ClipBoard;
-}());
+var InputType;
+(function (InputType) {
+    InputType[InputType["TEXT"] = INPUT_TEXT()] = "TEXT";
+    InputType[InputType["INT"] = INPUT_INT()] = "INT";
+    InputType[InputType["UINT"] = INPUT_UINT()] = "UINT";
+    InputType[InputType["HEX"] = INPUT_HEX()] = "HEX";
+    InputType[InputType["FLOAT"] = INPUT_FLOAT()] = "FLOAT";
+    InputType[InputType["UFLOAT"] = INPUT_UFLOAT()] = "UFLOAT";
+    InputType[InputType["EMAIL"] = INPUT_EMAIL()] = "EMAIL";
+    InputType[InputType["PASSWORD"] = INPUT_PASSWORD()] = "PASSWORD";
+    InputType[InputType["PHONE"] = INPUT_PHONE()] = "PHONE";
+})(InputType || (InputType = {}));
+;
 var Widget = /** @class */ (function () {
     function Widget(nativeObj) {
         this.nativeObj = nativeObj;
@@ -585,8 +463,8 @@ var Widget = /** @class */ (function () {
     Widget.prototype.off = function (id) {
         return widget_off(this.nativeObj, id);
     };
-    Widget.prototype.invalidateForce = function () {
-        return widget_invalidate_force(this.nativeObj);
+    Widget.prototype.invalidateForce = function (r) {
+        return widget_invalidate_force(this.nativeObj, r ? (r.nativeObj || r) : null);
     };
     Widget.prototype.setPropStr = function (name, v) {
         return widget_set_prop_str(this.nativeObj, name, v);
@@ -714,87 +592,6 @@ var Widget = /** @class */ (function () {
     });
     return Widget;
 }());
-var Event = /** @class */ (function () {
-    function Event(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    Event.cast = function (event) {
-        return new Event(event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(Event.prototype, "type", {
-        get: function () {
-            return event_t_get_prop_type(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Event.prototype, "time", {
-        get: function () {
-            return event_t_get_prop_time(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Event.prototype, "target", {
-        get: function () {
-            return event_t_get_prop_target(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Event;
-}());
-var Style = /** @class */ (function () {
-    function Style(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    Style.prototype.notifyWidgetStateChanged = function (widget) {
-        return style_notify_widget_state_changed(this.nativeObj, widget ? (widget.nativeObj || widget) : null);
-    };
-    Style.prototype.isValid = function () {
-        return style_is_valid(this.nativeObj);
-    };
-    Style.prototype.getInt = function (id, defval) {
-        return style_get_int(this.nativeObj, id, defval);
-    };
-    Style.prototype.getStr = function (id, defval) {
-        return style_get_str(this.nativeObj, id, defval);
-    };
-    return Style;
-}());
-var Rect = /** @class */ (function () {
-    function Rect(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    return Rect;
-}());
-var Point = /** @class */ (function () {
-    function Point(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    return Point;
-}());
-var LocaleInfo = /** @class */ (function () {
-    function LocaleInfo(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    LocaleInfo.instance = function () {
-        return new LocaleInfo(locale_info());
-    };
-    LocaleInfo.prototype.tr = function (text) {
-        return locale_info_tr(this.nativeObj, text);
-    };
-    LocaleInfo.prototype.change = function (language, country) {
-        return locale_info_change(this.nativeObj, language, country);
-    };
-    LocaleInfo.prototype.on = function (type, on_event, ctx) {
-        return locale_info_on(this.nativeObj, type, on_event, ctx);
-    };
-    LocaleInfo.prototype.off = function (id) {
-        return locale_info_off(this.nativeObj, id);
-    };
-    return LocaleInfo;
-}());
 var Value = /** @class */ (function () {
     function Value(nativeObj) {
         this.nativeObj = nativeObj;
@@ -898,17 +695,23 @@ var Value = /** @class */ (function () {
     });
     return Value;
 }());
-var ImageManager = /** @class */ (function () {
-    function ImageManager(nativeObj) {
+var DateTime = /** @class */ (function () {
+    function DateTime(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    ImageManager.instance = function () {
-        return new ImageManager(image_manager());
+    DateTime.create = function () {
+        return new DateTime(date_time_create());
     };
-    ImageManager.prototype.load = function (name, image) {
-        return image_manager_load(this.nativeObj, name, image ? (image.nativeObj || image) : null);
+    DateTime.prototype.destroy = function () {
+        return date_time_destroy(this.nativeObj);
     };
-    return ImageManager;
+    return DateTime;
+}());
+var Canvas = /** @class */ (function () {
+    function Canvas(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    return Canvas;
 }());
 var AssetInfo = /** @class */ (function () {
     function AssetInfo(nativeObj) {
@@ -957,6 +760,213 @@ var AssetInfo = /** @class */ (function () {
         configurable: true
     });
     return AssetInfo;
+}());
+var Bitmap = /** @class */ (function () {
+    function Bitmap(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Bitmap.create = function () {
+        return new Bitmap(bitmap_create());
+    };
+    Bitmap.createEx = function (w, h, line_length, format) {
+        return new Bitmap(bitmap_create_ex(w, h, line_length, format));
+    };
+    Bitmap.prototype.getBpp = function () {
+        return bitmap_get_bpp(this.nativeObj);
+    };
+    Bitmap.prototype.destroy = function () {
+        return bitmap_destroy(this.nativeObj);
+    };
+    Object.defineProperty(Bitmap.prototype, "w", {
+        get: function () {
+            return bitmap_t_get_prop_w(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "h", {
+        get: function () {
+            return bitmap_t_get_prop_h(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "lineLength", {
+        get: function () {
+            return bitmap_t_get_prop_line_length(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "flags", {
+        get: function () {
+            return bitmap_t_get_prop_flags(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "format", {
+        get: function () {
+            return bitmap_t_get_prop_format(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Bitmap.prototype, "name", {
+        get: function () {
+            return bitmap_t_get_prop_name(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Bitmap;
+}());
+var ClipBoard = /** @class */ (function () {
+    function ClipBoard(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    ClipBoard.setText = function (text) {
+        return clip_board_set_text(text);
+    };
+    ClipBoard.getText = function () {
+        return clip_board_get_text();
+    };
+    return ClipBoard;
+}());
+var Timer = /** @class */ (function () {
+    function Timer(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Timer.add = function (on_timer, ctx, duration_ms) {
+        return timer_add(on_timer, ctx, duration_ms);
+    };
+    Timer.remove = function (timer_id) {
+        return timer_remove(timer_id);
+    };
+    return Timer;
+}());
+var AssetsManager = /** @class */ (function () {
+    function AssetsManager(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    AssetsManager.instance = function () {
+        return new AssetsManager(assets_manager());
+    };
+    AssetsManager.prototype.ref = function (type, name) {
+        return assets_manager_ref(this.nativeObj, type, name);
+    };
+    AssetsManager.prototype.unref = function (info) {
+        return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
+    };
+    return AssetsManager;
+}());
+var Event = /** @class */ (function () {
+    function Event(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Event.cast = function (event) {
+        return new Event(event_cast(event ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(Event.prototype, "type", {
+        get: function () {
+            return event_t_get_prop_type(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Event.prototype, "time", {
+        get: function () {
+            return event_t_get_prop_time(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Event.prototype, "target", {
+        get: function () {
+            return event_t_get_prop_target(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Event;
+}());
+var TimeNow = /** @class */ (function () {
+    function TimeNow(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    TimeNow.s = function () {
+        return time_now_s();
+    };
+    TimeNow.ms = function () {
+        return time_now_ms();
+    };
+    return TimeNow;
+}());
+var Style = /** @class */ (function () {
+    function Style(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Style.prototype.notifyWidgetStateChanged = function (widget) {
+        return style_notify_widget_state_changed(this.nativeObj, widget ? (widget.nativeObj || widget) : null);
+    };
+    Style.prototype.isValid = function () {
+        return style_is_valid(this.nativeObj);
+    };
+    Style.prototype.getInt = function (id, defval) {
+        return style_get_int(this.nativeObj, id, defval);
+    };
+    Style.prototype.getStr = function (id, defval) {
+        return style_get_str(this.nativeObj, id, defval);
+    };
+    return Style;
+}());
+var Rect = /** @class */ (function () {
+    function Rect(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    return Rect;
+}());
+var LocaleInfo = /** @class */ (function () {
+    function LocaleInfo(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    LocaleInfo.instance = function () {
+        return new LocaleInfo(locale_info());
+    };
+    LocaleInfo.prototype.tr = function (text) {
+        return locale_info_tr(this.nativeObj, text);
+    };
+    LocaleInfo.prototype.change = function (language, country) {
+        return locale_info_change(this.nativeObj, language, country);
+    };
+    LocaleInfo.prototype.on = function (type, on_event, ctx) {
+        return locale_info_on(this.nativeObj, type, on_event, ctx);
+    };
+    LocaleInfo.prototype.off = function (id) {
+        return locale_info_off(this.nativeObj, id);
+    };
+    return LocaleInfo;
+}());
+var Tk = /** @class */ (function () {
+    function Tk(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Tk.quit = function () {
+        return tk_quit();
+    };
+    return Tk;
+}());
+var ImageManager = /** @class */ (function () {
+    function ImageManager(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    ImageManager.instance = function () {
+        return new ImageManager(image_manager());
+    };
+    ImageManager.prototype.load = function (name, image) {
+        return image_manager_load(this.nativeObj, name, image ? (image.nativeObj || image) : null);
+    };
+    return ImageManager;
 }());
 var Idle = /** @class */ (function () {
     function Idle(nativeObj) {
@@ -1441,6 +1451,32 @@ var Edit = /** @class */ (function (_super) {
     });
     return Edit;
 }(Widget));
+var GifImage = /** @class */ (function (_super) {
+    __extends(GifImage, _super);
+    function GifImage(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    GifImage.create = function (parent, x, y, w, h) {
+        return new GifImage(gif_image_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    GifImage.cast = function (widget) {
+        return new GifImage(gif_image_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    return GifImage;
+}(Widget));
+var GridItem = /** @class */ (function (_super) {
+    __extends(GridItem, _super);
+    function GridItem(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    GridItem.create = function (parent, x, y, w, h) {
+        return new GridItem(grid_item_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    GridItem.cast = function (widget) {
+        return new GridItem(grid_item_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    return GridItem;
+}(Widget));
 var Grid = /** @class */ (function (_super) {
     __extends(Grid, _super);
     function Grid(nativeObj) {
@@ -1768,9 +1804,9 @@ var KeyEvent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(KeyEvent.prototype, "caplock", {
+    Object.defineProperty(KeyEvent.prototype, "capslock", {
         get: function () {
-            return key_event_t_get_prop_caplock(this.nativeObj);
+            return key_event_t_get_prop_capslock(this.nativeObj);
         },
         enumerable: true,
         configurable: true
@@ -2467,6 +2503,19 @@ var StyleMutable = /** @class */ (function (_super) {
     });
     return StyleMutable;
 }(Style));
+var SvgImage = /** @class */ (function (_super) {
+    __extends(SvgImage, _super);
+    function SvgImage(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    SvgImage.create = function (parent, x, y, w, h) {
+        return new SvgImage(svg_image_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    SvgImage.cast = function (widget) {
+        return new SvgImage(svg_image_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    return SvgImage;
+}(Widget));
 var Switch = /** @class */ (function (_super) {
     __extends(Switch, _super);
     function Switch(nativeObj) {

@@ -31,6 +31,10 @@ function installOne(w) {
       Dialog.cast(iter.getWindow()).quit(0);
     })
     print('quit dialog.' + widgetName);
+  } else if(strContains(widgetName, 'exit')) {
+    iter.on(EventType.CLICK, function(evt) {
+      Tk.quit();
+    })
   } else if(strContains(widgetName, 'chinese')) {
     iter.on(EventType.CLICK, function(evt) {
       Tklocale.instance().change('zh', 'CN');

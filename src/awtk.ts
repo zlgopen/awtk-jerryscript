@@ -15,6 +15,27 @@ declare function WIDGET_STATE_OVER_OF_CHECKED();
 declare function WIDGET_STATE_NORMAL_OF_ACTIVE();
 declare function WIDGET_STATE_PRESSED_OF_ACTIVE();
 declare function WIDGET_STATE_OVER_OF_ACTIVE();
+declare function WINDOW_STAGE_NONE();
+declare function WINDOW_STAGE_CREATED();
+declare function WINDOW_STAGE_OPENED();
+declare function WINDOW_STAGE_CLOSED();
+declare function CLIP_BOARD_DATA_TYPE_NONE();
+declare function CLIP_BOARD_DATA_TYPE_TEXT();
+declare function IMAGE_DRAW_DEFAULT();
+declare function IMAGE_DRAW_CENTER();
+declare function IMAGE_DRAW_ICON();
+declare function IMAGE_DRAW_SCALE();
+declare function IMAGE_DRAW_SCALE_AUTO();
+declare function IMAGE_DRAW_SCALE_W();
+declare function IMAGE_DRAW_SCALE_H();
+declare function IMAGE_DRAW_REPEAT();
+declare function IMAGE_DRAW_REPEAT_X();
+declare function IMAGE_DRAW_REPEAT_Y();
+declare function IMAGE_DRAW_PATCH9();
+declare function IMAGE_DRAW_PATCH3_X();
+declare function IMAGE_DRAW_PATCH3_Y();
+declare function IMAGE_DRAW_PATCH3_X_SCALE_Y();
+declare function IMAGE_DRAW_PATCH3_Y_SCALE_X();
 declare function WIDGET_TYPE_NONE();
 declare function WIDGET_TYPE_WINDOW_MANAGER();
 declare function WIDGET_TYPE_NORMAL_WINDOW();
@@ -60,148 +81,10 @@ declare function WIDGET_TYPE_COLOR_TILE();
 declare function WIDGET_TYPE_RICH_TEXT();
 declare function WIDGET_TYPE_APP_BAR();
 declare function WIDGET_TYPE_GRID();
+declare function WIDGET_TYPE_GRID_ITEM();
 declare function WIDGET_TYPE_ROW();
 declare function WIDGET_TYPE_COLUMN();
 declare function WIDGET_TYPE_CALIBRATION_WIN();
-declare function CLIP_BOARD_DATA_TYPE_NONE();
-declare function CLIP_BOARD_DATA_TYPE_TEXT();
-declare function WINDOW_STAGE_NONE();
-declare function WINDOW_STAGE_CREATED();
-declare function WINDOW_STAGE_OPENED();
-declare function WINDOW_STAGE_CLOSED();
-declare function VALUE_TYPE_INVALID();
-declare function VALUE_TYPE_BOOL();
-declare function VALUE_TYPE_INT8();
-declare function VALUE_TYPE_UINT8();
-declare function VALUE_TYPE_INT16();
-declare function VALUE_TYPE_UINT16();
-declare function VALUE_TYPE_INT32();
-declare function VALUE_TYPE_UINT32();
-declare function VALUE_TYPE_INT64();
-declare function VALUE_TYPE_UINT64();
-declare function VALUE_TYPE_POINTER();
-declare function VALUE_TYPE_FLOAT();
-declare function VALUE_TYPE_FLOAT32();
-declare function VALUE_TYPE_DOUBLE();
-declare function VALUE_TYPE_STRING();
-declare function VALUE_TYPE_WSTRING();
-declare function ALIGN_H_NONE();
-declare function ALIGN_H_CENTER();
-declare function ALIGN_H_LEFT();
-declare function ALIGN_H_RIGHT();
-declare function ALIGN_V_NONE();
-declare function ALIGN_V_MIDDLE();
-declare function ALIGN_V_TOP();
-declare function ALIGN_V_BOTTOM();
-declare function RET_OK();
-declare function RET_OOM();
-declare function RET_FAIL();
-declare function RET_NOT_IMPL();
-declare function RET_QUIT();
-declare function RET_FOUND();
-declare function RET_REMOVE();
-declare function RET_REPEAT();
-declare function RET_NOT_FOUND();
-declare function RET_DONE();
-declare function RET_STOP();
-declare function RET_CONTINUE();
-declare function RET_BAD_PARAMS();
-declare function IMAGE_DRAW_DEFAULT();
-declare function IMAGE_DRAW_CENTER();
-declare function IMAGE_DRAW_ICON();
-declare function IMAGE_DRAW_SCALE();
-declare function IMAGE_DRAW_SCALE_AUTO();
-declare function IMAGE_DRAW_SCALE_W();
-declare function IMAGE_DRAW_SCALE_H();
-declare function IMAGE_DRAW_REPEAT();
-declare function IMAGE_DRAW_REPEAT_X();
-declare function IMAGE_DRAW_REPEAT_Y();
-declare function IMAGE_DRAW_PATCH9();
-declare function IMAGE_DRAW_PATCH3_X();
-declare function IMAGE_DRAW_PATCH3_Y();
-declare function IMAGE_DRAW_PATCH3_X_SCALE_Y();
-declare function IMAGE_DRAW_PATCH3_Y_SCALE_X();
-declare function EVT_NONE();
-declare function EVT_POINTER_DOWN();
-declare function EVT_POINTER_DOWN_ABORT();
-declare function EVT_POINTER_MOVE();
-declare function EVT_POINTER_UP();
-declare function EVT_WHEEL();
-declare function EVT_CONTEXT_MENU();
-declare function EVT_POINTER_ENTER();
-declare function EVT_POINTER_LEAVE();
-declare function EVT_LONG_PRESS();
-declare function EVT_CLICK();
-declare function EVT_FOCUS();
-declare function EVT_BLUR();
-declare function EVT_KEY_DOWN();
-declare function EVT_KEY_REPEAT();
-declare function EVT_KEY_UP();
-declare function EVT_DESTROY();
-declare function EVT_WILL_MOVE();
-declare function EVT_MOVE();
-declare function EVT_WILL_RESIZE();
-declare function EVT_RESIZE();
-declare function EVT_WILL_MOVE_RESIZE();
-declare function EVT_MOVE_RESIZE();
-declare function EVT_PROP_WILL_CHANGE();
-declare function EVT_PROP_CHANGED();
-declare function EVT_VALUE_WILL_CHANGE();
-declare function EVT_VALUE_CHANGED();
-declare function EVT_VALUE_CHANGING();
-declare function EVT_PAINT();
-declare function EVT_BEFORE_PAINT();
-declare function EVT_AFTER_PAINT();
-declare function EVT_LOCALE_CHANGED();
-declare function EVT_ANIM_START();
-declare function EVT_ANIM_STOP();
-declare function EVT_ANIM_PAUSE();
-declare function EVT_ANIM_ONCE();
-declare function EVT_ANIM_END();
-declare function EVT_WINDOW_LOAD();
-declare function EVT_WINDOW_WILL_OPEN();
-declare function EVT_WINDOW_OPEN();
-declare function EVT_WINDOW_CLOSE();
-declare function EVT_IM_COMMIT();
-declare function EVT_IM_SHOW_CANDIDATES();
-declare function EVT_IM_ACTION();
-declare function EVT_IM_ACTION_INFO();
-declare function EVT_DRAG_START();
-declare function EVT_DRAG();
-declare function EVT_DRAG_END();
-declare function EVT_REQ_START();
-declare function EVT_USER_START();
-declare function BITMAP_FLAG_NONE();
-declare function BITMAP_FLAG_OPAQUE();
-declare function BITMAP_FLAG_IMMUTABLE();
-declare function BITMAP_FLAG_TEXTURE();
-declare function BITMAP_FLAG_CHANGED();
-declare function INPUT_TEXT();
-declare function INPUT_INT();
-declare function INPUT_UINT();
-declare function INPUT_HEX();
-declare function INPUT_FLOAT();
-declare function INPUT_UFLOAT();
-declare function INPUT_EMAIL();
-declare function INPUT_PASSWORD();
-declare function INPUT_PHONE();
-declare function BITMAP_FMT_NONE();
-declare function BITMAP_FMT_RGBA8888();
-declare function BITMAP_FMT_ABGR8888();
-declare function BITMAP_FMT_BGRA8888();
-declare function BITMAP_FMT_ARGB8888();
-declare function BITMAP_FMT_RGB565();
-declare function BITMAP_FMT_BGR565();
-declare function BITMAP_FMT_RGB888();
-declare function BITMAP_FMT_BGR888();
-declare function ASSET_TYPE_NONE();
-declare function ASSET_TYPE_FONT();
-declare function ASSET_TYPE_IMAGE();
-declare function ASSET_TYPE_STYLE();
-declare function ASSET_TYPE_UI();
-declare function ASSET_TYPE_XML();
-declare function ASSET_TYPE_STRINGS();
-declare function ASSET_TYPE_DATA();
 declare function WIDGET_PROP_X();
 declare function WIDGET_PROP_Y();
 declare function WIDGET_PROP_W();
@@ -289,27 +172,124 @@ declare function WIDGET_PROP_LINE_GAP();
 declare function WIDGET_PROP_BG_COLOR();
 declare function WIDGET_PROP_BORDER_COLOR();
 declare function WIDGET_PROP_DELAY();
-declare function date_time_create();
-declare function date_time_destroy(dt);
-declare function bitmap_create();
-declare function bitmap_create_ex(w, h, line_length, format);
-declare function bitmap_get_bpp(bitmap);
-declare function bitmap_destroy(bitmap);
-declare function bitmap_t_get_prop_w(nativeObj);
-declare function bitmap_t_get_prop_h(nativeObj);
-declare function bitmap_t_get_prop_line_length(nativeObj);
-declare function bitmap_t_get_prop_flags(nativeObj);
-declare function bitmap_t_get_prop_format(nativeObj);
-declare function bitmap_t_get_prop_name(nativeObj);
-declare function assets_manager();
-declare function assets_manager_ref(rm, type, name);
-declare function assets_manager_unref(rm, info);
-declare function timer_add(on_timer, ctx, duration_ms);
-declare function timer_remove(timer_id);
-declare function time_now_s();
-declare function time_now_ms();
-declare function clip_board_set_text(text);
-declare function clip_board_get_text();
+declare function VALUE_TYPE_INVALID();
+declare function VALUE_TYPE_BOOL();
+declare function VALUE_TYPE_INT8();
+declare function VALUE_TYPE_UINT8();
+declare function VALUE_TYPE_INT16();
+declare function VALUE_TYPE_UINT16();
+declare function VALUE_TYPE_INT32();
+declare function VALUE_TYPE_UINT32();
+declare function VALUE_TYPE_INT64();
+declare function VALUE_TYPE_UINT64();
+declare function VALUE_TYPE_POINTER();
+declare function VALUE_TYPE_FLOAT();
+declare function VALUE_TYPE_FLOAT32();
+declare function VALUE_TYPE_DOUBLE();
+declare function VALUE_TYPE_STRING();
+declare function VALUE_TYPE_WSTRING();
+declare function ALIGN_H_NONE();
+declare function ALIGN_H_CENTER();
+declare function ALIGN_H_LEFT();
+declare function ALIGN_H_RIGHT();
+declare function ALIGN_V_NONE();
+declare function ALIGN_V_MIDDLE();
+declare function ALIGN_V_TOP();
+declare function ALIGN_V_BOTTOM();
+declare function BITMAP_FLAG_NONE();
+declare function BITMAP_FLAG_OPAQUE();
+declare function BITMAP_FLAG_IMMUTABLE();
+declare function BITMAP_FLAG_TEXTURE();
+declare function BITMAP_FLAG_CHANGED();
+declare function RET_OK();
+declare function RET_OOM();
+declare function RET_FAIL();
+declare function RET_NOT_IMPL();
+declare function RET_QUIT();
+declare function RET_FOUND();
+declare function RET_REMOVE();
+declare function RET_REPEAT();
+declare function RET_NOT_FOUND();
+declare function RET_DONE();
+declare function RET_STOP();
+declare function RET_CONTINUE();
+declare function RET_BAD_PARAMS();
+declare function BITMAP_FMT_NONE();
+declare function BITMAP_FMT_RGBA8888();
+declare function BITMAP_FMT_ABGR8888();
+declare function BITMAP_FMT_BGRA8888();
+declare function BITMAP_FMT_ARGB8888();
+declare function BITMAP_FMT_RGB565();
+declare function BITMAP_FMT_BGR565();
+declare function BITMAP_FMT_RGB888();
+declare function BITMAP_FMT_BGR888();
+declare function EVT_NONE();
+declare function EVT_POINTER_DOWN();
+declare function EVT_POINTER_DOWN_ABORT();
+declare function EVT_POINTER_MOVE();
+declare function EVT_POINTER_UP();
+declare function EVT_WHEEL();
+declare function EVT_CONTEXT_MENU();
+declare function EVT_POINTER_ENTER();
+declare function EVT_POINTER_LEAVE();
+declare function EVT_LONG_PRESS();
+declare function EVT_CLICK();
+declare function EVT_FOCUS();
+declare function EVT_BLUR();
+declare function EVT_KEY_DOWN();
+declare function EVT_KEY_REPEAT();
+declare function EVT_KEY_UP();
+declare function EVT_DESTROY();
+declare function EVT_WILL_MOVE();
+declare function EVT_MOVE();
+declare function EVT_WILL_RESIZE();
+declare function EVT_RESIZE();
+declare function EVT_WILL_MOVE_RESIZE();
+declare function EVT_MOVE_RESIZE();
+declare function EVT_PROP_WILL_CHANGE();
+declare function EVT_PROP_CHANGED();
+declare function EVT_VALUE_WILL_CHANGE();
+declare function EVT_VALUE_CHANGED();
+declare function EVT_VALUE_CHANGING();
+declare function EVT_PAINT();
+declare function EVT_BEFORE_PAINT();
+declare function EVT_AFTER_PAINT();
+declare function EVT_LOCALE_CHANGED();
+declare function EVT_ANIM_START();
+declare function EVT_ANIM_STOP();
+declare function EVT_ANIM_PAUSE();
+declare function EVT_ANIM_ONCE();
+declare function EVT_ANIM_END();
+declare function EVT_WINDOW_LOAD();
+declare function EVT_WINDOW_WILL_OPEN();
+declare function EVT_WINDOW_OPEN();
+declare function EVT_WINDOW_CLOSE();
+declare function EVT_IM_COMMIT();
+declare function EVT_IM_SHOW_CANDIDATES();
+declare function EVT_IM_ACTION();
+declare function EVT_IM_ACTION_INFO();
+declare function EVT_DRAG_START();
+declare function EVT_DRAG();
+declare function EVT_DRAG_END();
+declare function EVT_REQ_START();
+declare function EVT_USER_START();
+declare function ASSET_TYPE_NONE();
+declare function ASSET_TYPE_FONT();
+declare function ASSET_TYPE_IMAGE();
+declare function ASSET_TYPE_STYLE();
+declare function ASSET_TYPE_UI();
+declare function ASSET_TYPE_XML();
+declare function ASSET_TYPE_STRINGS();
+declare function ASSET_TYPE_DATA();
+declare function INPUT_TEXT();
+declare function INPUT_INT();
+declare function INPUT_UINT();
+declare function INPUT_HEX();
+declare function INPUT_FLOAT();
+declare function INPUT_UFLOAT();
+declare function INPUT_EMAIL();
+declare function INPUT_PASSWORD();
+declare function INPUT_PHONE();
 declare function widget_count_children(widget);
 declare function widget_get_child(widget, index);
 declare function widget_index_of(widget);
@@ -340,7 +320,7 @@ declare function widget_lookup_by_type(widget, type, recursive);
 declare function widget_set_visible(widget, visible, recursive);
 declare function widget_on(widget, type, on_event, ctx);
 declare function widget_off(widget, id);
-declare function widget_invalidate_force(widget);
+declare function widget_invalidate_force(widget, r);
 declare function widget_set_prop_str(widget, name, v);
 declare function widget_get_prop_str(widget, name, defval);
 declare function widget_set_prop_int(widget, name, v);
@@ -369,19 +349,6 @@ declare function widget_t_get_prop_animation(nativeObj);
 declare function widget_t_get_prop_enable(nativeObj);
 declare function widget_t_get_prop_visible(nativeObj);
 declare function widget_t_set_prop_visible(nativeObj, value);
-declare function event_cast(event);
-declare function event_t_get_prop_type(nativeObj);
-declare function event_t_get_prop_time(nativeObj);
-declare function event_t_get_prop_target(nativeObj);
-declare function style_notify_widget_state_changed(s, widget);
-declare function style_is_valid(s);
-declare function style_get_int(s, id, defval);
-declare function style_get_str(s, id, defval);
-declare function locale_info();
-declare function locale_info_tr(locale_info, text);
-declare function locale_info_change(locale_info, language, country);
-declare function locale_info_on(locale_info, type, on_event, ctx);
-declare function locale_info_off(locale_info, id);
 declare function value_set_bool(v, value);
 declare function value_bool(v);
 declare function value_set_int8(v, value);
@@ -413,14 +380,49 @@ declare function value_set_int(v, value);
 declare function value_create();
 declare function value_destroy(v);
 declare function value_t_get_prop_type(nativeObj);
-declare function image_manager();
-declare function image_manager_load(imm, name, image);
+declare function date_time_create();
+declare function date_time_destroy(dt);
 declare function asset_info_t_get_prop_type(nativeObj);
 declare function asset_info_t_get_prop_subtype(nativeObj);
 declare function asset_info_t_get_prop_is_in_rom(nativeObj);
 declare function asset_info_t_get_prop_size(nativeObj);
 declare function asset_info_t_get_prop_refcount(nativeObj);
 declare function asset_info_t_get_prop_name(nativeObj);
+declare function bitmap_create();
+declare function bitmap_create_ex(w, h, line_length, format);
+declare function bitmap_get_bpp(bitmap);
+declare function bitmap_destroy(bitmap);
+declare function bitmap_t_get_prop_w(nativeObj);
+declare function bitmap_t_get_prop_h(nativeObj);
+declare function bitmap_t_get_prop_line_length(nativeObj);
+declare function bitmap_t_get_prop_flags(nativeObj);
+declare function bitmap_t_get_prop_format(nativeObj);
+declare function bitmap_t_get_prop_name(nativeObj);
+declare function clip_board_set_text(text);
+declare function clip_board_get_text();
+declare function timer_add(on_timer, ctx, duration_ms);
+declare function timer_remove(timer_id);
+declare function assets_manager();
+declare function assets_manager_ref(rm, type, name);
+declare function assets_manager_unref(rm, info);
+declare function event_cast(event);
+declare function event_t_get_prop_type(nativeObj);
+declare function event_t_get_prop_time(nativeObj);
+declare function event_t_get_prop_target(nativeObj);
+declare function time_now_s();
+declare function time_now_ms();
+declare function style_notify_widget_state_changed(s, widget);
+declare function style_is_valid(s);
+declare function style_get_int(s, id, defval);
+declare function style_get_str(s, id, defval);
+declare function locale_info();
+declare function locale_info_tr(locale_info, text);
+declare function locale_info_change(locale_info, language, country);
+declare function locale_info_on(locale_info, type, on_event, ctx);
+declare function locale_info_off(locale_info, id);
+declare function tk_quit();
+declare function image_manager();
+declare function image_manager_load(imm, name, image);
 declare function idle_add(on_idle, ctx);
 declare function idle_remove(idle_id);
 declare function app_bar_create(parent, x, y, w, h);
@@ -513,6 +515,10 @@ declare function edit_t_get_prop_bottom_margin(nativeObj);
 declare function edit_t_get_prop_left_margin(nativeObj);
 declare function edit_t_get_prop_right_margin(nativeObj);
 declare function edit_t_get_prop_tips(nativeObj);
+declare function gif_image_create(parent, x, y, w, h);
+declare function gif_image_cast(widget);
+declare function grid_item_create(parent, x, y, w, h);
+declare function grid_item_cast(widget);
 declare function grid_create(parent, x, y, w, h);
 declare function grid_cast(widget);
 declare function group_box_create(parent, x, y, w, h);
@@ -572,7 +578,7 @@ declare function key_event_t_get_prop_key(nativeObj);
 declare function key_event_t_get_prop_alt(nativeObj);
 declare function key_event_t_get_prop_ctrl(nativeObj);
 declare function key_event_t_get_prop_shift(nativeObj);
-declare function key_event_t_get_prop_caplock(nativeObj);
+declare function key_event_t_get_prop_capslock(nativeObj);
 declare function label_create(parent, x, y, w, h);
 declare function list_item_create(parent, x, y, w, h);
 declare function list_item_cast(widget);
@@ -696,6 +702,8 @@ declare function style_mutable_set_name(s, name);
 declare function style_mutable_set_int(s, state, id, val);
 declare function style_mutable_create(widget);
 declare function style_mutable_t_get_prop_name(nativeObj);
+declare function svg_image_create(parent, x, y, w, h);
+declare function svg_image_cast(widget);
 declare function switch_create(parent, x, y, w, h);
 declare function switch_set_value(widget, value);
 declare function switch_cast(widget);
@@ -789,6 +797,36 @@ enum WidgetState {
  STATE_OVER_OF_ACTIVE = WIDGET_STATE_OVER_OF_ACTIVE(),
 };
 
+enum WindowStage {
+ NONE = WINDOW_STAGE_NONE(),
+ CREATED = WINDOW_STAGE_CREATED(),
+ OPENED = WINDOW_STAGE_OPENED(),
+ CLOSED = WINDOW_STAGE_CLOSED(),
+};
+
+enum ClipBoardDataType {
+ NONE = CLIP_BOARD_DATA_TYPE_NONE(),
+ TEXT = CLIP_BOARD_DATA_TYPE_TEXT(),
+};
+
+enum ImageDrawType {
+ DEFAULT = IMAGE_DRAW_DEFAULT(),
+ CENTER = IMAGE_DRAW_CENTER(),
+ ICON = IMAGE_DRAW_ICON(),
+ SCALE = IMAGE_DRAW_SCALE(),
+ SCALE_AUTO = IMAGE_DRAW_SCALE_AUTO(),
+ SCALE_W = IMAGE_DRAW_SCALE_W(),
+ SCALE_H = IMAGE_DRAW_SCALE_H(),
+ REPEAT = IMAGE_DRAW_REPEAT(),
+ REPEAT_X = IMAGE_DRAW_REPEAT_X(),
+ REPEAT_Y = IMAGE_DRAW_REPEAT_Y(),
+ PATCH9 = IMAGE_DRAW_PATCH9(),
+ PATCH3_X = IMAGE_DRAW_PATCH3_X(),
+ PATCH3_Y = IMAGE_DRAW_PATCH3_Y(),
+ PATCH3_X_SCALE_Y = IMAGE_DRAW_PATCH3_X_SCALE_Y(),
+ PATCH3_Y_SCALE_X = IMAGE_DRAW_PATCH3_Y_SCALE_X(),
+};
+
 enum WidgetType {
  NONE = WIDGET_TYPE_NONE(),
  WINDOW_MANAGER = WIDGET_TYPE_WINDOW_MANAGER(),
@@ -835,184 +873,10 @@ enum WidgetType {
  RICH_TEXT = WIDGET_TYPE_RICH_TEXT(),
  APP_BAR = WIDGET_TYPE_APP_BAR(),
  GRID = WIDGET_TYPE_GRID(),
+ GRID_ITEM = WIDGET_TYPE_GRID_ITEM(),
  ROW = WIDGET_TYPE_ROW(),
  COLUMN = WIDGET_TYPE_COLUMN(),
  CALIBRATION_WIN = WIDGET_TYPE_CALIBRATION_WIN(),
-};
-
-enum ClipBoardDataType {
- NONE = CLIP_BOARD_DATA_TYPE_NONE(),
- TEXT = CLIP_BOARD_DATA_TYPE_TEXT(),
-};
-
-enum WindowStage {
- NONE = WINDOW_STAGE_NONE(),
- CREATED = WINDOW_STAGE_CREATED(),
- OPENED = WINDOW_STAGE_OPENED(),
- CLOSED = WINDOW_STAGE_CLOSED(),
-};
-
-enum ValueType {
- INVALID = VALUE_TYPE_INVALID(),
- BOOL = VALUE_TYPE_BOOL(),
- INT8 = VALUE_TYPE_INT8(),
- UINT8 = VALUE_TYPE_UINT8(),
- INT16 = VALUE_TYPE_INT16(),
- UINT16 = VALUE_TYPE_UINT16(),
- INT32 = VALUE_TYPE_INT32(),
- UINT32 = VALUE_TYPE_UINT32(),
- INT64 = VALUE_TYPE_INT64(),
- UINT64 = VALUE_TYPE_UINT64(),
- POINTER = VALUE_TYPE_POINTER(),
- FLOAT = VALUE_TYPE_FLOAT(),
- FLOAT32 = VALUE_TYPE_FLOAT32(),
- DOUBLE = VALUE_TYPE_DOUBLE(),
- STRING = VALUE_TYPE_STRING(),
- WSTRING = VALUE_TYPE_WSTRING(),
-};
-
-enum AlignH {
- NONE = ALIGN_H_NONE(),
- CENTER = ALIGN_H_CENTER(),
- LEFT = ALIGN_H_LEFT(),
- RIGHT = ALIGN_H_RIGHT(),
-};
-
-enum AlignV {
- NONE = ALIGN_V_NONE(),
- MIDDLE = ALIGN_V_MIDDLE(),
- TOP = ALIGN_V_TOP(),
- BOTTOM = ALIGN_V_BOTTOM(),
-};
-
-enum Ret {
- OK = RET_OK(),
- OOM = RET_OOM(),
- FAIL = RET_FAIL(),
- NOT_IMPL = RET_NOT_IMPL(),
- QUIT = RET_QUIT(),
- FOUND = RET_FOUND(),
- REMOVE = RET_REMOVE(),
- REPEAT = RET_REPEAT(),
- NOT_FOUND = RET_NOT_FOUND(),
- DONE = RET_DONE(),
- STOP = RET_STOP(),
- CONTINUE = RET_CONTINUE(),
- BAD_PARAMS = RET_BAD_PARAMS(),
-};
-
-enum ImageDrawType {
- DEFAULT = IMAGE_DRAW_DEFAULT(),
- CENTER = IMAGE_DRAW_CENTER(),
- ICON = IMAGE_DRAW_ICON(),
- SCALE = IMAGE_DRAW_SCALE(),
- SCALE_AUTO = IMAGE_DRAW_SCALE_AUTO(),
- SCALE_W = IMAGE_DRAW_SCALE_W(),
- SCALE_H = IMAGE_DRAW_SCALE_H(),
- REPEAT = IMAGE_DRAW_REPEAT(),
- REPEAT_X = IMAGE_DRAW_REPEAT_X(),
- REPEAT_Y = IMAGE_DRAW_REPEAT_Y(),
- PATCH9 = IMAGE_DRAW_PATCH9(),
- PATCH3_X = IMAGE_DRAW_PATCH3_X(),
- PATCH3_Y = IMAGE_DRAW_PATCH3_Y(),
- PATCH3_X_SCALE_Y = IMAGE_DRAW_PATCH3_X_SCALE_Y(),
- PATCH3_Y_SCALE_X = IMAGE_DRAW_PATCH3_Y_SCALE_X(),
-};
-
-enum EventType {
- NONE = EVT_NONE(),
- POINTER_DOWN = EVT_POINTER_DOWN(),
- POINTER_DOWN_ABORT = EVT_POINTER_DOWN_ABORT(),
- POINTER_MOVE = EVT_POINTER_MOVE(),
- POINTER_UP = EVT_POINTER_UP(),
- WHEEL = EVT_WHEEL(),
- CONTEXT_MENU = EVT_CONTEXT_MENU(),
- POINTER_ENTER = EVT_POINTER_ENTER(),
- POINTER_LEAVE = EVT_POINTER_LEAVE(),
- LONG_PRESS = EVT_LONG_PRESS(),
- CLICK = EVT_CLICK(),
- FOCUS = EVT_FOCUS(),
- BLUR = EVT_BLUR(),
- KEY_DOWN = EVT_KEY_DOWN(),
- KEY_REPEAT = EVT_KEY_REPEAT(),
- KEY_UP = EVT_KEY_UP(),
- DESTROY = EVT_DESTROY(),
- WILL_MOVE = EVT_WILL_MOVE(),
- MOVE = EVT_MOVE(),
- WILL_RESIZE = EVT_WILL_RESIZE(),
- RESIZE = EVT_RESIZE(),
- WILL_MOVE_RESIZE = EVT_WILL_MOVE_RESIZE(),
- MOVE_RESIZE = EVT_MOVE_RESIZE(),
- PROP_WILL_CHANGE = EVT_PROP_WILL_CHANGE(),
- PROP_CHANGED = EVT_PROP_CHANGED(),
- VALUE_WILL_CHANGE = EVT_VALUE_WILL_CHANGE(),
- VALUE_CHANGED = EVT_VALUE_CHANGED(),
- VALUE_CHANGING = EVT_VALUE_CHANGING(),
- PAINT = EVT_PAINT(),
- BEFORE_PAINT = EVT_BEFORE_PAINT(),
- AFTER_PAINT = EVT_AFTER_PAINT(),
- LOCALE_CHANGED = EVT_LOCALE_CHANGED(),
- ANIM_START = EVT_ANIM_START(),
- ANIM_STOP = EVT_ANIM_STOP(),
- ANIM_PAUSE = EVT_ANIM_PAUSE(),
- ANIM_ONCE = EVT_ANIM_ONCE(),
- ANIM_END = EVT_ANIM_END(),
- WINDOW_LOAD = EVT_WINDOW_LOAD(),
- WINDOW_WILL_OPEN = EVT_WINDOW_WILL_OPEN(),
- WINDOW_OPEN = EVT_WINDOW_OPEN(),
- WINDOW_CLOSE = EVT_WINDOW_CLOSE(),
- IM_COMMIT = EVT_IM_COMMIT(),
- IM_SHOW_CANDIDATES = EVT_IM_SHOW_CANDIDATES(),
- IM_ACTION = EVT_IM_ACTION(),
- IM_ACTION_INFO = EVT_IM_ACTION_INFO(),
- DRAG_START = EVT_DRAG_START(),
- DRAG = EVT_DRAG(),
- DRAG_END = EVT_DRAG_END(),
- REQ_START = EVT_REQ_START(),
- USER_START = EVT_USER_START(),
-};
-
-enum BitmapFlag {
- NONE = BITMAP_FLAG_NONE(),
- OPAQUE = BITMAP_FLAG_OPAQUE(),
- IMMUTABLE = BITMAP_FLAG_IMMUTABLE(),
- TEXTURE = BITMAP_FLAG_TEXTURE(),
- CHANGED = BITMAP_FLAG_CHANGED(),
-};
-
-enum InputType {
- TEXT = INPUT_TEXT(),
- INT = INPUT_INT(),
- UINT = INPUT_UINT(),
- HEX = INPUT_HEX(),
- FLOAT = INPUT_FLOAT(),
- UFLOAT = INPUT_UFLOAT(),
- EMAIL = INPUT_EMAIL(),
- PASSWORD = INPUT_PASSWORD(),
- PHONE = INPUT_PHONE(),
-};
-
-enum BitmapFormat {
- NONE = BITMAP_FMT_NONE(),
- RGBA8888 = BITMAP_FMT_RGBA8888(),
- ABGR8888 = BITMAP_FMT_ABGR8888(),
- BGRA8888 = BITMAP_FMT_BGRA8888(),
- ARGB8888 = BITMAP_FMT_ARGB8888(),
- RGB565 = BITMAP_FMT_RGB565(),
- BGR565 = BITMAP_FMT_BGR565(),
- RGB888 = BITMAP_FMT_RGB888(),
- BGR888 = BITMAP_FMT_BGR888(),
-};
-
-enum AssetType {
- NONE = ASSET_TYPE_NONE(),
- FONT = ASSET_TYPE_FONT(),
- IMAGE = ASSET_TYPE_IMAGE(),
- STYLE = ASSET_TYPE_STYLE(),
- UI = ASSET_TYPE_UI(),
- XML = ASSET_TYPE_XML(),
- STRINGS = ASSET_TYPE_STRINGS(),
- DATA = ASSET_TYPE_DATA(),
 };
 
 enum WidgetProp {
@@ -1105,7 +969,140 @@ enum WidgetProp {
  DELAY = WIDGET_PROP_DELAY(),
 };
 
-class Canvas {
+enum ValueType {
+ INVALID = VALUE_TYPE_INVALID(),
+ BOOL = VALUE_TYPE_BOOL(),
+ INT8 = VALUE_TYPE_INT8(),
+ UINT8 = VALUE_TYPE_UINT8(),
+ INT16 = VALUE_TYPE_INT16(),
+ UINT16 = VALUE_TYPE_UINT16(),
+ INT32 = VALUE_TYPE_INT32(),
+ UINT32 = VALUE_TYPE_UINT32(),
+ INT64 = VALUE_TYPE_INT64(),
+ UINT64 = VALUE_TYPE_UINT64(),
+ POINTER = VALUE_TYPE_POINTER(),
+ FLOAT = VALUE_TYPE_FLOAT(),
+ FLOAT32 = VALUE_TYPE_FLOAT32(),
+ DOUBLE = VALUE_TYPE_DOUBLE(),
+ STRING = VALUE_TYPE_STRING(),
+ WSTRING = VALUE_TYPE_WSTRING(),
+};
+
+enum AlignH {
+ NONE = ALIGN_H_NONE(),
+ CENTER = ALIGN_H_CENTER(),
+ LEFT = ALIGN_H_LEFT(),
+ RIGHT = ALIGN_H_RIGHT(),
+};
+
+enum AlignV {
+ NONE = ALIGN_V_NONE(),
+ MIDDLE = ALIGN_V_MIDDLE(),
+ TOP = ALIGN_V_TOP(),
+ BOTTOM = ALIGN_V_BOTTOM(),
+};
+
+enum BitmapFlag {
+ NONE = BITMAP_FLAG_NONE(),
+ OPAQUE = BITMAP_FLAG_OPAQUE(),
+ IMMUTABLE = BITMAP_FLAG_IMMUTABLE(),
+ TEXTURE = BITMAP_FLAG_TEXTURE(),
+ CHANGED = BITMAP_FLAG_CHANGED(),
+};
+
+enum Ret {
+ OK = RET_OK(),
+ OOM = RET_OOM(),
+ FAIL = RET_FAIL(),
+ NOT_IMPL = RET_NOT_IMPL(),
+ QUIT = RET_QUIT(),
+ FOUND = RET_FOUND(),
+ REMOVE = RET_REMOVE(),
+ REPEAT = RET_REPEAT(),
+ NOT_FOUND = RET_NOT_FOUND(),
+ DONE = RET_DONE(),
+ STOP = RET_STOP(),
+ CONTINUE = RET_CONTINUE(),
+ BAD_PARAMS = RET_BAD_PARAMS(),
+};
+
+enum BitmapFormat {
+ NONE = BITMAP_FMT_NONE(),
+ RGBA8888 = BITMAP_FMT_RGBA8888(),
+ ABGR8888 = BITMAP_FMT_ABGR8888(),
+ BGRA8888 = BITMAP_FMT_BGRA8888(),
+ ARGB8888 = BITMAP_FMT_ARGB8888(),
+ RGB565 = BITMAP_FMT_RGB565(),
+ BGR565 = BITMAP_FMT_BGR565(),
+ RGB888 = BITMAP_FMT_RGB888(),
+ BGR888 = BITMAP_FMT_BGR888(),
+};
+
+enum EventType {
+ NONE = EVT_NONE(),
+ POINTER_DOWN = EVT_POINTER_DOWN(),
+ POINTER_DOWN_ABORT = EVT_POINTER_DOWN_ABORT(),
+ POINTER_MOVE = EVT_POINTER_MOVE(),
+ POINTER_UP = EVT_POINTER_UP(),
+ WHEEL = EVT_WHEEL(),
+ CONTEXT_MENU = EVT_CONTEXT_MENU(),
+ POINTER_ENTER = EVT_POINTER_ENTER(),
+ POINTER_LEAVE = EVT_POINTER_LEAVE(),
+ LONG_PRESS = EVT_LONG_PRESS(),
+ CLICK = EVT_CLICK(),
+ FOCUS = EVT_FOCUS(),
+ BLUR = EVT_BLUR(),
+ KEY_DOWN = EVT_KEY_DOWN(),
+ KEY_REPEAT = EVT_KEY_REPEAT(),
+ KEY_UP = EVT_KEY_UP(),
+ DESTROY = EVT_DESTROY(),
+ WILL_MOVE = EVT_WILL_MOVE(),
+ MOVE = EVT_MOVE(),
+ WILL_RESIZE = EVT_WILL_RESIZE(),
+ RESIZE = EVT_RESIZE(),
+ WILL_MOVE_RESIZE = EVT_WILL_MOVE_RESIZE(),
+ MOVE_RESIZE = EVT_MOVE_RESIZE(),
+ PROP_WILL_CHANGE = EVT_PROP_WILL_CHANGE(),
+ PROP_CHANGED = EVT_PROP_CHANGED(),
+ VALUE_WILL_CHANGE = EVT_VALUE_WILL_CHANGE(),
+ VALUE_CHANGED = EVT_VALUE_CHANGED(),
+ VALUE_CHANGING = EVT_VALUE_CHANGING(),
+ PAINT = EVT_PAINT(),
+ BEFORE_PAINT = EVT_BEFORE_PAINT(),
+ AFTER_PAINT = EVT_AFTER_PAINT(),
+ LOCALE_CHANGED = EVT_LOCALE_CHANGED(),
+ ANIM_START = EVT_ANIM_START(),
+ ANIM_STOP = EVT_ANIM_STOP(),
+ ANIM_PAUSE = EVT_ANIM_PAUSE(),
+ ANIM_ONCE = EVT_ANIM_ONCE(),
+ ANIM_END = EVT_ANIM_END(),
+ WINDOW_LOAD = EVT_WINDOW_LOAD(),
+ WINDOW_WILL_OPEN = EVT_WINDOW_WILL_OPEN(),
+ WINDOW_OPEN = EVT_WINDOW_OPEN(),
+ WINDOW_CLOSE = EVT_WINDOW_CLOSE(),
+ IM_COMMIT = EVT_IM_COMMIT(),
+ IM_SHOW_CANDIDATES = EVT_IM_SHOW_CANDIDATES(),
+ IM_ACTION = EVT_IM_ACTION(),
+ IM_ACTION_INFO = EVT_IM_ACTION_INFO(),
+ DRAG_START = EVT_DRAG_START(),
+ DRAG = EVT_DRAG(),
+ DRAG_END = EVT_DRAG_END(),
+ REQ_START = EVT_REQ_START(),
+ USER_START = EVT_USER_START(),
+};
+
+enum AssetType {
+ NONE = ASSET_TYPE_NONE(),
+ FONT = ASSET_TYPE_FONT(),
+ IMAGE = ASSET_TYPE_IMAGE(),
+ STYLE = ASSET_TYPE_STYLE(),
+ UI = ASSET_TYPE_UI(),
+ XML = ASSET_TYPE_XML(),
+ STRINGS = ASSET_TYPE_STRINGS(),
+ DATA = ASSET_TYPE_DATA(),
+};
+
+class Point {
  public nativeObj;
  constructor(nativeObj) {
    this.nativeObj = nativeObj;
@@ -1113,137 +1110,17 @@ class Canvas {
 
 }
 
-class DateTime {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static create() {
-   return new DateTime(date_time_create());
- }
-
- destroy() {
-   return date_time_destroy(this.nativeObj);
- }
-
-}
-
-class Bitmap {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static create() {
-   return new Bitmap(bitmap_create());
- }
-
- static createEx(w, h, line_length, format) {
-   return new Bitmap(bitmap_create_ex(w, h, line_length, format));
- }
-
- getBpp() {
-   return bitmap_get_bpp(this.nativeObj);
- }
-
- destroy() {
-   return bitmap_destroy(this.nativeObj);
- }
-
- get w() {
-   return bitmap_t_get_prop_w(this.nativeObj);
- }
-
- get h() {
-   return bitmap_t_get_prop_h(this.nativeObj);
- }
-
- get lineLength() {
-   return bitmap_t_get_prop_line_length(this.nativeObj);
- }
-
- get flags() {
-   return bitmap_t_get_prop_flags(this.nativeObj);
- }
-
- get format() {
-   return bitmap_t_get_prop_format(this.nativeObj);
- }
-
- get name() {
-   return bitmap_t_get_prop_name(this.nativeObj);
- }
-
-}
-
-class AssetsManager {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static instance() {
-   return new AssetsManager(assets_manager());
- }
-
- ref(type, name) {
-   return assets_manager_ref(this.nativeObj, type, name);
- }
-
- unref(info) {
-   return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
- }
-
-}
-
-class Timer {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static add(on_timer, ctx, duration_ms) {
-   return timer_add(on_timer, ctx, duration_ms);
- }
-
- static remove(timer_id) {
-   return timer_remove(timer_id);
- }
-
-}
-
-class TimeNow {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static s() {
-   return time_now_s();
- }
-
- static ms() {
-   return time_now_ms();
- }
-
-}
-
-class ClipBoard {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static setText(text) {
-   return clip_board_set_text(text);
- }
-
- static getText() {
-   return clip_board_get_text();
- }
-
-}
+enum InputType {
+ TEXT = INPUT_TEXT(),
+ INT = INPUT_INT(),
+ UINT = INPUT_UINT(),
+ HEX = INPUT_HEX(),
+ FLOAT = INPUT_FLOAT(),
+ UFLOAT = INPUT_UFLOAT(),
+ EMAIL = INPUT_EMAIL(),
+ PASSWORD = INPUT_PASSWORD(),
+ PHONE = INPUT_PHONE(),
+};
 
 class Widget {
  public nativeObj;
@@ -1371,8 +1248,8 @@ class Widget {
    return widget_off(this.nativeObj, id);
  }
 
- invalidateForce() {
-   return widget_invalidate_force(this.nativeObj);
+ invalidateForce(r) {
+   return widget_invalidate_force(this.nativeObj, r ? (r.nativeObj || r) : null);
  }
 
  setPropStr(name, v) {
@@ -1485,98 +1362,6 @@ class Widget {
 
  get visible() {
    return widget_t_get_prop_visible(this.nativeObj);
- }
-
-}
-
-class Event {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static cast(event) {
-   return new Event(event_cast(event ? (event.nativeObj || event) : null));
- }
-
- get type() {
-   return event_t_get_prop_type(this.nativeObj);
- }
-
- get time() {
-   return event_t_get_prop_time(this.nativeObj);
- }
-
- get target() {
-   return event_t_get_prop_target(this.nativeObj);
- }
-
-}
-
-class Style {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- notifyWidgetStateChanged(widget) {
-   return style_notify_widget_state_changed(this.nativeObj, widget ? (widget.nativeObj || widget) : null);
- }
-
- isValid() {
-   return style_is_valid(this.nativeObj);
- }
-
- getInt(id, defval) {
-   return style_get_int(this.nativeObj, id, defval);
- }
-
- getStr(id, defval) {
-   return style_get_str(this.nativeObj, id, defval);
- }
-
-}
-
-class Rect {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
-}
-
-class Point {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
-}
-
-class LocaleInfo {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static instance() {
-   return new LocaleInfo(locale_info());
- }
-
- tr(text) {
-   return locale_info_tr(this.nativeObj, text);
- }
-
- change(language, country) {
-   return locale_info_change(this.nativeObj, language, country);
- }
-
- on(type, on_event, ctx) {
-   return locale_info_on(this.nativeObj, type, on_event, ctx);
- }
-
- off(id) {
-   return locale_info_off(this.nativeObj, id);
  }
 
 }
@@ -1713,18 +1498,26 @@ class Value {
 
 }
 
-class ImageManager {
+class DateTime {
  public nativeObj;
  constructor(nativeObj) {
    this.nativeObj = nativeObj;
  }
 
- static instance() {
-   return new ImageManager(image_manager());
+ static create() {
+   return new DateTime(date_time_create());
  }
 
- load(name, image) {
-   return image_manager_load(this.nativeObj, name, image ? (image.nativeObj || image) : null);
+ destroy() {
+   return date_time_destroy(this.nativeObj);
+ }
+
+}
+
+class Canvas {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
  }
 
 }
@@ -1757,6 +1550,234 @@ class AssetInfo {
 
  get name() {
    return asset_info_t_get_prop_name(this.nativeObj);
+ }
+
+}
+
+class Bitmap {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static create() {
+   return new Bitmap(bitmap_create());
+ }
+
+ static createEx(w, h, line_length, format) {
+   return new Bitmap(bitmap_create_ex(w, h, line_length, format));
+ }
+
+ getBpp() {
+   return bitmap_get_bpp(this.nativeObj);
+ }
+
+ destroy() {
+   return bitmap_destroy(this.nativeObj);
+ }
+
+ get w() {
+   return bitmap_t_get_prop_w(this.nativeObj);
+ }
+
+ get h() {
+   return bitmap_t_get_prop_h(this.nativeObj);
+ }
+
+ get lineLength() {
+   return bitmap_t_get_prop_line_length(this.nativeObj);
+ }
+
+ get flags() {
+   return bitmap_t_get_prop_flags(this.nativeObj);
+ }
+
+ get format() {
+   return bitmap_t_get_prop_format(this.nativeObj);
+ }
+
+ get name() {
+   return bitmap_t_get_prop_name(this.nativeObj);
+ }
+
+}
+
+class ClipBoard {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static setText(text) {
+   return clip_board_set_text(text);
+ }
+
+ static getText() {
+   return clip_board_get_text();
+ }
+
+}
+
+class Timer {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static add(on_timer, ctx, duration_ms) {
+   return timer_add(on_timer, ctx, duration_ms);
+ }
+
+ static remove(timer_id) {
+   return timer_remove(timer_id);
+ }
+
+}
+
+class AssetsManager {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static instance() {
+   return new AssetsManager(assets_manager());
+ }
+
+ ref(type, name) {
+   return assets_manager_ref(this.nativeObj, type, name);
+ }
+
+ unref(info) {
+   return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
+ }
+
+}
+
+class Event {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static cast(event) {
+   return new Event(event_cast(event ? (event.nativeObj || event) : null));
+ }
+
+ get type() {
+   return event_t_get_prop_type(this.nativeObj);
+ }
+
+ get time() {
+   return event_t_get_prop_time(this.nativeObj);
+ }
+
+ get target() {
+   return event_t_get_prop_target(this.nativeObj);
+ }
+
+}
+
+class TimeNow {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static s() {
+   return time_now_s();
+ }
+
+ static ms() {
+   return time_now_ms();
+ }
+
+}
+
+class Style {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ notifyWidgetStateChanged(widget) {
+   return style_notify_widget_state_changed(this.nativeObj, widget ? (widget.nativeObj || widget) : null);
+ }
+
+ isValid() {
+   return style_is_valid(this.nativeObj);
+ }
+
+ getInt(id, defval) {
+   return style_get_int(this.nativeObj, id, defval);
+ }
+
+ getStr(id, defval) {
+   return style_get_str(this.nativeObj, id, defval);
+ }
+
+}
+
+class Rect {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+}
+
+class LocaleInfo {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static instance() {
+   return new LocaleInfo(locale_info());
+ }
+
+ tr(text) {
+   return locale_info_tr(this.nativeObj, text);
+ }
+
+ change(language, country) {
+   return locale_info_change(this.nativeObj, language, country);
+ }
+
+ on(type, on_event, ctx) {
+   return locale_info_on(this.nativeObj, type, on_event, ctx);
+ }
+
+ off(id) {
+   return locale_info_off(this.nativeObj, id);
+ }
+
+}
+
+class Tk {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static quit() {
+   return tk_quit();
+ }
+
+}
+
+class ImageManager {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static instance() {
+   return new ImageManager(image_manager());
+ }
+
+ load(name, image) {
+   return image_manager_load(this.nativeObj, name, image ? (image.nativeObj || image) : null);
  }
 
 }
@@ -2257,6 +2278,38 @@ class Edit extends Widget {
 
 }
 
+class GifImage extends Widget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new GifImage(gif_image_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+ }
+
+ static cast(widget) {
+   return new GifImage(gif_image_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+}
+
+class GridItem extends Widget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new GridItem(grid_item_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+ }
+
+ static cast(widget) {
+   return new GridItem(grid_item_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+}
+
 class Grid extends Widget {
  public nativeObj;
  constructor(nativeObj) {
@@ -2555,8 +2608,8 @@ class KeyEvent extends Event {
    return key_event_t_get_prop_shift(this.nativeObj);
  }
 
- get caplock() {
-   return key_event_t_get_prop_caplock(this.nativeObj);
+ get capslock() {
+   return key_event_t_get_prop_capslock(this.nativeObj);
  }
 
 }
@@ -3201,6 +3254,22 @@ class StyleMutable extends Style {
 
  get name() {
    return style_mutable_t_get_prop_name(this.nativeObj);
+ }
+
+}
+
+class SvgImage extends Widget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new SvgImage(svg_image_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+ }
+
+ static cast(widget) {
+   return new SvgImage(svg_image_cast(widget ? (widget.nativeObj || widget) : null));
  }
 
 }
