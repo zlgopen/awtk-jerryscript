@@ -27,8 +27,8 @@
 #include "awtk.h"
 #include "ext_widgets/ext_widgets.h"
 
-#include "base/fs.h"
-#include "base/mem.h"
+#include "tkc/fs.h"
+#include "tkc/mem.h"
 #include "demos/assets.h"
 
 extern ret_t awtk_js_init(void);

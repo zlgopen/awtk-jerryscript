@@ -319,8 +319,8 @@ class JerryscriptGenerator {
   genIncludes(json) {
     let result = '/*XXX: GENERATED CODE, DONT EDIT IT.*/\n';
 
-    result += '#include "base/utf8.h"\n';
-    result += '#include "base/mem.h"\n';
+    result += '#include "tkc/utf8.h"\n';
+    result += '#include "tkc/mem.h"\n';
     result += this.genJavascriptIncludes();
 
     json.forEach(iter => {
