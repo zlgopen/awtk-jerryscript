@@ -3,7 +3,7 @@
 #include "tkc/mem.h"
 #include "jerryscript.h"
 #include "jerryscript-ext/handler.h"
-#include "src/awtk_main.h"
+#include "src/awtk_global.h"
 #include "base/assets_manager.h"
 #include "base/bitmap.h"
 #include "base/canvas.h"
@@ -16,6 +16,7 @@
 #include "base/locale_info.h"
 #include "base/style.h"
 #include "base/timer.h"
+#include "base/types_def.h"
 #include "base/widget_consts.h"
 #include "base/widget.h"
 #include "base/window_base.h"
@@ -2305,6 +2306,96 @@ jerry_value_t wrap_timer_remove(
 ret_t timer_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"timer_add", wrap_timer_add);
   jerryx_handler_register_global((const jerry_char_t*)"timer_remove", wrap_timer_remove);
+
+ return RET_OK;
+}
+
+jerry_value_t get_ALIGN_V_NONE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(ALIGN_V_NONE);
+}
+
+jerry_value_t get_ALIGN_V_MIDDLE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(ALIGN_V_MIDDLE);
+}
+
+jerry_value_t get_ALIGN_V_TOP(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(ALIGN_V_TOP);
+}
+
+jerry_value_t get_ALIGN_V_BOTTOM(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(ALIGN_V_BOTTOM);
+}
+
+ret_t align_v_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_V_NONE", get_ALIGN_V_NONE);
+  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_V_MIDDLE", get_ALIGN_V_MIDDLE);
+  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_V_TOP", get_ALIGN_V_TOP);
+  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_V_BOTTOM", get_ALIGN_V_BOTTOM);
+
+ return RET_OK;
+}
+
+jerry_value_t get_ALIGN_H_NONE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(ALIGN_H_NONE);
+}
+
+jerry_value_t get_ALIGN_H_CENTER(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(ALIGN_H_CENTER);
+}
+
+jerry_value_t get_ALIGN_H_LEFT(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(ALIGN_H_LEFT);
+}
+
+jerry_value_t get_ALIGN_H_RIGHT(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(ALIGN_H_RIGHT);
+}
+
+ret_t align_h_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_H_NONE", get_ALIGN_H_NONE);
+  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_H_CENTER", get_ALIGN_H_CENTER);
+  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_H_LEFT", get_ALIGN_H_LEFT);
+  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_H_RIGHT", get_ALIGN_H_RIGHT);
 
  return RET_OK;
 }
@@ -7837,96 +7928,6 @@ ret_t ret_t_init(void) {
  return RET_OK;
 }
 
-jerry_value_t get_ALIGN_V_NONE(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  return jerry_create_number(ALIGN_V_NONE);
-}
-
-jerry_value_t get_ALIGN_V_MIDDLE(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  return jerry_create_number(ALIGN_V_MIDDLE);
-}
-
-jerry_value_t get_ALIGN_V_TOP(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  return jerry_create_number(ALIGN_V_TOP);
-}
-
-jerry_value_t get_ALIGN_V_BOTTOM(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  return jerry_create_number(ALIGN_V_BOTTOM);
-}
-
-ret_t align_v_t_init(void) {
-  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_V_NONE", get_ALIGN_V_NONE);
-  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_V_MIDDLE", get_ALIGN_V_MIDDLE);
-  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_V_TOP", get_ALIGN_V_TOP);
-  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_V_BOTTOM", get_ALIGN_V_BOTTOM);
-
- return RET_OK;
-}
-
-jerry_value_t get_ALIGN_H_NONE(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  return jerry_create_number(ALIGN_H_NONE);
-}
-
-jerry_value_t get_ALIGN_H_CENTER(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  return jerry_create_number(ALIGN_H_CENTER);
-}
-
-jerry_value_t get_ALIGN_H_LEFT(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  return jerry_create_number(ALIGN_H_LEFT);
-}
-
-jerry_value_t get_ALIGN_H_RIGHT(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  return jerry_create_number(ALIGN_H_RIGHT);
-}
-
-ret_t align_h_t_init(void) {
-  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_H_NONE", get_ALIGN_H_NONE);
-  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_H_CENTER", get_ALIGN_H_CENTER);
-  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_H_LEFT", get_ALIGN_H_LEFT);
-  jerryx_handler_register_global((const jerry_char_t*)"ALIGN_H_RIGHT", get_ALIGN_H_RIGHT);
-
- return RET_OK;
-}
-
 jerry_value_t get_VALUE_TYPE_INVALID(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -10927,6 +10928,8 @@ ret_t awtk_js_init(void) {
   locale_info_t_init();
   style_t_init();
   timer_t_init();
+  align_v_t_init();
+  align_h_t_init();
   widget_prop_t_init();
   widget_type_t_init();
   widget_state_t_init();
@@ -10962,8 +10965,6 @@ ret_t awtk_js_init(void) {
   rect_t_init();
   time_now_t_init();
   ret_t_init();
-  align_v_t_init();
-  align_h_t_init();
   value_type_t_init();
   value_t_init();
   app_bar_t_init();
