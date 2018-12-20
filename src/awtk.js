@@ -140,6 +140,9 @@ var WidgetProp;
     WidgetProp[WidgetProp["OPACITY"] = WIDGET_PROP_OPACITY()] = "OPACITY";
     WidgetProp[WidgetProp["MIN_W"] = WIDGET_PROP_MIN_W()] = "MIN_W";
     WidgetProp[WidgetProp["MAX_W"] = WIDGET_PROP_MAX_W()] = "MAX_W";
+    WidgetProp[WidgetProp["CHILDREN_LAYOUT"] = WIDGET_PROP_CHILDREN_LAYOUT()] = "CHILDREN_LAYOUT";
+    WidgetProp[WidgetProp["LAYOUT"] = WIDGET_PROP_LAYOUT()] = "LAYOUT";
+    WidgetProp[WidgetProp["SELF_LAYOUT"] = WIDGET_PROP_SELF_LAYOUT()] = "SELF_LAYOUT";
     WidgetProp[WidgetProp["LAYOUT_W"] = WIDGET_PROP_LAYOUT_W()] = "LAYOUT_W";
     WidgetProp[WidgetProp["LAYOUT_H"] = WIDGET_PROP_LAYOUT_H()] = "LAYOUT_H";
     WidgetProp[WidgetProp["VIRTUAL_W"] = WIDGET_PROP_VIRTUAL_W()] = "VIRTUAL_W";
@@ -153,6 +156,7 @@ var WidgetProp;
     WidgetProp[WidgetProp["TR_TEXT"] = WIDGET_PROP_TR_TEXT()] = "TR_TEXT";
     WidgetProp[WidgetProp["STYLE"] = WIDGET_PROP_STYLE()] = "STYLE";
     WidgetProp[WidgetProp["ENABLE"] = WIDGET_PROP_ENABLE()] = "ENABLE";
+    WidgetProp[WidgetProp["FLOATING"] = WIDGET_PROP_FLOATING()] = "FLOATING";
     WidgetProp[WidgetProp["MARGIN"] = WIDGET_PROP_MARGIN()] = "MARGIN";
     WidgetProp[WidgetProp["SPACING"] = WIDGET_PROP_SPACING()] = "SPACING";
     WidgetProp[WidgetProp["LEFT_MARGIN"] = WIDGET_PROP_LEFT_MARGIN()] = "LEFT_MARGIN";
@@ -433,6 +437,9 @@ var Widget = /** @class */ (function () {
     Widget.prototype.setEnable = function (enable) {
         return widget_set_enable(this.nativeObj, enable);
     };
+    Widget.prototype.setFloating = function (floating) {
+        return widget_set_floating(this.nativeObj, floating);
+    };
     Widget.prototype.setFocused = function (focused) {
         return widget_set_focused(this.nativeObj, focused);
     };
@@ -496,20 +503,23 @@ var Widget = /** @class */ (function () {
     Widget.prototype.equal = function (other) {
         return widget_equal(this.nativeObj, other ? (other.nativeObj || other) : null);
     };
-    Widget.prototype.setSelfLayoutParams = function (x, y, w, h) {
-        return widget_set_self_layout_params(this.nativeObj, x, y, w, h);
-    };
-    Widget.prototype.setChildrenLayoutParams = function (params) {
-        return widget_set_children_layout_params(this.nativeObj, params);
-    };
-    Widget.prototype.layout = function () {
-        return widget_layout(this.nativeObj);
-    };
     Widget.cast = function (widget) {
         return new Widget(widget_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Widget.prototype.destroy = function () {
         return widget_destroy(this.nativeObj);
+    };
+    Widget.prototype.layout = function () {
+        return widget_layout(this.nativeObj);
+    };
+    Widget.prototype.setSelfLayout = function (params) {
+        return widget_set_self_layout(this.nativeObj, params);
+    };
+    Widget.prototype.setChildrenLayout = function (params) {
+        return widget_set_children_layout(this.nativeObj, params);
+    };
+    Widget.prototype.setSelfLayoutParams = function (x, y, w, h) {
+        return widget_set_self_layout_params(this.nativeObj, x, y, w, h);
     };
     Object.defineProperty(Widget.prototype, "x", {
         get: function () {
@@ -580,6 +590,13 @@ var Widget = /** @class */ (function () {
         },
         set: function (value) {
             widget_t_set_prop_visible(this.nativeObj, value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Widget.prototype, "floating", {
+        get: function () {
+            return widget_t_get_prop_floating(this.nativeObj);
         },
         enumerable: true,
         configurable: true

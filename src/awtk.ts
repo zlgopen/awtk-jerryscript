@@ -97,6 +97,9 @@ declare function WIDGET_PROP_H();
 declare function WIDGET_PROP_OPACITY();
 declare function WIDGET_PROP_MIN_W();
 declare function WIDGET_PROP_MAX_W();
+declare function WIDGET_PROP_CHILDREN_LAYOUT();
+declare function WIDGET_PROP_LAYOUT();
+declare function WIDGET_PROP_SELF_LAYOUT();
 declare function WIDGET_PROP_LAYOUT_W();
 declare function WIDGET_PROP_LAYOUT_H();
 declare function WIDGET_PROP_VIRTUAL_W();
@@ -110,6 +113,7 @@ declare function WIDGET_PROP_TEXT();
 declare function WIDGET_PROP_TR_TEXT();
 declare function WIDGET_PROP_STYLE();
 declare function WIDGET_PROP_ENABLE();
+declare function WIDGET_PROP_FLOATING();
 declare function WIDGET_PROP_MARGIN();
 declare function WIDGET_PROP_SPACING();
 declare function WIDGET_PROP_LEFT_MARGIN();
@@ -310,6 +314,7 @@ declare function widget_pause_animator(widget, name);
 declare function widget_stop_animator(widget, name);
 declare function widget_destroy_animator(widget, name);
 declare function widget_set_enable(widget, enable);
+declare function widget_set_floating(widget, floating);
 declare function widget_set_focused(widget, focused);
 declare function widget_child(widget, name);
 declare function widget_lookup(widget, name, recursive);
@@ -331,11 +336,12 @@ declare function widget_get_window_manager(widget);
 declare function widget_get_type(widget);
 declare function widget_clone(widget, parent);
 declare function widget_equal(widget, other);
-declare function widget_set_self_layout_params(widget, x, y, w, h);
-declare function widget_set_children_layout_params(widget, params);
-declare function widget_layout(widget);
 declare function widget_cast(widget);
 declare function widget_destroy(widget);
+declare function widget_layout(widget);
+declare function widget_set_self_layout(widget, params);
+declare function widget_set_children_layout(widget, params);
+declare function widget_set_self_layout_params(widget, x, y, w, h);
 declare function widget_t_get_prop_x(nativeObj);
 declare function widget_t_get_prop_y(nativeObj);
 declare function widget_t_get_prop_w(nativeObj);
@@ -347,6 +353,7 @@ declare function widget_t_get_prop_animation(nativeObj);
 declare function widget_t_get_prop_enable(nativeObj);
 declare function widget_t_get_prop_visible(nativeObj);
 declare function widget_t_set_prop_visible(nativeObj, value);
+declare function widget_t_get_prop_floating(nativeObj);
 declare function value_set_bool(v, value);
 declare function value_bool(v);
 declare function value_set_int8(v, value);
@@ -937,6 +944,9 @@ enum WidgetProp {
  OPACITY = WIDGET_PROP_OPACITY(),
  MIN_W = WIDGET_PROP_MIN_W(),
  MAX_W = WIDGET_PROP_MAX_W(),
+ CHILDREN_LAYOUT = WIDGET_PROP_CHILDREN_LAYOUT(),
+ LAYOUT = WIDGET_PROP_LAYOUT(),
+ SELF_LAYOUT = WIDGET_PROP_SELF_LAYOUT(),
  LAYOUT_W = WIDGET_PROP_LAYOUT_W(),
  LAYOUT_H = WIDGET_PROP_LAYOUT_H(),
  VIRTUAL_W = WIDGET_PROP_VIRTUAL_W(),
@@ -950,6 +960,7 @@ enum WidgetProp {
  TR_TEXT = WIDGET_PROP_TR_TEXT(),
  STYLE = WIDGET_PROP_STYLE(),
  ENABLE = WIDGET_PROP_ENABLE(),
+ FLOATING = WIDGET_PROP_FLOATING(),
  MARGIN = WIDGET_PROP_MARGIN(),
  SPACING = WIDGET_PROP_SPACING(),
  LEFT_MARGIN = WIDGET_PROP_LEFT_MARGIN(),
@@ -1248,6 +1259,10 @@ class Widget {
    return widget_set_enable(this.nativeObj, enable);
  }
 
+ setFloating(floating) {
+   return widget_set_floating(this.nativeObj, floating);
+ }
+
  setFocused(focused) {
    return widget_set_focused(this.nativeObj, focused);
  }
@@ -1332,24 +1347,28 @@ class Widget {
    return widget_equal(this.nativeObj, other ? (other.nativeObj || other) : null);
  }
 
- setSelfLayoutParams(x, y, w, h) {
-   return widget_set_self_layout_params(this.nativeObj, x, y, w, h);
- }
-
- setChildrenLayoutParams(params) {
-   return widget_set_children_layout_params(this.nativeObj, params);
- }
-
- layout() {
-   return widget_layout(this.nativeObj);
- }
-
  static cast(widget) {
    return new Widget(widget_cast(widget ? (widget.nativeObj || widget) : null));
  }
 
  destroy() {
    return widget_destroy(this.nativeObj);
+ }
+
+ layout() {
+   return widget_layout(this.nativeObj);
+ }
+
+ setSelfLayout(params) {
+   return widget_set_self_layout(this.nativeObj, params);
+ }
+
+ setChildrenLayout(params) {
+   return widget_set_children_layout(this.nativeObj, params);
+ }
+
+ setSelfLayoutParams(x, y, w, h) {
+   return widget_set_self_layout_params(this.nativeObj, x, y, w, h);
  }
 
  get x() {
@@ -1394,6 +1413,10 @@ class Widget {
 
  get visible() {
    return widget_t_get_prop_visible(this.nativeObj);
+ }
+
+ get floating() {
+   return widget_t_get_prop_floating(this.nativeObj);
  }
 
 }
