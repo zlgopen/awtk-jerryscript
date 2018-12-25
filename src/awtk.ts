@@ -288,6 +288,13 @@ declare function WIDGET_TYPE_GRID_ITEM();
 declare function WIDGET_TYPE_ROW();
 declare function WIDGET_TYPE_COLUMN();
 declare function WIDGET_TYPE_CALIBRATION_WIN();
+declare function WINDOW_STAGE_NONE();
+declare function WINDOW_STAGE_CREATED();
+declare function WINDOW_STAGE_OPENED();
+declare function WINDOW_STAGE_CLOSED();
+declare function WINDOW_CLOSABLE_YES();
+declare function WINDOW_CLOSABLE_NO();
+declare function WINDOW_CLOSABLE_CONFIRM();
 declare function WIDGET_STATE_NONE();
 declare function WIDGET_STATE_NORMAL();
 declare function WIDGET_STATE_PRESSED();
@@ -305,13 +312,6 @@ declare function WIDGET_STATE_OVER_OF_CHECKED();
 declare function WIDGET_STATE_NORMAL_OF_ACTIVE();
 declare function WIDGET_STATE_PRESSED_OF_ACTIVE();
 declare function WIDGET_STATE_OVER_OF_ACTIVE();
-declare function WINDOW_STAGE_NONE();
-declare function WINDOW_STAGE_CREATED();
-declare function WINDOW_STAGE_OPENED();
-declare function WINDOW_STAGE_CLOSED();
-declare function WINDOW_CLOSABLE_YES();
-declare function WINDOW_CLOSABLE_NO();
-declare function WINDOW_CLOSABLE_CONFIRM();
 declare function widget_count_children(widget);
 declare function widget_get_child(widget, index);
 declare function widget_index_of(widget);
@@ -1368,6 +1368,19 @@ enum WidgetType {
  CALIBRATION_WIN = WIDGET_TYPE_CALIBRATION_WIN(),
 };
 
+enum WindowStage {
+ NONE = WINDOW_STAGE_NONE(),
+ CREATED = WINDOW_STAGE_CREATED(),
+ OPENED = WINDOW_STAGE_OPENED(),
+ CLOSED = WINDOW_STAGE_CLOSED(),
+};
+
+enum WindowClosable {
+ YES = WINDOW_CLOSABLE_YES(),
+ NO = WINDOW_CLOSABLE_NO(),
+ CONFIRM = WINDOW_CLOSABLE_CONFIRM(),
+};
+
 enum WidgetState {
  STATE_NONE = WIDGET_STATE_NONE(),
  STATE_NORMAL = WIDGET_STATE_NORMAL(),
@@ -1386,19 +1399,6 @@ enum WidgetState {
  STATE_NORMAL_OF_ACTIVE = WIDGET_STATE_NORMAL_OF_ACTIVE(),
  STATE_PRESSED_OF_ACTIVE = WIDGET_STATE_PRESSED_OF_ACTIVE(),
  STATE_OVER_OF_ACTIVE = WIDGET_STATE_OVER_OF_ACTIVE(),
-};
-
-enum WindowStage {
- NONE = WINDOW_STAGE_NONE(),
- CREATED = WINDOW_STAGE_CREATED(),
- OPENED = WINDOW_STAGE_OPENED(),
- CLOSED = WINDOW_STAGE_CLOSED(),
-};
-
-enum WindowClosable {
- YES = WINDOW_CLOSABLE_YES(),
- NO = WINDOW_CLOSABLE_NO(),
- CONFIRM = WINDOW_CLOSABLE_CONFIRM(),
 };
 
 class Widget {

@@ -555,6 +555,21 @@ var WidgetType;
     WidgetType[WidgetType["CALIBRATION_WIN"] = WIDGET_TYPE_CALIBRATION_WIN()] = "CALIBRATION_WIN";
 })(WidgetType || (WidgetType = {}));
 ;
+var WindowStage;
+(function (WindowStage) {
+    WindowStage[WindowStage["NONE"] = WINDOW_STAGE_NONE()] = "NONE";
+    WindowStage[WindowStage["CREATED"] = WINDOW_STAGE_CREATED()] = "CREATED";
+    WindowStage[WindowStage["OPENED"] = WINDOW_STAGE_OPENED()] = "OPENED";
+    WindowStage[WindowStage["CLOSED"] = WINDOW_STAGE_CLOSED()] = "CLOSED";
+})(WindowStage || (WindowStage = {}));
+;
+var WindowClosable;
+(function (WindowClosable) {
+    WindowClosable[WindowClosable["YES"] = WINDOW_CLOSABLE_YES()] = "YES";
+    WindowClosable[WindowClosable["NO"] = WINDOW_CLOSABLE_NO()] = "NO";
+    WindowClosable[WindowClosable["CONFIRM"] = WINDOW_CLOSABLE_CONFIRM()] = "CONFIRM";
+})(WindowClosable || (WindowClosable = {}));
+;
 var WidgetState;
 (function (WidgetState) {
     WidgetState[WidgetState["STATE_NONE"] = WIDGET_STATE_NONE()] = "STATE_NONE";
@@ -575,21 +590,6 @@ var WidgetState;
     WidgetState[WidgetState["STATE_PRESSED_OF_ACTIVE"] = WIDGET_STATE_PRESSED_OF_ACTIVE()] = "STATE_PRESSED_OF_ACTIVE";
     WidgetState[WidgetState["STATE_OVER_OF_ACTIVE"] = WIDGET_STATE_OVER_OF_ACTIVE()] = "STATE_OVER_OF_ACTIVE";
 })(WidgetState || (WidgetState = {}));
-;
-var WindowStage;
-(function (WindowStage) {
-    WindowStage[WindowStage["NONE"] = WINDOW_STAGE_NONE()] = "NONE";
-    WindowStage[WindowStage["CREATED"] = WINDOW_STAGE_CREATED()] = "CREATED";
-    WindowStage[WindowStage["OPENED"] = WINDOW_STAGE_OPENED()] = "OPENED";
-    WindowStage[WindowStage["CLOSED"] = WINDOW_STAGE_CLOSED()] = "CLOSED";
-})(WindowStage || (WindowStage = {}));
-;
-var WindowClosable;
-(function (WindowClosable) {
-    WindowClosable[WindowClosable["YES"] = WINDOW_CLOSABLE_YES()] = "YES";
-    WindowClosable[WindowClosable["NO"] = WINDOW_CLOSABLE_NO()] = "NO";
-    WindowClosable[WindowClosable["CONFIRM"] = WINDOW_CLOSABLE_CONFIRM()] = "CONFIRM";
-})(WindowClosable || (WindowClosable = {}));
 ;
 var Widget = /** @class */ (function () {
     function Widget(nativeObj) {
