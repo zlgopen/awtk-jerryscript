@@ -365,6 +365,35 @@ var LocaleInfo = /** @class */ (function () {
     };
     return LocaleInfo;
 }());
+var StyleId;
+(function (StyleId) {
+    StyleId[StyleId["_ID_BG_COLOR"] = STYLE_ID_BG_COLOR()] = "_ID_BG_COLOR";
+    StyleId[StyleId["_ID_FG_COLOR"] = STYLE_ID_FG_COLOR()] = "_ID_FG_COLOR";
+    StyleId[StyleId["_ID_FONT_NAME"] = STYLE_ID_FONT_NAME()] = "_ID_FONT_NAME";
+    StyleId[StyleId["_ID_FONT_SIZE"] = STYLE_ID_FONT_SIZE()] = "_ID_FONT_SIZE";
+    StyleId[StyleId["_ID_FONT_STYLE"] = STYLE_ID_FONT_STYLE()] = "_ID_FONT_STYLE";
+    StyleId[StyleId["_ID_TEXT_COLOR"] = STYLE_ID_TEXT_COLOR()] = "_ID_TEXT_COLOR";
+    StyleId[StyleId["_ID_TIPS_TEXT_COLOR"] = STYLE_ID_TIPS_TEXT_COLOR()] = "_ID_TIPS_TEXT_COLOR";
+    StyleId[StyleId["_ID_TEXT_ALIGN_H"] = STYLE_ID_TEXT_ALIGN_H()] = "_ID_TEXT_ALIGN_H";
+    StyleId[StyleId["_ID_TEXT_ALIGN_V"] = STYLE_ID_TEXT_ALIGN_V()] = "_ID_TEXT_ALIGN_V";
+    StyleId[StyleId["_ID_BORDER_COLOR"] = STYLE_ID_BORDER_COLOR()] = "_ID_BORDER_COLOR";
+    StyleId[StyleId["_ID_BORDER"] = STYLE_ID_BORDER()] = "_ID_BORDER";
+    StyleId[StyleId["_ID_BG_IMAGE"] = STYLE_ID_BG_IMAGE()] = "_ID_BG_IMAGE";
+    StyleId[StyleId["_ID_BG_IMAGE_DRAW_TYPE"] = STYLE_ID_BG_IMAGE_DRAW_TYPE()] = "_ID_BG_IMAGE_DRAW_TYPE";
+    StyleId[StyleId["_ID_ICON"] = STYLE_ID_ICON()] = "_ID_ICON";
+    StyleId[StyleId["_ID_FG_IMAGE"] = STYLE_ID_FG_IMAGE()] = "_ID_FG_IMAGE";
+    StyleId[StyleId["_ID_FG_IMAGE_DRAW_TYPE"] = STYLE_ID_FG_IMAGE_DRAW_TYPE()] = "_ID_FG_IMAGE_DRAW_TYPE";
+    StyleId[StyleId["_ID_MARGIN"] = STYLE_ID_MARGIN()] = "_ID_MARGIN";
+    StyleId[StyleId["_ID_ICON_AT"] = STYLE_ID_ICON_AT()] = "_ID_ICON_AT";
+    StyleId[StyleId["_ID_ACTIVE_ICON"] = STYLE_ID_ACTIVE_ICON()] = "_ID_ACTIVE_ICON";
+    StyleId[StyleId["_ID_X_OFFSET"] = STYLE_ID_X_OFFSET()] = "_ID_X_OFFSET";
+    StyleId[StyleId["_ID_Y_OFFSET"] = STYLE_ID_Y_OFFSET()] = "_ID_Y_OFFSET";
+    StyleId[StyleId["_ID_SELECTED_BG_COLOR"] = STYLE_ID_SELECTED_BG_COLOR()] = "_ID_SELECTED_BG_COLOR";
+    StyleId[StyleId["_ID_SELECTED_FG_COLOR"] = STYLE_ID_SELECTED_FG_COLOR()] = "_ID_SELECTED_FG_COLOR";
+    StyleId[StyleId["_ID_SELECTED_TEXT_COLOR"] = STYLE_ID_SELECTED_TEXT_COLOR()] = "_ID_SELECTED_TEXT_COLOR";
+    StyleId[StyleId["_ID_ROUND_RADIUS"] = STYLE_ID_ROUND_RADIUS()] = "_ID_ROUND_RADIUS";
+})(StyleId || (StyleId = {}));
+;
 var Style = /** @class */ (function () {
     function Style(nativeObj) {
         this.nativeObj = nativeObj;
@@ -375,11 +404,11 @@ var Style = /** @class */ (function () {
     Style.prototype.isValid = function () {
         return style_is_valid(this.nativeObj);
     };
-    Style.prototype.getInt = function (id, defval) {
-        return style_get_int(this.nativeObj, id, defval);
+    Style.prototype.getInt = function (name, defval) {
+        return style_get_int(this.nativeObj, name, defval);
     };
-    Style.prototype.getStr = function (id, defval) {
-        return style_get_str(this.nativeObj, id, defval);
+    Style.prototype.getStr = function (name, defval) {
+        return style_get_str(this.nativeObj, name, defval);
     };
     return Style;
 }());
@@ -2076,8 +2105,8 @@ var StyleMutable = /** @class */ (function (_super) {
     StyleMutable.prototype.setName = function (name) {
         return style_mutable_set_name(this.nativeObj, name);
     };
-    StyleMutable.prototype.setInt = function (state, id, val) {
-        return style_mutable_set_int(this.nativeObj, state, id, val);
+    StyleMutable.prototype.setInt = function (state, name, val) {
+        return style_mutable_set_int(this.nativeObj, state, name, val);
     };
     StyleMutable.create = function (widget) {
         return new StyleMutable(style_mutable_create(widget ? (widget.nativeObj || widget) : null));

@@ -128,10 +128,35 @@ declare function locale_info_tr(locale_info, text);
 declare function locale_info_change(locale_info, language, country);
 declare function locale_info_on(locale_info, type, on_event, ctx);
 declare function locale_info_off(locale_info, id);
+declare function STYLE_ID_BG_COLOR();
+declare function STYLE_ID_FG_COLOR();
+declare function STYLE_ID_FONT_NAME();
+declare function STYLE_ID_FONT_SIZE();
+declare function STYLE_ID_FONT_STYLE();
+declare function STYLE_ID_TEXT_COLOR();
+declare function STYLE_ID_TIPS_TEXT_COLOR();
+declare function STYLE_ID_TEXT_ALIGN_H();
+declare function STYLE_ID_TEXT_ALIGN_V();
+declare function STYLE_ID_BORDER_COLOR();
+declare function STYLE_ID_BORDER();
+declare function STYLE_ID_BG_IMAGE();
+declare function STYLE_ID_BG_IMAGE_DRAW_TYPE();
+declare function STYLE_ID_ICON();
+declare function STYLE_ID_FG_IMAGE();
+declare function STYLE_ID_FG_IMAGE_DRAW_TYPE();
+declare function STYLE_ID_MARGIN();
+declare function STYLE_ID_ICON_AT();
+declare function STYLE_ID_ACTIVE_ICON();
+declare function STYLE_ID_X_OFFSET();
+declare function STYLE_ID_Y_OFFSET();
+declare function STYLE_ID_SELECTED_BG_COLOR();
+declare function STYLE_ID_SELECTED_FG_COLOR();
+declare function STYLE_ID_SELECTED_TEXT_COLOR();
+declare function STYLE_ID_ROUND_RADIUS();
 declare function style_notify_widget_state_changed(s, widget);
 declare function style_is_valid(s);
-declare function style_get_int(s, id, defval);
-declare function style_get_str(s, id, defval);
+declare function style_get_int(s, name, defval);
+declare function style_get_str(s, name, defval);
 declare function ALIGN_V_NONE();
 declare function ALIGN_V_MIDDLE();
 declare function ALIGN_V_TOP();
@@ -638,7 +663,7 @@ declare function window_manager_set_cursor(widget, cursor);
 declare function window_manager_t_get_prop_show_fps(nativeObj);
 declare function style_mutable_get_name(s);
 declare function style_mutable_set_name(s, name);
-declare function style_mutable_set_int(s, state, id, val);
+declare function style_mutable_set_int(s, state, name, val);
 declare function style_mutable_create(widget);
 declare function style_mutable_t_get_prop_name(nativeObj);
 declare function color_picker_create(parent, x, y, w, h);
@@ -1176,6 +1201,34 @@ class LocaleInfo {
 
 }
 
+enum StyleId {
+ _ID_BG_COLOR = STYLE_ID_BG_COLOR(),
+ _ID_FG_COLOR = STYLE_ID_FG_COLOR(),
+ _ID_FONT_NAME = STYLE_ID_FONT_NAME(),
+ _ID_FONT_SIZE = STYLE_ID_FONT_SIZE(),
+ _ID_FONT_STYLE = STYLE_ID_FONT_STYLE(),
+ _ID_TEXT_COLOR = STYLE_ID_TEXT_COLOR(),
+ _ID_TIPS_TEXT_COLOR = STYLE_ID_TIPS_TEXT_COLOR(),
+ _ID_TEXT_ALIGN_H = STYLE_ID_TEXT_ALIGN_H(),
+ _ID_TEXT_ALIGN_V = STYLE_ID_TEXT_ALIGN_V(),
+ _ID_BORDER_COLOR = STYLE_ID_BORDER_COLOR(),
+ _ID_BORDER = STYLE_ID_BORDER(),
+ _ID_BG_IMAGE = STYLE_ID_BG_IMAGE(),
+ _ID_BG_IMAGE_DRAW_TYPE = STYLE_ID_BG_IMAGE_DRAW_TYPE(),
+ _ID_ICON = STYLE_ID_ICON(),
+ _ID_FG_IMAGE = STYLE_ID_FG_IMAGE(),
+ _ID_FG_IMAGE_DRAW_TYPE = STYLE_ID_FG_IMAGE_DRAW_TYPE(),
+ _ID_MARGIN = STYLE_ID_MARGIN(),
+ _ID_ICON_AT = STYLE_ID_ICON_AT(),
+ _ID_ACTIVE_ICON = STYLE_ID_ACTIVE_ICON(),
+ _ID_X_OFFSET = STYLE_ID_X_OFFSET(),
+ _ID_Y_OFFSET = STYLE_ID_Y_OFFSET(),
+ _ID_SELECTED_BG_COLOR = STYLE_ID_SELECTED_BG_COLOR(),
+ _ID_SELECTED_FG_COLOR = STYLE_ID_SELECTED_FG_COLOR(),
+ _ID_SELECTED_TEXT_COLOR = STYLE_ID_SELECTED_TEXT_COLOR(),
+ _ID_ROUND_RADIUS = STYLE_ID_ROUND_RADIUS(),
+};
+
 class Style {
  public nativeObj;
  constructor(nativeObj) {
@@ -1190,12 +1243,12 @@ class Style {
    return style_is_valid(this.nativeObj);
  }
 
- getInt(id, defval) {
-   return style_get_int(this.nativeObj, id, defval);
+ getInt(name, defval) {
+   return style_get_int(this.nativeObj, name, defval);
  }
 
- getStr(id, defval) {
-   return style_get_str(this.nativeObj, id, defval);
+ getStr(name, defval) {
+   return style_get_str(this.nativeObj, name, defval);
  }
 
 }
@@ -2849,8 +2902,8 @@ class StyleMutable extends Style {
    return style_mutable_set_name(this.nativeObj, name);
  }
 
- setInt(state, id, val) {
-   return style_mutable_set_int(this.nativeObj, state, id, val);
+ setInt(state, name, val) {
+   return style_mutable_set_int(this.nativeObj, state, name, val);
  }
 
  static create(widget) {

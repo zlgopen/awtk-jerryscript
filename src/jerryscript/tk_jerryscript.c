@@ -1557,6 +1557,261 @@ ret_t locale_info_t_init(void) {
  return RET_OK;
 }
 
+jerry_value_t get_STYLE_ID_BG_COLOR(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_BG_COLOR);
+}
+
+jerry_value_t get_STYLE_ID_FG_COLOR(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_FG_COLOR);
+}
+
+jerry_value_t get_STYLE_ID_FONT_NAME(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_FONT_NAME);
+}
+
+jerry_value_t get_STYLE_ID_FONT_SIZE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_FONT_SIZE);
+}
+
+jerry_value_t get_STYLE_ID_FONT_STYLE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_FONT_STYLE);
+}
+
+jerry_value_t get_STYLE_ID_TEXT_COLOR(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_TEXT_COLOR);
+}
+
+jerry_value_t get_STYLE_ID_TIPS_TEXT_COLOR(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_TIPS_TEXT_COLOR);
+}
+
+jerry_value_t get_STYLE_ID_TEXT_ALIGN_H(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_TEXT_ALIGN_H);
+}
+
+jerry_value_t get_STYLE_ID_TEXT_ALIGN_V(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_TEXT_ALIGN_V);
+}
+
+jerry_value_t get_STYLE_ID_BORDER_COLOR(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_BORDER_COLOR);
+}
+
+jerry_value_t get_STYLE_ID_BORDER(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_BORDER);
+}
+
+jerry_value_t get_STYLE_ID_BG_IMAGE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_BG_IMAGE);
+}
+
+jerry_value_t get_STYLE_ID_BG_IMAGE_DRAW_TYPE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_BG_IMAGE_DRAW_TYPE);
+}
+
+jerry_value_t get_STYLE_ID_ICON(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_ICON);
+}
+
+jerry_value_t get_STYLE_ID_FG_IMAGE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_FG_IMAGE);
+}
+
+jerry_value_t get_STYLE_ID_FG_IMAGE_DRAW_TYPE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_FG_IMAGE_DRAW_TYPE);
+}
+
+jerry_value_t get_STYLE_ID_MARGIN(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_MARGIN);
+}
+
+jerry_value_t get_STYLE_ID_ICON_AT(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_ICON_AT);
+}
+
+jerry_value_t get_STYLE_ID_ACTIVE_ICON(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_ACTIVE_ICON);
+}
+
+jerry_value_t get_STYLE_ID_X_OFFSET(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_X_OFFSET);
+}
+
+jerry_value_t get_STYLE_ID_Y_OFFSET(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_Y_OFFSET);
+}
+
+jerry_value_t get_STYLE_ID_SELECTED_BG_COLOR(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_SELECTED_BG_COLOR);
+}
+
+jerry_value_t get_STYLE_ID_SELECTED_FG_COLOR(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_SELECTED_FG_COLOR);
+}
+
+jerry_value_t get_STYLE_ID_SELECTED_TEXT_COLOR(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_SELECTED_TEXT_COLOR);
+}
+
+jerry_value_t get_STYLE_ID_ROUND_RADIUS(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(STYLE_ID_ROUND_RADIUS);
+}
+
+ret_t style_id_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_BG_COLOR", get_STYLE_ID_BG_COLOR);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_FG_COLOR", get_STYLE_ID_FG_COLOR);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_FONT_NAME", get_STYLE_ID_FONT_NAME);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_FONT_SIZE", get_STYLE_ID_FONT_SIZE);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_FONT_STYLE", get_STYLE_ID_FONT_STYLE);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_TEXT_COLOR", get_STYLE_ID_TEXT_COLOR);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_TIPS_TEXT_COLOR", get_STYLE_ID_TIPS_TEXT_COLOR);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_TEXT_ALIGN_H", get_STYLE_ID_TEXT_ALIGN_H);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_TEXT_ALIGN_V", get_STYLE_ID_TEXT_ALIGN_V);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_BORDER_COLOR", get_STYLE_ID_BORDER_COLOR);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_BORDER", get_STYLE_ID_BORDER);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_BG_IMAGE", get_STYLE_ID_BG_IMAGE);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_BG_IMAGE_DRAW_TYPE", get_STYLE_ID_BG_IMAGE_DRAW_TYPE);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_ICON", get_STYLE_ID_ICON);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_FG_IMAGE", get_STYLE_ID_FG_IMAGE);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_FG_IMAGE_DRAW_TYPE", get_STYLE_ID_FG_IMAGE_DRAW_TYPE);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_MARGIN", get_STYLE_ID_MARGIN);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_ICON_AT", get_STYLE_ID_ICON_AT);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_ACTIVE_ICON", get_STYLE_ID_ACTIVE_ICON);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_X_OFFSET", get_STYLE_ID_X_OFFSET);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_Y_OFFSET", get_STYLE_ID_Y_OFFSET);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_SELECTED_BG_COLOR", get_STYLE_ID_SELECTED_BG_COLOR);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_SELECTED_FG_COLOR", get_STYLE_ID_SELECTED_FG_COLOR);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_SELECTED_TEXT_COLOR", get_STYLE_ID_SELECTED_TEXT_COLOR);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_ROUND_RADIUS", get_STYLE_ID_ROUND_RADIUS);
+
+ return RET_OK;
+}
+
 jerry_value_t wrap_style_notify_widget_state_changed(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -1592,9 +1847,10 @@ jerry_value_t wrap_style_get_int(
   ) {
   int32_t ret = 0;
   style_t* s = (style_t*)jerry_get_pointer(args_p[0], "style_t*");
-  style_id_t id = (style_id_t)jerry_get_number_value(args_p[1]);
+  const char* name = (const char*)jerry_get_utf8_string(args_p[1]);
   int32_t defval = (int32_t)jerry_get_number_value(args_p[2]);
-  ret = (int32_t)style_get_int(s, id, defval);
+  ret = (int32_t)style_get_int(s, name, defval);
+  TKMEM_FREE(name);
 
   return jerry_create_number(ret);
 }
@@ -1607,9 +1863,10 @@ jerry_value_t wrap_style_get_str(
   ) {
   const char* ret = NULL;
   style_t* s = (style_t*)jerry_get_pointer(args_p[0], "style_t*");
-  style_id_t id = (style_id_t)jerry_get_number_value(args_p[1]);
+  const char* name = (const char*)jerry_get_utf8_string(args_p[1]);
   const char* defval = (const char*)jerry_get_utf8_string(args_p[2]);
-  ret = (const char*)style_get_str(s, id, defval);
+  ret = (const char*)style_get_str(s, name, defval);
+  TKMEM_FREE(name);
   TKMEM_FREE(defval);
 
   return jerry_create_str(ret);
@@ -8107,10 +8364,11 @@ jerry_value_t wrap_style_mutable_set_int(
   ret_t ret = 0;
   style_t* s = (style_t*)jerry_get_pointer(args_p[0], "style_t*");
   const char* state = (const char*)jerry_get_utf8_string(args_p[1]);
-  style_id_t id = (style_id_t)jerry_get_number_value(args_p[2]);
+  const char* name = (const char*)jerry_get_utf8_string(args_p[2]);
   int32_t val = (int32_t)jerry_get_number_value(args_p[3]);
-  ret = (ret_t)style_mutable_set_int(s, state, id, val);
+  ret = (ret_t)style_mutable_set_int(s, state, name, val);
   TKMEM_FREE(state);
+  TKMEM_FREE(name);
 
   return jerry_create_number(ret);
 }
@@ -11083,6 +11341,7 @@ ret_t awtk_js_init(void) {
   image_manager_t_init();
   input_type_t_init();
   locale_info_t_init();
+  style_id_t_init();
   style_t_init();
   align_v_t_init();
   align_h_t_init();
