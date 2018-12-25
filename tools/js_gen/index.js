@@ -311,30 +311,6 @@ class JerryscriptGenerator {
 
     fs.writeFileSync('filter.json', JSON.stringify(json, null, '  '));
 
-    return this.reorderJson(json);
-  }
-
-  reorderJson(json) {
-    json.sort((a, b) => {
-      if (a.type !== 'class') {
-        return -1;
-      }
-
-      if (a.parent && b.parent) {
-        return a.name.localeCompare(b.name);
-      }
-
-      if (a.parent) {
-        return 1;
-      }
-
-      if (b.parent) {
-        return -1;
-      }
-
-      return 0;
-    });
-
     return json;
   }
 

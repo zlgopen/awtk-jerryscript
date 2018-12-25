@@ -132,7 +132,7 @@ jerry_value_t wrap_widget_on(const jerry_value_t func_obj_val, const jerry_value
 }
 
 jerry_value_t wrap_locale_info_on(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                               const jerry_value_t args_p[], const jerry_length_t args_cnt) {
+                                  const jerry_value_t args_p[], const jerry_length_t args_cnt) {
   int32_t ret = 0;
   return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
 
