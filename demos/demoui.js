@@ -109,7 +109,7 @@ function showPreloadResWindow() {
       var name = sPreloadRes[finish].name;
 
       if(type == AssetType.IMAGE) {
-        ImageManager.instance().load(name, bitmap);
+        ImageManager.instance().getBitmap(name, bitmap);
       }
 
       finish = finish + 1;
