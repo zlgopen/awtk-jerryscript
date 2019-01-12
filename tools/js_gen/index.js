@@ -185,13 +185,23 @@ class JerryscriptGenerator {
     return result;
   }
 
+  getParentClassName(cls) {
+    let parentName = cls.parent;
+    let parentClass = this.getClassInfo(parentName);
+
+    return parentClass.alias || parentName;
+  }
+
   genOneClass(cls) {
     let result = '';
     let clsName = this.toClassName(cls.name);
+    if(cls.alias) {
+      clsName = this.toClassName(cls.alias);
+    }
 
     result = `class ${clsName}`;
     if (cls.parent) {
-      result += ` extends ${this.toClassName(cls.parent)} {\n`
+      result += ` extends ${this.toClassName(this.getParentClassName(cls))} {\n`
     } else {
       result += ' {\n';
     }
