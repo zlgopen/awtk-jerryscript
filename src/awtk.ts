@@ -981,11 +981,11 @@ class AssetsManager {
  }
 
  ref(type, name) {
-   return assets_manager_ref(this.nativeObj, type, name);
+   return new AssetInfo(assets_manager_ref(this.nativeObj, type, name));
  }
 
  unref(info) {
-   return assets_manager_unref(this.nativeObj, info ? (info.nativeObj || info) : null);
+   return assets_manager_unref(this.nativeObj, info ? info.nativeObj : null);
  }
 
 }
@@ -1092,15 +1092,15 @@ class Canvas {
  }
 
  getClipRect(r) {
-   return canvas_get_clip_rect(this.nativeObj, r ? (r.nativeObj || r) : null);
+   return canvas_get_clip_rect(this.nativeObj, r ? r.nativeObj : null);
  }
 
  setClipRect(r) {
-   return canvas_set_clip_rect(this.nativeObj, r);
+   return canvas_set_clip_rect(this.nativeObj, r ? r.nativeObj : null);
  }
 
  setClipRectEx(r, translate) {
-   return canvas_set_clip_rect_ex(this.nativeObj, r, translate);
+   return canvas_set_clip_rect_ex(this.nativeObj, r ? r.nativeObj : null, translate);
  }
 
  setFillColor(color) {
@@ -1156,23 +1156,23 @@ class Canvas {
  }
 
  drawTextInRect(str, r) {
-   return canvas_draw_utf8_in_rect(this.nativeObj, str, r);
+   return canvas_draw_utf8_in_rect(this.nativeObj, str, r ? r.nativeObj : null);
  }
 
  drawIcon(img, cx, cy) {
-   return canvas_draw_icon(this.nativeObj, img ? (img.nativeObj || img) : null, cx, cy);
+   return canvas_draw_icon(this.nativeObj, img ? img.nativeObj : null, cx, cy);
  }
 
  drawImage(img, src, dst) {
-   return canvas_draw_image(this.nativeObj, img ? (img.nativeObj || img) : null, src ? (src.nativeObj || src) : null, dst ? (dst.nativeObj || dst) : null);
+   return canvas_draw_image(this.nativeObj, img ? img.nativeObj : null, src ? src.nativeObj : null, dst ? dst.nativeObj : null);
  }
 
  static getVgcanvas(c) {
-   return new Canvas(canvas_get_vgcanvas(c ? (c.nativeObj || c) : null));
+   return canvas_get_vgcanvas(c ? c.nativeObj : null);
  }
 
  static cast(c) {
-   return new Canvas(canvas_cast(c ? (c.nativeObj || c) : null));
+   return new Canvas(canvas_cast(c ? c.nativeObj : null));
  }
 
 }
@@ -1277,7 +1277,7 @@ class ImageManager {
  }
 
  getBitmap(name, image) {
-   return image_manager_get_bitmap(this.nativeObj, name, image ? (image.nativeObj || image) : null);
+   return image_manager_get_bitmap(this.nativeObj, name, image ? image.nativeObj : null);
  }
 
 }
@@ -1358,7 +1358,7 @@ class Style {
  }
 
  notifyWidgetStateChanged(widget) {
-   return style_notify_widget_state_changed(this.nativeObj, widget ? (widget.nativeObj || widget) : null);
+   return style_notify_widget_state_changed(this.nativeObj, widget ? widget.nativeObj : null);
  }
 
  isValid() {
@@ -1731,7 +1731,7 @@ class Widget {
  }
 
  invalidateForce(r) {
-   return widget_invalidate_force(this.nativeObj, r ? (r.nativeObj || r) : null);
+   return widget_invalidate_force(this.nativeObj, r ? r.nativeObj : null);
  }
 
  setPropStr(name, v) {
@@ -1779,15 +1779,15 @@ class Widget {
  }
 
  clone(parent) {
-   return new Widget(widget_clone(this.nativeObj, parent ? (parent.nativeObj || parent) : null));
+   return new Widget(widget_clone(this.nativeObj, parent ? parent.nativeObj : null));
  }
 
  equal(other) {
-   return widget_equal(this.nativeObj, other ? (other.nativeObj || other) : null);
+   return widget_equal(this.nativeObj, other ? other.nativeObj : null);
  }
 
  static cast(widget) {
-   return new Widget(widget_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(widget_cast(widget ? widget.nativeObj : null));
  }
 
  destroy() {
@@ -1938,7 +1938,7 @@ class Emitter {
  }
 
  dispatch(e) {
-   return emitter_dispatch(this.nativeObj, e ? (e.nativeObj || e) : null);
+   return emitter_dispatch(this.nativeObj, e ? e.nativeObj : null);
  }
 
  on(type, on_event, ctx) {
@@ -1976,7 +1976,7 @@ class Event {
  }
 
  static cast(event) {
-   return new Event(event_cast(event ? (event.nativeObj || event) : null));
+   return new Event(event_cast(event ? event.nativeObj : null));
  }
 
  get type() {
@@ -2004,7 +2004,7 @@ class NamedValue {
  }
 
  static cast(nv) {
-   return new NamedValue(named_value_cast(nv ? (nv.nativeObj || nv) : null));
+   return new NamedValue(named_value_cast(nv ? nv.nativeObj : null));
  }
 
  setName(name) {
@@ -2012,11 +2012,11 @@ class NamedValue {
  }
 
  setValue(value) {
-   return named_value_set_value(this.nativeObj, value);
+   return named_value_set_value(this.nativeObj, value ? value.nativeObj : null);
  }
 
  getValue() {
-   return named_value_get_value(this.nativeObj);
+   return new Value(named_value_get_value(this.nativeObj));
  }
 
  destroy() {
@@ -2113,7 +2113,7 @@ class Value {
  }
 
  setBool(value) {
-   return value_set_bool(this.nativeObj, value);
+   return new Value(value_set_bool(this.nativeObj, value));
  }
 
  bool() {
@@ -2121,7 +2121,7 @@ class Value {
  }
 
  setInt8(value) {
-   return value_set_int8(this.nativeObj, value);
+   return new Value(value_set_int8(this.nativeObj, value));
  }
 
  int8() {
@@ -2129,7 +2129,7 @@ class Value {
  }
 
  setUint8(value) {
-   return value_set_uint8(this.nativeObj, value);
+   return new Value(value_set_uint8(this.nativeObj, value));
  }
 
  uint8() {
@@ -2137,7 +2137,7 @@ class Value {
  }
 
  setInt16(value) {
-   return value_set_int16(this.nativeObj, value);
+   return new Value(value_set_int16(this.nativeObj, value));
  }
 
  int16() {
@@ -2145,7 +2145,7 @@ class Value {
  }
 
  setUint16(value) {
-   return value_set_uint16(this.nativeObj, value);
+   return new Value(value_set_uint16(this.nativeObj, value));
  }
 
  uint16() {
@@ -2153,7 +2153,7 @@ class Value {
  }
 
  setInt32(value) {
-   return value_set_int32(this.nativeObj, value);
+   return new Value(value_set_int32(this.nativeObj, value));
  }
 
  int32() {
@@ -2161,11 +2161,11 @@ class Value {
  }
 
  setUint32(value) {
-   return value_set_uint32(this.nativeObj, value);
+   return new Value(value_set_uint32(this.nativeObj, value));
  }
 
  setInt64(value) {
-   return value_set_int64(this.nativeObj, value);
+   return new Value(value_set_int64(this.nativeObj, value));
  }
 
  int64() {
@@ -2173,7 +2173,7 @@ class Value {
  }
 
  setUint64(value) {
-   return value_set_uint64(this.nativeObj, value);
+   return new Value(value_set_uint64(this.nativeObj, value));
  }
 
  uint64() {
@@ -2181,7 +2181,7 @@ class Value {
  }
 
  setFloat(value) {
-   return value_set_float(this.nativeObj, value);
+   return new Value(value_set_float(this.nativeObj, value));
  }
 
  float() {
@@ -2189,7 +2189,7 @@ class Value {
  }
 
  setFloat32(value) {
-   return value_set_float32(this.nativeObj, value);
+   return new Value(value_set_float32(this.nativeObj, value));
  }
 
  float32() {
@@ -2197,7 +2197,7 @@ class Value {
  }
 
  setDouble(value) {
-   return value_set_double(this.nativeObj, value);
+   return new Value(value_set_double(this.nativeObj, value));
  }
 
  double() {
@@ -2205,7 +2205,7 @@ class Value {
  }
 
  setStr(value) {
-   return value_set_str(this.nativeObj, value);
+   return new Value(value_set_str(this.nativeObj, value));
  }
 
  str() {
@@ -2225,15 +2225,15 @@ class Value {
  }
 
  setInt(value) {
-   return value_set_int(this.nativeObj, value);
+   return new Value(value_set_int(this.nativeObj, value));
  }
 
  setObject(value) {
-   return value_set_object(this.nativeObj, value ? (value.nativeObj || value) : null);
+   return new Value(value_set_object(this.nativeObj, value ? value.nativeObj : null));
  }
 
  static object(v) {
-   return new Value(value_object(v ? (v.nativeObj || v) : null));
+   return new ObjectBase(value_object(v ? v.nativeObj : null));
  }
 
  static create() {
@@ -2257,7 +2257,7 @@ class ListViewH extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ListViewH(list_view_h_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(list_view_h_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setItemWidth(item_width) {
@@ -2269,7 +2269,7 @@ class ListViewH extends Widget {
  }
 
  static cast(widget) {
-   return new ListViewH(list_view_h_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(list_view_h_cast(widget ? widget.nativeObj : null));
  }
 
  get itemWidth() {
@@ -2289,7 +2289,7 @@ class ListView extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ListView(list_view_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(list_view_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setItemHeight(item_height) {
@@ -2305,7 +2305,7 @@ class ListView extends Widget {
  }
 
  static cast(widget) {
-   return new ListView(list_view_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(list_view_cast(widget ? widget.nativeObj : null));
  }
 
  get itemHeight() {
@@ -2329,19 +2329,19 @@ class ScrollBar extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ScrollBar(scroll_bar_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(scroll_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new ScrollBar(scroll_bar_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(scroll_bar_cast(widget ? widget.nativeObj : null));
  }
 
  static createMobile(parent, x, y, w, h) {
-   return new ScrollBar(scroll_bar_create_mobile(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(scroll_bar_create_mobile(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static createDesktop(parent, x, y, w, h) {
-   return new ScrollBar(scroll_bar_create_desktop(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(scroll_bar_create_desktop(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setParams(virtual_size, row) {
@@ -2397,11 +2397,11 @@ class ScrollView extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ScrollView(scroll_view_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(scroll_view_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new ScrollView(scroll_view_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(scroll_view_cast(widget ? widget.nativeObj : null));
  }
 
  setVirtualW(w) {
@@ -2461,11 +2461,11 @@ class SlideMenu extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new SlideMenu(slide_menu_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(slide_menu_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new SlideMenu(slide_menu_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(slide_menu_cast(widget ? widget.nativeObj : null));
  }
 
  setValue(value) {
@@ -2501,11 +2501,11 @@ class SlideView extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new SlideView(slide_view_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(slide_view_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new SlideView(slide_view_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(slide_view_cast(widget ? widget.nativeObj : null));
  }
 
  setAutoPlay(auto_play) {
@@ -2537,11 +2537,11 @@ class TabButtonGroup extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new TabButtonGroup(tab_button_group_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(tab_button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new TabButtonGroup(tab_button_group_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(tab_button_group_cast(widget ? widget.nativeObj : null));
  }
 
  get compact() {
@@ -2557,7 +2557,7 @@ class Switch extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Switch(switch_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(switch_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setValue(value) {
@@ -2565,7 +2565,7 @@ class Switch extends Widget {
  }
 
  static cast(widget) {
-   return new Switch(switch_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(switch_cast(widget ? widget.nativeObj : null));
  }
 
  get value() {
@@ -2589,11 +2589,11 @@ class TextSelector extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new TextSelector(text_selector_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(text_selector_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new TextSelector(text_selector_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(text_selector_cast(widget ? widget.nativeObj : null));
  }
 
  resetOptions() {
@@ -2661,11 +2661,11 @@ class DigitClock extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new DigitClock(digit_clock_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(digit_clock_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new DigitClock(digit_clock_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(digit_clock_cast(widget ? widget.nativeObj : null));
  }
 
  setFormat(format) {
@@ -2685,11 +2685,11 @@ class TimeClock extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new TimeClock(time_clock_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(time_clock_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new TimeClock(time_clock_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(time_clock_cast(widget ? widget.nativeObj : null));
  }
 
  setHour(hour) {
@@ -2765,7 +2765,7 @@ class WindowEvent extends Event {
  }
 
  static cast(event) {
-   return new WindowEvent(window_event_cast(event ? (event.nativeObj || event) : null));
+   return new WindowEvent(window_event_cast(event ? event.nativeObj : null));
  }
 
  get window() {
@@ -2781,11 +2781,11 @@ class TabControl extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new TabControl(tab_control_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(tab_control_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new TabControl(tab_control_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(tab_control_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -2825,7 +2825,7 @@ class ImageBase extends Widget {
  }
 
  static cast(widget) {
-   return new ImageBase(image_base_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(image_base_cast(widget ? widget.nativeObj : null));
  }
 
  get image() {
@@ -2873,15 +2873,15 @@ class Window extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Window(window_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(window_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static open(name) {
-   return new Window(window_open(name));
+   return new Widget(window_open(name));
  }
 
  static openAndClose(name, to_close) {
-   return new Window(window_open_and_close(name, to_close ? (to_close.nativeObj || to_close) : null));
+   return new Widget(window_open_and_close(name, to_close ? to_close.nativeObj : null));
  }
 
  close() {
@@ -2889,7 +2889,7 @@ class Window extends Widget {
  }
 
  static cast(widget) {
-   return new Window(window_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(window_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -2901,7 +2901,7 @@ class WheelEvent extends Event {
  }
 
  static cast(event) {
-   return new WheelEvent(wheel_event_cast(event ? (event.nativeObj || event) : null));
+   return new WheelEvent(wheel_event_cast(event ? event.nativeObj : null));
  }
 
  get dx() {
@@ -2933,7 +2933,7 @@ class PointerEvent extends Event {
  }
 
  static cast(event) {
-   return new PointerEvent(pointer_event_cast(event ? (event.nativeObj || event) : null));
+   return new PointerEvent(pointer_event_cast(event ? event.nativeObj : null));
  }
 
  get x() {
@@ -2973,7 +2973,7 @@ class KeyEvent extends Event {
  }
 
  static cast(event) {
-   return new KeyEvent(key_event_cast(event ? (event.nativeObj || event) : null));
+   return new KeyEvent(key_event_cast(event ? event.nativeObj : null));
  }
 
  get key() {
@@ -3005,7 +3005,7 @@ class PaintEvent extends Event {
  }
 
  static cast(event) {
-   return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
+   return new PaintEvent(paint_event_cast(event ? event.nativeObj : null));
  }
 
  get c() {
@@ -3021,7 +3021,7 @@ class PropChangeEvent extends Event {
  }
 
  static cast(event) {
-   return new PropChangeEvent(prop_change_event_cast(event ? (event.nativeObj || event) : null));
+   return new PropChangeEvent(prop_change_event_cast(event ? event.nativeObj : null));
  }
 
  get name() {
@@ -3057,11 +3057,11 @@ class WindowManager extends Widget {
  }
 
  static instance() {
-   return new WindowManager(window_manager());
+   return new Widget(window_manager());
  }
 
  static cast(widget) {
-   return new WindowManager(window_manager_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(window_manager_cast(widget ? widget.nativeObj : null));
  }
 
  setShowFps(show_fps) {
@@ -3097,7 +3097,7 @@ class StyleMutable extends Style {
  }
 
  static create(widget) {
-   return new StyleMutable(style_mutable_create(widget ? (widget.nativeObj || widget) : null));
+   return new Style(style_mutable_create(widget ? widget.nativeObj : null));
  }
 
  get name() {
@@ -3113,11 +3113,11 @@ class Slider extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Slider(slider_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(slider_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new Slider(slider_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(slider_cast(widget ? widget.nativeObj : null));
  }
 
  setValue(value) {
@@ -3173,7 +3173,7 @@ class ObjectBase extends Emitter {
  }
 
  static ref(obj) {
-   return new Object(object_ref(obj ? (obj.nativeObj || obj) : null));
+   return new ObjectBase(object_ref(obj ? obj.nativeObj : null));
  }
 
  setName(name) {
@@ -3181,11 +3181,11 @@ class ObjectBase extends Emitter {
  }
 
  compare(other) {
-   return object_compare(this.nativeObj, other ? (other.nativeObj || other) : null);
+   return object_compare(this.nativeObj, other ? other.nativeObj : null);
  }
 
  getProp(name, v) {
-   return object_get_prop(this.nativeObj, name, v ? (v.nativeObj || v) : null);
+   return object_get_prop(this.nativeObj, name, v ? v.nativeObj : null);
  }
 
  removeProp(name) {
@@ -3193,7 +3193,7 @@ class ObjectBase extends Emitter {
  }
 
  setProp(name, v) {
-   return object_set_prop(this.nativeObj, name, v ? (v.nativeObj || v) : null);
+   return object_set_prop(this.nativeObj, name, v ? v.nativeObj : null);
  }
 
  foreachProp(on_prop, ctx) {
@@ -3217,11 +3217,11 @@ class CanvasWidget extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new CanvasWidget(canvas_widget_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(canvas_widget_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new CanvasWidget(canvas_widget_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(canvas_widget_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -3233,7 +3233,7 @@ class ColorPicker extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ColorPicker(color_picker_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(color_picker_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setColor(color) {
@@ -3241,7 +3241,7 @@ class ColorPicker extends Widget {
  }
 
  static cast(widget) {
-   return new ColorPicker(color_picker_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(color_picker_cast(widget ? widget.nativeObj : null));
  }
 
  get value() {
@@ -3257,11 +3257,11 @@ class TabButton extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new TabButton(tab_button_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(tab_button_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new TabButton(tab_button_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(tab_button_cast(widget ? widget.nativeObj : null));
  }
 
  setValue(value) {
@@ -3297,11 +3297,11 @@ class GuagePointer extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new GuagePointer(guage_pointer_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(guage_pointer_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new GuagePointer(guage_pointer_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(guage_pointer_cast(widget ? widget.nativeObj : null));
  }
 
  setAngle(angle) {
@@ -3329,11 +3329,11 @@ class Guage extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Guage(guage_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(guage_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new Guage(guage_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(guage_cast(widget ? widget.nativeObj : null));
  }
 
  setImage(name) {
@@ -3361,7 +3361,7 @@ class ImageAnimation extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ImageAnimation(image_animation_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(image_animation_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setLoop(loop) {
@@ -3401,7 +3401,7 @@ class ImageAnimation extends Widget {
  }
 
  static cast(widget) {
-   return new ImageAnimation(image_animation_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(image_animation_cast(widget ? widget.nativeObj : null));
  }
 
  get image() {
@@ -3437,7 +3437,7 @@ class ImageValue extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ImageValue(image_value_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(image_value_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setImage(image) {
@@ -3453,7 +3453,7 @@ class ImageValue extends Widget {
  }
 
  static cast(widget) {
-   return new ImageValue(image_value_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(image_value_cast(widget ? widget.nativeObj : null));
  }
 
  get image() {
@@ -3477,11 +3477,11 @@ class View extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new View(view_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(view_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new View(view_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(view_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -3493,11 +3493,11 @@ class ProgressCircle extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ProgressCircle(progress_circle_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(progress_circle_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new ProgressCircle(progress_circle_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(progress_circle_cast(widget ? widget.nativeObj : null));
  }
 
  setValue(value) {
@@ -3565,7 +3565,7 @@ class RichText extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new RichText(rich_text_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(rich_text_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setText(text) {
@@ -3585,11 +3585,11 @@ class ListItem extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ListItem(list_item_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(list_item_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new ListItem(list_item_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(list_item_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -3601,11 +3601,11 @@ class AppBar extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new AppBar(app_bar_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(app_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new AppBar(app_bar_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(app_bar_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -3617,11 +3617,11 @@ class ButtonGroup extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ButtonGroup(button_group_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new ButtonGroup(button_group_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(button_group_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -3633,11 +3633,11 @@ class Button extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Button(button_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(button_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new Button(button_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(button_cast(widget ? widget.nativeObj : null));
  }
 
  setRepeat(repeat) {
@@ -3657,11 +3657,11 @@ class CheckButton extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new CheckButton(check_button_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(check_button_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static createRadio(parent, x, y, w, h) {
-   return new CheckButton(check_button_create_radio(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(check_button_create_radio(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setValue(value) {
@@ -3669,7 +3669,7 @@ class CheckButton extends Widget {
  }
 
  static cast(widget) {
-   return new CheckButton(check_button_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(check_button_cast(widget ? widget.nativeObj : null));
  }
 
  get value() {
@@ -3685,11 +3685,11 @@ class ColorTile extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ColorTile(color_tile_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(color_tile_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new ColorTile(color_tile_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(color_tile_cast(widget ? widget.nativeObj : null));
  }
 
  setBgColor(color) {
@@ -3713,11 +3713,11 @@ class Column extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Column(column_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(column_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new Column(column_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(column_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -3729,11 +3729,11 @@ class ComboBoxItem extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ComboBoxItem(combo_box_item_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(combo_box_item_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new ComboBoxItem(combo_box_item_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(combo_box_item_cast(widget ? widget.nativeObj : null));
  }
 
  setChecked(checked) {
@@ -3761,11 +3761,11 @@ class ComboBox extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ComboBox(combo_box_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(combo_box_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new ComboBox(combo_box_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(combo_box_cast(widget ? widget.nativeObj : null));
  }
 
  setOpenWindow(open_window) {
@@ -3825,11 +3825,11 @@ class DialogClient extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new DialogClient(dialog_client_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(dialog_client_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new DialogClient(dialog_client_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(dialog_client_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -3841,11 +3841,11 @@ class DialogTitle extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new DialogTitle(dialog_title_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(dialog_title_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new DialogTitle(dialog_title_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(dialog_title_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -3857,15 +3857,15 @@ class Dialog extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Dialog(dialog_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(dialog_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static createSimple(parent, x, y, w, h) {
-   return new Dialog(dialog_create_simple(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(dialog_create_simple(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new Dialog(dialog_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(dialog_cast(widget ? widget.nativeObj : null));
  }
 
  getTitle() {
@@ -3877,7 +3877,7 @@ class Dialog extends Widget {
  }
 
  static open(name) {
-   return new Dialog(dialog_open(name));
+   return new Widget(dialog_open(name));
  }
 
  setTitle(title) {
@@ -3901,11 +3901,11 @@ class Dragger extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Dragger(dragger_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(dragger_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new Dragger(dragger_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(dragger_cast(widget ? widget.nativeObj : null));
  }
 
  setRange(x_min, y_min, x_max, y_max) {
@@ -3937,11 +3937,11 @@ class Edit extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Edit(edit_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(edit_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new Edit(edit_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(edit_cast(widget ? widget.nativeObj : null));
  }
 
  getInt() {
@@ -4033,11 +4033,11 @@ class GridItem extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new GridItem(grid_item_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(grid_item_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new GridItem(grid_item_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(grid_item_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -4049,11 +4049,11 @@ class Grid extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Grid(grid_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(grid_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new Grid(grid_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(grid_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -4065,11 +4065,11 @@ class GroupBox extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new GroupBox(group_box_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(group_box_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new GroupBox(group_box_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(group_box_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -4081,11 +4081,11 @@ class Row extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Row(row_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(row_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new Row(row_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(row_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -4097,7 +4097,7 @@ class Label extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Label(label_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(label_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setLength(length) {
@@ -4117,11 +4117,11 @@ class Pages extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Pages(pages_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(pages_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new Pages(pages_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(pages_cast(widget ? widget.nativeObj : null));
  }
 
  setActive(index) {
@@ -4145,11 +4145,11 @@ class Popup extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Popup(popup_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(popup_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new Popup(popup_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(popup_cast(widget ? widget.nativeObj : null));
  }
 
  setCloseWhenClick(close_when_click) {
@@ -4177,11 +4177,11 @@ class ProgressBar extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new ProgressBar(progress_bar_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(progress_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new ProgressBar(progress_bar_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(progress_bar_cast(widget ? widget.nativeObj : null));
  }
 
  setValue(value) {
@@ -4217,7 +4217,7 @@ class Image extends ImageBase {
  }
 
  static create(parent, x, y, w, h) {
-   return new Image(image_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(image_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setDrawType(draw_type) {
@@ -4225,7 +4225,7 @@ class Image extends ImageBase {
  }
 
  static cast(widget) {
-   return new Image(image_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(image_cast(widget ? widget.nativeObj : null));
  }
 
  get drawType() {
@@ -4241,7 +4241,7 @@ class ObjectDefault extends ObjectBase {
  }
 
  static create(init_capacity) {
-   return new ObjectDefault(object_default_create(init_capacity));
+   return new ObjectBase(object_default_create(init_capacity));
  }
 
  get propsSize() {
@@ -4257,11 +4257,11 @@ class SpinBox extends Edit {
  }
 
  static create(parent, x, y, w, h) {
-   return new SpinBox(spin_box_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(spin_box_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new SpinBox(spin_box_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(spin_box_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -4273,11 +4273,11 @@ class SystemBar extends WindowBase {
  }
 
  static create(parent, x, y, w, h) {
-   return new SystemBar(system_bar_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(system_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new SystemBar(system_bar_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(system_bar_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -4289,11 +4289,11 @@ class SvgImage extends ImageBase {
  }
 
  static create(parent, x, y, w, h) {
-   return new SvgImage(svg_image_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(svg_image_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new SvgImage(svg_image_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(svg_image_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -4305,11 +4305,11 @@ class GifImage extends ImageBase {
  }
 
  static create(parent, x, y, w, h) {
-   return new GifImage(gif_image_create(parent ? (parent.nativeObj || parent) : null, x, y, w, h));
+   return new Widget(gif_image_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new GifImage(gif_image_cast(widget ? (widget.nativeObj || widget) : null));
+   return new Widget(gif_image_cast(widget ? widget.nativeObj : null));
  }
 
 }
@@ -4321,7 +4321,7 @@ class TimerInfo extends ObjectBase {
  }
 
  static cast(timer) {
-   return new TimerInfo(timer_info_cast(timer ? (timer.nativeObj || timer) : null));
+   return new TimerInfo(timer_info_cast(timer ? timer.nativeObj : null));
  }
 
  get ctx() {
@@ -4349,7 +4349,7 @@ class IdleInfo extends ObjectBase {
  }
 
  static cast(idle) {
-   return new IdleInfo(idle_info_cast(idle ? (idle.nativeObj || idle) : null));
+   return new IdleInfo(idle_info_cast(idle ? idle.nativeObj : null));
  }
 
  get ctx() {

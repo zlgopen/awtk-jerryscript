@@ -5423,8 +5423,8 @@ jerry_value_t wrap_named_value_create(
     const jerry_value_t args_p[], 
     const jerry_length_t args_cnt
   ) {
-  ret_t ret = 0;
-  ret = (ret_t)named_value_create();
+  named_value_t* ret = NULL;
+  ret = (named_value_t*)named_value_create();
 
   return jerry_create_pointer(ret, "named_value_t*");
 }
@@ -5435,9 +5435,9 @@ jerry_value_t wrap_named_value_cast(
     const jerry_value_t args_p[], 
     const jerry_length_t args_cnt
   ) {
-  ret_t ret = 0;
+  named_value_t* ret = NULL;
   named_value_t* nv = (named_value_t*)jerry_get_pointer(args_p[0], "named_value_t*");
-  ret = (ret_t)named_value_cast(nv);
+  ret = (named_value_t*)named_value_cast(nv);
 
   return jerry_create_pointer(ret, "named_value_t*");
 }
@@ -9065,9 +9065,9 @@ jerry_value_t wrap_object_ref(
     const jerry_value_t args_p[], 
     const jerry_length_t args_cnt
   ) {
-  ret_t ret = 0;
+  object_t* ret = NULL;
   object_t* obj = (object_t*)jerry_get_pointer(args_p[0], "object_t*");
-  ret = (ret_t)object_ref(obj);
+  ret = (object_t*)object_ref(obj);
 
   return jerry_create_pointer(ret, "object_t*");
 }
@@ -12145,9 +12145,9 @@ jerry_value_t wrap_object_default_create(
     const jerry_value_t args_p[], 
     const jerry_length_t args_cnt
   ) {
-  ret_t ret = 0;
+  object_t* ret = NULL;
   uint32_t init_capacity = (uint32_t)jerry_get_number_value(args_p[0]);
-  ret = (ret_t)object_default_create(init_capacity);
+  ret = (object_t*)object_default_create(init_capacity);
 
   return jerry_create_pointer(ret, "object_default_t*");
 }
