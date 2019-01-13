@@ -5,5 +5,13 @@ print(r.y);
 print(r.w);
 print(r.h);
 
+r.set(10, 20, 30, 40);
+
+print(r.x);
+print(r.y);
+print(r.w);
+print(r.h);
+
+
 r.destroy();
 

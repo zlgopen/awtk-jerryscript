@@ -1330,6 +1330,9 @@ var Rect = /** @class */ (function () {
     Rect.create = function (x, y, w, h) {
         return new Rect(rect_create(x, y, w, h));
     };
+    Rect.prototype.set = function (x, y, w, h) {
+        return new Rect(rect_set(this.nativeObj, x, y, w, h));
+    };
     Rect.cast = function (rect) {
         return new Rect(rect_cast(rect ? (rect.nativeObj || rect) : null));
     };

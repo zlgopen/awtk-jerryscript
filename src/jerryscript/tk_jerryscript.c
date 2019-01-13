@@ -6502,6 +6502,23 @@ jerry_value_t wrap_rect_create(
   return jerry_create_pointer(ret, "rect_t*");
 }
 
+jerry_value_t wrap_rect_set(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  rect_t* ret = NULL;
+  rect_t* rect = (rect_t*)jerry_get_pointer(args_p[0], "rect_t*");
+  xy_t x = (xy_t)jerry_get_number_value(args_p[1]);
+  xy_t y = (xy_t)jerry_get_number_value(args_p[2]);
+  wh_t w = (wh_t)jerry_get_number_value(args_p[3]);
+  wh_t h = (wh_t)jerry_get_number_value(args_p[4]);
+  ret = (rect_t*)rect_set(rect, x, y, w, h);
+
+  return jerry_create_pointer(ret, "rect_t*");
+}
+
 jerry_value_t wrap_rect_cast(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -6574,6 +6591,7 @@ jerry_value_t wrap_rect_t_get_prop_h(
 
 ret_t rect_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"rect_create", wrap_rect_create);
+  jerryx_handler_register_global((const jerry_char_t*)"rect_set", wrap_rect_set);
   jerryx_handler_register_global((const jerry_char_t*)"rect_cast", wrap_rect_cast);
   jerryx_handler_register_global((const jerry_char_t*)"rect_destroy", wrap_rect_destroy);
   jerryx_handler_register_global((const jerry_char_t*)"rect_t_get_prop_x", wrap_rect_t_get_prop_x);

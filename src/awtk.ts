@@ -523,6 +523,7 @@ declare function named_value_get_value(nv);
 declare function named_value_destroy(nv);
 declare function named_value_t_get_prop_name(nativeObj);
 declare function rect_create(x, y, w, h);
+declare function rect_set(rect, x, y, w, h);
 declare function rect_cast(rect);
 declare function rect_destroy(r);
 declare function rect_t_get_prop_x(nativeObj);
@@ -2379,6 +2380,10 @@ class Rect {
 
  static create(x, y, w, h) {
    return new Rect(rect_create(x, y, w, h));
+ }
+
+ set(x, y, w, h) {
+   return new Rect(rect_set(this.nativeObj, x, y, w, h));
  }
 
  static cast(rect) {
