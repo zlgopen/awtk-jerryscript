@@ -131,6 +131,24 @@ jerry_value_t wrap_widget_on(const jerry_value_t func_obj_val, const jerry_value
   return jerry_create_number(ret);
 }
 
+jerry_value_t wrap_emitter_on(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                              const jerry_value_t args_p[], const jerry_length_t args_cnt) {
+  int32_t ret = 0;
+  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
+
+  if (args_cnt >= 2) {
+    emitter_t* emitter = (emitter_t*)jerry_get_pointer(args_p[0], "emitter_t*");
+    event_type_t type = (event_type_t)jerry_get_number_value(args_p[1]);
+    jerry_value_t on_event = jerry_acquire_value(args_p[2]);
+
+    void* ctx = (char*)NULL + (int32_t)on_event;
+    ret = (int32_t)emitter_on(emitter, type, call_on_event, ctx);
+    emitter_set_on_destroy(emitter, ret, emitter_item_on_destroy, NULL);
+  }
+
+  return jerry_create_number(ret);
+}
+
 jerry_value_t wrap_locale_info_on(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                   const jerry_value_t args_p[], const jerry_length_t args_cnt) {
   int32_t ret = 0;

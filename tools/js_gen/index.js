@@ -160,10 +160,14 @@ class JerryscriptGenerator {
     let isNormalMethod = !isCast(m) && !isStatic(m) && !isConstructor(m);
 
     m.params.forEach((iter, index) => {
+      const name = iter.name;
 
       if(index == 0) {
         if(isNormalMethod) {
           result += 'this.nativeObj';
+          return;
+        } else if(isCast(m)) {
+          result += `${name} ? (${name}.nativeObj || ${name}) : null`;
           return;
         }
       }
@@ -173,10 +177,9 @@ class JerryscriptGenerator {
       }
 
       if (this.isClassName(iter.type)) {
-        const name = iter.name;
         result += `${name} ? ${name}.nativeObj : null`;
       } else {
-        result += iter.name;
+        result += name;
       }
     });
 
