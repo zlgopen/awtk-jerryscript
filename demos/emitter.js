@@ -11,5 +11,6 @@ emitter.on(EventBaseType.PROP_CHANGED, function(e) {
 
 emitter.dispatch(e);
 
+e.destroy();
 emitter.destroy();
 

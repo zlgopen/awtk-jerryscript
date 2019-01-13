@@ -252,12 +252,26 @@ var Canvas = /** @class */ (function () {
     Canvas.prototype.drawImage = function (img, src, dst) {
         return canvas_draw_image(this.nativeObj, img ? img.nativeObj : null, src ? src.nativeObj : null, dst ? dst.nativeObj : null);
     };
-    Canvas.getVgcanvas = function (c) {
-        return canvas_get_vgcanvas(c ? c.nativeObj : null);
+    Canvas.prototype.getVgcanvas = function () {
+        return new Vgcanvas(canvas_get_vgcanvas(this.nativeObj));
     };
     Canvas.cast = function (c) {
         return new Canvas(canvas_cast(c ? (c.nativeObj || c) : null));
     };
+    Object.defineProperty(Canvas.prototype, "ox", {
+        get: function () {
+            return canvas_t_get_prop_ox(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Canvas.prototype, "oy", {
+        get: function () {
+            return canvas_t_get_prop_oy(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Canvas;
 }());
 var ClipBoardDataType;
@@ -465,6 +479,226 @@ var AlignH;
     AlignH[AlignH["RIGHT"] = ALIGN_H_RIGHT()] = "RIGHT";
 })(AlignH || (AlignH = {}));
 ;
+var Vgcanvas = /** @class */ (function () {
+    function Vgcanvas(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Vgcanvas.cast = function (vg) {
+        return new Vgcanvas(vgcanvas_cast(vg ? (vg.nativeObj || vg) : null));
+    };
+    Vgcanvas.prototype.flush = function () {
+        return vgcanvas_flush(this.nativeObj);
+    };
+    Vgcanvas.prototype.beginPath = function () {
+        return vgcanvas_begin_path(this.nativeObj);
+    };
+    Vgcanvas.prototype.moveTo = function (x, y) {
+        return vgcanvas_move_to(this.nativeObj, x, y);
+    };
+    Vgcanvas.prototype.lineTo = function (x, y) {
+        return vgcanvas_line_to(this.nativeObj, x, y);
+    };
+    Vgcanvas.prototype.quadTo = function (cpx, cpy, x, y) {
+        return vgcanvas_quad_to(this.nativeObj, cpx, cpy, x, y);
+    };
+    Vgcanvas.prototype.bezierTo = function (cp1x, cp1y, cp2x, cp2y, x, y) {
+        return vgcanvas_bezier_to(this.nativeObj, cp1x, cp1y, cp2x, cp2y, x, y);
+    };
+    Vgcanvas.prototype.arcTo = function (x1, y1, x2, y2, r) {
+        return vgcanvas_arc_to(this.nativeObj, x1, y1, x2, y2, r);
+    };
+    Vgcanvas.prototype.arc = function (x, y, r, start_angle, end_angle, ccw) {
+        return vgcanvas_arc(this.nativeObj, x, y, r, start_angle, end_angle, ccw);
+    };
+    Vgcanvas.prototype.isPointInPath = function (x, y) {
+        return vgcanvas_is_point_in_path(this.nativeObj, x, y);
+    };
+    Vgcanvas.prototype.rect = function (x, y, w, h) {
+        return vgcanvas_rect(this.nativeObj, x, y, w, h);
+    };
+    Vgcanvas.prototype.roundedRect = function (x, y, w, h, r) {
+        return vgcanvas_rounded_rect(this.nativeObj, x, y, w, h, r);
+    };
+    Vgcanvas.prototype.ellipse = function (x, y, rx, ry) {
+        return vgcanvas_ellipse(this.nativeObj, x, y, rx, ry);
+    };
+    Vgcanvas.prototype.closePath = function () {
+        return vgcanvas_close_path(this.nativeObj);
+    };
+    Vgcanvas.prototype.rotate = function (rad) {
+        return vgcanvas_rotate(this.nativeObj, rad);
+    };
+    Vgcanvas.prototype.scale = function (x, y) {
+        return vgcanvas_scale(this.nativeObj, x, y);
+    };
+    Vgcanvas.prototype.translate = function (x, y) {
+        return vgcanvas_translate(this.nativeObj, x, y);
+    };
+    Vgcanvas.prototype.transform = function (a, b, c, d, e, f) {
+        return vgcanvas_transform(this.nativeObj, a, b, c, d, e, f);
+    };
+    Vgcanvas.prototype.setTransform = function (a, b, c, d, e, f) {
+        return vgcanvas_set_transform(this.nativeObj, a, b, c, d, e, f);
+    };
+    Vgcanvas.prototype.clipRect = function (x, y, w, h) {
+        return vgcanvas_clip_rect(this.nativeObj, x, y, w, h);
+    };
+    Vgcanvas.prototype.fill = function () {
+        return vgcanvas_fill(this.nativeObj);
+    };
+    Vgcanvas.prototype.stroke = function () {
+        return vgcanvas_stroke(this.nativeObj);
+    };
+    Vgcanvas.prototype.paint = function (stroke, img) {
+        return vgcanvas_paint(this.nativeObj, stroke, img ? img.nativeObj : null);
+    };
+    Vgcanvas.prototype.setFont = function (font) {
+        return vgcanvas_set_font(this.nativeObj, font);
+    };
+    Vgcanvas.prototype.setFontSize = function (font) {
+        return vgcanvas_set_font_size(this.nativeObj, font);
+    };
+    Vgcanvas.prototype.setTextAlign = function (value) {
+        return vgcanvas_set_text_align(this.nativeObj, value);
+    };
+    Vgcanvas.prototype.setTextBaseline = function (value) {
+        return vgcanvas_set_text_baseline(this.nativeObj, value);
+    };
+    Vgcanvas.prototype.fillText = function (text, x, y, max_width) {
+        return vgcanvas_fill_text(this.nativeObj, text, x, y, max_width);
+    };
+    Vgcanvas.prototype.measureText = function (text) {
+        return vgcanvas_measure_text(this.nativeObj, text);
+    };
+    Vgcanvas.prototype.drawImage = function (img, sx, sy, sw, sh, dx, dy, dw, dh) {
+        return vgcanvas_draw_image(this.nativeObj, img ? img.nativeObj : null, sx, sy, sw, sh, dx, dy, dw, dh);
+    };
+    Vgcanvas.prototype.drawIcon = function (img, sx, sy, sw, sh, dx, dy, dw, dh) {
+        return vgcanvas_draw_icon(this.nativeObj, img ? img.nativeObj : null, sx, sy, sw, sh, dx, dy, dw, dh);
+    };
+    Vgcanvas.prototype.setAntialias = function (value) {
+        return vgcanvas_set_antialias(this.nativeObj, value);
+    };
+    Vgcanvas.prototype.setGlobalAlpha = function (alpha) {
+        return vgcanvas_set_global_alpha(this.nativeObj, alpha);
+    };
+    Vgcanvas.prototype.setLineWidth = function (value) {
+        return vgcanvas_set_line_width(this.nativeObj, value);
+    };
+    Vgcanvas.prototype.setFillColor = function (color) {
+        return vgcanvas_set_fill_color_str(this.nativeObj, color);
+    };
+    Vgcanvas.prototype.setStrokeColor = function (color) {
+        return vgcanvas_set_stroke_color_str(this.nativeObj, color);
+    };
+    Vgcanvas.prototype.setLineCap = function (value) {
+        return vgcanvas_set_line_cap(this.nativeObj, value);
+    };
+    Vgcanvas.prototype.setLineJoin = function (value) {
+        return vgcanvas_set_line_join(this.nativeObj, value);
+    };
+    Vgcanvas.prototype.setMiterLimit = function (value) {
+        return vgcanvas_set_miter_limit(this.nativeObj, value);
+    };
+    Vgcanvas.prototype.save = function () {
+        return vgcanvas_save(this.nativeObj);
+    };
+    Vgcanvas.prototype.restore = function () {
+        return vgcanvas_restore(this.nativeObj);
+    };
+    Object.defineProperty(Vgcanvas.prototype, "w", {
+        get: function () {
+            return vgcanvas_t_get_prop_w(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "h", {
+        get: function () {
+            return vgcanvas_t_get_prop_h(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "ratio", {
+        get: function () {
+            return vgcanvas_t_get_prop_ratio(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "antiAlias", {
+        get: function () {
+            return vgcanvas_t_get_prop_anti_alias(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "lineWidth", {
+        get: function () {
+            return vgcanvas_t_get_prop_line_width(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "globalAlpha", {
+        get: function () {
+            return vgcanvas_t_get_prop_global_alpha(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "miterLimit", {
+        get: function () {
+            return vgcanvas_t_get_prop_miter_limit(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "lineCap", {
+        get: function () {
+            return vgcanvas_t_get_prop_line_cap(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "lineJoin", {
+        get: function () {
+            return vgcanvas_t_get_prop_line_join(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "font", {
+        get: function () {
+            return vgcanvas_t_get_prop_font(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "fontSize", {
+        get: function () {
+            return vgcanvas_t_get_prop_font_size(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "textAlign", {
+        get: function () {
+            return vgcanvas_t_get_prop_text_align(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Vgcanvas.prototype, "textBaseline", {
+        get: function () {
+            return vgcanvas_t_get_prop_text_baseline(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Vgcanvas;
+}());
 var WidgetProp;
 (function (WidgetProp) {
     WidgetProp[WidgetProp["X"] = WIDGET_PROP_X()] = "X";
@@ -931,8 +1165,8 @@ var Color = /** @class */ (function () {
     Color.create = function (r, b, g, a) {
         return new Color(color_create(r, b, g, a));
     };
-    Color.createWithStr = function (str) {
-        return new Color(color_create_with_str(str));
+    Color.prototype.fromStr = function (str) {
+        return new Color(color_from_str(this.nativeObj, str));
     };
     Color.prototype.r = function () {
         return color_r(this.nativeObj);
@@ -946,9 +1180,22 @@ var Color = /** @class */ (function () {
     Color.prototype.a = function () {
         return color_a(this.nativeObj);
     };
+    Color.cast = function (color) {
+        return new Color(color_cast(color ? (color.nativeObj || color) : null));
+    };
     Color.prototype.destroy = function () {
         return color_destroy(this.nativeObj);
     };
+    Object.defineProperty(Color.prototype, "color", {
+        get: function () {
+            return color_t_get_prop_color(this.nativeObj);
+        },
+        set: function (value) {
+            color_t_set_prop_color(this.nativeObj, value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Color;
 }());
 var DateTime = /** @class */ (function () {
@@ -1083,9 +1330,40 @@ var Rect = /** @class */ (function () {
     Rect.create = function (x, y, w, h) {
         return new Rect(rect_create(x, y, w, h));
     };
+    Rect.cast = function (rect) {
+        return new Rect(rect_cast(rect ? (rect.nativeObj || rect) : null));
+    };
     Rect.prototype.destroy = function () {
         return rect_destroy(this.nativeObj);
     };
+    Object.defineProperty(Rect.prototype, "x", {
+        get: function () {
+            return rect_t_get_prop_x(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Rect.prototype, "y", {
+        get: function () {
+            return rect_t_get_prop_y(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Rect.prototype, "w", {
+        get: function () {
+            return rect_t_get_prop_w(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Rect.prototype, "h", {
+        get: function () {
+            return rect_t_get_prop_h(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Rect;
 }());
 var TimeNow = /** @class */ (function () {
@@ -1213,7 +1491,7 @@ var Value = /** @class */ (function () {
         return value_double(this.nativeObj);
     };
     Value.prototype.setStr = function (value) {
-        return new Value(value_set_str(this.nativeObj, value));
+        return new Value(value_dup_str(this.nativeObj, value));
     };
     Value.prototype.str = function () {
         return value_str(this.nativeObj);
@@ -1244,6 +1522,9 @@ var Value = /** @class */ (function () {
     };
     Value.prototype.reset = function () {
         return value_reset(this.nativeObj);
+    };
+    Value.cast = function (value) {
+        return new Value(value_cast(value ? (value.nativeObj || value) : null));
     };
     return Value;
 }());

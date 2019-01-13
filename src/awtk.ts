@@ -71,6 +71,8 @@ declare function canvas_draw_icon(c, img, cx, cy);
 declare function canvas_draw_image(c, img, src, dst);
 declare function canvas_get_vgcanvas(c);
 declare function canvas_cast(c);
+declare function canvas_t_get_prop_ox(nativeObj);
+declare function canvas_t_get_prop_oy(nativeObj);
 declare function CLIP_BOARD_DATA_TYPE_NONE();
 declare function CLIP_BOARD_DATA_TYPE_TEXT();
 declare function clip_board_set_text(text);
@@ -182,6 +184,60 @@ declare function ALIGN_H_NONE();
 declare function ALIGN_H_CENTER();
 declare function ALIGN_H_LEFT();
 declare function ALIGN_H_RIGHT();
+declare function vgcanvas_cast(vg);
+declare function vgcanvas_flush(vg);
+declare function vgcanvas_begin_path(vg);
+declare function vgcanvas_move_to(vg, x, y);
+declare function vgcanvas_line_to(vg, x, y);
+declare function vgcanvas_quad_to(vg, cpx, cpy, x, y);
+declare function vgcanvas_bezier_to(vg, cp1x, cp1y, cp2x, cp2y, x, y);
+declare function vgcanvas_arc_to(vg, x1, y1, x2, y2, r);
+declare function vgcanvas_arc(vg, x, y, r, start_angle, end_angle, ccw);
+declare function vgcanvas_is_point_in_path(vg, x, y);
+declare function vgcanvas_rect(vg, x, y, w, h);
+declare function vgcanvas_rounded_rect(vg, x, y, w, h, r);
+declare function vgcanvas_ellipse(vg, x, y, rx, ry);
+declare function vgcanvas_close_path(vg);
+declare function vgcanvas_rotate(vg, rad);
+declare function vgcanvas_scale(vg, x, y);
+declare function vgcanvas_translate(vg, x, y);
+declare function vgcanvas_transform(vg, a, b, c, d, e, f);
+declare function vgcanvas_set_transform(vg, a, b, c, d, e, f);
+declare function vgcanvas_clip_rect(vg, x, y, w, h);
+declare function vgcanvas_fill(vg);
+declare function vgcanvas_stroke(vg);
+declare function vgcanvas_paint(vg, stroke, img);
+declare function vgcanvas_set_font(vg, font);
+declare function vgcanvas_set_font_size(vg, font);
+declare function vgcanvas_set_text_align(vg, value);
+declare function vgcanvas_set_text_baseline(vg, value);
+declare function vgcanvas_fill_text(vg, text, x, y, max_width);
+declare function vgcanvas_measure_text(vg, text);
+declare function vgcanvas_draw_image(vg, img, sx, sy, sw, sh, dx, dy, dw, dh);
+declare function vgcanvas_draw_icon(vg, img, sx, sy, sw, sh, dx, dy, dw, dh);
+declare function vgcanvas_set_antialias(vg, value);
+declare function vgcanvas_set_global_alpha(vg, alpha);
+declare function vgcanvas_set_line_width(vg, value);
+declare function vgcanvas_set_fill_color_str(vg, color);
+declare function vgcanvas_set_stroke_color_str(vg, color);
+declare function vgcanvas_set_line_cap(vg, value);
+declare function vgcanvas_set_line_join(vg, value);
+declare function vgcanvas_set_miter_limit(vg, value);
+declare function vgcanvas_save(vg);
+declare function vgcanvas_restore(vg);
+declare function vgcanvas_t_get_prop_w(nativeObj);
+declare function vgcanvas_t_get_prop_h(nativeObj);
+declare function vgcanvas_t_get_prop_ratio(nativeObj);
+declare function vgcanvas_t_get_prop_anti_alias(nativeObj);
+declare function vgcanvas_t_get_prop_line_width(nativeObj);
+declare function vgcanvas_t_get_prop_global_alpha(nativeObj);
+declare function vgcanvas_t_get_prop_miter_limit(nativeObj);
+declare function vgcanvas_t_get_prop_line_cap(nativeObj);
+declare function vgcanvas_t_get_prop_line_join(nativeObj);
+declare function vgcanvas_t_get_prop_font(nativeObj);
+declare function vgcanvas_t_get_prop_font_size(nativeObj);
+declare function vgcanvas_t_get_prop_text_align(nativeObj);
+declare function vgcanvas_t_get_prop_text_baseline(nativeObj);
 declare function WIDGET_PROP_X();
 declare function WIDGET_PROP_Y();
 declare function WIDGET_PROP_W();
@@ -430,12 +486,15 @@ declare function ASSET_TYPE_XML();
 declare function ASSET_TYPE_STRINGS();
 declare function ASSET_TYPE_DATA();
 declare function color_create(r, b, g, a);
-declare function color_create_with_str(str);
+declare function color_from_str(c, str);
 declare function color_r(c);
 declare function color_g(c);
 declare function color_b(c);
 declare function color_a(c);
+declare function color_cast(color);
 declare function color_destroy(c);
+declare function color_t_get_prop_color(nativeObj);
+declare function color_t_set_prop_color(nativeObj, value);
 declare function date_time_create();
 declare function date_time_destroy(dt);
 declare function emitter_create();
@@ -464,7 +523,12 @@ declare function named_value_get_value(nv);
 declare function named_value_destroy(nv);
 declare function named_value_t_get_prop_name(nativeObj);
 declare function rect_create(x, y, w, h);
+declare function rect_cast(rect);
 declare function rect_destroy(r);
+declare function rect_t_get_prop_x(nativeObj);
+declare function rect_t_get_prop_y(nativeObj);
+declare function rect_t_get_prop_w(nativeObj);
+declare function rect_t_get_prop_h(nativeObj);
 declare function time_now_s();
 declare function time_now_ms();
 declare function RET_OK();
@@ -521,7 +585,7 @@ declare function value_set_float32(v, value);
 declare function value_float32(v);
 declare function value_set_double(v, value);
 declare function value_double(v);
-declare function value_set_str(v, value);
+declare function value_dup_str(v, value);
 declare function value_str(v);
 declare function value_wstr(v);
 declare function value_is_null(value);
@@ -532,6 +596,7 @@ declare function value_object(v);
 declare function value_create();
 declare function value_destroy(v);
 declare function value_reset(v);
+declare function value_cast(value);
 declare function list_view_h_create(parent, x, y, w, h);
 declare function list_view_h_set_item_width(widget, item_width);
 declare function list_view_h_set_spacing(widget, spacing);
@@ -1172,12 +1237,20 @@ class Canvas {
    return canvas_draw_image(this.nativeObj, img ? img.nativeObj : null, src ? src.nativeObj : null, dst ? dst.nativeObj : null);
  }
 
- static getVgcanvas(c) {
-   return canvas_get_vgcanvas(c ? c.nativeObj : null);
+ getVgcanvas() {
+   return new Vgcanvas(canvas_get_vgcanvas(this.nativeObj));
  }
 
  static cast(c) {
    return new Canvas(canvas_cast(c ? (c.nativeObj || c) : null));
+ }
+
+ get ox() {
+   return canvas_t_get_prop_ox(this.nativeObj);
+ }
+
+ get oy() {
+   return canvas_t_get_prop_oy(this.nativeObj);
  }
 
 }
@@ -1409,6 +1482,230 @@ enum AlignH {
  LEFT = ALIGN_H_LEFT(),
  RIGHT = ALIGN_H_RIGHT(),
 };
+
+class Vgcanvas {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static cast(vg) {
+   return new Vgcanvas(vgcanvas_cast(vg ? (vg.nativeObj || vg) : null));
+ }
+
+ flush() {
+   return vgcanvas_flush(this.nativeObj);
+ }
+
+ beginPath() {
+   return vgcanvas_begin_path(this.nativeObj);
+ }
+
+ moveTo(x, y) {
+   return vgcanvas_move_to(this.nativeObj, x, y);
+ }
+
+ lineTo(x, y) {
+   return vgcanvas_line_to(this.nativeObj, x, y);
+ }
+
+ quadTo(cpx, cpy, x, y) {
+   return vgcanvas_quad_to(this.nativeObj, cpx, cpy, x, y);
+ }
+
+ bezierTo(cp1x, cp1y, cp2x, cp2y, x, y) {
+   return vgcanvas_bezier_to(this.nativeObj, cp1x, cp1y, cp2x, cp2y, x, y);
+ }
+
+ arcTo(x1, y1, x2, y2, r) {
+   return vgcanvas_arc_to(this.nativeObj, x1, y1, x2, y2, r);
+ }
+
+ arc(x, y, r, start_angle, end_angle, ccw) {
+   return vgcanvas_arc(this.nativeObj, x, y, r, start_angle, end_angle, ccw);
+ }
+
+ isPointInPath(x, y) {
+   return vgcanvas_is_point_in_path(this.nativeObj, x, y);
+ }
+
+ rect(x, y, w, h) {
+   return vgcanvas_rect(this.nativeObj, x, y, w, h);
+ }
+
+ roundedRect(x, y, w, h, r) {
+   return vgcanvas_rounded_rect(this.nativeObj, x, y, w, h, r);
+ }
+
+ ellipse(x, y, rx, ry) {
+   return vgcanvas_ellipse(this.nativeObj, x, y, rx, ry);
+ }
+
+ closePath() {
+   return vgcanvas_close_path(this.nativeObj);
+ }
+
+ rotate(rad) {
+   return vgcanvas_rotate(this.nativeObj, rad);
+ }
+
+ scale(x, y) {
+   return vgcanvas_scale(this.nativeObj, x, y);
+ }
+
+ translate(x, y) {
+   return vgcanvas_translate(this.nativeObj, x, y);
+ }
+
+ transform(a, b, c, d, e, f) {
+   return vgcanvas_transform(this.nativeObj, a, b, c, d, e, f);
+ }
+
+ setTransform(a, b, c, d, e, f) {
+   return vgcanvas_set_transform(this.nativeObj, a, b, c, d, e, f);
+ }
+
+ clipRect(x, y, w, h) {
+   return vgcanvas_clip_rect(this.nativeObj, x, y, w, h);
+ }
+
+ fill() {
+   return vgcanvas_fill(this.nativeObj);
+ }
+
+ stroke() {
+   return vgcanvas_stroke(this.nativeObj);
+ }
+
+ paint(stroke, img) {
+   return vgcanvas_paint(this.nativeObj, stroke, img ? img.nativeObj : null);
+ }
+
+ setFont(font) {
+   return vgcanvas_set_font(this.nativeObj, font);
+ }
+
+ setFontSize(font) {
+   return vgcanvas_set_font_size(this.nativeObj, font);
+ }
+
+ setTextAlign(value) {
+   return vgcanvas_set_text_align(this.nativeObj, value);
+ }
+
+ setTextBaseline(value) {
+   return vgcanvas_set_text_baseline(this.nativeObj, value);
+ }
+
+ fillText(text, x, y, max_width) {
+   return vgcanvas_fill_text(this.nativeObj, text, x, y, max_width);
+ }
+
+ measureText(text) {
+   return vgcanvas_measure_text(this.nativeObj, text);
+ }
+
+ drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh) {
+   return vgcanvas_draw_image(this.nativeObj, img ? img.nativeObj : null, sx, sy, sw, sh, dx, dy, dw, dh);
+ }
+
+ drawIcon(img, sx, sy, sw, sh, dx, dy, dw, dh) {
+   return vgcanvas_draw_icon(this.nativeObj, img ? img.nativeObj : null, sx, sy, sw, sh, dx, dy, dw, dh);
+ }
+
+ setAntialias(value) {
+   return vgcanvas_set_antialias(this.nativeObj, value);
+ }
+
+ setGlobalAlpha(alpha) {
+   return vgcanvas_set_global_alpha(this.nativeObj, alpha);
+ }
+
+ setLineWidth(value) {
+   return vgcanvas_set_line_width(this.nativeObj, value);
+ }
+
+ setFillColor(color) {
+   return vgcanvas_set_fill_color_str(this.nativeObj, color);
+ }
+
+ setStrokeColor(color) {
+   return vgcanvas_set_stroke_color_str(this.nativeObj, color);
+ }
+
+ setLineCap(value) {
+   return vgcanvas_set_line_cap(this.nativeObj, value);
+ }
+
+ setLineJoin(value) {
+   return vgcanvas_set_line_join(this.nativeObj, value);
+ }
+
+ setMiterLimit(value) {
+   return vgcanvas_set_miter_limit(this.nativeObj, value);
+ }
+
+ save() {
+   return vgcanvas_save(this.nativeObj);
+ }
+
+ restore() {
+   return vgcanvas_restore(this.nativeObj);
+ }
+
+ get w() {
+   return vgcanvas_t_get_prop_w(this.nativeObj);
+ }
+
+ get h() {
+   return vgcanvas_t_get_prop_h(this.nativeObj);
+ }
+
+ get ratio() {
+   return vgcanvas_t_get_prop_ratio(this.nativeObj);
+ }
+
+ get antiAlias() {
+   return vgcanvas_t_get_prop_anti_alias(this.nativeObj);
+ }
+
+ get lineWidth() {
+   return vgcanvas_t_get_prop_line_width(this.nativeObj);
+ }
+
+ get globalAlpha() {
+   return vgcanvas_t_get_prop_global_alpha(this.nativeObj);
+ }
+
+ get miterLimit() {
+   return vgcanvas_t_get_prop_miter_limit(this.nativeObj);
+ }
+
+ get lineCap() {
+   return vgcanvas_t_get_prop_line_cap(this.nativeObj);
+ }
+
+ get lineJoin() {
+   return vgcanvas_t_get_prop_line_join(this.nativeObj);
+ }
+
+ get font() {
+   return vgcanvas_t_get_prop_font(this.nativeObj);
+ }
+
+ get fontSize() {
+   return vgcanvas_t_get_prop_font_size(this.nativeObj);
+ }
+
+ get textAlign() {
+   return vgcanvas_t_get_prop_text_align(this.nativeObj);
+ }
+
+ get textBaseline() {
+   return vgcanvas_t_get_prop_text_baseline(this.nativeObj);
+ }
+
+}
 
 enum WidgetProp {
  X = WIDGET_PROP_X(),
@@ -1894,8 +2191,8 @@ class Color {
    return new Color(color_create(r, b, g, a));
  }
 
- static createWithStr(str) {
-   return new Color(color_create_with_str(str));
+ fromStr(str) {
+   return new Color(color_from_str(this.nativeObj, str));
  }
 
  r() {
@@ -1914,8 +2211,20 @@ class Color {
    return color_a(this.nativeObj);
  }
 
+ static cast(color) {
+   return new Color(color_cast(color ? (color.nativeObj || color) : null));
+ }
+
  destroy() {
    return color_destroy(this.nativeObj);
+ }
+
+ set color(value) {
+   color_t_set_prop_color(this.nativeObj, value);
+ }
+
+ get color() {
+   return color_t_get_prop_color(this.nativeObj);
  }
 
 }
@@ -2072,8 +2381,28 @@ class Rect {
    return new Rect(rect_create(x, y, w, h));
  }
 
+ static cast(rect) {
+   return new Rect(rect_cast(rect ? (rect.nativeObj || rect) : null));
+ }
+
  destroy() {
    return rect_destroy(this.nativeObj);
+ }
+
+ get x() {
+   return rect_t_get_prop_x(this.nativeObj);
+ }
+
+ get y() {
+   return rect_t_get_prop_y(this.nativeObj);
+ }
+
+ get w() {
+   return rect_t_get_prop_w(this.nativeObj);
+ }
+
+ get h() {
+   return rect_t_get_prop_h(this.nativeObj);
  }
 
 }
@@ -2230,7 +2559,7 @@ class Value {
  }
 
  setStr(value) {
-   return new Value(value_set_str(this.nativeObj, value));
+   return new Value(value_dup_str(this.nativeObj, value));
  }
 
  str() {
@@ -2271,6 +2600,10 @@ class Value {
 
  reset() {
    return value_reset(this.nativeObj);
+ }
+
+ static cast(value) {
+   return new Value(value_cast(value ? (value.nativeObj || value) : null));
  }
 
 }
