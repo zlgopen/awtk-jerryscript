@@ -1208,6 +1208,48 @@ var DateTime = /** @class */ (function () {
     DateTime.prototype.destroy = function () {
         return date_time_destroy(this.nativeObj);
     };
+    Object.defineProperty(DateTime.prototype, "second", {
+        get: function () {
+            return date_time_t_get_prop_second(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DateTime.prototype, "minute", {
+        get: function () {
+            return date_time_t_get_prop_minute(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DateTime.prototype, "hour", {
+        get: function () {
+            return date_time_t_get_prop_hour(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DateTime.prototype, "day", {
+        get: function () {
+            return date_time_t_get_prop_day(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DateTime.prototype, "month", {
+        get: function () {
+            return date_time_t_get_prop_month(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DateTime.prototype, "year", {
+        get: function () {
+            return date_time_t_get_prop_year(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
     return DateTime;
 }());
 var Emitter = /** @class */ (function () {

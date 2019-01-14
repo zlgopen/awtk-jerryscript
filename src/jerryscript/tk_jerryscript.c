@@ -6133,9 +6133,81 @@ jerry_value_t wrap_date_time_destroy(
   return jerry_create_number(ret);
 }
 
+jerry_value_t wrap_date_time_t_get_prop_second(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  date_time_t* obj = (date_time_t*)jerry_get_pointer(args_p[0], "date_time_t*");
+
+  return jerry_create_number(obj->second);
+}
+
+jerry_value_t wrap_date_time_t_get_prop_minute(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  date_time_t* obj = (date_time_t*)jerry_get_pointer(args_p[0], "date_time_t*");
+
+  return jerry_create_number(obj->minute);
+}
+
+jerry_value_t wrap_date_time_t_get_prop_hour(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  date_time_t* obj = (date_time_t*)jerry_get_pointer(args_p[0], "date_time_t*");
+
+  return jerry_create_number(obj->hour);
+}
+
+jerry_value_t wrap_date_time_t_get_prop_day(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  date_time_t* obj = (date_time_t*)jerry_get_pointer(args_p[0], "date_time_t*");
+
+  return jerry_create_number(obj->day);
+}
+
+jerry_value_t wrap_date_time_t_get_prop_month(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  date_time_t* obj = (date_time_t*)jerry_get_pointer(args_p[0], "date_time_t*");
+
+  return jerry_create_number(obj->month);
+}
+
+jerry_value_t wrap_date_time_t_get_prop_year(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  date_time_t* obj = (date_time_t*)jerry_get_pointer(args_p[0], "date_time_t*");
+
+  return jerry_create_number(obj->year);
+}
+
 ret_t date_time_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"date_time_create", wrap_date_time_create);
   jerryx_handler_register_global((const jerry_char_t*)"date_time_destroy", wrap_date_time_destroy);
+  jerryx_handler_register_global((const jerry_char_t*)"date_time_t_get_prop_second", wrap_date_time_t_get_prop_second);
+  jerryx_handler_register_global((const jerry_char_t*)"date_time_t_get_prop_minute", wrap_date_time_t_get_prop_minute);
+  jerryx_handler_register_global((const jerry_char_t*)"date_time_t_get_prop_hour", wrap_date_time_t_get_prop_hour);
+  jerryx_handler_register_global((const jerry_char_t*)"date_time_t_get_prop_day", wrap_date_time_t_get_prop_day);
+  jerryx_handler_register_global((const jerry_char_t*)"date_time_t_get_prop_month", wrap_date_time_t_get_prop_month);
+  jerryx_handler_register_global((const jerry_char_t*)"date_time_t_get_prop_year", wrap_date_time_t_get_prop_year);
 
  return RET_OK;
 }

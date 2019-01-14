@@ -497,6 +497,12 @@ declare function color_t_get_prop_color(nativeObj);
 declare function color_t_set_prop_color(nativeObj, value);
 declare function date_time_create();
 declare function date_time_destroy(dt);
+declare function date_time_t_get_prop_second(nativeObj);
+declare function date_time_t_get_prop_minute(nativeObj);
+declare function date_time_t_get_prop_hour(nativeObj);
+declare function date_time_t_get_prop_day(nativeObj);
+declare function date_time_t_get_prop_month(nativeObj);
+declare function date_time_t_get_prop_year(nativeObj);
 declare function emitter_create();
 declare function emitter_dispatch(emitter, e);
 declare function emitter_on(emitter, type, on_event, ctx);
@@ -2242,6 +2248,30 @@ class DateTime {
 
  destroy() {
    return date_time_destroy(this.nativeObj);
+ }
+
+ get second() {
+   return date_time_t_get_prop_second(this.nativeObj);
+ }
+
+ get minute() {
+   return date_time_t_get_prop_minute(this.nativeObj);
+ }
+
+ get hour() {
+   return date_time_t_get_prop_hour(this.nativeObj);
+ }
+
+ get day() {
+   return date_time_t_get_prop_day(this.nativeObj);
+ }
+
+ get month() {
+   return date_time_t_get_prop_month(this.nativeObj);
+ }
+
+ get year() {
+   return date_time_t_get_prop_year(this.nativeObj);
  }
 
 }
