@@ -74,7 +74,8 @@ void* jerry_get_pointer(jerry_value_t v, const char* type) {
   return p;
 }
 
-jerry_value_t jerry_create_pointer(const void* ptr, const char* type) {
+jerry_value_t jerry_create_pointer(const void* ptr, const char* type, 
+    const jerry_object_native_info_t *native_info_p) {
   if (ptr == NULL) {
     return jerry_create_null();
   } else {
@@ -83,7 +84,7 @@ jerry_value_t jerry_create_pointer(const void* ptr, const char* type) {
     jerry_value_t cls_type_value = jerry_create_string_from_utf8((jerry_char_t*)type);
 
     jerry_set_property(obj, cls_type, cls_type_value);
-    jerry_set_object_native_pointer(obj, (void*)ptr, NULL);
+    jerry_set_object_native_pointer(obj, (void*)ptr, native_info_p);
 
     return obj;
   }
@@ -95,7 +96,7 @@ static ret_t call_on_event(void* ctx, event_t* e) {
   jerry_value_t func = (jerry_value_t)((char*)ctx - (char*)NULL);
   jerry_value_t this_value = jerry_create_undefined();
 
-  args[0] = jerry_create_pointer(e, "event_t");
+  args[0] = jerry_create_pointer(e, "event_t", NULL);
   res = jerry_call_function(func, this_value, args, 1);
 
   jerry_release_value(args[0]);
@@ -255,7 +256,7 @@ static ret_t call_visit(void* ctx, const void* data) {
   jerry_value_t func = (jerry_value_t)((char*)ctx - (char*)NULL);
   jerry_value_t this_value = jerry_create_undefined();
 
-  args[0] = jerry_create_pointer(data, "widget_t*");
+  args[0] = jerry_create_pointer(data, "widget_t*", NULL);
   res = jerry_call_function(func, this_value, args, 1);
 
   jerry_release_value(args[0]);

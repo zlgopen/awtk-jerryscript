@@ -32,6 +32,14 @@ function isConstructor(obj) {
   return obj.annotation && obj.annotation.constructor === true;
 }
 
+function isGcConstructor(obj) {
+  return obj.annotation && (obj.annotation.constructor === true && obj.annotation.gc);
+}
+
+function isGcDeconstructor(obj) {
+  return obj.annotation && (obj.annotation.deconstructor === true && obj.annotation.gc);
+}
+
 function isCast(obj) {
   return obj.annotation && obj.annotation.cast
 }
@@ -112,7 +120,7 @@ class JerryscriptGenerator {
     return result;
   }
 
-  genReturnData(type, name) {
+  genReturnData(deconstructor, type, name) {
     let result = '\n';
     if (type.indexOf('char*') >= 0) {
       result += `  return jerry_create_str(${name});\n`;
@@ -120,7 +128,13 @@ class JerryscriptGenerator {
       result += `  return jerry_create_string_from_wstring(${name});\n`;
     } else if (type.indexOf('*') >= 0) {
       const typeName = type.replace(/\*/g, "");
-      result += `  return jerry_create_pointer(${name}, "${type}");\n`;
+      let m = deconstructor;
+      if(m) {
+        result += `  static jerry_object_native_info_t info = {(jerry_object_native_free_callback_t)${m.name}};\n`;
+        result += `  return jerry_create_pointer(${name}, "${type}", &info);\n`;
+      } else {
+        result += `  return jerry_create_pointer(${name}, "${type}", NULL);\n`;
+      }
     } else if (type.indexOf('int') >= 0) {
       result += `  return jerry_create_number(${name});\n`;
     } else if (type.indexOf('bool_t') >= 0) {
@@ -154,6 +168,15 @@ class JerryscriptGenerator {
     return result;
   }
 
+  getGcDeconstructor(cls) {
+    let gcDeconstructor = null;
+    cls.methods.forEach(m => {
+      if(isGcDeconstructor(m)) {
+        gcDeconstructor = m;
+      }  
+    }); 
+    return gcDeconstructor;
+  }
 
   genCallMethod(cls, m) {
     const ret_type = m.return.type;
@@ -174,9 +197,13 @@ class JerryscriptGenerator {
       result += '  return 0;\n';
     } else {
       if (isConstructor(m) || isCast(m)) {
-        result += this.genReturnData(`${cls.name}*`, 'ret');
+        if(isGcConstructor(m)) {
+          result += this.genReturnData(this.getGcDeconstructor(cls), `${cls.name}*`, 'ret');
+        } else {
+          result += this.genReturnData(null, `${cls.name}*`, 'ret');
+        }
       } else {
-        result += this.genReturnData(ret_type, 'ret');
+        result += this.genReturnData(null, ret_type, 'ret');
       }
     }
 
@@ -201,7 +228,9 @@ class JerryscriptGenerator {
     let isConstString = isEnumString(cls);
     if (cls.methods) {
       cls.methods.forEach(iter => {
-        result += this.genFuncImpl(cls, iter);
+        if(!isGcDeconstructor(iter)) {
+          result += this.genFuncImpl(cls, iter);
+        }
       });
     }
 
@@ -234,7 +263,9 @@ class JerryscriptGenerator {
     if (cls.methods) {
       cls.methods.forEach(iter => {
         const name = iter.name;
-        result += `  jerryx_handler_register_global((const jerry_char_t*)"${name}", wrap_${name});\n`;
+        if(!isGcDeconstructor(iter)) {
+          result += `  jerryx_handler_register_global((const jerry_char_t*)"${name}", wrap_${name});\n`;
+        }
       });
     }
 
@@ -298,7 +329,7 @@ class JerryscriptGenerator {
 
     result += `jerry_value_t wrap_${funcName}` + gJerryScriptFuncArgs + ' {\n';
     result += this.genParamDecl(0, cls.name + '*', 'obj');
-    result += this.genReturnData(type, `obj->${name}`);
+    result += this.genReturnData(null, type, `obj->${name}`);
     result += '}\n\n'
 
     return result;

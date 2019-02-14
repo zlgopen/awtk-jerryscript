@@ -1,16 +1,22 @@
-var emitter = Emitter.create();
-var e = Event.create(EventBaseType.PROP_CHANGED, null);
 
-emitter.on(EventBaseType.PROP_CHANGED, function(e) {
-  var evt = Event.cast(e);
-  var em = Emitter.cast(evt.target); 
+function application_init() {
+  var emitter = Emitter.create();
+  var e = Event.create(EventBaseType.PROP_CHANGED, null);
 
-  print("evt.type = " + evt.type);
-  print("emitter.size() = " + em.size());
-});
+  emitter.on(EventBaseType.PROP_CHANGED, function(e) {
+    var evt = Event.cast(e);
+    var em = Emitter.cast(evt.target); 
 
-emitter.dispatch(e);
+    print("evt.type = " + evt.type);
+    print("emitter.size() = " + em.size());
+  });
 
-e.destroy();
-emitter.destroy();
+  emitter.dispatch(e);
+
+  e = null;
+  emitter = null;
+  gc();
+}
+
+application_init();
 

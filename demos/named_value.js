@@ -1,12 +1,16 @@
-var v = Value.create()
-var nv = NamedValue.create()
 
-nv.setName("name")
-nv.setValue(v.setStr("hello"));
+function application_init() {
+  var v = Value.create()
+  var nv = NamedValue.create()
 
-print(nv.name + ':' + nv.getValue().str());
+  nv.setName("name")
+  nv.setValue(v.setStr("hello"));
 
-nv.destroy();
-v.destroy();
+  print(nv.name + ':' + nv.getValue().str());
 
+  nv = null;
+  v = null;
+  gc()
+}
 
+application_init();

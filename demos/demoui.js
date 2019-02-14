@@ -101,7 +101,8 @@ function showPreloadResWindow() {
     if(finish == total) {
       print('done')
       openWindow('main', win);
-      bitmap.destroy();
+      bitmap = null;
+      gc();
 
       return Ret.REMOVE;
     } else {

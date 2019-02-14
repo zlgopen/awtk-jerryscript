@@ -3706,6 +3706,9 @@ var ObjectDefault = /** @class */ (function (_super) {
     ObjectDefault.create = function () {
         return new ObjectBase(object_default_create());
     };
+    ObjectDefault.prototype.unref = function () {
+        return object_default_unref();
+    };
     Object.defineProperty(ObjectDefault.prototype, "propsSize", {
         get: function () {
             return object_default_t_get_prop_props_size(this.nativeObj);
