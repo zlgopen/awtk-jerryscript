@@ -33,7 +33,7 @@
 
 extern ret_t awtk_js_init(void);
 
-#define JERRY_BUFFER_SIZE (1048576)
+#define JERRY_BUFFER_SIZE (40 * 1024)
 #define SYNTAX_ERROR_CONTEXT_SIZE 2
 #define JERRY_SNAPSHOT_BUFFER_SIZE (JERRY_BUFFER_SIZE / sizeof(uint32_t))
 

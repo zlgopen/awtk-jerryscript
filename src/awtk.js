@@ -380,6 +380,7 @@ var InputType;
     InputType[InputType["EMAIL"] = INPUT_EMAIL()] = "EMAIL";
     InputType[InputType["PASSWORD"] = INPUT_PASSWORD()] = "PASSWORD";
     InputType[InputType["PHONE"] = INPUT_PHONE()] = "PHONE";
+    InputType[InputType["CUSTOM"] = INPUT_CUSTOM()] = "CUSTOM";
 })(InputType || (InputType = {}));
 ;
 var LocaleInfo = /** @class */ (function () {
@@ -766,7 +767,6 @@ var WidgetProp;
     WidgetProp[WidgetProp["FONT_MANAGER"] = WIDGET_PROP_FONT_MANAGER()] = "FONT_MANAGER";
     WidgetProp[WidgetProp["THEME_OBJ"] = WIDGET_PROP_THEME_OBJ()] = "THEME_OBJ";
     WidgetProp[WidgetProp["DEFAULT_THEME_OBJ"] = WIDGET_PROP_DEFAULT_THEME_OBJ()] = "DEFAULT_THEME_OBJ";
-    WidgetProp[WidgetProp["SCRIPT"] = WIDGET_PROP_SCRIPT()] = "SCRIPT";
     WidgetProp[WidgetProp["ITEM_WIDTH"] = WIDGET_PROP_ITEM_WIDTH()] = "ITEM_WIDTH";
     WidgetProp[WidgetProp["ITEM_HEIGHT"] = WIDGET_PROP_ITEM_HEIGHT()] = "ITEM_HEIGHT";
     WidgetProp[WidgetProp["DEFAULT_ITEM_HEIGHT"] = WIDGET_PROP_DEFAULT_ITEM_HEIGHT()] = "DEFAULT_ITEM_HEIGHT";
@@ -1155,6 +1155,7 @@ var AssetType;
     AssetType[AssetType["UI"] = ASSET_TYPE_UI()] = "UI";
     AssetType[AssetType["XML"] = ASSET_TYPE_XML()] = "XML";
     AssetType[AssetType["STRINGS"] = ASSET_TYPE_STRINGS()] = "STRINGS";
+    AssetType[AssetType["SCRIPT"] = ASSET_TYPE_SCRIPT()] = "SCRIPT";
     AssetType[AssetType["DATA"] = ASSET_TYPE_DATA()] = "DATA";
 })(AssetType || (AssetType = {}));
 ;
@@ -1289,6 +1290,7 @@ var EventBaseType;
 (function (EventBaseType) {
     EventBaseType[EventBaseType["PROP_WILL_CHANGE"] = EVT_PROP_WILL_CHANGE()] = "PROP_WILL_CHANGE";
     EventBaseType[EventBaseType["PROP_CHANGED"] = EVT_PROP_CHANGED()] = "PROP_CHANGED";
+    EventBaseType[EventBaseType["PROPS_CHANGED"] = EVT_PROPS_CHANGED()] = "PROPS_CHANGED";
     EventBaseType[EventBaseType["DESTROY"] = EVT_DESTROY()] = "DESTROY";
 })(EventBaseType || (EventBaseType = {}));
 ;
@@ -1438,6 +1440,7 @@ var Ret;
     Ret[Ret["DONE"] = RET_DONE()] = "DONE";
     Ret[Ret["STOP"] = RET_STOP()] = "STOP";
     Ret[Ret["CONTINUE"] = RET_CONTINUE()] = "CONTINUE";
+    Ret[Ret["OBJECT_CHANGED"] = RET_OBJECT_CHANGED()] = "OBJECT_CHANGED";
     Ret[Ret["BAD_PARAMS"] = RET_BAD_PARAMS()] = "BAD_PARAMS";
 })(Ret || (Ret = {}));
 ;
@@ -2109,23 +2112,6 @@ var TimeClock = /** @class */ (function (_super) {
     });
     return TimeClock;
 }(Widget));
-var WindowEvent = /** @class */ (function (_super) {
-    __extends(WindowEvent, _super);
-    function WindowEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    WindowEvent.cast = function (event) {
-        return new WindowEvent(window_event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(WindowEvent.prototype, "window", {
-        get: function () {
-            return window_event_t_get_prop_window(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return WindowEvent;
-}(Event));
 var TabControl = /** @class */ (function (_super) {
     __extends(TabControl, _super);
     function TabControl(nativeObj) {
@@ -2601,14 +2587,59 @@ var ObjectBase = /** @class */ (function (_super) {
     ObjectBase.prototype.getProp = function (name, v) {
         return object_get_prop(this.nativeObj, name, v ? v.nativeObj : null);
     };
+    ObjectBase.prototype.getPropStr = function (name) {
+        return object_get_prop_str(this.nativeObj, name);
+    };
+    ObjectBase.prototype.getPropPointer = function (name) {
+        return object_get_prop_pointer(this.nativeObj, name);
+    };
+    ObjectBase.prototype.getPropObject = function (name) {
+        return new ObjectBase(object_get_prop_object(this.nativeObj, name));
+    };
+    ObjectBase.prototype.getPropInt = function (name, defval) {
+        return object_get_prop_int(this.nativeObj, name, defval);
+    };
+    ObjectBase.prototype.getPropFloat = function (name, defval) {
+        return object_get_prop_float(this.nativeObj, name, defval);
+    };
     ObjectBase.prototype.removeProp = function (name) {
         return object_remove_prop(this.nativeObj, name);
     };
-    ObjectBase.prototype.setProp = function (name, v) {
-        return object_set_prop(this.nativeObj, name, v ? v.nativeObj : null);
+    ObjectBase.prototype.setProp = function (name, value) {
+        return object_set_prop(this.nativeObj, name, value ? value.nativeObj : null);
+    };
+    ObjectBase.prototype.setPropStr = function (name, value) {
+        return object_set_prop_str(this.nativeObj, name, value);
+    };
+    ObjectBase.prototype.setPropPointer = function (name, value) {
+        return object_set_prop_pointer(this.nativeObj, name, value);
+    };
+    ObjectBase.prototype.setPropObject = function (name, value) {
+        return object_set_prop_object(this.nativeObj, name, value ? value.nativeObj : null);
+    };
+    ObjectBase.prototype.setPropInt = function (name, value) {
+        return object_set_prop_int(this.nativeObj, name, value);
+    };
+    ObjectBase.prototype.setPropFloat = function (name, value) {
+        return object_set_prop_float(this.nativeObj, name, value);
     };
     ObjectBase.prototype.foreachProp = function (on_prop, ctx) {
         return object_foreach_prop(this.nativeObj, on_prop, ctx);
+    };
+    ObjectBase.prototype.hasProp = function (name) {
+        return object_has_prop(this.nativeObj, name);
+    };
+    ObjectBase.prototype.eval = function (expr, v) {
+        return object_eval(this.nativeObj, expr, v ? v.nativeObj : null);
+    };
+    ObjectBase.prototype.canExec = function (name, args) {
+        return object_can_exec(this.nativeObj, name, args);
+    };
+    ObjectBase.prototype.exec = function (name, args) {
+        return object_exec(this.nativeObj, name, args);
+    };
+    ObjectBase.prototype.notifyChanged = function () {
+        return object_notify_changed(this.nativeObj);
     };
     Object.defineProperty(ObjectBase.prototype, "refCount", {
         get: function () {
@@ -2661,6 +2692,19 @@ var ColorPicker = /** @class */ (function (_super) {
         configurable: true
     });
     return ColorPicker;
+}(Widget));
+var View = /** @class */ (function (_super) {
+    __extends(View, _super);
+    function View(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    View.create = function (parent, x, y, w, h) {
+        return new Widget(view_create(parent ? parent.nativeObj : null, x, y, w, h));
+    };
+    View.cast = function (widget) {
+        return new Widget(view_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    return View;
 }(Widget));
 var TabButton = /** @class */ (function (_super) {
     __extends(TabButton, _super);
@@ -2896,102 +2940,23 @@ var ImageValue = /** @class */ (function (_super) {
     });
     return ImageValue;
 }(Widget));
-var View = /** @class */ (function (_super) {
-    __extends(View, _super);
-    function View(nativeObj) {
+var WindowEvent = /** @class */ (function (_super) {
+    __extends(WindowEvent, _super);
+    function WindowEvent(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    View.create = function (parent, x, y, w, h) {
-        return new Widget(view_create(parent ? parent.nativeObj : null, x, y, w, h));
+    WindowEvent.cast = function (event) {
+        return new WindowEvent(window_event_cast(event ? (event.nativeObj || event) : null));
     };
-    View.cast = function (widget) {
-        return new Widget(view_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    return View;
-}(Widget));
-var ProgressCircle = /** @class */ (function (_super) {
-    __extends(ProgressCircle, _super);
-    function ProgressCircle(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    ProgressCircle.create = function (parent, x, y, w, h) {
-        return new Widget(progress_circle_create(parent ? parent.nativeObj : null, x, y, w, h));
-    };
-    ProgressCircle.cast = function (widget) {
-        return new Widget(progress_circle_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    ProgressCircle.prototype.setValue = function (value) {
-        return progress_circle_set_value(this.nativeObj, value);
-    };
-    ProgressCircle.prototype.setMax = function (max) {
-        return progress_circle_set_max(this.nativeObj, max);
-    };
-    ProgressCircle.prototype.setLineWidth = function (line_width) {
-        return progress_circle_set_line_width(this.nativeObj, line_width);
-    };
-    ProgressCircle.prototype.setStartAngle = function (start_angle) {
-        return progress_circle_set_start_angle(this.nativeObj, start_angle);
-    };
-    ProgressCircle.prototype.setUnit = function (unit) {
-        return progress_circle_set_unit(this.nativeObj, unit);
-    };
-    ProgressCircle.prototype.setShowText = function (show_text) {
-        return progress_circle_set_show_text(this.nativeObj, show_text);
-    };
-    ProgressCircle.prototype.setCounterClockWise = function (counter_clock_wise) {
-        return progress_circle_set_counter_clock_wise(this.nativeObj, counter_clock_wise);
-    };
-    Object.defineProperty(ProgressCircle.prototype, "value", {
+    Object.defineProperty(WindowEvent.prototype, "window", {
         get: function () {
-            return progress_circle_t_get_prop_value(this.nativeObj);
+            return window_event_t_get_prop_window(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ProgressCircle.prototype, "max", {
-        get: function () {
-            return progress_circle_t_get_prop_max(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ProgressCircle.prototype, "startAngle", {
-        get: function () {
-            return progress_circle_t_get_prop_start_angle(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ProgressCircle.prototype, "lineWidth", {
-        get: function () {
-            return progress_circle_t_get_prop_line_width(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ProgressCircle.prototype, "unit", {
-        get: function () {
-            return progress_circle_t_get_prop_unit(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ProgressCircle.prototype, "counterClockWise", {
-        get: function () {
-            return progress_circle_t_get_prop_counter_clock_wise(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ProgressCircle.prototype, "showText", {
-        get: function () {
-            return progress_circle_t_get_prop_show_text(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ProgressCircle;
-}(Widget));
+    return WindowEvent;
+}(Event));
 var RichText = /** @class */ (function (_super) {
     __extends(RichText, _super);
     function RichText(nativeObj) {
@@ -3198,6 +3163,9 @@ var ComboBox = /** @class */ (function (_super) {
     };
     ComboBox.prototype.setSelectedIndex = function (index) {
         return combo_box_set_selected_index(this.nativeObj, index);
+    };
+    ComboBox.prototype.setValue = function (value) {
+        return combo_box_set_value(this.nativeObj, value);
     };
     ComboBox.prototype.appendOption = function (value, text) {
         return combo_box_append_option(this.nativeObj, value, text);
@@ -3623,6 +3591,89 @@ var ProgressBar = /** @class */ (function (_super) {
         configurable: true
     });
     return ProgressBar;
+}(Widget));
+var ProgressCircle = /** @class */ (function (_super) {
+    __extends(ProgressCircle, _super);
+    function ProgressCircle(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    ProgressCircle.create = function (parent, x, y, w, h) {
+        return new Widget(progress_circle_create(parent ? parent.nativeObj : null, x, y, w, h));
+    };
+    ProgressCircle.cast = function (widget) {
+        return new Widget(progress_circle_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    ProgressCircle.prototype.setValue = function (value) {
+        return progress_circle_set_value(this.nativeObj, value);
+    };
+    ProgressCircle.prototype.setMax = function (max) {
+        return progress_circle_set_max(this.nativeObj, max);
+    };
+    ProgressCircle.prototype.setLineWidth = function (line_width) {
+        return progress_circle_set_line_width(this.nativeObj, line_width);
+    };
+    ProgressCircle.prototype.setStartAngle = function (start_angle) {
+        return progress_circle_set_start_angle(this.nativeObj, start_angle);
+    };
+    ProgressCircle.prototype.setUnit = function (unit) {
+        return progress_circle_set_unit(this.nativeObj, unit);
+    };
+    ProgressCircle.prototype.setShowText = function (show_text) {
+        return progress_circle_set_show_text(this.nativeObj, show_text);
+    };
+    ProgressCircle.prototype.setCounterClockWise = function (counter_clock_wise) {
+        return progress_circle_set_counter_clock_wise(this.nativeObj, counter_clock_wise);
+    };
+    Object.defineProperty(ProgressCircle.prototype, "value", {
+        get: function () {
+            return progress_circle_t_get_prop_value(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "max", {
+        get: function () {
+            return progress_circle_t_get_prop_max(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "startAngle", {
+        get: function () {
+            return progress_circle_t_get_prop_start_angle(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "lineWidth", {
+        get: function () {
+            return progress_circle_t_get_prop_line_width(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "unit", {
+        get: function () {
+            return progress_circle_t_get_prop_unit(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "counterClockWise", {
+        get: function () {
+            return progress_circle_t_get_prop_counter_clock_wise(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "showText", {
+        get: function () {
+            return progress_circle_t_get_prop_show_text(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ProgressCircle;
 }(Widget));
 var Image = /** @class */ (function (_super) {
     __extends(Image, _super);
