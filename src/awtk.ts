@@ -1012,7 +1012,7 @@ declare function image_set_draw_type(widget, draw_type);
 declare function image_cast(widget);
 declare function image_t_get_prop_draw_type(nativeObj);
 declare function object_default_create();
-declare function object_default_unref();
+declare function object_default_unref(obj);
 declare function object_default_t_get_prop_props_size(nativeObj);
 declare function spin_box_create(parent, x, y, w, h);
 declare function spin_box_cast(widget);
@@ -4759,7 +4759,7 @@ class ObjectDefault extends ObjectBase {
  }
 
  unref() {
-   return object_default_unref();
+   return object_default_unref(this.nativeObj);
  }
 
  get propsSize() {

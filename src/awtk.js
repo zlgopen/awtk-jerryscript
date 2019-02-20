@@ -3739,7 +3739,7 @@ var ObjectDefault = /** @class */ (function (_super) {
         return new ObjectBase(object_default_create());
     };
     ObjectDefault.prototype.unref = function () {
-        return object_default_unref();
+        return object_default_unref(this.nativeObj);
     };
     Object.defineProperty(ObjectDefault.prototype, "propsSize", {
         get: function () {
