@@ -341,6 +341,7 @@ var EventType;
     EventType[EventType["DRAG_START"] = EVT_DRAG_START()] = "DRAG_START";
     EventType[EventType["DRAG"] = EVT_DRAG()] = "DRAG";
     EventType[EventType["DRAG_END"] = EVT_DRAG_END()] = "DRAG_END";
+    EventType[EventType["SCREEN_SAVER"] = EVT_SCREEN_SAVER()] = "SCREEN_SAVER";
     EventType[EventType["REQ_START"] = EVT_REQ_START()] = "REQ_START";
     EventType[EventType["USER_START"] = EVT_USER_START()] = "USER_START";
 })(EventType || (EventType = {}));
@@ -461,6 +462,9 @@ var Timer = /** @class */ (function () {
     };
     Timer.remove = function (timer_id) {
         return timer_remove(timer_id);
+    };
+    Timer.reset = function (timer_id) {
+        return timer_reset(timer_id);
     };
     return Timer;
 }());
@@ -773,6 +777,7 @@ var WidgetProp;
     WidgetProp[WidgetProp["XSLIDABLE"] = WIDGET_PROP_XSLIDABLE()] = "XSLIDABLE";
     WidgetProp[WidgetProp["YSLIDABLE"] = WIDGET_PROP_YSLIDABLE()] = "YSLIDABLE";
     WidgetProp[WidgetProp["REPEAT"] = WIDGET_PROP_REPEAT()] = "REPEAT";
+    WidgetProp[WidgetProp["ENABLE_LONG_PRESS"] = WIDGET_PROP_ENABLE_LONG_PRESS()] = "ENABLE_LONG_PRESS";
     WidgetProp[WidgetProp["ANIMATABLE"] = WIDGET_PROP_ANIMATABLE()] = "ANIMATABLE";
     WidgetProp[WidgetProp["AUTO_HIDE_SCROLL_BAR"] = WIDGET_PROP_AUTO_HIDE_SCROLL_BAR()] = "AUTO_HIDE_SCROLL_BAR";
     WidgetProp[WidgetProp["IMAGE"] = WIDGET_PROP_IMAGE()] = "IMAGE";
@@ -2841,6 +2846,9 @@ var ImageAnimation = /** @class */ (function (_super) {
     ImageAnimation.prototype.setSequence = function (sequence) {
         return image_animation_set_sequence(this.nativeObj, sequence);
     };
+    ImageAnimation.prototype.setRangeSequence = function (start_index, end_index) {
+        return image_animation_set_range_sequence(this.nativeObj, start_index, end_index);
+    };
     ImageAnimation.prototype.play = function () {
         return image_animation_play(this.nativeObj);
     };
@@ -2863,6 +2871,20 @@ var ImageAnimation = /** @class */ (function (_super) {
     Object.defineProperty(ImageAnimation.prototype, "sequence", {
         get: function () {
             return image_animation_t_get_prop_sequence(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ImageAnimation.prototype, "startIndex", {
+        get: function () {
+            return image_animation_t_get_prop_start_index(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ImageAnimation.prototype, "endIndex", {
+        get: function () {
+            return image_animation_t_get_prop_end_index(this.nativeObj);
         },
         enumerable: true,
         configurable: true
@@ -3030,9 +3052,19 @@ var Button = /** @class */ (function (_super) {
     Button.prototype.setRepeat = function (repeat) {
         return button_set_repeat(this.nativeObj, repeat);
     };
+    Button.prototype.setEnableLongPress = function (enable_long_press) {
+        return button_set_enable_long_press(this.nativeObj, enable_long_press);
+    };
     Object.defineProperty(Button.prototype, "repeat", {
         get: function () {
             return button_t_get_prop_repeat(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Button.prototype, "enableLongPress", {
+        get: function () {
+            return button_t_get_prop_enable_long_press(this.nativeObj);
         },
         enumerable: true,
         configurable: true

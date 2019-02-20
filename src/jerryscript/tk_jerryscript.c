@@ -1552,6 +1552,15 @@ jerry_value_t get_EVT_DRAG_END(
   return jerry_create_number(EVT_DRAG_END);
 }
 
+jerry_value_t get_EVT_SCREEN_SAVER(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(EVT_SCREEN_SAVER);
+}
+
 jerry_value_t get_EVT_REQ_START(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -1618,6 +1627,7 @@ ret_t event_type_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"EVT_DRAG_START", get_EVT_DRAG_START);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_DRAG", get_EVT_DRAG);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_DRAG_END", get_EVT_DRAG_END);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_SCREEN_SAVER", get_EVT_SCREEN_SAVER);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_REQ_START", get_EVT_REQ_START);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_USER_START", get_EVT_USER_START);
 
@@ -2199,9 +2209,23 @@ jerry_value_t wrap_timer_remove(
   return jerry_create_number(ret);
 }
 
+jerry_value_t wrap_timer_reset(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  uint32_t timer_id = (uint32_t)jerry_get_number_value(args_p[0]);
+  ret = (ret_t)timer_reset(timer_id);
+
+  return jerry_create_number(ret);
+}
+
 ret_t timer_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"timer_add", wrap_timer_add);
   jerryx_handler_register_global((const jerry_char_t*)"timer_remove", wrap_timer_remove);
+  jerryx_handler_register_global((const jerry_char_t*)"timer_reset", wrap_timer_reset);
 
  return RET_OK;
 }
@@ -3777,6 +3801,15 @@ jerry_value_t get_WIDGET_PROP_REPEAT(
   return jerry_create_str(WIDGET_PROP_REPEAT);
 }
 
+jerry_value_t get_WIDGET_PROP_ENABLE_LONG_PRESS(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(WIDGET_PROP_ENABLE_LONG_PRESS);
+}
+
 jerry_value_t get_WIDGET_PROP_ANIMATABLE(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -4083,6 +4116,7 @@ ret_t widget_prop_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_XSLIDABLE", get_WIDGET_PROP_XSLIDABLE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_YSLIDABLE", get_WIDGET_PROP_YSLIDABLE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_REPEAT", get_WIDGET_PROP_REPEAT);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ENABLE_LONG_PRESS", get_WIDGET_PROP_ENABLE_LONG_PRESS);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ANIMATABLE", get_WIDGET_PROP_ANIMATABLE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_AUTO_HIDE_SCROLL_BAR", get_WIDGET_PROP_AUTO_HIDE_SCROLL_BAR);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_IMAGE", get_WIDGET_PROP_IMAGE);
@@ -11007,6 +11041,21 @@ jerry_value_t wrap_image_animation_set_sequence(
   return jerry_create_number(ret);
 }
 
+jerry_value_t wrap_image_animation_set_range_sequence(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  uint32_t start_index = (uint32_t)jerry_get_number_value(args_p[1]);
+  uint32_t end_index = (uint32_t)jerry_get_number_value(args_p[2]);
+  ret = (ret_t)image_animation_set_range_sequence(widget, start_index, end_index);
+
+  return jerry_create_number(ret);
+}
+
 jerry_value_t wrap_image_animation_play(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -11081,6 +11130,28 @@ jerry_value_t wrap_image_animation_t_get_prop_sequence(
   return jerry_create_str(obj->sequence);
 }
 
+jerry_value_t wrap_image_animation_t_get_prop_start_index(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  image_animation_t* obj = (image_animation_t*)jerry_get_pointer(args_p[0], "image_animation_t*");
+
+  return jerry_create_number(obj->start_index);
+}
+
+jerry_value_t wrap_image_animation_t_get_prop_end_index(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  image_animation_t* obj = (image_animation_t*)jerry_get_pointer(args_p[0], "image_animation_t*");
+
+  return jerry_create_number(obj->end_index);
+}
+
 jerry_value_t wrap_image_animation_t_get_prop_loop(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -11133,12 +11204,15 @@ ret_t image_animation_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_set_delay", wrap_image_animation_set_delay);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_set_auto_play", wrap_image_animation_set_auto_play);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_set_sequence", wrap_image_animation_set_sequence);
+  jerryx_handler_register_global((const jerry_char_t*)"image_animation_set_range_sequence", wrap_image_animation_set_range_sequence);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_play", wrap_image_animation_play);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_stop", wrap_image_animation_stop);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_pause", wrap_image_animation_pause);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_cast", wrap_image_animation_cast);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_image", wrap_image_animation_t_get_prop_image);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_sequence", wrap_image_animation_t_get_prop_sequence);
+  jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_start_index", wrap_image_animation_t_get_prop_start_index);
+  jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_end_index", wrap_image_animation_t_get_prop_end_index);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_loop", wrap_image_animation_t_get_prop_loop);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_auto_play", wrap_image_animation_t_get_prop_auto_play);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_interval", wrap_image_animation_t_get_prop_interval);
@@ -11504,6 +11578,20 @@ jerry_value_t wrap_button_set_repeat(
   return jerry_create_number(ret);
 }
 
+jerry_value_t wrap_button_set_enable_long_press(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t enable_long_press = (bool_t)jerry_get_boolean_value(args_p[1]);
+  ret = (ret_t)button_set_enable_long_press(widget, enable_long_press);
+
+  return jerry_create_number(ret);
+}
+
 jerry_value_t wrap_button_t_get_prop_repeat(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -11515,11 +11603,24 @@ jerry_value_t wrap_button_t_get_prop_repeat(
   return jerry_create_number(obj->repeat);
 }
 
+jerry_value_t wrap_button_t_get_prop_enable_long_press(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  button_t* obj = (button_t*)jerry_get_pointer(args_p[0], "button_t*");
+
+  return jerry_create_boolean(obj->enable_long_press);
+}
+
 ret_t button_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"button_create", wrap_button_create);
   jerryx_handler_register_global((const jerry_char_t*)"button_cast", wrap_button_cast);
   jerryx_handler_register_global((const jerry_char_t*)"button_set_repeat", wrap_button_set_repeat);
+  jerryx_handler_register_global((const jerry_char_t*)"button_set_enable_long_press", wrap_button_set_enable_long_press);
   jerryx_handler_register_global((const jerry_char_t*)"button_t_get_prop_repeat", wrap_button_t_get_prop_repeat);
+  jerryx_handler_register_global((const jerry_char_t*)"button_t_get_prop_enable_long_press", wrap_button_t_get_prop_enable_long_press);
 
  return RET_OK;
 }

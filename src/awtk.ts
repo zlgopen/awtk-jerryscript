@@ -124,6 +124,7 @@ declare function EVT_IM_ACTION_INFO();
 declare function EVT_DRAG_START();
 declare function EVT_DRAG();
 declare function EVT_DRAG_END();
+declare function EVT_SCREEN_SAVER();
 declare function EVT_REQ_START();
 declare function EVT_USER_START();
 declare function idle_add(on_idle, ctx);
@@ -177,6 +178,7 @@ declare function style_get_int(s, name, defval);
 declare function style_get_str(s, name, defval);
 declare function timer_add(on_timer, ctx, duration);
 declare function timer_remove(timer_id);
+declare function timer_reset(timer_id);
 declare function ALIGN_V_NONE();
 declare function ALIGN_V_MIDDLE();
 declare function ALIGN_V_TOP();
@@ -310,6 +312,7 @@ declare function WIDGET_PROP_DEFAULT_ITEM_HEIGHT();
 declare function WIDGET_PROP_XSLIDABLE();
 declare function WIDGET_PROP_YSLIDABLE();
 declare function WIDGET_PROP_REPEAT();
+declare function WIDGET_PROP_ENABLE_LONG_PRESS();
 declare function WIDGET_PROP_ANIMATABLE();
 declare function WIDGET_PROP_AUTO_HIDE_SCROLL_BAR();
 declare function WIDGET_PROP_IMAGE();
@@ -845,12 +848,15 @@ declare function image_animation_set_interval(widget, interval);
 declare function image_animation_set_delay(widget, delay);
 declare function image_animation_set_auto_play(widget, auto_play);
 declare function image_animation_set_sequence(widget, sequence);
+declare function image_animation_set_range_sequence(widget, start_index, end_index);
 declare function image_animation_play(widget);
 declare function image_animation_stop(widget);
 declare function image_animation_pause(widget);
 declare function image_animation_cast(widget);
 declare function image_animation_t_get_prop_image(nativeObj);
 declare function image_animation_t_get_prop_sequence(nativeObj);
+declare function image_animation_t_get_prop_start_index(nativeObj);
+declare function image_animation_t_get_prop_end_index(nativeObj);
 declare function image_animation_t_get_prop_loop(nativeObj);
 declare function image_animation_t_get_prop_auto_play(nativeObj);
 declare function image_animation_t_get_prop_interval(nativeObj);
@@ -877,7 +883,9 @@ declare function button_group_cast(widget);
 declare function button_create(parent, x, y, w, h);
 declare function button_cast(widget);
 declare function button_set_repeat(widget, repeat);
+declare function button_set_enable_long_press(widget, enable_long_press);
 declare function button_t_get_prop_repeat(nativeObj);
+declare function button_t_get_prop_enable_long_press(nativeObj);
 declare function check_button_create(parent, x, y, w, h);
 declare function check_button_create_radio(parent, x, y, w, h);
 declare function check_button_set_value(widget, value);
@@ -1351,6 +1359,7 @@ enum EventType {
  DRAG_START = EVT_DRAG_START(),
  DRAG = EVT_DRAG(),
  DRAG_END = EVT_DRAG_END(),
+ SCREEN_SAVER = EVT_SCREEN_SAVER(),
  REQ_START = EVT_REQ_START(),
  USER_START = EVT_USER_START(),
 };
@@ -1493,6 +1502,10 @@ class Timer {
 
  static remove(timer_id) {
    return timer_remove(timer_id);
+ }
+
+ static reset(timer_id) {
+   return timer_reset(timer_id);
  }
 
 }
@@ -1807,6 +1820,7 @@ enum WidgetProp {
  XSLIDABLE = WIDGET_PROP_XSLIDABLE(),
  YSLIDABLE = WIDGET_PROP_YSLIDABLE(),
  REPEAT = WIDGET_PROP_REPEAT(),
+ ENABLE_LONG_PRESS = WIDGET_PROP_ENABLE_LONG_PRESS(),
  ANIMATABLE = WIDGET_PROP_ANIMATABLE(),
  AUTO_HIDE_SCROLL_BAR = WIDGET_PROP_AUTO_HIDE_SCROLL_BAR(),
  IMAGE = WIDGET_PROP_IMAGE(),
@@ -3864,6 +3878,10 @@ class ImageAnimation extends Widget {
    return image_animation_set_sequence(this.nativeObj, sequence);
  }
 
+ setRangeSequence(start_index, end_index) {
+   return image_animation_set_range_sequence(this.nativeObj, start_index, end_index);
+ }
+
  play() {
    return image_animation_play(this.nativeObj);
  }
@@ -3886,6 +3904,14 @@ class ImageAnimation extends Widget {
 
  get sequence() {
    return image_animation_t_get_prop_sequence(this.nativeObj);
+ }
+
+ get startIndex() {
+   return image_animation_t_get_prop_start_index(this.nativeObj);
+ }
+
+ get endIndex() {
+   return image_animation_t_get_prop_end_index(this.nativeObj);
  }
 
  get loop() {
@@ -4048,8 +4074,16 @@ class Button extends Widget {
    return button_set_repeat(this.nativeObj, repeat);
  }
 
+ setEnableLongPress(enable_long_press) {
+   return button_set_enable_long_press(this.nativeObj, enable_long_press);
+ }
+
  get repeat() {
    return button_t_get_prop_repeat(this.nativeObj);
+ }
+
+ get enableLongPress() {
+   return button_t_get_prop_enable_long_press(this.nativeObj);
  }
 
 }
