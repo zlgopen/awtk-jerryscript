@@ -84,11 +84,16 @@ class JerryscriptGenerator {
   }
 
   genCallMethod(cls, m) {
+    let returnType = null;
     let result = `${m.name}${this.genCallParamList(m)}`;
-    let returnType = m.return.type.replace(/\*/g, "");
-    let classInfo = this.getClassInfo(returnType);
+    if (isCast(m)) {
+      returnType = cls.name;
+    } else {
+      returnType = m.return.type.replace(/\*/g, "");
+    }
 
-    if(classInfo) {
+    let classInfo = this.getClassInfo(returnType);
+    if (classInfo) {
       let clsName = this.toClassName(this.getClassName(classInfo));
       result = `   return new ${clsName}(${result});\n`;
     } else {
@@ -140,13 +145,13 @@ class JerryscriptGenerator {
     let isNormalMethod = !isCast(m) && !isStatic(m) && !isConstructor(m);
 
     m.params.forEach((iter, index) => {
-      if(index == 0) {
-        if(isNormalMethod) {
+      if (index == 0) {
+        if (isNormalMethod) {
           return;
         }
       }
 
-      if(result !== '') { 
+      if (result !== '') {
         result += ', ';
       }
       result += iter.name;
@@ -154,7 +159,7 @@ class JerryscriptGenerator {
 
     return '(' + result + ')';
   }
-  
+
   genCallParamList(m) {
     let result = '';
     let isNormalMethod = !isCast(m) && !isStatic(m) && !isConstructor(m);
@@ -162,17 +167,17 @@ class JerryscriptGenerator {
     m.params.forEach((iter, index) => {
       const name = iter.name;
 
-      if(index == 0) {
-        if(isNormalMethod) {
+      if (index == 0) {
+        if (isNormalMethod) {
           result += 'this.nativeObj';
           return;
-        } else if(isCast(m)) {
+        } else if (isCast(m)) {
           result += `${name} ? (${name}.nativeObj || ${name}) : null`;
           return;
         }
       }
 
-      if(result !== '') { 
+      if (result !== '') {
         result += ', ';
       }
 
@@ -304,7 +309,7 @@ class JerryscriptGenerator {
         result += ` ${shortName} = ${name}(),\n`
       });
     }
-    
+
     result += `};\n\n`;
 
     return result;
@@ -313,7 +318,7 @@ class JerryscriptGenerator {
   genOne(cls) {
     if (cls.type === 'class') {
       return this.genOneClass(cls);
-    } else if(cls.type === 'enum') {
+    } else if (cls.type === 'enum') {
       return this.genOneEnum(cls);
     } else {
       return '';

@@ -9815,6 +9815,20 @@ jerry_value_t wrap_window_manager_set_show_fps(
   return jerry_create_number(ret);
 }
 
+jerry_value_t wrap_window_manager_set_screen_saver_time(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  uint32_t screen_saver_time = (uint32_t)jerry_get_number_value(args_p[1]);
+  ret = (ret_t)window_manager_set_screen_saver_time(widget, screen_saver_time);
+
+  return jerry_create_number(ret);
+}
+
 jerry_value_t wrap_window_manager_set_cursor(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -9845,6 +9859,7 @@ ret_t window_manager_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"window_manager", wrap_window_manager);
   jerryx_handler_register_global((const jerry_char_t*)"window_manager_cast", wrap_window_manager_cast);
   jerryx_handler_register_global((const jerry_char_t*)"window_manager_set_show_fps", wrap_window_manager_set_show_fps);
+  jerryx_handler_register_global((const jerry_char_t*)"window_manager_set_screen_saver_time", wrap_window_manager_set_screen_saver_time);
   jerryx_handler_register_global((const jerry_char_t*)"window_manager_set_cursor", wrap_window_manager_set_cursor);
   jerryx_handler_register_global((const jerry_char_t*)"window_manager_t_get_prop_show_fps", wrap_window_manager_t_get_prop_show_fps);
 
@@ -10351,6 +10366,22 @@ jerry_value_t wrap_object_set_prop_float(
   return jerry_create_number(ret);
 }
 
+jerry_value_t wrap_object_copy_prop(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  object_t* obj = (object_t*)jerry_get_pointer(args_p[0], "object_t*");
+  object_t* src = (object_t*)jerry_get_pointer(args_p[1], "object_t*");
+  const char* name = (const char*)jerry_get_utf8_string(args_p[2]);
+  ret = (ret_t)object_copy_prop(obj, src, name);
+  TKMEM_FREE(name);
+
+  return jerry_create_number(ret);
+}
+
 jerry_value_t wrap_object_foreach_prop(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -10483,6 +10514,7 @@ ret_t object_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"object_set_prop_object", wrap_object_set_prop_object);
   jerryx_handler_register_global((const jerry_char_t*)"object_set_prop_int", wrap_object_set_prop_int);
   jerryx_handler_register_global((const jerry_char_t*)"object_set_prop_float", wrap_object_set_prop_float);
+  jerryx_handler_register_global((const jerry_char_t*)"object_copy_prop", wrap_object_copy_prop);
   jerryx_handler_register_global((const jerry_char_t*)"object_foreach_prop", wrap_object_foreach_prop);
   jerryx_handler_register_global((const jerry_char_t*)"object_has_prop", wrap_object_has_prop);
   jerryx_handler_register_global((const jerry_char_t*)"object_eval", wrap_object_eval);

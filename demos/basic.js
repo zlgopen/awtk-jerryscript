@@ -16,6 +16,8 @@ function application_init() {
     print('bar1 value:' + win.child("bar1").getValue());
     print('bar2 value:' + win.child("bar2").getValue());
   });
+
+  WindowManager.cast(win.getWindowManager()).setShowFps(true);
 }
 
 application_init()

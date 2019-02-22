@@ -1596,7 +1596,7 @@ var ListViewH = /** @class */ (function (_super) {
         return list_view_h_set_spacing(this.nativeObj, spacing);
     };
     ListViewH.cast = function (widget) {
-        return new Widget(list_view_h_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ListViewH(list_view_h_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(ListViewH.prototype, "itemWidth", {
         get: function () {
@@ -1632,7 +1632,7 @@ var ListView = /** @class */ (function (_super) {
         return list_view_set_auto_hide_scroll_bar(this.nativeObj, auto_hide_scroll_bar);
     };
     ListView.cast = function (widget) {
-        return new Widget(list_view_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ListView(list_view_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(ListView.prototype, "itemHeight", {
         get: function () {
@@ -1666,7 +1666,7 @@ var ScrollBar = /** @class */ (function (_super) {
         return new Widget(scroll_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     ScrollBar.cast = function (widget) {
-        return new Widget(scroll_bar_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ScrollBar(scroll_bar_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ScrollBar.createMobile = function (parent, x, y, w, h) {
         return new Widget(scroll_bar_create_mobile(parent ? parent.nativeObj : null, x, y, w, h));
@@ -1734,7 +1734,7 @@ var ScrollView = /** @class */ (function (_super) {
         return new Widget(scroll_view_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     ScrollView.cast = function (widget) {
-        return new Widget(scroll_view_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ScrollView(scroll_view_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ScrollView.prototype.setVirtualW = function (w) {
         return scroll_view_set_virtual_w(this.nativeObj, w);
@@ -1807,7 +1807,7 @@ var SlideMenu = /** @class */ (function (_super) {
         return new Widget(slide_menu_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     SlideMenu.cast = function (widget) {
-        return new Widget(slide_menu_cast(widget ? (widget.nativeObj || widget) : null));
+        return new SlideMenu(slide_menu_cast(widget ? (widget.nativeObj || widget) : null));
     };
     SlideMenu.prototype.setValue = function (value) {
         return slide_menu_set_value(this.nativeObj, value);
@@ -1850,7 +1850,7 @@ var SlideView = /** @class */ (function (_super) {
         return new Widget(slide_view_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     SlideView.cast = function (widget) {
-        return new Widget(slide_view_cast(widget ? (widget.nativeObj || widget) : null));
+        return new SlideView(slide_view_cast(widget ? (widget.nativeObj || widget) : null));
     };
     SlideView.prototype.setAutoPlay = function (auto_play) {
         return slide_view_set_auto_play(this.nativeObj, auto_play);
@@ -1886,7 +1886,7 @@ var TabButtonGroup = /** @class */ (function (_super) {
         return new Widget(tab_button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     TabButtonGroup.cast = function (widget) {
-        return new Widget(tab_button_group_cast(widget ? (widget.nativeObj || widget) : null));
+        return new TabButtonGroup(tab_button_group_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(TabButtonGroup.prototype, "compact", {
         get: function () {
@@ -1909,7 +1909,7 @@ var Switch = /** @class */ (function (_super) {
         return switch_set_value(this.nativeObj, value);
     };
     Switch.cast = function (widget) {
-        return new Widget(switch_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Switch(switch_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(Switch.prototype, "value", {
         get: function () {
@@ -1943,7 +1943,7 @@ var TextSelector = /** @class */ (function (_super) {
         return new Widget(text_selector_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     TextSelector.cast = function (widget) {
-        return new Widget(text_selector_cast(widget ? (widget.nativeObj || widget) : null));
+        return new TextSelector(text_selector_cast(widget ? (widget.nativeObj || widget) : null));
     };
     TextSelector.prototype.resetOptions = function () {
         return text_selector_reset_options(this.nativeObj);
@@ -2010,7 +2010,7 @@ var DigitClock = /** @class */ (function (_super) {
         return new Widget(digit_clock_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     DigitClock.cast = function (widget) {
-        return new Widget(digit_clock_cast(widget ? (widget.nativeObj || widget) : null));
+        return new DigitClock(digit_clock_cast(widget ? (widget.nativeObj || widget) : null));
     };
     DigitClock.prototype.setFormat = function (format) {
         return digit_clock_set_format(this.nativeObj, format);
@@ -2033,7 +2033,7 @@ var TimeClock = /** @class */ (function (_super) {
         return new Widget(time_clock_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     TimeClock.cast = function (widget) {
-        return new Widget(time_clock_cast(widget ? (widget.nativeObj || widget) : null));
+        return new TimeClock(time_clock_cast(widget ? (widget.nativeObj || widget) : null));
     };
     TimeClock.prototype.setHour = function (hour) {
         return time_clock_set_hour(this.nativeObj, hour);
@@ -2126,7 +2126,7 @@ var TabControl = /** @class */ (function (_super) {
         return new Widget(tab_control_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     TabControl.cast = function (widget) {
-        return new Widget(tab_control_cast(widget ? (widget.nativeObj || widget) : null));
+        return new TabControl(tab_control_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return TabControl;
 }(Widget));
@@ -2157,7 +2157,7 @@ var ImageBase = /** @class */ (function (_super) {
         return image_set_clickable(this.nativeObj, clickable);
     };
     ImageBase.cast = function (widget) {
-        return new Widget(image_base_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ImageBase(image_base_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(ImageBase.prototype, "image", {
         get: function () {
@@ -2242,7 +2242,7 @@ var Window = /** @class */ (function (_super) {
         return window_close(this.nativeObj);
     };
     Window.cast = function (widget) {
-        return new Widget(window_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Window(window_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return Window;
 }(Widget));
@@ -2463,13 +2463,16 @@ var WindowManager = /** @class */ (function (_super) {
         return _super.call(this, nativeObj) || this;
     }
     WindowManager.instance = function () {
-        return new Widget(window_manager());
+        return new WindowManager(window_manager());
     };
     WindowManager.cast = function (widget) {
-        return new Widget(window_manager_cast(widget ? (widget.nativeObj || widget) : null));
+        return new WindowManager(window_manager_cast(widget ? (widget.nativeObj || widget) : null));
     };
     WindowManager.prototype.setShowFps = function (show_fps) {
         return window_manager_set_show_fps(this.nativeObj, show_fps);
+    };
+    WindowManager.prototype.setScreenSaverTime = function (screen_saver_time) {
+        return window_manager_set_screen_saver_time(this.nativeObj, screen_saver_time);
     };
     WindowManager.prototype.setCursor = function (cursor) {
         return window_manager_set_cursor(this.nativeObj, cursor);
@@ -2518,7 +2521,7 @@ var Slider = /** @class */ (function (_super) {
         return new Widget(slider_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Slider.cast = function (widget) {
-        return new Widget(slider_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Slider(slider_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Slider.prototype.setValue = function (value) {
         return slider_set_value(this.nativeObj, value);
@@ -2628,6 +2631,9 @@ var ObjectBase = /** @class */ (function (_super) {
     ObjectBase.prototype.setPropFloat = function (name, value) {
         return object_set_prop_float(this.nativeObj, name, value);
     };
+    ObjectBase.prototype.copyProp = function (src, name) {
+        return object_copy_prop(this.nativeObj, src ? src.nativeObj : null, name);
+    };
     ObjectBase.prototype.foreachProp = function (on_prop, ctx) {
         return object_foreach_prop(this.nativeObj, on_prop, ctx);
     };
@@ -2671,7 +2677,7 @@ var CanvasWidget = /** @class */ (function (_super) {
         return new Widget(canvas_widget_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     CanvasWidget.cast = function (widget) {
-        return new Widget(canvas_widget_cast(widget ? (widget.nativeObj || widget) : null));
+        return new CanvasWidget(canvas_widget_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return CanvasWidget;
 }(Widget));
@@ -2687,7 +2693,7 @@ var ColorPicker = /** @class */ (function (_super) {
         return color_picker_set_color(this.nativeObj, color);
     };
     ColorPicker.cast = function (widget) {
-        return new Widget(color_picker_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ColorPicker(color_picker_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(ColorPicker.prototype, "value", {
         get: function () {
@@ -2707,7 +2713,7 @@ var View = /** @class */ (function (_super) {
         return new Widget(view_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     View.cast = function (widget) {
-        return new Widget(view_cast(widget ? (widget.nativeObj || widget) : null));
+        return new View(view_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return View;
 }(Widget));
@@ -2720,7 +2726,7 @@ var TabButton = /** @class */ (function (_super) {
         return new Widget(tab_button_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     TabButton.cast = function (widget) {
-        return new Widget(tab_button_cast(widget ? (widget.nativeObj || widget) : null));
+        return new TabButton(tab_button_cast(widget ? (widget.nativeObj || widget) : null));
     };
     TabButton.prototype.setValue = function (value) {
         return tab_button_set_value(this.nativeObj, value);
@@ -2763,7 +2769,7 @@ var GuagePointer = /** @class */ (function (_super) {
         return new Widget(guage_pointer_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     GuagePointer.cast = function (widget) {
-        return new Widget(guage_pointer_cast(widget ? (widget.nativeObj || widget) : null));
+        return new GuagePointer(guage_pointer_cast(widget ? (widget.nativeObj || widget) : null));
     };
     GuagePointer.prototype.setAngle = function (angle) {
         return guage_pointer_set_angle(this.nativeObj, angle);
@@ -2796,7 +2802,7 @@ var Guage = /** @class */ (function (_super) {
         return new Widget(guage_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Guage.cast = function (widget) {
-        return new Widget(guage_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Guage(guage_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Guage.prototype.setImage = function (name) {
         return guage_set_image(this.nativeObj, name);
@@ -2859,7 +2865,7 @@ var ImageAnimation = /** @class */ (function (_super) {
         return image_animation_pause(this.nativeObj);
     };
     ImageAnimation.cast = function (widget) {
-        return new Widget(image_animation_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ImageAnimation(image_animation_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(ImageAnimation.prototype, "image", {
         get: function () {
@@ -2937,7 +2943,7 @@ var ImageValue = /** @class */ (function (_super) {
         return image_value_set_value(this.nativeObj, value);
     };
     ImageValue.cast = function (widget) {
-        return new Widget(image_value_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ImageValue(image_value_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(ImageValue.prototype, "image", {
         get: function () {
@@ -3008,7 +3014,7 @@ var ListItem = /** @class */ (function (_super) {
         return new Widget(list_item_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     ListItem.cast = function (widget) {
-        return new Widget(list_item_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ListItem(list_item_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return ListItem;
 }(Widget));
@@ -3021,7 +3027,7 @@ var AppBar = /** @class */ (function (_super) {
         return new Widget(app_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     AppBar.cast = function (widget) {
-        return new Widget(app_bar_cast(widget ? (widget.nativeObj || widget) : null));
+        return new AppBar(app_bar_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return AppBar;
 }(Widget));
@@ -3034,7 +3040,7 @@ var ButtonGroup = /** @class */ (function (_super) {
         return new Widget(button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     ButtonGroup.cast = function (widget) {
-        return new Widget(button_group_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ButtonGroup(button_group_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return ButtonGroup;
 }(Widget));
@@ -3047,7 +3053,7 @@ var Button = /** @class */ (function (_super) {
         return new Widget(button_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Button.cast = function (widget) {
-        return new Widget(button_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Button(button_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Button.prototype.setRepeat = function (repeat) {
         return button_set_repeat(this.nativeObj, repeat);
@@ -3086,7 +3092,7 @@ var CheckButton = /** @class */ (function (_super) {
         return check_button_set_value(this.nativeObj, value);
     };
     CheckButton.cast = function (widget) {
-        return new Widget(check_button_cast(widget ? (widget.nativeObj || widget) : null));
+        return new CheckButton(check_button_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(CheckButton.prototype, "value", {
         get: function () {
@@ -3106,7 +3112,7 @@ var ColorTile = /** @class */ (function (_super) {
         return new Widget(color_tile_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     ColorTile.cast = function (widget) {
-        return new Widget(color_tile_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ColorTile(color_tile_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ColorTile.prototype.setBgColor = function (color) {
         return color_tile_set_bg_color(this.nativeObj, color);
@@ -3136,7 +3142,7 @@ var Column = /** @class */ (function (_super) {
         return new Widget(column_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Column.cast = function (widget) {
-        return new Widget(column_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Column(column_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return Column;
 }(Widget));
@@ -3149,7 +3155,7 @@ var ComboBoxItem = /** @class */ (function (_super) {
         return new Widget(combo_box_item_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     ComboBoxItem.cast = function (widget) {
-        return new Widget(combo_box_item_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ComboBoxItem(combo_box_item_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ComboBoxItem.prototype.setChecked = function (checked) {
         return combo_box_item_set_checked(this.nativeObj, checked);
@@ -3182,7 +3188,7 @@ var ComboBox = /** @class */ (function (_super) {
         return new Widget(combo_box_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     ComboBox.cast = function (widget) {
-        return new Widget(combo_box_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ComboBox(combo_box_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ComboBox.prototype.setOpenWindow = function (open_window) {
         return combo_box_set_open_window(this.nativeObj, open_window);
@@ -3250,7 +3256,7 @@ var DialogClient = /** @class */ (function (_super) {
         return new Widget(dialog_client_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     DialogClient.cast = function (widget) {
-        return new Widget(dialog_client_cast(widget ? (widget.nativeObj || widget) : null));
+        return new DialogClient(dialog_client_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return DialogClient;
 }(Widget));
@@ -3263,7 +3269,7 @@ var DialogTitle = /** @class */ (function (_super) {
         return new Widget(dialog_title_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     DialogTitle.cast = function (widget) {
-        return new Widget(dialog_title_cast(widget ? (widget.nativeObj || widget) : null));
+        return new DialogTitle(dialog_title_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return DialogTitle;
 }(Widget));
@@ -3279,7 +3285,7 @@ var Dialog = /** @class */ (function (_super) {
         return new Widget(dialog_create_simple(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Dialog.cast = function (widget) {
-        return new Widget(dialog_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Dialog(dialog_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Dialog.prototype.getTitle = function () {
         return new Widget(dialog_get_title(this.nativeObj));
@@ -3310,7 +3316,7 @@ var Dragger = /** @class */ (function (_super) {
         return new Widget(dragger_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Dragger.cast = function (widget) {
-        return new Widget(dragger_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Dragger(dragger_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Dragger.prototype.setRange = function (x_min, y_min, x_max, y_max) {
         return new Widget(dragger_set_range(this.nativeObj, x_min, y_min, x_max, y_max));
@@ -3354,7 +3360,7 @@ var Edit = /** @class */ (function (_super) {
         return new Widget(edit_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Edit.cast = function (widget) {
-        return new Widget(edit_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Edit(edit_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Edit.prototype.getInt = function () {
         return edit_get_int(this.nativeObj);
@@ -3459,7 +3465,7 @@ var GridItem = /** @class */ (function (_super) {
         return new Widget(grid_item_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     GridItem.cast = function (widget) {
-        return new Widget(grid_item_cast(widget ? (widget.nativeObj || widget) : null));
+        return new GridItem(grid_item_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return GridItem;
 }(Widget));
@@ -3472,7 +3478,7 @@ var Grid = /** @class */ (function (_super) {
         return new Widget(grid_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Grid.cast = function (widget) {
-        return new Widget(grid_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Grid(grid_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return Grid;
 }(Widget));
@@ -3485,7 +3491,7 @@ var GroupBox = /** @class */ (function (_super) {
         return new Widget(group_box_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     GroupBox.cast = function (widget) {
-        return new Widget(group_box_cast(widget ? (widget.nativeObj || widget) : null));
+        return new GroupBox(group_box_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return GroupBox;
 }(Widget));
@@ -3498,7 +3504,7 @@ var Row = /** @class */ (function (_super) {
         return new Widget(row_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Row.cast = function (widget) {
-        return new Widget(row_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Row(row_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return Row;
 }(Widget));
@@ -3531,7 +3537,7 @@ var Pages = /** @class */ (function (_super) {
         return new Widget(pages_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Pages.cast = function (widget) {
-        return new Widget(pages_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Pages(pages_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Pages.prototype.setActive = function (index) {
         return pages_set_active(this.nativeObj, index);
@@ -3557,7 +3563,7 @@ var Popup = /** @class */ (function (_super) {
         return new Widget(popup_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     Popup.cast = function (widget) {
-        return new Widget(popup_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Popup(popup_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Popup.prototype.setCloseWhenClick = function (close_when_click) {
         return popup_set_close_when_click(this.nativeObj, close_when_click);
@@ -3590,7 +3596,7 @@ var ProgressBar = /** @class */ (function (_super) {
         return new Widget(progress_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     ProgressBar.cast = function (widget) {
-        return new Widget(progress_bar_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ProgressBar(progress_bar_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ProgressBar.prototype.setValue = function (value) {
         return progress_bar_set_value(this.nativeObj, value);
@@ -3633,7 +3639,7 @@ var ProgressCircle = /** @class */ (function (_super) {
         return new Widget(progress_circle_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     ProgressCircle.cast = function (widget) {
-        return new Widget(progress_circle_cast(widget ? (widget.nativeObj || widget) : null));
+        return new ProgressCircle(progress_circle_cast(widget ? (widget.nativeObj || widget) : null));
     };
     ProgressCircle.prototype.setValue = function (value) {
         return progress_circle_set_value(this.nativeObj, value);
@@ -3719,7 +3725,7 @@ var Image = /** @class */ (function (_super) {
         return image_set_draw_type(this.nativeObj, draw_type);
     };
     Image.cast = function (widget) {
-        return new Widget(image_cast(widget ? (widget.nativeObj || widget) : null));
+        return new Image(image_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(Image.prototype, "drawType", {
         get: function () {
@@ -3759,7 +3765,7 @@ var SpinBox = /** @class */ (function (_super) {
         return new Widget(spin_box_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     SpinBox.cast = function (widget) {
-        return new Widget(spin_box_cast(widget ? (widget.nativeObj || widget) : null));
+        return new SpinBox(spin_box_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return SpinBox;
 }(Edit));
@@ -3772,7 +3778,7 @@ var SystemBar = /** @class */ (function (_super) {
         return new Widget(system_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     SystemBar.cast = function (widget) {
-        return new Widget(system_bar_cast(widget ? (widget.nativeObj || widget) : null));
+        return new SystemBar(system_bar_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return SystemBar;
 }(WindowBase));
@@ -3785,7 +3791,7 @@ var SvgImage = /** @class */ (function (_super) {
         return new Widget(svg_image_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     SvgImage.cast = function (widget) {
-        return new Widget(svg_image_cast(widget ? (widget.nativeObj || widget) : null));
+        return new SvgImage(svg_image_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return SvgImage;
 }(ImageBase));
@@ -3798,7 +3804,7 @@ var GifImage = /** @class */ (function (_super) {
         return new Widget(gif_image_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
     GifImage.cast = function (widget) {
-        return new Widget(gif_image_cast(widget ? (widget.nativeObj || widget) : null));
+        return new GifImage(gif_image_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return GifImage;
 }(ImageBase));
