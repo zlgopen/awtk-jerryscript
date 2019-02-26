@@ -2441,6 +2441,9 @@ var WindowBase = /** @class */ (function (_super) {
     function WindowBase(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
+    WindowBase.cast = function (widget) {
+        return new WindowBase(window_base_cast(widget ? (widget.nativeObj || widget) : null));
+    };
     Object.defineProperty(WindowBase.prototype, "theme", {
         get: function () {
             return window_base_t_get_prop_theme(this.nativeObj);
@@ -2864,6 +2867,12 @@ var ImageAnimation = /** @class */ (function (_super) {
     ImageAnimation.prototype.pause = function () {
         return image_animation_pause(this.nativeObj);
     };
+    ImageAnimation.prototype.setFormat = function (format) {
+        return image_animation_set_format(this.nativeObj, format);
+    };
+    ImageAnimation.prototype.setUnloadAfterPaint = function (unload_after_paint) {
+        return image_animation_set_unload_after_paint(this.nativeObj, unload_after_paint);
+    };
     ImageAnimation.cast = function (widget) {
         return new ImageAnimation(image_animation_cast(widget ? (widget.nativeObj || widget) : null));
     };
@@ -2905,6 +2914,20 @@ var ImageAnimation = /** @class */ (function (_super) {
     Object.defineProperty(ImageAnimation.prototype, "autoPlay", {
         get: function () {
             return image_animation_t_get_prop_auto_play(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ImageAnimation.prototype, "unloadAfterPaint", {
+        get: function () {
+            return image_animation_t_get_prop_unload_after_paint(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ImageAnimation.prototype, "format", {
+        get: function () {
+            return image_animation_t_get_prop_format(this.nativeObj);
         },
         enumerable: true,
         configurable: true
@@ -2995,6 +3018,9 @@ var RichText = /** @class */ (function (_super) {
     };
     RichText.prototype.setText = function (text) {
         return rich_text_set_text(this.nativeObj, text);
+    };
+    RichText.cast = function (widget) {
+        return new RichText(rich_text_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(RichText.prototype, "lineGap", {
         get: function () {
@@ -3518,6 +3544,9 @@ var Label = /** @class */ (function (_super) {
     };
     Label.prototype.setLength = function (length) {
         return label_set_length(this.nativeObj, length);
+    };
+    Label.cast = function (widget) {
+        return new Label(label_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(Label.prototype, "length", {
         get: function () {

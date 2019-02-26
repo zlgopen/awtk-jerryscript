@@ -764,6 +764,7 @@ declare function paint_event_t_get_prop_c(nativeObj);
 declare function prop_change_event_cast(event);
 declare function prop_change_event_t_get_prop_name(nativeObj);
 declare function prop_change_event_t_get_prop_value(nativeObj);
+declare function window_base_cast(widget);
 declare function window_base_t_get_prop_theme(nativeObj);
 declare function window_base_t_get_prop_closable(nativeObj);
 declare function window_manager();
@@ -854,6 +855,8 @@ declare function image_animation_set_range_sequence(widget, start_index, end_ind
 declare function image_animation_play(widget);
 declare function image_animation_stop(widget);
 declare function image_animation_pause(widget);
+declare function image_animation_set_format(widget, format);
+declare function image_animation_set_unload_after_paint(widget, unload_after_paint);
 declare function image_animation_cast(widget);
 declare function image_animation_t_get_prop_image(nativeObj);
 declare function image_animation_t_get_prop_sequence(nativeObj);
@@ -861,6 +864,8 @@ declare function image_animation_t_get_prop_start_index(nativeObj);
 declare function image_animation_t_get_prop_end_index(nativeObj);
 declare function image_animation_t_get_prop_loop(nativeObj);
 declare function image_animation_t_get_prop_auto_play(nativeObj);
+declare function image_animation_t_get_prop_unload_after_paint(nativeObj);
+declare function image_animation_t_get_prop_format(nativeObj);
 declare function image_animation_t_get_prop_interval(nativeObj);
 declare function image_animation_t_get_prop_delay(nativeObj);
 declare function image_value_create(parent, x, y, w, h);
@@ -875,6 +880,7 @@ declare function window_event_cast(event);
 declare function window_event_t_get_prop_window(nativeObj);
 declare function rich_text_create(parent, x, y, w, h);
 declare function rich_text_set_text(widget, text);
+declare function rich_text_cast(widget);
 declare function rich_text_t_get_prop_line_gap(nativeObj);
 declare function list_item_create(parent, x, y, w, h);
 declare function list_item_cast(widget);
@@ -973,6 +979,7 @@ declare function row_create(parent, x, y, w, h);
 declare function row_cast(widget);
 declare function label_create(parent, x, y, w, h);
 declare function label_set_length(widget, length);
+declare function label_cast(widget);
 declare function label_t_get_prop_length(nativeObj);
 declare function pages_create(parent, x, y, w, h);
 declare function pages_cast(widget);
@@ -3456,6 +3463,10 @@ class WindowBase extends Widget {
    super(nativeObj);
  }
 
+ static cast(widget) {
+   return new WindowBase(window_base_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
  get theme() {
    return window_base_t_get_prop_theme(this.nativeObj);
  }
@@ -3904,6 +3915,14 @@ class ImageAnimation extends Widget {
    return image_animation_pause(this.nativeObj);
  }
 
+ setFormat(format) {
+   return image_animation_set_format(this.nativeObj, format);
+ }
+
+ setUnloadAfterPaint(unload_after_paint) {
+   return image_animation_set_unload_after_paint(this.nativeObj, unload_after_paint);
+ }
+
  static cast(widget) {
    return new ImageAnimation(image_animation_cast(widget ? (widget.nativeObj || widget) : null));
  }
@@ -3930,6 +3949,14 @@ class ImageAnimation extends Widget {
 
  get autoPlay() {
    return image_animation_t_get_prop_auto_play(this.nativeObj);
+ }
+
+ get unloadAfterPaint() {
+   return image_animation_t_get_prop_unload_after_paint(this.nativeObj);
+ }
+
+ get format() {
+   return image_animation_t_get_prop_format(this.nativeObj);
  }
 
  get interval() {
@@ -4010,6 +4037,10 @@ class RichText extends Widget {
 
  setText(text) {
    return rich_text_set_text(this.nativeObj, text);
+ }
+
+ static cast(widget) {
+   return new RichText(rich_text_cast(widget ? (widget.nativeObj || widget) : null));
  }
 
  get lineGap() {
@@ -4554,6 +4585,10 @@ class Label extends Widget {
 
  setLength(length) {
    return label_set_length(this.nativeObj, length);
+ }
+
+ static cast(widget) {
+   return new Label(label_cast(widget ? (widget.nativeObj || widget) : null));
  }
 
  get length() {
