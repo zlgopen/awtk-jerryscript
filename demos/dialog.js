@@ -28,11 +28,25 @@ function onClick(evt) {
 
 function applicationInit() {
   var win = Window.create(null, 0, 0, 0, 0);
-  var ok = Button.create(win, 0, 0, 0, 0);
+  var btn = Button.create(win, 0, 0, 0, 0);
 
-  ok.setText("Show Dialog");
-  ok.setSelfLayoutParams("center", "middle", "50%", "30");
-  ok.on(EventType.CLICK, onClick);
+  btn.setText("Show Dialog");
+  btn.setSelfLayoutParams("center", "middle:-60", "50%", "30");
+  btn.on(EventType.CLICK, onClick);
+  
+  btn = Button.create(win, 0, 0, 0, 0);
+  btn.setText("Show Info");
+  btn.setSelfLayoutParams("center", "middle", "50%", "30");
+  btn.on(EventType.CLICK, function() {
+    Dialog.info("Work is done!");
+  });
+  
+  btn = Button.create(win, 0, 0, 0, 0);
+  btn.setText("Show Confirm");
+  btn.setSelfLayoutParams("center", "middle:60", "50%", "30");
+  btn.on(EventType.CLICK, function() {
+    Dialog.info("Are you sure to quit?");
+  });
 
   win.layout();
 }

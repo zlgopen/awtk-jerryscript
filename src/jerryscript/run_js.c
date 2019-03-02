@@ -207,15 +207,14 @@ static jerry_value_t parse_file(const char* filename) {
   return parsed_code;
 }
 
-jerry_value_t
-jerryx_handler_gc(const jerry_value_t func_obj_val, /**< function object */
-                      const jerry_value_t this_p, /**< this arg */
-                      const jerry_value_t args_p[], /**< function arguments */
-                      const jerry_length_t args_cnt) /**< number of function arguments */
+jerry_value_t jerryx_handler_gc(const jerry_value_t func_obj_val, /**< function object */
+                                const jerry_value_t this_p,       /**< this arg */
+                                const jerry_value_t args_p[],     /**< function arguments */
+                                const jerry_length_t args_cnt) /**< number of function arguments */
 {
-   jerry_gc(JERRY_GC_SEVERITY_HIGH);
+  jerry_gc(JERRY_GC_SEVERITY_HIGH);
 
-   return jerry_create_null();
+  return jerry_create_null();
 }
 
 int main(int argc, char* argv[]) {

@@ -86,7 +86,7 @@ class JerryscriptGenerator {
   genCallMethod(cls, m) {
     let returnType = null;
     let result = `${m.name}${this.genCallParamList(m)}`;
-    if (isCast(m)) {
+    if (isCast(m) || isConstructor(m)) {
       returnType = cls.name;
     } else {
       returnType = m.return.type.replace(/\*/g, "");

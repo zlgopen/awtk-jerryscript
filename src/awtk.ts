@@ -610,6 +610,8 @@ declare function value_create();
 declare function value_destroy(v);
 declare function value_reset(v);
 declare function value_cast(value);
+declare function list_item_create(parent, x, y, w, h);
+declare function list_item_cast(widget);
 declare function list_view_h_create(parent, x, y, w, h);
 declare function list_view_h_set_item_width(widget, item_width);
 declare function list_view_h_set_spacing(widget, spacing);
@@ -878,12 +880,26 @@ declare function image_value_t_get_prop_format(nativeObj);
 declare function image_value_t_get_prop_value(nativeObj);
 declare function window_event_cast(event);
 declare function window_event_t_get_prop_window(nativeObj);
+declare function progress_circle_create(parent, x, y, w, h);
+declare function progress_circle_cast(widget);
+declare function progress_circle_set_value(widget, value);
+declare function progress_circle_set_max(widget, max);
+declare function progress_circle_set_line_width(widget, line_width);
+declare function progress_circle_set_start_angle(widget, start_angle);
+declare function progress_circle_set_unit(widget, unit);
+declare function progress_circle_set_show_text(widget, show_text);
+declare function progress_circle_set_counter_clock_wise(widget, counter_clock_wise);
+declare function progress_circle_t_get_prop_value(nativeObj);
+declare function progress_circle_t_get_prop_max(nativeObj);
+declare function progress_circle_t_get_prop_start_angle(nativeObj);
+declare function progress_circle_t_get_prop_line_width(nativeObj);
+declare function progress_circle_t_get_prop_unit(nativeObj);
+declare function progress_circle_t_get_prop_counter_clock_wise(nativeObj);
+declare function progress_circle_t_get_prop_show_text(nativeObj);
 declare function rich_text_create(parent, x, y, w, h);
 declare function rich_text_set_text(widget, text);
 declare function rich_text_cast(widget);
 declare function rich_text_t_get_prop_line_gap(nativeObj);
-declare function list_item_create(parent, x, y, w, h);
-declare function list_item_cast(widget);
 declare function app_bar_create(parent, x, y, w, h);
 declare function app_bar_cast(widget);
 declare function button_group_create(parent, x, y, w, h);
@@ -940,6 +956,10 @@ declare function dialog_open(name);
 declare function dialog_set_title(widget, title);
 declare function dialog_modal(widget);
 declare function dialog_quit(widget, code);
+declare function dialog_toast(text, duration);
+declare function dialog_info(text);
+declare function dialog_warn(text);
+declare function dialog_confirm(text);
 declare function dragger_create(parent, x, y, w, h);
 declare function dragger_cast(widget);
 declare function dragger_set_range(widget, x_min, y_min, x_max, y_max);
@@ -979,6 +999,7 @@ declare function row_create(parent, x, y, w, h);
 declare function row_cast(widget);
 declare function label_create(parent, x, y, w, h);
 declare function label_set_length(widget, length);
+declare function label_resize_to_content(widget, min_w, max_w, min_h, max_h);
 declare function label_cast(widget);
 declare function label_t_get_prop_length(nativeObj);
 declare function pages_create(parent, x, y, w, h);
@@ -1000,22 +1021,6 @@ declare function progress_bar_set_show_text(widget, show_text);
 declare function progress_bar_t_get_prop_value(nativeObj);
 declare function progress_bar_t_get_prop_vertical(nativeObj);
 declare function progress_bar_t_get_prop_show_text(nativeObj);
-declare function progress_circle_create(parent, x, y, w, h);
-declare function progress_circle_cast(widget);
-declare function progress_circle_set_value(widget, value);
-declare function progress_circle_set_max(widget, max);
-declare function progress_circle_set_line_width(widget, line_width);
-declare function progress_circle_set_start_angle(widget, start_angle);
-declare function progress_circle_set_unit(widget, unit);
-declare function progress_circle_set_show_text(widget, show_text);
-declare function progress_circle_set_counter_clock_wise(widget, counter_clock_wise);
-declare function progress_circle_t_get_prop_value(nativeObj);
-declare function progress_circle_t_get_prop_max(nativeObj);
-declare function progress_circle_t_get_prop_start_angle(nativeObj);
-declare function progress_circle_t_get_prop_line_width(nativeObj);
-declare function progress_circle_t_get_prop_unit(nativeObj);
-declare function progress_circle_t_get_prop_counter_clock_wise(nativeObj);
-declare function progress_circle_t_get_prop_show_text(nativeObj);
 declare function image_create(parent, x, y, w, h);
 declare function image_set_draw_type(widget, draw_type);
 declare function image_cast(widget);
@@ -2667,8 +2672,8 @@ class Value {
    return new Value(value_set_object(this.nativeObj, value ? value.nativeObj : null));
  }
 
- static object(v) {
-   return new ObjectBase(value_object(v ? v.nativeObj : null));
+ object() {
+   return new ObjectBase(value_object(this.nativeObj));
  }
 
  static create() {
@@ -2689,6 +2694,22 @@ class Value {
 
 }
 
+class ListItem extends Widget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new ListItem(list_item_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ static cast(widget) {
+   return new ListItem(list_item_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+}
+
 class ListViewH extends Widget {
  public nativeObj;
  constructor(nativeObj) {
@@ -2696,7 +2717,7 @@ class ListViewH extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(list_view_h_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ListViewH(list_view_h_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setItemWidth(item_width) {
@@ -2728,7 +2749,7 @@ class ListView extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(list_view_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ListView(list_view_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setItemHeight(item_height) {
@@ -2768,7 +2789,7 @@ class ScrollBar extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(scroll_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ScrollBar(scroll_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -2776,11 +2797,11 @@ class ScrollBar extends Widget {
  }
 
  static createMobile(parent, x, y, w, h) {
-   return new Widget(scroll_bar_create_mobile(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ScrollBar(scroll_bar_create_mobile(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static createDesktop(parent, x, y, w, h) {
-   return new Widget(scroll_bar_create_desktop(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ScrollBar(scroll_bar_create_desktop(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setParams(virtual_size, row) {
@@ -2836,7 +2857,7 @@ class ScrollView extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(scroll_view_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ScrollView(scroll_view_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -2900,7 +2921,7 @@ class SlideMenu extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(slide_menu_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new SlideMenu(slide_menu_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -2940,7 +2961,7 @@ class SlideView extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(slide_view_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new SlideView(slide_view_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -2976,7 +2997,7 @@ class TabButtonGroup extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(tab_button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new TabButtonGroup(tab_button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -2996,7 +3017,7 @@ class Switch extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(switch_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Switch(switch_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setValue(value) {
@@ -3028,7 +3049,7 @@ class TextSelector extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(text_selector_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new TextSelector(text_selector_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -3100,7 +3121,7 @@ class DigitClock extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(digit_clock_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new DigitClock(digit_clock_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -3124,7 +3145,7 @@ class TimeClock extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(time_clock_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new TimeClock(time_clock_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -3204,7 +3225,7 @@ class TabControl extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(tab_control_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new TabControl(tab_control_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -3296,15 +3317,15 @@ class Window extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(window_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Window(window_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static open(name) {
-   return new Widget(window_open(name));
+   return new Window(window_open(name));
  }
 
  static openAndClose(name, to_close) {
-   return new Widget(window_open_and_close(name, to_close ? to_close.nativeObj : null));
+   return new Window(window_open_and_close(name, to_close ? to_close.nativeObj : null));
  }
 
  close() {
@@ -3528,7 +3549,7 @@ class StyleMutable extends Style {
  }
 
  static create(widget) {
-   return new Style(style_mutable_create(widget ? widget.nativeObj : null));
+   return new StyleMutable(style_mutable_create(widget ? widget.nativeObj : null));
  }
 
  get name() {
@@ -3544,7 +3565,7 @@ class Slider extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(slider_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Slider(slider_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -3712,7 +3733,7 @@ class CanvasWidget extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(canvas_widget_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new CanvasWidget(canvas_widget_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -3728,7 +3749,7 @@ class ColorPicker extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(color_picker_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ColorPicker(color_picker_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setColor(color) {
@@ -3752,7 +3773,7 @@ class View extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(view_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new View(view_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -3768,7 +3789,7 @@ class TabButton extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(tab_button_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new TabButton(tab_button_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -3808,7 +3829,7 @@ class GuagePointer extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(guage_pointer_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new GuagePointer(guage_pointer_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -3840,7 +3861,7 @@ class Guage extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(guage_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Guage(guage_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -3872,7 +3893,7 @@ class ImageAnimation extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(image_animation_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ImageAnimation(image_animation_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setLoop(loop) {
@@ -3976,7 +3997,7 @@ class ImageValue extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(image_value_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ImageValue(image_value_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setImage(image) {
@@ -4025,6 +4046,78 @@ class WindowEvent extends Event {
 
 }
 
+class ProgressCircle extends Widget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new ProgressCircle(progress_circle_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ static cast(widget) {
+   return new ProgressCircle(progress_circle_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ setValue(value) {
+   return progress_circle_set_value(this.nativeObj, value);
+ }
+
+ setMax(max) {
+   return progress_circle_set_max(this.nativeObj, max);
+ }
+
+ setLineWidth(line_width) {
+   return progress_circle_set_line_width(this.nativeObj, line_width);
+ }
+
+ setStartAngle(start_angle) {
+   return progress_circle_set_start_angle(this.nativeObj, start_angle);
+ }
+
+ setUnit(unit) {
+   return progress_circle_set_unit(this.nativeObj, unit);
+ }
+
+ setShowText(show_text) {
+   return progress_circle_set_show_text(this.nativeObj, show_text);
+ }
+
+ setCounterClockWise(counter_clock_wise) {
+   return progress_circle_set_counter_clock_wise(this.nativeObj, counter_clock_wise);
+ }
+
+ get value() {
+   return progress_circle_t_get_prop_value(this.nativeObj);
+ }
+
+ get max() {
+   return progress_circle_t_get_prop_max(this.nativeObj);
+ }
+
+ get startAngle() {
+   return progress_circle_t_get_prop_start_angle(this.nativeObj);
+ }
+
+ get lineWidth() {
+   return progress_circle_t_get_prop_line_width(this.nativeObj);
+ }
+
+ get unit() {
+   return progress_circle_t_get_prop_unit(this.nativeObj);
+ }
+
+ get counterClockWise() {
+   return progress_circle_t_get_prop_counter_clock_wise(this.nativeObj);
+ }
+
+ get showText() {
+   return progress_circle_t_get_prop_show_text(this.nativeObj);
+ }
+
+}
+
 class RichText extends Widget {
  public nativeObj;
  constructor(nativeObj) {
@@ -4032,7 +4125,7 @@ class RichText extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(rich_text_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new RichText(rich_text_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setText(text) {
@@ -4049,22 +4142,6 @@ class RichText extends Widget {
 
 }
 
-class ListItem extends Widget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new Widget(list_item_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- static cast(widget) {
-   return new ListItem(list_item_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
-}
-
 class AppBar extends Widget {
  public nativeObj;
  constructor(nativeObj) {
@@ -4072,7 +4149,7 @@ class AppBar extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(app_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new AppBar(app_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4088,7 +4165,7 @@ class ButtonGroup extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ButtonGroup(button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4104,7 +4181,7 @@ class Button extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(button_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Button(button_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4136,11 +4213,11 @@ class CheckButton extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(check_button_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new CheckButton(check_button_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static createRadio(parent, x, y, w, h) {
-   return new Widget(check_button_create_radio(parent ? parent.nativeObj : null, x, y, w, h));
+   return new CheckButton(check_button_create_radio(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setValue(value) {
@@ -4164,7 +4241,7 @@ class ColorTile extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(color_tile_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ColorTile(color_tile_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4192,7 +4269,7 @@ class Column extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(column_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Column(column_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4208,7 +4285,7 @@ class ComboBoxItem extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(combo_box_item_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ComboBoxItem(combo_box_item_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4240,7 +4317,7 @@ class ComboBox extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(combo_box_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ComboBox(combo_box_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4308,7 +4385,7 @@ class DialogClient extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(dialog_client_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new DialogClient(dialog_client_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4324,7 +4401,7 @@ class DialogTitle extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(dialog_title_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new DialogTitle(dialog_title_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4340,11 +4417,11 @@ class Dialog extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(dialog_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Dialog(dialog_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static createSimple(parent, x, y, w, h) {
-   return new Widget(dialog_create_simple(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Dialog(dialog_create_simple(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4360,7 +4437,7 @@ class Dialog extends Widget {
  }
 
  static open(name) {
-   return new Widget(dialog_open(name));
+   return new Dialog(dialog_open(name));
  }
 
  setTitle(title) {
@@ -4375,6 +4452,22 @@ class Dialog extends Widget {
    return dialog_quit(this.nativeObj, code);
  }
 
+ static toast(text, duration) {
+   return dialog_toast(text, duration);
+ }
+
+ static info(text) {
+   return dialog_info(text);
+ }
+
+ static warn(text) {
+   return dialog_warn(text);
+ }
+
+ static confirm(text) {
+   return dialog_confirm(text);
+ }
+
 }
 
 class Dragger extends Widget {
@@ -4384,7 +4477,7 @@ class Dragger extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(dragger_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Dragger(dragger_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4420,7 +4513,7 @@ class Edit extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(edit_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Edit(edit_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4516,7 +4609,7 @@ class GridItem extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(grid_item_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new GridItem(grid_item_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4532,7 +4625,7 @@ class Grid extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(grid_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Grid(grid_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4548,7 +4641,7 @@ class GroupBox extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(group_box_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new GroupBox(group_box_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4564,7 +4657,7 @@ class Row extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(row_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Row(row_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4580,11 +4673,15 @@ class Label extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(label_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Label(label_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setLength(length) {
    return label_set_length(this.nativeObj, length);
+ }
+
+ resizeToContent(min_w, max_w, min_h, max_h) {
+   return label_resize_to_content(this.nativeObj, min_w, max_w, min_h, max_h);
  }
 
  static cast(widget) {
@@ -4604,7 +4701,7 @@ class Pages extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(pages_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Pages(pages_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4632,7 +4729,7 @@ class Popup extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(popup_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Popup(popup_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4664,7 +4761,7 @@ class ProgressBar extends Widget {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(progress_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new ProgressBar(progress_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4697,78 +4794,6 @@ class ProgressBar extends Widget {
 
 }
 
-class ProgressCircle extends Widget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new Widget(progress_circle_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- static cast(widget) {
-   return new ProgressCircle(progress_circle_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- setValue(value) {
-   return progress_circle_set_value(this.nativeObj, value);
- }
-
- setMax(max) {
-   return progress_circle_set_max(this.nativeObj, max);
- }
-
- setLineWidth(line_width) {
-   return progress_circle_set_line_width(this.nativeObj, line_width);
- }
-
- setStartAngle(start_angle) {
-   return progress_circle_set_start_angle(this.nativeObj, start_angle);
- }
-
- setUnit(unit) {
-   return progress_circle_set_unit(this.nativeObj, unit);
- }
-
- setShowText(show_text) {
-   return progress_circle_set_show_text(this.nativeObj, show_text);
- }
-
- setCounterClockWise(counter_clock_wise) {
-   return progress_circle_set_counter_clock_wise(this.nativeObj, counter_clock_wise);
- }
-
- get value() {
-   return progress_circle_t_get_prop_value(this.nativeObj);
- }
-
- get max() {
-   return progress_circle_t_get_prop_max(this.nativeObj);
- }
-
- get startAngle() {
-   return progress_circle_t_get_prop_start_angle(this.nativeObj);
- }
-
- get lineWidth() {
-   return progress_circle_t_get_prop_line_width(this.nativeObj);
- }
-
- get unit() {
-   return progress_circle_t_get_prop_unit(this.nativeObj);
- }
-
- get counterClockWise() {
-   return progress_circle_t_get_prop_counter_clock_wise(this.nativeObj);
- }
-
- get showText() {
-   return progress_circle_t_get_prop_show_text(this.nativeObj);
- }
-
-}
-
 class Image extends ImageBase {
  public nativeObj;
  constructor(nativeObj) {
@@ -4776,7 +4801,7 @@ class Image extends ImageBase {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(image_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new Image(image_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  setDrawType(draw_type) {
@@ -4800,7 +4825,7 @@ class ObjectDefault extends ObjectBase {
  }
 
  static create() {
-   return new ObjectBase(object_default_create());
+   return new ObjectDefault(object_default_create());
  }
 
  unref() {
@@ -4820,7 +4845,7 @@ class SpinBox extends Edit {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(spin_box_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new SpinBox(spin_box_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4836,7 +4861,7 @@ class SystemBar extends WindowBase {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(system_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new SystemBar(system_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4852,7 +4877,7 @@ class SvgImage extends ImageBase {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(svg_image_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new SvgImage(svg_image_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
@@ -4868,7 +4893,7 @@ class GifImage extends ImageBase {
  }
 
  static create(parent, x, y, w, h) {
-   return new Widget(gif_image_create(parent ? parent.nativeObj : null, x, y, w, h));
+   return new GifImage(gif_image_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {

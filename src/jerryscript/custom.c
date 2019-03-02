@@ -74,8 +74,8 @@ void* jerry_get_pointer(jerry_value_t v, const char* type) {
   return p;
 }
 
-jerry_value_t jerry_create_pointer(const void* ptr, const char* type, 
-    const jerry_object_native_info_t *native_info_p) {
+jerry_value_t jerry_create_pointer(const void* ptr, const char* type,
+                                   const jerry_object_native_info_t* native_info_p) {
   if (ptr == NULL) {
     return jerry_create_null();
   } else {
