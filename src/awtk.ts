@@ -276,6 +276,7 @@ declare function WIDGET_PROP_VISIBLE();
 declare function WIDGET_PROP_SENSITIVE();
 declare function WIDGET_PROP_ANIMATION();
 declare function WIDGET_PROP_ANIM_HINT();
+declare function WIDGET_PROP_FULLSCREEN();
 declare function WIDGET_PROP_OPEN_ANIM_HINT();
 declare function WIDGET_PROP_CLOSE_ANIM_HINT();
 declare function WIDGET_PROP_MIN();
@@ -564,6 +565,7 @@ declare function RET_DONE();
 declare function RET_STOP();
 declare function RET_CONTINUE();
 declare function RET_OBJECT_CHANGED();
+declare function RET_ITEMS_CHANGED();
 declare function RET_BAD_PARAMS();
 declare function VALUE_TYPE_INVALID();
 declare function VALUE_TYPE_BOOL();
@@ -773,10 +775,13 @@ declare function image_base_t_get_prop_clickable(nativeObj);
 declare function image_base_t_get_prop_selectable(nativeObj);
 declare function image_base_t_get_prop_selected(nativeObj);
 declare function window_create(parent, x, y, w, h);
+declare function window_set_fullscreen(widget, fullscreen);
 declare function window_open(name);
 declare function window_open_and_close(name, to_close);
 declare function window_close(widget);
+declare function window_close_force(widget);
 declare function window_cast(widget);
+declare function window_t_get_prop_fullscreen(nativeObj);
 declare function wheel_event_cast(event);
 declare function wheel_event_t_get_prop_dx(nativeObj);
 declare function wheel_event_t_get_prop_dy(nativeObj);
@@ -1818,6 +1823,7 @@ enum WidgetProp {
  SENSITIVE = WIDGET_PROP_SENSITIVE(),
  ANIMATION = WIDGET_PROP_ANIMATION(),
  ANIM_HINT = WIDGET_PROP_ANIM_HINT(),
+ FULLSCREEN = WIDGET_PROP_FULLSCREEN(),
  OPEN_ANIM_HINT = WIDGET_PROP_OPEN_ANIM_HINT(),
  CLOSE_ANIM_HINT = WIDGET_PROP_CLOSE_ANIM_HINT(),
  MIN = WIDGET_PROP_MIN(),
@@ -2556,6 +2562,7 @@ enum Ret {
  STOP = RET_STOP(),
  CONTINUE = RET_CONTINUE(),
  OBJECT_CHANGED = RET_OBJECT_CHANGED(),
+ ITEMS_CHANGED = RET_ITEMS_CHANGED(),
  BAD_PARAMS = RET_BAD_PARAMS(),
 };
 
@@ -3501,6 +3508,10 @@ class Window extends Widget {
    return new Window(window_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
+ setFullscreen(fullscreen) {
+   return window_set_fullscreen(this.nativeObj, fullscreen);
+ }
+
  static open(name) {
    return new Window(window_open(name));
  }
@@ -3513,8 +3524,16 @@ class Window extends Widget {
    return window_close(this.nativeObj);
  }
 
+ closeForce() {
+   return window_close_force(this.nativeObj);
+ }
+
  static cast(widget) {
    return new Window(window_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ get fullscreen() {
+   return window_t_get_prop_fullscreen(this.nativeObj);
  }
 
 }

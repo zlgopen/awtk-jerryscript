@@ -741,6 +741,7 @@ var WidgetProp;
     WidgetProp[WidgetProp["SENSITIVE"] = WIDGET_PROP_SENSITIVE()] = "SENSITIVE";
     WidgetProp[WidgetProp["ANIMATION"] = WIDGET_PROP_ANIMATION()] = "ANIMATION";
     WidgetProp[WidgetProp["ANIM_HINT"] = WIDGET_PROP_ANIM_HINT()] = "ANIM_HINT";
+    WidgetProp[WidgetProp["FULLSCREEN"] = WIDGET_PROP_FULLSCREEN()] = "FULLSCREEN";
     WidgetProp[WidgetProp["OPEN_ANIM_HINT"] = WIDGET_PROP_OPEN_ANIM_HINT()] = "OPEN_ANIM_HINT";
     WidgetProp[WidgetProp["CLOSE_ANIM_HINT"] = WIDGET_PROP_CLOSE_ANIM_HINT()] = "CLOSE_ANIM_HINT";
     WidgetProp[WidgetProp["MIN"] = WIDGET_PROP_MIN()] = "MIN";
@@ -1461,6 +1462,7 @@ var Ret;
     Ret[Ret["STOP"] = RET_STOP()] = "STOP";
     Ret[Ret["CONTINUE"] = RET_CONTINUE()] = "CONTINUE";
     Ret[Ret["OBJECT_CHANGED"] = RET_OBJECT_CHANGED()] = "OBJECT_CHANGED";
+    Ret[Ret["ITEMS_CHANGED"] = RET_ITEMS_CHANGED()] = "ITEMS_CHANGED";
     Ret[Ret["BAD_PARAMS"] = RET_BAD_PARAMS()] = "BAD_PARAMS";
 })(Ret || (Ret = {}));
 ;
@@ -2419,6 +2421,9 @@ var Window = /** @class */ (function (_super) {
     Window.create = function (parent, x, y, w, h) {
         return new Window(window_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
+    Window.prototype.setFullscreen = function (fullscreen) {
+        return window_set_fullscreen(this.nativeObj, fullscreen);
+    };
     Window.open = function (name) {
         return new Window(window_open(name));
     };
@@ -2428,9 +2433,19 @@ var Window = /** @class */ (function (_super) {
     Window.prototype.close = function () {
         return window_close(this.nativeObj);
     };
+    Window.prototype.closeForce = function () {
+        return window_close_force(this.nativeObj);
+    };
     Window.cast = function (widget) {
         return new Window(window_cast(widget ? (widget.nativeObj || widget) : null));
     };
+    Object.defineProperty(Window.prototype, "fullscreen", {
+        get: function () {
+            return window_t_get_prop_fullscreen(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Window;
 }(Widget));
 var WheelEvent = /** @class */ (function (_super) {

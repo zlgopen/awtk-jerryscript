@@ -3477,6 +3477,15 @@ jerry_value_t get_WIDGET_PROP_ANIM_HINT(
   return jerry_create_str(WIDGET_PROP_ANIM_HINT);
 }
 
+jerry_value_t get_WIDGET_PROP_FULLSCREEN(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(WIDGET_PROP_FULLSCREEN);
+}
+
 jerry_value_t get_WIDGET_PROP_OPEN_ANIM_HINT(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -4107,6 +4116,7 @@ ret_t widget_prop_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_SENSITIVE", get_WIDGET_PROP_SENSITIVE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ANIMATION", get_WIDGET_PROP_ANIMATION);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ANIM_HINT", get_WIDGET_PROP_ANIM_HINT);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_FULLSCREEN", get_WIDGET_PROP_FULLSCREEN);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_OPEN_ANIM_HINT", get_WIDGET_PROP_OPEN_ANIM_HINT);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CLOSE_ANIM_HINT", get_WIDGET_PROP_CLOSE_ANIM_HINT);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MIN", get_WIDGET_PROP_MIN);
@@ -6872,6 +6882,15 @@ jerry_value_t get_RET_OBJECT_CHANGED(
   return jerry_create_number(RET_OBJECT_CHANGED);
 }
 
+jerry_value_t get_RET_ITEMS_CHANGED(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(RET_ITEMS_CHANGED);
+}
+
 jerry_value_t get_RET_BAD_PARAMS(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -6896,6 +6915,7 @@ ret_t ret_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"RET_STOP", get_RET_STOP);
   jerryx_handler_register_global((const jerry_char_t*)"RET_CONTINUE", get_RET_CONTINUE);
   jerryx_handler_register_global((const jerry_char_t*)"RET_OBJECT_CHANGED", get_RET_OBJECT_CHANGED);
+  jerryx_handler_register_global((const jerry_char_t*)"RET_ITEMS_CHANGED", get_RET_ITEMS_CHANGED);
   jerryx_handler_register_global((const jerry_char_t*)"RET_BAD_PARAMS", get_RET_BAD_PARAMS);
 
  return RET_OK;
@@ -9892,6 +9912,20 @@ jerry_value_t wrap_window_create(
   return jerry_create_pointer(ret, "window_t*", NULL);
 }
 
+jerry_value_t wrap_window_set_fullscreen(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t fullscreen = (bool_t)jerry_get_boolean_value(args_p[1]);
+  ret = (ret_t)window_set_fullscreen(widget, fullscreen);
+
+  return jerry_create_number(ret);
+}
+
 jerry_value_t wrap_window_open(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -9934,6 +9968,19 @@ jerry_value_t wrap_window_close(
   return jerry_create_number(ret);
 }
 
+jerry_value_t wrap_window_close_force(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (ret_t)window_close_force(widget);
+
+  return jerry_create_number(ret);
+}
+
 jerry_value_t wrap_window_cast(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -9947,12 +9994,26 @@ jerry_value_t wrap_window_cast(
   return jerry_create_pointer(ret, "window_t*", NULL);
 }
 
+jerry_value_t wrap_window_t_get_prop_fullscreen(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  window_t* obj = (window_t*)jerry_get_pointer(args_p[0], "window_t*");
+
+  return jerry_create_boolean(obj->fullscreen);
+}
+
 ret_t window_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"window_create", wrap_window_create);
+  jerryx_handler_register_global((const jerry_char_t*)"window_set_fullscreen", wrap_window_set_fullscreen);
   jerryx_handler_register_global((const jerry_char_t*)"window_open", wrap_window_open);
   jerryx_handler_register_global((const jerry_char_t*)"window_open_and_close", wrap_window_open_and_close);
   jerryx_handler_register_global((const jerry_char_t*)"window_close", wrap_window_close);
+  jerryx_handler_register_global((const jerry_char_t*)"window_close_force", wrap_window_close_force);
   jerryx_handler_register_global((const jerry_char_t*)"window_cast", wrap_window_cast);
+  jerryx_handler_register_global((const jerry_char_t*)"window_t_get_prop_fullscreen", wrap_window_t_get_prop_fullscreen);
 
  return RET_OK;
 }
