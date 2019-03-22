@@ -710,6 +710,7 @@ var WidgetProp;
     WidgetProp[WidgetProp["Y"] = WIDGET_PROP_Y()] = "Y";
     WidgetProp[WidgetProp["W"] = WIDGET_PROP_W()] = "W";
     WidgetProp[WidgetProp["H"] = WIDGET_PROP_H()] = "H";
+    WidgetProp[WidgetProp["BAR_SIZE"] = WIDGET_PROP_BAR_SIZE()] = "BAR_SIZE";
     WidgetProp[WidgetProp["OPACITY"] = WIDGET_PROP_OPACITY()] = "OPACITY";
     WidgetProp[WidgetProp["MIN_W"] = WIDGET_PROP_MIN_W()] = "MIN_W";
     WidgetProp[WidgetProp["MAX_W"] = WIDGET_PROP_MAX_W()] = "MAX_W";
@@ -808,6 +809,7 @@ var WidgetProp;
     WidgetProp[WidgetProp["DELAY"] = WIDGET_PROP_DELAY()] = "DELAY";
     WidgetProp[WidgetProp["IS_KEYBOARD"] = WIDGET_PROP_IS_KEYBOARD()] = "IS_KEYBOARD";
     WidgetProp[WidgetProp["FOCUS"] = WIDGET_PROP_FOCUS()] = "FOCUS";
+    WidgetProp[WidgetProp["FOCUSABLE"] = WIDGET_PROP_FOCUSABLE()] = "FOCUSABLE";
 })(WidgetProp || (WidgetProp = {}));
 ;
 var WidgetType;
@@ -1598,6 +1600,89 @@ var Value = /** @class */ (function () {
     };
     return Value;
 }());
+var ProgressCircle = /** @class */ (function (_super) {
+    __extends(ProgressCircle, _super);
+    function ProgressCircle(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    ProgressCircle.create = function (parent, x, y, w, h) {
+        return new ProgressCircle(progress_circle_create(parent ? parent.nativeObj : null, x, y, w, h));
+    };
+    ProgressCircle.cast = function (widget) {
+        return new ProgressCircle(progress_circle_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    ProgressCircle.prototype.setValue = function (value) {
+        return progress_circle_set_value(this.nativeObj, value);
+    };
+    ProgressCircle.prototype.setMax = function (max) {
+        return progress_circle_set_max(this.nativeObj, max);
+    };
+    ProgressCircle.prototype.setLineWidth = function (line_width) {
+        return progress_circle_set_line_width(this.nativeObj, line_width);
+    };
+    ProgressCircle.prototype.setStartAngle = function (start_angle) {
+        return progress_circle_set_start_angle(this.nativeObj, start_angle);
+    };
+    ProgressCircle.prototype.setUnit = function (unit) {
+        return progress_circle_set_unit(this.nativeObj, unit);
+    };
+    ProgressCircle.prototype.setShowText = function (show_text) {
+        return progress_circle_set_show_text(this.nativeObj, show_text);
+    };
+    ProgressCircle.prototype.setCounterClockWise = function (counter_clock_wise) {
+        return progress_circle_set_counter_clock_wise(this.nativeObj, counter_clock_wise);
+    };
+    Object.defineProperty(ProgressCircle.prototype, "value", {
+        get: function () {
+            return progress_circle_t_get_prop_value(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "max", {
+        get: function () {
+            return progress_circle_t_get_prop_max(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "startAngle", {
+        get: function () {
+            return progress_circle_t_get_prop_start_angle(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "lineWidth", {
+        get: function () {
+            return progress_circle_t_get_prop_line_width(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "unit", {
+        get: function () {
+            return progress_circle_t_get_prop_unit(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "counterClockWise", {
+        get: function () {
+            return progress_circle_t_get_prop_counter_clock_wise(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressCircle.prototype, "showText", {
+        get: function () {
+            return progress_circle_t_get_prop_show_text(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ProgressCircle;
+}(Widget));
 var RichText = /** @class */ (function (_super) {
     __extends(RichText, _super);
     function RichText(nativeObj) {
@@ -1950,68 +2035,18 @@ var SlideView = /** @class */ (function (_super) {
     });
     return SlideView;
 }(Widget));
-var Slider = /** @class */ (function (_super) {
-    __extends(Slider, _super);
-    function Slider(nativeObj) {
+var Row = /** @class */ (function (_super) {
+    __extends(Row, _super);
+    function Row(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    Slider.create = function (parent, x, y, w, h) {
-        return new Slider(slider_create(parent ? parent.nativeObj : null, x, y, w, h));
+    Row.create = function (parent, x, y, w, h) {
+        return new Row(row_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    Slider.cast = function (widget) {
-        return new Slider(slider_cast(widget ? (widget.nativeObj || widget) : null));
+    Row.cast = function (widget) {
+        return new Row(row_cast(widget ? (widget.nativeObj || widget) : null));
     };
-    Slider.prototype.setValue = function (value) {
-        return slider_set_value(this.nativeObj, value);
-    };
-    Slider.prototype.setMin = function (min) {
-        return slider_set_min(this.nativeObj, min);
-    };
-    Slider.prototype.setMax = function (max) {
-        return slider_set_max(this.nativeObj, max);
-    };
-    Slider.prototype.setStep = function (step) {
-        return slider_set_step(this.nativeObj, step);
-    };
-    Slider.prototype.setVertical = function (vertical) {
-        return slider_set_vertical(this.nativeObj, vertical);
-    };
-    Object.defineProperty(Slider.prototype, "value", {
-        get: function () {
-            return slider_t_get_prop_value(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Slider.prototype, "min", {
-        get: function () {
-            return slider_t_get_prop_min(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Slider.prototype, "max", {
-        get: function () {
-            return slider_t_get_prop_max(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Slider.prototype, "step", {
-        get: function () {
-            return slider_t_get_prop_step(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Slider.prototype, "vertical", {
-        get: function () {
-            return slider_t_get_prop_vertical(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Slider;
+    return Row;
 }(Widget));
 var Switch = /** @class */ (function (_super) {
     __extends(Switch, _super);
@@ -2493,6 +2528,30 @@ var WheelEvent = /** @class */ (function (_super) {
     });
     return WheelEvent;
 }(Event));
+var PropChangeEvent = /** @class */ (function (_super) {
+    __extends(PropChangeEvent, _super);
+    function PropChangeEvent(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    PropChangeEvent.cast = function (event) {
+        return new PropChangeEvent(prop_change_event_cast(event ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(PropChangeEvent.prototype, "name", {
+        get: function () {
+            return prop_change_event_t_get_prop_name(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PropChangeEvent.prototype, "value", {
+        get: function () {
+            return prop_change_event_t_get_prop_value(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return PropChangeEvent;
+}(Event));
 var PointerEvent = /** @class */ (function (_super) {
     __extends(PointerEvent, _super);
     function PointerEvent(nativeObj) {
@@ -2597,47 +2656,6 @@ var KeyEvent = /** @class */ (function (_super) {
     });
     return KeyEvent;
 }(Event));
-var PropChangeEvent = /** @class */ (function (_super) {
-    __extends(PropChangeEvent, _super);
-    function PropChangeEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    PropChangeEvent.cast = function (event) {
-        return new PropChangeEvent(prop_change_event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(PropChangeEvent.prototype, "name", {
-        get: function () {
-            return prop_change_event_t_get_prop_name(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PropChangeEvent.prototype, "value", {
-        get: function () {
-            return prop_change_event_t_get_prop_value(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return PropChangeEvent;
-}(Event));
-var PaintEvent = /** @class */ (function (_super) {
-    __extends(PaintEvent, _super);
-    function PaintEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    PaintEvent.cast = function (event) {
-        return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(PaintEvent.prototype, "c", {
-        get: function () {
-            return paint_event_t_get_prop_c(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return PaintEvent;
-}(Event));
 var WindowBase = /** @class */ (function (_super) {
     __extends(WindowBase, _super);
     function WindowBase(nativeObj) {
@@ -2662,56 +2680,48 @@ var WindowBase = /** @class */ (function (_super) {
     });
     return WindowBase;
 }(Widget));
-var WindowManager = /** @class */ (function (_super) {
-    __extends(WindowManager, _super);
-    function WindowManager(nativeObj) {
+var ProgressBar = /** @class */ (function (_super) {
+    __extends(ProgressBar, _super);
+    function ProgressBar(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    WindowManager.instance = function () {
-        return new WindowManager(window_manager());
+    ProgressBar.create = function (parent, x, y, w, h) {
+        return new ProgressBar(progress_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    WindowManager.cast = function (widget) {
-        return new WindowManager(window_manager_cast(widget ? (widget.nativeObj || widget) : null));
+    ProgressBar.cast = function (widget) {
+        return new ProgressBar(progress_bar_cast(widget ? (widget.nativeObj || widget) : null));
     };
-    WindowManager.prototype.getTopMainWindow = function () {
-        return new Widget(window_manager_get_top_main_window(this.nativeObj));
+    ProgressBar.prototype.setValue = function (value) {
+        return progress_bar_set_value(this.nativeObj, value);
     };
-    WindowManager.prototype.setShowFps = function (show_fps) {
-        return window_manager_set_show_fps(this.nativeObj, show_fps);
+    ProgressBar.prototype.setVertical = function (vertical) {
+        return progress_bar_set_vertical(this.nativeObj, vertical);
     };
-    WindowManager.prototype.setScreenSaverTime = function (screen_saver_time) {
-        return window_manager_set_screen_saver_time(this.nativeObj, screen_saver_time);
+    ProgressBar.prototype.setShowText = function (show_text) {
+        return progress_bar_set_show_text(this.nativeObj, show_text);
     };
-    WindowManager.prototype.setCursor = function (cursor) {
-        return window_manager_set_cursor(this.nativeObj, cursor);
-    };
-    WindowManager.prototype.back = function () {
-        return window_manager_back(this.nativeObj);
-    };
-    WindowManager.prototype.backToHome = function () {
-        return window_manager_back_to_home(this.nativeObj);
-    };
-    Object.defineProperty(WindowManager.prototype, "showFps", {
+    Object.defineProperty(ProgressBar.prototype, "value", {
         get: function () {
-            return window_manager_t_get_prop_show_fps(this.nativeObj);
+            return progress_bar_t_get_prop_value(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    return WindowManager;
-}(Widget));
-var Row = /** @class */ (function (_super) {
-    __extends(Row, _super);
-    function Row(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    Row.create = function (parent, x, y, w, h) {
-        return new Row(row_create(parent ? parent.nativeObj : null, x, y, w, h));
-    };
-    Row.cast = function (widget) {
-        return new Row(row_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    return Row;
+    Object.defineProperty(ProgressBar.prototype, "vertical", {
+        get: function () {
+            return progress_bar_t_get_prop_vertical(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressBar.prototype, "showText", {
+        get: function () {
+            return progress_bar_t_get_prop_show_text(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ProgressBar;
 }(Widget));
 var ObjectBase = /** @class */ (function (_super) {
     __extends(ObjectBase, _super);
@@ -2818,6 +2828,44 @@ var ObjectBase = /** @class */ (function (_super) {
     });
     return ObjectBase;
 }(Emitter));
+var WindowManager = /** @class */ (function (_super) {
+    __extends(WindowManager, _super);
+    function WindowManager(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    WindowManager.instance = function () {
+        return new WindowManager(window_manager());
+    };
+    WindowManager.cast = function (widget) {
+        return new WindowManager(window_manager_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    WindowManager.prototype.getTopMainWindow = function () {
+        return new Widget(window_manager_get_top_main_window(this.nativeObj));
+    };
+    WindowManager.prototype.setShowFps = function (show_fps) {
+        return window_manager_set_show_fps(this.nativeObj, show_fps);
+    };
+    WindowManager.prototype.setScreenSaverTime = function (screen_saver_time) {
+        return window_manager_set_screen_saver_time(this.nativeObj, screen_saver_time);
+    };
+    WindowManager.prototype.setCursor = function (cursor) {
+        return window_manager_set_cursor(this.nativeObj, cursor);
+    };
+    WindowManager.prototype.back = function () {
+        return window_manager_back(this.nativeObj);
+    };
+    WindowManager.prototype.backToHome = function () {
+        return window_manager_back_to_home(this.nativeObj);
+    };
+    Object.defineProperty(WindowManager.prototype, "showFps", {
+        get: function () {
+            return window_manager_t_get_prop_show_fps(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return WindowManager;
+}(Widget));
 var StyleMutable = /** @class */ (function (_super) {
     __extends(StyleMutable, _super);
     function StyleMutable(nativeObj) {
@@ -2880,6 +2928,23 @@ var ColorPicker = /** @class */ (function (_super) {
     });
     return ColorPicker;
 }(Widget));
+var PaintEvent = /** @class */ (function (_super) {
+    __extends(PaintEvent, _super);
+    function PaintEvent(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    PaintEvent.cast = function (event) {
+        return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(PaintEvent.prototype, "c", {
+        get: function () {
+            return paint_event_t_get_prop_c(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return PaintEvent;
+}(Event));
 var TabButtonGroup = /** @class */ (function (_super) {
     __extends(TabButtonGroup, _super);
     function TabButtonGroup(nativeObj) {
@@ -3128,88 +3193,78 @@ var ImageValue = /** @class */ (function (_super) {
     });
     return ImageValue;
 }(Widget));
-var ProgressCircle = /** @class */ (function (_super) {
-    __extends(ProgressCircle, _super);
-    function ProgressCircle(nativeObj) {
+var Slider = /** @class */ (function (_super) {
+    __extends(Slider, _super);
+    function Slider(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    ProgressCircle.create = function (parent, x, y, w, h) {
-        return new ProgressCircle(progress_circle_create(parent ? parent.nativeObj : null, x, y, w, h));
+    Slider.create = function (parent, x, y, w, h) {
+        return new Slider(slider_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    ProgressCircle.cast = function (widget) {
-        return new ProgressCircle(progress_circle_cast(widget ? (widget.nativeObj || widget) : null));
+    Slider.cast = function (widget) {
+        return new Slider(slider_cast(widget ? (widget.nativeObj || widget) : null));
     };
-    ProgressCircle.prototype.setValue = function (value) {
-        return progress_circle_set_value(this.nativeObj, value);
+    Slider.prototype.setValue = function (value) {
+        return slider_set_value(this.nativeObj, value);
     };
-    ProgressCircle.prototype.setMax = function (max) {
-        return progress_circle_set_max(this.nativeObj, max);
+    Slider.prototype.setMin = function (min) {
+        return slider_set_min(this.nativeObj, min);
     };
-    ProgressCircle.prototype.setLineWidth = function (line_width) {
-        return progress_circle_set_line_width(this.nativeObj, line_width);
+    Slider.prototype.setMax = function (max) {
+        return slider_set_max(this.nativeObj, max);
     };
-    ProgressCircle.prototype.setStartAngle = function (start_angle) {
-        return progress_circle_set_start_angle(this.nativeObj, start_angle);
+    Slider.prototype.setStep = function (step) {
+        return slider_set_step(this.nativeObj, step);
     };
-    ProgressCircle.prototype.setUnit = function (unit) {
-        return progress_circle_set_unit(this.nativeObj, unit);
+    Slider.prototype.setBarSize = function (bar_size) {
+        return slider_set_bar_size(this.nativeObj, bar_size);
     };
-    ProgressCircle.prototype.setShowText = function (show_text) {
-        return progress_circle_set_show_text(this.nativeObj, show_text);
+    Slider.prototype.setVertical = function (vertical) {
+        return slider_set_vertical(this.nativeObj, vertical);
     };
-    ProgressCircle.prototype.setCounterClockWise = function (counter_clock_wise) {
-        return progress_circle_set_counter_clock_wise(this.nativeObj, counter_clock_wise);
-    };
-    Object.defineProperty(ProgressCircle.prototype, "value", {
+    Object.defineProperty(Slider.prototype, "value", {
         get: function () {
-            return progress_circle_t_get_prop_value(this.nativeObj);
+            return slider_t_get_prop_value(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ProgressCircle.prototype, "max", {
+    Object.defineProperty(Slider.prototype, "min", {
         get: function () {
-            return progress_circle_t_get_prop_max(this.nativeObj);
+            return slider_t_get_prop_min(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ProgressCircle.prototype, "startAngle", {
+    Object.defineProperty(Slider.prototype, "max", {
         get: function () {
-            return progress_circle_t_get_prop_start_angle(this.nativeObj);
+            return slider_t_get_prop_max(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ProgressCircle.prototype, "lineWidth", {
+    Object.defineProperty(Slider.prototype, "step", {
         get: function () {
-            return progress_circle_t_get_prop_line_width(this.nativeObj);
+            return slider_t_get_prop_step(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ProgressCircle.prototype, "unit", {
+    Object.defineProperty(Slider.prototype, "vertical", {
         get: function () {
-            return progress_circle_t_get_prop_unit(this.nativeObj);
+            return slider_t_get_prop_vertical(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ProgressCircle.prototype, "counterClockWise", {
+    Object.defineProperty(Slider.prototype, "barSize", {
         get: function () {
-            return progress_circle_t_get_prop_counter_clock_wise(this.nativeObj);
+            return slider_t_get_prop_bar_size(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ProgressCircle.prototype, "showText", {
-        get: function () {
-            return progress_circle_t_get_prop_show_text(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ProgressCircle;
+    return Slider;
 }(Widget));
 var AppBar = /** @class */ (function (_super) {
     __extends(AppBar, _super);
@@ -3710,48 +3765,38 @@ var GroupBox = /** @class */ (function (_super) {
     };
     return GroupBox;
 }(Widget));
-var ProgressBar = /** @class */ (function (_super) {
-    __extends(ProgressBar, _super);
-    function ProgressBar(nativeObj) {
+var Popup = /** @class */ (function (_super) {
+    __extends(Popup, _super);
+    function Popup(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    ProgressBar.create = function (parent, x, y, w, h) {
-        return new ProgressBar(progress_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
+    Popup.create = function (parent, x, y, w, h) {
+        return new Popup(popup_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    ProgressBar.cast = function (widget) {
-        return new ProgressBar(progress_bar_cast(widget ? (widget.nativeObj || widget) : null));
+    Popup.cast = function (widget) {
+        return new Popup(popup_cast(widget ? (widget.nativeObj || widget) : null));
     };
-    ProgressBar.prototype.setValue = function (value) {
-        return progress_bar_set_value(this.nativeObj, value);
+    Popup.prototype.setCloseWhenClick = function (close_when_click) {
+        return popup_set_close_when_click(this.nativeObj, close_when_click);
     };
-    ProgressBar.prototype.setVertical = function (vertical) {
-        return progress_bar_set_vertical(this.nativeObj, vertical);
+    Popup.prototype.setCloseWhenClickOutside = function (close_when_click_outside) {
+        return popup_set_close_when_click_outside(this.nativeObj, close_when_click_outside);
     };
-    ProgressBar.prototype.setShowText = function (show_text) {
-        return progress_bar_set_show_text(this.nativeObj, show_text);
-    };
-    Object.defineProperty(ProgressBar.prototype, "value", {
+    Object.defineProperty(Popup.prototype, "closeWhenClick", {
         get: function () {
-            return progress_bar_t_get_prop_value(this.nativeObj);
+            return popup_t_get_prop_close_when_click(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ProgressBar.prototype, "vertical", {
+    Object.defineProperty(Popup.prototype, "closeWhenClickOutside", {
         get: function () {
-            return progress_bar_t_get_prop_vertical(this.nativeObj);
+            return popup_t_get_prop_close_when_click_outside(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ProgressBar.prototype, "showText", {
-        get: function () {
-            return progress_bar_t_get_prop_show_text(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ProgressBar;
+    return Popup;
 }(Widget));
 var Label = /** @class */ (function (_super) {
     __extends(Label, _super);
@@ -3805,39 +3850,6 @@ var Pages = /** @class */ (function (_super) {
     });
     return Pages;
 }(Widget));
-var Popup = /** @class */ (function (_super) {
-    __extends(Popup, _super);
-    function Popup(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    Popup.create = function (parent, x, y, w, h) {
-        return new Popup(popup_create(parent ? parent.nativeObj : null, x, y, w, h));
-    };
-    Popup.cast = function (widget) {
-        return new Popup(popup_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    Popup.prototype.setCloseWhenClick = function (close_when_click) {
-        return popup_set_close_when_click(this.nativeObj, close_when_click);
-    };
-    Popup.prototype.setCloseWhenClickOutside = function (close_when_click_outside) {
-        return popup_set_close_when_click_outside(this.nativeObj, close_when_click_outside);
-    };
-    Object.defineProperty(Popup.prototype, "closeWhenClick", {
-        get: function () {
-            return popup_t_get_prop_close_when_click(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Popup.prototype, "closeWhenClickOutside", {
-        get: function () {
-            return popup_t_get_prop_close_when_click_outside(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Popup;
-}(Widget));
 var Image = /** @class */ (function (_super) {
     __extends(Image, _super);
     function Image(nativeObj) {
@@ -3861,26 +3873,6 @@ var Image = /** @class */ (function (_super) {
     });
     return Image;
 }(ImageBase));
-var ObjectDefault = /** @class */ (function (_super) {
-    __extends(ObjectDefault, _super);
-    function ObjectDefault(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    ObjectDefault.create = function () {
-        return new ObjectDefault(object_default_create());
-    };
-    ObjectDefault.prototype.unref = function () {
-        return object_default_unref(this.nativeObj);
-    };
-    Object.defineProperty(ObjectDefault.prototype, "propsSize", {
-        get: function () {
-            return object_default_t_get_prop_props_size(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ObjectDefault;
-}(ObjectBase));
 var SvgImage = /** @class */ (function (_super) {
     __extends(SvgImage, _super);
     function SvgImage(nativeObj) {
@@ -3907,19 +3899,26 @@ var SpinBox = /** @class */ (function (_super) {
     };
     return SpinBox;
 }(Edit));
-var SystemBar = /** @class */ (function (_super) {
-    __extends(SystemBar, _super);
-    function SystemBar(nativeObj) {
+var ObjectDefault = /** @class */ (function (_super) {
+    __extends(ObjectDefault, _super);
+    function ObjectDefault(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    SystemBar.create = function (parent, x, y, w, h) {
-        return new SystemBar(system_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
+    ObjectDefault.create = function () {
+        return new ObjectDefault(object_default_create());
     };
-    SystemBar.cast = function (widget) {
-        return new SystemBar(system_bar_cast(widget ? (widget.nativeObj || widget) : null));
+    ObjectDefault.prototype.unref = function () {
+        return object_default_unref(this.nativeObj);
     };
-    return SystemBar;
-}(WindowBase));
+    Object.defineProperty(ObjectDefault.prototype, "propsSize", {
+        get: function () {
+            return object_default_t_get_prop_props_size(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ObjectDefault;
+}(ObjectBase));
 var GifImage = /** @class */ (function (_super) {
     __extends(GifImage, _super);
     function GifImage(nativeObj) {
@@ -3995,4 +3994,17 @@ var IdleInfo = /** @class */ (function (_super) {
     });
     return IdleInfo;
 }(ObjectBase));
+var SystemBar = /** @class */ (function (_super) {
+    __extends(SystemBar, _super);
+    function SystemBar(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    SystemBar.create = function (parent, x, y, w, h) {
+        return new SystemBar(system_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
+    };
+    SystemBar.cast = function (widget) {
+        return new SystemBar(system_bar_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    return SystemBar;
+}(WindowBase));
 //# sourceMappingURL=awtk.js.map
