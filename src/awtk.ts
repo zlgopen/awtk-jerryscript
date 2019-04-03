@@ -6,8 +6,8 @@ declare function asset_info_t_get_prop_size(nativeObj);
 declare function asset_info_t_get_prop_refcount(nativeObj);
 declare function asset_info_t_get_prop_name(nativeObj);
 declare function assets_manager();
-declare function assets_manager_ref(rm, type, name);
-declare function assets_manager_unref(rm, info);
+declare function assets_manager_ref(am, type, name);
+declare function assets_manager_unref(am, info);
 declare function BITMAP_FMT_NONE();
 declare function BITMAP_FMT_RGBA8888();
 declare function BITMAP_FMT_ABGR8888();
@@ -77,7 +77,6 @@ declare function CLIP_BOARD_DATA_TYPE_NONE();
 declare function CLIP_BOARD_DATA_TYPE_TEXT();
 declare function clip_board_set_text(text);
 declare function clip_board_get_text();
-declare function EVT_NONE();
 declare function EVT_POINTER_DOWN();
 declare function EVT_POINTER_DOWN_ABORT();
 declare function EVT_POINTER_MOVE();
@@ -105,6 +104,7 @@ declare function EVT_VALUE_CHANGING();
 declare function EVT_PAINT();
 declare function EVT_BEFORE_PAINT();
 declare function EVT_AFTER_PAINT();
+declare function EVT_PAINT_DONE();
 declare function EVT_LOCALE_CHANGED();
 declare function EVT_ANIM_START();
 declare function EVT_ANIM_STOP();
@@ -245,6 +245,7 @@ declare function WIDGET_PROP_X();
 declare function WIDGET_PROP_Y();
 declare function WIDGET_PROP_W();
 declare function WIDGET_PROP_H();
+declare function WIDGET_PROP_HIGHLIGHT();
 declare function WIDGET_PROP_BAR_SIZE();
 declare function WIDGET_PROP_OPACITY();
 declare function WIDGET_PROP_MIN_W();
@@ -306,6 +307,7 @@ declare function WIDGET_PROP_THEME();
 declare function WIDGET_PROP_STAGE();
 declare function WIDGET_PROP_IMAGE_MANAGER();
 declare function WIDGET_PROP_ASSETS_MANAGER();
+declare function WIDGET_PROP_LOCALE_INFO();
 declare function WIDGET_PROP_FONT_MANAGER();
 declare function WIDGET_PROP_THEME_OBJ();
 declare function WIDGET_PROP_DEFAULT_THEME_OBJ();
@@ -524,6 +526,7 @@ declare function emitter_disable(emitter);
 declare function emitter_size(emitter);
 declare function emitter_destroy(emitter);
 declare function emitter_cast(emitter);
+declare function EVT_NONE();
 declare function EVT_PROP_WILL_CHANGE();
 declare function EVT_PROP_CHANGED();
 declare function EVT_ITEMS_WILL_CHANGE();
@@ -751,8 +754,6 @@ declare function time_clock_t_get_prop_bg_image(nativeObj);
 declare function time_clock_t_get_prop_hour_image(nativeObj);
 declare function time_clock_t_get_prop_minute_image(nativeObj);
 declare function time_clock_t_get_prop_second_image(nativeObj);
-declare function tab_control_create(parent, x, y, w, h);
-declare function tab_control_cast(widget);
 declare function view_create(parent, x, y, w, h);
 declare function view_cast(widget);
 declare function tab_button_create(parent, x, y, w, h);
@@ -796,9 +797,6 @@ declare function wheel_event_t_get_prop_dy(nativeObj);
 declare function wheel_event_t_get_prop_alt(nativeObj);
 declare function wheel_event_t_get_prop_ctrl(nativeObj);
 declare function wheel_event_t_get_prop_shift(nativeObj);
-declare function prop_change_event_cast(event);
-declare function prop_change_event_t_get_prop_name(nativeObj);
-declare function prop_change_event_t_get_prop_value(nativeObj);
 declare function pointer_event_cast(event);
 declare function pointer_event_t_get_prop_x(nativeObj);
 declare function pointer_event_t_get_prop_y(nativeObj);
@@ -813,9 +811,23 @@ declare function key_event_t_get_prop_alt(nativeObj);
 declare function key_event_t_get_prop_ctrl(nativeObj);
 declare function key_event_t_get_prop_shift(nativeObj);
 declare function key_event_t_get_prop_capslock(nativeObj);
+declare function prop_change_event_cast(event);
+declare function prop_change_event_t_get_prop_name(nativeObj);
+declare function prop_change_event_t_get_prop_value(nativeObj);
+declare function paint_event_cast(event);
+declare function paint_event_t_get_prop_c(nativeObj);
 declare function window_base_cast(widget);
 declare function window_base_t_get_prop_theme(nativeObj);
 declare function window_base_t_get_prop_closable(nativeObj);
+declare function window_manager();
+declare function window_manager_cast(widget);
+declare function window_manager_get_top_main_window(widget);
+declare function window_manager_set_show_fps(widget, show_fps);
+declare function window_manager_set_screen_saver_time(widget, screen_saver_time);
+declare function window_manager_set_cursor(widget, cursor);
+declare function window_manager_back(widget);
+declare function window_manager_back_to_home(widget);
+declare function window_manager_t_get_prop_show_fps(nativeObj);
 declare function progress_bar_create(parent, x, y, w, h);
 declare function progress_bar_cast(widget);
 declare function progress_bar_set_value(widget, value);
@@ -854,18 +866,10 @@ declare function object_exec(obj, name, args);
 declare function object_notify_changed(obj);
 declare function object_t_get_prop_ref_count(nativeObj);
 declare function object_t_get_prop_name(nativeObj);
-declare function window_manager();
-declare function window_manager_cast(widget);
-declare function window_manager_get_top_main_window(widget);
-declare function window_manager_set_show_fps(widget, show_fps);
-declare function window_manager_set_screen_saver_time(widget, screen_saver_time);
-declare function window_manager_set_cursor(widget, cursor);
-declare function window_manager_back(widget);
-declare function window_manager_back_to_home(widget);
-declare function window_manager_t_get_prop_show_fps(nativeObj);
 declare function style_mutable_get_name(s);
 declare function style_mutable_set_name(s, name);
 declare function style_mutable_set_int(s, state, name, val);
+declare function style_mutable_cast(s);
 declare function style_mutable_create(widget);
 declare function style_mutable_t_get_prop_name(nativeObj);
 declare function canvas_widget_create(parent, x, y, w, h);
@@ -874,8 +878,6 @@ declare function color_picker_create(parent, x, y, w, h);
 declare function color_picker_set_color(widget, color);
 declare function color_picker_cast(widget);
 declare function color_picker_t_get_prop_value(nativeObj);
-declare function paint_event_cast(event);
-declare function paint_event_t_get_prop_c(nativeObj);
 declare function tab_button_group_create(parent, x, y, w, h);
 declare function tab_button_group_cast(widget);
 declare function tab_button_group_t_get_prop_compact(nativeObj);
@@ -891,30 +893,8 @@ declare function guage_set_image(widget, name);
 declare function guage_set_draw_type(widget, draw_type);
 declare function guage_t_get_prop_image(nativeObj);
 declare function guage_t_get_prop_draw_type(nativeObj);
-declare function image_animation_create(parent, x, y, w, h);
-declare function image_animation_set_loop(widget, loop);
-declare function image_animation_set_image(widget, image);
-declare function image_animation_set_interval(widget, interval);
-declare function image_animation_set_delay(widget, delay);
-declare function image_animation_set_auto_play(widget, auto_play);
-declare function image_animation_set_sequence(widget, sequence);
-declare function image_animation_set_range_sequence(widget, start_index, end_index);
-declare function image_animation_play(widget);
-declare function image_animation_stop(widget);
-declare function image_animation_pause(widget);
-declare function image_animation_set_format(widget, format);
-declare function image_animation_set_unload_after_paint(widget, unload_after_paint);
-declare function image_animation_cast(widget);
-declare function image_animation_t_get_prop_image(nativeObj);
-declare function image_animation_t_get_prop_sequence(nativeObj);
-declare function image_animation_t_get_prop_start_index(nativeObj);
-declare function image_animation_t_get_prop_end_index(nativeObj);
-declare function image_animation_t_get_prop_loop(nativeObj);
-declare function image_animation_t_get_prop_auto_play(nativeObj);
-declare function image_animation_t_get_prop_unload_after_paint(nativeObj);
-declare function image_animation_t_get_prop_format(nativeObj);
-declare function image_animation_t_get_prop_interval(nativeObj);
-declare function image_animation_t_get_prop_delay(nativeObj);
+declare function tab_control_create(parent, x, y, w, h);
+declare function tab_control_cast(widget);
 declare function image_value_create(parent, x, y, w, h);
 declare function image_value_set_image(widget, image);
 declare function image_value_set_format(widget, format);
@@ -997,6 +977,7 @@ declare function dialog_toast(text, duration);
 declare function dialog_info(text);
 declare function dialog_warn(text);
 declare function dialog_confirm(text);
+declare function dialog_t_get_prop_highlight(nativeObj);
 declare function dragger_create(parent, x, y, w, h);
 declare function dragger_cast(widget);
 declare function dragger_set_range(widget, x_min, y_min, x_max, y_max);
@@ -1050,6 +1031,30 @@ declare function pages_cast(widget);
 declare function pages_set_active(widget, index);
 declare function pages_set_active_by_name(widget, name);
 declare function pages_t_get_prop_active(nativeObj);
+declare function image_animation_create(parent, x, y, w, h);
+declare function image_animation_set_loop(widget, loop);
+declare function image_animation_set_image(widget, image);
+declare function image_animation_set_interval(widget, interval);
+declare function image_animation_set_delay(widget, delay);
+declare function image_animation_set_auto_play(widget, auto_play);
+declare function image_animation_set_sequence(widget, sequence);
+declare function image_animation_set_range_sequence(widget, start_index, end_index);
+declare function image_animation_play(widget);
+declare function image_animation_stop(widget);
+declare function image_animation_pause(widget);
+declare function image_animation_set_format(widget, format);
+declare function image_animation_set_unload_after_paint(widget, unload_after_paint);
+declare function image_animation_cast(widget);
+declare function image_animation_t_get_prop_image(nativeObj);
+declare function image_animation_t_get_prop_sequence(nativeObj);
+declare function image_animation_t_get_prop_start_index(nativeObj);
+declare function image_animation_t_get_prop_end_index(nativeObj);
+declare function image_animation_t_get_prop_loop(nativeObj);
+declare function image_animation_t_get_prop_auto_play(nativeObj);
+declare function image_animation_t_get_prop_unload_after_paint(nativeObj);
+declare function image_animation_t_get_prop_format(nativeObj);
+declare function image_animation_t_get_prop_interval(nativeObj);
+declare function image_animation_t_get_prop_delay(nativeObj);
 declare function image_create(parent, x, y, w, h);
 declare function image_set_draw_type(widget, draw_type);
 declare function image_cast(widget);
@@ -1355,7 +1360,6 @@ class ClipBoard {
 }
 
 enum EventType {
- NONE = EVT_NONE(),
  POINTER_DOWN = EVT_POINTER_DOWN(),
  POINTER_DOWN_ABORT = EVT_POINTER_DOWN_ABORT(),
  POINTER_MOVE = EVT_POINTER_MOVE(),
@@ -1383,6 +1387,7 @@ enum EventType {
  PAINT = EVT_PAINT(),
  BEFORE_PAINT = EVT_BEFORE_PAINT(),
  AFTER_PAINT = EVT_AFTER_PAINT(),
+ PAINT_DONE = EVT_PAINT_DONE(),
  LOCALE_CHANGED = EVT_LOCALE_CHANGED(),
  ANIM_START = EVT_ANIM_START(),
  ANIM_STOP = EVT_ANIM_STOP(),
@@ -1796,6 +1801,7 @@ enum WidgetProp {
  Y = WIDGET_PROP_Y(),
  W = WIDGET_PROP_W(),
  H = WIDGET_PROP_H(),
+ HIGHLIGHT = WIDGET_PROP_HIGHLIGHT(),
  BAR_SIZE = WIDGET_PROP_BAR_SIZE(),
  OPACITY = WIDGET_PROP_OPACITY(),
  MIN_W = WIDGET_PROP_MIN_W(),
@@ -1857,6 +1863,7 @@ enum WidgetProp {
  STAGE = WIDGET_PROP_STAGE(),
  IMAGE_MANAGER = WIDGET_PROP_IMAGE_MANAGER(),
  ASSETS_MANAGER = WIDGET_PROP_ASSETS_MANAGER(),
+ LOCALE_INFO = WIDGET_PROP_LOCALE_INFO(),
  FONT_MANAGER = WIDGET_PROP_FONT_MANAGER(),
  THEME_OBJ = WIDGET_PROP_THEME_OBJ(),
  DEFAULT_THEME_OBJ = WIDGET_PROP_DEFAULT_THEME_OBJ(),
@@ -2413,6 +2420,7 @@ class Emitter {
 }
 
 enum EventBaseType {
+ NONE = EVT_NONE(),
  PROP_WILL_CHANGE = EVT_PROP_WILL_CHANGE(),
  PROP_CHANGED = EVT_PROP_CHANGED(),
  ITEMS_WILL_CHANGE = EVT_ITEMS_WILL_CHANGE(),
@@ -3372,22 +3380,6 @@ class TimeClock extends Widget {
 
 }
 
-class TabControl extends Widget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new TabControl(tab_control_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- static cast(widget) {
-   return new TabControl(tab_control_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
-}
-
 class View extends Widget {
  public nativeObj;
  constructor(nativeObj) {
@@ -3608,26 +3600,6 @@ class WheelEvent extends Event {
 
 }
 
-class PropChangeEvent extends Event {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static cast(event) {
-   return new PropChangeEvent(prop_change_event_cast(event ? (event.nativeObj || event) : null));
- }
-
- get name() {
-   return prop_change_event_t_get_prop_name(this.nativeObj);
- }
-
- get value() {
-   return prop_change_event_t_get_prop_value(this.nativeObj);
- }
-
-}
-
 class PointerEvent extends Event {
  public nativeObj;
  constructor(nativeObj) {
@@ -3700,6 +3672,42 @@ class KeyEvent extends Event {
 
 }
 
+class PropChangeEvent extends Event {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static cast(event) {
+   return new PropChangeEvent(prop_change_event_cast(event ? (event.nativeObj || event) : null));
+ }
+
+ get name() {
+   return prop_change_event_t_get_prop_name(this.nativeObj);
+ }
+
+ get value() {
+   return prop_change_event_t_get_prop_value(this.nativeObj);
+ }
+
+}
+
+class PaintEvent extends Event {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static cast(event) {
+   return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
+ }
+
+ get c() {
+   return paint_event_t_get_prop_c(this.nativeObj);
+ }
+
+}
+
 class WindowBase extends Widget {
  public nativeObj;
  constructor(nativeObj) {
@@ -3716,6 +3724,50 @@ class WindowBase extends Widget {
 
  get closable() {
    return window_base_t_get_prop_closable(this.nativeObj);
+ }
+
+}
+
+class WindowManager extends Widget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static instance() {
+   return new WindowManager(window_manager());
+ }
+
+ static cast(widget) {
+   return new WindowManager(window_manager_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ getTopMainWindow() {
+   return new Widget(window_manager_get_top_main_window(this.nativeObj));
+ }
+
+ setShowFps(show_fps) {
+   return window_manager_set_show_fps(this.nativeObj, show_fps);
+ }
+
+ setScreenSaverTime(screen_saver_time) {
+   return window_manager_set_screen_saver_time(this.nativeObj, screen_saver_time);
+ }
+
+ setCursor(cursor) {
+   return window_manager_set_cursor(this.nativeObj, cursor);
+ }
+
+ back() {
+   return window_manager_back(this.nativeObj);
+ }
+
+ backToHome() {
+   return window_manager_back_to_home(this.nativeObj);
+ }
+
+ get showFps() {
+   return window_manager_t_get_prop_show_fps(this.nativeObj);
  }
 
 }
@@ -3888,50 +3940,6 @@ class ObjectBase extends Emitter {
 
 }
 
-class WindowManager extends Widget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static instance() {
-   return new WindowManager(window_manager());
- }
-
- static cast(widget) {
-   return new WindowManager(window_manager_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- getTopMainWindow() {
-   return new Widget(window_manager_get_top_main_window(this.nativeObj));
- }
-
- setShowFps(show_fps) {
-   return window_manager_set_show_fps(this.nativeObj, show_fps);
- }
-
- setScreenSaverTime(screen_saver_time) {
-   return window_manager_set_screen_saver_time(this.nativeObj, screen_saver_time);
- }
-
- setCursor(cursor) {
-   return window_manager_set_cursor(this.nativeObj, cursor);
- }
-
- back() {
-   return window_manager_back(this.nativeObj);
- }
-
- backToHome() {
-   return window_manager_back_to_home(this.nativeObj);
- }
-
- get showFps() {
-   return window_manager_t_get_prop_show_fps(this.nativeObj);
- }
-
-}
-
 class StyleMutable extends Style {
  public nativeObj;
  constructor(nativeObj) {
@@ -3948,6 +3956,10 @@ class StyleMutable extends Style {
 
  setInt(state, name, val) {
    return style_mutable_set_int(this.nativeObj, state, name, val);
+ }
+
+ static cast(s) {
+   return new StyleMutable(style_mutable_cast(s ? (s.nativeObj || s) : null));
  }
 
  static create(widget) {
@@ -3996,22 +4008,6 @@ class ColorPicker extends Widget {
 
  get value() {
    return color_picker_t_get_prop_value(this.nativeObj);
- }
-
-}
-
-class PaintEvent extends Event {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static cast(event) {
-   return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
- }
-
- get c() {
-   return paint_event_t_get_prop_c(this.nativeObj);
  }
 
 }
@@ -4100,106 +4096,18 @@ class Guage extends Widget {
 
 }
 
-class ImageAnimation extends Widget {
+class TabControl extends Widget {
  public nativeObj;
  constructor(nativeObj) {
    super(nativeObj);
  }
 
  static create(parent, x, y, w, h) {
-   return new ImageAnimation(image_animation_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- setLoop(loop) {
-   return image_animation_set_loop(this.nativeObj, loop);
- }
-
- setImage(image) {
-   return image_animation_set_image(this.nativeObj, image);
- }
-
- setInterval(interval) {
-   return image_animation_set_interval(this.nativeObj, interval);
- }
-
- setDelay(delay) {
-   return image_animation_set_delay(this.nativeObj, delay);
- }
-
- setAutoPlay(auto_play) {
-   return image_animation_set_auto_play(this.nativeObj, auto_play);
- }
-
- setSequence(sequence) {
-   return image_animation_set_sequence(this.nativeObj, sequence);
- }
-
- setRangeSequence(start_index, end_index) {
-   return image_animation_set_range_sequence(this.nativeObj, start_index, end_index);
- }
-
- play() {
-   return image_animation_play(this.nativeObj);
- }
-
- stop() {
-   return image_animation_stop(this.nativeObj);
- }
-
- pause() {
-   return image_animation_pause(this.nativeObj);
- }
-
- setFormat(format) {
-   return image_animation_set_format(this.nativeObj, format);
- }
-
- setUnloadAfterPaint(unload_after_paint) {
-   return image_animation_set_unload_after_paint(this.nativeObj, unload_after_paint);
+   return new TabControl(tab_control_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
  static cast(widget) {
-   return new ImageAnimation(image_animation_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- get image() {
-   return image_animation_t_get_prop_image(this.nativeObj);
- }
-
- get sequence() {
-   return image_animation_t_get_prop_sequence(this.nativeObj);
- }
-
- get startIndex() {
-   return image_animation_t_get_prop_start_index(this.nativeObj);
- }
-
- get endIndex() {
-   return image_animation_t_get_prop_end_index(this.nativeObj);
- }
-
- get loop() {
-   return image_animation_t_get_prop_loop(this.nativeObj);
- }
-
- get autoPlay() {
-   return image_animation_t_get_prop_auto_play(this.nativeObj);
- }
-
- get unloadAfterPaint() {
-   return image_animation_t_get_prop_unload_after_paint(this.nativeObj);
- }
-
- get format() {
-   return image_animation_t_get_prop_format(this.nativeObj);
- }
-
- get interval() {
-   return image_animation_t_get_prop_interval(this.nativeObj);
- }
-
- get delay() {
-   return image_animation_t_get_prop_delay(this.nativeObj);
+   return new TabControl(tab_control_cast(widget ? (widget.nativeObj || widget) : null));
  }
 
 }
@@ -4634,6 +4542,10 @@ class Dialog extends Widget {
    return dialog_confirm(text);
  }
 
+ get highlight() {
+   return dialog_t_get_prop_highlight(this.nativeObj);
+ }
+
 }
 
 class Dragger extends Widget {
@@ -4908,6 +4820,110 @@ class Pages extends Widget {
 
  get active() {
    return pages_t_get_prop_active(this.nativeObj);
+ }
+
+}
+
+class ImageAnimation extends Widget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new ImageAnimation(image_animation_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ setLoop(loop) {
+   return image_animation_set_loop(this.nativeObj, loop);
+ }
+
+ setImage(image) {
+   return image_animation_set_image(this.nativeObj, image);
+ }
+
+ setInterval(interval) {
+   return image_animation_set_interval(this.nativeObj, interval);
+ }
+
+ setDelay(delay) {
+   return image_animation_set_delay(this.nativeObj, delay);
+ }
+
+ setAutoPlay(auto_play) {
+   return image_animation_set_auto_play(this.nativeObj, auto_play);
+ }
+
+ setSequence(sequence) {
+   return image_animation_set_sequence(this.nativeObj, sequence);
+ }
+
+ setRangeSequence(start_index, end_index) {
+   return image_animation_set_range_sequence(this.nativeObj, start_index, end_index);
+ }
+
+ play() {
+   return image_animation_play(this.nativeObj);
+ }
+
+ stop() {
+   return image_animation_stop(this.nativeObj);
+ }
+
+ pause() {
+   return image_animation_pause(this.nativeObj);
+ }
+
+ setFormat(format) {
+   return image_animation_set_format(this.nativeObj, format);
+ }
+
+ setUnloadAfterPaint(unload_after_paint) {
+   return image_animation_set_unload_after_paint(this.nativeObj, unload_after_paint);
+ }
+
+ static cast(widget) {
+   return new ImageAnimation(image_animation_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ get image() {
+   return image_animation_t_get_prop_image(this.nativeObj);
+ }
+
+ get sequence() {
+   return image_animation_t_get_prop_sequence(this.nativeObj);
+ }
+
+ get startIndex() {
+   return image_animation_t_get_prop_start_index(this.nativeObj);
+ }
+
+ get endIndex() {
+   return image_animation_t_get_prop_end_index(this.nativeObj);
+ }
+
+ get loop() {
+   return image_animation_t_get_prop_loop(this.nativeObj);
+ }
+
+ get autoPlay() {
+   return image_animation_t_get_prop_auto_play(this.nativeObj);
+ }
+
+ get unloadAfterPaint() {
+   return image_animation_t_get_prop_unload_after_paint(this.nativeObj);
+ }
+
+ get format() {
+   return image_animation_t_get_prop_format(this.nativeObj);
+ }
+
+ get interval() {
+   return image_animation_t_get_prop_interval(this.nativeObj);
+ }
+
+ get delay() {
+   return image_animation_t_get_prop_delay(this.nativeObj);
  }
 
 }
