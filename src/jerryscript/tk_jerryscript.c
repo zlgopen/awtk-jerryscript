@@ -10136,17 +10136,6 @@ jerry_value_t wrap_wheel_event_cast(
   return jerry_create_pointer(ret, "wheel_event_t*", NULL);
 }
 
-jerry_value_t wrap_wheel_event_t_get_prop_dx(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  wheel_event_t* obj = (wheel_event_t*)jerry_get_pointer(args_p[0], "wheel_event_t*");
-
-  return jerry_create_number(obj->dx);
-}
-
 jerry_value_t wrap_wheel_event_t_get_prop_dy(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -10193,7 +10182,6 @@ jerry_value_t wrap_wheel_event_t_get_prop_shift(
 
 ret_t wheel_event_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"wheel_event_cast", wrap_wheel_event_cast);
-  jerryx_handler_register_global((const jerry_char_t*)"wheel_event_t_get_prop_dx", wrap_wheel_event_t_get_prop_dx);
   jerryx_handler_register_global((const jerry_char_t*)"wheel_event_t_get_prop_dy", wrap_wheel_event_t_get_prop_dy);
   jerryx_handler_register_global((const jerry_char_t*)"wheel_event_t_get_prop_alt", wrap_wheel_event_t_get_prop_alt);
   jerryx_handler_register_global((const jerry_char_t*)"wheel_event_t_get_prop_ctrl", wrap_wheel_event_t_get_prop_ctrl);
@@ -12876,6 +12864,32 @@ jerry_value_t wrap_dialog_quit(
   return jerry_create_number(ret);
 }
 
+jerry_value_t wrap_dialog_is_quited(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  bool_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (bool_t)dialog_is_quited(widget);
+
+  return jerry_create_boolean(ret);
+}
+
+jerry_value_t wrap_dialog_is_modal(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  bool_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (bool_t)dialog_is_modal(widget);
+
+  return jerry_create_boolean(ret);
+}
+
 jerry_value_t wrap_dialog_toast(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -12954,6 +12968,8 @@ ret_t dialog_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"dialog_set_title", wrap_dialog_set_title);
   jerryx_handler_register_global((const jerry_char_t*)"dialog_modal", wrap_dialog_modal);
   jerryx_handler_register_global((const jerry_char_t*)"dialog_quit", wrap_dialog_quit);
+  jerryx_handler_register_global((const jerry_char_t*)"dialog_is_quited", wrap_dialog_is_quited);
+  jerryx_handler_register_global((const jerry_char_t*)"dialog_is_modal", wrap_dialog_is_modal);
   jerryx_handler_register_global((const jerry_char_t*)"dialog_toast", wrap_dialog_toast);
   jerryx_handler_register_global((const jerry_char_t*)"dialog_info", wrap_dialog_info);
   jerryx_handler_register_global((const jerry_char_t*)"dialog_warn", wrap_dialog_warn);

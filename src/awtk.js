@@ -2481,13 +2481,6 @@ var WheelEvent = /** @class */ (function (_super) {
     WheelEvent.cast = function (event) {
         return new WheelEvent(wheel_event_cast(event ? (event.nativeObj || event) : null));
     };
-    Object.defineProperty(WheelEvent.prototype, "dx", {
-        get: function () {
-            return wheel_event_t_get_prop_dx(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(WheelEvent.prototype, "dy", {
         get: function () {
             return wheel_event_t_get_prop_dy(this.nativeObj);
@@ -3439,6 +3432,12 @@ var Dialog = /** @class */ (function (_super) {
     };
     Dialog.prototype.quit = function (code) {
         return dialog_quit(this.nativeObj, code);
+    };
+    Dialog.prototype.isQuited = function () {
+        return dialog_is_quited(this.nativeObj);
+    };
+    Dialog.prototype.isModal = function () {
+        return dialog_is_modal(this.nativeObj);
     };
     Dialog.toast = function (text, duration) {
         return dialog_toast(text, duration);

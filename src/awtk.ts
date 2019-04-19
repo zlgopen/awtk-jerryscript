@@ -792,7 +792,6 @@ declare function window_close_force(widget);
 declare function window_cast(widget);
 declare function window_t_get_prop_fullscreen(nativeObj);
 declare function wheel_event_cast(event);
-declare function wheel_event_t_get_prop_dx(nativeObj);
 declare function wheel_event_t_get_prop_dy(nativeObj);
 declare function wheel_event_t_get_prop_alt(nativeObj);
 declare function wheel_event_t_get_prop_ctrl(nativeObj);
@@ -973,6 +972,8 @@ declare function dialog_open(name);
 declare function dialog_set_title(widget, title);
 declare function dialog_modal(widget);
 declare function dialog_quit(widget, code);
+declare function dialog_is_quited(widget);
+declare function dialog_is_modal(widget);
 declare function dialog_toast(text, duration);
 declare function dialog_info(text);
 declare function dialog_warn(text);
@@ -3578,10 +3579,6 @@ class WheelEvent extends Event {
    return new WheelEvent(wheel_event_cast(event ? (event.nativeObj || event) : null));
  }
 
- get dx() {
-   return wheel_event_t_get_prop_dx(this.nativeObj);
- }
-
  get dy() {
    return wheel_event_t_get_prop_dy(this.nativeObj);
  }
@@ -4524,6 +4521,14 @@ class Dialog extends Widget {
 
  quit(code) {
    return dialog_quit(this.nativeObj, code);
+ }
+
+ isQuited() {
+   return dialog_is_quited(this.nativeObj);
+ }
+
+ isModal() {
+   return dialog_is_modal(this.nativeObj);
  }
 
  static toast(text, duration) {
