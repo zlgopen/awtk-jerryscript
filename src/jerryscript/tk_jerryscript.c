@@ -12,6 +12,7 @@
 #include "base/idle.h"
 #include "base/image_manager.h"
 #include "base/input_method.h"
+#include "base/keys.h"
 #include "base/locale_info.h"
 #include "base/style.h"
 #include "base/timer.h"
@@ -43,7 +44,6 @@
 #include "text_selector/text_selector.h"
 #include "time_clock/digit_clock.h"
 #include "time_clock/time_clock.h"
-#include "widgets/view.h"
 #include "widgets/tab_button.h"
 #include "base/image_base.h"
 #include "widgets/window.h"
@@ -54,6 +54,7 @@
 #include "designer_support/style_mutable.h"
 #include "canvas_widget/canvas_widget.h"
 #include "color_picker/color_picker.h"
+#include "widgets/view.h"
 #include "widgets/tab_button_group.h"
 #include "guage/guage_pointer.h"
 #include "guage/guage.h"
@@ -1790,6 +1791,1050 @@ ret_t input_type_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_PASSWORD", get_INPUT_PASSWORD);
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_PHONE", get_INPUT_PHONE);
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_CUSTOM", get_INPUT_CUSTOM);
+
+ return RET_OK;
+}
+
+jerry_value_t wrap_input_method_commit_text(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  input_method_t* im = (input_method_t*)jerry_get_pointer(args_p[0], "input_method_t*");
+  char* text = (char*)jerry_get_utf8_string(args_p[1]);
+  ret = (ret_t)input_method_commit_text(im, text);
+  TKMEM_FREE(text);
+
+  return jerry_create_number(ret);
+}
+
+jerry_value_t wrap_input_method_dispatch_key(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  input_method_t* im = (input_method_t*)jerry_get_pointer(args_p[0], "input_method_t*");
+  uint32_t key = (uint32_t)jerry_get_number_value(args_p[1]);
+  ret = (ret_t)input_method_dispatch_key(im, key);
+
+  return jerry_create_number(ret);
+}
+
+jerry_value_t wrap_input_method(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  input_method_t* ret = NULL;
+  ret = (input_method_t*)input_method();
+
+  return jerry_create_pointer(ret, "input_method_t*", NULL);
+}
+
+ret_t input_method_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"input_method_commit_text", wrap_input_method_commit_text);
+  jerryx_handler_register_global((const jerry_char_t*)"input_method_dispatch_key", wrap_input_method_dispatch_key);
+  jerryx_handler_register_global((const jerry_char_t*)"input_method", wrap_input_method);
+
+ return RET_OK;
+}
+
+jerry_value_t get_TK_KEY_RETURN(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_RETURN);
+}
+
+jerry_value_t get_TK_KEY_ESCAPE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_ESCAPE);
+}
+
+jerry_value_t get_TK_KEY_BACKSPACE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_BACKSPACE);
+}
+
+jerry_value_t get_TK_KEY_TAB(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_TAB);
+}
+
+jerry_value_t get_TK_KEY_SPACE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_SPACE);
+}
+
+jerry_value_t get_TK_KEY_EXCLAIM(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_EXCLAIM);
+}
+
+jerry_value_t get_TK_KEY_QUOTEDBL(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_QUOTEDBL);
+}
+
+jerry_value_t get_TK_KEY_HASH(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_HASH);
+}
+
+jerry_value_t get_TK_KEY_PERCENT(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_PERCENT);
+}
+
+jerry_value_t get_TK_KEY_DOLLAR(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_DOLLAR);
+}
+
+jerry_value_t get_TK_KEY_AMPERSAND(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_AMPERSAND);
+}
+
+jerry_value_t get_TK_KEY_QUOTE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_QUOTE);
+}
+
+jerry_value_t get_TK_KEY_LEFTPAREN(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_LEFTPAREN);
+}
+
+jerry_value_t get_TK_KEY_RIGHTPAREN(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_RIGHTPAREN);
+}
+
+jerry_value_t get_TK_KEY_ASTERISK(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_ASTERISK);
+}
+
+jerry_value_t get_TK_KEY_PLUS(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_PLUS);
+}
+
+jerry_value_t get_TK_KEY_COMMA(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_COMMA);
+}
+
+jerry_value_t get_TK_KEY_MINUS(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_MINUS);
+}
+
+jerry_value_t get_TK_KEY_PERIOD(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_PERIOD);
+}
+
+jerry_value_t get_TK_KEY_SLASH(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_SLASH);
+}
+
+jerry_value_t get_TK_KEY_0(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_0);
+}
+
+jerry_value_t get_TK_KEY_1(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_1);
+}
+
+jerry_value_t get_TK_KEY_2(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_2);
+}
+
+jerry_value_t get_TK_KEY_3(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_3);
+}
+
+jerry_value_t get_TK_KEY_4(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_4);
+}
+
+jerry_value_t get_TK_KEY_5(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_5);
+}
+
+jerry_value_t get_TK_KEY_6(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_6);
+}
+
+jerry_value_t get_TK_KEY_7(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_7);
+}
+
+jerry_value_t get_TK_KEY_8(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_8);
+}
+
+jerry_value_t get_TK_KEY_9(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_9);
+}
+
+jerry_value_t get_TK_KEY_COLON(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_COLON);
+}
+
+jerry_value_t get_TK_KEY_SEMICOLON(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_SEMICOLON);
+}
+
+jerry_value_t get_TK_KEY_LESS(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_LESS);
+}
+
+jerry_value_t get_TK_KEY_EQUAL(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_EQUAL);
+}
+
+jerry_value_t get_TK_KEY_GREATER(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_GREATER);
+}
+
+jerry_value_t get_TK_KEY_QUESTION(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_QUESTION);
+}
+
+jerry_value_t get_TK_KEY_AT(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_AT);
+}
+
+jerry_value_t get_TK_KEY_LEFTBRACKET(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_LEFTBRACKET);
+}
+
+jerry_value_t get_TK_KEY_BACKSLASH(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_BACKSLASH);
+}
+
+jerry_value_t get_TK_KEY_RIGHTBRACKET(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_RIGHTBRACKET);
+}
+
+jerry_value_t get_TK_KEY_CARET(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_CARET);
+}
+
+jerry_value_t get_TK_KEY_UNDERSCORE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_UNDERSCORE);
+}
+
+jerry_value_t get_TK_KEY_BACKQUOTE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_BACKQUOTE);
+}
+
+jerry_value_t get_TK_KEY_a(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_a);
+}
+
+jerry_value_t get_TK_KEY_b(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_b);
+}
+
+jerry_value_t get_TK_KEY_c(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_c);
+}
+
+jerry_value_t get_TK_KEY_d(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_d);
+}
+
+jerry_value_t get_TK_KEY_e(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_e);
+}
+
+jerry_value_t get_TK_KEY_f(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_f);
+}
+
+jerry_value_t get_TK_KEY_g(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_g);
+}
+
+jerry_value_t get_TK_KEY_h(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_h);
+}
+
+jerry_value_t get_TK_KEY_i(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_i);
+}
+
+jerry_value_t get_TK_KEY_j(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_j);
+}
+
+jerry_value_t get_TK_KEY_k(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_k);
+}
+
+jerry_value_t get_TK_KEY_l(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_l);
+}
+
+jerry_value_t get_TK_KEY_m(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_m);
+}
+
+jerry_value_t get_TK_KEY_n(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_n);
+}
+
+jerry_value_t get_TK_KEY_o(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_o);
+}
+
+jerry_value_t get_TK_KEY_p(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_p);
+}
+
+jerry_value_t get_TK_KEY_q(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_q);
+}
+
+jerry_value_t get_TK_KEY_r(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_r);
+}
+
+jerry_value_t get_TK_KEY_s(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_s);
+}
+
+jerry_value_t get_TK_KEY_t(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_t);
+}
+
+jerry_value_t get_TK_KEY_u(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_u);
+}
+
+jerry_value_t get_TK_KEY_v(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_v);
+}
+
+jerry_value_t get_TK_KEY_w(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_w);
+}
+
+jerry_value_t get_TK_KEY_x(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_x);
+}
+
+jerry_value_t get_TK_KEY_y(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_y);
+}
+
+jerry_value_t get_TK_KEY_z(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_z);
+}
+
+jerry_value_t get_TK_KEY_A(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_A);
+}
+
+jerry_value_t get_TK_KEY_B(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_B);
+}
+
+jerry_value_t get_TK_KEY_C(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_C);
+}
+
+jerry_value_t get_TK_KEY_D(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_D);
+}
+
+jerry_value_t get_TK_KEY_E(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_E);
+}
+
+jerry_value_t get_TK_KEY_F(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_F);
+}
+
+jerry_value_t get_TK_KEY_G(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_G);
+}
+
+jerry_value_t get_TK_KEY_H(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_H);
+}
+
+jerry_value_t get_TK_KEY_I(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_I);
+}
+
+jerry_value_t get_TK_KEY_J(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_J);
+}
+
+jerry_value_t get_TK_KEY_K(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_K);
+}
+
+jerry_value_t get_TK_KEY_L(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_L);
+}
+
+jerry_value_t get_TK_KEY_M(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_M);
+}
+
+jerry_value_t get_TK_KEY_N(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_N);
+}
+
+jerry_value_t get_TK_KEY_O(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_O);
+}
+
+jerry_value_t get_TK_KEY_P(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_P);
+}
+
+jerry_value_t get_TK_KEY_Q(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_Q);
+}
+
+jerry_value_t get_TK_KEY_R(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_R);
+}
+
+jerry_value_t get_TK_KEY_S(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_S);
+}
+
+jerry_value_t get_TK_KEY_T(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_T);
+}
+
+jerry_value_t get_TK_KEY_U(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_U);
+}
+
+jerry_value_t get_TK_KEY_V(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_V);
+}
+
+jerry_value_t get_TK_KEY_W(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_W);
+}
+
+jerry_value_t get_TK_KEY_X(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_X);
+}
+
+jerry_value_t get_TK_KEY_Y(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_Y);
+}
+
+jerry_value_t get_TK_KEY_Z(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_Z);
+}
+
+jerry_value_t get_TK_KEY_DOT(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_DOT);
+}
+
+jerry_value_t get_TK_KEY_DELETE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_DELETE);
+}
+
+jerry_value_t get_TK_KEY_LEFTBRACE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_LEFTBRACE);
+}
+
+jerry_value_t get_TK_KEY_RIGHTBRACE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_number(TK_KEY_RIGHTBRACE);
+}
+
+ret_t key_code_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_RETURN", get_TK_KEY_RETURN);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_ESCAPE", get_TK_KEY_ESCAPE);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_BACKSPACE", get_TK_KEY_BACKSPACE);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_TAB", get_TK_KEY_TAB);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_SPACE", get_TK_KEY_SPACE);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_EXCLAIM", get_TK_KEY_EXCLAIM);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_QUOTEDBL", get_TK_KEY_QUOTEDBL);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_HASH", get_TK_KEY_HASH);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_PERCENT", get_TK_KEY_PERCENT);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_DOLLAR", get_TK_KEY_DOLLAR);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_AMPERSAND", get_TK_KEY_AMPERSAND);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_QUOTE", get_TK_KEY_QUOTE);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_LEFTPAREN", get_TK_KEY_LEFTPAREN);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_RIGHTPAREN", get_TK_KEY_RIGHTPAREN);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_ASTERISK", get_TK_KEY_ASTERISK);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_PLUS", get_TK_KEY_PLUS);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_COMMA", get_TK_KEY_COMMA);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_MINUS", get_TK_KEY_MINUS);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_PERIOD", get_TK_KEY_PERIOD);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_SLASH", get_TK_KEY_SLASH);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_0", get_TK_KEY_0);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_1", get_TK_KEY_1);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_2", get_TK_KEY_2);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_3", get_TK_KEY_3);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_4", get_TK_KEY_4);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_5", get_TK_KEY_5);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_6", get_TK_KEY_6);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_7", get_TK_KEY_7);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_8", get_TK_KEY_8);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_9", get_TK_KEY_9);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_COLON", get_TK_KEY_COLON);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_SEMICOLON", get_TK_KEY_SEMICOLON);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_LESS", get_TK_KEY_LESS);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_EQUAL", get_TK_KEY_EQUAL);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_GREATER", get_TK_KEY_GREATER);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_QUESTION", get_TK_KEY_QUESTION);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_AT", get_TK_KEY_AT);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_LEFTBRACKET", get_TK_KEY_LEFTBRACKET);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_BACKSLASH", get_TK_KEY_BACKSLASH);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_RIGHTBRACKET", get_TK_KEY_RIGHTBRACKET);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_CARET", get_TK_KEY_CARET);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_UNDERSCORE", get_TK_KEY_UNDERSCORE);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_BACKQUOTE", get_TK_KEY_BACKQUOTE);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_a", get_TK_KEY_a);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_b", get_TK_KEY_b);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_c", get_TK_KEY_c);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_d", get_TK_KEY_d);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_e", get_TK_KEY_e);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_f", get_TK_KEY_f);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_g", get_TK_KEY_g);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_h", get_TK_KEY_h);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_i", get_TK_KEY_i);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_j", get_TK_KEY_j);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_k", get_TK_KEY_k);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_l", get_TK_KEY_l);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_m", get_TK_KEY_m);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_n", get_TK_KEY_n);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_o", get_TK_KEY_o);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_p", get_TK_KEY_p);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_q", get_TK_KEY_q);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_r", get_TK_KEY_r);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_s", get_TK_KEY_s);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_t", get_TK_KEY_t);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_u", get_TK_KEY_u);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_v", get_TK_KEY_v);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_w", get_TK_KEY_w);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_x", get_TK_KEY_x);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_y", get_TK_KEY_y);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_z", get_TK_KEY_z);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_A", get_TK_KEY_A);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_B", get_TK_KEY_B);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_C", get_TK_KEY_C);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_D", get_TK_KEY_D);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_E", get_TK_KEY_E);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_F", get_TK_KEY_F);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_G", get_TK_KEY_G);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_H", get_TK_KEY_H);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_I", get_TK_KEY_I);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_J", get_TK_KEY_J);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_K", get_TK_KEY_K);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_L", get_TK_KEY_L);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_M", get_TK_KEY_M);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_N", get_TK_KEY_N);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_O", get_TK_KEY_O);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_P", get_TK_KEY_P);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_Q", get_TK_KEY_Q);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_R", get_TK_KEY_R);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_S", get_TK_KEY_S);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_T", get_TK_KEY_T);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_U", get_TK_KEY_U);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_V", get_TK_KEY_V);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_W", get_TK_KEY_W);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_X", get_TK_KEY_X);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_Y", get_TK_KEY_Y);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_Z", get_TK_KEY_Z);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_DOT", get_TK_KEY_DOT);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_DELETE", get_TK_KEY_DELETE);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_LEFTBRACE", get_TK_KEY_LEFTBRACE);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_RIGHTBRACE", get_TK_KEY_RIGHTBRACE);
 
  return RET_OK;
 }
@@ -5581,6 +6626,45 @@ jerry_value_t wrap_widget_is_window_opened(
   return jerry_create_boolean(ret);
 }
 
+jerry_value_t wrap_widget_is_window(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  bool_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (bool_t)widget_is_window(widget);
+
+  return jerry_create_boolean(ret);
+}
+
+jerry_value_t wrap_widget_is_designing_window(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  bool_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (bool_t)widget_is_designing_window(widget);
+
+  return jerry_create_boolean(ret);
+}
+
+jerry_value_t wrap_widget_is_window_manager(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  bool_t ret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (bool_t)widget_is_window_manager(widget);
+
+  return jerry_create_boolean(ret);
+}
+
 jerry_value_t wrap_widget_get_window(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -5936,6 +7020,9 @@ ret_t widget_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_prop_bool", wrap_widget_set_prop_bool);
   jerryx_handler_register_global((const jerry_char_t*)"widget_get_prop_bool", wrap_widget_get_prop_bool);
   jerryx_handler_register_global((const jerry_char_t*)"widget_is_window_opened", wrap_widget_is_window_opened);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_is_window", wrap_widget_is_window);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_is_designing_window", wrap_widget_is_designing_window);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_is_window_manager", wrap_widget_is_window_manager);
   jerryx_handler_register_global((const jerry_char_t*)"widget_foreach", wrap_widget_foreach);
   jerryx_handler_register_global((const jerry_char_t*)"widget_get_window", wrap_widget_get_window);
   jerryx_handler_register_global((const jerry_char_t*)"widget_get_window_manager", wrap_widget_get_window_manager);
@@ -9577,39 +10664,33 @@ ret_t time_clock_t_init(void) {
  return RET_OK;
 }
 
-jerry_value_t wrap_view_create(
+jerry_value_t wrap_window_event_cast(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
     const jerry_value_t args_p[], 
     const jerry_length_t args_cnt
   ) {
-  widget_t* ret = NULL;
-  widget_t* parent = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
-  xy_t x = (xy_t)jerry_get_number_value(args_p[1]);
-  xy_t y = (xy_t)jerry_get_number_value(args_p[2]);
-  wh_t w = (wh_t)jerry_get_number_value(args_p[3]);
-  wh_t h = (wh_t)jerry_get_number_value(args_p[4]);
-  ret = (widget_t*)view_create(parent, x, y, w, h);
+  window_event_t* ret = NULL;
+  event_t* event = (event_t*)jerry_get_pointer(args_p[0], "event_t*");
+  ret = (window_event_t*)window_event_cast(event);
 
-  return jerry_create_pointer(ret, "view_t*", NULL);
+  return jerry_create_pointer(ret, "window_event_t*", NULL);
 }
 
-jerry_value_t wrap_view_cast(
+jerry_value_t wrap_window_event_t_get_prop_window(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
     const jerry_value_t args_p[], 
     const jerry_length_t args_cnt
   ) {
-  widget_t* ret = NULL;
-  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
-  ret = (widget_t*)view_cast(widget);
+  window_event_t* obj = (window_event_t*)jerry_get_pointer(args_p[0], "window_event_t*");
 
-  return jerry_create_pointer(ret, "view_t*", NULL);
+  return jerry_create_pointer(obj->window, "widget_t*", NULL);
 }
 
-ret_t view_t_init(void) {
-  jerryx_handler_register_global((const jerry_char_t*)"view_create", wrap_view_create);
-  jerryx_handler_register_global((const jerry_char_t*)"view_cast", wrap_view_cast);
+ret_t window_event_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"window_event_cast", wrap_window_event_cast);
+  jerryx_handler_register_global((const jerry_char_t*)"window_event_t_get_prop_window", wrap_window_event_t_get_prop_window);
 
  return RET_OK;
 }
@@ -9730,37 +10811,6 @@ ret_t tab_button_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"tab_button_t_get_prop_value", wrap_tab_button_t_get_prop_value);
   jerryx_handler_register_global((const jerry_char_t*)"tab_button_t_get_prop_active_icon", wrap_tab_button_t_get_prop_active_icon);
   jerryx_handler_register_global((const jerry_char_t*)"tab_button_t_get_prop_icon", wrap_tab_button_t_get_prop_icon);
-
- return RET_OK;
-}
-
-jerry_value_t wrap_window_event_cast(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  window_event_t* ret = NULL;
-  event_t* event = (event_t*)jerry_get_pointer(args_p[0], "event_t*");
-  ret = (window_event_t*)window_event_cast(event);
-
-  return jerry_create_pointer(ret, "window_event_t*", NULL);
-}
-
-jerry_value_t wrap_window_event_t_get_prop_window(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  window_event_t* obj = (window_event_t*)jerry_get_pointer(args_p[0], "window_event_t*");
-
-  return jerry_create_pointer(obj->window, "widget_t*", NULL);
-}
-
-ret_t window_event_t_init(void) {
-  jerryx_handler_register_global((const jerry_char_t*)"window_event_cast", wrap_window_event_cast);
-  jerryx_handler_register_global((const jerry_char_t*)"window_event_t_get_prop_window", wrap_window_event_t_get_prop_window);
 
  return RET_OK;
 }
@@ -10372,6 +11422,37 @@ ret_t key_event_t_init(void) {
  return RET_OK;
 }
 
+jerry_value_t wrap_paint_event_cast(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  paint_event_t* ret = NULL;
+  event_t* event = (event_t*)jerry_get_pointer(args_p[0], "event_t*");
+  ret = (paint_event_t*)paint_event_cast(event);
+
+  return jerry_create_pointer(ret, "paint_event_t*", NULL);
+}
+
+jerry_value_t wrap_paint_event_t_get_prop_c(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  paint_event_t* obj = (paint_event_t*)jerry_get_pointer(args_p[0], "paint_event_t*");
+
+  return jerry_create_pointer(obj->c, "canvas_t*", NULL);
+}
+
+ret_t paint_event_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"paint_event_cast", wrap_paint_event_cast);
+  jerryx_handler_register_global((const jerry_char_t*)"paint_event_t_get_prop_c", wrap_paint_event_t_get_prop_c);
+
+ return RET_OK;
+}
+
 jerry_value_t wrap_prop_change_event_cast(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -10411,37 +11492,6 @@ ret_t prop_change_event_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"prop_change_event_cast", wrap_prop_change_event_cast);
   jerryx_handler_register_global((const jerry_char_t*)"prop_change_event_t_get_prop_name", wrap_prop_change_event_t_get_prop_name);
   jerryx_handler_register_global((const jerry_char_t*)"prop_change_event_t_get_prop_value", wrap_prop_change_event_t_get_prop_value);
-
- return RET_OK;
-}
-
-jerry_value_t wrap_paint_event_cast(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  paint_event_t* ret = NULL;
-  event_t* event = (event_t*)jerry_get_pointer(args_p[0], "event_t*");
-  ret = (paint_event_t*)paint_event_cast(event);
-
-  return jerry_create_pointer(ret, "paint_event_t*", NULL);
-}
-
-jerry_value_t wrap_paint_event_t_get_prop_c(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  paint_event_t* obj = (paint_event_t*)jerry_get_pointer(args_p[0], "paint_event_t*");
-
-  return jerry_create_pointer(obj->c, "canvas_t*", NULL);
-}
-
-ret_t paint_event_t_init(void) {
-  jerryx_handler_register_global((const jerry_char_t*)"paint_event_cast", wrap_paint_event_cast);
-  jerryx_handler_register_global((const jerry_char_t*)"paint_event_t_get_prop_c", wrap_paint_event_t_get_prop_c);
 
  return RET_OK;
 }
@@ -11396,6 +12446,43 @@ ret_t color_picker_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"color_picker_set_color", wrap_color_picker_set_color);
   jerryx_handler_register_global((const jerry_char_t*)"color_picker_cast", wrap_color_picker_cast);
   jerryx_handler_register_global((const jerry_char_t*)"color_picker_t_get_prop_value", wrap_color_picker_t_get_prop_value);
+
+ return RET_OK;
+}
+
+jerry_value_t wrap_view_create(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  widget_t* ret = NULL;
+  widget_t* parent = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  xy_t x = (xy_t)jerry_get_number_value(args_p[1]);
+  xy_t y = (xy_t)jerry_get_number_value(args_p[2]);
+  wh_t w = (wh_t)jerry_get_number_value(args_p[3]);
+  wh_t h = (wh_t)jerry_get_number_value(args_p[4]);
+  ret = (widget_t*)view_create(parent, x, y, w, h);
+
+  return jerry_create_pointer(ret, "view_t*", NULL);
+}
+
+jerry_value_t wrap_view_cast(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  widget_t* ret = NULL;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (widget_t*)view_cast(widget);
+
+  return jerry_create_pointer(ret, "view_t*", NULL);
+}
+
+ret_t view_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"view_create", wrap_view_create);
+  jerryx_handler_register_global((const jerry_char_t*)"view_cast", wrap_view_cast);
 
  return RET_OK;
 }
@@ -14496,6 +15583,8 @@ ret_t awtk_js_init(void) {
   idle_t_init();
   image_manager_t_init();
   input_type_t_init();
+  input_method_t_init();
+  key_code_t_init();
   locale_info_t_init();
   style_id_t_init();
   style_t_init();
@@ -14536,16 +15625,15 @@ ret_t awtk_js_init(void) {
   text_selector_t_init();
   digit_clock_t_init();
   time_clock_t_init();
-  view_t_init();
-  tab_button_t_init();
   window_event_t_init();
+  tab_button_t_init();
   image_base_t_init();
   window_t_init();
   wheel_event_t_init();
   pointer_event_t_init();
   key_event_t_init();
-  prop_change_event_t_init();
   paint_event_t_init();
+  prop_change_event_t_init();
   window_base_t_init();
   window_manager_t_init();
   progress_bar_t_init();
@@ -14553,6 +15641,7 @@ ret_t awtk_js_init(void) {
   style_mutable_t_init();
   canvas_widget_t_init();
   color_picker_t_init();
+  view_t_init();
   tab_button_group_t_init();
   guage_pointer_t_init();
   guage_t_init();

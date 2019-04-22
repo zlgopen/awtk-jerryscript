@@ -35,6 +35,16 @@ function installOne(w) {
     iter.on(EventType.CLICK, function(evt) {
       Tk.quit();
     })
+  } else if(strContains(widgetName, 'key')) {
+    iter.on(EventType.CLICK, function(evt) {
+      InputMethod.instance().commitText(iter.getText());
+      print('commitText');
+    })
+  } else if(strContains(widgetName, 'backspace')) {
+    iter.on(EventType.CLICK, function(evt) {
+      InputMethod.instance().dispatchKey(KeyCode.KEY_BACKSPACE);
+      print('dispatchKey');
+    })
   } else if(strContains(widgetName, 'chinese')) {
     iter.on(EventType.CLICK, function(evt) {
       Tklocale.instance().change('zh', 'CN');
@@ -100,6 +110,7 @@ function showPreloadResWindow() {
   Timer.add(function(info) { 
     if(finish == total) {
       print('done')
+      Window.open('system_bar');
       openWindow('main', win);
       bitmap = null;
       gc();

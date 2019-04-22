@@ -141,6 +141,108 @@ declare function INPUT_EMAIL();
 declare function INPUT_PASSWORD();
 declare function INPUT_PHONE();
 declare function INPUT_CUSTOM();
+declare function input_method_commit_text(im, text);
+declare function input_method_dispatch_key(im, key);
+declare function input_method();
+declare function TK_KEY_RETURN();
+declare function TK_KEY_ESCAPE();
+declare function TK_KEY_BACKSPACE();
+declare function TK_KEY_TAB();
+declare function TK_KEY_SPACE();
+declare function TK_KEY_EXCLAIM();
+declare function TK_KEY_QUOTEDBL();
+declare function TK_KEY_HASH();
+declare function TK_KEY_PERCENT();
+declare function TK_KEY_DOLLAR();
+declare function TK_KEY_AMPERSAND();
+declare function TK_KEY_QUOTE();
+declare function TK_KEY_LEFTPAREN();
+declare function TK_KEY_RIGHTPAREN();
+declare function TK_KEY_ASTERISK();
+declare function TK_KEY_PLUS();
+declare function TK_KEY_COMMA();
+declare function TK_KEY_MINUS();
+declare function TK_KEY_PERIOD();
+declare function TK_KEY_SLASH();
+declare function TK_KEY_0();
+declare function TK_KEY_1();
+declare function TK_KEY_2();
+declare function TK_KEY_3();
+declare function TK_KEY_4();
+declare function TK_KEY_5();
+declare function TK_KEY_6();
+declare function TK_KEY_7();
+declare function TK_KEY_8();
+declare function TK_KEY_9();
+declare function TK_KEY_COLON();
+declare function TK_KEY_SEMICOLON();
+declare function TK_KEY_LESS();
+declare function TK_KEY_EQUAL();
+declare function TK_KEY_GREATER();
+declare function TK_KEY_QUESTION();
+declare function TK_KEY_AT();
+declare function TK_KEY_LEFTBRACKET();
+declare function TK_KEY_BACKSLASH();
+declare function TK_KEY_RIGHTBRACKET();
+declare function TK_KEY_CARET();
+declare function TK_KEY_UNDERSCORE();
+declare function TK_KEY_BACKQUOTE();
+declare function TK_KEY_a();
+declare function TK_KEY_b();
+declare function TK_KEY_c();
+declare function TK_KEY_d();
+declare function TK_KEY_e();
+declare function TK_KEY_f();
+declare function TK_KEY_g();
+declare function TK_KEY_h();
+declare function TK_KEY_i();
+declare function TK_KEY_j();
+declare function TK_KEY_k();
+declare function TK_KEY_l();
+declare function TK_KEY_m();
+declare function TK_KEY_n();
+declare function TK_KEY_o();
+declare function TK_KEY_p();
+declare function TK_KEY_q();
+declare function TK_KEY_r();
+declare function TK_KEY_s();
+declare function TK_KEY_t();
+declare function TK_KEY_u();
+declare function TK_KEY_v();
+declare function TK_KEY_w();
+declare function TK_KEY_x();
+declare function TK_KEY_y();
+declare function TK_KEY_z();
+declare function TK_KEY_A();
+declare function TK_KEY_B();
+declare function TK_KEY_C();
+declare function TK_KEY_D();
+declare function TK_KEY_E();
+declare function TK_KEY_F();
+declare function TK_KEY_G();
+declare function TK_KEY_H();
+declare function TK_KEY_I();
+declare function TK_KEY_J();
+declare function TK_KEY_K();
+declare function TK_KEY_L();
+declare function TK_KEY_M();
+declare function TK_KEY_N();
+declare function TK_KEY_O();
+declare function TK_KEY_P();
+declare function TK_KEY_Q();
+declare function TK_KEY_R();
+declare function TK_KEY_S();
+declare function TK_KEY_T();
+declare function TK_KEY_U();
+declare function TK_KEY_V();
+declare function TK_KEY_W();
+declare function TK_KEY_X();
+declare function TK_KEY_Y();
+declare function TK_KEY_Z();
+declare function TK_KEY_DOT();
+declare function TK_KEY_DELETE();
+declare function TK_KEY_LEFTBRACE();
+declare function TK_KEY_RIGHTBRACE();
 declare function locale_info();
 declare function locale_info_tr(locale_info, text);
 declare function locale_info_change(locale_info, language, country);
@@ -462,6 +564,9 @@ declare function widget_get_prop_int(widget, name, defval);
 declare function widget_set_prop_bool(widget, name, v);
 declare function widget_get_prop_bool(widget, name, defval);
 declare function widget_is_window_opened(widget);
+declare function widget_is_window(widget);
+declare function widget_is_designing_window(widget);
+declare function widget_is_window_manager(widget);
 declare function widget_foreach(widget, visit, ctx);
 declare function widget_get_window(widget);
 declare function widget_get_window_manager(widget);
@@ -754,8 +859,8 @@ declare function time_clock_t_get_prop_bg_image(nativeObj);
 declare function time_clock_t_get_prop_hour_image(nativeObj);
 declare function time_clock_t_get_prop_minute_image(nativeObj);
 declare function time_clock_t_get_prop_second_image(nativeObj);
-declare function view_create(parent, x, y, w, h);
-declare function view_cast(widget);
+declare function window_event_cast(event);
+declare function window_event_t_get_prop_window(nativeObj);
 declare function tab_button_create(parent, x, y, w, h);
 declare function tab_button_cast(widget);
 declare function tab_button_set_value(widget, value);
@@ -764,8 +869,6 @@ declare function tab_button_set_active_icon(widget, name);
 declare function tab_button_t_get_prop_value(nativeObj);
 declare function tab_button_t_get_prop_active_icon(nativeObj);
 declare function tab_button_t_get_prop_icon(nativeObj);
-declare function window_event_cast(event);
-declare function window_event_t_get_prop_window(nativeObj);
 declare function image_set_image(widget, name);
 declare function image_set_rotation(widget, rotation);
 declare function image_set_scale(widget, scale_x, scale_y);
@@ -810,11 +913,11 @@ declare function key_event_t_get_prop_alt(nativeObj);
 declare function key_event_t_get_prop_ctrl(nativeObj);
 declare function key_event_t_get_prop_shift(nativeObj);
 declare function key_event_t_get_prop_capslock(nativeObj);
+declare function paint_event_cast(event);
+declare function paint_event_t_get_prop_c(nativeObj);
 declare function prop_change_event_cast(event);
 declare function prop_change_event_t_get_prop_name(nativeObj);
 declare function prop_change_event_t_get_prop_value(nativeObj);
-declare function paint_event_cast(event);
-declare function paint_event_t_get_prop_c(nativeObj);
 declare function window_base_cast(widget);
 declare function window_base_t_get_prop_theme(nativeObj);
 declare function window_base_t_get_prop_closable(nativeObj);
@@ -877,6 +980,8 @@ declare function color_picker_create(parent, x, y, w, h);
 declare function color_picker_set_color(widget, color);
 declare function color_picker_cast(widget);
 declare function color_picker_t_get_prop_value(nativeObj);
+declare function view_create(parent, x, y, w, h);
+declare function view_cast(widget);
 declare function tab_button_group_create(parent, x, y, w, h);
 declare function tab_button_group_cast(widget);
 declare function tab_button_group_t_get_prop_compact(nativeObj);
@@ -1456,6 +1561,128 @@ enum InputType {
  PASSWORD = INPUT_PASSWORD(),
  PHONE = INPUT_PHONE(),
  CUSTOM = INPUT_CUSTOM(),
+};
+
+class InputMethod {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ commitText(text) {
+   return input_method_commit_text(this.nativeObj, text);
+ }
+
+ dispatchKey(key) {
+   return input_method_dispatch_key(this.nativeObj, key);
+ }
+
+ static instance() {
+   return new InputMethod(input_method());
+ }
+
+}
+
+enum KeyCode {
+ KEY_RETURN = TK_KEY_RETURN(),
+ KEY_ESCAPE = TK_KEY_ESCAPE(),
+ KEY_BACKSPACE = TK_KEY_BACKSPACE(),
+ KEY_TAB = TK_KEY_TAB(),
+ KEY_SPACE = TK_KEY_SPACE(),
+ KEY_EXCLAIM = TK_KEY_EXCLAIM(),
+ KEY_QUOTEDBL = TK_KEY_QUOTEDBL(),
+ KEY_HASH = TK_KEY_HASH(),
+ KEY_PERCENT = TK_KEY_PERCENT(),
+ KEY_DOLLAR = TK_KEY_DOLLAR(),
+ KEY_AMPERSAND = TK_KEY_AMPERSAND(),
+ KEY_QUOTE = TK_KEY_QUOTE(),
+ KEY_LEFTPAREN = TK_KEY_LEFTPAREN(),
+ KEY_RIGHTPAREN = TK_KEY_RIGHTPAREN(),
+ KEY_ASTERISK = TK_KEY_ASTERISK(),
+ KEY_PLUS = TK_KEY_PLUS(),
+ KEY_COMMA = TK_KEY_COMMA(),
+ KEY_MINUS = TK_KEY_MINUS(),
+ KEY_PERIOD = TK_KEY_PERIOD(),
+ KEY_SLASH = TK_KEY_SLASH(),
+ KEY_0 = TK_KEY_0(),
+ KEY_1 = TK_KEY_1(),
+ KEY_2 = TK_KEY_2(),
+ KEY_3 = TK_KEY_3(),
+ KEY_4 = TK_KEY_4(),
+ KEY_5 = TK_KEY_5(),
+ KEY_6 = TK_KEY_6(),
+ KEY_7 = TK_KEY_7(),
+ KEY_8 = TK_KEY_8(),
+ KEY_9 = TK_KEY_9(),
+ KEY_COLON = TK_KEY_COLON(),
+ KEY_SEMICOLON = TK_KEY_SEMICOLON(),
+ KEY_LESS = TK_KEY_LESS(),
+ KEY_EQUAL = TK_KEY_EQUAL(),
+ KEY_GREATER = TK_KEY_GREATER(),
+ KEY_QUESTION = TK_KEY_QUESTION(),
+ KEY_AT = TK_KEY_AT(),
+ KEY_LEFTBRACKET = TK_KEY_LEFTBRACKET(),
+ KEY_BACKSLASH = TK_KEY_BACKSLASH(),
+ KEY_RIGHTBRACKET = TK_KEY_RIGHTBRACKET(),
+ KEY_CARET = TK_KEY_CARET(),
+ KEY_UNDERSCORE = TK_KEY_UNDERSCORE(),
+ KEY_BACKQUOTE = TK_KEY_BACKQUOTE(),
+ KEY_a = TK_KEY_a(),
+ KEY_b = TK_KEY_b(),
+ KEY_c = TK_KEY_c(),
+ KEY_d = TK_KEY_d(),
+ KEY_e = TK_KEY_e(),
+ KEY_f = TK_KEY_f(),
+ KEY_g = TK_KEY_g(),
+ KEY_h = TK_KEY_h(),
+ KEY_i = TK_KEY_i(),
+ KEY_j = TK_KEY_j(),
+ KEY_k = TK_KEY_k(),
+ KEY_l = TK_KEY_l(),
+ KEY_m = TK_KEY_m(),
+ KEY_n = TK_KEY_n(),
+ KEY_o = TK_KEY_o(),
+ KEY_p = TK_KEY_p(),
+ KEY_q = TK_KEY_q(),
+ KEY_r = TK_KEY_r(),
+ KEY_s = TK_KEY_s(),
+ KEY_t = TK_KEY_t(),
+ KEY_u = TK_KEY_u(),
+ KEY_v = TK_KEY_v(),
+ KEY_w = TK_KEY_w(),
+ KEY_x = TK_KEY_x(),
+ KEY_y = TK_KEY_y(),
+ KEY_z = TK_KEY_z(),
+ KEY_A = TK_KEY_A(),
+ KEY_B = TK_KEY_B(),
+ KEY_C = TK_KEY_C(),
+ KEY_D = TK_KEY_D(),
+ KEY_E = TK_KEY_E(),
+ KEY_F = TK_KEY_F(),
+ KEY_G = TK_KEY_G(),
+ KEY_H = TK_KEY_H(),
+ KEY_I = TK_KEY_I(),
+ KEY_J = TK_KEY_J(),
+ KEY_K = TK_KEY_K(),
+ KEY_L = TK_KEY_L(),
+ KEY_M = TK_KEY_M(),
+ KEY_N = TK_KEY_N(),
+ KEY_O = TK_KEY_O(),
+ KEY_P = TK_KEY_P(),
+ KEY_Q = TK_KEY_Q(),
+ KEY_R = TK_KEY_R(),
+ KEY_S = TK_KEY_S(),
+ KEY_T = TK_KEY_T(),
+ KEY_U = TK_KEY_U(),
+ KEY_V = TK_KEY_V(),
+ KEY_W = TK_KEY_W(),
+ KEY_X = TK_KEY_X(),
+ KEY_Y = TK_KEY_Y(),
+ KEY_Z = TK_KEY_Z(),
+ KEY_DOT = TK_KEY_DOT(),
+ KEY_DELETE = TK_KEY_DELETE(),
+ KEY_LEFTBRACE = TK_KEY_LEFTBRACE(),
+ KEY_RIGHTBRACE = TK_KEY_RIGHTBRACE(),
 };
 
 class LocaleInfo {
@@ -2160,6 +2387,18 @@ class Widget {
 
  isWindowOpened() {
    return widget_is_window_opened(this.nativeObj);
+ }
+
+ isWindow() {
+   return widget_is_window(this.nativeObj);
+ }
+
+ isDesigningWindow() {
+   return widget_is_designing_window(this.nativeObj);
+ }
+
+ isWindowManager() {
+   return widget_is_window_manager(this.nativeObj);
  }
 
  foreach(visit, ctx) {
@@ -3381,18 +3620,18 @@ class TimeClock extends Widget {
 
 }
 
-class View extends Widget {
+class WindowEvent extends Event {
  public nativeObj;
  constructor(nativeObj) {
    super(nativeObj);
  }
 
- static create(parent, x, y, w, h) {
-   return new View(view_create(parent ? parent.nativeObj : null, x, y, w, h));
+ static cast(event) {
+   return new WindowEvent(window_event_cast(event ? (event.nativeObj || event) : null));
  }
 
- static cast(widget) {
-   return new View(view_cast(widget ? (widget.nativeObj || widget) : null));
+ get window() {
+   return window_event_t_get_prop_window(this.nativeObj);
  }
 
 }
@@ -3433,22 +3672,6 @@ class TabButton extends Widget {
 
  get icon() {
    return tab_button_t_get_prop_icon(this.nativeObj);
- }
-
-}
-
-class WindowEvent extends Event {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static cast(event) {
-   return new WindowEvent(window_event_cast(event ? (event.nativeObj || event) : null));
- }
-
- get window() {
-   return window_event_t_get_prop_window(this.nativeObj);
  }
 
 }
@@ -3669,6 +3892,22 @@ class KeyEvent extends Event {
 
 }
 
+class PaintEvent extends Event {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static cast(event) {
+   return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
+ }
+
+ get c() {
+   return paint_event_t_get_prop_c(this.nativeObj);
+ }
+
+}
+
 class PropChangeEvent extends Event {
  public nativeObj;
  constructor(nativeObj) {
@@ -3685,22 +3924,6 @@ class PropChangeEvent extends Event {
 
  get value() {
    return prop_change_event_t_get_prop_value(this.nativeObj);
- }
-
-}
-
-class PaintEvent extends Event {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static cast(event) {
-   return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
- }
-
- get c() {
-   return paint_event_t_get_prop_c(this.nativeObj);
  }
 
 }
@@ -4005,6 +4228,22 @@ class ColorPicker extends Widget {
 
  get value() {
    return color_picker_t_get_prop_value(this.nativeObj);
+ }
+
+}
+
+class View extends Widget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new View(view_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ static cast(widget) {
+   return new View(view_cast(widget ? (widget.nativeObj || widget) : null));
  }
 
 }

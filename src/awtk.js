@@ -384,6 +384,124 @@ var InputType;
     InputType[InputType["CUSTOM"] = INPUT_CUSTOM()] = "CUSTOM";
 })(InputType || (InputType = {}));
 ;
+var InputMethod = /** @class */ (function () {
+    function InputMethod(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    InputMethod.prototype.commitText = function (text) {
+        return input_method_commit_text(this.nativeObj, text);
+    };
+    InputMethod.prototype.dispatchKey = function (key) {
+        return input_method_dispatch_key(this.nativeObj, key);
+    };
+    InputMethod.instance = function () {
+        return new InputMethod(input_method());
+    };
+    return InputMethod;
+}());
+var KeyCode;
+(function (KeyCode) {
+    KeyCode[KeyCode["KEY_RETURN"] = TK_KEY_RETURN()] = "KEY_RETURN";
+    KeyCode[KeyCode["KEY_ESCAPE"] = TK_KEY_ESCAPE()] = "KEY_ESCAPE";
+    KeyCode[KeyCode["KEY_BACKSPACE"] = TK_KEY_BACKSPACE()] = "KEY_BACKSPACE";
+    KeyCode[KeyCode["KEY_TAB"] = TK_KEY_TAB()] = "KEY_TAB";
+    KeyCode[KeyCode["KEY_SPACE"] = TK_KEY_SPACE()] = "KEY_SPACE";
+    KeyCode[KeyCode["KEY_EXCLAIM"] = TK_KEY_EXCLAIM()] = "KEY_EXCLAIM";
+    KeyCode[KeyCode["KEY_QUOTEDBL"] = TK_KEY_QUOTEDBL()] = "KEY_QUOTEDBL";
+    KeyCode[KeyCode["KEY_HASH"] = TK_KEY_HASH()] = "KEY_HASH";
+    KeyCode[KeyCode["KEY_PERCENT"] = TK_KEY_PERCENT()] = "KEY_PERCENT";
+    KeyCode[KeyCode["KEY_DOLLAR"] = TK_KEY_DOLLAR()] = "KEY_DOLLAR";
+    KeyCode[KeyCode["KEY_AMPERSAND"] = TK_KEY_AMPERSAND()] = "KEY_AMPERSAND";
+    KeyCode[KeyCode["KEY_QUOTE"] = TK_KEY_QUOTE()] = "KEY_QUOTE";
+    KeyCode[KeyCode["KEY_LEFTPAREN"] = TK_KEY_LEFTPAREN()] = "KEY_LEFTPAREN";
+    KeyCode[KeyCode["KEY_RIGHTPAREN"] = TK_KEY_RIGHTPAREN()] = "KEY_RIGHTPAREN";
+    KeyCode[KeyCode["KEY_ASTERISK"] = TK_KEY_ASTERISK()] = "KEY_ASTERISK";
+    KeyCode[KeyCode["KEY_PLUS"] = TK_KEY_PLUS()] = "KEY_PLUS";
+    KeyCode[KeyCode["KEY_COMMA"] = TK_KEY_COMMA()] = "KEY_COMMA";
+    KeyCode[KeyCode["KEY_MINUS"] = TK_KEY_MINUS()] = "KEY_MINUS";
+    KeyCode[KeyCode["KEY_PERIOD"] = TK_KEY_PERIOD()] = "KEY_PERIOD";
+    KeyCode[KeyCode["KEY_SLASH"] = TK_KEY_SLASH()] = "KEY_SLASH";
+    KeyCode[KeyCode["KEY_0"] = TK_KEY_0()] = "KEY_0";
+    KeyCode[KeyCode["KEY_1"] = TK_KEY_1()] = "KEY_1";
+    KeyCode[KeyCode["KEY_2"] = TK_KEY_2()] = "KEY_2";
+    KeyCode[KeyCode["KEY_3"] = TK_KEY_3()] = "KEY_3";
+    KeyCode[KeyCode["KEY_4"] = TK_KEY_4()] = "KEY_4";
+    KeyCode[KeyCode["KEY_5"] = TK_KEY_5()] = "KEY_5";
+    KeyCode[KeyCode["KEY_6"] = TK_KEY_6()] = "KEY_6";
+    KeyCode[KeyCode["KEY_7"] = TK_KEY_7()] = "KEY_7";
+    KeyCode[KeyCode["KEY_8"] = TK_KEY_8()] = "KEY_8";
+    KeyCode[KeyCode["KEY_9"] = TK_KEY_9()] = "KEY_9";
+    KeyCode[KeyCode["KEY_COLON"] = TK_KEY_COLON()] = "KEY_COLON";
+    KeyCode[KeyCode["KEY_SEMICOLON"] = TK_KEY_SEMICOLON()] = "KEY_SEMICOLON";
+    KeyCode[KeyCode["KEY_LESS"] = TK_KEY_LESS()] = "KEY_LESS";
+    KeyCode[KeyCode["KEY_EQUAL"] = TK_KEY_EQUAL()] = "KEY_EQUAL";
+    KeyCode[KeyCode["KEY_GREATER"] = TK_KEY_GREATER()] = "KEY_GREATER";
+    KeyCode[KeyCode["KEY_QUESTION"] = TK_KEY_QUESTION()] = "KEY_QUESTION";
+    KeyCode[KeyCode["KEY_AT"] = TK_KEY_AT()] = "KEY_AT";
+    KeyCode[KeyCode["KEY_LEFTBRACKET"] = TK_KEY_LEFTBRACKET()] = "KEY_LEFTBRACKET";
+    KeyCode[KeyCode["KEY_BACKSLASH"] = TK_KEY_BACKSLASH()] = "KEY_BACKSLASH";
+    KeyCode[KeyCode["KEY_RIGHTBRACKET"] = TK_KEY_RIGHTBRACKET()] = "KEY_RIGHTBRACKET";
+    KeyCode[KeyCode["KEY_CARET"] = TK_KEY_CARET()] = "KEY_CARET";
+    KeyCode[KeyCode["KEY_UNDERSCORE"] = TK_KEY_UNDERSCORE()] = "KEY_UNDERSCORE";
+    KeyCode[KeyCode["KEY_BACKQUOTE"] = TK_KEY_BACKQUOTE()] = "KEY_BACKQUOTE";
+    KeyCode[KeyCode["KEY_a"] = TK_KEY_a()] = "KEY_a";
+    KeyCode[KeyCode["KEY_b"] = TK_KEY_b()] = "KEY_b";
+    KeyCode[KeyCode["KEY_c"] = TK_KEY_c()] = "KEY_c";
+    KeyCode[KeyCode["KEY_d"] = TK_KEY_d()] = "KEY_d";
+    KeyCode[KeyCode["KEY_e"] = TK_KEY_e()] = "KEY_e";
+    KeyCode[KeyCode["KEY_f"] = TK_KEY_f()] = "KEY_f";
+    KeyCode[KeyCode["KEY_g"] = TK_KEY_g()] = "KEY_g";
+    KeyCode[KeyCode["KEY_h"] = TK_KEY_h()] = "KEY_h";
+    KeyCode[KeyCode["KEY_i"] = TK_KEY_i()] = "KEY_i";
+    KeyCode[KeyCode["KEY_j"] = TK_KEY_j()] = "KEY_j";
+    KeyCode[KeyCode["KEY_k"] = TK_KEY_k()] = "KEY_k";
+    KeyCode[KeyCode["KEY_l"] = TK_KEY_l()] = "KEY_l";
+    KeyCode[KeyCode["KEY_m"] = TK_KEY_m()] = "KEY_m";
+    KeyCode[KeyCode["KEY_n"] = TK_KEY_n()] = "KEY_n";
+    KeyCode[KeyCode["KEY_o"] = TK_KEY_o()] = "KEY_o";
+    KeyCode[KeyCode["KEY_p"] = TK_KEY_p()] = "KEY_p";
+    KeyCode[KeyCode["KEY_q"] = TK_KEY_q()] = "KEY_q";
+    KeyCode[KeyCode["KEY_r"] = TK_KEY_r()] = "KEY_r";
+    KeyCode[KeyCode["KEY_s"] = TK_KEY_s()] = "KEY_s";
+    KeyCode[KeyCode["KEY_t"] = TK_KEY_t()] = "KEY_t";
+    KeyCode[KeyCode["KEY_u"] = TK_KEY_u()] = "KEY_u";
+    KeyCode[KeyCode["KEY_v"] = TK_KEY_v()] = "KEY_v";
+    KeyCode[KeyCode["KEY_w"] = TK_KEY_w()] = "KEY_w";
+    KeyCode[KeyCode["KEY_x"] = TK_KEY_x()] = "KEY_x";
+    KeyCode[KeyCode["KEY_y"] = TK_KEY_y()] = "KEY_y";
+    KeyCode[KeyCode["KEY_z"] = TK_KEY_z()] = "KEY_z";
+    KeyCode[KeyCode["KEY_A"] = TK_KEY_A()] = "KEY_A";
+    KeyCode[KeyCode["KEY_B"] = TK_KEY_B()] = "KEY_B";
+    KeyCode[KeyCode["KEY_C"] = TK_KEY_C()] = "KEY_C";
+    KeyCode[KeyCode["KEY_D"] = TK_KEY_D()] = "KEY_D";
+    KeyCode[KeyCode["KEY_E"] = TK_KEY_E()] = "KEY_E";
+    KeyCode[KeyCode["KEY_F"] = TK_KEY_F()] = "KEY_F";
+    KeyCode[KeyCode["KEY_G"] = TK_KEY_G()] = "KEY_G";
+    KeyCode[KeyCode["KEY_H"] = TK_KEY_H()] = "KEY_H";
+    KeyCode[KeyCode["KEY_I"] = TK_KEY_I()] = "KEY_I";
+    KeyCode[KeyCode["KEY_J"] = TK_KEY_J()] = "KEY_J";
+    KeyCode[KeyCode["KEY_K"] = TK_KEY_K()] = "KEY_K";
+    KeyCode[KeyCode["KEY_L"] = TK_KEY_L()] = "KEY_L";
+    KeyCode[KeyCode["KEY_M"] = TK_KEY_M()] = "KEY_M";
+    KeyCode[KeyCode["KEY_N"] = TK_KEY_N()] = "KEY_N";
+    KeyCode[KeyCode["KEY_O"] = TK_KEY_O()] = "KEY_O";
+    KeyCode[KeyCode["KEY_P"] = TK_KEY_P()] = "KEY_P";
+    KeyCode[KeyCode["KEY_Q"] = TK_KEY_Q()] = "KEY_Q";
+    KeyCode[KeyCode["KEY_R"] = TK_KEY_R()] = "KEY_R";
+    KeyCode[KeyCode["KEY_S"] = TK_KEY_S()] = "KEY_S";
+    KeyCode[KeyCode["KEY_T"] = TK_KEY_T()] = "KEY_T";
+    KeyCode[KeyCode["KEY_U"] = TK_KEY_U()] = "KEY_U";
+    KeyCode[KeyCode["KEY_V"] = TK_KEY_V()] = "KEY_V";
+    KeyCode[KeyCode["KEY_W"] = TK_KEY_W()] = "KEY_W";
+    KeyCode[KeyCode["KEY_X"] = TK_KEY_X()] = "KEY_X";
+    KeyCode[KeyCode["KEY_Y"] = TK_KEY_Y()] = "KEY_Y";
+    KeyCode[KeyCode["KEY_Z"] = TK_KEY_Z()] = "KEY_Z";
+    KeyCode[KeyCode["KEY_DOT"] = TK_KEY_DOT()] = "KEY_DOT";
+    KeyCode[KeyCode["KEY_DELETE"] = TK_KEY_DELETE()] = "KEY_DELETE";
+    KeyCode[KeyCode["KEY_LEFTBRACE"] = TK_KEY_LEFTBRACE()] = "KEY_LEFTBRACE";
+    KeyCode[KeyCode["KEY_RIGHTBRACE"] = TK_KEY_RIGHTBRACE()] = "KEY_RIGHTBRACE";
+})(KeyCode || (KeyCode = {}));
+;
 var LocaleInfo = /** @class */ (function () {
     function LocaleInfo(nativeObj) {
         this.nativeObj = nativeObj;
@@ -1030,6 +1148,15 @@ var Widget = /** @class */ (function () {
     };
     Widget.prototype.isWindowOpened = function () {
         return widget_is_window_opened(this.nativeObj);
+    };
+    Widget.prototype.isWindow = function () {
+        return widget_is_window(this.nativeObj);
+    };
+    Widget.prototype.isDesigningWindow = function () {
+        return widget_is_designing_window(this.nativeObj);
+    };
+    Widget.prototype.isWindowManager = function () {
+        return widget_is_window_manager(this.nativeObj);
     };
     Widget.prototype.foreach = function (visit, ctx) {
         return widget_foreach(this.nativeObj, visit, ctx);
@@ -2271,19 +2398,23 @@ var TimeClock = /** @class */ (function (_super) {
     });
     return TimeClock;
 }(Widget));
-var View = /** @class */ (function (_super) {
-    __extends(View, _super);
-    function View(nativeObj) {
+var WindowEvent = /** @class */ (function (_super) {
+    __extends(WindowEvent, _super);
+    function WindowEvent(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    View.create = function (parent, x, y, w, h) {
-        return new View(view_create(parent ? parent.nativeObj : null, x, y, w, h));
+    WindowEvent.cast = function (event) {
+        return new WindowEvent(window_event_cast(event ? (event.nativeObj || event) : null));
     };
-    View.cast = function (widget) {
-        return new View(view_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    return View;
-}(Widget));
+    Object.defineProperty(WindowEvent.prototype, "window", {
+        get: function () {
+            return window_event_t_get_prop_window(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return WindowEvent;
+}(Event));
 var TabButton = /** @class */ (function (_super) {
     __extends(TabButton, _super);
     function TabButton(nativeObj) {
@@ -2327,23 +2458,6 @@ var TabButton = /** @class */ (function (_super) {
     });
     return TabButton;
 }(Widget));
-var WindowEvent = /** @class */ (function (_super) {
-    __extends(WindowEvent, _super);
-    function WindowEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    WindowEvent.cast = function (event) {
-        return new WindowEvent(window_event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(WindowEvent.prototype, "window", {
-        get: function () {
-            return window_event_t_get_prop_window(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return WindowEvent;
-}(Event));
 var ImageBase = /** @class */ (function (_super) {
     __extends(ImageBase, _super);
     function ImageBase(nativeObj) {
@@ -2615,6 +2729,23 @@ var KeyEvent = /** @class */ (function (_super) {
     });
     return KeyEvent;
 }(Event));
+var PaintEvent = /** @class */ (function (_super) {
+    __extends(PaintEvent, _super);
+    function PaintEvent(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    PaintEvent.cast = function (event) {
+        return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(PaintEvent.prototype, "c", {
+        get: function () {
+            return paint_event_t_get_prop_c(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return PaintEvent;
+}(Event));
 var PropChangeEvent = /** @class */ (function (_super) {
     __extends(PropChangeEvent, _super);
     function PropChangeEvent(nativeObj) {
@@ -2638,23 +2769,6 @@ var PropChangeEvent = /** @class */ (function (_super) {
         configurable: true
     });
     return PropChangeEvent;
-}(Event));
-var PaintEvent = /** @class */ (function (_super) {
-    __extends(PaintEvent, _super);
-    function PaintEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    PaintEvent.cast = function (event) {
-        return new PaintEvent(paint_event_cast(event ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(PaintEvent.prototype, "c", {
-        get: function () {
-            return paint_event_t_get_prop_c(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return PaintEvent;
 }(Event));
 var WindowBase = /** @class */ (function (_super) {
     __extends(WindowBase, _super);
@@ -2930,6 +3044,19 @@ var ColorPicker = /** @class */ (function (_super) {
         configurable: true
     });
     return ColorPicker;
+}(Widget));
+var View = /** @class */ (function (_super) {
+    __extends(View, _super);
+    function View(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    View.create = function (parent, x, y, w, h) {
+        return new View(view_create(parent ? parent.nativeObj : null, x, y, w, h));
+    };
+    View.cast = function (widget) {
+        return new View(view_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    return View;
 }(Widget));
 var TabButtonGroup = /** @class */ (function (_super) {
     __extends(TabButtonGroup, _super);
