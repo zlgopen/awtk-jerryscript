@@ -12,6 +12,7 @@ cd awtk; scons; cd -
 ```
 
 2.获取awtk-js并编译
+
 ```
 git clone https://github.com/zlgopen/awtk-js.git
 cd awtk-js
@@ -22,9 +23,10 @@ scons
 ## 更新绑定
 
 ```
-cd tools/js_gen; node index.js; node jerryscript.js; cd -
-cd src; tsc; cd -
+./sync.sh
 ```
+
+> 在非bash终端(如Windows平台的cmd.exe)，需要根据sync.sh的内容手工执行相应的命令。
 
 ## 运行
 
