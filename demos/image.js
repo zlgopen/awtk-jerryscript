@@ -28,7 +28,7 @@ function applicationInit() {
   image = createImage(win, 'bricks', ImageDrawType.REPEAT_X);
   image = createImage(win, 'bricks', ImageDrawType.REPEAT_Y);
 
-  win.setChildrenLayoutParams("rows:3 cols:3 margin:2 spacing:2");
+  win.setChildrenLayout("rows:3 cols:3 margin:2 spacing:2");
   win.layout();
 }
 

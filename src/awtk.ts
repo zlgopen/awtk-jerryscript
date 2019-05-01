@@ -127,6 +127,7 @@ declare function EVT_DRAG_END();
 declare function EVT_SCREEN_SAVER();
 declare function EVT_REQ_START();
 declare function EVT_USER_START();
+declare function font_manager_unload_font(fm, name, size);
 declare function idle_add(on_idle, ctx);
 declare function idle_remove(idle_id);
 declare function image_manager();
@@ -278,6 +279,7 @@ declare function style_notify_widget_state_changed(s, widget);
 declare function style_is_valid(s);
 declare function style_get_int(s, name, defval);
 declare function style_get_str(s, name, defval);
+declare function theme();
 declare function timer_add(on_timer, ctx, duration);
 declare function timer_remove(timer_id);
 declare function timer_reset(timer_id);
@@ -869,13 +871,13 @@ declare function tab_button_set_active_icon(widget, name);
 declare function tab_button_t_get_prop_value(nativeObj);
 declare function tab_button_t_get_prop_active_icon(nativeObj);
 declare function tab_button_t_get_prop_icon(nativeObj);
-declare function image_set_image(widget, name);
-declare function image_set_rotation(widget, rotation);
-declare function image_set_scale(widget, scale_x, scale_y);
-declare function image_set_anchor(widget, anchor_x, anchor_y);
-declare function image_set_selected(widget, selected);
-declare function image_set_selectable(widget, selectable);
-declare function image_set_clickable(widget, clickable);
+declare function image_base_set_image(widget, name);
+declare function image_base_set_rotation(widget, rotation);
+declare function image_base_set_scale(widget, scale_x, scale_y);
+declare function image_base_set_anchor(widget, anchor_x, anchor_y);
+declare function image_base_set_selected(widget, selected);
+declare function image_base_set_selectable(widget, selectable);
+declare function image_base_set_clickable(widget, clickable);
 declare function image_base_cast(widget);
 declare function image_base_t_get_prop_image(nativeObj);
 declare function image_base_t_get_prop_anchor_x(nativeObj);
@@ -1518,6 +1520,18 @@ enum EventType {
  USER_START = EVT_USER_START(),
 };
 
+class FontManager {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ unloadFont(name, size) {
+   return font_manager_unload_font(this.nativeObj, name, size);
+ }
+
+}
+
 class Idle {
  public nativeObj;
  constructor(nativeObj) {
@@ -1762,6 +1776,18 @@ class Style {
 
  getStr(name, defval) {
    return style_get_str(this.nativeObj, name, defval);
+ }
+
+}
+
+class Theme {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static instance() {
+   return new Theme(theme());
  }
 
 }
@@ -3682,32 +3708,32 @@ class ImageBase extends Widget {
    super(nativeObj);
  }
 
- imageSetImage(name) {
-   return image_set_image(this.nativeObj, name);
+ setImage(name) {
+   return image_base_set_image(this.nativeObj, name);
  }
 
- imageSetRotation(rotation) {
-   return image_set_rotation(this.nativeObj, rotation);
+ setRotation(rotation) {
+   return image_base_set_rotation(this.nativeObj, rotation);
  }
 
- imageSetScale(scale_x, scale_y) {
-   return image_set_scale(this.nativeObj, scale_x, scale_y);
+ setScale(scale_x, scale_y) {
+   return image_base_set_scale(this.nativeObj, scale_x, scale_y);
  }
 
- imageSetAnchor(anchor_x, anchor_y) {
-   return image_set_anchor(this.nativeObj, anchor_x, anchor_y);
+ setAnchor(anchor_x, anchor_y) {
+   return image_base_set_anchor(this.nativeObj, anchor_x, anchor_y);
  }
 
- imageSetSelected(selected) {
-   return image_set_selected(this.nativeObj, selected);
+ setSelected(selected) {
+   return image_base_set_selected(this.nativeObj, selected);
  }
 
- imageSetSelectable(selectable) {
-   return image_set_selectable(this.nativeObj, selectable);
+ setSelectable(selectable) {
+   return image_base_set_selectable(this.nativeObj, selectable);
  }
 
- imageSetClickable(clickable) {
-   return image_set_clickable(this.nativeObj, clickable);
+ setClickable(clickable) {
+   return image_base_set_clickable(this.nativeObj, clickable);
  }
 
  static cast(widget) {

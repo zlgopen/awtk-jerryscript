@@ -346,6 +346,15 @@ var EventType;
     EventType[EventType["USER_START"] = EVT_USER_START()] = "USER_START";
 })(EventType || (EventType = {}));
 ;
+var FontManager = /** @class */ (function () {
+    function FontManager(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    FontManager.prototype.unloadFont = function (name, size) {
+        return font_manager_unload_font(this.nativeObj, name, size);
+    };
+    return FontManager;
+}());
 var Idle = /** @class */ (function () {
     function Idle(nativeObj) {
         this.nativeObj = nativeObj;
@@ -570,6 +579,15 @@ var Style = /** @class */ (function () {
         return style_get_str(this.nativeObj, name, defval);
     };
     return Style;
+}());
+var Theme = /** @class */ (function () {
+    function Theme(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    Theme.instance = function () {
+        return new Theme(theme());
+    };
+    return Theme;
 }());
 var Timer = /** @class */ (function () {
     function Timer(nativeObj) {
@@ -2463,26 +2481,26 @@ var ImageBase = /** @class */ (function (_super) {
     function ImageBase(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    ImageBase.prototype.imageSetImage = function (name) {
-        return image_set_image(this.nativeObj, name);
+    ImageBase.prototype.setImage = function (name) {
+        return image_base_set_image(this.nativeObj, name);
     };
-    ImageBase.prototype.imageSetRotation = function (rotation) {
-        return image_set_rotation(this.nativeObj, rotation);
+    ImageBase.prototype.setRotation = function (rotation) {
+        return image_base_set_rotation(this.nativeObj, rotation);
     };
-    ImageBase.prototype.imageSetScale = function (scale_x, scale_y) {
-        return image_set_scale(this.nativeObj, scale_x, scale_y);
+    ImageBase.prototype.setScale = function (scale_x, scale_y) {
+        return image_base_set_scale(this.nativeObj, scale_x, scale_y);
     };
-    ImageBase.prototype.imageSetAnchor = function (anchor_x, anchor_y) {
-        return image_set_anchor(this.nativeObj, anchor_x, anchor_y);
+    ImageBase.prototype.setAnchor = function (anchor_x, anchor_y) {
+        return image_base_set_anchor(this.nativeObj, anchor_x, anchor_y);
     };
-    ImageBase.prototype.imageSetSelected = function (selected) {
-        return image_set_selected(this.nativeObj, selected);
+    ImageBase.prototype.setSelected = function (selected) {
+        return image_base_set_selected(this.nativeObj, selected);
     };
-    ImageBase.prototype.imageSetSelectable = function (selectable) {
-        return image_set_selectable(this.nativeObj, selectable);
+    ImageBase.prototype.setSelectable = function (selectable) {
+        return image_base_set_selectable(this.nativeObj, selectable);
     };
-    ImageBase.prototype.imageSetClickable = function (clickable) {
-        return image_set_clickable(this.nativeObj, clickable);
+    ImageBase.prototype.setClickable = function (clickable) {
+        return image_base_set_clickable(this.nativeObj, clickable);
     };
     ImageBase.cast = function (widget) {
         return new ImageBase(image_base_cast(widget ? (widget.nativeObj || widget) : null));
