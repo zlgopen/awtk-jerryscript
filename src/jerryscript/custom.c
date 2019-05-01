@@ -85,6 +85,9 @@ jerry_value_t jerry_create_pointer(const void* ptr, const char* type,
 
     jerry_set_property(obj, cls_type, cls_type_value);
     jerry_set_object_native_pointer(obj, (void*)ptr, native_info_p);
+    if(native_info_p != NULL) {
+      jerry_set_object_native_pointer(obj, (void*)ptr, NULL);
+    }
 
     return obj;
   }

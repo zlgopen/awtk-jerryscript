@@ -4,7 +4,7 @@ function createImage(win, imageName, drawType) {
 
   image.useStyle('border');
   image.setDrawType(drawType);
-  image.setImageName(imageName);
+  image.setImage(imageName);
 
   return image;
 }
