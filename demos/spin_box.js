@@ -1,15 +1,15 @@
 
 function createSpinBox(win, type, name, text, x, y, w, h) {
-  var spinBox = SpinBox.create(win, x, y, w, h);
+  var spinBox = TSpinBox.create(win, x, y, w, h);
 
-  spinBox.on(EventType.VALUE_CHANGED, function(evt) { 
+  spinBox.on(TEventType.VALUE_CHANGED, function(evt) { 
     print(spinBox.name + ' changed');
-    return Ret.OK;
+    return TRet.OK;
   });
   
-  spinBox.on(EventType.VALUE_CHANGING, function(evt) { 
+  spinBox.on(TEventType.VALUE_CHANGING, function(evt) { 
     print(spinBox.name + ' changing.' + tostring(spinBox.getDouble()));
-    return Ret.OK;
+    return TRet.OK;
   });
 
   spinBox.setName(name);
@@ -21,18 +21,18 @@ function createSpinBox(win, type, name, text, x, y, w, h) {
 }
 
 function applicationInit() {
-  var win = Window.create(null, 0, 0, 0, 0);
+  var win = TWindow.create(null, 0, 0, 0, 0);
 
-  var spinBox1 = createSpinBox(win, InputType.INT, 'int', '', 10, 10, 228, 30);
+  var spinBox1 = createSpinBox(win, TInputType.INT, 'int', '', 10, 10, 228, 30);
   spinBox1.setIntLimit(1, 100, 1);
 
-  var spinBox2 = createSpinBox(win, InputType.UINT, 'uint', '', 10, 50, 228, 30);
+  var spinBox2 = createSpinBox(win, TInputType.UINT, 'uint', '', 10, 50, 228, 30);
   spinBox2.setIntLimit(1, 100, 1);
 
-  var spinBox3 = createSpinBox(win, InputType.FLOAT, 'float', '1.23', 10, 90, 228, 30);
+  var spinBox3 = createSpinBox(win, TInputType.FLOAT, 'float', '1.23', 10, 90, 228, 30);
   spinBox3.setFloatLimit(1, 10, 1);
 
-  var spinBox4 = createSpinBox(win, InputType.UFLOAT, 'ufloat', '', 10, 10+128, 228, 30);
+  var spinBox4 = createSpinBox(win, TInputType.UFLOAT, 'ufloat', '', 10, 10+128, 228, 30);
   spinBox4.setFloatLimit(1, 10, 0.1);
 
   win.layout();

@@ -1,6 +1,6 @@
 
 function createImage(win, imageName, drawType) { 
-  var image = Image.create(win, 0, 0, 0, 0);
+  var image = TImage.create(win, 0, 0, 0, 0);
 
   image.useStyle('border');
   image.setDrawType(drawType);
@@ -11,22 +11,22 @@ function createImage(win, imageName, drawType) {
 
 function applicationInit() {
   var image = null;
-  var win = Window.create(null, 0, 0, 0, 0);
+  var win = TWindow.create(null, 0, 0, 0, 0);
 
-  image = createImage(win, 'earth', ImageDrawType.ICON);
+  image = createImage(win, 'earth', TImageDrawType.ICON);
   image.setRotation(0.5);
   image.setScale(1, 2);
 
-  image = createImage(win, 'earth', ImageDrawType.CENTER);
-  image = createImage(win, 'earth', ImageDrawType.SCALE_AUTO);
+  image = createImage(win, 'earth', TImageDrawType.CENTER);
+  image = createImage(win, 'earth', TImageDrawType.SCALE_AUTO);
   
-  image = createImage(win, '1', ImageDrawType.SCALE);
-  image = createImage(win, '2', ImageDrawType.SCALE_W);
-  image = createImage(win, '3', ImageDrawType.SCALE_H);
+  image = createImage(win, '1', TImageDrawType.SCALE);
+  image = createImage(win, '2', TImageDrawType.SCALE_W);
+  image = createImage(win, '3', TImageDrawType.SCALE_H);
   
-  image = createImage(win, 'bricks', ImageDrawType.REPEAT);
-  image = createImage(win, 'bricks', ImageDrawType.REPEAT_X);
-  image = createImage(win, 'bricks', ImageDrawType.REPEAT_Y);
+  image = createImage(win, 'bricks', TImageDrawType.REPEAT);
+  image = createImage(win, 'bricks', TImageDrawType.REPEAT_X);
+  image = createImage(win, 'bricks', TImageDrawType.REPEAT_Y);
 
   win.setChildrenLayout("rows:3 cols:3 margin:2 spacing:2");
   win.layout();

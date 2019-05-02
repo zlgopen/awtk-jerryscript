@@ -1,10 +1,10 @@
 
 function application_init() {
-  var win = Window.open("vgcanvas");
+  var win = TWindow.open("vgcanvas");
 
-  win.child("paint_vgcanvas").on(EventType.PAINT, function(e) { 
-    var evt = PaintEvent.cast(e);
-    var c = Canvas.cast(evt.c);
+  win.child("paint_vgcanvas").on(TEventType.PAINT, function(e) { 
+    var evt = TPaintEvent.cast(e);
+    var c = TCanvas.cast(evt.c);
     var vg = c.getVgcanvas();
 
     c.setFillColor("#f0f0f0");

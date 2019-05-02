@@ -1,7 +1,7 @@
 
 function applicationInit() {
-  var win = Window.create(null, 0, 0, 0, 0);
-  var label = Label.create(win, 0, 0, 0, 0);
+  var win = TWindow.create(null, 0, 0, 0, 0);
+  var label = TLabel.create(win, 0, 0, 0, 0);
 
   label.useStyle('big_green');
   label.setText("hello awtk!");

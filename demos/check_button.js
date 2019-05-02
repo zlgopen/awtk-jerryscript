@@ -3,14 +3,14 @@ function createCheckButton(win, radio, text, x, y, w, h) {
   var btn = null;
   
   if(radio) {
-    btn = CheckButton.createRadio(win, x, y, w, h);
+    btn = TCheckButton.createRadio(win, x, y, w, h);
   } else {
-    btn = CheckButton.create(win, x, y, w, h);
+    btn = TCheckButton.create(win, x, y, w, h);
   }
 
-  btn.on(EventType.VALUE_CHANGED, function(evt) { 
+  btn.on(TEventType.VALUE_CHANGED, function(evt) { 
     print(btn.name + ' changed. ' + (btn.value))
-    return Ret.OK;
+    return TRet.OK;
   });
 
   btn.setName(text);
@@ -20,7 +20,7 @@ function createCheckButton(win, radio, text, x, y, w, h) {
 }
 
 function applicationInit() {
-  var win = Window.create(null, 0, 0, 0, 0);
+  var win = TWindow.create(null, 0, 0, 0, 0);
 
   var btn1 = createCheckButton(win, false, 'Zzzzzz', 10, 10, 128, 30);
   var btn2 = createCheckButton(win, false, 'Lzzzzz', 10, 50, 128, 30);

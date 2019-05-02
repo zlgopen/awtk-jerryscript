@@ -1,12 +1,12 @@
 
 var count = 0;
-Timer.add(function() {
+TTimer.add(function() {
   print(count);
   if(count < 10) {
     count += 1;
-    return Ret.REPEAT;
+    return TRet.REPEAT;
   } else {
     tk_quit();
-    return Ret.OK;
+    return TRet.OK;
   }
 }, 1000);

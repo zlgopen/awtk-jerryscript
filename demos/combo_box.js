@@ -1,9 +1,9 @@
 function createComboBox(win, name, options, index, x, y, w, h) {
-  var box = ComboBox.create(win, x, y, w, h);
+  var box = TComboBox.create(win, x, y, w, h);
 
-  box.on(EventType.VALUE_CHANGED, function(evt) { 
+  box.on(TEventType.VALUE_CHANGED, function(evt) { 
     print(box.name + ' changed: ' + (box.value))
-    return Ret.OK;
+    return TRet.OK;
   });
 
   box.setName(name);
@@ -14,7 +14,7 @@ function createComboBox(win, name, options, index, x, y, w, h) {
 }
 
 function applicationInit() {
-  var win = Window.create(null, 0, 0, 0, 0);
+  var win = TWindow.create(null, 0, 0, 0, 0);
 
   var box1 = createComboBox(win, 'color', 'Red;Green;Blue', 0, 10, 10, 168, 30);
   var box2 = createComboBox(win, 'zlg', '0.Zzzzzzzz;1.Lzzzzzzz;2.Gzzzzzzz', 1, 10, 50, 168, 30);

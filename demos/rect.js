@@ -1,5 +1,5 @@
 function application_init() {
-  var r = Rect.create(1, 2, 3, 4);
+  var r = TRect.create(1, 2, 3, 4);
 
   print(r.x);
   print(r.y);

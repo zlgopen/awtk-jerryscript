@@ -62,7 +62,9 @@ class JerryscriptGenerator {
       return r.toUpperCase();
     });
 
-    return name;
+    let newName = 'T' + name;
+    //console.log(`:%s/\\<${name}\\>/${newName}/g`); 
+    return newName;
   }
 
   getClassInfo(name) {

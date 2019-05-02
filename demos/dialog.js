@@ -1,25 +1,25 @@
 function onClick(evt) { 
-  var dlg = Dialog.createSimple(null, 0, 0, 240, 160);
+  var dlg = TDialog.createSimple(null, 0, 0, 240, 160);
 
-  dlg.setTitle('Dialog');
+  dlg.setTitle('TDialog');
 
-  var ok = Button.create(dlg.getClient(), 20, 80, 80, 30);
+  var ok = TButton.create(dlg.getClient(), 20, 80, 80, 30);
   ok.setText('Go');
 
-  var cancel = Button.create(dlg.getClient(), 140, 80, 80, 30);
+  var cancel = TButton.create(dlg.getClient(), 140, 80, 80, 30);
   cancel.setText('Cancel');
 
-  var label = Label.create(dlg.getClient(), 10, 30, 200, 30);
+  var label = TLabel.create(dlg.getClient(), 10, 30, 200, 30);
   label.setText('AWTK is cool!');
 
-  ok.on(EventType.CLICK, function(evt) { 
+  ok.on(TEventType.CLICK, function(evt) { 
     dlg.quit(1);
-    return Ret.OK;
+    return TRet.OK;
   })
 
-  cancel.on(EventType.CLICK, function(evt) { 
+  cancel.on(TEventType.CLICK, function(evt) { 
     dlg.quit(2);
-    return Ret.OK;
+    return TRet.OK;
   })
 
   var code = dlg.modal();
@@ -27,25 +27,25 @@ function onClick(evt) {
 }
 
 function applicationInit() {
-  var win = Window.create(null, 0, 0, 0, 0);
-  var btn = Button.create(win, 0, 0, 0, 0);
+  var win = TWindow.create(null, 0, 0, 0, 0);
+  var btn = TButton.create(win, 0, 0, 0, 0);
 
-  btn.setText("Show Dialog");
+  btn.setText("Show TDialog");
   btn.setSelfLayoutParams("center", "middle:-60", "50%", "30");
-  btn.on(EventType.CLICK, onClick);
+  btn.on(TEventType.CLICK, onClick);
   
-  btn = Button.create(win, 0, 0, 0, 0);
+  btn = TButton.create(win, 0, 0, 0, 0);
   btn.setText("Show Info");
   btn.setSelfLayoutParams("center", "middle", "50%", "30");
-  btn.on(EventType.CLICK, function() {
-    Dialog.info("Work is done!");
+  btn.on(TEventType.CLICK, function() {
+    TDialog.info("Work is done!");
   });
   
-  btn = Button.create(win, 0, 0, 0, 0);
+  btn = TButton.create(win, 0, 0, 0, 0);
   btn.setText("Show Confirm");
   btn.setSelfLayoutParams("center", "middle:60", "50%", "30");
-  btn.on(EventType.CLICK, function() {
-    Dialog.info("Are you sure to quit?");
+  btn.on(TEventType.CLICK, function() {
+    TDialog.info("Are you sure to quit?");
   });
 
   win.layout();

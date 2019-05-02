@@ -1,9 +1,9 @@
 
 function application_init() {
-  print(TimeNow.s());
-  print(TimeNow.ms());
+  print(TTimeNow.s());
+  print(TTimeNow.ms());
 
-  var dt = DateTime.create();
+  var dt = TDateTime.create();
 
   print(dt.year);
   print(dt.month);

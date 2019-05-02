@@ -1,10 +1,10 @@
 
 function createProgressBar(win, vertical, name) {
-  var bar = ProgressBar.create(win, 0, 0, 0, 0);
+  var bar = TProgressBar.create(win, 0, 0, 0, 0);
 
-  bar.on(EventType.VALUE_CHANGED, function(evt) { 
+  bar.on(TEventType.VALUE_CHANGED, function(evt) { 
     print(bar.name + ' changed. ' + bar.value);
-    return Ret.OK;
+    return TRet.OK;
   });
 
   bar.setName(name);
@@ -22,18 +22,18 @@ function createProgressBar(win, vertical, name) {
 }
 
 function applicationInit() {
-  var win = Window.create(null, 0, 0, 0, 0);
+  var win = TWindow.create(null, 0, 0, 0, 0);
   var bar1 = createProgressBar(win, false, 'bar1');
   var bar2 = createProgressBar(win, true, 'bar2');
 
-  Timer.add(function(info) {
+  TTimer.add(function(info) {
     bar1.setValue(bar1.value+5);
     bar2.setValue(bar2.value+5);
 
     if(bar1.value < 100) {
-      return Ret.REPEAT;
+      return TRet.REPEAT;
     } else {
-      return Ret.REMOVE;
+      return TRet.REMOVE;
     }
   }, 500);
 

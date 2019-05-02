@@ -1,15 +1,15 @@
 function createTabButton(tabButtonGroup, text) {
-  var tabButton = TabButton.create(tabButtonGroup, 0, 0, 0, 0);
+  var tabButton = TTabButton.create(tabButtonGroup, 0, 0, 0, 0);
   tabButton.setText(text);
 
   return tabButton;
 }
 
 function createPage(pages, text) { 
-  var view = View.create(pages, 0, 0, 0, 0);
+  var view = TView.create(pages, 0, 0, 0, 0);
   view.setSelfLayoutParams('0', '0', '100%', '100%');
 
-  var label = Label.create(view, 0, 0, 0, 0);
+  var label = TLabel.create(view, 0, 0, 0, 0);
   label.setSelfLayoutParams('0', 'middle', '100%', '30');
   label.setText(text);
 
@@ -17,19 +17,19 @@ function createPage(pages, text) {
 }
 
 function applicationInit() {
-  var win = Window.create(null, 0, 0, 0, 0);
-  var tabButtonGroup = TabButtonGroup.create(win, 0, 0, 0, 0);
+  var win = TWindow.create(null, 0, 0, 0, 0);
+  var tabButtonGroup = TTabButtonGroup.create(win, 0, 0, 0, 0);
 
-  win.setPropStr(WidgetProp.THEME, 'tab_top_compact');
+  win.setPropStr(TWidgetProp.THEME, 'tab_top_compact');
 
-  tabButtonGroup.setPropStr(WidgetProp.COMPACT, 'true');
+  tabButtonGroup.setPropStr(TWidgetProp.COMPACT, 'true');
   tabButtonGroup.setSelfLayoutParams('center', '12', '90%', '30');
 
   createTabButton(tabButtonGroup, 'General');
   createTabButton(tabButtonGroup, 'Network');
   createTabButton(tabButtonGroup, 'Security');
 
-  var  pages = Pages.create(win, 0, 0, 0, 0);
+  var  pages = TPages.create(win, 0, 0, 0, 0);
   pages.setSelfLayoutParams('center', '42', '90%', '-60');
 
   createPage(pages, 'General');

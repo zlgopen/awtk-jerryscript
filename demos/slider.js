@@ -1,15 +1,15 @@
 
 function createProgressBar(win, vertical, name) {
-  var slider = Slider.create(win, 0, 0, 0, 0);
+  var slider = TSlider.create(win, 0, 0, 0, 0);
 
-  slider.on(EventType.VALUE_CHANGED, function(evt) { 
+  slider.on(TEventType.VALUE_CHANGED, function(evt) { 
     print(slider.name + ' changed. ' + slider.value);
-    return Ret.OK;
+    return TRet.OK;
   });
   
-  slider.on(EventType.VALUE_CHANGING, function(evt) { 
+  slider.on(TEventType.VALUE_CHANGING, function(evt) { 
     print(slider.name + ' changing. ' + slider.value);
-    return Ret.OK;
+    return TRet.OK;
   });
 
   slider.setName(name);
@@ -26,7 +26,7 @@ function createProgressBar(win, vertical, name) {
 }
 
 function applicationInit() {
-  var win = Window.create(null, 0, 0, 0, 0);
+  var win = TWindow.create(null, 0, 0, 0, 0);
   var slider1 = createProgressBar(win, false, 'slider1');
   var slider2 = createProgressBar(win, true, 'slider2');
 

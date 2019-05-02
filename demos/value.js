@@ -1,6 +1,6 @@
 
 function application_init() {
-  var v = Value.create()
+  var v = TValue.create()
   var a = 100;
 
   v.setInt8(100);
@@ -14,10 +14,10 @@ function application_init() {
   print(v.bool());
 
   print(v.type);
-  print(ValueType)
-  print(ValueType.INVALID);
-  print(ValueType.BOOL);
-  print(ValueType.FLOAT);
+  print(TValueType)
+  print(TValueType.INVALID);
+  print(TValueType.BOOL);
+  print(TValueType.FLOAT);
 
   v = null
 

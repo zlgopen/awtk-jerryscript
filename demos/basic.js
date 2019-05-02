@@ -1,23 +1,23 @@
 
 function application_init() {
-  var win = Window.open("basic");
+  var win = TWindow.open("basic");
 
-  win.lookup("inc_value", true).on(EventType.CLICK, function(evt) { 
+  win.lookup("inc_value", true).on(TEventType.CLICK, function(evt) { 
     win.child("bar1").addValue(10);
     win.child("bar2").addValue(10);
   });
   
-  win.lookup("dec_value", true).on(EventType.CLICK, function(evt) { 
+  win.lookup("dec_value", true).on(TEventType.CLICK, function(evt) { 
     win.child("bar1").addValue(-10);
     win.child("bar2").addValue(-10);
   });
   
-  win.lookup("close", true).on(EventType.CLICK, function(evt) { 
+  win.lookup("close", true).on(TEventType.CLICK, function(evt) { 
     print('bar1 value:' + win.child("bar1").getValue());
     print('bar2 value:' + win.child("bar2").getValue());
   });
 
-  WindowManager.cast(win.getWindowManager()).setShowFps(true);
+  TWindowManager.cast(win.getWindowManager()).setShowFps(true);
 }
 
 application_init()

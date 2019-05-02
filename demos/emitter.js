@@ -1,11 +1,11 @@
 
 function application_init() {
-  var emitter = Emitter.create();
-  var e = Event.create(EventBaseType.PROP_CHANGED, null);
+  var emitter = TEmitter.create();
+  var e = TEvent.create(TEventBaseType.PROP_CHANGED, null);
 
-  emitter.on(EventBaseType.PROP_CHANGED, function(e) {
-    var evt = Event.cast(e);
-    var em = Emitter.cast(evt.target); 
+  emitter.on(TEventBaseType.PROP_CHANGED, function(e) {
+    var evt = TEvent.cast(e);
+    var em = TEmitter.cast(evt.target); 
 
     print("evt.type = " + evt.type);
     print("emitter.size() = " + em.size());
