@@ -9,7 +9,7 @@ function createCheckButton(win, radio, text, x, y, w, h) {
   }
 
   btn.on(TEventType.VALUE_CHANGED, function(evt) { 
-    print(btn.name + ' changed. ' + (btn.value))
+    console.log(btn.name + ' changed. ' + (btn.value))
     return TRet.OK;
   });
 

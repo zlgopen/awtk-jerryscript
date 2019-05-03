@@ -7,7 +7,7 @@ function applicationInit() {
 
   ok.on(TEventType.CLICK, function(evt) {
     var e = TPointerEvent.cast(evt);
-    print("on click: " + e.x + " " + e.y);
+    console.log("on click: " + e.x + " " + e.y);
 
     return TRet.OK;
   });

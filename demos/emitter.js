@@ -7,8 +7,8 @@ function application_init() {
     var evt = TEvent.cast(e);
     var em = TEmitter.cast(evt.target); 
 
-    print("evt.type = " + evt.type);
-    print("emitter.size() = " + em.size());
+    console.log("evt.type = " + evt.type);
+    console.log("emitter.size() = " + em.size());
   });
 
   emitter.dispatch(e);

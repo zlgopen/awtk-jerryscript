@@ -1,17 +1,17 @@
 function application_init() {
   var c = TColor.create(1, 2, 3, 4);
 
-  print(c.r());
-  print(c.g());
-  print(c.b());
-  print(c.a());
+  console.log(c.r());
+  console.log(c.g());
+  console.log(c.b());
+  console.log(c.a());
 
   c.fromStr("gold");
 
-  print(c.r());
-  print(c.g());
-  print(c.b());
-  print(c.a());
+  console.log(c.r());
+  console.log(c.g());
+  console.log(c.b());
+  console.log(c.a());
   c = null;
 
   gc();

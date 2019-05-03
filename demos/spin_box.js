@@ -3,12 +3,12 @@ function createSpinBox(win, type, name, text, x, y, w, h) {
   var spinBox = TSpinBox.create(win, x, y, w, h);
 
   spinBox.on(TEventType.VALUE_CHANGED, function(evt) { 
-    print(spinBox.name + ' changed');
+    console.log(spinBox.name + ' changed');
     return TRet.OK;
   });
   
   spinBox.on(TEventType.VALUE_CHANGING, function(evt) { 
-    print(spinBox.name + ' changing.' + tostring(spinBox.getDouble()));
+    console.log(spinBox.name + ' changing.' + tostring(spinBox.getDouble()));
     return TRet.OK;
   });
 

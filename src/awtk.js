@@ -11,6 +11,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+if (this['console'] === undefined) {
+    this.console = {};
+    this.console.log = function (str) {
+        print(str);
+    };
+}
 var TGlobal = /** @class */ (function () {
     function TGlobal(nativeObj) {
         this.nativeObj = nativeObj;

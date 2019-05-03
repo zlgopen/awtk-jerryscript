@@ -20,17 +20,17 @@ function installOne(w) {
     iter.on(TEventType.CLICK, function(evt) {
       openWindow(name, null);
     })
-    print('open window:' + name);
+    console.log('open window:' + name);
   } else if(strContains(widgetName, 'close')) {
     iter.on(TEventType.CLICK, function(evt) {
       TWindow.cast(iter.getWindow()).close();
     })
-    print('close window: ' + widgetName);
+    console.log('close window: ' + widgetName);
   } else if(strContains(widgetName, 'quit')) {
     iter.on(TEventType.CLICK, function(evt) {
       TDialog.cast(iter.getWindow()).quit(0);
     })
-    print('quit dialog.' + widgetName);
+    console.log('quit dialog.' + widgetName);
   } else if(strContains(widgetName, 'exit')) {
     iter.on(TEventType.CLICK, function(evt) {
       TGlobal.quit();
@@ -38,12 +38,12 @@ function installOne(w) {
   } else if(strContains(widgetName, 'key')) {
     iter.on(TEventType.CLICK, function(evt) {
       TInputMethod.instance().commitText(iter.getText());
-      print('commitText');
+      console.log('commitText');
     })
   } else if(strContains(widgetName, 'backspace')) {
     iter.on(TEventType.CLICK, function(evt) {
       TInputMethod.instance().dispatchKey(TKeyCode.KEY_BACKSPACE);
-      print('dispatchKey');
+      console.log('dispatchKey');
     })
   } else if(strContains(widgetName, 'chinese')) {
     iter.on(TEventType.CLICK, function(evt) {
@@ -56,7 +56,7 @@ function installOne(w) {
   } else if(strContains(widgetName, 'show_fps')) {
     iter.on(TEventType.CLICK, function(evt) {
       var wm = TWindowManager.instance();
-      print(wm.showFps)
+      console.log(wm.showFps)
       if(wm.showFps) {
         wm.setShowFps(false);
         iter.setText("Show FPS");
@@ -65,20 +65,20 @@ function installOne(w) {
         iter.setText("Hide FPS");
       }
     })
-    print('close window.' + widgetName);
+    console.log('close window.' + widgetName);
   }
 
   return TRet.OK;
 }
 
 function installHandlers(win) {
-  print('installHandlers');
+  console.log('installHandlers');
   win.foreach(installOne);
 }
 
 function openWindow(name, toClose) {
   var win = null;
-  print('open ' + name);
+  console.log('open ' + name);
   if(toClose) {
     win = TWindow.openAndClose(name, toClose);
   } else {
@@ -87,10 +87,10 @@ function openWindow(name, toClose) {
 
   installHandlers(win);
 
-  print(win.getType() + '.' + TWidgetType.DIALOG);
+  console.log(win.getType() + '.' + TWidgetType.DIALOG);
 
   if(win.getType() == TWidgetType.DIALOG) {
-    print('win.modal');
+    console.log('win.modal');
     TDialog.cast(win).modal();
   }
 }
@@ -109,7 +109,7 @@ function showPreloadResWindow() {
 
   TTimer.add(function(info) { 
     if(finish == total) {
-      print('done')
+      console.log('done')
       TWindow.open('system_bar');
       openWindow('main', win);
       bitmap = null;

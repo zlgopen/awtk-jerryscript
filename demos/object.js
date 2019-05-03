@@ -6,9 +6,9 @@ function application_init() {
 
   obj.on(TEventBaseType.PROP_CHANGED, function(e) {
     var evt = TPropChangeEvent.cast(e);
-    print(evt.type);
-    print(evt.name);
-    print(TValue.cast(evt.value).str());
+    console.log(evt.type);
+    console.log(evt.name);
+    console.log(TValue.cast(evt.value).str());
   });
 
   obj.setProp("prop_name", v.setStr("prop_value"));

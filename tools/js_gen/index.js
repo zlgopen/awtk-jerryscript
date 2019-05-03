@@ -381,7 +381,16 @@ class JerryscriptGenerator {
   }
 
   genJsonAll(ojson) {
-    let result = '';
+    let result = `
+declare function print(str);
+if(this['console'] === undefined) {
+  this.console = {}
+  this.console.log = function(str) {
+      print(str);
+  }
+}
+`;
+
     let json = this.filterScriptableJson(ojson);
     this.json = json;
 

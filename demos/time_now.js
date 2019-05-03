@@ -1,16 +1,16 @@
 
 function application_init() {
-  print(TTimeNow.s());
-  print(TTimeNow.ms());
+  console.log(TTimeNow.s());
+  console.log(TTimeNow.ms());
 
   var dt = TDateTime.create();
 
-  print(dt.year);
-  print(dt.month);
-  print(dt.day);
-  print(dt.hour);
-  print(dt.minute);
-  print(dt.second);
+  console.log(dt.year);
+  console.log(dt.month);
+  console.log(dt.day);
+  console.log(dt.hour);
+  console.log(dt.minute);
+  console.log(dt.second);
 
   dt = null;
   gc();

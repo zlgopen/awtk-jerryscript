@@ -3,7 +3,7 @@ function createProgressBar(win, vertical, name) {
   var bar = TProgressBar.create(win, 0, 0, 0, 0);
 
   bar.on(TEventType.VALUE_CHANGED, function(evt) { 
-    print(bar.name + ' changed. ' + bar.value);
+    console.log(bar.name + ' changed. ' + bar.value);
     return TRet.OK;
   });
 

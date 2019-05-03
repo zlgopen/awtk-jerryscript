@@ -6,7 +6,7 @@ function application_init() {
   nv.setName("name")
   nv.setValue(v.setStr("hello"));
 
-  print(nv.name + ':' + nv.getValue().str());
+  console.log(nv.name + ':' + nv.getValue().str());
 
   nv = null;
   v = null;

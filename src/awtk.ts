@@ -1,3 +1,11 @@
+
+declare function print(str);
+if(this['console'] === undefined) {
+  this.console = {}
+  this.console.log = function(str) {
+      print(str);
+  }
+}
 declare function tk_quit();
 declare function asset_info_t_get_prop_type(nativeObj);
 declare function asset_info_t_get_prop_subtype(nativeObj);

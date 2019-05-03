@@ -2,7 +2,7 @@ function createComboBox(win, name, options, index, x, y, w, h) {
   var box = TComboBox.create(win, x, y, w, h);
 
   box.on(TEventType.VALUE_CHANGED, function(evt) { 
-    print(box.name + ' changed: ' + (box.value))
+    console.log(box.name + ' changed: ' + (box.value))
     return TRet.OK;
   });
 

@@ -1,7 +1,7 @@
 
 var count = 0;
 TTimer.add(function() {
-  print(count);
+  console.log(count);
   if(count < 10) {
     count += 1;
     return TRet.REPEAT;

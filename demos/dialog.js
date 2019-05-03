@@ -23,7 +23,7 @@ function onClick(evt) {
   })
 
   var code = dlg.modal();
-  print('code=' + (code));
+  console.log('code=' + (code));
 }
 
 function applicationInit() {

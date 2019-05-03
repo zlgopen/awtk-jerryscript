@@ -3,7 +3,7 @@ function onChanged(evt) {
   var target = TEvent.cast(evt).target;
   var edit = TEdit.cast(target);
 
-  print(edit.name + ' *onChanged*');
+  console.log(edit.name + ' *onChanged*');
 
   return TRet.OK;
 }
@@ -12,12 +12,12 @@ function createEdit(win, type, name, text, x, y, w, h) {
   var edit = TEdit.create(win, x, y, w, h);
 
   edit.on(TEventType.VALUE_CHANGED, function(evt) { 
-    print(edit.name + ' changed');
+    console.log(edit.name + ' changed');
     return TRet.OK;
   });
   
   edit.on(TEventType.VALUE_CHANGING, function(evt) { 
-    print(edit.name + ' changing');
+    console.log(edit.name + ' changing');
     return TRet.OK;
   });
   

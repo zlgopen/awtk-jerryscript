@@ -13,8 +13,8 @@ function application_init() {
   });
   
   win.lookup("close", true).on(TEventType.CLICK, function(evt) { 
-    print('bar1 value:' + win.child("bar1").getValue());
-    print('bar2 value:' + win.child("bar2").getValue());
+    console.log('bar1 value:' + win.child("bar1").getValue());
+    console.log('bar2 value:' + win.child("bar2").getValue());
   });
 
   TWindowManager.cast(win.getWindowManager()).setShowFps(true);

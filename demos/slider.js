@@ -3,12 +3,12 @@ function createProgressBar(win, vertical, name) {
   var slider = TSlider.create(win, 0, 0, 0, 0);
 
   slider.on(TEventType.VALUE_CHANGED, function(evt) { 
-    print(slider.name + ' changed. ' + slider.value);
+    console.log(slider.name + ' changed. ' + slider.value);
     return TRet.OK;
   });
   
   slider.on(TEventType.VALUE_CHANGING, function(evt) { 
-    print(slider.name + ' changing. ' + slider.value);
+    console.log(slider.name + ' changing. ' + slider.value);
     return TRet.OK;
   });
 
