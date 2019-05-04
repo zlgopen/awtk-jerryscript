@@ -41,3 +41,21 @@ scons
 [js绑定原理与示例](docs/binding_js.md)
 
 > 本文以Linux/MacOS为例，Windows可能会微妙差异，请酌情处理。
+
+## 重要通知
+
+为了让AWTK-WEB和AWTK-JS对外提供的API保持兼容，AWTK-JS做了下列修改：
+
+* 所有的类均增加前缀T，以避免AWTK的类名和浏览器中的类名冲突。
+
+* print函数更名为console.log。
+
+> 提供了一个vim脚本(demos/vim_rename)，用于更新应用程序。
+
+如果希望自己的应用程序，同时支持AWTK-JS和AWTK-WEB，还需要注意下列事项：
+
+* 避免使用模态对话框。
+
+* 避免使用动态GIF图片。
+
+
