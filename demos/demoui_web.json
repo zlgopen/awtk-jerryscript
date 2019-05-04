@@ -1,7 +1,7 @@
 {
-  "name":"button",
+  "name":"demouijs",
   "version":"1.0",
   "app_type":"js",
   "assets" : "../../awtk/demos/assets",
-  "sources":["button.js"]
+  "sources":["demoui.js"]
 }

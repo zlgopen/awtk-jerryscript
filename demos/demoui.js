@@ -113,7 +113,6 @@ function showPreloadResWindow() {
       TWindow.open('system_bar');
       openWindow('main', win);
       bitmap = null;
-      gc();
 
       return TRet.REMOVE;
     } else {
