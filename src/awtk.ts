@@ -1202,7 +1202,7 @@ class TGlobal {
    this.nativeObj = nativeObj;
  }
 
- static tkQuit() {
+ static quit() {
    return tk_quit();
  }
 

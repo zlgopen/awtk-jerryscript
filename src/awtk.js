@@ -21,7 +21,7 @@ var TGlobal = /** @class */ (function () {
     function TGlobal(nativeObj) {
         this.nativeObj = nativeObj;
     }
-    TGlobal.tkQuit = function () {
+    TGlobal.quit = function () {
         return tk_quit();
     };
     return TGlobal;
