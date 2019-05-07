@@ -5980,6 +5980,15 @@ jerry_value_t get_WIDGET_STATE_EMPTY(
   return jerry_create_str(WIDGET_STATE_EMPTY);
 }
 
+jerry_value_t get_WIDGET_STATE_EMPTY_FOCUS(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(WIDGET_STATE_EMPTY_FOCUS);
+}
+
 jerry_value_t get_WIDGET_STATE_ERROR(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -6062,6 +6071,7 @@ ret_t widget_state_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_CHECKED", get_WIDGET_STATE_CHECKED);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_UNCHECKED", get_WIDGET_STATE_UNCHECKED);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_EMPTY", get_WIDGET_STATE_EMPTY);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_EMPTY_FOCUS", get_WIDGET_STATE_EMPTY_FOCUS);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_ERROR", get_WIDGET_STATE_ERROR);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_SELECTED", get_WIDGET_STATE_SELECTED);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_NORMAL_OF_CHECKED", get_WIDGET_STATE_NORMAL_OF_CHECKED);
