@@ -57,21 +57,22 @@ jerry_value_t jerry_create_str(const char* str) {
 }
 
 void* jerry_get_pointer(jerry_value_t v, const char* type) {
-  char str[64];
-  void* p = NULL;
-  jerry_value_t cls_type = jerry_create_string_from_utf8((jerry_char_t*)"class_type");
-  jerry_value_t cls_type_value = jerry_get_property(v, cls_type);
-
   if (jerry_value_is_null(v) || jerry_value_is_undefined(v)) {
     return NULL;
+  } else {
+    char str[64];
+    void* p = NULL;
+    jerry_value_t cls_type = jerry_create_string_from_utf8((jerry_char_t*)"class_type");
+    jerry_value_t cls_type_value = jerry_get_property(v, cls_type);
+
+    memset(str, 0x00, sizeof(str));
+    jerry_string_to_utf8_char_buffer(cls_type_value, (jerry_char_t*)str, sizeof(str));
+    jerry_get_object_native_pointer(v, &p, NULL);
+    jerry_release_value(cls_type);
+    jerry_release_value(cls_type_value);
+
+    return p;
   }
-
-  memset(str, 0x00, sizeof(str));
-  jerry_string_to_utf8_char_buffer(cls_type_value, (jerry_char_t*)str, sizeof(str));
-
-  jerry_get_object_native_pointer(v, &p, NULL);
-
-  return p;
 }
 
 jerry_value_t jerry_create_pointer(const void* ptr, const char* type,
@@ -85,6 +86,9 @@ jerry_value_t jerry_create_pointer(const void* ptr, const char* type,
 
     jerry_set_property(obj, cls_type, cls_type_value);
     jerry_set_object_native_pointer(obj, (void*)ptr, native_info_p);
+    jerry_release_value(cls_type);
+    jerry_release_value(cls_type_value);
+
     if (native_info_p != NULL) {
       jerry_set_object_native_pointer(obj, (void*)ptr, NULL);
     }
