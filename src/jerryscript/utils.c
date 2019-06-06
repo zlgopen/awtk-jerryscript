@@ -176,13 +176,9 @@ static void print_unhandled_exception(jerry_value_t error_value) /**< error valu
   jerry_release_value(err_str_val);
 } /* print_unhandled_exception */
 
-ret_t awtk_jerryscript_eval(const char* filename) {
-  uint32_t size = 0;
-  char* script = NULL;
+ret_t awtk_jerryscript_eval_script(const char* script, uint32_t size) {
   ret_t ret = RET_FAIL;
   jerry_value_t parsed_code;
-  return_value_if_fail(filename != NULL, RET_BAD_PARAMS);
-  script = file_read(filename, &size);
   return_value_if_fail(script != NULL && size > 0, RET_NOT_FOUND);
 
   parsed_code = jerry_parse(NULL, 0, (jerry_char_t*)script, size, JERRY_PARSE_NO_OPTS);
@@ -202,6 +198,19 @@ ret_t awtk_jerryscript_eval(const char* filename) {
   }
 
   jerry_release_value(parsed_code);
+
+  return ret;
+}
+
+ret_t awtk_jerryscript_eval(const char* filename) {
+  uint32_t size = 0;
+  char* script = NULL;
+  ret_t ret = RET_FAIL;
+  return_value_if_fail(filename != NULL, RET_BAD_PARAMS);
+  script = file_read(filename, &size);
+  return_value_if_fail(script != NULL && size > 0, RET_NOT_FOUND);
+  
+  ret = awtk_jerryscript_eval_script(script, size);
 
   TKMEM_FREE(script);
 
