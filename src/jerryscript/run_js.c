@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
   tk_ext_widgets_init();
 
   awtk_jerryscript_init();
-  return_value_if_fail(awtk_jerryscript_eval("src/awtk.js") == RET_OK, 0);
+  return_value_if_fail(awtk_jerryscript_eval_awtk_js("src/awtk.js") == RET_OK, 0);
   return_value_if_fail(awtk_jerryscript_eval(script_file) == RET_OK, 0);
 
   tk_run();
