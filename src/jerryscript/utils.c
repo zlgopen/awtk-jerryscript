@@ -251,6 +251,14 @@ ret_t awtk_jerryscript_init(void) {
   return RET_OK;
 }
 
+ret_t awtk_iotjs_jerryscript_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"gc", jerryx_handler_gc);
+  jerryx_handler_register_global((const jerry_char_t*)"print", jerryx_handler_print);
+  awtk_js_init();
+
+  return RET_OK;
+}
+
 ret_t awtk_jerryscript_deinit(void) {
   jerry_cleanup();
 
