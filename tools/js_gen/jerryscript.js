@@ -112,7 +112,8 @@ class JerryscriptGenerator {
     if (returnType != 'void') {
       result = this.genParamDecl(-1, returnType, 'ret');
     }
-
+    
+    result += '  jerry_value_t jret = 0;\n';
     m.params.forEach((iter, index) => {
       result += this.genParamDecl(index, iter.type, iter.name);
     })
@@ -123,24 +124,24 @@ class JerryscriptGenerator {
   genReturnData(deconstructor, type, name) {
     let result = '\n';
     if (type.indexOf('char*') >= 0) {
-      result += `  return jerry_create_str(${name});\n`;
+      result += `  jret = jerry_create_str(${name});\n`;
     } else if (type.indexOf('wchar_t*') >= 0) {
-      result += `  return jerry_create_string_from_wstring(${name});\n`;
+      result += `  jret = jerry_create_string_from_wstring(${name});\n`;
     } else if (type.indexOf('*') >= 0) {
       const typeName = type.replace(/\*/g, "");
       let m = deconstructor;
       if(m) {
         result += `  static jerry_object_native_info_t info = {(jerry_object_native_free_callback_t)${m.name}};\n`;
-        result += `  return jerry_create_pointer(${name}, "${type}", &info);\n`;
+        result += `  jret = jerry_create_pointer(${name}, "${type}", &info);\n`;
       } else {
-        result += `  return jerry_create_pointer(${name}, "${type}", NULL);\n`;
+        result += `  jret = jerry_create_pointer(${name}, "${type}", NULL);\n`;
       }
     } else if (type.indexOf('int') >= 0) {
-      result += `  return jerry_create_number(${name});\n`;
+      result += `  jret = jerry_create_number(${name});\n`;
     } else if (type.indexOf('bool_t') >= 0) {
-      result += `  return jerry_create_boolean(${name});\n`;
+      result += `  jret = jerry_create_boolean(${name});\n`;
     } else {
-      result += `  return jerry_create_number(${name});\n`;
+      result += `  jret = jerry_create_number(${name});\n`;
     }
 
     return result;
@@ -193,9 +194,7 @@ class JerryscriptGenerator {
     result += ');\n';
     result += this.freeParams(m);
 
-    if (ret_type == 'void') {
-      result += '  return 0;\n';
-    } else {
+    if (ret_type != 'void') {
       if (isConstructor(m) || isCast(m)) {
         if(isGcConstructor(m)) {
           result += this.genReturnData(this.getGcDeconstructor(cls), `${cls.name}*`, 'ret');
@@ -206,6 +205,8 @@ class JerryscriptGenerator {
         result += this.genReturnData(null, ret_type, 'ret');
       }
     }
+
+    result += ' return jret;\n';
 
     return result;
   }
@@ -329,7 +330,9 @@ class JerryscriptGenerator {
 
     result += `jerry_value_t wrap_${funcName}` + gJerryScriptFuncArgs + ' {\n';
     result += this.genParamDecl(0, cls.name + '*', 'obj');
+    result += '  jerry_value_t jret = 0;\n';
     result += this.genReturnData(null, type, `obj->${name}`);
+    result += '  return jret;\n';
     result += '}\n\n'
 
     return result;

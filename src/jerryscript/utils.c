@@ -209,7 +209,7 @@ ret_t awtk_jerryscript_try_eval(const char* filename) {
   return_value_if_fail(filename != NULL, RET_BAD_PARAMS);
   script = file_read(filename, &size);
   return_value_if_fail(script != NULL && size > 0, RET_NOT_FOUND);
-  
+
   ret = awtk_jerryscript_eval_script(script, size);
 
   TKMEM_FREE(script);
@@ -220,11 +220,11 @@ ret_t awtk_jerryscript_try_eval(const char* filename) {
 }
 
 ret_t awtk_jerryscript_eval_awtk_js(const char* filename) {
-  if(file_exist(filename)) {
+  if (file_exist(filename)) {
     return awtk_jerryscript_try_eval(filename);
-  } else if(file_exist("./awtk.js")) {
+  } else if (file_exist("./awtk.js")) {
     return awtk_jerryscript_try_eval("./awtk.js");
-  } else if(file_exist("./js/awtk.js")) {
+  } else if (file_exist("./js/awtk.js")) {
     return awtk_jerryscript_try_eval("./js/awtk.js");
   } else {
     log_debug("not found awtk.js: %s\n", filename);
@@ -233,7 +233,7 @@ ret_t awtk_jerryscript_eval_awtk_js(const char* filename) {
 }
 
 ret_t awtk_jerryscript_eval(const char* filename) {
-  if(file_exist(filename)) {
+  if (file_exist(filename)) {
     return awtk_jerryscript_try_eval(filename);
   } else {
     log_debug("Not found: %s\n", filename);
