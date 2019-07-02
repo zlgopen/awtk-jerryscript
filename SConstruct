@@ -56,12 +56,6 @@ APP_CFLAGS = '-DRES_ROOT=\"\\\"'+RES_ROOT+'\\\"\" -DPATH_MAX=256 '
 APP_CCFLAGS = '-DRES_ROOT=\"\\\"'+RES_ROOT+'\\\"\" -DPATH_MAX=256 '
 
 DefaultEnvironment(
-  CC=awtk.TOOLS_PREFIX+'gcc',
-  CXX=awtk.TOOLS_PREFIX+'g++',
-  LD=awtk.TOOLS_PREFIX+'g++',
-  AR=awtk.TOOLS_PREFIX+'ar',
-  STRIP=awtk.TOOLS_PREFIX+'strip',
-
   CPPPATH   = APP_CPPPATH + awtk.CPPPATH,
   LINKFLAGS = awtk.LINKFLAGS,
   LIBS      = APP_LIBS + awtk.LIBS,
@@ -70,6 +64,14 @@ DefaultEnvironment(
   CCFLAGS   = APP_CCFLAGS + awtk.CCFLAGS, 
   OS_SUBSYSTEM_CONSOLE=awtk.OS_SUBSYSTEM_CONSOLE,
   OS_SUBSYSTEM_WINDOWS=awtk.OS_SUBSYSTEM_WINDOWS)
+
+if awtk.OS_NAME != 'Windows':
+  DefaultEnvironment(CC=awtk.TOOLS_PREFIX+'gcc',
+    CXX=awtk.TOOLS_PREFIX+'g++',
+    LD=awtk.TOOLS_PREFIX+'g++',
+    AR=awtk.TOOLS_PREFIX+'ar',
+    STRIP=awtk.TOOLS_PREFIX+'strip')
+
 
 SConscript(['3rd/SConscript', 'src/jerryscript/SConscript']);
 
