@@ -463,6 +463,7 @@ declare function WIDGET_PROP_ANCHOR_X();
 declare function WIDGET_PROP_ANCHOR_Y();
 declare function WIDGET_PROP_ROTATION();
 declare function WIDGET_PROP_COMPACT();
+declare function WIDGET_PROP_SCROLLABLE();
 declare function WIDGET_PROP_ICON();
 declare function WIDGET_PROP_OPTIONS();
 declare function WIDGET_PROP_SELECTED();
@@ -592,6 +593,7 @@ declare function widget_child(widget, name);
 declare function widget_lookup(widget, name, recursive);
 declare function widget_lookup_by_type(widget, type, recursive);
 declare function widget_set_visible(widget, visible, recursive);
+declare function widget_set_visible_only(widget, visible);
 declare function widget_set_sensitive(widget, sensitive);
 declare function widget_on(widget, type, on_event, ctx);
 declare function widget_off(widget, id);
@@ -792,6 +794,25 @@ declare function rich_text_create(parent, x, y, w, h);
 declare function rich_text_set_text(widget, text);
 declare function rich_text_cast(widget);
 declare function rich_text_t_get_prop_line_gap(nativeObj);
+declare function hscroll_label_create(parent, x, y, w, h);
+declare function hscroll_label_set_lull(widget, lull);
+declare function hscroll_label_set_duration(widget, duration);
+declare function hscroll_label_set_only_focus(widget, only_focus);
+declare function hscroll_label_set_loop(widget, loop);
+declare function hscroll_label_set_yoyo(widget, yoyo);
+declare function hscroll_label_set_ellipses(widget, ellipses);
+declare function hscroll_label_set_xoffset(widget, xoffset);
+declare function hscroll_label_start(widget);
+declare function hscroll_label_stop(widget);
+declare function hscroll_label_cast(widget);
+declare function hscroll_label_t_get_prop_only_focus(nativeObj);
+declare function hscroll_label_t_get_prop_loop(nativeObj);
+declare function hscroll_label_t_get_prop_yoyo(nativeObj);
+declare function hscroll_label_t_get_prop_ellipses(nativeObj);
+declare function hscroll_label_t_get_prop_lull(nativeObj);
+declare function hscroll_label_t_get_prop_duration(nativeObj);
+declare function hscroll_label_t_get_prop_xoffset(nativeObj);
+declare function hscroll_label_t_get_prop_text_w(nativeObj);
 declare function list_item_create(parent, x, y, w, h);
 declare function list_item_cast(widget);
 declare function list_view_h_create(parent, x, y, w, h);
@@ -1060,8 +1081,11 @@ declare function window_close_force(widget);
 declare function window_cast(widget);
 declare function window_t_get_prop_fullscreen(nativeObj);
 declare function tab_button_group_create(parent, x, y, w, h);
+declare function tab_button_group_set_compact(widget, compact);
+declare function tab_button_group_set_scrollable(widget, scrollable);
 declare function tab_button_group_cast(widget);
 declare function tab_button_group_t_get_prop_compact(nativeObj);
+declare function tab_button_group_t_get_prop_scrollable(nativeObj);
 declare function guage_pointer_create(parent, x, y, w, h);
 declare function guage_pointer_cast(widget);
 declare function guage_pointer_set_angle(widget, angle);
@@ -2274,6 +2298,7 @@ enum TWidgetProp {
  ANCHOR_Y = WIDGET_PROP_ANCHOR_Y(),
  ROTATION = WIDGET_PROP_ROTATION(),
  COMPACT = WIDGET_PROP_COMPACT(),
+ SCROLLABLE = WIDGET_PROP_SCROLLABLE(),
  ICON = WIDGET_PROP_ICON(),
  OPTIONS = WIDGET_PROP_OPTIONS(),
  SELECTED = WIDGET_PROP_SELECTED(),
@@ -2514,6 +2539,10 @@ class TWidget {
 
  setVisible(visible, recursive) {
    return widget_set_visible(this.nativeObj, visible, recursive);
+ }
+
+ setVisibleOnly(visible) {
+   return widget_set_visible_only(this.nativeObj, visible);
  }
 
  setSensitive(sensitive) {
@@ -3264,6 +3293,90 @@ class TRichText extends TWidget {
 
  get lineGap() {
    return rich_text_t_get_prop_line_gap(this.nativeObj);
+ }
+
+}
+
+class THscrollLabel extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new THscrollLabel(hscroll_label_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ setLull(lull) {
+   return hscroll_label_set_lull(this.nativeObj, lull);
+ }
+
+ setDuration(duration) {
+   return hscroll_label_set_duration(this.nativeObj, duration);
+ }
+
+ setOnlyFocus(only_focus) {
+   return hscroll_label_set_only_focus(this.nativeObj, only_focus);
+ }
+
+ setLoop(loop) {
+   return hscroll_label_set_loop(this.nativeObj, loop);
+ }
+
+ setYoyo(yoyo) {
+   return hscroll_label_set_yoyo(this.nativeObj, yoyo);
+ }
+
+ setEllipses(ellipses) {
+   return hscroll_label_set_ellipses(this.nativeObj, ellipses);
+ }
+
+ setXoffset(xoffset) {
+   return hscroll_label_set_xoffset(this.nativeObj, xoffset);
+ }
+
+ start() {
+   return hscroll_label_start(this.nativeObj);
+ }
+
+ stop() {
+   return hscroll_label_stop(this.nativeObj);
+ }
+
+ static cast(widget) {
+   return new THscrollLabel(hscroll_label_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ get onlyFocus() {
+   return hscroll_label_t_get_prop_only_focus(this.nativeObj);
+ }
+
+ get loop() {
+   return hscroll_label_t_get_prop_loop(this.nativeObj);
+ }
+
+ get yoyo() {
+   return hscroll_label_t_get_prop_yoyo(this.nativeObj);
+ }
+
+ get ellipses() {
+   return hscroll_label_t_get_prop_ellipses(this.nativeObj);
+ }
+
+ get lull() {
+   return hscroll_label_t_get_prop_lull(this.nativeObj);
+ }
+
+ get duration() {
+   return hscroll_label_t_get_prop_duration(this.nativeObj);
+ }
+
+ get xoffset() {
+   return hscroll_label_t_get_prop_xoffset(this.nativeObj);
+ }
+
+ get textW() {
+   return hscroll_label_t_get_prop_text_w(this.nativeObj);
  }
 
 }
@@ -4586,12 +4699,24 @@ class TTabButtonGroup extends TWidget {
    return new TTabButtonGroup(tab_button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
  }
 
+ setCompact(compact) {
+   return tab_button_group_set_compact(this.nativeObj, compact);
+ }
+
+ setScrollable(scrollable) {
+   return tab_button_group_set_scrollable(this.nativeObj, scrollable);
+ }
+
  static cast(widget) {
    return new TTabButtonGroup(tab_button_group_cast(widget ? (widget.nativeObj || widget) : null));
  }
 
  get compact() {
    return tab_button_group_t_get_prop_compact(this.nativeObj);
+ }
+
+ get scrollable() {
+   return tab_button_group_t_get_prop_scrollable(this.nativeObj);
  }
 
 }

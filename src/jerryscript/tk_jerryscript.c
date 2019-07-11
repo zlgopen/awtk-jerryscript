@@ -34,6 +34,7 @@
 #include "tkc/value.h"
 #include "progress_circle/progress_circle.h"
 #include "rich_text/rich_text.h"
+#include "scroll_label/hscroll_label.h"
 #include "scroll_view/list_item.h"
 #include "scroll_view/list_view_h.h"
 #include "scroll_view/list_view.h"
@@ -5529,6 +5530,15 @@ jerry_value_t get_WIDGET_PROP_COMPACT(
   return jerry_create_str(WIDGET_PROP_COMPACT);
 }
 
+jerry_value_t get_WIDGET_PROP_SCROLLABLE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(WIDGET_PROP_SCROLLABLE);
+}
+
 jerry_value_t get_WIDGET_PROP_ICON(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -5782,6 +5792,7 @@ ret_t widget_prop_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ANCHOR_Y", get_WIDGET_PROP_ANCHOR_Y);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ROTATION", get_WIDGET_PROP_ROTATION);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_COMPACT", get_WIDGET_PROP_COMPACT);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_SCROLLABLE", get_WIDGET_PROP_SCROLLABLE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ICON", get_WIDGET_PROP_ICON);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_OPTIONS", get_WIDGET_PROP_OPTIONS);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_SELECTED", get_WIDGET_PROP_SELECTED);
@@ -7142,6 +7153,22 @@ jerry_value_t wrap_widget_set_visible(
  return jret;
 }
 
+jerry_value_t wrap_widget_set_visible_only(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t visible = (bool_t)jerry_get_boolean_value(args_p[1]);
+  ret = (ret_t)widget_set_visible_only(widget, visible);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
 jerry_value_t wrap_widget_set_sensitive(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -7806,6 +7833,7 @@ ret_t widget_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_lookup", wrap_widget_lookup);
   jerryx_handler_register_global((const jerry_char_t*)"widget_lookup_by_type", wrap_widget_lookup_by_type);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_visible", wrap_widget_set_visible);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_set_visible_only", wrap_widget_set_visible_only);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_sensitive", wrap_widget_set_sensitive);
   jerryx_handler_register_global((const jerry_char_t*)"widget_on", wrap_widget_on);
   jerryx_handler_register_global((const jerry_char_t*)"widget_off", wrap_widget_off);
@@ -10030,6 +10058,310 @@ ret_t rich_text_t_init(void) {
  return RET_OK;
 }
 
+jerry_value_t wrap_hscroll_label_create(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  widget_t* ret = NULL;
+  jerry_value_t jret = 0;
+  widget_t* parent = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  xy_t x = (xy_t)jerry_get_number_value(args_p[1]);
+  xy_t y = (xy_t)jerry_get_number_value(args_p[2]);
+  wh_t w = (wh_t)jerry_get_number_value(args_p[3]);
+  wh_t h = (wh_t)jerry_get_number_value(args_p[4]);
+  ret = (widget_t*)hscroll_label_create(parent, x, y, w, h);
+
+  jret = jerry_create_pointer(ret, "hscroll_label_t*", NULL);
+ return jret;
+}
+
+jerry_value_t wrap_hscroll_label_set_lull(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  int32_t lull = (int32_t)jerry_get_number_value(args_p[1]);
+  ret = (ret_t)hscroll_label_set_lull(widget, lull);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_hscroll_label_set_duration(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  int32_t duration = (int32_t)jerry_get_number_value(args_p[1]);
+  ret = (ret_t)hscroll_label_set_duration(widget, duration);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_hscroll_label_set_only_focus(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t only_focus = (bool_t)jerry_get_boolean_value(args_p[1]);
+  ret = (ret_t)hscroll_label_set_only_focus(widget, only_focus);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_hscroll_label_set_loop(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t loop = (bool_t)jerry_get_boolean_value(args_p[1]);
+  ret = (ret_t)hscroll_label_set_loop(widget, loop);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_hscroll_label_set_yoyo(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t yoyo = (bool_t)jerry_get_boolean_value(args_p[1]);
+  ret = (ret_t)hscroll_label_set_yoyo(widget, yoyo);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_hscroll_label_set_ellipses(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t ellipses = (bool_t)jerry_get_boolean_value(args_p[1]);
+  ret = (ret_t)hscroll_label_set_ellipses(widget, ellipses);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_hscroll_label_set_xoffset(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  int32_t xoffset = (int32_t)jerry_get_number_value(args_p[1]);
+  ret = (ret_t)hscroll_label_set_xoffset(widget, xoffset);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_hscroll_label_start(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (ret_t)hscroll_label_start(widget);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_hscroll_label_stop(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (ret_t)hscroll_label_stop(widget);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_hscroll_label_cast(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  widget_t* ret = NULL;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  ret = (widget_t*)hscroll_label_cast(widget);
+
+  jret = jerry_create_pointer(ret, "hscroll_label_t*", NULL);
+ return jret;
+}
+
+jerry_value_t wrap_hscroll_label_t_get_prop_only_focus(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  hscroll_label_t* obj = (hscroll_label_t*)jerry_get_pointer(args_p[0], "hscroll_label_t*");
+  jerry_value_t jret = 0;
+
+  jret = jerry_create_boolean(obj->only_focus);
+  return jret;
+}
+
+jerry_value_t wrap_hscroll_label_t_get_prop_loop(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  hscroll_label_t* obj = (hscroll_label_t*)jerry_get_pointer(args_p[0], "hscroll_label_t*");
+  jerry_value_t jret = 0;
+
+  jret = jerry_create_boolean(obj->loop);
+  return jret;
+}
+
+jerry_value_t wrap_hscroll_label_t_get_prop_yoyo(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  hscroll_label_t* obj = (hscroll_label_t*)jerry_get_pointer(args_p[0], "hscroll_label_t*");
+  jerry_value_t jret = 0;
+
+  jret = jerry_create_boolean(obj->yoyo);
+  return jret;
+}
+
+jerry_value_t wrap_hscroll_label_t_get_prop_ellipses(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  hscroll_label_t* obj = (hscroll_label_t*)jerry_get_pointer(args_p[0], "hscroll_label_t*");
+  jerry_value_t jret = 0;
+
+  jret = jerry_create_boolean(obj->ellipses);
+  return jret;
+}
+
+jerry_value_t wrap_hscroll_label_t_get_prop_lull(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  hscroll_label_t* obj = (hscroll_label_t*)jerry_get_pointer(args_p[0], "hscroll_label_t*");
+  jerry_value_t jret = 0;
+
+  jret = jerry_create_number(obj->lull);
+  return jret;
+}
+
+jerry_value_t wrap_hscroll_label_t_get_prop_duration(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  hscroll_label_t* obj = (hscroll_label_t*)jerry_get_pointer(args_p[0], "hscroll_label_t*");
+  jerry_value_t jret = 0;
+
+  jret = jerry_create_number(obj->duration);
+  return jret;
+}
+
+jerry_value_t wrap_hscroll_label_t_get_prop_xoffset(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  hscroll_label_t* obj = (hscroll_label_t*)jerry_get_pointer(args_p[0], "hscroll_label_t*");
+  jerry_value_t jret = 0;
+
+  jret = jerry_create_number(obj->xoffset);
+  return jret;
+}
+
+jerry_value_t wrap_hscroll_label_t_get_prop_text_w(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  hscroll_label_t* obj = (hscroll_label_t*)jerry_get_pointer(args_p[0], "hscroll_label_t*");
+  jerry_value_t jret = 0;
+
+  jret = jerry_create_number(obj->text_w);
+  return jret;
+}
+
+ret_t hscroll_label_t_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_create", wrap_hscroll_label_create);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_set_lull", wrap_hscroll_label_set_lull);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_set_duration", wrap_hscroll_label_set_duration);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_set_only_focus", wrap_hscroll_label_set_only_focus);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_set_loop", wrap_hscroll_label_set_loop);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_set_yoyo", wrap_hscroll_label_set_yoyo);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_set_ellipses", wrap_hscroll_label_set_ellipses);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_set_xoffset", wrap_hscroll_label_set_xoffset);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_start", wrap_hscroll_label_start);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_stop", wrap_hscroll_label_stop);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_cast", wrap_hscroll_label_cast);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_t_get_prop_only_focus", wrap_hscroll_label_t_get_prop_only_focus);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_t_get_prop_loop", wrap_hscroll_label_t_get_prop_loop);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_t_get_prop_yoyo", wrap_hscroll_label_t_get_prop_yoyo);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_t_get_prop_ellipses", wrap_hscroll_label_t_get_prop_ellipses);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_t_get_prop_lull", wrap_hscroll_label_t_get_prop_lull);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_t_get_prop_duration", wrap_hscroll_label_t_get_prop_duration);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_t_get_prop_xoffset", wrap_hscroll_label_t_get_prop_xoffset);
+  jerryx_handler_register_global((const jerry_char_t*)"hscroll_label_t_get_prop_text_w", wrap_hscroll_label_t_get_prop_text_w);
+
+ return RET_OK;
+}
+
 jerry_value_t wrap_list_item_create(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -11141,7 +11473,7 @@ jerry_value_t wrap_slide_indicator_set_indicated_target(
   ret_t ret = 0;
   jerry_value_t jret = 0;
   widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
-  const char** indicated_target = (const char**)jerry_get_utf8_string(args_p[1]);
+  const char* indicated_target = (const char*)jerry_get_utf8_string(args_p[1]);
   ret = (ret_t)slide_indicator_set_indicated_target(widget, indicated_target);
   TKMEM_FREE(indicated_target);
 
@@ -14513,6 +14845,38 @@ jerry_value_t wrap_tab_button_group_create(
  return jret;
 }
 
+jerry_value_t wrap_tab_button_group_set_compact(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t compact = (bool_t)jerry_get_boolean_value(args_p[1]);
+  ret = (ret_t)tab_button_group_set_compact(widget, compact);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_tab_button_group_set_scrollable(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  ret_t ret = 0;
+  jerry_value_t jret = 0;
+  widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t scrollable = (bool_t)jerry_get_boolean_value(args_p[1]);
+  ret = (ret_t)tab_button_group_set_scrollable(widget, scrollable);
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
 jerry_value_t wrap_tab_button_group_cast(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -14541,10 +14905,26 @@ jerry_value_t wrap_tab_button_group_t_get_prop_compact(
   return jret;
 }
 
+jerry_value_t wrap_tab_button_group_t_get_prop_scrollable(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  tab_button_group_t* obj = (tab_button_group_t*)jerry_get_pointer(args_p[0], "tab_button_group_t*");
+  jerry_value_t jret = 0;
+
+  jret = jerry_create_boolean(obj->scrollable);
+  return jret;
+}
+
 ret_t tab_button_group_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"tab_button_group_create", wrap_tab_button_group_create);
+  jerryx_handler_register_global((const jerry_char_t*)"tab_button_group_set_compact", wrap_tab_button_group_set_compact);
+  jerryx_handler_register_global((const jerry_char_t*)"tab_button_group_set_scrollable", wrap_tab_button_group_set_scrollable);
   jerryx_handler_register_global((const jerry_char_t*)"tab_button_group_cast", wrap_tab_button_group_cast);
   jerryx_handler_register_global((const jerry_char_t*)"tab_button_group_t_get_prop_compact", wrap_tab_button_group_t_get_prop_compact);
+  jerryx_handler_register_global((const jerry_char_t*)"tab_button_group_t_get_prop_scrollable", wrap_tab_button_group_t_get_prop_scrollable);
 
  return RET_OK;
 }
@@ -18464,6 +18844,7 @@ ret_t awtk_js_init(void) {
   value_t_init();
   progress_circle_t_init();
   rich_text_t_init();
+  hscroll_label_t_init();
   list_item_t_init();
   list_view_h_t_init();
   list_view_t_init();

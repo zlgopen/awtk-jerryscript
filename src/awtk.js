@@ -966,6 +966,7 @@ var TWidgetProp;
     TWidgetProp[TWidgetProp["ANCHOR_Y"] = WIDGET_PROP_ANCHOR_Y()] = "ANCHOR_Y";
     TWidgetProp[TWidgetProp["ROTATION"] = WIDGET_PROP_ROTATION()] = "ROTATION";
     TWidgetProp[TWidgetProp["COMPACT"] = WIDGET_PROP_COMPACT()] = "COMPACT";
+    TWidgetProp[TWidgetProp["SCROLLABLE"] = WIDGET_PROP_SCROLLABLE()] = "SCROLLABLE";
     TWidgetProp[TWidgetProp["ICON"] = WIDGET_PROP_ICON()] = "ICON";
     TWidgetProp[TWidgetProp["OPTIONS"] = WIDGET_PROP_OPTIONS()] = "OPTIONS";
     TWidgetProp[TWidgetProp["SELECTED"] = WIDGET_PROP_SELECTED()] = "SELECTED";
@@ -1178,6 +1179,9 @@ var TWidget = /** @class */ (function () {
     };
     TWidget.prototype.setVisible = function (visible, recursive) {
         return widget_set_visible(this.nativeObj, visible, recursive);
+    };
+    TWidget.prototype.setVisibleOnly = function (visible) {
+        return widget_set_visible_only(this.nativeObj, visible);
     };
     TWidget.prototype.setSensitive = function (sensitive) {
         return widget_set_sensitive(this.nativeObj, sensitive);
@@ -1908,6 +1912,102 @@ var TRichText = /** @class */ (function (_super) {
         configurable: true
     });
     return TRichText;
+}(TWidget));
+var THscrollLabel = /** @class */ (function (_super) {
+    __extends(THscrollLabel, _super);
+    function THscrollLabel(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    THscrollLabel.create = function (parent, x, y, w, h) {
+        return new THscrollLabel(hscroll_label_create(parent ? parent.nativeObj : null, x, y, w, h));
+    };
+    THscrollLabel.prototype.setLull = function (lull) {
+        return hscroll_label_set_lull(this.nativeObj, lull);
+    };
+    THscrollLabel.prototype.setDuration = function (duration) {
+        return hscroll_label_set_duration(this.nativeObj, duration);
+    };
+    THscrollLabel.prototype.setOnlyFocus = function (only_focus) {
+        return hscroll_label_set_only_focus(this.nativeObj, only_focus);
+    };
+    THscrollLabel.prototype.setLoop = function (loop) {
+        return hscroll_label_set_loop(this.nativeObj, loop);
+    };
+    THscrollLabel.prototype.setYoyo = function (yoyo) {
+        return hscroll_label_set_yoyo(this.nativeObj, yoyo);
+    };
+    THscrollLabel.prototype.setEllipses = function (ellipses) {
+        return hscroll_label_set_ellipses(this.nativeObj, ellipses);
+    };
+    THscrollLabel.prototype.setXoffset = function (xoffset) {
+        return hscroll_label_set_xoffset(this.nativeObj, xoffset);
+    };
+    THscrollLabel.prototype.start = function () {
+        return hscroll_label_start(this.nativeObj);
+    };
+    THscrollLabel.prototype.stop = function () {
+        return hscroll_label_stop(this.nativeObj);
+    };
+    THscrollLabel.cast = function (widget) {
+        return new THscrollLabel(hscroll_label_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    Object.defineProperty(THscrollLabel.prototype, "onlyFocus", {
+        get: function () {
+            return hscroll_label_t_get_prop_only_focus(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(THscrollLabel.prototype, "loop", {
+        get: function () {
+            return hscroll_label_t_get_prop_loop(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(THscrollLabel.prototype, "yoyo", {
+        get: function () {
+            return hscroll_label_t_get_prop_yoyo(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(THscrollLabel.prototype, "ellipses", {
+        get: function () {
+            return hscroll_label_t_get_prop_ellipses(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(THscrollLabel.prototype, "lull", {
+        get: function () {
+            return hscroll_label_t_get_prop_lull(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(THscrollLabel.prototype, "duration", {
+        get: function () {
+            return hscroll_label_t_get_prop_duration(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(THscrollLabel.prototype, "xoffset", {
+        get: function () {
+            return hscroll_label_t_get_prop_xoffset(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(THscrollLabel.prototype, "textW", {
+        get: function () {
+            return hscroll_label_t_get_prop_text_w(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return THscrollLabel;
 }(TWidget));
 var TListItem = /** @class */ (function (_super) {
     __extends(TListItem, _super);
@@ -3328,12 +3428,25 @@ var TTabButtonGroup = /** @class */ (function (_super) {
     TTabButtonGroup.create = function (parent, x, y, w, h) {
         return new TTabButtonGroup(tab_button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
+    TTabButtonGroup.prototype.setCompact = function (compact) {
+        return tab_button_group_set_compact(this.nativeObj, compact);
+    };
+    TTabButtonGroup.prototype.setScrollable = function (scrollable) {
+        return tab_button_group_set_scrollable(this.nativeObj, scrollable);
+    };
     TTabButtonGroup.cast = function (widget) {
         return new TTabButtonGroup(tab_button_group_cast(widget ? (widget.nativeObj || widget) : null));
     };
     Object.defineProperty(TTabButtonGroup.prototype, "compact", {
         get: function () {
             return tab_button_group_t_get_prop_compact(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TTabButtonGroup.prototype, "scrollable", {
+        get: function () {
+            return tab_button_group_t_get_prop_scrollable(this.nativeObj);
         },
         enumerable: true,
         configurable: true
