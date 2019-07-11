@@ -7,6 +7,9 @@ if(this['console'] === undefined) {
   }
 }
 declare function tk_quit();
+declare function tk_get_pointer_x();
+declare function tk_get_pointer_y();
+declare function tk_is_pointer_pressed();
 declare function asset_info_t_get_prop_type(nativeObj);
 declare function asset_info_t_get_prop_subtype(nativeObj);
 declare function asset_info_t_get_prop_is_in_rom(nativeObj);
@@ -1320,6 +1323,18 @@ class TGlobal {
 
  static quit() {
    return tk_quit();
+ }
+
+ static getPointerX() {
+   return tk_get_pointer_x();
+ }
+
+ static getPointerY() {
+   return tk_get_pointer_y();
+ }
+
+ static isPointerPressed() {
+   return tk_is_pointer_pressed();
  }
 
 }

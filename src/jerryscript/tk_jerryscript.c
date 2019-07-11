@@ -112,8 +112,53 @@ jerry_value_t wrap_tk_quit(
  return jret;
 }
 
+jerry_value_t wrap_tk_get_pointer_x(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  int32_t ret = 0;
+  jerry_value_t jret = 0;
+  ret = (int32_t)tk_get_pointer_x();
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_tk_get_pointer_y(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  int32_t ret = 0;
+  jerry_value_t jret = 0;
+  ret = (int32_t)tk_get_pointer_y();
+
+  jret = jerry_create_number(ret);
+ return jret;
+}
+
+jerry_value_t wrap_tk_is_pointer_pressed(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  bool_t ret = 0;
+  jerry_value_t jret = 0;
+  ret = (bool_t)tk_is_pointer_pressed();
+
+  jret = jerry_create_boolean(ret);
+ return jret;
+}
+
 ret_t global_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"tk_quit", wrap_tk_quit);
+  jerryx_handler_register_global((const jerry_char_t*)"tk_get_pointer_x", wrap_tk_get_pointer_x);
+  jerryx_handler_register_global((const jerry_char_t*)"tk_get_pointer_y", wrap_tk_get_pointer_y);
+  jerryx_handler_register_global((const jerry_char_t*)"tk_is_pointer_pressed", wrap_tk_is_pointer_pressed);
 
  return RET_OK;
 }

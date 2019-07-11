@@ -24,6 +24,15 @@ var TGlobal = /** @class */ (function () {
     TGlobal.quit = function () {
         return tk_quit();
     };
+    TGlobal.getPointerX = function () {
+        return tk_get_pointer_x();
+    };
+    TGlobal.getPointerY = function () {
+        return tk_get_pointer_y();
+    };
+    TGlobal.isPointerPressed = function () {
+        return tk_is_pointer_pressed();
+    };
     return TGlobal;
 }());
 var TAssetInfo = /** @class */ (function () {
