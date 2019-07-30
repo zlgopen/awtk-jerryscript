@@ -393,6 +393,7 @@ declare function WIDGET_PROP_LAYOUT_H();
 declare function WIDGET_PROP_VIRTUAL_W();
 declare function WIDGET_PROP_VIRTUAL_H();
 declare function WIDGET_PROP_NAME();
+declare function WIDGET_PROP_TYPE();
 declare function WIDGET_PROP_CLOSABLE();
 declare function WIDGET_PROP_CURSOR();
 declare function WIDGET_PROP_VALUE();
@@ -483,6 +484,7 @@ declare function WIDGET_PROP_DELAY();
 declare function WIDGET_PROP_IS_KEYBOARD();
 declare function WIDGET_PROP_FOCUS();
 declare function WIDGET_PROP_FOCUSABLE();
+declare function WIDGET_PROP_WITH_FOCUS_STATE();
 declare function WIDGET_PROP_MOVE_FOCUS_NEXT_KEY();
 declare function WIDGET_PROP_MOVE_FOCUS_PREV_KEY();
 declare function WIDGET_TYPE_NONE();
@@ -639,6 +641,10 @@ declare function widget_t_get_prop_visible(nativeObj);
 declare function widget_t_set_prop_visible(nativeObj, value);
 declare function widget_t_get_prop_sensitive(nativeObj);
 declare function widget_t_set_prop_sensitive(nativeObj, value);
+declare function widget_t_get_prop_focusable(nativeObj);
+declare function widget_t_set_prop_focusable(nativeObj, value);
+declare function widget_t_get_prop_with_focus_state(nativeObj);
+declare function widget_t_set_prop_with_focus_state(nativeObj, value);
 declare function widget_t_get_prop_floating(nativeObj);
 declare function ASSET_TYPE_NONE();
 declare function ASSET_TYPE_FONT();
@@ -910,7 +916,6 @@ declare function switch_set_value(widget, value);
 declare function switch_cast(widget);
 declare function switch_t_get_prop_value(nativeObj);
 declare function switch_t_get_prop_max_xoffset_ratio(nativeObj);
-declare function switch_t_get_prop_round_radius(nativeObj);
 declare function text_selector_create(parent, x, y, w, h);
 declare function text_selector_cast(widget);
 declare function text_selector_reset_options(widget);
@@ -2240,6 +2245,7 @@ enum TWidgetProp {
  VIRTUAL_W = WIDGET_PROP_VIRTUAL_W(),
  VIRTUAL_H = WIDGET_PROP_VIRTUAL_H(),
  NAME = WIDGET_PROP_NAME(),
+ TYPE = WIDGET_PROP_TYPE(),
  CLOSABLE = WIDGET_PROP_CLOSABLE(),
  CURSOR = WIDGET_PROP_CURSOR(),
  VALUE = WIDGET_PROP_VALUE(),
@@ -2330,6 +2336,7 @@ enum TWidgetProp {
  IS_KEYBOARD = WIDGET_PROP_IS_KEYBOARD(),
  FOCUS = WIDGET_PROP_FOCUS(),
  FOCUSABLE = WIDGET_PROP_FOCUSABLE(),
+ WITH_FOCUS_STATE = WIDGET_PROP_WITH_FOCUS_STATE(),
  MOVE_FOCUS_NEXT_KEY = WIDGET_PROP_MOVE_FOCUS_NEXT_KEY(),
  MOVE_FOCUS_PREV_KEY = WIDGET_PROP_MOVE_FOCUS_PREV_KEY(),
 };
@@ -2726,6 +2733,22 @@ class TWidget {
 
  get sensitive() {
    return widget_t_get_prop_sensitive(this.nativeObj);
+ }
+
+ set focusable(value) {
+   widget_t_set_prop_focusable(this.nativeObj, value);
+ }
+
+ get focusable() {
+   return widget_t_get_prop_focusable(this.nativeObj);
+ }
+
+ set withFocusState(value) {
+   widget_t_set_prop_with_focus_state(this.nativeObj, value);
+ }
+
+ get withFocusState() {
+   return widget_t_get_prop_with_focus_state(this.nativeObj);
  }
 
  get floating() {
@@ -3848,10 +3871,6 @@ class TSwitch extends TWidget {
 
  get maxXoffsetRatio() {
    return switch_t_get_prop_max_xoffset_ratio(this.nativeObj);
- }
-
- get roundRadius() {
-   return switch_t_get_prop_round_radius(this.nativeObj);
  }
 
 }

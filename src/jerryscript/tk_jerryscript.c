@@ -4918,6 +4918,15 @@ jerry_value_t get_WIDGET_PROP_NAME(
   return jerry_create_str(WIDGET_PROP_NAME);
 }
 
+jerry_value_t get_WIDGET_PROP_TYPE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(WIDGET_PROP_TYPE);
+}
+
 jerry_value_t get_WIDGET_PROP_CLOSABLE(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -5728,6 +5737,15 @@ jerry_value_t get_WIDGET_PROP_FOCUSABLE(
   return jerry_create_str(WIDGET_PROP_FOCUSABLE);
 }
 
+jerry_value_t get_WIDGET_PROP_WITH_FOCUS_STATE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  return jerry_create_str(WIDGET_PROP_WITH_FOCUS_STATE);
+}
+
 jerry_value_t get_WIDGET_PROP_MOVE_FOCUS_NEXT_KEY(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -5764,6 +5782,7 @@ ret_t widget_prop_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_VIRTUAL_W", get_WIDGET_PROP_VIRTUAL_W);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_VIRTUAL_H", get_WIDGET_PROP_VIRTUAL_H);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_NAME", get_WIDGET_PROP_NAME);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_TYPE", get_WIDGET_PROP_TYPE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CLOSABLE", get_WIDGET_PROP_CLOSABLE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CURSOR", get_WIDGET_PROP_CURSOR);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_VALUE", get_WIDGET_PROP_VALUE);
@@ -5854,6 +5873,7 @@ ret_t widget_prop_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_IS_KEYBOARD", get_WIDGET_PROP_IS_KEYBOARD);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_FOCUS", get_WIDGET_PROP_FOCUS);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_FOCUSABLE", get_WIDGET_PROP_FOCUSABLE);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_WITH_FOCUS_STATE", get_WIDGET_PROP_WITH_FOCUS_STATE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MOVE_FOCUS_NEXT_KEY", get_WIDGET_PROP_MOVE_FOCUS_NEXT_KEY);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MOVE_FOCUS_PREV_KEY", get_WIDGET_PROP_MOVE_FOCUS_PREV_KEY);
 
@@ -7833,6 +7853,56 @@ jerry_value_t wrap_widget_t_get_prop_sensitive(
   return jret;
 }
 
+jerry_value_t wrap_widget_t_set_prop_focusable(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  widget_t* obj = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t focusable = (bool_t)jerry_get_boolean_value(args_p[1]);
+  obj->focusable = focusable;
+  return jerry_create_number(RET_OK);
+};
+
+jerry_value_t wrap_widget_t_get_prop_focusable(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  widget_t* obj = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  jerry_value_t jret = 0;
+
+  jret = jerry_create_boolean(obj->focusable);
+  return jret;
+}
+
+jerry_value_t wrap_widget_t_set_prop_with_focus_state(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  widget_t* obj = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  bool_t with_focus_state = (bool_t)jerry_get_boolean_value(args_p[1]);
+  obj->with_focus_state = with_focus_state;
+  return jerry_create_number(RET_OK);
+};
+
+jerry_value_t wrap_widget_t_get_prop_with_focus_state(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t args_p[], 
+    const jerry_length_t args_cnt
+  ) {
+  widget_t* obj = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
+  jerry_value_t jret = 0;
+
+  jret = jerry_create_boolean(obj->with_focus_state);
+  return jret;
+}
+
 jerry_value_t wrap_widget_t_get_prop_floating(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -7921,6 +7991,10 @@ ret_t widget_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_visible", wrap_widget_t_get_prop_visible);
   jerryx_handler_register_global((const jerry_char_t*)"widget_t_set_prop_sensitive", wrap_widget_t_set_prop_sensitive);
   jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_sensitive", wrap_widget_t_get_prop_sensitive);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_t_set_prop_focusable", wrap_widget_t_set_prop_focusable);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_focusable", wrap_widget_t_get_prop_focusable);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_t_set_prop_with_focus_state", wrap_widget_t_set_prop_with_focus_state);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_with_focus_state", wrap_widget_t_get_prop_with_focus_state);
   jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_floating", wrap_widget_t_get_prop_floating);
 
  return RET_OK;
@@ -11984,26 +12058,12 @@ jerry_value_t wrap_switch_t_get_prop_max_xoffset_ratio(
   return jret;
 }
 
-jerry_value_t wrap_switch_t_get_prop_round_radius(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t args_p[], 
-    const jerry_length_t args_cnt
-  ) {
-  switch_t* obj = (switch_t*)jerry_get_pointer(args_p[0], "switch_t*");
-  jerry_value_t jret = 0;
-
-  jret = jerry_create_number(obj->round_radius);
-  return jret;
-}
-
 ret_t switch_t_init(void) {
   jerryx_handler_register_global((const jerry_char_t*)"switch_create", wrap_switch_create);
   jerryx_handler_register_global((const jerry_char_t*)"switch_set_value", wrap_switch_set_value);
   jerryx_handler_register_global((const jerry_char_t*)"switch_cast", wrap_switch_cast);
   jerryx_handler_register_global((const jerry_char_t*)"switch_t_get_prop_value", wrap_switch_t_get_prop_value);
   jerryx_handler_register_global((const jerry_char_t*)"switch_t_get_prop_max_xoffset_ratio", wrap_switch_t_get_prop_max_xoffset_ratio);
-  jerryx_handler_register_global((const jerry_char_t*)"switch_t_get_prop_round_radius", wrap_switch_t_get_prop_round_radius);
 
  return RET_OK;
 }

@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    };
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -902,6 +902,7 @@ var TWidgetProp;
     TWidgetProp[TWidgetProp["VIRTUAL_W"] = WIDGET_PROP_VIRTUAL_W()] = "VIRTUAL_W";
     TWidgetProp[TWidgetProp["VIRTUAL_H"] = WIDGET_PROP_VIRTUAL_H()] = "VIRTUAL_H";
     TWidgetProp[TWidgetProp["NAME"] = WIDGET_PROP_NAME()] = "NAME";
+    TWidgetProp[TWidgetProp["TYPE"] = WIDGET_PROP_TYPE()] = "TYPE";
     TWidgetProp[TWidgetProp["CLOSABLE"] = WIDGET_PROP_CLOSABLE()] = "CLOSABLE";
     TWidgetProp[TWidgetProp["CURSOR"] = WIDGET_PROP_CURSOR()] = "CURSOR";
     TWidgetProp[TWidgetProp["VALUE"] = WIDGET_PROP_VALUE()] = "VALUE";
@@ -992,6 +993,7 @@ var TWidgetProp;
     TWidgetProp[TWidgetProp["IS_KEYBOARD"] = WIDGET_PROP_IS_KEYBOARD()] = "IS_KEYBOARD";
     TWidgetProp[TWidgetProp["FOCUS"] = WIDGET_PROP_FOCUS()] = "FOCUS";
     TWidgetProp[TWidgetProp["FOCUSABLE"] = WIDGET_PROP_FOCUSABLE()] = "FOCUSABLE";
+    TWidgetProp[TWidgetProp["WITH_FOCUS_STATE"] = WIDGET_PROP_WITH_FOCUS_STATE()] = "WITH_FOCUS_STATE";
     TWidgetProp[TWidgetProp["MOVE_FOCUS_NEXT_KEY"] = WIDGET_PROP_MOVE_FOCUS_NEXT_KEY()] = "MOVE_FOCUS_NEXT_KEY";
     TWidgetProp[TWidgetProp["MOVE_FOCUS_PREV_KEY"] = WIDGET_PROP_MOVE_FOCUS_PREV_KEY()] = "MOVE_FOCUS_PREV_KEY";
 })(TWidgetProp || (TWidgetProp = {}));
@@ -1358,6 +1360,26 @@ var TWidget = /** @class */ (function () {
         },
         set: function (value) {
             widget_t_set_prop_sensitive(this.nativeObj, value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TWidget.prototype, "focusable", {
+        get: function () {
+            return widget_t_get_prop_focusable(this.nativeObj);
+        },
+        set: function (value) {
+            widget_t_set_prop_focusable(this.nativeObj, value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TWidget.prototype, "withFocusState", {
+        get: function () {
+            return widget_t_get_prop_with_focus_state(this.nativeObj);
+        },
+        set: function (value) {
+            widget_t_set_prop_with_focus_state(this.nativeObj, value);
         },
         enumerable: true,
         configurable: true
@@ -2500,13 +2522,6 @@ var TSwitch = /** @class */ (function (_super) {
     Object.defineProperty(TSwitch.prototype, "maxXoffsetRatio", {
         get: function () {
             return switch_t_get_prop_max_xoffset_ratio(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TSwitch.prototype, "roundRadius", {
-        get: function () {
-            return switch_t_get_prop_round_radius(this.nativeObj);
         },
         enumerable: true,
         configurable: true
