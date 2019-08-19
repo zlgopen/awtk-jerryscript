@@ -6,28 +6,64 @@ if(this['console'] === undefined) {
       print(str);
   }
 }
+declare function vgcanvas_cast(vg);
+declare function vgcanvas_flush(vg);
+declare function vgcanvas_begin_path(vg);
+declare function vgcanvas_move_to(vg, x, y);
+declare function vgcanvas_line_to(vg, x, y);
+declare function vgcanvas_quad_to(vg, cpx, cpy, x, y);
+declare function vgcanvas_bezier_to(vg, cp1x, cp1y, cp2x, cp2y, x, y);
+declare function vgcanvas_arc_to(vg, x1, y1, x2, y2, r);
+declare function vgcanvas_arc(vg, x, y, r, start_angle, end_angle, ccw);
+declare function vgcanvas_is_point_in_path(vg, x, y);
+declare function vgcanvas_rect(vg, x, y, w, h);
+declare function vgcanvas_rounded_rect(vg, x, y, w, h, r);
+declare function vgcanvas_ellipse(vg, x, y, rx, ry);
+declare function vgcanvas_close_path(vg);
+declare function vgcanvas_rotate(vg, rad);
+declare function vgcanvas_scale(vg, x, y);
+declare function vgcanvas_translate(vg, x, y);
+declare function vgcanvas_transform(vg, a, b, c, d, e, f);
+declare function vgcanvas_set_transform(vg, a, b, c, d, e, f);
+declare function vgcanvas_clip_rect(vg, x, y, w, h);
+declare function vgcanvas_fill(vg);
+declare function vgcanvas_stroke(vg);
+declare function vgcanvas_paint(vg, stroke, img);
+declare function vgcanvas_set_font(vg, font);
+declare function vgcanvas_set_font_size(vg, font);
+declare function vgcanvas_set_text_align(vg, value);
+declare function vgcanvas_set_text_baseline(vg, value);
+declare function vgcanvas_fill_text(vg, text, x, y, max_width);
+declare function vgcanvas_measure_text(vg, text);
+declare function vgcanvas_draw_image(vg, img, sx, sy, sw, sh, dx, dy, dw, dh);
+declare function vgcanvas_draw_icon(vg, img, sx, sy, sw, sh, dx, dy, dw, dh);
+declare function vgcanvas_set_antialias(vg, value);
+declare function vgcanvas_set_global_alpha(vg, alpha);
+declare function vgcanvas_set_line_width(vg, value);
+declare function vgcanvas_set_fill_color_str(vg, color);
+declare function vgcanvas_set_stroke_color_str(vg, color);
+declare function vgcanvas_set_line_cap(vg, value);
+declare function vgcanvas_set_line_join(vg, value);
+declare function vgcanvas_set_miter_limit(vg, value);
+declare function vgcanvas_save(vg);
+declare function vgcanvas_restore(vg);
+declare function vgcanvas_t_get_prop_w(nativeObj);
+declare function vgcanvas_t_get_prop_h(nativeObj);
+declare function vgcanvas_t_get_prop_ratio(nativeObj);
+declare function vgcanvas_t_get_prop_anti_alias(nativeObj);
+declare function vgcanvas_t_get_prop_line_width(nativeObj);
+declare function vgcanvas_t_get_prop_global_alpha(nativeObj);
+declare function vgcanvas_t_get_prop_miter_limit(nativeObj);
+declare function vgcanvas_t_get_prop_line_cap(nativeObj);
+declare function vgcanvas_t_get_prop_line_join(nativeObj);
+declare function vgcanvas_t_get_prop_font(nativeObj);
+declare function vgcanvas_t_get_prop_font_size(nativeObj);
+declare function vgcanvas_t_get_prop_text_align(nativeObj);
+declare function vgcanvas_t_get_prop_text_baseline(nativeObj);
 declare function tk_quit();
 declare function tk_get_pointer_x();
 declare function tk_get_pointer_y();
 declare function tk_is_pointer_pressed();
-declare function asset_info_t_get_prop_type(nativeObj);
-declare function asset_info_t_get_prop_subtype(nativeObj);
-declare function asset_info_t_get_prop_is_in_rom(nativeObj);
-declare function asset_info_t_get_prop_size(nativeObj);
-declare function asset_info_t_get_prop_refcount(nativeObj);
-declare function asset_info_t_get_prop_name(nativeObj);
-declare function assets_manager();
-declare function assets_manager_ref(am, type, name);
-declare function assets_manager_unref(am, info);
-declare function BITMAP_FMT_NONE();
-declare function BITMAP_FMT_RGBA8888();
-declare function BITMAP_FMT_ABGR8888();
-declare function BITMAP_FMT_BGRA8888();
-declare function BITMAP_FMT_ARGB8888();
-declare function BITMAP_FMT_RGB565();
-declare function BITMAP_FMT_BGR565();
-declare function BITMAP_FMT_RGB888();
-declare function BITMAP_FMT_BGR888();
 declare function BITMAP_FLAG_NONE();
 declare function BITMAP_FLAG_OPAQUE();
 declare function BITMAP_FLAG_IMMUTABLE();
@@ -149,9 +185,13 @@ declare function EVT_LOW_MEMORY();
 declare function EVT_OUT_OF_MEMORY();
 declare function EVT_ORIENTATION_WILL_CHANGED();
 declare function EVT_ORIENTATION_CHANGED();
+declare function EVT_WIDGET_CREATED();
 declare function EVT_REQ_START();
 declare function EVT_USER_START();
 declare function font_manager_unload_font(fm, name, size);
+declare function GLYPH_FMT_ALPHA();
+declare function GLYPH_FMT_MONO();
+declare function GLYPH_FMT_RGBA();
 declare function idle_add(on_idle, ctx);
 declare function idle_remove(idle_id);
 declare function image_manager();
@@ -324,60 +364,17 @@ declare function ALIGN_H_NONE();
 declare function ALIGN_H_CENTER();
 declare function ALIGN_H_LEFT();
 declare function ALIGN_H_RIGHT();
-declare function vgcanvas_cast(vg);
-declare function vgcanvas_flush(vg);
-declare function vgcanvas_begin_path(vg);
-declare function vgcanvas_move_to(vg, x, y);
-declare function vgcanvas_line_to(vg, x, y);
-declare function vgcanvas_quad_to(vg, cpx, cpy, x, y);
-declare function vgcanvas_bezier_to(vg, cp1x, cp1y, cp2x, cp2y, x, y);
-declare function vgcanvas_arc_to(vg, x1, y1, x2, y2, r);
-declare function vgcanvas_arc(vg, x, y, r, start_angle, end_angle, ccw);
-declare function vgcanvas_is_point_in_path(vg, x, y);
-declare function vgcanvas_rect(vg, x, y, w, h);
-declare function vgcanvas_rounded_rect(vg, x, y, w, h, r);
-declare function vgcanvas_ellipse(vg, x, y, rx, ry);
-declare function vgcanvas_close_path(vg);
-declare function vgcanvas_rotate(vg, rad);
-declare function vgcanvas_scale(vg, x, y);
-declare function vgcanvas_translate(vg, x, y);
-declare function vgcanvas_transform(vg, a, b, c, d, e, f);
-declare function vgcanvas_set_transform(vg, a, b, c, d, e, f);
-declare function vgcanvas_clip_rect(vg, x, y, w, h);
-declare function vgcanvas_fill(vg);
-declare function vgcanvas_stroke(vg);
-declare function vgcanvas_paint(vg, stroke, img);
-declare function vgcanvas_set_font(vg, font);
-declare function vgcanvas_set_font_size(vg, font);
-declare function vgcanvas_set_text_align(vg, value);
-declare function vgcanvas_set_text_baseline(vg, value);
-declare function vgcanvas_fill_text(vg, text, x, y, max_width);
-declare function vgcanvas_measure_text(vg, text);
-declare function vgcanvas_draw_image(vg, img, sx, sy, sw, sh, dx, dy, dw, dh);
-declare function vgcanvas_draw_icon(vg, img, sx, sy, sw, sh, dx, dy, dw, dh);
-declare function vgcanvas_set_antialias(vg, value);
-declare function vgcanvas_set_global_alpha(vg, alpha);
-declare function vgcanvas_set_line_width(vg, value);
-declare function vgcanvas_set_fill_color_str(vg, color);
-declare function vgcanvas_set_stroke_color_str(vg, color);
-declare function vgcanvas_set_line_cap(vg, value);
-declare function vgcanvas_set_line_join(vg, value);
-declare function vgcanvas_set_miter_limit(vg, value);
-declare function vgcanvas_save(vg);
-declare function vgcanvas_restore(vg);
-declare function vgcanvas_t_get_prop_w(nativeObj);
-declare function vgcanvas_t_get_prop_h(nativeObj);
-declare function vgcanvas_t_get_prop_ratio(nativeObj);
-declare function vgcanvas_t_get_prop_anti_alias(nativeObj);
-declare function vgcanvas_t_get_prop_line_width(nativeObj);
-declare function vgcanvas_t_get_prop_global_alpha(nativeObj);
-declare function vgcanvas_t_get_prop_miter_limit(nativeObj);
-declare function vgcanvas_t_get_prop_line_cap(nativeObj);
-declare function vgcanvas_t_get_prop_line_join(nativeObj);
-declare function vgcanvas_t_get_prop_font(nativeObj);
-declare function vgcanvas_t_get_prop_font_size(nativeObj);
-declare function vgcanvas_t_get_prop_text_align(nativeObj);
-declare function vgcanvas_t_get_prop_text_baseline(nativeObj);
+declare function BITMAP_FMT_NONE();
+declare function BITMAP_FMT_RGBA8888();
+declare function BITMAP_FMT_ABGR8888();
+declare function BITMAP_FMT_BGRA8888();
+declare function BITMAP_FMT_ARGB8888();
+declare function BITMAP_FMT_RGB565();
+declare function BITMAP_FMT_BGR565();
+declare function BITMAP_FMT_RGB888();
+declare function BITMAP_FMT_BGR888();
+declare function BITMAP_FMT_GRAY();
+declare function BITMAP_FMT_MONO();
 declare function WIDGET_PROP_X();
 declare function WIDGET_PROP_Y();
 declare function WIDGET_PROP_W();
@@ -650,6 +647,9 @@ declare function widget_t_set_prop_focusable(nativeObj, value);
 declare function widget_t_get_prop_with_focus_state(nativeObj);
 declare function widget_t_set_prop_with_focus_state(nativeObj, value);
 declare function widget_t_get_prop_floating(nativeObj);
+declare function assets_manager();
+declare function assets_manager_ref(am, type, name);
+declare function assets_manager_unref(am, info);
 declare function ASSET_TYPE_NONE();
 declare function ASSET_TYPE_FONT();
 declare function ASSET_TYPE_IMAGE();
@@ -659,6 +659,12 @@ declare function ASSET_TYPE_XML();
 declare function ASSET_TYPE_STRINGS();
 declare function ASSET_TYPE_SCRIPT();
 declare function ASSET_TYPE_DATA();
+declare function asset_info_t_get_prop_type(nativeObj);
+declare function asset_info_t_get_prop_subtype(nativeObj);
+declare function asset_info_t_get_prop_is_in_rom(nativeObj);
+declare function asset_info_t_get_prop_size(nativeObj);
+declare function asset_info_t_get_prop_refcount(nativeObj);
+declare function asset_info_t_get_prop_name(nativeObj);
 declare function color_create(r, b, g, a);
 declare function color_from_str(c, str);
 declare function color_r(c);
@@ -787,74 +793,6 @@ declare function value_create();
 declare function value_destroy(v);
 declare function value_reset(v);
 declare function value_cast(value);
-declare function mledit_create(parent, x, y, w, h);
-declare function mledit_set_readonly(widget, readonly);
-declare function mledit_set_wrap_word(widget, wrap_word);
-declare function mledit_set_max_lines(widget, max_lines);
-declare function mledit_set_input_tips(widget, tips);
-declare function mledit_cast(widget);
-declare function mledit_t_get_prop_readonly(nativeObj);
-declare function mledit_t_get_prop_top_margin(nativeObj);
-declare function mledit_t_get_prop_bottom_margin(nativeObj);
-declare function mledit_t_get_prop_left_margin(nativeObj);
-declare function mledit_t_get_prop_right_margin(nativeObj);
-declare function mledit_t_get_prop_tips(nativeObj);
-declare function mledit_t_get_prop_focus(nativeObj);
-declare function mledit_t_get_prop_wrap_word(nativeObj);
-declare function mledit_t_get_prop_max_lines(nativeObj);
-declare function slider_create(parent, x, y, w, h);
-declare function slider_cast(widget);
-declare function slider_set_value(widget, value);
-declare function slider_set_min(widget, min);
-declare function slider_set_max(widget, max);
-declare function slider_set_step(widget, step);
-declare function slider_set_bar_size(widget, bar_size);
-declare function slider_set_vertical(widget, vertical);
-declare function slider_t_get_prop_value(nativeObj);
-declare function slider_t_get_prop_min(nativeObj);
-declare function slider_t_get_prop_max(nativeObj);
-declare function slider_t_get_prop_step(nativeObj);
-declare function slider_t_get_prop_vertical(nativeObj);
-declare function slider_t_get_prop_bar_size(nativeObj);
-declare function progress_circle_create(parent, x, y, w, h);
-declare function progress_circle_cast(widget);
-declare function progress_circle_set_value(widget, value);
-declare function progress_circle_set_max(widget, max);
-declare function progress_circle_set_line_width(widget, line_width);
-declare function progress_circle_set_start_angle(widget, start_angle);
-declare function progress_circle_set_unit(widget, unit);
-declare function progress_circle_set_show_text(widget, show_text);
-declare function progress_circle_set_counter_clock_wise(widget, counter_clock_wise);
-declare function progress_circle_t_get_prop_value(nativeObj);
-declare function progress_circle_t_get_prop_max(nativeObj);
-declare function progress_circle_t_get_prop_start_angle(nativeObj);
-declare function progress_circle_t_get_prop_line_width(nativeObj);
-declare function progress_circle_t_get_prop_unit(nativeObj);
-declare function progress_circle_t_get_prop_counter_clock_wise(nativeObj);
-declare function progress_circle_t_get_prop_show_text(nativeObj);
-declare function rich_text_create(parent, x, y, w, h);
-declare function rich_text_set_text(widget, text);
-declare function rich_text_cast(widget);
-declare function rich_text_t_get_prop_line_gap(nativeObj);
-declare function hscroll_label_create(parent, x, y, w, h);
-declare function hscroll_label_set_lull(widget, lull);
-declare function hscroll_label_set_duration(widget, duration);
-declare function hscroll_label_set_only_focus(widget, only_focus);
-declare function hscroll_label_set_loop(widget, loop);
-declare function hscroll_label_set_yoyo(widget, yoyo);
-declare function hscroll_label_set_ellipses(widget, ellipses);
-declare function hscroll_label_set_xoffset(widget, xoffset);
-declare function hscroll_label_start(widget);
-declare function hscroll_label_stop(widget);
-declare function hscroll_label_cast(widget);
-declare function hscroll_label_t_get_prop_only_focus(nativeObj);
-declare function hscroll_label_t_get_prop_loop(nativeObj);
-declare function hscroll_label_t_get_prop_yoyo(nativeObj);
-declare function hscroll_label_t_get_prop_ellipses(nativeObj);
-declare function hscroll_label_t_get_prop_lull(nativeObj);
-declare function hscroll_label_t_get_prop_duration(nativeObj);
-declare function hscroll_label_t_get_prop_xoffset(nativeObj);
-declare function hscroll_label_t_get_prop_text_w(nativeObj);
 declare function list_item_create(parent, x, y, w, h);
 declare function list_item_cast(widget);
 declare function list_view_h_create(parent, x, y, w, h);
@@ -987,20 +925,34 @@ declare function time_clock_t_get_prop_bg_image(nativeObj);
 declare function time_clock_t_get_prop_hour_image(nativeObj);
 declare function time_clock_t_get_prop_minute_image(nativeObj);
 declare function time_clock_t_get_prop_second_image(nativeObj);
+declare function style_mutable_get_name(s);
+declare function style_mutable_set_name(s, name);
+declare function style_mutable_set_int(s, state, name, val);
+declare function style_mutable_cast(s);
+declare function style_mutable_create(widget, default_style);
+declare function style_mutable_t_get_prop_name(nativeObj);
 declare function paint_event_cast(event);
 declare function paint_event_t_get_prop_c(nativeObj);
 declare function tab_control_create(parent, x, y, w, h);
 declare function tab_control_cast(widget);
-declare function window_create(parent, x, y, w, h);
-declare function window_set_fullscreen(widget, fullscreen);
-declare function window_open(name);
-declare function window_open_and_close(name, to_close);
-declare function window_close(widget);
-declare function window_close_force(widget);
-declare function window_cast(widget);
-declare function window_t_get_prop_fullscreen(nativeObj);
 declare function window_event_cast(event);
 declare function window_event_t_get_prop_window(nativeObj);
+declare function dialog_create(parent, x, y, w, h);
+declare function dialog_create_simple(parent, x, y, w, h);
+declare function dialog_cast(widget);
+declare function dialog_get_title(widget);
+declare function dialog_get_client(widget);
+declare function dialog_open(name);
+declare function dialog_set_title(widget, title);
+declare function dialog_modal(widget);
+declare function dialog_quit(widget, code);
+declare function dialog_is_quited(widget);
+declare function dialog_is_modal(widget);
+declare function dialog_toast(text, duration);
+declare function dialog_info(title, text);
+declare function dialog_warn(title, text);
+declare function dialog_confirm(title, text);
+declare function dialog_t_get_prop_highlight(nativeObj);
 declare function tab_button_create(parent, x, y, w, h);
 declare function tab_button_cast(widget);
 declare function tab_button_set_value(widget, value);
@@ -1026,6 +978,25 @@ declare function image_base_t_get_prop_rotation(nativeObj);
 declare function image_base_t_get_prop_clickable(nativeObj);
 declare function image_base_t_get_prop_selectable(nativeObj);
 declare function image_base_t_get_prop_selected(nativeObj);
+declare function hscroll_label_create(parent, x, y, w, h);
+declare function hscroll_label_set_lull(widget, lull);
+declare function hscroll_label_set_duration(widget, duration);
+declare function hscroll_label_set_only_focus(widget, only_focus);
+declare function hscroll_label_set_loop(widget, loop);
+declare function hscroll_label_set_yoyo(widget, yoyo);
+declare function hscroll_label_set_ellipses(widget, ellipses);
+declare function hscroll_label_set_xoffset(widget, xoffset);
+declare function hscroll_label_start(widget);
+declare function hscroll_label_stop(widget);
+declare function hscroll_label_cast(widget);
+declare function hscroll_label_t_get_prop_only_focus(nativeObj);
+declare function hscroll_label_t_get_prop_loop(nativeObj);
+declare function hscroll_label_t_get_prop_yoyo(nativeObj);
+declare function hscroll_label_t_get_prop_ellipses(nativeObj);
+declare function hscroll_label_t_get_prop_lull(nativeObj);
+declare function hscroll_label_t_get_prop_duration(nativeObj);
+declare function hscroll_label_t_get_prop_xoffset(nativeObj);
+declare function hscroll_label_t_get_prop_text_w(nativeObj);
 declare function wheel_event_cast(event);
 declare function wheel_event_t_get_prop_dy(nativeObj);
 declare function wheel_event_t_get_prop_alt(nativeObj);
@@ -1033,11 +1004,32 @@ declare function wheel_event_t_get_prop_ctrl(nativeObj);
 declare function wheel_event_t_get_prop_shift(nativeObj);
 declare function view_create(parent, x, y, w, h);
 declare function view_cast(widget);
-declare function prop_change_event_cast(event);
-declare function prop_change_event_t_get_prop_name(nativeObj);
-declare function prop_change_event_t_get_prop_value(nativeObj);
 declare function orientation_event_cast(event);
 declare function orientation_event_t_get_prop_orientation(nativeObj);
+declare function window_base_cast(widget);
+declare function window_base_t_get_prop_theme(nativeObj);
+declare function window_base_t_get_prop_closable(nativeObj);
+declare function window_manager();
+declare function window_manager_cast(widget);
+declare function window_manager_get_top_main_window(widget);
+declare function window_manager_get_top_window(widget);
+declare function window_manager_get_prev_window(widget);
+declare function window_manager_get_pointer_x(widget);
+declare function window_manager_get_pointer_y(widget);
+declare function window_manager_get_pointer_pressed(widget);
+declare function window_manager_set_show_fps(widget, show_fps);
+declare function window_manager_set_screen_saver_time(widget, screen_saver_time);
+declare function window_manager_set_cursor(widget, cursor);
+declare function window_manager_back(widget);
+declare function window_manager_back_to_home(widget);
+declare function window_create(parent, x, y, w, h);
+declare function window_set_fullscreen(widget, fullscreen);
+declare function window_open(name);
+declare function window_open_and_close(name, to_close);
+declare function window_close(widget);
+declare function window_close_force(widget);
+declare function window_cast(widget);
+declare function window_t_get_prop_fullscreen(nativeObj);
 declare function pointer_event_cast(event);
 declare function pointer_event_t_get_prop_x(nativeObj);
 declare function pointer_event_t_get_prop_y(nativeObj);
@@ -1048,6 +1040,15 @@ declare function pointer_event_t_get_prop_ctrl(nativeObj);
 declare function pointer_event_t_get_prop_cmd(nativeObj);
 declare function pointer_event_t_get_prop_menu(nativeObj);
 declare function pointer_event_t_get_prop_shift(nativeObj);
+declare function prop_change_event_cast(event);
+declare function prop_change_event_t_get_prop_name(nativeObj);
+declare function prop_change_event_t_get_prop_value(nativeObj);
+declare function canvas_widget_create(parent, x, y, w, h);
+declare function canvas_widget_cast(widget);
+declare function color_picker_create(parent, x, y, w, h);
+declare function color_picker_set_color(widget, color);
+declare function color_picker_cast(widget);
+declare function color_picker_t_get_prop_value(nativeObj);
 declare function key_event_cast(event);
 declare function key_event_t_get_prop_key(nativeObj);
 declare function key_event_t_get_prop_alt(nativeObj);
@@ -1062,9 +1063,6 @@ declare function key_event_t_get_prop_rshift(nativeObj);
 declare function key_event_t_get_prop_cmd(nativeObj);
 declare function key_event_t_get_prop_menu(nativeObj);
 declare function key_event_t_get_prop_capslock(nativeObj);
-declare function window_base_cast(widget);
-declare function window_base_t_get_prop_theme(nativeObj);
-declare function window_base_t_get_prop_closable(nativeObj);
 declare function progress_bar_create(parent, x, y, w, h);
 declare function progress_bar_cast(widget);
 declare function progress_bar_set_value(widget, value);
@@ -1103,25 +1101,6 @@ declare function object_exec(obj, name, args);
 declare function object_notify_changed(obj);
 declare function object_t_get_prop_ref_count(nativeObj);
 declare function object_t_get_prop_name(nativeObj);
-declare function window_manager();
-declare function window_manager_cast(widget);
-declare function window_manager_get_top_main_window(widget);
-declare function window_manager_get_top_window(widget);
-declare function window_manager_get_prev_window(widget);
-declare function window_manager_get_pointer_x(widget);
-declare function window_manager_get_pointer_y(widget);
-declare function window_manager_get_pointer_pressed(widget);
-declare function window_manager_set_show_fps(widget, show_fps);
-declare function window_manager_set_screen_saver_time(widget, screen_saver_time);
-declare function window_manager_set_cursor(widget, cursor);
-declare function window_manager_back(widget);
-declare function window_manager_back_to_home(widget);
-declare function canvas_widget_create(parent, x, y, w, h);
-declare function canvas_widget_cast(widget);
-declare function color_picker_create(parent, x, y, w, h);
-declare function color_picker_set_color(widget, color);
-declare function color_picker_cast(widget);
-declare function color_picker_t_get_prop_value(nativeObj);
 declare function tab_button_group_create(parent, x, y, w, h);
 declare function tab_button_group_set_compact(widget, compact);
 declare function tab_button_group_set_scrollable(widget, scrollable);
@@ -1175,18 +1154,62 @@ declare function image_value_cast(widget);
 declare function image_value_t_get_prop_image(nativeObj);
 declare function image_value_t_get_prop_format(nativeObj);
 declare function image_value_t_get_prop_value(nativeObj);
-declare function style_mutable_get_name(s);
-declare function style_mutable_set_name(s, name);
-declare function style_mutable_set_int(s, state, name, val);
-declare function style_mutable_cast(s);
-declare function style_mutable_create(widget, default_style);
-declare function style_mutable_t_get_prop_name(nativeObj);
 declare function line_number_create(parent, x, y, w, h);
 declare function line_number_set_top_margin(widget, top_margin);
 declare function line_number_set_bottom_margin(widget, bottom_margin);
 declare function line_number_set_line_height(widget, line_height);
 declare function line_number_set_yoffset(widget, yoffset);
 declare function line_number_cast(widget);
+declare function mledit_create(parent, x, y, w, h);
+declare function mledit_set_readonly(widget, readonly);
+declare function mledit_set_focus(widget, focus);
+declare function mledit_set_wrap_word(widget, wrap_word);
+declare function mledit_set_max_lines(widget, max_lines);
+declare function mledit_set_input_tips(widget, tips);
+declare function mledit_cast(widget);
+declare function mledit_t_get_prop_readonly(nativeObj);
+declare function mledit_t_get_prop_top_margin(nativeObj);
+declare function mledit_t_get_prop_bottom_margin(nativeObj);
+declare function mledit_t_get_prop_left_margin(nativeObj);
+declare function mledit_t_get_prop_right_margin(nativeObj);
+declare function mledit_t_get_prop_tips(nativeObj);
+declare function mledit_t_get_prop_focus(nativeObj);
+declare function mledit_t_get_prop_wrap_word(nativeObj);
+declare function mledit_t_get_prop_max_lines(nativeObj);
+declare function slider_create(parent, x, y, w, h);
+declare function slider_cast(widget);
+declare function slider_set_value(widget, value);
+declare function slider_set_min(widget, min);
+declare function slider_set_max(widget, max);
+declare function slider_set_step(widget, step);
+declare function slider_set_bar_size(widget, bar_size);
+declare function slider_set_vertical(widget, vertical);
+declare function slider_t_get_prop_value(nativeObj);
+declare function slider_t_get_prop_min(nativeObj);
+declare function slider_t_get_prop_max(nativeObj);
+declare function slider_t_get_prop_step(nativeObj);
+declare function slider_t_get_prop_vertical(nativeObj);
+declare function slider_t_get_prop_bar_size(nativeObj);
+declare function progress_circle_create(parent, x, y, w, h);
+declare function progress_circle_cast(widget);
+declare function progress_circle_set_value(widget, value);
+declare function progress_circle_set_max(widget, max);
+declare function progress_circle_set_line_width(widget, line_width);
+declare function progress_circle_set_start_angle(widget, start_angle);
+declare function progress_circle_set_unit(widget, unit);
+declare function progress_circle_set_show_text(widget, show_text);
+declare function progress_circle_set_counter_clock_wise(widget, counter_clock_wise);
+declare function progress_circle_t_get_prop_value(nativeObj);
+declare function progress_circle_t_get_prop_max(nativeObj);
+declare function progress_circle_t_get_prop_start_angle(nativeObj);
+declare function progress_circle_t_get_prop_line_width(nativeObj);
+declare function progress_circle_t_get_prop_unit(nativeObj);
+declare function progress_circle_t_get_prop_counter_clock_wise(nativeObj);
+declare function progress_circle_t_get_prop_show_text(nativeObj);
+declare function rich_text_create(parent, x, y, w, h);
+declare function rich_text_set_text(widget, text);
+declare function rich_text_cast(widget);
+declare function rich_text_t_get_prop_line_gap(nativeObj);
 declare function app_bar_create(parent, x, y, w, h);
 declare function app_bar_cast(widget);
 declare function button_group_create(parent, x, y, w, h);
@@ -1234,22 +1257,6 @@ declare function dialog_client_create(parent, x, y, w, h);
 declare function dialog_client_cast(widget);
 declare function dialog_title_create(parent, x, y, w, h);
 declare function dialog_title_cast(widget);
-declare function dialog_create(parent, x, y, w, h);
-declare function dialog_create_simple(parent, x, y, w, h);
-declare function dialog_cast(widget);
-declare function dialog_get_title(widget);
-declare function dialog_get_client(widget);
-declare function dialog_open(name);
-declare function dialog_set_title(widget, title);
-declare function dialog_modal(widget);
-declare function dialog_quit(widget, code);
-declare function dialog_is_quited(widget);
-declare function dialog_is_modal(widget);
-declare function dialog_toast(text, duration);
-declare function dialog_info(title, text);
-declare function dialog_warn(title, text);
-declare function dialog_confirm(title, text);
-declare function dialog_t_get_prop_highlight(nativeObj);
 declare function dragger_create(parent, x, y, w, h);
 declare function dragger_cast(widget);
 declare function dragger_set_range(widget, x_min, y_min, x_max, y_max);
@@ -1329,6 +1336,230 @@ declare function idle_info_cast(idle);
 declare function idle_info_t_get_prop_ctx(nativeObj);
 declare function idle_info_t_get_prop_id(nativeObj);
 
+class TVgcanvas {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static cast(vg) {
+   return new TVgcanvas(vgcanvas_cast(vg ? (vg.nativeObj || vg) : null));
+ }
+
+ flush() {
+   return vgcanvas_flush(this.nativeObj);
+ }
+
+ beginPath() {
+   return vgcanvas_begin_path(this.nativeObj);
+ }
+
+ moveTo(x, y) {
+   return vgcanvas_move_to(this.nativeObj, x, y);
+ }
+
+ lineTo(x, y) {
+   return vgcanvas_line_to(this.nativeObj, x, y);
+ }
+
+ quadTo(cpx, cpy, x, y) {
+   return vgcanvas_quad_to(this.nativeObj, cpx, cpy, x, y);
+ }
+
+ bezierTo(cp1x, cp1y, cp2x, cp2y, x, y) {
+   return vgcanvas_bezier_to(this.nativeObj, cp1x, cp1y, cp2x, cp2y, x, y);
+ }
+
+ arcTo(x1, y1, x2, y2, r) {
+   return vgcanvas_arc_to(this.nativeObj, x1, y1, x2, y2, r);
+ }
+
+ arc(x, y, r, start_angle, end_angle, ccw) {
+   return vgcanvas_arc(this.nativeObj, x, y, r, start_angle, end_angle, ccw);
+ }
+
+ isPointInPath(x, y) {
+   return vgcanvas_is_point_in_path(this.nativeObj, x, y);
+ }
+
+ rect(x, y, w, h) {
+   return vgcanvas_rect(this.nativeObj, x, y, w, h);
+ }
+
+ roundedRect(x, y, w, h, r) {
+   return vgcanvas_rounded_rect(this.nativeObj, x, y, w, h, r);
+ }
+
+ ellipse(x, y, rx, ry) {
+   return vgcanvas_ellipse(this.nativeObj, x, y, rx, ry);
+ }
+
+ closePath() {
+   return vgcanvas_close_path(this.nativeObj);
+ }
+
+ rotate(rad) {
+   return vgcanvas_rotate(this.nativeObj, rad);
+ }
+
+ scale(x, y) {
+   return vgcanvas_scale(this.nativeObj, x, y);
+ }
+
+ translate(x, y) {
+   return vgcanvas_translate(this.nativeObj, x, y);
+ }
+
+ transform(a, b, c, d, e, f) {
+   return vgcanvas_transform(this.nativeObj, a, b, c, d, e, f);
+ }
+
+ setTransform(a, b, c, d, e, f) {
+   return vgcanvas_set_transform(this.nativeObj, a, b, c, d, e, f);
+ }
+
+ clipRect(x, y, w, h) {
+   return vgcanvas_clip_rect(this.nativeObj, x, y, w, h);
+ }
+
+ fill() {
+   return vgcanvas_fill(this.nativeObj);
+ }
+
+ stroke() {
+   return vgcanvas_stroke(this.nativeObj);
+ }
+
+ paint(stroke, img) {
+   return vgcanvas_paint(this.nativeObj, stroke, img ? img.nativeObj : null);
+ }
+
+ setFont(font) {
+   return vgcanvas_set_font(this.nativeObj, font);
+ }
+
+ setFontSize(font) {
+   return vgcanvas_set_font_size(this.nativeObj, font);
+ }
+
+ setTextAlign(value) {
+   return vgcanvas_set_text_align(this.nativeObj, value);
+ }
+
+ setTextBaseline(value) {
+   return vgcanvas_set_text_baseline(this.nativeObj, value);
+ }
+
+ fillText(text, x, y, max_width) {
+   return vgcanvas_fill_text(this.nativeObj, text, x, y, max_width);
+ }
+
+ measureText(text) {
+   return vgcanvas_measure_text(this.nativeObj, text);
+ }
+
+ drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh) {
+   return vgcanvas_draw_image(this.nativeObj, img ? img.nativeObj : null, sx, sy, sw, sh, dx, dy, dw, dh);
+ }
+
+ drawIcon(img, sx, sy, sw, sh, dx, dy, dw, dh) {
+   return vgcanvas_draw_icon(this.nativeObj, img ? img.nativeObj : null, sx, sy, sw, sh, dx, dy, dw, dh);
+ }
+
+ setAntialias(value) {
+   return vgcanvas_set_antialias(this.nativeObj, value);
+ }
+
+ setGlobalAlpha(alpha) {
+   return vgcanvas_set_global_alpha(this.nativeObj, alpha);
+ }
+
+ setLineWidth(value) {
+   return vgcanvas_set_line_width(this.nativeObj, value);
+ }
+
+ setFillColor(color) {
+   return vgcanvas_set_fill_color_str(this.nativeObj, color);
+ }
+
+ setStrokeColor(color) {
+   return vgcanvas_set_stroke_color_str(this.nativeObj, color);
+ }
+
+ setLineCap(value) {
+   return vgcanvas_set_line_cap(this.nativeObj, value);
+ }
+
+ setLineJoin(value) {
+   return vgcanvas_set_line_join(this.nativeObj, value);
+ }
+
+ setMiterLimit(value) {
+   return vgcanvas_set_miter_limit(this.nativeObj, value);
+ }
+
+ save() {
+   return vgcanvas_save(this.nativeObj);
+ }
+
+ restore() {
+   return vgcanvas_restore(this.nativeObj);
+ }
+
+ get w() {
+   return vgcanvas_t_get_prop_w(this.nativeObj);
+ }
+
+ get h() {
+   return vgcanvas_t_get_prop_h(this.nativeObj);
+ }
+
+ get ratio() {
+   return vgcanvas_t_get_prop_ratio(this.nativeObj);
+ }
+
+ get antiAlias() {
+   return vgcanvas_t_get_prop_anti_alias(this.nativeObj);
+ }
+
+ get lineWidth() {
+   return vgcanvas_t_get_prop_line_width(this.nativeObj);
+ }
+
+ get globalAlpha() {
+   return vgcanvas_t_get_prop_global_alpha(this.nativeObj);
+ }
+
+ get miterLimit() {
+   return vgcanvas_t_get_prop_miter_limit(this.nativeObj);
+ }
+
+ get lineCap() {
+   return vgcanvas_t_get_prop_line_cap(this.nativeObj);
+ }
+
+ get lineJoin() {
+   return vgcanvas_t_get_prop_line_join(this.nativeObj);
+ }
+
+ get font() {
+   return vgcanvas_t_get_prop_font(this.nativeObj);
+ }
+
+ get fontSize() {
+   return vgcanvas_t_get_prop_font_size(this.nativeObj);
+ }
+
+ get textAlign() {
+   return vgcanvas_t_get_prop_text_align(this.nativeObj);
+ }
+
+ get textBaseline() {
+   return vgcanvas_t_get_prop_text_baseline(this.nativeObj);
+ }
+
+}
+
 class TGlobal {
  public nativeObj;
  constructor(nativeObj) {
@@ -1352,70 +1583,6 @@ class TGlobal {
  }
 
 }
-
-class TAssetInfo {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- get type() {
-   return asset_info_t_get_prop_type(this.nativeObj);
- }
-
- get subtype() {
-   return asset_info_t_get_prop_subtype(this.nativeObj);
- }
-
- get isInRom() {
-   return asset_info_t_get_prop_is_in_rom(this.nativeObj);
- }
-
- get size() {
-   return asset_info_t_get_prop_size(this.nativeObj);
- }
-
- get refcount() {
-   return asset_info_t_get_prop_refcount(this.nativeObj);
- }
-
- get name() {
-   return asset_info_t_get_prop_name(this.nativeObj);
- }
-
-}
-
-class TAssetsManager {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static instance() {
-   return new TAssetsManager(assets_manager());
- }
-
- ref(type, name) {
-   return new TAssetInfo(assets_manager_ref(this.nativeObj, type, name));
- }
-
- unref(info) {
-   return assets_manager_unref(this.nativeObj, info ? info.nativeObj : null);
- }
-
-}
-
-enum TBitmapFormat {
- NONE = BITMAP_FMT_NONE(),
- RGBA8888 = BITMAP_FMT_RGBA8888(),
- ABGR8888 = BITMAP_FMT_ABGR8888(),
- BGRA8888 = BITMAP_FMT_BGRA8888(),
- ARGB8888 = BITMAP_FMT_ARGB8888(),
- RGB565 = BITMAP_FMT_RGB565(),
- BGR565 = BITMAP_FMT_BGR565(),
- RGB888 = BITMAP_FMT_RGB888(),
- BGR888 = BITMAP_FMT_BGR888(),
-};
 
 enum TBitmapFlag {
  NONE = BITMAP_FLAG_NONE(),
@@ -1686,6 +1853,7 @@ enum TEventType {
  OUT_OF_MEMORY = EVT_OUT_OF_MEMORY(),
  ORIENTATION_WILL_CHANGED = EVT_ORIENTATION_WILL_CHANGED(),
  ORIENTATION_CHANGED = EVT_ORIENTATION_CHANGED(),
+ WIDGET_CREATED = EVT_WIDGET_CREATED(),
  REQ_START = EVT_REQ_START(),
  USER_START = EVT_USER_START(),
 };
@@ -1701,6 +1869,12 @@ class TFontManager {
  }
 
 }
+
+enum TGlyphFormat {
+ ALPHA = GLYPH_FMT_ALPHA(),
+ MONO = GLYPH_FMT_MONO(),
+ RGBA = GLYPH_FMT_RGBA(),
+};
 
 class TIdle {
  public nativeObj;
@@ -2014,229 +2188,19 @@ enum TAlignH {
  RIGHT = ALIGN_H_RIGHT(),
 };
 
-class TVgcanvas {
- public nativeObj;
- constructor(nativeObj) {
-   this.nativeObj = nativeObj;
- }
-
- static cast(vg) {
-   return new TVgcanvas(vgcanvas_cast(vg ? (vg.nativeObj || vg) : null));
- }
-
- flush() {
-   return vgcanvas_flush(this.nativeObj);
- }
-
- beginPath() {
-   return vgcanvas_begin_path(this.nativeObj);
- }
-
- moveTo(x, y) {
-   return vgcanvas_move_to(this.nativeObj, x, y);
- }
-
- lineTo(x, y) {
-   return vgcanvas_line_to(this.nativeObj, x, y);
- }
-
- quadTo(cpx, cpy, x, y) {
-   return vgcanvas_quad_to(this.nativeObj, cpx, cpy, x, y);
- }
-
- bezierTo(cp1x, cp1y, cp2x, cp2y, x, y) {
-   return vgcanvas_bezier_to(this.nativeObj, cp1x, cp1y, cp2x, cp2y, x, y);
- }
-
- arcTo(x1, y1, x2, y2, r) {
-   return vgcanvas_arc_to(this.nativeObj, x1, y1, x2, y2, r);
- }
-
- arc(x, y, r, start_angle, end_angle, ccw) {
-   return vgcanvas_arc(this.nativeObj, x, y, r, start_angle, end_angle, ccw);
- }
-
- isPointInPath(x, y) {
-   return vgcanvas_is_point_in_path(this.nativeObj, x, y);
- }
-
- rect(x, y, w, h) {
-   return vgcanvas_rect(this.nativeObj, x, y, w, h);
- }
-
- roundedRect(x, y, w, h, r) {
-   return vgcanvas_rounded_rect(this.nativeObj, x, y, w, h, r);
- }
-
- ellipse(x, y, rx, ry) {
-   return vgcanvas_ellipse(this.nativeObj, x, y, rx, ry);
- }
-
- closePath() {
-   return vgcanvas_close_path(this.nativeObj);
- }
-
- rotate(rad) {
-   return vgcanvas_rotate(this.nativeObj, rad);
- }
-
- scale(x, y) {
-   return vgcanvas_scale(this.nativeObj, x, y);
- }
-
- translate(x, y) {
-   return vgcanvas_translate(this.nativeObj, x, y);
- }
-
- transform(a, b, c, d, e, f) {
-   return vgcanvas_transform(this.nativeObj, a, b, c, d, e, f);
- }
-
- setTransform(a, b, c, d, e, f) {
-   return vgcanvas_set_transform(this.nativeObj, a, b, c, d, e, f);
- }
-
- clipRect(x, y, w, h) {
-   return vgcanvas_clip_rect(this.nativeObj, x, y, w, h);
- }
-
- fill() {
-   return vgcanvas_fill(this.nativeObj);
- }
-
- stroke() {
-   return vgcanvas_stroke(this.nativeObj);
- }
-
- paint(stroke, img) {
-   return vgcanvas_paint(this.nativeObj, stroke, img ? img.nativeObj : null);
- }
-
- setFont(font) {
-   return vgcanvas_set_font(this.nativeObj, font);
- }
-
- setFontSize(font) {
-   return vgcanvas_set_font_size(this.nativeObj, font);
- }
-
- setTextAlign(value) {
-   return vgcanvas_set_text_align(this.nativeObj, value);
- }
-
- setTextBaseline(value) {
-   return vgcanvas_set_text_baseline(this.nativeObj, value);
- }
-
- fillText(text, x, y, max_width) {
-   return vgcanvas_fill_text(this.nativeObj, text, x, y, max_width);
- }
-
- measureText(text) {
-   return vgcanvas_measure_text(this.nativeObj, text);
- }
-
- drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh) {
-   return vgcanvas_draw_image(this.nativeObj, img ? img.nativeObj : null, sx, sy, sw, sh, dx, dy, dw, dh);
- }
-
- drawIcon(img, sx, sy, sw, sh, dx, dy, dw, dh) {
-   return vgcanvas_draw_icon(this.nativeObj, img ? img.nativeObj : null, sx, sy, sw, sh, dx, dy, dw, dh);
- }
-
- setAntialias(value) {
-   return vgcanvas_set_antialias(this.nativeObj, value);
- }
-
- setGlobalAlpha(alpha) {
-   return vgcanvas_set_global_alpha(this.nativeObj, alpha);
- }
-
- setLineWidth(value) {
-   return vgcanvas_set_line_width(this.nativeObj, value);
- }
-
- setFillColor(color) {
-   return vgcanvas_set_fill_color_str(this.nativeObj, color);
- }
-
- setStrokeColor(color) {
-   return vgcanvas_set_stroke_color_str(this.nativeObj, color);
- }
-
- setLineCap(value) {
-   return vgcanvas_set_line_cap(this.nativeObj, value);
- }
-
- setLineJoin(value) {
-   return vgcanvas_set_line_join(this.nativeObj, value);
- }
-
- setMiterLimit(value) {
-   return vgcanvas_set_miter_limit(this.nativeObj, value);
- }
-
- save() {
-   return vgcanvas_save(this.nativeObj);
- }
-
- restore() {
-   return vgcanvas_restore(this.nativeObj);
- }
-
- get w() {
-   return vgcanvas_t_get_prop_w(this.nativeObj);
- }
-
- get h() {
-   return vgcanvas_t_get_prop_h(this.nativeObj);
- }
-
- get ratio() {
-   return vgcanvas_t_get_prop_ratio(this.nativeObj);
- }
-
- get antiAlias() {
-   return vgcanvas_t_get_prop_anti_alias(this.nativeObj);
- }
-
- get lineWidth() {
-   return vgcanvas_t_get_prop_line_width(this.nativeObj);
- }
-
- get globalAlpha() {
-   return vgcanvas_t_get_prop_global_alpha(this.nativeObj);
- }
-
- get miterLimit() {
-   return vgcanvas_t_get_prop_miter_limit(this.nativeObj);
- }
-
- get lineCap() {
-   return vgcanvas_t_get_prop_line_cap(this.nativeObj);
- }
-
- get lineJoin() {
-   return vgcanvas_t_get_prop_line_join(this.nativeObj);
- }
-
- get font() {
-   return vgcanvas_t_get_prop_font(this.nativeObj);
- }
-
- get fontSize() {
-   return vgcanvas_t_get_prop_font_size(this.nativeObj);
- }
-
- get textAlign() {
-   return vgcanvas_t_get_prop_text_align(this.nativeObj);
- }
-
- get textBaseline() {
-   return vgcanvas_t_get_prop_text_baseline(this.nativeObj);
- }
-
-}
+enum TBitmapFormat {
+ NONE = BITMAP_FMT_NONE(),
+ RGBA8888 = BITMAP_FMT_RGBA8888(),
+ ABGR8888 = BITMAP_FMT_ABGR8888(),
+ BGRA8888 = BITMAP_FMT_BGRA8888(),
+ ARGB8888 = BITMAP_FMT_ARGB8888(),
+ RGB565 = BITMAP_FMT_RGB565(),
+ BGR565 = BITMAP_FMT_BGR565(),
+ RGB888 = BITMAP_FMT_RGB888(),
+ BGR888 = BITMAP_FMT_BGR888(),
+ GRAY = BITMAP_FMT_GRAY(),
+ MONO = BITMAP_FMT_MONO(),
+};
 
 enum TWidgetProp {
  X = WIDGET_PROP_X(),
@@ -2770,6 +2734,26 @@ class TWidget {
 
 }
 
+class TAssetsManager {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ static instance() {
+   return new TAssetsManager(assets_manager());
+ }
+
+ ref(type, name) {
+   return new TAssetInfo(assets_manager_ref(this.nativeObj, type, name));
+ }
+
+ unref(info) {
+   return assets_manager_unref(this.nativeObj, info ? info.nativeObj : null);
+ }
+
+}
+
 enum TAssetType {
  NONE = ASSET_TYPE_NONE(),
  FONT = ASSET_TYPE_FONT(),
@@ -2781,6 +2765,38 @@ enum TAssetType {
  SCRIPT = ASSET_TYPE_SCRIPT(),
  DATA = ASSET_TYPE_DATA(),
 };
+
+class TAssetInfo {
+ public nativeObj;
+ constructor(nativeObj) {
+   this.nativeObj = nativeObj;
+ }
+
+ get type() {
+   return asset_info_t_get_prop_type(this.nativeObj);
+ }
+
+ get subtype() {
+   return asset_info_t_get_prop_subtype(this.nativeObj);
+ }
+
+ get isInRom() {
+   return asset_info_t_get_prop_is_in_rom(this.nativeObj);
+ }
+
+ get size() {
+   return asset_info_t_get_prop_size(this.nativeObj);
+ }
+
+ get refcount() {
+   return asset_info_t_get_prop_refcount(this.nativeObj);
+ }
+
+ get name() {
+   return asset_info_t_get_prop_name(this.nativeObj);
+ }
+
+}
 
 class TColor {
  public nativeObj;
@@ -3248,318 +3264,6 @@ class TValue {
 
  static cast(value) {
    return new TValue(value_cast(value ? (value.nativeObj || value) : null));
- }
-
-}
-
-class TMledit extends TWidget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new TMledit(mledit_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- setReadonly(readonly) {
-   return mledit_set_readonly(this.nativeObj, readonly);
- }
-
- setWrapWord(wrap_word) {
-   return mledit_set_wrap_word(this.nativeObj, wrap_word);
- }
-
- setMaxLines(max_lines) {
-   return mledit_set_max_lines(this.nativeObj, max_lines);
- }
-
- setInputTips(tips) {
-   return mledit_set_input_tips(this.nativeObj, tips);
- }
-
- static cast(widget) {
-   return new TMledit(mledit_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- get readonly() {
-   return mledit_t_get_prop_readonly(this.nativeObj);
- }
-
- get topMargin() {
-   return mledit_t_get_prop_top_margin(this.nativeObj);
- }
-
- get bottomMargin() {
-   return mledit_t_get_prop_bottom_margin(this.nativeObj);
- }
-
- get leftMargin() {
-   return mledit_t_get_prop_left_margin(this.nativeObj);
- }
-
- get rightMargin() {
-   return mledit_t_get_prop_right_margin(this.nativeObj);
- }
-
- get tips() {
-   return mledit_t_get_prop_tips(this.nativeObj);
- }
-
- get focus() {
-   return mledit_t_get_prop_focus(this.nativeObj);
- }
-
- get wrapWord() {
-   return mledit_t_get_prop_wrap_word(this.nativeObj);
- }
-
- get maxLines() {
-   return mledit_t_get_prop_max_lines(this.nativeObj);
- }
-
-}
-
-class TSlider extends TWidget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new TSlider(slider_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- static cast(widget) {
-   return new TSlider(slider_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- setValue(value) {
-   return slider_set_value(this.nativeObj, value);
- }
-
- setMin(min) {
-   return slider_set_min(this.nativeObj, min);
- }
-
- setMax(max) {
-   return slider_set_max(this.nativeObj, max);
- }
-
- setStep(step) {
-   return slider_set_step(this.nativeObj, step);
- }
-
- setBarSize(bar_size) {
-   return slider_set_bar_size(this.nativeObj, bar_size);
- }
-
- setVertical(vertical) {
-   return slider_set_vertical(this.nativeObj, vertical);
- }
-
- get value() {
-   return slider_t_get_prop_value(this.nativeObj);
- }
-
- get min() {
-   return slider_t_get_prop_min(this.nativeObj);
- }
-
- get max() {
-   return slider_t_get_prop_max(this.nativeObj);
- }
-
- get step() {
-   return slider_t_get_prop_step(this.nativeObj);
- }
-
- get vertical() {
-   return slider_t_get_prop_vertical(this.nativeObj);
- }
-
- get barSize() {
-   return slider_t_get_prop_bar_size(this.nativeObj);
- }
-
-}
-
-class TProgressCircle extends TWidget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new TProgressCircle(progress_circle_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- static cast(widget) {
-   return new TProgressCircle(progress_circle_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- setValue(value) {
-   return progress_circle_set_value(this.nativeObj, value);
- }
-
- setMax(max) {
-   return progress_circle_set_max(this.nativeObj, max);
- }
-
- setLineWidth(line_width) {
-   return progress_circle_set_line_width(this.nativeObj, line_width);
- }
-
- setStartAngle(start_angle) {
-   return progress_circle_set_start_angle(this.nativeObj, start_angle);
- }
-
- setUnit(unit) {
-   return progress_circle_set_unit(this.nativeObj, unit);
- }
-
- setShowText(show_text) {
-   return progress_circle_set_show_text(this.nativeObj, show_text);
- }
-
- setCounterClockWise(counter_clock_wise) {
-   return progress_circle_set_counter_clock_wise(this.nativeObj, counter_clock_wise);
- }
-
- get value() {
-   return progress_circle_t_get_prop_value(this.nativeObj);
- }
-
- get max() {
-   return progress_circle_t_get_prop_max(this.nativeObj);
- }
-
- get startAngle() {
-   return progress_circle_t_get_prop_start_angle(this.nativeObj);
- }
-
- get lineWidth() {
-   return progress_circle_t_get_prop_line_width(this.nativeObj);
- }
-
- get unit() {
-   return progress_circle_t_get_prop_unit(this.nativeObj);
- }
-
- get counterClockWise() {
-   return progress_circle_t_get_prop_counter_clock_wise(this.nativeObj);
- }
-
- get showText() {
-   return progress_circle_t_get_prop_show_text(this.nativeObj);
- }
-
-}
-
-class TRichText extends TWidget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new TRichText(rich_text_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- setText(text) {
-   return rich_text_set_text(this.nativeObj, text);
- }
-
- static cast(widget) {
-   return new TRichText(rich_text_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- get lineGap() {
-   return rich_text_t_get_prop_line_gap(this.nativeObj);
- }
-
-}
-
-class THscrollLabel extends TWidget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new THscrollLabel(hscroll_label_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- setLull(lull) {
-   return hscroll_label_set_lull(this.nativeObj, lull);
- }
-
- setDuration(duration) {
-   return hscroll_label_set_duration(this.nativeObj, duration);
- }
-
- setOnlyFocus(only_focus) {
-   return hscroll_label_set_only_focus(this.nativeObj, only_focus);
- }
-
- setLoop(loop) {
-   return hscroll_label_set_loop(this.nativeObj, loop);
- }
-
- setYoyo(yoyo) {
-   return hscroll_label_set_yoyo(this.nativeObj, yoyo);
- }
-
- setEllipses(ellipses) {
-   return hscroll_label_set_ellipses(this.nativeObj, ellipses);
- }
-
- setXoffset(xoffset) {
-   return hscroll_label_set_xoffset(this.nativeObj, xoffset);
- }
-
- start() {
-   return hscroll_label_start(this.nativeObj);
- }
-
- stop() {
-   return hscroll_label_stop(this.nativeObj);
- }
-
- static cast(widget) {
-   return new THscrollLabel(hscroll_label_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- get onlyFocus() {
-   return hscroll_label_t_get_prop_only_focus(this.nativeObj);
- }
-
- get loop() {
-   return hscroll_label_t_get_prop_loop(this.nativeObj);
- }
-
- get yoyo() {
-   return hscroll_label_t_get_prop_yoyo(this.nativeObj);
- }
-
- get ellipses() {
-   return hscroll_label_t_get_prop_ellipses(this.nativeObj);
- }
-
- get lull() {
-   return hscroll_label_t_get_prop_lull(this.nativeObj);
- }
-
- get duration() {
-   return hscroll_label_t_get_prop_duration(this.nativeObj);
- }
-
- get xoffset() {
-   return hscroll_label_t_get_prop_xoffset(this.nativeObj);
- }
-
- get textW() {
-   return hscroll_label_t_get_prop_text_w(this.nativeObj);
  }
 
 }
@@ -4196,6 +3900,38 @@ class TTimeClock extends TWidget {
 
 }
 
+class TStyleMutable extends TStyle {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ getName() {
+   return style_mutable_get_name(this.nativeObj);
+ }
+
+ setName(name) {
+   return style_mutable_set_name(this.nativeObj, name);
+ }
+
+ setInt(state, name, val) {
+   return style_mutable_set_int(this.nativeObj, state, name, val);
+ }
+
+ static cast(s) {
+   return new TStyleMutable(style_mutable_cast(s ? (s.nativeObj || s) : null));
+ }
+
+ static create(widget, default_style) {
+   return new TStyleMutable(style_mutable_create(widget ? widget.nativeObj : null, default_style ? default_style.nativeObj : null));
+ }
+
+ get name() {
+   return style_mutable_t_get_prop_name(this.nativeObj);
+ }
+
+}
+
 class TPaintEvent extends TEvent {
  public nativeObj;
  constructor(nativeObj) {
@@ -4228,46 +3964,6 @@ class TTabControl extends TWidget {
 
 }
 
-class TWindow extends TWidget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new TWindow(window_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- setFullscreen(fullscreen) {
-   return window_set_fullscreen(this.nativeObj, fullscreen);
- }
-
- static open(name) {
-   return new TWindow(window_open(name));
- }
-
- static openAndClose(name, to_close) {
-   return new TWindow(window_open_and_close(name, to_close ? to_close.nativeObj : null));
- }
-
- close() {
-   return window_close(this.nativeObj);
- }
-
- closeForce() {
-   return window_close_force(this.nativeObj);
- }
-
- static cast(widget) {
-   return new TWindow(window_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- get fullscreen() {
-   return window_t_get_prop_fullscreen(this.nativeObj);
- }
-
-}
-
 class TWindowEvent extends TEvent {
  public nativeObj;
  constructor(nativeObj) {
@@ -4280,6 +3976,78 @@ class TWindowEvent extends TEvent {
 
  get window() {
    return window_event_t_get_prop_window(this.nativeObj);
+ }
+
+}
+
+class TDialog extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new TDialog(dialog_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ static createSimple(parent, x, y, w, h) {
+   return new TDialog(dialog_create_simple(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ static cast(widget) {
+   return new TDialog(dialog_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ getTitle() {
+   return new TWidget(dialog_get_title(this.nativeObj));
+ }
+
+ getClient() {
+   return new TWidget(dialog_get_client(this.nativeObj));
+ }
+
+ static open(name) {
+   return new TDialog(dialog_open(name));
+ }
+
+ setTitle(title) {
+   return dialog_set_title(this.nativeObj, title);
+ }
+
+ modal() {
+   return dialog_modal(this.nativeObj);
+ }
+
+ quit(code) {
+   return dialog_quit(this.nativeObj, code);
+ }
+
+ isQuited() {
+   return dialog_is_quited(this.nativeObj);
+ }
+
+ isModal() {
+   return dialog_is_modal(this.nativeObj);
+ }
+
+ static toast(text, duration) {
+   return dialog_toast(text, duration);
+ }
+
+ static info(title, text) {
+   return dialog_info(title, text);
+ }
+
+ static warn(title, text) {
+   return dialog_warn(title, text);
+ }
+
+ static confirm(title, text) {
+   return dialog_confirm(title, text);
+ }
+
+ get highlight() {
+   return dialog_t_get_prop_highlight(this.nativeObj);
  }
 
 }
@@ -4400,6 +4168,90 @@ class TImageBase extends TWidget {
 
 }
 
+class THscrollLabel extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new THscrollLabel(hscroll_label_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ setLull(lull) {
+   return hscroll_label_set_lull(this.nativeObj, lull);
+ }
+
+ setDuration(duration) {
+   return hscroll_label_set_duration(this.nativeObj, duration);
+ }
+
+ setOnlyFocus(only_focus) {
+   return hscroll_label_set_only_focus(this.nativeObj, only_focus);
+ }
+
+ setLoop(loop) {
+   return hscroll_label_set_loop(this.nativeObj, loop);
+ }
+
+ setYoyo(yoyo) {
+   return hscroll_label_set_yoyo(this.nativeObj, yoyo);
+ }
+
+ setEllipses(ellipses) {
+   return hscroll_label_set_ellipses(this.nativeObj, ellipses);
+ }
+
+ setXoffset(xoffset) {
+   return hscroll_label_set_xoffset(this.nativeObj, xoffset);
+ }
+
+ start() {
+   return hscroll_label_start(this.nativeObj);
+ }
+
+ stop() {
+   return hscroll_label_stop(this.nativeObj);
+ }
+
+ static cast(widget) {
+   return new THscrollLabel(hscroll_label_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ get onlyFocus() {
+   return hscroll_label_t_get_prop_only_focus(this.nativeObj);
+ }
+
+ get loop() {
+   return hscroll_label_t_get_prop_loop(this.nativeObj);
+ }
+
+ get yoyo() {
+   return hscroll_label_t_get_prop_yoyo(this.nativeObj);
+ }
+
+ get ellipses() {
+   return hscroll_label_t_get_prop_ellipses(this.nativeObj);
+ }
+
+ get lull() {
+   return hscroll_label_t_get_prop_lull(this.nativeObj);
+ }
+
+ get duration() {
+   return hscroll_label_t_get_prop_duration(this.nativeObj);
+ }
+
+ get xoffset() {
+   return hscroll_label_t_get_prop_xoffset(this.nativeObj);
+ }
+
+ get textW() {
+   return hscroll_label_t_get_prop_text_w(this.nativeObj);
+ }
+
+}
+
 class TWheelEvent extends TEvent {
  public nativeObj;
  constructor(nativeObj) {
@@ -4444,26 +4296,6 @@ class TView extends TWidget {
 
 }
 
-class TPropChangeEvent extends TEvent {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static cast(event) {
-   return new TPropChangeEvent(prop_change_event_cast(event ? (event.nativeObj || event) : null));
- }
-
- get name() {
-   return prop_change_event_t_get_prop_name(this.nativeObj);
- }
-
- get value() {
-   return prop_change_event_t_get_prop_value(this.nativeObj);
- }
-
-}
-
 class TOrientationEvent extends TEvent {
  public nativeObj;
  constructor(nativeObj) {
@@ -4476,6 +4308,126 @@ class TOrientationEvent extends TEvent {
 
  get orientation() {
    return orientation_event_t_get_prop_orientation(this.nativeObj);
+ }
+
+}
+
+class TWindowBase extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static cast(widget) {
+   return new TWindowBase(window_base_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ get theme() {
+   return window_base_t_get_prop_theme(this.nativeObj);
+ }
+
+ get closable() {
+   return window_base_t_get_prop_closable(this.nativeObj);
+ }
+
+}
+
+class TWindowManager extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static instance() {
+   return new TWindowManager(window_manager());
+ }
+
+ static cast(widget) {
+   return new TWindowManager(window_manager_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ getTopMainWindow() {
+   return new TWidget(window_manager_get_top_main_window(this.nativeObj));
+ }
+
+ getTopWindow() {
+   return new TWidget(window_manager_get_top_window(this.nativeObj));
+ }
+
+ getPrevWindow() {
+   return new TWidget(window_manager_get_prev_window(this.nativeObj));
+ }
+
+ getPointerX() {
+   return window_manager_get_pointer_x(this.nativeObj);
+ }
+
+ getPointerY() {
+   return window_manager_get_pointer_y(this.nativeObj);
+ }
+
+ getPointerPressed() {
+   return window_manager_get_pointer_pressed(this.nativeObj);
+ }
+
+ setShowFps(show_fps) {
+   return window_manager_set_show_fps(this.nativeObj, show_fps);
+ }
+
+ setScreenSaverTime(screen_saver_time) {
+   return window_manager_set_screen_saver_time(this.nativeObj, screen_saver_time);
+ }
+
+ setCursor(cursor) {
+   return window_manager_set_cursor(this.nativeObj, cursor);
+ }
+
+ back() {
+   return window_manager_back(this.nativeObj);
+ }
+
+ backToHome() {
+   return window_manager_back_to_home(this.nativeObj);
+ }
+
+}
+
+class TWindow extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new TWindow(window_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ setFullscreen(fullscreen) {
+   return window_set_fullscreen(this.nativeObj, fullscreen);
+ }
+
+ static open(name) {
+   return new TWindow(window_open(name));
+ }
+
+ static openAndClose(name, to_close) {
+   return new TWindow(window_open_and_close(name, to_close ? to_close.nativeObj : null));
+ }
+
+ close() {
+   return window_close(this.nativeObj);
+ }
+
+ closeForce() {
+   return window_close_force(this.nativeObj);
+ }
+
+ static cast(widget) {
+   return new TWindow(window_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ get fullscreen() {
+   return window_t_get_prop_fullscreen(this.nativeObj);
  }
 
 }
@@ -4524,6 +4476,66 @@ class TPointerEvent extends TEvent {
 
  get shift() {
    return pointer_event_t_get_prop_shift(this.nativeObj);
+ }
+
+}
+
+class TPropChangeEvent extends TEvent {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static cast(event) {
+   return new TPropChangeEvent(prop_change_event_cast(event ? (event.nativeObj || event) : null));
+ }
+
+ get name() {
+   return prop_change_event_t_get_prop_name(this.nativeObj);
+ }
+
+ get value() {
+   return prop_change_event_t_get_prop_value(this.nativeObj);
+ }
+
+}
+
+class TCanvasWidget extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new TCanvasWidget(canvas_widget_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ static cast(widget) {
+   return new TCanvasWidget(canvas_widget_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+}
+
+class TColorPicker extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new TColorPicker(color_picker_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ setColor(color) {
+   return color_picker_set_color(this.nativeObj, color);
+ }
+
+ static cast(widget) {
+   return new TColorPicker(color_picker_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ get value() {
+   return color_picker_t_get_prop_value(this.nativeObj);
  }
 
 }
@@ -4588,26 +4600,6 @@ class TKeyEvent extends TEvent {
 
  get capslock() {
    return key_event_t_get_prop_capslock(this.nativeObj);
- }
-
-}
-
-class TWindowBase extends TWidget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static cast(widget) {
-   return new TWindowBase(window_base_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- get theme() {
-   return window_base_t_get_prop_theme(this.nativeObj);
- }
-
- get closable() {
-   return window_base_t_get_prop_closable(this.nativeObj);
  }
 
 }
@@ -4776,106 +4768,6 @@ class TObject extends TEmitter {
 
  get name() {
    return object_t_get_prop_name(this.nativeObj);
- }
-
-}
-
-class TWindowManager extends TWidget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static instance() {
-   return new TWindowManager(window_manager());
- }
-
- static cast(widget) {
-   return new TWindowManager(window_manager_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- getTopMainWindow() {
-   return new TWidget(window_manager_get_top_main_window(this.nativeObj));
- }
-
- getTopWindow() {
-   return new TWidget(window_manager_get_top_window(this.nativeObj));
- }
-
- getPrevWindow() {
-   return new TWidget(window_manager_get_prev_window(this.nativeObj));
- }
-
- getPointerX() {
-   return window_manager_get_pointer_x(this.nativeObj);
- }
-
- getPointerY() {
-   return window_manager_get_pointer_y(this.nativeObj);
- }
-
- getPointerPressed() {
-   return window_manager_get_pointer_pressed(this.nativeObj);
- }
-
- setShowFps(show_fps) {
-   return window_manager_set_show_fps(this.nativeObj, show_fps);
- }
-
- setScreenSaverTime(screen_saver_time) {
-   return window_manager_set_screen_saver_time(this.nativeObj, screen_saver_time);
- }
-
- setCursor(cursor) {
-   return window_manager_set_cursor(this.nativeObj, cursor);
- }
-
- back() {
-   return window_manager_back(this.nativeObj);
- }
-
- backToHome() {
-   return window_manager_back_to_home(this.nativeObj);
- }
-
-}
-
-class TCanvasWidget extends TWidget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new TCanvasWidget(canvas_widget_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- static cast(widget) {
-   return new TCanvasWidget(canvas_widget_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
-}
-
-class TColorPicker extends TWidget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new TColorPicker(color_picker_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- setColor(color) {
-   return color_picker_set_color(this.nativeObj, color);
- }
-
- static cast(widget) {
-   return new TColorPicker(color_picker_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- get value() {
-   return color_picker_t_get_prop_value(this.nativeObj);
  }
 
 }
@@ -5132,38 +5024,6 @@ class TImageValue extends TWidget {
 
 }
 
-class TStyleMutable extends TStyle {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- getName() {
-   return style_mutable_get_name(this.nativeObj);
- }
-
- setName(name) {
-   return style_mutable_set_name(this.nativeObj, name);
- }
-
- setInt(state, name, val) {
-   return style_mutable_set_int(this.nativeObj, state, name, val);
- }
-
- static cast(s) {
-   return new TStyleMutable(style_mutable_cast(s ? (s.nativeObj || s) : null));
- }
-
- static create(widget, default_style) {
-   return new TStyleMutable(style_mutable_create(widget ? widget.nativeObj : null, default_style ? default_style.nativeObj : null));
- }
-
- get name() {
-   return style_mutable_t_get_prop_name(this.nativeObj);
- }
-
-}
-
 class TLineNumber extends TWidget {
  public nativeObj;
  constructor(nativeObj) {
@@ -5192,6 +5052,238 @@ class TLineNumber extends TWidget {
 
  static cast(widget) {
    return new TLineNumber(line_number_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+}
+
+class TMledit extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new TMledit(mledit_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ setReadonly(readonly) {
+   return mledit_set_readonly(this.nativeObj, readonly);
+ }
+
+ setFocus(focus) {
+   return mledit_set_focus(this.nativeObj, focus);
+ }
+
+ setWrapWord(wrap_word) {
+   return mledit_set_wrap_word(this.nativeObj, wrap_word);
+ }
+
+ setMaxLines(max_lines) {
+   return mledit_set_max_lines(this.nativeObj, max_lines);
+ }
+
+ setInputTips(tips) {
+   return mledit_set_input_tips(this.nativeObj, tips);
+ }
+
+ static cast(widget) {
+   return new TMledit(mledit_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ get readonly() {
+   return mledit_t_get_prop_readonly(this.nativeObj);
+ }
+
+ get topMargin() {
+   return mledit_t_get_prop_top_margin(this.nativeObj);
+ }
+
+ get bottomMargin() {
+   return mledit_t_get_prop_bottom_margin(this.nativeObj);
+ }
+
+ get leftMargin() {
+   return mledit_t_get_prop_left_margin(this.nativeObj);
+ }
+
+ get rightMargin() {
+   return mledit_t_get_prop_right_margin(this.nativeObj);
+ }
+
+ get tips() {
+   return mledit_t_get_prop_tips(this.nativeObj);
+ }
+
+ get focus() {
+   return mledit_t_get_prop_focus(this.nativeObj);
+ }
+
+ get wrapWord() {
+   return mledit_t_get_prop_wrap_word(this.nativeObj);
+ }
+
+ get maxLines() {
+   return mledit_t_get_prop_max_lines(this.nativeObj);
+ }
+
+}
+
+class TSlider extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new TSlider(slider_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ static cast(widget) {
+   return new TSlider(slider_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ setValue(value) {
+   return slider_set_value(this.nativeObj, value);
+ }
+
+ setMin(min) {
+   return slider_set_min(this.nativeObj, min);
+ }
+
+ setMax(max) {
+   return slider_set_max(this.nativeObj, max);
+ }
+
+ setStep(step) {
+   return slider_set_step(this.nativeObj, step);
+ }
+
+ setBarSize(bar_size) {
+   return slider_set_bar_size(this.nativeObj, bar_size);
+ }
+
+ setVertical(vertical) {
+   return slider_set_vertical(this.nativeObj, vertical);
+ }
+
+ get value() {
+   return slider_t_get_prop_value(this.nativeObj);
+ }
+
+ get min() {
+   return slider_t_get_prop_min(this.nativeObj);
+ }
+
+ get max() {
+   return slider_t_get_prop_max(this.nativeObj);
+ }
+
+ get step() {
+   return slider_t_get_prop_step(this.nativeObj);
+ }
+
+ get vertical() {
+   return slider_t_get_prop_vertical(this.nativeObj);
+ }
+
+ get barSize() {
+   return slider_t_get_prop_bar_size(this.nativeObj);
+ }
+
+}
+
+class TProgressCircle extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new TProgressCircle(progress_circle_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ static cast(widget) {
+   return new TProgressCircle(progress_circle_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ setValue(value) {
+   return progress_circle_set_value(this.nativeObj, value);
+ }
+
+ setMax(max) {
+   return progress_circle_set_max(this.nativeObj, max);
+ }
+
+ setLineWidth(line_width) {
+   return progress_circle_set_line_width(this.nativeObj, line_width);
+ }
+
+ setStartAngle(start_angle) {
+   return progress_circle_set_start_angle(this.nativeObj, start_angle);
+ }
+
+ setUnit(unit) {
+   return progress_circle_set_unit(this.nativeObj, unit);
+ }
+
+ setShowText(show_text) {
+   return progress_circle_set_show_text(this.nativeObj, show_text);
+ }
+
+ setCounterClockWise(counter_clock_wise) {
+   return progress_circle_set_counter_clock_wise(this.nativeObj, counter_clock_wise);
+ }
+
+ get value() {
+   return progress_circle_t_get_prop_value(this.nativeObj);
+ }
+
+ get max() {
+   return progress_circle_t_get_prop_max(this.nativeObj);
+ }
+
+ get startAngle() {
+   return progress_circle_t_get_prop_start_angle(this.nativeObj);
+ }
+
+ get lineWidth() {
+   return progress_circle_t_get_prop_line_width(this.nativeObj);
+ }
+
+ get unit() {
+   return progress_circle_t_get_prop_unit(this.nativeObj);
+ }
+
+ get counterClockWise() {
+   return progress_circle_t_get_prop_counter_clock_wise(this.nativeObj);
+ }
+
+ get showText() {
+   return progress_circle_t_get_prop_show_text(this.nativeObj);
+ }
+
+}
+
+class TRichText extends TWidget {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+ static create(parent, x, y, w, h) {
+   return new TRichText(rich_text_create(parent ? parent.nativeObj : null, x, y, w, h));
+ }
+
+ setText(text) {
+   return rich_text_set_text(this.nativeObj, text);
+ }
+
+ static cast(widget) {
+   return new TRichText(rich_text_cast(widget ? (widget.nativeObj || widget) : null));
+ }
+
+ get lineGap() {
+   return rich_text_t_get_prop_line_gap(this.nativeObj);
  }
 
 }
@@ -5460,78 +5552,6 @@ class TDialogTitle extends TWidget {
 
  static cast(widget) {
    return new TDialogTitle(dialog_title_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
-}
-
-class TDialog extends TWidget {
- public nativeObj;
- constructor(nativeObj) {
-   super(nativeObj);
- }
-
- static create(parent, x, y, w, h) {
-   return new TDialog(dialog_create(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- static createSimple(parent, x, y, w, h) {
-   return new TDialog(dialog_create_simple(parent ? parent.nativeObj : null, x, y, w, h));
- }
-
- static cast(widget) {
-   return new TDialog(dialog_cast(widget ? (widget.nativeObj || widget) : null));
- }
-
- getTitle() {
-   return new TWidget(dialog_get_title(this.nativeObj));
- }
-
- getClient() {
-   return new TWidget(dialog_get_client(this.nativeObj));
- }
-
- static open(name) {
-   return new TDialog(dialog_open(name));
- }
-
- setTitle(title) {
-   return dialog_set_title(this.nativeObj, title);
- }
-
- modal() {
-   return dialog_modal(this.nativeObj);
- }
-
- quit(code) {
-   return dialog_quit(this.nativeObj, code);
- }
-
- isQuited() {
-   return dialog_is_quited(this.nativeObj);
- }
-
- isModal() {
-   return dialog_is_modal(this.nativeObj);
- }
-
- static toast(text, duration) {
-   return dialog_toast(text, duration);
- }
-
- static info(title, text) {
-   return dialog_info(title, text);
- }
-
- static warn(title, text) {
-   return dialog_warn(title, text);
- }
-
- static confirm(title, text) {
-   return dialog_confirm(title, text);
- }
-
- get highlight() {
-   return dialog_t_get_prop_highlight(this.nativeObj);
  }
 
 }
@@ -5985,6 +6005,14 @@ class TIdleInfo extends TObject {
 }
 
 class TWindowManagerDefault extends TWindowManager {
+ public nativeObj;
+ constructor(nativeObj) {
+   super(nativeObj);
+ }
+
+}
+
+class TWindowManagerSimple extends TWindowManager {
  public nativeObj;
  constructor(nativeObj) {
    super(nativeObj);
