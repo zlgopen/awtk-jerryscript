@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -2297,18 +2297,48 @@ var TSlideView = /** @class */ (function (_super) {
     });
     return TSlideView;
 }(TWidget));
-var TRow = /** @class */ (function (_super) {
-    __extends(TRow, _super);
-    function TRow(nativeObj) {
+var TProgressBar = /** @class */ (function (_super) {
+    __extends(TProgressBar, _super);
+    function TProgressBar(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    TRow.create = function (parent, x, y, w, h) {
-        return new TRow(row_create(parent ? parent.nativeObj : null, x, y, w, h));
+    TProgressBar.create = function (parent, x, y, w, h) {
+        return new TProgressBar(progress_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    TRow.cast = function (widget) {
-        return new TRow(row_cast(widget ? (widget.nativeObj || widget) : null));
+    TProgressBar.cast = function (widget) {
+        return new TProgressBar(progress_bar_cast(widget ? (widget.nativeObj || widget) : null));
     };
-    return TRow;
+    TProgressBar.prototype.setValue = function (value) {
+        return progress_bar_set_value(this.nativeObj, value);
+    };
+    TProgressBar.prototype.setVertical = function (vertical) {
+        return progress_bar_set_vertical(this.nativeObj, vertical);
+    };
+    TProgressBar.prototype.setShowText = function (show_text) {
+        return progress_bar_set_show_text(this.nativeObj, show_text);
+    };
+    Object.defineProperty(TProgressBar.prototype, "value", {
+        get: function () {
+            return progress_bar_t_get_prop_value(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TProgressBar.prototype, "vertical", {
+        get: function () {
+            return progress_bar_t_get_prop_vertical(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TProgressBar.prototype, "showText", {
+        get: function () {
+            return progress_bar_t_get_prop_show_text(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TProgressBar;
 }(TWidget));
 var TSwitch = /** @class */ (function (_super) {
     __extends(TSwitch, _super);
@@ -3197,149 +3227,71 @@ var TColorPicker = /** @class */ (function (_super) {
     });
     return TColorPicker;
 }(TWidget));
-var TKeyEvent = /** @class */ (function (_super) {
-    __extends(TKeyEvent, _super);
-    function TKeyEvent(nativeObj) {
+var TTabButtonGroup = /** @class */ (function (_super) {
+    __extends(TTabButtonGroup, _super);
+    function TTabButtonGroup(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    TKeyEvent.cast = function (event) {
-        return new TKeyEvent(key_event_cast(event ? (event.nativeObj || event) : null));
+    TTabButtonGroup.create = function (parent, x, y, w, h) {
+        return new TTabButtonGroup(tab_button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    Object.defineProperty(TKeyEvent.prototype, "key", {
+    TTabButtonGroup.prototype.setCompact = function (compact) {
+        return tab_button_group_set_compact(this.nativeObj, compact);
+    };
+    TTabButtonGroup.prototype.setScrollable = function (scrollable) {
+        return tab_button_group_set_scrollable(this.nativeObj, scrollable);
+    };
+    TTabButtonGroup.cast = function (widget) {
+        return new TTabButtonGroup(tab_button_group_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    Object.defineProperty(TTabButtonGroup.prototype, "compact", {
         get: function () {
-            return key_event_t_get_prop_key(this.nativeObj);
+            return tab_button_group_t_get_prop_compact(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TKeyEvent.prototype, "alt", {
+    Object.defineProperty(TTabButtonGroup.prototype, "scrollable", {
         get: function () {
-            return key_event_t_get_prop_alt(this.nativeObj);
+            return tab_button_group_t_get_prop_scrollable(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TKeyEvent.prototype, "lalt", {
-        get: function () {
-            return key_event_t_get_prop_lalt(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TKeyEvent.prototype, "ralt", {
-        get: function () {
-            return key_event_t_get_prop_ralt(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TKeyEvent.prototype, "ctrl", {
-        get: function () {
-            return key_event_t_get_prop_ctrl(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TKeyEvent.prototype, "lctrl", {
-        get: function () {
-            return key_event_t_get_prop_lctrl(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TKeyEvent.prototype, "rctrl", {
-        get: function () {
-            return key_event_t_get_prop_rctrl(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TKeyEvent.prototype, "shift", {
-        get: function () {
-            return key_event_t_get_prop_shift(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TKeyEvent.prototype, "lshift", {
-        get: function () {
-            return key_event_t_get_prop_lshift(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TKeyEvent.prototype, "rshift", {
-        get: function () {
-            return key_event_t_get_prop_rshift(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TKeyEvent.prototype, "cmd", {
-        get: function () {
-            return key_event_t_get_prop_cmd(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TKeyEvent.prototype, "menu", {
-        get: function () {
-            return key_event_t_get_prop_menu(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TKeyEvent.prototype, "capslock", {
-        get: function () {
-            return key_event_t_get_prop_capslock(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TKeyEvent;
-}(TEvent));
-var TProgressBar = /** @class */ (function (_super) {
-    __extends(TProgressBar, _super);
-    function TProgressBar(nativeObj) {
+    return TTabButtonGroup;
+}(TWidget));
+var TPopup = /** @class */ (function (_super) {
+    __extends(TPopup, _super);
+    function TPopup(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    TProgressBar.create = function (parent, x, y, w, h) {
-        return new TProgressBar(progress_bar_create(parent ? parent.nativeObj : null, x, y, w, h));
+    TPopup.create = function (parent, x, y, w, h) {
+        return new TPopup(popup_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    TProgressBar.cast = function (widget) {
-        return new TProgressBar(progress_bar_cast(widget ? (widget.nativeObj || widget) : null));
+    TPopup.cast = function (widget) {
+        return new TPopup(popup_cast(widget ? (widget.nativeObj || widget) : null));
     };
-    TProgressBar.prototype.setValue = function (value) {
-        return progress_bar_set_value(this.nativeObj, value);
+    TPopup.prototype.setCloseWhenClick = function (close_when_click) {
+        return popup_set_close_when_click(this.nativeObj, close_when_click);
     };
-    TProgressBar.prototype.setVertical = function (vertical) {
-        return progress_bar_set_vertical(this.nativeObj, vertical);
+    TPopup.prototype.setCloseWhenClickOutside = function (close_when_click_outside) {
+        return popup_set_close_when_click_outside(this.nativeObj, close_when_click_outside);
     };
-    TProgressBar.prototype.setShowText = function (show_text) {
-        return progress_bar_set_show_text(this.nativeObj, show_text);
-    };
-    Object.defineProperty(TProgressBar.prototype, "value", {
+    Object.defineProperty(TPopup.prototype, "closeWhenClick", {
         get: function () {
-            return progress_bar_t_get_prop_value(this.nativeObj);
+            return popup_t_get_prop_close_when_click(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TProgressBar.prototype, "vertical", {
+    Object.defineProperty(TPopup.prototype, "closeWhenClickOutside", {
         get: function () {
-            return progress_bar_t_get_prop_vertical(this.nativeObj);
+            return popup_t_get_prop_close_when_click_outside(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TProgressBar.prototype, "showText", {
-        get: function () {
-            return progress_bar_t_get_prop_show_text(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TProgressBar;
+    return TPopup;
 }(TWidget));
 var TObject = /** @class */ (function (_super) {
     __extends(TObject, _super);
@@ -3446,38 +3398,179 @@ var TObject = /** @class */ (function (_super) {
     });
     return TObject;
 }(TEmitter));
-var TTabButtonGroup = /** @class */ (function (_super) {
-    __extends(TTabButtonGroup, _super);
-    function TTabButtonGroup(nativeObj) {
+var TKeyEvent = /** @class */ (function (_super) {
+    __extends(TKeyEvent, _super);
+    function TKeyEvent(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    TTabButtonGroup.create = function (parent, x, y, w, h) {
-        return new TTabButtonGroup(tab_button_group_create(parent ? parent.nativeObj : null, x, y, w, h));
+    TKeyEvent.cast = function (event) {
+        return new TKeyEvent(key_event_cast(event ? (event.nativeObj || event) : null));
     };
-    TTabButtonGroup.prototype.setCompact = function (compact) {
-        return tab_button_group_set_compact(this.nativeObj, compact);
-    };
-    TTabButtonGroup.prototype.setScrollable = function (scrollable) {
-        return tab_button_group_set_scrollable(this.nativeObj, scrollable);
-    };
-    TTabButtonGroup.cast = function (widget) {
-        return new TTabButtonGroup(tab_button_group_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    Object.defineProperty(TTabButtonGroup.prototype, "compact", {
+    Object.defineProperty(TKeyEvent.prototype, "key", {
         get: function () {
-            return tab_button_group_t_get_prop_compact(this.nativeObj);
+            return key_event_t_get_prop_key(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TTabButtonGroup.prototype, "scrollable", {
+    Object.defineProperty(TKeyEvent.prototype, "alt", {
         get: function () {
-            return tab_button_group_t_get_prop_scrollable(this.nativeObj);
+            return key_event_t_get_prop_alt(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    return TTabButtonGroup;
+    Object.defineProperty(TKeyEvent.prototype, "lalt", {
+        get: function () {
+            return key_event_t_get_prop_lalt(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TKeyEvent.prototype, "ralt", {
+        get: function () {
+            return key_event_t_get_prop_ralt(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TKeyEvent.prototype, "ctrl", {
+        get: function () {
+            return key_event_t_get_prop_ctrl(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TKeyEvent.prototype, "lctrl", {
+        get: function () {
+            return key_event_t_get_prop_lctrl(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TKeyEvent.prototype, "rctrl", {
+        get: function () {
+            return key_event_t_get_prop_rctrl(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TKeyEvent.prototype, "shift", {
+        get: function () {
+            return key_event_t_get_prop_shift(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TKeyEvent.prototype, "lshift", {
+        get: function () {
+            return key_event_t_get_prop_lshift(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TKeyEvent.prototype, "rshift", {
+        get: function () {
+            return key_event_t_get_prop_rshift(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TKeyEvent.prototype, "cmd", {
+        get: function () {
+            return key_event_t_get_prop_cmd(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TKeyEvent.prototype, "menu", {
+        get: function () {
+            return key_event_t_get_prop_menu(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TKeyEvent.prototype, "capslock", {
+        get: function () {
+            return key_event_t_get_prop_capslock(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TKeyEvent;
+}(TEvent));
+var TSlider = /** @class */ (function (_super) {
+    __extends(TSlider, _super);
+    function TSlider(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    TSlider.create = function (parent, x, y, w, h) {
+        return new TSlider(slider_create(parent ? parent.nativeObj : null, x, y, w, h));
+    };
+    TSlider.cast = function (widget) {
+        return new TSlider(slider_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    TSlider.prototype.setValue = function (value) {
+        return slider_set_value(this.nativeObj, value);
+    };
+    TSlider.prototype.setMin = function (min) {
+        return slider_set_min(this.nativeObj, min);
+    };
+    TSlider.prototype.setMax = function (max) {
+        return slider_set_max(this.nativeObj, max);
+    };
+    TSlider.prototype.setStep = function (step) {
+        return slider_set_step(this.nativeObj, step);
+    };
+    TSlider.prototype.setBarSize = function (bar_size) {
+        return slider_set_bar_size(this.nativeObj, bar_size);
+    };
+    TSlider.prototype.setVertical = function (vertical) {
+        return slider_set_vertical(this.nativeObj, vertical);
+    };
+    Object.defineProperty(TSlider.prototype, "value", {
+        get: function () {
+            return slider_t_get_prop_value(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TSlider.prototype, "min", {
+        get: function () {
+            return slider_t_get_prop_min(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TSlider.prototype, "max", {
+        get: function () {
+            return slider_t_get_prop_max(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TSlider.prototype, "step", {
+        get: function () {
+            return slider_t_get_prop_step(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TSlider.prototype, "vertical", {
+        get: function () {
+            return slider_t_get_prop_vertical(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TSlider.prototype, "barSize", {
+        get: function () {
+            return slider_t_get_prop_bar_size(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TSlider;
 }(TWidget));
 var TGuagePointer = /** @class */ (function (_super) {
     __extends(TGuagePointer, _super);
@@ -3840,78 +3933,18 @@ var TMledit = /** @class */ (function (_super) {
     });
     return TMledit;
 }(TWidget));
-var TSlider = /** @class */ (function (_super) {
-    __extends(TSlider, _super);
-    function TSlider(nativeObj) {
+var TRow = /** @class */ (function (_super) {
+    __extends(TRow, _super);
+    function TRow(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    TSlider.create = function (parent, x, y, w, h) {
-        return new TSlider(slider_create(parent ? parent.nativeObj : null, x, y, w, h));
+    TRow.create = function (parent, x, y, w, h) {
+        return new TRow(row_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    TSlider.cast = function (widget) {
-        return new TSlider(slider_cast(widget ? (widget.nativeObj || widget) : null));
+    TRow.cast = function (widget) {
+        return new TRow(row_cast(widget ? (widget.nativeObj || widget) : null));
     };
-    TSlider.prototype.setValue = function (value) {
-        return slider_set_value(this.nativeObj, value);
-    };
-    TSlider.prototype.setMin = function (min) {
-        return slider_set_min(this.nativeObj, min);
-    };
-    TSlider.prototype.setMax = function (max) {
-        return slider_set_max(this.nativeObj, max);
-    };
-    TSlider.prototype.setStep = function (step) {
-        return slider_set_step(this.nativeObj, step);
-    };
-    TSlider.prototype.setBarSize = function (bar_size) {
-        return slider_set_bar_size(this.nativeObj, bar_size);
-    };
-    TSlider.prototype.setVertical = function (vertical) {
-        return slider_set_vertical(this.nativeObj, vertical);
-    };
-    Object.defineProperty(TSlider.prototype, "value", {
-        get: function () {
-            return slider_t_get_prop_value(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TSlider.prototype, "min", {
-        get: function () {
-            return slider_t_get_prop_min(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TSlider.prototype, "max", {
-        get: function () {
-            return slider_t_get_prop_max(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TSlider.prototype, "step", {
-        get: function () {
-            return slider_t_get_prop_step(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TSlider.prototype, "vertical", {
-        get: function () {
-            return slider_t_get_prop_vertical(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TSlider.prototype, "barSize", {
-        get: function () {
-            return slider_t_get_prop_bar_size(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TSlider;
+    return TRow;
 }(TWidget));
 var TProgressCircle = /** @class */ (function (_super) {
     __extends(TProgressCircle, _super);
@@ -4472,38 +4505,31 @@ var TGroupBox = /** @class */ (function (_super) {
     };
     return TGroupBox;
 }(TWidget));
-var TPopup = /** @class */ (function (_super) {
-    __extends(TPopup, _super);
-    function TPopup(nativeObj) {
+var TPages = /** @class */ (function (_super) {
+    __extends(TPages, _super);
+    function TPages(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    TPopup.create = function (parent, x, y, w, h) {
-        return new TPopup(popup_create(parent ? parent.nativeObj : null, x, y, w, h));
+    TPages.create = function (parent, x, y, w, h) {
+        return new TPages(pages_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    TPopup.cast = function (widget) {
-        return new TPopup(popup_cast(widget ? (widget.nativeObj || widget) : null));
+    TPages.cast = function (widget) {
+        return new TPages(pages_cast(widget ? (widget.nativeObj || widget) : null));
     };
-    TPopup.prototype.setCloseWhenClick = function (close_when_click) {
-        return popup_set_close_when_click(this.nativeObj, close_when_click);
+    TPages.prototype.setActive = function (index) {
+        return pages_set_active(this.nativeObj, index);
     };
-    TPopup.prototype.setCloseWhenClickOutside = function (close_when_click_outside) {
-        return popup_set_close_when_click_outside(this.nativeObj, close_when_click_outside);
+    TPages.prototype.setActiveByName = function (name) {
+        return pages_set_active_by_name(this.nativeObj, name);
     };
-    Object.defineProperty(TPopup.prototype, "closeWhenClick", {
+    Object.defineProperty(TPages.prototype, "active", {
         get: function () {
-            return popup_t_get_prop_close_when_click(this.nativeObj);
+            return pages_t_get_prop_active(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TPopup.prototype, "closeWhenClickOutside", {
-        get: function () {
-            return popup_t_get_prop_close_when_click_outside(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TPopup;
+    return TPages;
 }(TWidget));
 var TLabel = /** @class */ (function (_super) {
     __extends(TLabel, _super);
@@ -4544,45 +4570,16 @@ var TOverlay = /** @class */ (function (_super) {
     };
     return TOverlay;
 }(TWidget));
-var TPages = /** @class */ (function (_super) {
-    __extends(TPages, _super);
-    function TPages(nativeObj) {
+var TComboBoxEx = /** @class */ (function (_super) {
+    __extends(TComboBoxEx, _super);
+    function TComboBoxEx(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    TPages.create = function (parent, x, y, w, h) {
-        return new TPages(pages_create(parent ? parent.nativeObj : null, x, y, w, h));
+    TComboBoxEx.create = function (parent, x, y, w, h) {
+        return new TComboBoxEx(combo_box_ex_create(parent ? parent.nativeObj : null, x, y, w, h));
     };
-    TPages.cast = function (widget) {
-        return new TPages(pages_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    TPages.prototype.setActive = function (index) {
-        return pages_set_active(this.nativeObj, index);
-    };
-    TPages.prototype.setActiveByName = function (name) {
-        return pages_set_active_by_name(this.nativeObj, name);
-    };
-    Object.defineProperty(TPages.prototype, "active", {
-        get: function () {
-            return pages_t_get_prop_active(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TPages;
-}(TWidget));
-var TGifImage = /** @class */ (function (_super) {
-    __extends(TGifImage, _super);
-    function TGifImage(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    TGifImage.create = function (parent, x, y, w, h) {
-        return new TGifImage(gif_image_create(parent ? parent.nativeObj : null, x, y, w, h));
-    };
-    TGifImage.cast = function (widget) {
-        return new TGifImage(gif_image_cast(widget ? (widget.nativeObj || widget) : null));
-    };
-    return TGifImage;
-}(TImageBase));
+    return TComboBoxEx;
+}(TComboBox));
 var TImage = /** @class */ (function (_super) {
     __extends(TImage, _super);
     function TImage(nativeObj) {
@@ -4618,6 +4615,19 @@ var TSvgImage = /** @class */ (function (_super) {
         return new TSvgImage(svg_image_cast(widget ? (widget.nativeObj || widget) : null));
     };
     return TSvgImage;
+}(TImageBase));
+var TGifImage = /** @class */ (function (_super) {
+    __extends(TGifImage, _super);
+    function TGifImage(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    TGifImage.create = function (parent, x, y, w, h) {
+        return new TGifImage(gif_image_create(parent ? parent.nativeObj : null, x, y, w, h));
+    };
+    TGifImage.cast = function (widget) {
+        return new TGifImage(gif_image_cast(widget ? (widget.nativeObj || widget) : null));
+    };
+    return TGifImage;
 }(TImageBase));
 var TSpinBox = /** @class */ (function (_super) {
     __extends(TSpinBox, _super);
