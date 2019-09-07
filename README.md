@@ -16,7 +16,7 @@ cd awtk; scons; cd -
 ```
 git clone https://github.com/zlgopen/awtk-js.git
 cd awtk-js
-git clone https://github.com/jerryscript-project/jerryscript.git 3rd/jerryscript
+git clone https://github.com/jerryscript-project/jerryscript.git 3rd/jerryscript/jerryscript
 scons
 ```
 
