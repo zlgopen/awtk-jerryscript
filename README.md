@@ -66,10 +66,10 @@ sys.path.insert(0, '../awtk-linux-fb/')
 
 如果希望自己的应用程序，同时支持 AWTK-JS 和 AWTK-WEB，还需要注意下列事项：
 
-* 不要直接调用gc()函数。
+* 避免直接调用gc()函数。
 
 * 避免使用模态对话框。
 
 * 避免使用动态 GIF 图片。
 
-* 不要直接使用value\_t/color\_t/bitmap\_t/object\_t等类。
+* 避免直接使用value\_t/color\_t/bitmap\_t/object\_t等类。
