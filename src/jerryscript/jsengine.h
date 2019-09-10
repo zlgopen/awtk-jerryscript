@@ -107,6 +107,7 @@ static inline jsvalue_t jsvalue_create_object(JSContext* ctx, const void* ptr, c
     jerry_value_t cls_type_value = jsvalue_create_string(ctx, type);
 
     jerry_set_property(obj, cls_type, cls_type_value);
+    jerry_set_object_native_pointer(obj, (void*)ptr, NULL);
     jerry_set_object_native_pointer(obj, (void*)ptr, native_info_p);
     jerry_release_value(cls_type);
     jerry_release_value(cls_type_value);
