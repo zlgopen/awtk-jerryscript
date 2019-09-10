@@ -1,289 +1,227 @@
+#include "jsengine.h"
 
-char* jerry_get_utf8_string(jerry_value_t v) {
-  jerry_size_t size = jerry_get_utf8_string_size(v);
-  char* str = (char*)TKMEM_ALLOC(size + 1);
-  return_value_if_fail(str != NULL, NULL);
+jsvalue_t jsvalue_create_string_from_wstring(JSContext* ctx, const wchar_t* wstr) {
+  str_t str;
+  jsvalue_t jret;
+  return_value_if_fail(wstr != NULL, JS_NULL);
 
-  jerry_string_to_utf8_char_buffer(v, (jerry_char_t*)str, size);
-  str[size] = '\0';
+  str_init(&str, 0);
+  str_from_wstr(&str, wstr);
+  jret = jsvalue_create_string(ctx, str.str);
+  str_reset(&str);
 
-  return str;
+  return jret;
 }
 
-wchar_t* jerry_get_wstring(jerry_value_t v) {
+wchar_t* jsvalue_get_wstring(JSContext* ctx, jsvalue_t v) {
+  uint32_t size = 0;
   wchar_t* wstr = NULL;
-  jerry_size_t size = jerry_get_utf8_string_size(v);
-  char* str = (char*)TKMEM_ALLOC(size + 1);
-
+  char* str = (char*)jsvalue_get_utf8_string(ctx, v);
   return_value_if_fail(str != NULL, NULL);
 
+  size = strlen(str);
   wstr = (wchar_t*)TKMEM_ALLOC(sizeof(wchar_t) * (size + 1));
-  jerry_string_to_utf8_char_buffer(v, (jerry_char_t*)str, size);
-  str[size] = '\0';
-
-  utf8_to_utf16(str, wstr, size + 1);
-  TKMEM_FREE(str);
+  if (wstr != NULL) {
+    utf8_to_utf16(str, wstr, size + 1);
+    wstr[size] = '\0';
+  }
+  jsvalue_free_str(ctx, str);
 
   return wstr;
 }
 
-jerry_value_t jerry_create_string_from_wstring(const wchar_t* wstr) {
-  int32_t size = 0;
-  char* str = NULL;
-  jerry_value_t ret;
-  if (wstr == NULL) {
-    return jerry_create_null();
-  }
+typedef struct _sync_callback_info_t {
+  JSContext* ctx;
+  jsvalue_t func;
+} sync_callback_info_t;
 
-  size = wcslen(wstr) * 4 + 1;
-  str = (char*)TKMEM_ALLOC(size);
-  if (str == NULL) {
-    return jerry_create_null();
-  }
+sync_callback_info_t* sync_callback_info_init(sync_callback_info_t* info, JSContext* ctx,
+                                              jsvalue_t func) {
+  return_value_if_fail(info != NULL, NULL);
+  info->ctx = ctx;
+  info->func = func;
 
-  utf8_from_utf16(wstr, str, size);
-  ret = jerry_create_string_from_utf8((jerry_char_t*)str);
-  TKMEM_FREE(str);
+  return info;
+}
+
+typedef struct _async_callback_info_t {
+  JSContext* ctx;
+  jsvalue_t func;
+} async_callback_info_t;
+
+static ret_t call_on_event(void* ctx, event_t* e) {
+  jsvalue_t jret;
+  jsvalue_const_t argv[1];
+  ret_t ret = RET_REMOVE;
+  async_callback_info_t* info = (async_callback_info_t*)(ctx);
+  JSContext* jctx = info->ctx;
+
+  argv[0] = jsvalue_create_pointer(info->ctx, e, "event_t*");
+  jret = jsfunc_call(jctx, info->func, JS_NULL, 1, argv);
+  ret = (ret_t)jsvalue_get_int_value(jctx, jret);
+  jsvalue_unref(jctx, argv[0]);
+  jsvalue_unref(jctx, jret);
 
   return ret;
 }
 
-jerry_value_t jerry_create_str(const char* str) {
-  if (str == NULL) {
-    str = "";
-  }
+static async_callback_info_t* async_callback_info_create(JSContext* ctx, jsvalue_t func) {
+  async_callback_info_t* info = TKMEM_ZALLOC(async_callback_info_t);
+  return_value_if_fail(info != NULL, NULL);
 
-  return jerry_create_string_from_utf8((jerry_char_t*)str);
+  info->ctx = ctx;
+  info->func = func;
+
+  return info;
 }
 
-void* jerry_get_pointer(jerry_value_t v, const char* type) {
-  if (jerry_value_is_null(v) || jerry_value_is_undefined(v)) {
-    return NULL;
-  } else {
-    char str[64];
-    void* p = NULL;
-    jerry_value_t cls_type = jerry_create_string_from_utf8((jerry_char_t*)"class_type");
-    jerry_value_t cls_type_value = jerry_get_property(v, cls_type);
+static ret_t async_callback_info_destroy(async_callback_info_t* info) {
+  return_value_if_fail(info != NULL, RET_BAD_PARAMS);
+  jsvalue_unref(info->ctx, info->func);
 
-    memset(str, 0x00, sizeof(str));
-    jerry_string_to_utf8_char_buffer(cls_type_value, (jerry_char_t*)str, sizeof(str));
-    jerry_get_object_native_pointer(v, &p, NULL);
-    jerry_release_value(cls_type);
-    jerry_release_value(cls_type_value);
-
-    return p;
-  }
-}
-
-jerry_value_t jerry_create_pointer(const void* ptr, const char* type,
-                                   const jerry_object_native_info_t* native_info_p) {
-  if (ptr == NULL) {
-    return jerry_create_null();
-  } else {
-    jerry_value_t obj = jerry_create_object();
-    jerry_value_t cls_type = jerry_create_string_from_utf8((jerry_char_t*)"class_type");
-    jerry_value_t cls_type_value = jerry_create_string_from_utf8((jerry_char_t*)type);
-
-    jerry_set_property(obj, cls_type, cls_type_value);
-    jerry_set_object_native_pointer(obj, (void*)ptr, native_info_p);
-    jerry_release_value(cls_type);
-    jerry_release_value(cls_type_value);
-
-    if (native_info_p != NULL) {
-      jerry_set_object_native_pointer(obj, (void*)ptr, NULL);
-    }
-
-    return obj;
-  }
-}
-
-static ret_t call_on_event(void* ctx, event_t* e) {
-  jerry_value_t res;
-  jerry_value_t args[1];
-  jerry_value_t func = (jerry_value_t)((char*)ctx - (char*)NULL);
-  jerry_value_t this_value = jerry_create_undefined();
-
-  args[0] = jerry_create_pointer(e, "event_t", NULL);
-  res = jerry_call_function(func, this_value, args, 1);
-
-  jerry_release_value(args[0]);
-  jerry_release_value(this_value);
-
-  return (ret_t)jerry_get_number_value(res);
+  return RET_OK;
 }
 
 static ret_t emitter_item_on_destroy(void* data) {
   emitter_item_t* item = (emitter_item_t*)data;
 
-  uint32_t func = (char*)(item->ctx) - (char*)NULL;
-  jerry_release_value(func);
+  async_callback_info_destroy((async_callback_info_t*)(item->ctx));
 
   return RET_OK;
 }
 
-jerry_value_t wrap_widget_on(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                             const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  int32_t ret = 0;
-  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
+JSFUNC_DECL(wrap_widget_on)
+ret_t ret = RET_FAIL;
 
-  if (args_cnt >= 2) {
-    widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
-    event_type_t type = (event_type_t)jerry_get_number_value(args_p[1]);
-    jerry_value_t on_event = jerry_acquire_value(args_p[2]);
+if (argc >= 3) {
+  widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+  uint32_t type = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
+  async_callback_info_t* info = async_callback_info_create(ctx, jsvalue_ref(ctx, argv[2]));
 
-    void* ctx = (char*)NULL + (int32_t)on_event;
-    ret = (int32_t)widget_on(widget, type, call_on_event, ctx);
-    emitter_set_on_destroy(widget->emitter, ret, emitter_item_on_destroy, NULL);
-  }
-
-  return jerry_create_number(ret);
+  ret = widget_on(widget, type, call_on_event, info);
+  emitter_set_on_destroy(widget->emitter, ret, emitter_item_on_destroy, NULL);
 }
 
-jerry_value_t wrap_emitter_on(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                              const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  int32_t ret = 0;
-  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
-
-  if (args_cnt >= 2) {
-    emitter_t* emitter = (emitter_t*)jerry_get_pointer(args_p[0], "emitter_t*");
-    event_type_t type = (event_type_t)jerry_get_number_value(args_p[1]);
-    jerry_value_t on_event = jerry_acquire_value(args_p[2]);
-
-    void* ctx = (char*)NULL + (int32_t)on_event;
-    ret = (int32_t)emitter_on(emitter, type, call_on_event, ctx);
-    emitter_set_on_destroy(emitter, ret, emitter_item_on_destroy, NULL);
-  }
-
-  return jerry_create_number(ret);
+return jsvalue_create_int(ctx, ret);
 }
 
-jerry_value_t wrap_locale_info_on(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                                  const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  int32_t ret = 0;
-  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
+JSFUNC_DECL(wrap_emitter_on)
+ret_t ret = RET_OK;
 
-  if (args_cnt >= 2) {
-    locale_info_t* locale_info = (locale_info_t*)jerry_get_pointer(args_p[0], "locale_info_t*");
-    event_type_t type = (event_type_t)jerry_get_number_value(args_p[1]);
-    jerry_value_t on_event = jerry_acquire_value(args_p[2]);
+return jsvalue_create_int(ctx, ret);
+}
 
-    void* ctx = (char*)NULL + (int32_t)on_event;
-    ret = (uint32_t)locale_info_on(locale_info, type, call_on_event, ctx);
-    emitter_set_on_destroy(locale_info->emitter, ret, emitter_item_on_destroy, NULL);
-  }
+JSFUNC_DECL(wrap_locale_info_on)
+ret_t ret = RET_OK;
 
-  return jerry_create_number(ret);
+return jsvalue_create_int(ctx, ret);
 }
 
 static ret_t timer_info_on_destroy(void* data) {
   timer_info_t* item = (timer_info_t*)data;
 
-  uint32_t func = (char*)(item->ctx) - (char*)NULL;
-  jerry_release_value(func);
+  async_callback_info_destroy((async_callback_info_t*)(item->ctx));
 
   return RET_OK;
 }
 
 static ret_t call_on_timer(const timer_info_t* timer) {
-  jerry_value_t res;
-  jerry_value_t args[1];
-  jerry_value_t this_value = jerry_create_undefined();
-  jerry_value_t func = (jerry_value_t)((char*)timer->ctx - (char*)NULL);
+  jsvalue_t jret;
+  jsvalue_const_t argv[1];
+  ret_t ret = RET_REMOVE;
+  async_callback_info_t* info = (async_callback_info_t*)(timer->ctx);
+  JSContext* jctx = info->ctx;
 
-  args[0] = jerry_create_undefined();
-  res = jerry_call_function(func, this_value, args, 1);
+  argv[0] = JS_NULL;
+  jret = jsfunc_call(jctx, info->func, JS_NULL, 1, argv);
+  ret = (ret_t)jsvalue_get_int_value(jctx, jret);
+  jsvalue_unref(jctx, jret);
 
-  jerry_release_value(args[0]);
-  jerry_release_value(this_value);
-
-  return (ret_t)jerry_get_number_value(res);
+  return ret;
 }
 
-jerry_value_t wrap_timer_add(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                             const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  int32_t ret = 0;
-  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
+JSFUNC_DECL(wrap_timer_add)
+uint32_t ret = TK_INVALID_ID;
 
-  if (args_cnt >= 2) {
-    jerry_value_t on_timer = jerry_acquire_value(args_p[0]);
-    uint32_t duration_ms = (uint32_t)jerry_get_number_value(args_p[1]);
-    void* ctx = (char*)NULL + (int32_t)on_timer;
+if (argc >= 2) {
+  async_callback_info_t* info = async_callback_info_create(ctx, jsvalue_ref(ctx, argv[0]));
+  uint32_t duration = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
 
-    ret = (uint32_t)timer_add(call_on_timer, ctx, duration_ms);
-    timer_set_on_destroy(ret, timer_info_on_destroy, NULL);
-  }
+  ret = timer_add(call_on_timer, info, duration);
+  timer_set_on_destroy(ret, timer_info_on_destroy, NULL);
+}
 
-  return jerry_create_number(ret);
+return jsvalue_create_int(ctx, ret);
 }
 
 static ret_t idle_info_on_destroy(void* data) {
   idle_info_t* item = (idle_info_t*)data;
 
-  uint32_t func = (char*)(item->ctx) - (char*)NULL;
-  jerry_release_value(func);
+  async_callback_info_destroy((async_callback_info_t*)(item->ctx));
 
   return RET_OK;
-  ;
 }
 
 static ret_t call_on_idle(const idle_info_t* idle) {
-  jerry_value_t res;
-  jerry_value_t args[1];
-  jerry_value_t this_value = jerry_create_undefined();
-  jerry_value_t func = (jerry_value_t)((char*)idle->ctx - (char*)NULL);
+  jsvalue_t jret;
+  jsvalue_const_t argv[1];
+  ret_t ret = RET_REMOVE;
+  async_callback_info_t* info = (async_callback_info_t*)(idle->ctx);
+  JSContext* jctx = info->ctx;
 
-  args[0] = jerry_create_undefined();
-  res = jerry_call_function(func, this_value, args, 1);
+  argv[0] = JS_NULL;
+  jret = jsfunc_call(jctx, info->func, JS_NULL, 1, argv);
+  ret = (ret_t)jsvalue_get_int_value(jctx, jret);
+  jsvalue_unref(jctx, jret);
 
-  jerry_release_value(args[0]);
-  jerry_release_value(this_value);
-
-  return (ret_t)jerry_get_number_value(res);
+  return ret;
 }
 
-jerry_value_t wrap_idle_add(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                            const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  int32_t ret = 0;
-  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
+JSFUNC_DECL(wrap_idle_add)
+uint32_t ret = TK_INVALID_ID;
 
-  if (args_cnt >= 1) {
-    jerry_value_t on_idle = jerry_acquire_value(args_p[0]);
-    void* ctx = (char*)NULL + (int32_t)on_idle;
+if (argc >= 1) {
+  async_callback_info_t* info = async_callback_info_create(ctx, jsvalue_ref(ctx, argv[0]));
 
-    ret = (uint32_t)idle_add(call_on_idle, ctx);
-    idle_set_on_destroy(ret, idle_info_on_destroy, NULL);
-  }
+  ret = idle_add(call_on_idle, info);
+  idle_set_on_destroy(ret, idle_info_on_destroy, NULL);
+}
 
-  return jerry_create_number(ret);
+return jsvalue_create_int(ctx, ret);
 }
 
 static ret_t call_visit(void* ctx, const void* data) {
-  jerry_value_t res;
-  jerry_value_t args[1];
-  jerry_value_t func = (jerry_value_t)((char*)ctx - (char*)NULL);
-  jerry_value_t this_value = jerry_create_undefined();
+  jsvalue_t jret;
+  jsvalue_const_t argv[1];
+  ret_t ret = RET_REMOVE;
+  sync_callback_info_t* info = (sync_callback_info_t*)(ctx);
+  JSContext* jctx = info->ctx;
 
-  args[0] = jerry_create_pointer(data, "widget_t*", NULL);
-  res = jerry_call_function(func, this_value, args, 1);
+  argv[0] = jsvalue_create_pointer(info->ctx, data, NULL);
+  jret = jsfunc_call(jctx, info->func, JS_NULL, 1, argv);
+  ret = (ret_t)jsvalue_get_int_value(jctx, jret);
+  jsvalue_unref(jctx, argv[0]);
+  jsvalue_unref(jctx, jret);
 
-  jerry_release_value(args[0]);
-  jerry_release_value(this_value);
-
-  return (ret_t)jerry_get_number_value(res);
+  return ret;
 }
 
-jerry_value_t wrap_widget_foreach(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                                  const jerry_value_t args_p[], const jerry_length_t args_cnt) {
-  ret_t ret = RET_OK;
+JSFUNC_DECL(wrap_object_foreach_prop)
+ret_t ret = RET_OK;
 
-  return_value_if_fail(args_cnt >= 2, jerry_create_undefined());
-  if (args_cnt >= 2) {
-    widget_t* widget = (widget_t*)jerry_get_pointer(args_p[0], "widget_t*");
-    jerry_value_t func = args_p[1];
-    void* ctx = (char*)NULL + (int32_t)func;
+return jsvalue_create_int(ctx, ret);
+}
 
-    ret = (ret_t)widget_foreach(widget, call_visit, ctx);
-  }
+JSFUNC_DECL(wrap_widget_foreach)
+ret_t ret = RET_FAIL;
 
-  return jerry_create_number(ret);
+if (argc >= 2) {
+  sync_callback_info_t info;
+  widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+  jsvalue_t func = jsvalue_ref(ctx, argv[1]);
+  ret = widget_foreach(widget, call_visit, sync_callback_info_init(&info, ctx, func));
+  jsvalue_unref(ctx, func);
+}
+
+return jsvalue_create_int(ctx, ret);
 }

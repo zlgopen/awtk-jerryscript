@@ -15,13 +15,14 @@ APP_BIN_DIR = os.path.join(APP_ROOT, 'bin')
 APP_LIB_DIR = os.path.join(APP_ROOT, 'lib')
 RES_ROOT    = awtk.TK_DEMO_ROOT.replace("\\", "\\\\")
 TK_JS_ROOT  = os.path.normpath(os.getcwd())
-TK_JERRYSCRIPT_ROOT = os.path.join(TK_JS_ROOT, '3rd/jerryscript')
+TK_JERRYSCRIPT_ROOT = os.path.join(TK_JS_ROOT, '3rd/jerryscript/')
 
 os.environ['APP_ROOT'] = APP_ROOT;
 os.environ['BIN_DIR'] = APP_BIN_DIR;
 os.environ['LIB_DIR'] = APP_LIB_DIR;
 
 TK_JS_JERRYSCRIPT_DIRS = [
+  TK_JERRYSCRIPT_ROOT,
   os.path.join(TK_JERRYSCRIPT_ROOT, 'jerryscript/jerry-ext/include'),
   os.path.join(TK_JERRYSCRIPT_ROOT, 'jerryscript/jerry-ext/arg'),
   os.path.join(TK_JERRYSCRIPT_ROOT, 'jerryscript/jerry-ext/common'),
@@ -84,6 +85,6 @@ else:
 
 
 SConscript([
-  '3rd/quickjs/SConscript', 
-  'src/quickjs/SConscript']);
+  '3rd/jerryscript/SConscript', 
+  'src/jerryscript/SConscript']);
 
