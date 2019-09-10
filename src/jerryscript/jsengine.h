@@ -44,7 +44,8 @@ static inline char* jsvalue_get_utf8_string(JSContext* ctx, jsvalue_t v) {
   return str;
 }
 
-static inline void* jsvalue_get_pointer(JSContext* ctx, jsvalue_t v, const char* type) {
+static inline void* jsvalue_get_object(JSContext* ctx, jsvalue_t v, const char* type,
+                                       const jerry_object_native_info_t* native_info_p) {
   if (jerry_value_is_null(v) || jerry_value_is_undefined(v)) {
     return NULL;
   } else {
@@ -55,12 +56,16 @@ static inline void* jsvalue_get_pointer(JSContext* ctx, jsvalue_t v, const char*
 
     memset(str, 0x00, sizeof(str));
     jerry_string_to_utf8_char_buffer(cls_type_value, (jerry_char_t*)str, sizeof(str));
-    jerry_get_object_native_pointer(v, &p, NULL);
+    jerry_get_object_native_pointer(v, &p, native_info_p);
     jerry_release_value(cls_type);
     jerry_release_value(cls_type_value);
 
     return p;
   }
+}
+
+static inline void* jsvalue_get_pointer(JSContext* ctx, jsvalue_t v, const char* type) {
+  return jsvalue_get_object(ctx, v, type, NULL);
 }
 
 static inline int32_t jsvalue_get_int_value(JSContext* ctx, jsvalue_t v) {
