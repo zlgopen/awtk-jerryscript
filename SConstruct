@@ -86,5 +86,5 @@ else:
 
 SConscript([
   '3rd/jerryscript/SConscript', 
-  'src/jerryscript/SConscript']);
+  'src/SConscript']);
 
