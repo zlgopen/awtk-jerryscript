@@ -14643,6 +14643,26 @@ jsvalue_t wrap_combo_box_set_value(
   return jret;
 }
 
+jsvalue_t wrap_combo_box_set_item_height(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    jsvalue_t jret = JS_NULL;
+  if(argc >= 2) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+  uint32_t item_height = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
+  ret = (ret_t)combo_box_set_item_height(widget, item_height);
+
+  jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_combo_box_append_option(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -14799,6 +14819,21 @@ jsvalue_t wrap_combo_box_t_get_prop_options(
   return jret;
 }
 
+jsvalue_t wrap_combo_box_t_get_prop_item_height(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    jsvalue_t jret = JS_NULL;
+  combo_box_t* obj = (combo_box_t*)jsvalue_get_pointer(ctx, argv[0], "combo_box_t*");
+
+  jret = jsvalue_create_int(ctx, obj->item_height);
+  return jret;
+}
+
 ret_t combo_box_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"combo_box_create", wrap_combo_box_create);
   jerryx_handler_register_global((const jerry_char_t*)"combo_box_cast", wrap_combo_box_cast);
@@ -14808,6 +14843,7 @@ ret_t combo_box_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"combo_box_set_selected_index", wrap_combo_box_set_selected_index);
   jerryx_handler_register_global((const jerry_char_t*)"combo_box_set_localize_options", wrap_combo_box_set_localize_options);
   jerryx_handler_register_global((const jerry_char_t*)"combo_box_set_value", wrap_combo_box_set_value);
+  jerryx_handler_register_global((const jerry_char_t*)"combo_box_set_item_height", wrap_combo_box_set_item_height);
   jerryx_handler_register_global((const jerry_char_t*)"combo_box_append_option", wrap_combo_box_append_option);
   jerryx_handler_register_global((const jerry_char_t*)"combo_box_set_options", wrap_combo_box_set_options);
   jerryx_handler_register_global((const jerry_char_t*)"combo_box_get_value", wrap_combo_box_get_value);
@@ -14817,6 +14853,7 @@ ret_t combo_box_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"combo_box_t_get_prop_value", wrap_combo_box_t_get_prop_value);
   jerryx_handler_register_global((const jerry_char_t*)"combo_box_t_get_prop_localize_options", wrap_combo_box_t_get_prop_localize_options);
   jerryx_handler_register_global((const jerry_char_t*)"combo_box_t_get_prop_options", wrap_combo_box_t_get_prop_options);
+  jerryx_handler_register_global((const jerry_char_t*)"combo_box_t_get_prop_item_height", wrap_combo_box_t_get_prop_item_height);
 
  return RET_OK;
 }
