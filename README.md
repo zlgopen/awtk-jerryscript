@@ -15,8 +15,8 @@ cd awtk; scons; cd -
 2. 获取 awtk-jerryscript 并编译
 
 ```
-git clone https://github.com/zlgopen/awtk-js.git
-cd awtk-js
+git clone https://github.com/zlgopen/awtk-jerryscript.git
+cd awtk-jerryscript
 git clone https://github.com/jerryscript-project/jerryscript.git 3rd/jerryscript/jerryscript
 scons
 ```
