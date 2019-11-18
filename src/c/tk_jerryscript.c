@@ -11729,6 +11729,16 @@ ret_t rect_t_init(JSContext *ctx) {
  return RET_OK;
 }
 
+ret_t pointf_t_init(JSContext *ctx) {
+
+ return RET_OK;
+}
+
+ret_t point_t_init(JSContext *ctx) {
+
+ return RET_OK;
+}
+
 ret_t path_t_init(JSContext *ctx) {
 
  return RET_OK;
@@ -26437,6 +26447,8 @@ ret_t awtk_js_init(JSContext *ctx) {
   timer_manager_t_init(ctx);
   time_now_t_init(ctx);
   rect_t_init(ctx);
+  pointf_t_init(ctx);
+  point_t_init(ctx);
   path_t_init(ctx);
   named_value_t_init(ctx);
   MIME_TYPE_init(ctx);
