@@ -4932,6 +4932,17 @@ jsvalue_t get_TK_KEY_BACK(
     return jsvalue_create_int(ctx, TK_KEY_BACK);
 }
 
+jsvalue_t get_TK_KEY_CANCEL(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    return jsvalue_create_int(ctx, TK_KEY_CANCEL);
+}
+
 ret_t key_code_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_RETURN", get_TK_KEY_RETURN);
   jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_ESCAPE", get_TK_KEY_ESCAPE);
@@ -5063,6 +5074,7 @@ ret_t key_code_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_MENU", get_TK_KEY_MENU);
   jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_COMMAND", get_TK_KEY_COMMAND);
   jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_BACK", get_TK_KEY_BACK);
+  jerryx_handler_register_global((const jerry_char_t*)"TK_KEY_CANCEL", get_TK_KEY_CANCEL);
 
  return RET_OK;
 }
@@ -7908,6 +7920,17 @@ jsvalue_t get_WIDGET_PROP_AUTO_FIX(
     return jsvalue_create_string(ctx, WIDGET_PROP_AUTO_FIX);
 }
 
+jsvalue_t get_WIDGET_PROP_SELECT_NONE_WHEN_FOCUSED(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    return jsvalue_create_string(ctx, WIDGET_PROP_SELECT_NONE_WHEN_FOCUSED);
+}
+
 jsvalue_t get_WIDGET_PROP_X_MIN(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -7961,6 +7984,17 @@ jsvalue_t get_WIDGET_PROP_MAX(
 
     void* ctx = NULL;
     return jsvalue_create_string(ctx, WIDGET_PROP_MAX);
+}
+
+jsvalue_t get_WIDGET_PROP_GRAB_KEYS(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    return jsvalue_create_string(ctx, WIDGET_PROP_GRAB_KEYS);
 }
 
 jsvalue_t get_WIDGET_PROP_ROW(
@@ -8502,6 +8536,17 @@ jsvalue_t get_WIDGET_PROP_WITH_FOCUS_STATE(
     return jsvalue_create_string(ctx, WIDGET_PROP_WITH_FOCUS_STATE);
 }
 
+jsvalue_t get_WIDGET_PROP_MOVE_FOCUS_PREV_KEY(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    return jsvalue_create_string(ctx, WIDGET_PROP_MOVE_FOCUS_PREV_KEY);
+}
+
 jsvalue_t get_WIDGET_PROP_MOVE_FOCUS_NEXT_KEY(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -8513,7 +8558,7 @@ jsvalue_t get_WIDGET_PROP_MOVE_FOCUS_NEXT_KEY(
     return jsvalue_create_string(ctx, WIDGET_PROP_MOVE_FOCUS_NEXT_KEY);
 }
 
-jsvalue_t get_WIDGET_PROP_MOVE_FOCUS_PREV_KEY(
+jsvalue_t get_WIDGET_PROP_MOVE_FOCUS_UP_KEY(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
     const jerry_value_t argv[], 
@@ -8521,7 +8566,40 @@ jsvalue_t get_WIDGET_PROP_MOVE_FOCUS_PREV_KEY(
   ) {
 
     void* ctx = NULL;
-    return jsvalue_create_string(ctx, WIDGET_PROP_MOVE_FOCUS_PREV_KEY);
+    return jsvalue_create_string(ctx, WIDGET_PROP_MOVE_FOCUS_UP_KEY);
+}
+
+jsvalue_t get_WIDGET_PROP_MOVE_FOCUS_DOWN_KEY(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    return jsvalue_create_string(ctx, WIDGET_PROP_MOVE_FOCUS_DOWN_KEY);
+}
+
+jsvalue_t get_WIDGET_PROP_MOVE_FOCUS_LEFT_KEY(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    return jsvalue_create_string(ctx, WIDGET_PROP_MOVE_FOCUS_LEFT_KEY);
+}
+
+jsvalue_t get_WIDGET_PROP_MOVE_FOCUS_RIGHT_KEY(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    return jsvalue_create_string(ctx, WIDGET_PROP_MOVE_FOCUS_RIGHT_KEY);
 }
 
 ret_t widget_prop_t_init(JSContext *ctx) {
@@ -8586,11 +8664,13 @@ ret_t widget_prop_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_AUTO_PLAY", get_WIDGET_PROP_AUTO_PLAY);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_LOOP", get_WIDGET_PROP_LOOP);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_AUTO_FIX", get_WIDGET_PROP_AUTO_FIX);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_SELECT_NONE_WHEN_FOCUSED", get_WIDGET_PROP_SELECT_NONE_WHEN_FOCUSED);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_X_MIN", get_WIDGET_PROP_X_MIN);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_X_MAX", get_WIDGET_PROP_X_MAX);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_Y_MIN", get_WIDGET_PROP_Y_MIN);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_Y_MAX", get_WIDGET_PROP_Y_MAX);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MAX", get_WIDGET_PROP_MAX);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_GRAB_KEYS", get_WIDGET_PROP_GRAB_KEYS);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ROW", get_WIDGET_PROP_ROW);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_STATE_FOR_STYLE", get_WIDGET_PROP_STATE_FOR_STYLE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_THEME", get_WIDGET_PROP_THEME);
@@ -8640,8 +8720,12 @@ ret_t widget_prop_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_FOCUS", get_WIDGET_PROP_FOCUS);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_FOCUSABLE", get_WIDGET_PROP_FOCUSABLE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_WITH_FOCUS_STATE", get_WIDGET_PROP_WITH_FOCUS_STATE);
-  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MOVE_FOCUS_NEXT_KEY", get_WIDGET_PROP_MOVE_FOCUS_NEXT_KEY);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MOVE_FOCUS_PREV_KEY", get_WIDGET_PROP_MOVE_FOCUS_PREV_KEY);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MOVE_FOCUS_NEXT_KEY", get_WIDGET_PROP_MOVE_FOCUS_NEXT_KEY);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MOVE_FOCUS_UP_KEY", get_WIDGET_PROP_MOVE_FOCUS_UP_KEY);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MOVE_FOCUS_DOWN_KEY", get_WIDGET_PROP_MOVE_FOCUS_DOWN_KEY);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MOVE_FOCUS_LEFT_KEY", get_WIDGET_PROP_MOVE_FOCUS_LEFT_KEY);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MOVE_FOCUS_RIGHT_KEY", get_WIDGET_PROP_MOVE_FOCUS_RIGHT_KEY);
 
  return RET_OK;
 }
@@ -25464,6 +25548,26 @@ jsvalue_t wrap_edit_set_auto_fix(
   return jret;
 }
 
+jsvalue_t wrap_edit_set_select_none_when_focused(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    jsvalue_t jret = JS_NULL;
+  if(argc >= 2) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+  bool_t select_none_when_focused = (bool_t)jsvalue_get_boolean_value(ctx, argv[1]);
+  ret = (ret_t)edit_set_select_none_when_focused(widget, select_none_when_focused);
+
+  jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_edit_set_input_type(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -25610,6 +25714,21 @@ jsvalue_t wrap_edit_t_get_prop_auto_fix(
   return jret;
 }
 
+jsvalue_t wrap_edit_t_get_prop_select_none_when_focused(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    jsvalue_t jret = JS_NULL;
+  edit_t* obj = (edit_t*)jsvalue_get_pointer(ctx, argv[0], "edit_t*");
+
+  jret = jsvalue_create_bool(ctx, obj->select_none_when_focused);
+  return jret;
+}
+
 jsvalue_t wrap_edit_t_get_prop_tips(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -25697,6 +25816,7 @@ ret_t edit_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"edit_set_float_limit", wrap_edit_set_float_limit);
   jerryx_handler_register_global((const jerry_char_t*)"edit_set_readonly", wrap_edit_set_readonly);
   jerryx_handler_register_global((const jerry_char_t*)"edit_set_auto_fix", wrap_edit_set_auto_fix);
+  jerryx_handler_register_global((const jerry_char_t*)"edit_set_select_none_when_focused", wrap_edit_set_select_none_when_focused);
   jerryx_handler_register_global((const jerry_char_t*)"edit_set_input_type", wrap_edit_set_input_type);
   jerryx_handler_register_global((const jerry_char_t*)"edit_set_input_tips", wrap_edit_set_input_tips);
   jerryx_handler_register_global((const jerry_char_t*)"edit_set_password_visible", wrap_edit_set_password_visible);
@@ -25705,6 +25825,7 @@ ret_t edit_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_readonly", wrap_edit_t_get_prop_readonly);
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_password_visible", wrap_edit_t_get_prop_password_visible);
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_auto_fix", wrap_edit_t_get_prop_auto_fix);
+  jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_select_none_when_focused", wrap_edit_t_get_prop_select_none_when_focused);
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_tips", wrap_edit_t_get_prop_tips);
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_input_type", wrap_edit_t_get_prop_input_type);
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_min", wrap_edit_t_get_prop_min);
