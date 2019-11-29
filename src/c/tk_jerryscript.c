@@ -10336,27 +10336,6 @@ jsvalue_t wrap_widget_pause_animator(
   return jret;
 }
 
-jsvalue_t wrap_widget_find_animator(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 2) {
-  widget_animator_t* ret = NULL;
-  widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
-  char* name = (char*)jsvalue_get_utf8_string(ctx, argv[1]);
-  ret = (widget_animator_t*)widget_find_animator(widget, name);
-  TKMEM_FREE(name);
-
-  jret = jsvalue_create_pointer(ctx, ret, "widget_animator_t*");
-  }
-  return jret;
-}
-
 jsvalue_t wrap_widget_stop_animator(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -10990,6 +10969,25 @@ jsvalue_t wrap_widget_destroy(
   return jret;
 }
 
+jsvalue_t wrap_widget_unref(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  ) {
+
+    void* ctx = NULL;
+    jsvalue_t jret = JS_NULL;
+  if(argc >= 1) {
+  ret_t ret = 0;
+  widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+  ret = (ret_t)widget_unref(widget);
+
+  jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_widget_layout(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -11449,7 +11447,6 @@ ret_t widget_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_start_animator", wrap_widget_start_animator);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_animator_time_scale", wrap_widget_set_animator_time_scale);
   jerryx_handler_register_global((const jerry_char_t*)"widget_pause_animator", wrap_widget_pause_animator);
-  jerryx_handler_register_global((const jerry_char_t*)"widget_find_animator", wrap_widget_find_animator);
   jerryx_handler_register_global((const jerry_char_t*)"widget_stop_animator", wrap_widget_stop_animator);
   jerryx_handler_register_global((const jerry_char_t*)"widget_destroy_animator", wrap_widget_destroy_animator);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_enable", wrap_widget_set_enable);
@@ -11484,6 +11481,7 @@ ret_t widget_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_equal", wrap_widget_equal);
   jerryx_handler_register_global((const jerry_char_t*)"widget_cast", wrap_widget_cast);
   jerryx_handler_register_global((const jerry_char_t*)"widget_destroy", wrap_widget_destroy);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_unref", wrap_widget_unref);
   jerryx_handler_register_global((const jerry_char_t*)"widget_layout", wrap_widget_layout);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_self_layout", wrap_widget_set_self_layout);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_children_layout", wrap_widget_set_children_layout);
