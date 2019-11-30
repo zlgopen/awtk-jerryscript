@@ -2638,45 +2638,6 @@ jsvalue_t wrap_value_set_float(
   return jret;
 }
 
-jsvalue_t wrap_value_float(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 1) {
-  float_t ret = 0;
-  value_t* v = (value_t*)jsvalue_get_pointer(ctx, argv[0], "value_t*");
-  ret = (float_t)value_float(v);
-
-  jret = jsvalue_create_number(ctx, ret);
-  }
-  return jret;
-}
-
-jsvalue_t wrap_value_set_float32(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 2) {
-  value_t* ret = NULL;
-  value_t* v = (value_t*)jsvalue_get_pointer(ctx, argv[0], "value_t*");
-  float value = (float)jsvalue_get_number_value(ctx, argv[1]);
-  ret = (value_t*)value_set_float32(v, value);
-
-  jret = jsvalue_create_pointer(ctx, ret, "value_t*");
-  }
-  return jret;
-}
-
 jsvalue_t wrap_value_float32(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -2790,25 +2751,6 @@ jsvalue_t wrap_value_is_null(
   ret = (bool_t)value_is_null(value);
 
   jret = jsvalue_create_bool(ctx, ret);
-  }
-  return jret;
-}
-
-jsvalue_t wrap_value_int(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 1) {
-  int ret = 0;
-  value_t* v = (value_t*)jsvalue_get_pointer(ctx, argv[0], "value_t*");
-  ret = (int)value_int(v);
-
-  jret = jsvalue_create_int(ctx, ret);
   }
   return jret;
 }
@@ -2986,15 +2928,12 @@ ret_t value_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"value_set_uint64", wrap_value_set_uint64);
   jerryx_handler_register_global((const jerry_char_t*)"value_uint64", wrap_value_uint64);
   jerryx_handler_register_global((const jerry_char_t*)"value_set_float", wrap_value_set_float);
-  jerryx_handler_register_global((const jerry_char_t*)"value_float", wrap_value_float);
-  jerryx_handler_register_global((const jerry_char_t*)"value_set_float32", wrap_value_set_float32);
   jerryx_handler_register_global((const jerry_char_t*)"value_float32", wrap_value_float32);
   jerryx_handler_register_global((const jerry_char_t*)"value_set_double", wrap_value_set_double);
   jerryx_handler_register_global((const jerry_char_t*)"value_double", wrap_value_double);
   jerryx_handler_register_global((const jerry_char_t*)"value_dup_str", wrap_value_dup_str);
   jerryx_handler_register_global((const jerry_char_t*)"value_str", wrap_value_str);
   jerryx_handler_register_global((const jerry_char_t*)"value_is_null", wrap_value_is_null);
-  jerryx_handler_register_global((const jerry_char_t*)"value_int", wrap_value_int);
   jerryx_handler_register_global((const jerry_char_t*)"value_set_int", wrap_value_set_int);
   jerryx_handler_register_global((const jerry_char_t*)"value_set_object", wrap_value_set_object);
   jerryx_handler_register_global((const jerry_char_t*)"value_object", wrap_value_object);
@@ -22972,25 +22911,6 @@ ret_t label_t_init(JSContext *ctx) {
  return RET_OK;
 }
 
-jsvalue_t wrap_style_mutable_get_name(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 1) {
-  const char* ret = NULL;
-  style_t* s = (style_t*)jsvalue_get_pointer(ctx, argv[0], "style_t*");
-  ret = (const char*)style_mutable_get_name(s);
-
-  jret = jsvalue_create_string(ctx, ret);
-  }
-  return jret;
-}
-
 jsvalue_t wrap_style_mutable_set_name(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -23091,7 +23011,6 @@ jsvalue_t wrap_style_mutable_t_get_prop_name(
 }
 
 ret_t style_mutable_t_init(JSContext *ctx) {
-  jerryx_handler_register_global((const jerry_char_t*)"style_mutable_get_name", wrap_style_mutable_get_name);
   jerryx_handler_register_global((const jerry_char_t*)"style_mutable_set_name", wrap_style_mutable_set_name);
   jerryx_handler_register_global((const jerry_char_t*)"style_mutable_set_int", wrap_style_mutable_set_int);
   jerryx_handler_register_global((const jerry_char_t*)"style_mutable_cast", wrap_style_mutable_cast);
