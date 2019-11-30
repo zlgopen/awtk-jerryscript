@@ -2775,25 +2775,6 @@ jsvalue_t wrap_value_str(
   return jret;
 }
 
-jsvalue_t wrap_value_wstr(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 1) {
-  const wchar_t* ret = NULL;
-  value_t* v = (value_t*)jsvalue_get_pointer(ctx, argv[0], "value_t*");
-  ret = (const wchar_t*)value_wstr(v);
-
-  jret = jsvalue_create_string_from_wstring(ctx, ret);
-  }
-  return jret;
-}
-
 jsvalue_t wrap_value_is_null(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -2930,127 +2911,6 @@ jsvalue_t wrap_value_token(
   return jret;
 }
 
-jsvalue_t wrap_value_set_sized_str(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 3) {
-  value_t* ret = NULL;
-  value_t* v = (value_t*)jsvalue_get_pointer(ctx, argv[0], "value_t*");
-  char* str = (char*)jsvalue_get_utf8_string(ctx, argv[1]);
-  uint32_t size = (uint32_t)jsvalue_get_int_value(ctx, argv[2]);
-  ret = (value_t*)value_set_sized_str(v, str, size);
-  TKMEM_FREE(str);
-
-  jret = jsvalue_create_pointer(ctx, ret, "value_t*");
-  }
-  return jret;
-}
-
-jsvalue_t wrap_value_sized_str(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 1) {
-  sized_str_t* ret = NULL;
-  value_t* v = (value_t*)jsvalue_get_pointer(ctx, argv[0], "value_t*");
-  ret = (sized_str_t*)value_sized_str(v);
-
-  jret = jsvalue_create_pointer(ctx, ret, "sized_str_t*");
-  }
-  return jret;
-}
-
-jsvalue_t wrap_value_set_binary_data(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 3) {
-  value_t* ret = NULL;
-  value_t* v = (value_t*)jsvalue_get_pointer(ctx, argv[0], "value_t*");
-  void* value = (void*)jsvalue_get_pointer(ctx, argv[1], "void*");
-  uint32_t size = (uint32_t)jsvalue_get_int_value(ctx, argv[2]);
-  ret = (value_t*)value_set_binary_data(v, value, size);
-
-  jret = jsvalue_create_pointer(ctx, ret, "value_t*");
-  }
-  return jret;
-}
-
-jsvalue_t wrap_value_binary_data(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 1) {
-  binary_data_t* ret = NULL;
-  value_t* v = (value_t*)jsvalue_get_pointer(ctx, argv[0], "value_t*");
-  ret = (binary_data_t*)value_binary_data(v);
-
-  jret = jsvalue_create_pointer(ctx, ret, "binary_data_t*");
-  }
-  return jret;
-}
-
-jsvalue_t wrap_value_set_ubjson(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 3) {
-  value_t* ret = NULL;
-  value_t* v = (value_t*)jsvalue_get_pointer(ctx, argv[0], "value_t*");
-  void* value = (void*)jsvalue_get_pointer(ctx, argv[1], "void*");
-  uint32_t size = (uint32_t)jsvalue_get_int_value(ctx, argv[2]);
-  ret = (value_t*)value_set_ubjson(v, value, size);
-
-  jret = jsvalue_create_pointer(ctx, ret, "value_t*");
-  }
-  return jret;
-}
-
-jsvalue_t wrap_value_ubjson(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  ) {
-
-    void* ctx = NULL;
-    jsvalue_t jret = JS_NULL;
-  if(argc >= 1) {
-  binary_data_t* ret = NULL;
-  value_t* v = (value_t*)jsvalue_get_pointer(ctx, argv[0], "value_t*");
-  ret = (binary_data_t*)value_ubjson(v);
-
-  jret = jsvalue_create_pointer(ctx, ret, "binary_data_t*");
-  }
-  return jret;
-}
-
 jsvalue_t wrap_value_create(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -3133,7 +2993,6 @@ ret_t value_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"value_double", wrap_value_double);
   jerryx_handler_register_global((const jerry_char_t*)"value_dup_str", wrap_value_dup_str);
   jerryx_handler_register_global((const jerry_char_t*)"value_str", wrap_value_str);
-  jerryx_handler_register_global((const jerry_char_t*)"value_wstr", wrap_value_wstr);
   jerryx_handler_register_global((const jerry_char_t*)"value_is_null", wrap_value_is_null);
   jerryx_handler_register_global((const jerry_char_t*)"value_int", wrap_value_int);
   jerryx_handler_register_global((const jerry_char_t*)"value_set_int", wrap_value_set_int);
@@ -3141,12 +3000,6 @@ ret_t value_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"value_object", wrap_value_object);
   jerryx_handler_register_global((const jerry_char_t*)"value_set_token", wrap_value_set_token);
   jerryx_handler_register_global((const jerry_char_t*)"value_token", wrap_value_token);
-  jerryx_handler_register_global((const jerry_char_t*)"value_set_sized_str", wrap_value_set_sized_str);
-  jerryx_handler_register_global((const jerry_char_t*)"value_sized_str", wrap_value_sized_str);
-  jerryx_handler_register_global((const jerry_char_t*)"value_set_binary_data", wrap_value_set_binary_data);
-  jerryx_handler_register_global((const jerry_char_t*)"value_binary_data", wrap_value_binary_data);
-  jerryx_handler_register_global((const jerry_char_t*)"value_set_ubjson", wrap_value_set_ubjson);
-  jerryx_handler_register_global((const jerry_char_t*)"value_ubjson", wrap_value_ubjson);
   jerryx_handler_register_global((const jerry_char_t*)"value_create", wrap_value_create);
   jerryx_handler_register_global((const jerry_char_t*)"value_reset", wrap_value_reset);
   jerryx_handler_register_global((const jerry_char_t*)"value_cast", wrap_value_cast);
@@ -10209,7 +10062,7 @@ jsvalue_t wrap_widget_set_theme(
   return jret;
 }
 
-jsvalue_t wrap_widget_set_cursor(
+jsvalue_t wrap_widget_set_pointer_cursor(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
     const jerry_value_t argv[], 
@@ -10222,7 +10075,7 @@ jsvalue_t wrap_widget_set_cursor(
   ret_t ret = 0;
   widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
   char* cursor = (char*)jsvalue_get_utf8_string(ctx, argv[1]);
-  ret = (ret_t)widget_set_cursor(widget, cursor);
+  ret = (ret_t)widget_set_pointer_cursor(widget, cursor);
   TKMEM_FREE(cursor);
 
   jret = jsvalue_create_int(ctx, ret);
@@ -11441,7 +11294,7 @@ ret_t widget_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_get_text", wrap_widget_get_text);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_name", wrap_widget_set_name);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_theme", wrap_widget_set_theme);
-  jerryx_handler_register_global((const jerry_char_t*)"widget_set_cursor", wrap_widget_set_cursor);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_set_pointer_cursor", wrap_widget_set_pointer_cursor);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_animation", wrap_widget_set_animation);
   jerryx_handler_register_global((const jerry_char_t*)"widget_create_animator", wrap_widget_create_animator);
   jerryx_handler_register_global((const jerry_char_t*)"widget_start_animator", wrap_widget_start_animator);
