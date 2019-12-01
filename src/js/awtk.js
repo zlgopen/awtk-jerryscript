@@ -1847,8 +1847,8 @@ var TEvent = /** @class */ (function () {
     TEvent.cast = function (event) {
         return new TEvent(event_cast(event != null ? (event.nativeObj || event) : null));
     };
-    TEvent.create = function (type, target) {
-        return new TEvent(event_create(type, target));
+    TEvent.create = function (type) {
+        return new TEvent(event_create(type));
     };
     TEvent.prototype.destroy = function () {
         return event_destroy(this.nativeObj);
@@ -3461,9 +3461,6 @@ var TObject = /** @class */ (function (_super) {
     };
     TObject.prototype.setPropStr = function (name, value) {
         return object_set_prop_str(this.nativeObj, name, value);
-    };
-    TObject.prototype.setPropPointer = function (name, value) {
-        return object_set_prop_pointer(this.nativeObj, name, value);
     };
     TObject.prototype.setPropObject = function (name, value) {
         return object_set_prop_object(this.nativeObj, name, value != null ? (value.nativeObj || value) : null);
