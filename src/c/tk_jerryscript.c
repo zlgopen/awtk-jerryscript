@@ -27,7 +27,6 @@
 #include "tkc/types_def.h"
 #include "tkc/timer_manager.h"
 #include "tkc/time_now.h"
-#include "ext_widgets/ext_widgets.h"
 #include "tkc/rect.h"
 #include "tkc/path.h"
 #include "tkc/named_value.h"
@@ -4761,7 +4760,6 @@ ret_t locale_info_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"locale_info", wrap_locale_info);
   jerryx_handler_register_global((const jerry_char_t*)"locale_info_tr", wrap_locale_info_tr);
   jerryx_handler_register_global((const jerry_char_t*)"locale_info_change", wrap_locale_info_change);
-  jerryx_handler_register_global((const jerry_char_t*)"locale_info_on", wrap_locale_info_on);
   jerryx_handler_register_global((const jerry_char_t*)"locale_info_off", wrap_locale_info_off);
 
  return RET_OK;
@@ -5437,6 +5435,44 @@ ret_t align_h_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"ALIGN_H_CENTER", get_ALIGN_H_CENTER);
   jerryx_handler_register_global((const jerry_char_t*)"ALIGN_H_LEFT", get_ALIGN_H_LEFT);
   jerryx_handler_register_global((const jerry_char_t*)"ALIGN_H_RIGHT", get_ALIGN_H_RIGHT);
+
+ return RET_OK;
+}
+
+jsvalue_t get_APP_MOBILE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, APP_MOBILE);
+}
+
+jsvalue_t get_APP_SIMULATOR(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, APP_SIMULATOR);
+}
+
+jsvalue_t get_APP_DESKTOP(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, APP_DESKTOP);
+}
+
+ret_t app_type_t_init(JSContext *ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"APP_MOBILE", get_APP_MOBILE);
+  jerryx_handler_register_global((const jerry_char_t*)"APP_SIMULATOR", get_APP_SIMULATOR);
+  jerryx_handler_register_global((const jerry_char_t*)"APP_DESKTOP", get_APP_DESKTOP);
 
  return RET_OK;
 }
@@ -10657,7 +10693,6 @@ ret_t widget_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_visible_only", wrap_widget_set_visible_only);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_sensitive", wrap_widget_set_sensitive);
   jerryx_handler_register_global((const jerry_char_t*)"widget_on", wrap_widget_on);
-  jerryx_handler_register_global((const jerry_char_t*)"widget_on_with_tag", wrap_widget_on_with_tag);
   jerryx_handler_register_global((const jerry_char_t*)"widget_off", wrap_widget_off);
   jerryx_handler_register_global((const jerry_char_t*)"widget_invalidate_force", wrap_widget_invalidate_force);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_prop_str", wrap_widget_set_prop_str);
@@ -10990,23 +11025,6 @@ ret_t time_now_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"time_now_ms", wrap_time_now_ms);
 
  return RET_OK;
-}
-
-jsvalue_t wrap_tk_ext_widgets_init(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  )  {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if(argc >= 0) {
-  ret_t ret = 0;
-  ret = (ret_t)tk_ext_widgets_init();
-
-  jret = jsvalue_create_int(ctx, ret);
-  }
-  return jret;
 }
 
 jsvalue_t wrap_rect_create(
@@ -12799,7 +12817,6 @@ ret_t emitter_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"emitter_dispatch", wrap_emitter_dispatch);
   jerryx_handler_register_global((const jerry_char_t*)"emitter_dispatch_simple_event", wrap_emitter_dispatch_simple_event);
   jerryx_handler_register_global((const jerry_char_t*)"emitter_on", wrap_emitter_on);
-  jerryx_handler_register_global((const jerry_char_t*)"emitter_on_with_tag", wrap_emitter_on_with_tag);
   jerryx_handler_register_global((const jerry_char_t*)"emitter_off", wrap_emitter_off);
   jerryx_handler_register_global((const jerry_char_t*)"emitter_enable", wrap_emitter_enable);
   jerryx_handler_register_global((const jerry_char_t*)"emitter_disable", wrap_emitter_disable);
@@ -19022,7 +19039,6 @@ ret_t object_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"object_set_prop_bool", wrap_object_set_prop_bool);
   jerryx_handler_register_global((const jerry_char_t*)"object_set_prop_float", wrap_object_set_prop_float);
   jerryx_handler_register_global((const jerry_char_t*)"object_copy_prop", wrap_object_copy_prop);
-  jerryx_handler_register_global((const jerry_char_t*)"object_foreach_prop", wrap_object_foreach_prop);
   jerryx_handler_register_global((const jerry_char_t*)"object_has_prop", wrap_object_has_prop);
   jerryx_handler_register_global((const jerry_char_t*)"object_eval", wrap_object_eval);
   jerryx_handler_register_global((const jerry_char_t*)"object_can_exec", wrap_object_can_exec);
@@ -25212,6 +25228,7 @@ ret_t awtk_js_init(JSContext *ctx) {
   timer_t_init(ctx);
   align_v_t_init(ctx);
   align_h_t_init(ctx);
+  app_type_t_init(ctx);
   bitmap_format_t_init(ctx);
   bitmap_flag_t_init(ctx);
   vgcanvas_t_init(ctx);
