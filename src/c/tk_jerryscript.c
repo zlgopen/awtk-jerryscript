@@ -1965,6 +1965,86 @@ jsvalue_t get_EVT_USER_START(
   return jsvalue_create_int(ctx, EVT_USER_START);
 }
 
+jsvalue_t get_EVT_NONE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_NONE);
+}
+
+jsvalue_t get_EVT_PROP_WILL_CHANGE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_PROP_WILL_CHANGE);
+}
+
+jsvalue_t get_EVT_PROP_CHANGED(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_PROP_CHANGED);
+}
+
+jsvalue_t get_EVT_ITEMS_WILL_CHANGE(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_ITEMS_WILL_CHANGE);
+}
+
+jsvalue_t get_EVT_ITEMS_CHANGED(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_ITEMS_CHANGED);
+}
+
+jsvalue_t get_EVT_PROPS_CHANGED(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_PROPS_CHANGED);
+}
+
+jsvalue_t get_EVT_PROGRESS(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_PROGRESS);
+}
+
+jsvalue_t get_EVT_DESTROY(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_DESTROY);
+}
+
 ret_t event_type_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"EVT_POINTER_DOWN", get_EVT_POINTER_DOWN);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_POINTER_DOWN_BEFORE_CHILDREN", get_EVT_POINTER_DOWN_BEFORE_CHILDREN);
@@ -2031,6 +2111,14 @@ ret_t event_type_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"EVT_THEME_CHANGED", get_EVT_THEME_CHANGED);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_REQ_START", get_EVT_REQ_START);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_USER_START", get_EVT_USER_START);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_NONE", get_EVT_NONE);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_PROP_WILL_CHANGE", get_EVT_PROP_WILL_CHANGE);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_PROP_CHANGED", get_EVT_PROP_CHANGED);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_ITEMS_WILL_CHANGE", get_EVT_ITEMS_WILL_CHANGE);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_ITEMS_CHANGED", get_EVT_ITEMS_CHANGED);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_PROPS_CHANGED", get_EVT_PROPS_CHANGED);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_PROGRESS", get_EVT_PROGRESS);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_DESTROY", get_EVT_DESTROY);
 
  return RET_OK;
 }
@@ -12573,99 +12661,6 @@ ret_t event_t_init(JSContext *ctx) {
  return RET_OK;
 }
 
-jsvalue_t get_EVT_NONE(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  )  {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, EVT_NONE);
-}
-
-jsvalue_t get_EVT_PROP_WILL_CHANGE(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  )  {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, EVT_PROP_WILL_CHANGE);
-}
-
-jsvalue_t get_EVT_PROP_CHANGED(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  )  {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, EVT_PROP_CHANGED);
-}
-
-jsvalue_t get_EVT_ITEMS_WILL_CHANGE(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  )  {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, EVT_ITEMS_WILL_CHANGE);
-}
-
-jsvalue_t get_EVT_ITEMS_CHANGED(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  )  {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, EVT_ITEMS_CHANGED);
-}
-
-jsvalue_t get_EVT_PROPS_CHANGED(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  )  {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, EVT_PROPS_CHANGED);
-}
-
-jsvalue_t get_EVT_PROGRESS(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  )  {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, EVT_PROGRESS);
-}
-
-jsvalue_t get_EVT_DESTROY(
-    const jerry_value_t func_obj_val, 
-    const jerry_value_t this_p, 
-    const jerry_value_t argv[], 
-    const jerry_length_t argc 
-  )  {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, EVT_DESTROY);
-}
-
-ret_t event_base_type_t_init(JSContext *ctx) {
-  jerryx_handler_register_global((const jerry_char_t*)"EVT_NONE", get_EVT_NONE);
-  jerryx_handler_register_global((const jerry_char_t*)"EVT_PROP_WILL_CHANGE", get_EVT_PROP_WILL_CHANGE);
-  jerryx_handler_register_global((const jerry_char_t*)"EVT_PROP_CHANGED", get_EVT_PROP_CHANGED);
-  jerryx_handler_register_global((const jerry_char_t*)"EVT_ITEMS_WILL_CHANGE", get_EVT_ITEMS_WILL_CHANGE);
-  jerryx_handler_register_global((const jerry_char_t*)"EVT_ITEMS_CHANGED", get_EVT_ITEMS_CHANGED);
-  jerryx_handler_register_global((const jerry_char_t*)"EVT_PROPS_CHANGED", get_EVT_PROPS_CHANGED);
-  jerryx_handler_register_global((const jerry_char_t*)"EVT_PROGRESS", get_EVT_PROGRESS);
-  jerryx_handler_register_global((const jerry_char_t*)"EVT_DESTROY", get_EVT_DESTROY);
-
- return RET_OK;
-}
-
 jsvalue_t wrap_emitter_create(
     const jerry_value_t func_obj_val, 
     const jerry_value_t this_p, 
@@ -12713,7 +12708,7 @@ jsvalue_t wrap_emitter_dispatch_simple_event(
   if(argc >= 2) {
   ret_t ret = 0;
   emitter_t* emitter = (emitter_t*)jsvalue_get_pointer(ctx, argv[0], "emitter_t*");
-  uint32_t type = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
+  event_type_t type = (event_type_t)jsvalue_get_number_value(ctx, argv[1]);
   ret = (ret_t)emitter_dispatch_simple_event(emitter, type);
 
   jret = jsvalue_create_int(ctx, ret);
@@ -25251,7 +25246,6 @@ ret_t awtk_js_init(JSContext *ctx) {
   indicator_default_paint_t_init(ctx);
   fs_file_t_init(ctx);
   event_t_init(ctx);
-  event_base_type_t_init(ctx);
   emitter_t_init(ctx);
   easing_type_t_init(ctx);
   date_time_t_init(ctx);
