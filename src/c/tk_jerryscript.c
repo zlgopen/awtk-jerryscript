@@ -3005,6 +3005,16 @@ jsvalue_t get_INPUT_CUSTOM(
   return jsvalue_create_int(ctx, INPUT_CUSTOM);
 }
 
+jsvalue_t get_INPUT_CUSTOM_PASSWORD(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, INPUT_CUSTOM_PASSWORD);
+}
+
 ret_t input_type_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_TEXT", get_INPUT_TEXT);
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_INT", get_INPUT_INT);
@@ -3016,6 +3026,7 @@ ret_t input_type_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_PASSWORD", get_INPUT_PASSWORD);
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_PHONE", get_INPUT_PHONE);
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_CUSTOM", get_INPUT_CUSTOM);
+  jerryx_handler_register_global((const jerry_char_t*)"INPUT_CUSTOM_PASSWORD", get_INPUT_CUSTOM_PASSWORD);
 
  return RET_OK;
 }
@@ -17781,6 +17792,48 @@ jsvalue_t wrap_slider_t_get_prop_bar_size(
   return jret;
 }
 
+jsvalue_t wrap_slider_t_get_prop_dragger_size(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  slider_t* obj = (slider_t*)jsvalue_get_pointer(ctx, argv[0], "slider_t*");
+
+  jret = jsvalue_create_int(ctx, obj->dragger_size);
+  return jret;
+}
+
+jsvalue_t wrap_slider_t_get_prop_dragger_adapt_to_icon(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  slider_t* obj = (slider_t*)jsvalue_get_pointer(ctx, argv[0], "slider_t*");
+
+  jret = jsvalue_create_bool(ctx, obj->dragger_adapt_to_icon);
+  return jret;
+}
+
+jsvalue_t wrap_slider_t_get_prop_slide_with_bar(
+    const jerry_value_t func_obj_val, 
+    const jerry_value_t this_p, 
+    const jerry_value_t argv[], 
+    const jerry_length_t argc 
+  )  {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  slider_t* obj = (slider_t*)jsvalue_get_pointer(ctx, argv[0], "slider_t*");
+
+  jret = jsvalue_create_bool(ctx, obj->slide_with_bar);
+  return jret;
+}
+
 ret_t slider_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"slider_create", wrap_slider_create);
   jerryx_handler_register_global((const jerry_char_t*)"slider_cast", wrap_slider_cast);
@@ -17796,6 +17849,9 @@ ret_t slider_t_init(JSContext *ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"slider_t_get_prop_step", wrap_slider_t_get_prop_step);
   jerryx_handler_register_global((const jerry_char_t*)"slider_t_get_prop_vertical", wrap_slider_t_get_prop_vertical);
   jerryx_handler_register_global((const jerry_char_t*)"slider_t_get_prop_bar_size", wrap_slider_t_get_prop_bar_size);
+  jerryx_handler_register_global((const jerry_char_t*)"slider_t_get_prop_dragger_size", wrap_slider_t_get_prop_dragger_size);
+  jerryx_handler_register_global((const jerry_char_t*)"slider_t_get_prop_dragger_adapt_to_icon", wrap_slider_t_get_prop_dragger_adapt_to_icon);
+  jerryx_handler_register_global((const jerry_char_t*)"slider_t_get_prop_slide_with_bar", wrap_slider_t_get_prop_slide_with_bar);
 
  return RET_OK;
 }
