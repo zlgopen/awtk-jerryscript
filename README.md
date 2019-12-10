@@ -49,27 +49,22 @@ sys.path.insert(0, '../awtk-linux-fb/')
 
 ## 文档
 
-[AWTK 脚本绑定原理](https://github.com/zlgopen/awtk/blob/master/docs/script_binding.md)
+* [AWTK JS API 文档](https://github.com/zlgopen/awtk-binding/tree/master/docs/js)
 
-[Javascript 绑定原理与示例](https://github.com/zlgopen/awtk-binding/blob/master/docs/binding_js.md)
+* [AWTK 脚本绑定原理](https://github.com/zlgopen/awtk/blob/master/docs/script_binding.md)
+
+* [Javascript 绑定原理与示例](https://github.com/zlgopen/awtk-binding/blob/master/docs/binding_js.md)
 
 > 本文以 Linux/MacOS 为例，Windows 可能会微妙差异，请酌情处理。
 
-## 重要通知
-
-为了让 AWTK-WEB 和 AWTK-JS 对外提供的 API 保持兼容，AWTK-JS 做了下列修改：
-
-* 所有的类均增加前缀 T，以避免 AWTK 的类名和浏览器中的类名冲突。
-
-* print 函数更名为 console.log。
-
+# 注意事项
 
 如果希望自己的应用程序，同时支持 AWTK-JS 和 AWTK-WEB，还需要注意下列事项：
 
-* 避免直接调用gc()函数。
+* 避免直接调用 gc() 函数。
 
 * 避免使用模态对话框。
 
 * 避免使用动态 GIF 图片。
 
-* 避免直接使用value\_t/color\_t/bitmap\_t/object\_t等类。
+* 避免直接使用 value\_t/color\_t/bitmap\_t/object\_t 等类。
