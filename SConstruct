@@ -50,7 +50,7 @@ TK_JS_JERRYSCRIPT_DIRS = [
   os.path.join(TK_JERRYSCRIPT_ROOT, 'jerryscript/jerry-core/ecma/builtin-objects/typedarray'),
 ]
 
-APP_LIBS = ['assets']
+APP_LIBS = ['awtk-jerryscript', 'jerryscript']
 APP_LIBPATH = [APP_LIB_DIR]
 APP_CPPPATH = TK_JS_JERRYSCRIPT_DIRS
 APP_CFLAGS = '-DRES_ROOT=\"\\\"'+RES_ROOT+'\\\"\" -DPATH_MAX=256 '
