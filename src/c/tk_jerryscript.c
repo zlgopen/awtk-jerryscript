@@ -101,6 +101,7 @@
 #include "tkc/object_default.h"
 #include "widgets/image.h"
 #include "combo_box_ex/combo_box_ex.h"
+#include "widgets/calibration_win.h"
 #include "widgets/popup.h"
 #include "svg_image/svg_image.h"
 #include "tkc/timer_info.h"
@@ -8092,6 +8093,62 @@ jsvalue_t wrap_widget_unref(const jerry_value_t func_obj_val, const jerry_value_
   return jret;
 }
 
+jsvalue_t wrap_widget_is_system_bar(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                    const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    bool_t ret = 0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (bool_t)widget_is_system_bar(widget);
+
+    jret = jsvalue_create_bool(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_widget_is_normal_window(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                       const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    bool_t ret = 0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (bool_t)widget_is_normal_window(widget);
+
+    jret = jsvalue_create_bool(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_widget_is_dialog(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    bool_t ret = 0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (bool_t)widget_is_dialog(widget);
+
+    jret = jsvalue_create_bool(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_widget_is_popup(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                               const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    bool_t ret = 0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (bool_t)widget_is_popup(widget);
+
+    jret = jsvalue_create_bool(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_widget_layout(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                              const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -8527,6 +8584,12 @@ ret_t widget_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_cast", wrap_widget_cast);
   jerryx_handler_register_global((const jerry_char_t*)"widget_destroy", wrap_widget_destroy);
   jerryx_handler_register_global((const jerry_char_t*)"widget_unref", wrap_widget_unref);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_is_system_bar",
+                                 wrap_widget_is_system_bar);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_is_normal_window",
+                                 wrap_widget_is_normal_window);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_is_dialog", wrap_widget_is_dialog);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_is_popup", wrap_widget_is_popup);
   jerryx_handler_register_global((const jerry_char_t*)"widget_layout", wrap_widget_layout);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_self_layout",
                                  wrap_widget_set_self_layout);
@@ -20022,6 +20085,27 @@ ret_t combo_box_ex_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
+jsvalue_t wrap_calibration_win_cast(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                    const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    widget_t* ret = NULL;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (widget_t*)calibration_win_cast(widget);
+
+    jret = jsvalue_create_pointer(ctx, ret, "calibration_win_t*");
+  }
+  return jret;
+}
+
+ret_t calibration_win_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"calibration_win_cast",
+                                 wrap_calibration_win_cast);
+
+  return RET_OK;
+}
+
 jsvalue_t wrap_popup_create(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                             const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -20372,7 +20456,7 @@ jsvalue_t wrap_window_open(const jerry_value_t func_obj_val, const jerry_value_t
   jsvalue_t jret = JS_NULL;
   if (argc >= 1) {
     widget_t* ret = NULL;
-    char* name = (char*)jsvalue_get_utf8_string(ctx, argv[0]);
+    const char* name = (const char*)jsvalue_get_utf8_string(ctx, argv[0]);
     ret = (widget_t*)window_open(name);
     TKMEM_FREE(name);
 
@@ -20387,7 +20471,7 @@ jsvalue_t wrap_window_open_and_close(const jerry_value_t func_obj_val, const jer
   jsvalue_t jret = JS_NULL;
   if (argc >= 2) {
     widget_t* ret = NULL;
-    char* name = (char*)jsvalue_get_utf8_string(ctx, argv[0]);
+    const char* name = (const char*)jsvalue_get_utf8_string(ctx, argv[0]);
     widget_t* to_close = (widget_t*)jsvalue_get_pointer(ctx, argv[1], "widget_t*");
     ret = (widget_t*)window_open_and_close(name, to_close);
     TKMEM_FREE(name);
@@ -20899,6 +20983,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   object_default_t_init(ctx);
   image_t_init(ctx);
   combo_box_ex_t_init(ctx);
+  calibration_win_t_init(ctx);
   popup_t_init(ctx);
   svg_image_t_init(ctx);
   timer_info_t_init(ctx);
