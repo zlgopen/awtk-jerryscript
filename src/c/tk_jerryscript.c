@@ -4742,6 +4742,21 @@ jsvalue_t wrap_vgcanvas_close_path(const jerry_value_t func_obj_val, const jerry
   return jret;
 }
 
+jsvalue_t wrap_vgcanvas_path_winding(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                     const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = 0;
+    vgcanvas_t* vg = (vgcanvas_t*)jsvalue_get_pointer(ctx, argv[0], "vgcanvas_t*");
+    bool_t dir = (bool_t)jsvalue_get_boolean_value(ctx, argv[1]);
+    ret = (ret_t)vgcanvas_path_winding(vg, dir);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_vgcanvas_rotate(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -5370,6 +5385,8 @@ ret_t vgcanvas_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_ellipse", wrap_vgcanvas_ellipse);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_close_path",
                                  wrap_vgcanvas_close_path);
+  jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_path_winding",
+                                 wrap_vgcanvas_path_winding);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_rotate", wrap_vgcanvas_rotate);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_scale", wrap_vgcanvas_scale);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_translate",
@@ -7173,6 +7190,20 @@ jsvalue_t wrap_widget_index_of(const jerry_value_t func_obj_val, const jerry_val
   return jret;
 }
 
+jsvalue_t wrap_widget_close_window(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                   const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = 0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (ret_t)widget_close_window(widget);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_widget_move(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                            const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -8488,6 +8519,8 @@ ret_t widget_t_init(JSContext* ctx) {
                                  wrap_widget_count_children);
   jerryx_handler_register_global((const jerry_char_t*)"widget_get_child", wrap_widget_get_child);
   jerryx_handler_register_global((const jerry_char_t*)"widget_index_of", wrap_widget_index_of);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_close_window",
+                                 wrap_widget_close_window);
   jerryx_handler_register_global((const jerry_char_t*)"widget_move", wrap_widget_move);
   jerryx_handler_register_global((const jerry_char_t*)"widget_resize", wrap_widget_resize);
   jerryx_handler_register_global((const jerry_char_t*)"widget_move_resize",
