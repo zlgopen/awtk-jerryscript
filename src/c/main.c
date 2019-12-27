@@ -36,6 +36,8 @@ int main(int argc, char* argv[]) {
   tk_ext_widgets_init();
 
   awtk_jerryscript_init();
+#define STR_BOOT_JS "var exports = {};\n"
+  awtk_jerryscript_eval_script(STR_BOOT_JS, strlen(STR_BOOT_JS));
   return_value_if_fail(awtk_jerryscript_eval_awtk_js("src/js/awtk.js") == RET_OK, 0);
   return_value_if_fail(awtk_jerryscript_eval(script_file) == RET_OK, 0);
 
