@@ -56,6 +56,7 @@
 #include "progress_circle/progress_circle.h"
 #include "mledit/mledit.h"
 #include "mledit/line_number.h"
+#include "keyboard/candidates.h"
 #include "image_value/image_value.h"
 #include "image_animation/image_animation.h"
 #include "guage/guage.h"
@@ -2526,10 +2527,28 @@ jsvalue_t wrap_image_manager_get_bitmap(const jerry_value_t func_obj_val,
   return jret;
 }
 
+jsvalue_t wrap_image_manager_preload(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                     const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    image_manager_t* imm = (image_manager_t*)jsvalue_get_pointer(ctx, argv[0], "image_manager_t*");
+    char* name = (char*)jsvalue_get_utf8_string(ctx, argv[1]);
+    ret = (ret_t)image_manager_preload(imm, name);
+    TKMEM_FREE(name);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 ret_t image_manager_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"image_manager", wrap_image_manager);
   jerryx_handler_register_global((const jerry_char_t*)"image_manager_get_bitmap",
                                  wrap_image_manager_get_bitmap);
+  jerryx_handler_register_global((const jerry_char_t*)"image_manager_preload",
+                                 wrap_image_manager_preload);
 
   return RET_OK;
 }
@@ -14834,6 +14853,26 @@ ret_t line_number_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
+jsvalue_t wrap_candidates_cast(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                               const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    widget_t* ret = NULL;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (widget_t*)candidates_cast(widget);
+
+    jret = jsvalue_create_pointer(ctx, ret, "candidates_t*");
+  }
+  return jret;
+}
+
+ret_t candidates_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"candidates_cast", wrap_candidates_cast);
+
+  return RET_OK;
+}
+
 jsvalue_t wrap_image_value_create(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                   const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -20980,6 +21019,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   progress_circle_t_init(ctx);
   mledit_t_init(ctx);
   line_number_t_init(ctx);
+  candidates_t_init(ctx);
   image_value_t_init(ctx);
   image_animation_t_init(ctx);
   guage_t_init(ctx);
