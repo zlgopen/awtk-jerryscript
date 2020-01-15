@@ -16831,15 +16831,44 @@ jsvalue_t wrap_file_chooser_create(const jerry_value_t func_obj_val, const jerry
                                    const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
-  if (argc >= 2) {
+  if (argc >= 0) {
     file_chooser_t* ret = NULL;
-    const char* init_dir = (const char*)jsvalue_get_utf8_string(ctx, argv[0]);
-    const char* filter = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
-    ret = (file_chooser_t*)file_chooser_create(init_dir, filter);
-    TKMEM_FREE(init_dir);
-    TKMEM_FREE(filter);
+    ret = (file_chooser_t*)file_chooser_create();
 
     jret = jsvalue_create_pointer(ctx, ret, "file_chooser_t*");
+  }
+  return jret;
+}
+
+jsvalue_t wrap_file_chooser_set_init_dir(const jerry_value_t func_obj_val,
+                                         const jerry_value_t this_p, const jerry_value_t argv[],
+                                         const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    file_chooser_t* chooser = (file_chooser_t*)jsvalue_get_pointer(ctx, argv[0], "file_chooser_t*");
+    const char* init_dir = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
+    ret = (ret_t)file_chooser_set_init_dir(chooser, init_dir);
+    TKMEM_FREE(init_dir);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_file_chooser_set_filter(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                       const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    file_chooser_t* chooser = (file_chooser_t*)jsvalue_get_pointer(ctx, argv[0], "file_chooser_t*");
+    const char* filter = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
+    ret = (ret_t)file_chooser_set_filter(chooser, filter);
+    TKMEM_FREE(filter);
+
+    jret = jsvalue_create_int(ctx, ret);
   }
   return jret;
 }
@@ -16850,8 +16879,8 @@ jsvalue_t wrap_file_chooser_cast(const jerry_value_t func_obj_val, const jerry_v
   jsvalue_t jret = JS_NULL;
   if (argc >= 1) {
     file_chooser_t* ret = NULL;
-    void* data = (void*)jsvalue_get_pointer(ctx, argv[0], "void*");
-    ret = (file_chooser_t*)file_chooser_cast(data);
+    file_chooser_t* chooser = (file_chooser_t*)jsvalue_get_pointer(ctx, argv[0], "file_chooser_t*");
+    ret = (file_chooser_t*)file_chooser_cast(chooser);
 
     jret = jsvalue_create_pointer(ctx, ret, "file_chooser_t*");
   }
@@ -16951,6 +16980,10 @@ jsvalue_t wrap_file_chooser_is_aborted(const jerry_value_t func_obj_val, const j
 ret_t file_chooser_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"file_chooser_create",
                                  wrap_file_chooser_create);
+  jerryx_handler_register_global((const jerry_char_t*)"file_chooser_set_init_dir",
+                                 wrap_file_chooser_set_init_dir);
+  jerryx_handler_register_global((const jerry_char_t*)"file_chooser_set_filter",
+                                 wrap_file_chooser_set_filter);
   jerryx_handler_register_global((const jerry_char_t*)"file_chooser_cast", wrap_file_chooser_cast);
   jerryx_handler_register_global((const jerry_char_t*)"file_chooser_choose_file_for_save",
                                  wrap_file_chooser_choose_file_for_save);
