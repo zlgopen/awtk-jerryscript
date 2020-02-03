@@ -118,6 +118,7 @@
 #include "jerryscript/jerry-core/parser/js/js-parser-mem.c"
 #include "jerryscript/jerry-core/parser/js/js-parser-statm.c"
 #include "jerryscript/jerry-core/parser/js/js-scanner-util.c"
+#include "jerryscript/jerry-core/parser/js/js-scanner-ops.c"
 #include "jerryscript/jerry-core/parser/js/js-parser-util.c"
 #include "jerryscript/jerry-core/parser/js/js-parser.c"
 #include "jerryscript/jerry-core/parser/js/js-scanner.c"
