@@ -5130,6 +5130,15 @@ var TWidget = /** @class */ (function () {
         return new TWidget(widget_get_child(this != null ? (this.nativeObj || this) : null, index));
     };
     /**
+     * 获取原生窗口对象。
+     *
+     *
+     * @returns 原生窗口对象。
+     */
+    TWidget.prototype.getNativeWindow = function () {
+        return new TNativeWindow(widget_get_native_window(this != null ? (this.nativeObj || this) : null));
+    };
+    /**
      * 获取控件在父控件中的索引编号。
      *
      *
@@ -16615,10 +16624,10 @@ var TDigitClock = /** @class */ (function (_super) {
          ** MMM 代表月的英文缩写(支持翻译)
          *
          *如 日期时间为：2018/11/12 9:10:20
-         ** "Y/D/M"显示为"2018/11/12"
-         ** "Y-D-M"显示为"2018-11-12"
-         ** "Y-D-M h:m:s"显示为"2018-11-12 9:10:20"
-         ** "Y-D-M hh:mm:ss"显示为"2018-11-12 09:10:20"
+         ** "Y/M/D"显示为"2018/11/12"
+         ** "Y-M-D"显示为"2018-11-12"
+         ** "Y-M-D h:m:s"显示为"2018-11-12 9:10:20"
+         ** "Y-M-D hh:mm:ss"显示为"2018-11-12 09:10:20"
          *
          */
         get: function () {
@@ -17132,6 +17141,99 @@ var TComboBox = /** @class */ (function (_super) {
     return TComboBox;
 }(TEdit));
 exports.TComboBox = TComboBox;
+;
+/**
+ * 原生窗口。
+ *
+ */
+var TNativeWindow = /** @class */ (function (_super) {
+    __extends(TNativeWindow, _super);
+    function TNativeWindow(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    /**
+     * 移动窗口。
+     *
+     * @param x x坐标。
+     * @param y y坐标。
+     * @param force 无论是否shared都move。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TNativeWindow.prototype.move = function (x, y, force) {
+        return native_window_move(this != null ? (this.nativeObj || this) : null, x, y, force);
+    };
+    /**
+     * 调整窗口大小。
+     *
+     * @param w 宽。
+     * @param h 高。
+     * @param force 无论是否shared都resize。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TNativeWindow.prototype.resize = function (w, h, force) {
+        return native_window_resize(this != null ? (this.nativeObj || this) : null, w, h, force);
+    };
+    /**
+     * 最小化窗口。
+     *
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TNativeWindow.prototype.minimize = function () {
+        return native_window_minimize(this != null ? (this.nativeObj || this) : null);
+    };
+    /**
+     * 最大化窗口。
+     *
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TNativeWindow.prototype.maximize = function () {
+        return native_window_maximize(this != null ? (this.nativeObj || this) : null);
+    };
+    /**
+     * 恢复窗口大小。
+     *
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TNativeWindow.prototype.restore = function () {
+        return native_window_restore(this != null ? (this.nativeObj || this) : null);
+    };
+    /**
+     * 窗口居中。
+     *
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TNativeWindow.prototype.center = function () {
+        return native_window_center(this != null ? (this.nativeObj || this) : null);
+    };
+    /**
+     * 是否显示边框。
+     *
+     * @param show 是否显示。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TNativeWindow.prototype.showBorder = function (show) {
+        return native_window_show_border(this != null ? (this.nativeObj || this) : null, show);
+    };
+    /**
+     * 是否全屏。
+     *
+     * @param fullscreen 是否全屏。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TNativeWindow.prototype.setFullscreen = function (fullscreen) {
+        return native_window_set_fullscreen(this != null ? (this.nativeObj || this) : null, fullscreen);
+    };
+    return TNativeWindow;
+}(TObject));
+exports.TNativeWindow = TNativeWindow;
 ;
 /**
  * 窗口。

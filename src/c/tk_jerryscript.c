@@ -98,6 +98,7 @@
 #include "widgets/dialog_title.h"
 #include "tkc/object_default.h"
 #include "widgets/combo_box.h"
+#include "base/native_window.h"
 #include "base/window.h"
 #include "tkc/timer_info.h"
 #include "widgets/image.h"
@@ -7229,6 +7230,21 @@ jsvalue_t wrap_widget_get_child(const jerry_value_t func_obj_val, const jerry_va
   return jret;
 }
 
+jsvalue_t wrap_widget_get_native_window(const jerry_value_t func_obj_val,
+                                        const jerry_value_t this_p, const jerry_value_t argv[],
+                                        const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    native_window_t* ret = NULL;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (native_window_t*)widget_get_native_window(widget);
+
+    jret = jsvalue_create_pointer(ctx, ret, "native_window_t*");
+  }
+  return jret;
+}
+
 jsvalue_t wrap_widget_index_of(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -8626,6 +8642,8 @@ ret_t widget_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_count_children",
                                  wrap_widget_count_children);
   jerryx_handler_register_global((const jerry_char_t*)"widget_get_child", wrap_widget_get_child);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_get_native_window",
+                                 wrap_widget_get_native_window);
   jerryx_handler_register_global((const jerry_char_t*)"widget_index_of", wrap_widget_index_of);
   jerryx_handler_register_global((const jerry_char_t*)"widget_close_window",
                                  wrap_widget_close_window);
@@ -20857,6 +20875,149 @@ ret_t combo_box_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
+jsvalue_t wrap_native_window_move(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                  const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 4) {
+    ret_t ret = (ret_t)0;
+    native_window_t* win = (native_window_t*)jsvalue_get_pointer(ctx, argv[0], "native_window_t*");
+    xy_t x = (xy_t)jsvalue_get_int_value(ctx, argv[1]);
+    xy_t y = (xy_t)jsvalue_get_int_value(ctx, argv[2]);
+    bool_t force = (bool_t)jsvalue_get_boolean_value(ctx, argv[3]);
+    ret = (ret_t)native_window_move(win, x, y, force);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_native_window_resize(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                    const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 4) {
+    ret_t ret = (ret_t)0;
+    native_window_t* win = (native_window_t*)jsvalue_get_pointer(ctx, argv[0], "native_window_t*");
+    wh_t w = (wh_t)jsvalue_get_int_value(ctx, argv[1]);
+    wh_t h = (wh_t)jsvalue_get_int_value(ctx, argv[2]);
+    bool_t force = (bool_t)jsvalue_get_boolean_value(ctx, argv[3]);
+    ret = (ret_t)native_window_resize(win, w, h, force);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_native_window_minimize(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                      const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    native_window_t* win = (native_window_t*)jsvalue_get_pointer(ctx, argv[0], "native_window_t*");
+    ret = (ret_t)native_window_minimize(win);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_native_window_maximize(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                      const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    native_window_t* win = (native_window_t*)jsvalue_get_pointer(ctx, argv[0], "native_window_t*");
+    ret = (ret_t)native_window_maximize(win);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_native_window_restore(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                     const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    native_window_t* win = (native_window_t*)jsvalue_get_pointer(ctx, argv[0], "native_window_t*");
+    ret = (ret_t)native_window_restore(win);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_native_window_center(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                    const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    native_window_t* win = (native_window_t*)jsvalue_get_pointer(ctx, argv[0], "native_window_t*");
+    ret = (ret_t)native_window_center(win);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_native_window_show_border(const jerry_value_t func_obj_val,
+                                         const jerry_value_t this_p, const jerry_value_t argv[],
+                                         const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    native_window_t* win = (native_window_t*)jsvalue_get_pointer(ctx, argv[0], "native_window_t*");
+    bool_t show = (bool_t)jsvalue_get_boolean_value(ctx, argv[1]);
+    ret = (ret_t)native_window_show_border(win, show);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_native_window_set_fullscreen(const jerry_value_t func_obj_val,
+                                            const jerry_value_t this_p, const jerry_value_t argv[],
+                                            const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    native_window_t* win = (native_window_t*)jsvalue_get_pointer(ctx, argv[0], "native_window_t*");
+    bool_t fullscreen = (bool_t)jsvalue_get_boolean_value(ctx, argv[1]);
+    ret = (ret_t)native_window_set_fullscreen(win, fullscreen);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+ret_t native_window_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"native_window_move",
+                                 wrap_native_window_move);
+  jerryx_handler_register_global((const jerry_char_t*)"native_window_resize",
+                                 wrap_native_window_resize);
+  jerryx_handler_register_global((const jerry_char_t*)"native_window_minimize",
+                                 wrap_native_window_minimize);
+  jerryx_handler_register_global((const jerry_char_t*)"native_window_maximize",
+                                 wrap_native_window_maximize);
+  jerryx_handler_register_global((const jerry_char_t*)"native_window_restore",
+                                 wrap_native_window_restore);
+  jerryx_handler_register_global((const jerry_char_t*)"native_window_center",
+                                 wrap_native_window_center);
+  jerryx_handler_register_global((const jerry_char_t*)"native_window_show_border",
+                                 wrap_native_window_show_border);
+  jerryx_handler_register_global((const jerry_char_t*)"native_window_set_fullscreen",
+                                 wrap_native_window_set_fullscreen);
+
+  return RET_OK;
+}
+
 jsvalue_t wrap_window_create(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                              const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -21987,6 +22148,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   dialog_title_t_init(ctx);
   object_default_t_init(ctx);
   combo_box_t_init(ctx);
+  native_window_t_init(ctx);
   window_t_init(ctx);
   timer_info_t_init(ctx);
   image_t_init(ctx);
