@@ -7,7 +7,7 @@ function applicationInit() {
   var fullscreen = TCheckButton.create(win, 0, 0, 0, 0);
   var restore = TButton.create(win, 0, 0, 0, 0);
   var quit = TButton.create(win, 0, 0, 0, 0);
-  var nv = maximize.getNativeWindow();
+  var nv = win.getNativeWindow();
 
   win.setChildrenLayout("default(r=7,c=1,s=10,m=10)");
   maximize.setText("maximize");
