@@ -4898,6 +4898,25 @@ jsvalue_t wrap_vgcanvas_clip_rect(const jerry_value_t func_obj_val, const jerry_
   return jret;
 }
 
+jsvalue_t wrap_vgcanvas_intersect_clip_rect(const jerry_value_t func_obj_val,
+                                            const jerry_value_t this_p, const jerry_value_t argv[],
+                                            const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 5) {
+    ret_t ret = (ret_t)0;
+    vgcanvas_t* vg = (vgcanvas_t*)jsvalue_get_pointer(ctx, argv[0], "vgcanvas_t*");
+    float_t x = (float_t)jsvalue_get_number_value(ctx, argv[1]);
+    float_t y = (float_t)jsvalue_get_number_value(ctx, argv[2]);
+    float_t w = (float_t)jsvalue_get_number_value(ctx, argv[3]);
+    float_t h = (float_t)jsvalue_get_number_value(ctx, argv[4]);
+    ret = (ret_t)vgcanvas_intersect_clip_rect(vg, x, y, w, h);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_vgcanvas_fill(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                              const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -5433,6 +5452,8 @@ ret_t vgcanvas_t_init(JSContext* ctx) {
                                  wrap_vgcanvas_set_transform);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_clip_rect",
                                  wrap_vgcanvas_clip_rect);
+  jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_intersect_clip_rect",
+                                 wrap_vgcanvas_intersect_clip_rect);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_fill", wrap_vgcanvas_fill);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_stroke", wrap_vgcanvas_stroke);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_paint", wrap_vgcanvas_paint);
