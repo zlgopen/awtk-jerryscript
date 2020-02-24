@@ -19,31 +19,35 @@
  *
  */
 
-#include "tkc/fs.h"
-#include "tkc/mem.h"
-#include "demos/assets.h"
 
 #include "awtk.h"
 #include "awtk_js.h"
-#include "ext_widgets/ext_widgets.h"
 
-int main(int argc, char* argv[]) {
-  const char* script_file = argc == 2 ? argv[1] : "./demos/demoui.js";
-
-  tk_init(320, 480, APP_SIMULATOR, "AWTK-JS", NULL);
-
-  assets_init();
-  tk_ext_widgets_init();
-
-  awtk_jerryscript_init();
 #define STR_BOOT_JS "var exports = {};\n"
+
+const char* script_file = NULL;
+
+static ret_t on_cmd_line(int argc, char* argv[]) {
+  script_file = argc == 2 ? argv[1] : "./demos/demoui.js";
+
+  return RET_OK;
+}
+
+static ret_t application_init() {
+  awtk_jerryscript_init();
   awtk_jerryscript_eval_script(STR_BOOT_JS, strlen(STR_BOOT_JS));
-  return_value_if_fail(awtk_jerryscript_eval_awtk_js("src/js/awtk.js") == RET_OK, 0);
-  return_value_if_fail(awtk_jerryscript_eval(script_file) == RET_OK, 0);
+  return_value_if_fail(awtk_jerryscript_eval_awtk_js("src/js/awtk.js") == RET_OK, RET_FAIL);
+  return_value_if_fail(awtk_jerryscript_eval(script_file) == RET_OK, RET_FAIL);
 
-  tk_run();
+  return RET_OK;
+}
 
+static ret_t application_exit() {
   awtk_jerryscript_deinit();
 
-  return 0;
+  return RET_OK;
 }
+
+#define ON_CMD_LINE on_cmd_line
+
+#include "awtk_main.inc"
