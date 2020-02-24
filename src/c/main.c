@@ -48,6 +48,7 @@ static ret_t application_exit() {
   return RET_OK;
 }
 
+#define APP_NAME "AWTK-JS"
 #define ON_CMD_LINE on_cmd_line
 
 #include "awtk_main.inc"
