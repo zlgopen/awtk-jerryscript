@@ -1260,6 +1260,37 @@ var TGlobal = /** @class */ (function () {
 exports.TGlobal = TGlobal;
 ;
 /**
+ * 剪切板接口。
+ *
+ */
+var TClipBoard = /** @class */ (function () {
+    function TClipBoard(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    /**
+     * 设置文本(UTF8)数据到剪切板。
+     *
+     * @param text 文本。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TClipBoard.setText = function (text) {
+        return clip_board_set_text(text);
+    };
+    /**
+     * 从剪切板中获取文本(UTF8)数据。
+     *
+     *
+     * @returns 返回文本数据。
+     */
+    TClipBoard.getText = function () {
+        return clip_board_get_text();
+    };
+    return TClipBoard;
+}());
+exports.TClipBoard = TClipBoard;
+;
+/**
  * 对话框退出码。
  *
  *> 一般用作dialog_quit函数的参数。
@@ -1796,6 +1827,86 @@ var TIdle = /** @class */ (function () {
     return TIdle;
 }());
 exports.TIdle = TIdle;
+;
+/**
+ * 资源管理器。
+ *这里的资源管理器并非Windows下的文件浏览器，而是负责对各种资源，比如字体、主题、图片、界面数据、字符串和其它数据的进行集中管理的组件。引入资源管理器的目的有以下几个：
+ *
+ ** 让上层不需要了解存储的方式。
+ *在没有文件系统时或者内存紧缺时，把资源转成常量数组直接编译到代码中。在有文件系统而且内存充足时，资源放在文件系统中。在有网络时，资源也可以存放在服务器上(暂未实现)。资源管理器为上层提供统一的接口，让上层而不用关心底层的存储方式。
+ *
+ ** 让上层不需要了解资源的具体格式。
+ *比如一个名为earth的图片，没有文件系统或内存紧缺，图片直接用位图数据格式存在ROM中，而有文件系统时，则用PNG格式存放在文件系统中。资源管理器让上层不需要关心图片的格式，访问时指定图片的名称即可(不用指定扩展名)。
+ *
+ ** 让上层不需要了解屏幕的密度。
+ *不同的屏幕密度下需要加载不同的图片，比如MacPro的Retina屏就需要用双倍解析度的图片，否则就出现界面模糊。AWTK以后会支持PC软件和手机软件的开发，所以资源管理器需要为此提供支持，让上层不需关心屏幕的密度。
+ *
+ ** 对资源进行内存缓存。
+ *不同类型的资源使用方式是不一样的，比如字体和主题加载之后会一直使用，UI文件在生成界面之后就暂时不需要了，PNG文件解码之后就只需要保留解码的位图数据即可。资源管理器配合图片管理器等其它组件实现资源的自动缓存。
+ *
+ *当从文件系统加载资源时，目录结构要求如下：
+ *
+ *```
+ *assets/{theme}/raw/
+ *fonts   字体
+ *images  图片
+ *x1   普通密度屏幕的图片。
+ *x2   2倍密度屏幕的图片。
+ *x3   3倍密度屏幕的图片。
+ *xx   密度无关的图片。
+ *strings 需要翻译的字符串。
+ *styles  主题数据。
+ *ui      UI描述数据。
+ *```
+ *
+ */
+var TAssetsManager = /** @class */ (function () {
+    function TAssetsManager(nativeObj) {
+        this.nativeObj = nativeObj;
+    }
+    /**
+     * 获取缺省资源管理器。
+     *
+     *
+     * @returns 返回asset manager对象。
+     */
+    TAssetsManager.instance = function () {
+        return new TAssetsManager(assets_manager());
+    };
+    /**
+     * 设置当前的主题。
+     *
+     * @param theme 主题名称。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TAssetsManager.prototype.setTheme = function (theme) {
+        return assets_manager_set_theme(this != null ? (this.nativeObj || this) : null, theme);
+    };
+    /**
+     * 在资源管理器的缓存中查找指定的资源并引用它，如果缓存中不存在，尝试加载该资源。
+     *
+     * @param type 资源的类型。
+     * @param name 资源的名称。
+     *
+     * @returns 返回资源。
+     */
+    TAssetsManager.prototype.ref = function (type, name) {
+        return new TAssetInfo(assets_manager_ref(this != null ? (this.nativeObj || this) : null, type, name));
+    };
+    /**
+     * 释放指定的资源。
+     *
+     * @param info 资源。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TAssetsManager.prototype.unref = function (info) {
+        return assets_manager_unref(this != null ? (this.nativeObj || this) : null, info != null ? (info.nativeObj || info) : null);
+    };
+    return TAssetsManager;
+}());
+exports.TAssetsManager = TAssetsManager;
 ;
 /**
  * 图片管理器。负责加载，解码和缓存图片。
@@ -2825,6 +2936,21 @@ var TStyleId;
      *
      */
     TStyleId[TStyleId["_ID_TEXT_COLOR"] = STYLE_ID_TEXT_COLOR()] = "_ID_TEXT_COLOR";
+    /**
+     * 高亮文本的字体名称。
+     *
+     */
+    TStyleId[TStyleId["_ID_HIGHLIGHT_FONT_NAME"] = STYLE_ID_HIGHLIGHT_FONT_NAME()] = "_ID_HIGHLIGHT_FONT_NAME";
+    /**
+     * 高亮文本的字体大小。
+     *
+     */
+    TStyleId[TStyleId["_ID_HIGHLIGHT_FONT_SIZE"] = STYLE_ID_HIGHLIGHT_FONT_SIZE()] = "_ID_HIGHLIGHT_FONT_SIZE";
+    /**
+     * 高亮文本的文本颜色。
+     *
+     */
+    TStyleId[TStyleId["_ID_HIGHLIGHT_TEXT_COLOR"] = STYLE_ID_HIGHLIGHT_TEXT_COLOR()] = "_ID_HIGHLIGHT_TEXT_COLOR";
     /**
      * 提示文本颜色。
      *
@@ -7496,37 +7622,6 @@ var TClipBoardDataType;
 })(TClipBoardDataType = exports.TClipBoardDataType || (exports.TClipBoardDataType = {}));
 ;
 /**
- * 剪切板接口。
- *
- */
-var TClipBoard = /** @class */ (function () {
-    function TClipBoard(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    /**
-     * 设置文本(UTF8)数据到剪切板。
-     *
-     * @param text 文本。
-     *
-     * @returns 返回RET_OK表示成功，否则表示失败。
-     */
-    TClipBoard.setText = function (text) {
-        return clip_board_set_text(text);
-    };
-    /**
-     * 从剪切板中获取文本(UTF8)数据。
-     *
-     *
-     * @returns 返回文本数据。
-     */
-    TClipBoard.getText = function () {
-        return clip_board_get_text();
-    };
-    return TClipBoard;
-}());
-exports.TClipBoard = TClipBoard;
-;
-/**
  * 缓动作动画常量定义。
  *
  */
@@ -8032,76 +8127,6 @@ var TAssetType;
      */
     TAssetType[TAssetType["DATA"] = ASSET_TYPE_DATA()] = "DATA";
 })(TAssetType = exports.TAssetType || (exports.TAssetType = {}));
-;
-/**
- * 资源管理器。
- *这里的资源管理器并非Windows下的文件浏览器，而是负责对各种资源，比如字体、主题、图片、界面数据、字符串和其它数据的进行集中管理的组件。引入资源管理器的目的有以下几个：
- *
- ** 让上层不需要了解存储的方式。
- *在没有文件系统时或者内存紧缺时，把资源转成常量数组直接编译到代码中。在有文件系统而且内存充足时，资源放在文件系统中。在有网络时，资源也可以存放在服务器上(暂未实现)。资源管理器为上层提供统一的接口，让上层而不用关心底层的存储方式。
- *
- ** 让上层不需要了解资源的具体格式。
- *比如一个名为earth的图片，没有文件系统或内存紧缺，图片直接用位图数据格式存在ROM中，而有文件系统时，则用PNG格式存放在文件系统中。资源管理器让上层不需要关心图片的格式，访问时指定图片的名称即可(不用指定扩展名)。
- *
- ** 让上层不需要了解屏幕的密度。
- *不同的屏幕密度下需要加载不同的图片，比如MacPro的Retina屏就需要用双倍解析度的图片，否则就出现界面模糊。AWTK以后会支持PC软件和手机软件的开发，所以资源管理器需要为此提供支持，让上层不需关心屏幕的密度。
- *
- ** 对资源进行内存缓存。
- *不同类型的资源使用方式是不一样的，比如字体和主题加载之后会一直使用，UI文件在生成界面之后就暂时不需要了，PNG文件解码之后就只需要保留解码的位图数据即可。资源管理器配合图片管理器等其它组件实现资源的自动缓存。
- *
- *当从文件系统加载资源时，目录结构要求如下：
- *
- *```
- *assets/{theme}/raw/
- *fonts   字体
- *images  图片
- *x1   普通密度屏幕的图片。
- *x2   2倍密度屏幕的图片。
- *x3   3倍密度屏幕的图片。
- *xx   密度无关的图片。
- *strings 需要翻译的字符串。
- *styles  主题数据。
- *ui      UI描述数据。
- *```
- *
- */
-var TAssetsManager = /** @class */ (function () {
-    function TAssetsManager(nativeObj) {
-        this.nativeObj = nativeObj;
-    }
-    /**
-     * 获取缺省资源管理器。
-     *
-     *
-     * @returns 返回asset manager对象。
-     */
-    TAssetsManager.instance = function () {
-        return new TAssetsManager(assets_manager());
-    };
-    /**
-     * 在资源管理器的缓存中查找指定的资源并引用它，如果缓存中不存在，尝试加载该资源。
-     *
-     * @param type 资源的类型。
-     * @param name 资源的名称。
-     *
-     * @returns 返回资源。
-     */
-    TAssetsManager.prototype.ref = function (type, name) {
-        return new TAssetInfo(assets_manager_ref(this != null ? (this.nativeObj || this) : null, type, name));
-    };
-    /**
-     * 释放指定的资源。
-     *
-     * @param info 资源。
-     *
-     * @returns 返回RET_OK表示成功，否则表示失败。
-     */
-    TAssetsManager.prototype.unref = function (info) {
-        return assets_manager_unref(this != null ? (this.nativeObj || this) : null, info != null ? (info.nativeObj || info) : null);
-    };
-    return TAssetsManager;
-}());
-exports.TAssetsManager = TAssetsManager;
 ;
 /**
  * 可变的style(可实时修改并生效，主要用于在designer中被编辑的控件，或者一些特殊控件)。
@@ -12670,6 +12695,9 @@ exports.TCandidates = TCandidates;
  ** 2.把每个字符与image(图片文件名前缀)映射成一个图片名。
  ** 3.最后把这些图片显示出来。
  *
+ *如果设置click\_add\_delta为非0，那么点击时自动增加指定的增量，值超过最大值时回到最小值,
+ *或者值超过最小值时回到最大值。
+ *
  *image\_value\_t是[widget\_t](widget_t.md)的子类控件，widget\_t的函数均适用于image\_value\_t控件。
  *
  *在xml中使用"image\_value"标签创建图片值控件。如：
@@ -12730,6 +12758,16 @@ var TImageValue = /** @class */ (function (_super) {
         return image_value_set_format(this != null ? (this.nativeObj || this) : null, format);
     };
     /**
+     * 设置点击时加上的增量。
+     *
+     * @param delta 增量。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TImageValue.prototype.setClickAddDelta = function (delta) {
+        return image_value_set_click_add_delta(this != null ? (this.nativeObj || this) : null, delta);
+    };
+    /**
      * 设置值。
      *
      * @param value 值。
@@ -12738,6 +12776,26 @@ var TImageValue = /** @class */ (function (_super) {
      */
     TImageValue.prototype.setValue = function (value) {
         return image_value_set_value(this != null ? (this.nativeObj || this) : null, value);
+    };
+    /**
+     * 设置最小值。
+     *
+     * @param min 最小值。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TImageValue.prototype.setMin = function (min) {
+        return image_value_set_min(this != null ? (this.nativeObj || this) : null, min);
+    };
+    /**
+     * 设置最大值。
+     *
+     * @param max 最大值。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TImageValue.prototype.setMax = function (max) {
+        return image_value_set_max(this != null ? (this.nativeObj || this) : null, max);
     };
     /**
      * 转换为image_value对象(供脚本语言使用)。
@@ -12777,6 +12835,20 @@ var TImageValue = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TImageValue.prototype, "clickAddDelta", {
+        /**
+         * 点击时加上一个增量。
+         *
+         */
+        get: function () {
+            return image_value_t_get_prop_click_add_delta(this.nativeObj);
+        },
+        set: function (v) {
+            this.setClickAddDelta(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(TImageValue.prototype, "value", {
         /**
          * 值。
@@ -12787,6 +12859,34 @@ var TImageValue = /** @class */ (function (_super) {
         },
         set: function (v) {
             this.setValue(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TImageValue.prototype, "min", {
+        /**
+         * 最小值(如果设置了click\_add\_delta，到达最小值后回到最大值)。
+         *
+         */
+        get: function () {
+            return image_value_t_get_prop_min(this.nativeObj);
+        },
+        set: function (v) {
+            this.setMin(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TImageValue.prototype, "max", {
+        /**
+         * 最大值(如果设置了click\_add\_delta，到达最大值后回到最小值)。
+         *
+         */
+        get: function () {
+            return image_value_t_get_prop_max(this.nativeObj);
+        },
+        set: function (v) {
+            this.setMax(v);
         },
         enumerable: true,
         configurable: true
@@ -17994,6 +18094,7 @@ exports.TObjectArray = TObjectArray;
  *
  *> 创建之后:
  *>
+ *> 需要用mutable\_image\_set\_create\_image设置创建图片的回调函数。
  *> 需要用mutable\_image\_set\_prepare\_image设置准备图片的回调函数。
  *
  *> 完整示例请参考：[mutable image demo](

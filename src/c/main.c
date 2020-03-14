@@ -19,7 +19,6 @@
  *
  */
 
-
 #include "awtk.h"
 #include "awtk_js.h"
 
