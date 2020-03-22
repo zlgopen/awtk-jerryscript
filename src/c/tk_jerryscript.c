@@ -7630,6 +7630,46 @@ jsvalue_t wrap_widget_set_text_utf8(const jerry_value_t func_obj_val, const jerr
   return jret;
 }
 
+jsvalue_t wrap_widget_set_child_text_utf8(const jerry_value_t func_obj_val,
+                                          const jerry_value_t this_p, const jerry_value_t argv[],
+                                          const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 3) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    const char* name = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
+    const char* text = (const char*)jsvalue_get_utf8_string(ctx, argv[2]);
+    ret = (ret_t)widget_set_child_text_utf8(widget, name, text);
+    TKMEM_FREE(name);
+    TKMEM_FREE(text);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_widget_set_child_text_with_double(const jerry_value_t func_obj_val,
+                                                 const jerry_value_t this_p,
+                                                 const jerry_value_t argv[],
+                                                 const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 4) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    const char* name = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
+    const char* format = (const char*)jsvalue_get_utf8_string(ctx, argv[2]);
+    double value = (double)jsvalue_get_number_value(ctx, argv[3]);
+    ret = (ret_t)widget_set_child_text_with_double(widget, name, format, value);
+    TKMEM_FREE(name);
+    TKMEM_FREE(format);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_widget_set_tr_text(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                   const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -8887,6 +8927,10 @@ ret_t widget_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_use_style", wrap_widget_use_style);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_text_utf8",
                                  wrap_widget_set_text_utf8);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_set_child_text_utf8",
+                                 wrap_widget_set_child_text_utf8);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_set_child_text_with_double",
+                                 wrap_widget_set_child_text_with_double);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_tr_text",
                                  wrap_widget_set_tr_text);
   jerryx_handler_register_global((const jerry_char_t*)"widget_get_value", wrap_widget_get_value);

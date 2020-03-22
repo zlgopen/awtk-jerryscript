@@ -5450,6 +5450,31 @@ var TWidget = /** @class */ (function () {
         return widget_set_text_utf8(this != null ? (this.nativeObj || this) : null, text);
     };
     /**
+     * 设置子控件的文本。
+     *只是对widget\_set\_prop的包装，文本的意义由子类控件决定。
+     *
+     * @param name 子控件的名称。
+     * @param text 文本。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TWidget.prototype.setChildText = function (name, text) {
+        return widget_set_child_text_utf8(this != null ? (this.nativeObj || this) : null, name, text);
+    };
+    /**
+     * 用一个浮点数去设置子控件的文本。
+     *只是对widget\_set\_prop的包装，文本的意义由子类控件决定。
+     *
+     * @param name 子控件的名称。
+     * @param format 格式字符串(如："%2.2lf")。
+     * @param value 浮点数值。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TWidget.prototype.setChildTextWithDouble = function (name, format, value) {
+        return widget_set_child_text_with_double(this != null ? (this.nativeObj || this) : null, name, format, value);
+    };
+    /**
      * 获取翻译之后的文本，然后调用widget_set_text。
      *
      * @param text 文本。
