@@ -2040,119 +2040,6 @@ var TAssetsManager = /** @class */ (function () {
 exports.TAssetsManager = TAssetsManager;
 ;
 /**
- * 类型常量定义。
- *
- */
-var TValueType;
-(function (TValueType) {
-    /**
-     * 无效类型。
-     *
-     */
-    TValueType[TValueType["INVALID"] = VALUE_TYPE_INVALID()] = "INVALID";
-    /**
-     * BOOL类型。
-     *
-     */
-    TValueType[TValueType["BOOL"] = VALUE_TYPE_BOOL()] = "BOOL";
-    /**
-     * int8_t类型。
-     *
-     */
-    TValueType[TValueType["INT8"] = VALUE_TYPE_INT8()] = "INT8";
-    /**
-     * uint8_t类型。
-     *
-     */
-    TValueType[TValueType["UINT8"] = VALUE_TYPE_UINT8()] = "UINT8";
-    /**
-     * int16_t类型。
-     *
-     */
-    TValueType[TValueType["INT16"] = VALUE_TYPE_INT16()] = "INT16";
-    /**
-     * uint16_t类型。
-     *
-     */
-    TValueType[TValueType["UINT16"] = VALUE_TYPE_UINT16()] = "UINT16";
-    /**
-     * int32_t类型。
-     *
-     */
-    TValueType[TValueType["INT32"] = VALUE_TYPE_INT32()] = "INT32";
-    /**
-     * uint32_t类型。
-     *
-     */
-    TValueType[TValueType["UINT32"] = VALUE_TYPE_UINT32()] = "UINT32";
-    /**
-     * int64_t类型。
-     *
-     */
-    TValueType[TValueType["INT64"] = VALUE_TYPE_INT64()] = "INT64";
-    /**
-     * uint64_t类型。
-     *
-     */
-    TValueType[TValueType["UINT64"] = VALUE_TYPE_UINT64()] = "UINT64";
-    /**
-     * void*类型。
-     *
-     */
-    TValueType[TValueType["POINTER"] = VALUE_TYPE_POINTER()] = "POINTER";
-    /**
-     * float_t类型。
-     *
-     */
-    TValueType[TValueType["FLOAT"] = VALUE_TYPE_FLOAT()] = "FLOAT";
-    /**
-     * float类型。
-     *
-     */
-    TValueType[TValueType["FLOAT32"] = VALUE_TYPE_FLOAT32()] = "FLOAT32";
-    /**
-     * double类型。
-     *
-     */
-    TValueType[TValueType["DOUBLE"] = VALUE_TYPE_DOUBLE()] = "DOUBLE";
-    /**
-     * char*类型。
-     *
-     */
-    TValueType[TValueType["STRING"] = VALUE_TYPE_STRING()] = "STRING";
-    /**
-     * wchar_t*类型。
-     *
-     */
-    TValueType[TValueType["WSTRING"] = VALUE_TYPE_WSTRING()] = "WSTRING";
-    /**
-     * object_t*类型。
-     *
-     */
-    TValueType[TValueType["OBJECT"] = VALUE_TYPE_OBJECT()] = "OBJECT";
-    /**
-     * 带长度的字符串。
-     *
-     */
-    TValueType[TValueType["SIZED_STRING"] = VALUE_TYPE_SIZED_STRING()] = "SIZED_STRING";
-    /**
-     * 二进制数据。
-     *
-     */
-    TValueType[TValueType["BINARY"] = VALUE_TYPE_BINARY()] = "BINARY";
-    /**
-     * 二进制数据(UBJSON)。
-     *
-     */
-    TValueType[TValueType["UBJSON"] = VALUE_TYPE_UBJSON()] = "UBJSON";
-    /**
-     * 特殊用途。
-     *
-     */
-    TValueType[TValueType["TOKEN"] = VALUE_TYPE_TOKEN()] = "TOKEN";
-})(TValueType = exports.TValueType || (exports.TValueType = {}));
-;
-/**
  * 输入法接口。
  *
  *常见的实现方式有以下几种：
@@ -2928,6 +2815,119 @@ var TKeyCode;
      */
     TKeyCode[TKeyCode["KEY_CANCEL"] = TK_KEY_CANCEL()] = "KEY_CANCEL";
 })(TKeyCode = exports.TKeyCode || (exports.TKeyCode = {}));
+;
+/**
+ * 类型常量定义。
+ *
+ */
+var TValueType;
+(function (TValueType) {
+    /**
+     * 无效类型。
+     *
+     */
+    TValueType[TValueType["INVALID"] = VALUE_TYPE_INVALID()] = "INVALID";
+    /**
+     * BOOL类型。
+     *
+     */
+    TValueType[TValueType["BOOL"] = VALUE_TYPE_BOOL()] = "BOOL";
+    /**
+     * int8_t类型。
+     *
+     */
+    TValueType[TValueType["INT8"] = VALUE_TYPE_INT8()] = "INT8";
+    /**
+     * uint8_t类型。
+     *
+     */
+    TValueType[TValueType["UINT8"] = VALUE_TYPE_UINT8()] = "UINT8";
+    /**
+     * int16_t类型。
+     *
+     */
+    TValueType[TValueType["INT16"] = VALUE_TYPE_INT16()] = "INT16";
+    /**
+     * uint16_t类型。
+     *
+     */
+    TValueType[TValueType["UINT16"] = VALUE_TYPE_UINT16()] = "UINT16";
+    /**
+     * int32_t类型。
+     *
+     */
+    TValueType[TValueType["INT32"] = VALUE_TYPE_INT32()] = "INT32";
+    /**
+     * uint32_t类型。
+     *
+     */
+    TValueType[TValueType["UINT32"] = VALUE_TYPE_UINT32()] = "UINT32";
+    /**
+     * int64_t类型。
+     *
+     */
+    TValueType[TValueType["INT64"] = VALUE_TYPE_INT64()] = "INT64";
+    /**
+     * uint64_t类型。
+     *
+     */
+    TValueType[TValueType["UINT64"] = VALUE_TYPE_UINT64()] = "UINT64";
+    /**
+     * void*类型。
+     *
+     */
+    TValueType[TValueType["POINTER"] = VALUE_TYPE_POINTER()] = "POINTER";
+    /**
+     * float_t类型。
+     *
+     */
+    TValueType[TValueType["FLOAT"] = VALUE_TYPE_FLOAT()] = "FLOAT";
+    /**
+     * float类型。
+     *
+     */
+    TValueType[TValueType["FLOAT32"] = VALUE_TYPE_FLOAT32()] = "FLOAT32";
+    /**
+     * double类型。
+     *
+     */
+    TValueType[TValueType["DOUBLE"] = VALUE_TYPE_DOUBLE()] = "DOUBLE";
+    /**
+     * char*类型。
+     *
+     */
+    TValueType[TValueType["STRING"] = VALUE_TYPE_STRING()] = "STRING";
+    /**
+     * wchar_t*类型。
+     *
+     */
+    TValueType[TValueType["WSTRING"] = VALUE_TYPE_WSTRING()] = "WSTRING";
+    /**
+     * object_t*类型。
+     *
+     */
+    TValueType[TValueType["OBJECT"] = VALUE_TYPE_OBJECT()] = "OBJECT";
+    /**
+     * 带长度的字符串。
+     *
+     */
+    TValueType[TValueType["SIZED_STRING"] = VALUE_TYPE_SIZED_STRING()] = "SIZED_STRING";
+    /**
+     * 二进制数据。
+     *
+     */
+    TValueType[TValueType["BINARY"] = VALUE_TYPE_BINARY()] = "BINARY";
+    /**
+     * 二进制数据(UBJSON)。
+     *
+     */
+    TValueType[TValueType["UBJSON"] = VALUE_TYPE_UBJSON()] = "UBJSON";
+    /**
+     * 特殊用途。
+     *
+     */
+    TValueType[TValueType["TOKEN"] = VALUE_TYPE_TOKEN()] = "TOKEN";
+})(TValueType = exports.TValueType || (exports.TValueType = {}));
 ;
 /**
  * 本地化信息。提供字符串翻译数据管理，当前语言改变的事件通知等等。
@@ -8389,90 +8389,229 @@ var TStyleMutable = /** @class */ (function (_super) {
 exports.TStyleMutable = TStyleMutable;
 ;
 /**
- * 一个通用的容器控件。
- *
- *它本身不提供布局功能，仅提供具有语义的标签，让xml更具有可读性。
- *子控件的布局可用layout\_children属性指定。
- *请参考[布局参数](https://github.com/zlgopen/awtk/blob/master/docs/layout.md)。
- *
- *view\_t是[widget\_t](widget_t.md)的子类控件，widget\_t的函数均适用于view\_t控件。
- *
- *在xml中使用"view"标签创建view。如：
- *
- *```xml
- *<view x="0" y="0" w="100%" h="100%" children_layout="default(c=2,r=2,m=5,s=5)">
- *</view>
- *```
- *
- *可用通过style来设置控件的显示风格，如背景颜色等。如：
- *
- *```xml
- *<style name="default" border_color="#a0a0a0">
- *<normal     bg_color="#f0f0f0" />
- *</style>
- *```
+ * 滚轮事件。
  *
  */
-var TView = /** @class */ (function (_super) {
-    __extends(TView, _super);
-    function TView(nativeObj) {
+var TWheelEvent = /** @class */ (function (_super) {
+    __extends(TWheelEvent, _super);
+    function TWheelEvent(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
     /**
-     * 创建view对象
+     * 把event对象转wheel_event_t对象，主要给脚本语言使用。
      *
-     * @param parent 父控件
-     * @param x x坐标
-     * @param y y坐标
-     * @param w 宽度
-     * @param h 高度
+     * @param event event对象。
      *
-     * @returns 对象。
+     * @returns event对象。
      */
-    TView.create = function (parent, x, y, w, h) {
-        return new TView(view_create(parent != null ? (parent.nativeObj || parent) : null, x, y, w, h));
+    TWheelEvent.cast = function (event) {
+        return new TWheelEvent(wheel_event_cast(event != null ? (event.nativeObj || event) : null));
     };
-    /**
-     * 设置缺省获得焦点的子控件(可用控件名或类型)。
-     *
-     * @param default_focused_child 缺省获得焦点的子控件(可用控件名或类型)。
-     *
-     * @returns 返回RET_OK表示成功，否则表示失败。
-     */
-    TView.prototype.setDefaultFocusedChild = function (default_focused_child) {
-        return view_set_default_focused_child(this != null ? (this.nativeObj || this) : null, default_focused_child);
-    };
-    /**
-     * 转换为view对象(供脚本语言使用)。
-     *
-     * @param widget view对象。
-     *
-     * @returns view对象。
-     */
-    TView.cast = function (widget) {
-        return new TView(view_cast(widget != null ? (widget.nativeObj || widget) : null));
-    };
-    Object.defineProperty(TView.prototype, "defaultFocusedChild", {
+    Object.defineProperty(TWheelEvent.prototype, "dy", {
         /**
-         * 缺省获得焦点的子控件(可用控件名或类型)。
-         *
-         *> view作为pages/slideview的直接子控件才需要设置。
-         *> 正常情况下，一个窗口只能指定一个初始焦点。
-         *> 但是对于pages/slideview来说，可能希望每一个页面都有一个初始焦点，此时可用default\_focused\_child来指定。
+         * 滚轮的y值。
          *
          */
         get: function () {
-            return view_t_get_prop_default_focused_child(this.nativeObj);
-        },
-        set: function (v) {
-            this.setDefaultFocusedChild(v);
+            return wheel_event_t_get_prop_dy(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    return TView;
-}(TWidget));
-exports.TView = TView;
+    Object.defineProperty(TWheelEvent.prototype, "alt", {
+        /**
+         * alt键是否按下。
+         *
+         */
+        get: function () {
+            return wheel_event_t_get_prop_alt(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TWheelEvent.prototype, "ctrl", {
+        /**
+         * ctrl键是否按下。
+         *
+         */
+        get: function () {
+            return wheel_event_t_get_prop_ctrl(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TWheelEvent.prototype, "shift", {
+        /**
+         * shift键是否按下。
+         *
+         */
+        get: function () {
+            return wheel_event_t_get_prop_shift(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TWheelEvent;
+}(TEvent));
+exports.TWheelEvent = TWheelEvent;
+;
+/**
+ * 对象属性变化事件。
+ *
+ */
+var TPropChangeEvent = /** @class */ (function (_super) {
+    __extends(TPropChangeEvent, _super);
+    function TPropChangeEvent(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    /**
+     * 把event对象转prop_change_event_t对象，主要给脚本语言使用。
+     *
+     * @param event event对象。
+     *
+     * @returns 返回event对象。
+     */
+    TPropChangeEvent.cast = function (event) {
+        return new TPropChangeEvent(prop_change_event_cast(event != null ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(TPropChangeEvent.prototype, "name", {
+        /**
+         * 属性的名称。
+         *
+         */
+        get: function () {
+            return prop_change_event_t_get_prop_name(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TPropChangeEvent.prototype, "value", {
+        /**
+         * 属性的值。
+         *
+         */
+        get: function () {
+            return new TValue(prop_change_event_t_get_prop_value(this.nativeObj));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TPropChangeEvent;
+}(TEvent));
+exports.TPropChangeEvent = TPropChangeEvent;
+;
+/**
+ * 进度变化事件。
+ *
+ */
+var TProgressEvent = /** @class */ (function (_super) {
+    __extends(TProgressEvent, _super);
+    function TProgressEvent(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    /**
+     * 把event对象转progress_event_t对象，主要给脚本语言使用。
+     *
+     * @param event event对象。
+     *
+     * @returns 返回event对象。
+     */
+    TProgressEvent.cast = function (event) {
+        return new TProgressEvent(progress_event_cast(event != null ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(TProgressEvent.prototype, "percent", {
+        /**
+         * 进度百分比。
+         *
+         */
+        get: function () {
+            return progress_event_t_get_prop_percent(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TProgressEvent;
+}(TEvent));
+exports.TProgressEvent = TProgressEvent;
+;
+/**
+ * 执行完成事件。
+ *
+ */
+var TDoneEvent = /** @class */ (function (_super) {
+    __extends(TDoneEvent, _super);
+    function TDoneEvent(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    /**
+     * 把event对象转done_event_t对象，主要给脚本语言使用。
+     *
+     * @param event event对象。
+     *
+     * @returns 返回event对象。
+     */
+    TDoneEvent.cast = function (event) {
+        return new TDoneEvent(done_event_cast(event != null ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(TDoneEvent.prototype, "result", {
+        /**
+         * 执行结果。
+         *
+         */
+        get: function () {
+            return done_event_t_get_prop_result(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TDoneEvent;
+}(TEvent));
+exports.TDoneEvent = TDoneEvent;
+;
+/**
+ * 执行完成事件。
+ *
+ */
+var TErrorEvent = /** @class */ (function (_super) {
+    __extends(TErrorEvent, _super);
+    function TErrorEvent(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    /**
+     * 把event对象转error_event_t对象，主要给脚本语言使用。
+     *
+     * @param event event对象。
+     *
+     * @returns 返回event对象。
+     */
+    TErrorEvent.cast = function (event) {
+        return new TErrorEvent(error_event_cast(event != null ? (event.nativeObj || event) : null));
+    };
+    Object.defineProperty(TErrorEvent.prototype, "code", {
+        /**
+         * 错误码。
+         *
+         */
+        get: function () {
+            return error_event_t_get_prop_code(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TErrorEvent.prototype, "message", {
+        /**
+         * 错误信息。
+         *
+         */
+        get: function () {
+            return error_event_t_get_prop_message(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TErrorEvent;
+}(TEvent));
+exports.TErrorEvent = TErrorEvent;
 ;
 /**
  * 模拟时钟控件。
@@ -8824,164 +8963,6 @@ var TTimeClock = /** @class */ (function (_super) {
     return TTimeClock;
 }(TWidget));
 exports.TTimeClock = TTimeClock;
-;
-/**
- * 对象属性变化事件。
- *
- */
-var TPropChangeEvent = /** @class */ (function (_super) {
-    __extends(TPropChangeEvent, _super);
-    function TPropChangeEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    /**
-     * 把event对象转prop_change_event_t对象，主要给脚本语言使用。
-     *
-     * @param event event对象。
-     *
-     * @returns 返回event对象。
-     */
-    TPropChangeEvent.cast = function (event) {
-        return new TPropChangeEvent(prop_change_event_cast(event != null ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(TPropChangeEvent.prototype, "name", {
-        /**
-         * 属性的名称。
-         *
-         */
-        get: function () {
-            return prop_change_event_t_get_prop_name(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TPropChangeEvent.prototype, "value", {
-        /**
-         * 属性的值。
-         *
-         */
-        get: function () {
-            return new TValue(prop_change_event_t_get_prop_value(this.nativeObj));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TPropChangeEvent;
-}(TEvent));
-exports.TPropChangeEvent = TPropChangeEvent;
-;
-/**
- * 进度变化事件。
- *
- */
-var TProgressEvent = /** @class */ (function (_super) {
-    __extends(TProgressEvent, _super);
-    function TProgressEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    /**
-     * 把event对象转progress_event_t对象，主要给脚本语言使用。
-     *
-     * @param event event对象。
-     *
-     * @returns 返回event对象。
-     */
-    TProgressEvent.cast = function (event) {
-        return new TProgressEvent(progress_event_cast(event != null ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(TProgressEvent.prototype, "percent", {
-        /**
-         * 进度百分比。
-         *
-         */
-        get: function () {
-            return progress_event_t_get_prop_percent(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TProgressEvent;
-}(TEvent));
-exports.TProgressEvent = TProgressEvent;
-;
-/**
- * 执行完成事件。
- *
- */
-var TDoneEvent = /** @class */ (function (_super) {
-    __extends(TDoneEvent, _super);
-    function TDoneEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    /**
-     * 把event对象转done_event_t对象，主要给脚本语言使用。
-     *
-     * @param event event对象。
-     *
-     * @returns 返回event对象。
-     */
-    TDoneEvent.cast = function (event) {
-        return new TDoneEvent(done_event_cast(event != null ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(TDoneEvent.prototype, "result", {
-        /**
-         * 执行结果。
-         *
-         */
-        get: function () {
-            return done_event_t_get_prop_result(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TDoneEvent;
-}(TEvent));
-exports.TDoneEvent = TDoneEvent;
-;
-/**
- * 执行完成事件。
- *
- */
-var TErrorEvent = /** @class */ (function (_super) {
-    __extends(TErrorEvent, _super);
-    function TErrorEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    /**
-     * 把event对象转error_event_t对象，主要给脚本语言使用。
-     *
-     * @param event event对象。
-     *
-     * @returns 返回event对象。
-     */
-    TErrorEvent.cast = function (event) {
-        return new TErrorEvent(error_event_cast(event != null ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(TErrorEvent.prototype, "code", {
-        /**
-         * 错误码。
-         *
-         */
-        get: function () {
-            return error_event_t_get_prop_code(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TErrorEvent.prototype, "message", {
-        /**
-         * 错误信息。
-         *
-         */
-        get: function () {
-            return error_event_t_get_prop_message(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TErrorEvent;
-}(TEvent));
-exports.TErrorEvent = TErrorEvent;
 ;
 /**
  * 文本选择器控件，通常用于选择日期和时间等。
@@ -14614,73 +14595,6 @@ var TOrientationEvent = /** @class */ (function (_super) {
 exports.TOrientationEvent = TOrientationEvent;
 ;
 /**
- * 滚轮事件。
- *
- */
-var TWheelEvent = /** @class */ (function (_super) {
-    __extends(TWheelEvent, _super);
-    function TWheelEvent(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    /**
-     * 把event对象转wheel_event_t对象，主要给脚本语言使用。
-     *
-     * @param event event对象。
-     *
-     * @returns event对象。
-     */
-    TWheelEvent.cast = function (event) {
-        return new TWheelEvent(wheel_event_cast(event != null ? (event.nativeObj || event) : null));
-    };
-    Object.defineProperty(TWheelEvent.prototype, "dy", {
-        /**
-         * 滚轮的y值。
-         *
-         */
-        get: function () {
-            return wheel_event_t_get_prop_dy(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TWheelEvent.prototype, "alt", {
-        /**
-         * alt键是否按下。
-         *
-         */
-        get: function () {
-            return wheel_event_t_get_prop_alt(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TWheelEvent.prototype, "ctrl", {
-        /**
-         * ctrl键是否按下。
-         *
-         */
-        get: function () {
-            return wheel_event_t_get_prop_ctrl(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TWheelEvent.prototype, "shift", {
-        /**
-         * shift键是否按下。
-         *
-         */
-        get: function () {
-            return wheel_event_t_get_prop_shift(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TWheelEvent;
-}(TEvent));
-exports.TWheelEvent = TWheelEvent;
-;
-/**
  * app_bar控件。
  *
  *一个简单的容器控件，一般在窗口的顶部，用于显示本窗口的状态和信息。
@@ -17405,46 +17319,137 @@ var TTabControl = /** @class */ (function (_super) {
 exports.TTabControl = TTabControl;
 ;
 /**
- * mutable图片控件。
+ * 一个通用的容器控件。
  *
- *像摄像头和视频的图像是变化的，每一帧都不同，我们把这类图片称为mutable image。
+ *它本身不提供布局功能，仅提供具有语义的标签，让xml更具有可读性。
+ *子控件的布局可用layout\_children属性指定。
+ *请参考[布局参数](https://github.com/zlgopen/awtk/blob/master/docs/layout.md)。
  *
- *本控件辅助实现摄像头和视频的显示功能。
+ *view\_t是[widget\_t](widget_t.md)的子类控件，widget\_t的函数均适用于view\_t控件。
  *
- *mutable\_image\_t是[image\_base\_t](image_base_t.md)的子类控件，image\_base\_t的函数均适用于mutable\_image\_t控件。
- *
- *在xml中使用"mutable\_image"标签创建mutable图片控件。如：
+ *在xml中使用"view"标签创建view。如：
  *
  *```xml
- *<mutable_image w="100%" h="100%"/>
+ *<view x="0" y="0" w="100%" h="100%" children_layout="default(c=2,r=2,m=5,s=5)">
+ *</view>
  *```
  *
- *>更多用法请参考：
- *[mutable
- *image](https://github.com/zlgopen/awtk/blob/master/demos/assets/default/raw/ui/mutable_image.xml)
+ *可用通过style来设置控件的显示风格，如背景颜色等。如：
  *
- *在c代码中使用函数mutable\_image\_create创建mutable图片控件。如：
- *
- *
- *> 创建之后:
- *>
- *> 需要用mutable\_image\_set\_create\_image设置创建图片的回调函数。
- *> 需要用mutable\_image\_set\_prepare\_image设置准备图片的回调函数。
- *
- *> 完整示例请参考：[mutable image demo](
- *https://github.com/zlgopen/awtk-c-demos/blob/master/demos/mutable_image.c)
- *
- *一般不需通过style来设置控件的显示风格，如果在特殊情况下需要，可以参考其它控件。
+ *```xml
+ *<style name="default" border_color="#a0a0a0">
+ *<normal     bg_color="#f0f0f0" />
+ *</style>
+ *```
  *
  */
-var TMutableImage = /** @class */ (function (_super) {
-    __extends(TMutableImage, _super);
-    function TMutableImage(nativeObj) {
+var TView = /** @class */ (function (_super) {
+    __extends(TView, _super);
+    function TView(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    return TMutableImage;
-}(TImageBase));
-exports.TMutableImage = TMutableImage;
+    /**
+     * 创建view对象
+     *
+     * @param parent 父控件
+     * @param x x坐标
+     * @param y y坐标
+     * @param w 宽度
+     * @param h 高度
+     *
+     * @returns 对象。
+     */
+    TView.create = function (parent, x, y, w, h) {
+        return new TView(view_create(parent != null ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    /**
+     * 设置缺省获得焦点的子控件(可用控件名或类型)。
+     *
+     * @param default_focused_child 缺省获得焦点的子控件(可用控件名或类型)。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TView.prototype.setDefaultFocusedChild = function (default_focused_child) {
+        return view_set_default_focused_child(this != null ? (this.nativeObj || this) : null, default_focused_child);
+    };
+    /**
+     * 转换为view对象(供脚本语言使用)。
+     *
+     * @param widget view对象。
+     *
+     * @returns view对象。
+     */
+    TView.cast = function (widget) {
+        return new TView(view_cast(widget != null ? (widget.nativeObj || widget) : null));
+    };
+    Object.defineProperty(TView.prototype, "defaultFocusedChild", {
+        /**
+         * 缺省获得焦点的子控件(可用控件名或类型)。
+         *
+         *> view作为pages/slideview的直接子控件才需要设置。
+         *> 正常情况下，一个窗口只能指定一个初始焦点。
+         *> 但是对于pages/slideview来说，可能希望每一个页面都有一个初始焦点，此时可用default\_focused\_child来指定。
+         *
+         */
+        get: function () {
+            return view_t_get_prop_default_focused_child(this.nativeObj);
+        },
+        set: function (v) {
+            this.setDefaultFocusedChild(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TView;
+}(TWidget));
+exports.TView = TView;
+;
+/**
+ * 单个idle的信息。
+ *
+ */
+var TIdleInfo = /** @class */ (function (_super) {
+    __extends(TIdleInfo, _super);
+    function TIdleInfo(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    /**
+     * 转换为idle_info对象(供脚本语言使用)。
+     *
+     * @param idle idle_info对象。
+     *
+     * @returns idle_info对象。
+     */
+    TIdleInfo.cast = function (idle) {
+        return new TIdleInfo(idle_info_cast(idle != null ? (idle.nativeObj || idle) : null));
+    };
+    Object.defineProperty(TIdleInfo.prototype, "ctx", {
+        /**
+         * idle回调函数上下文。
+         *
+         */
+        get: function () {
+            return idle_info_t_get_prop_ctx(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TIdleInfo.prototype, "id", {
+        /**
+         * idle的ID
+         *
+         *> 为TK\_INVALID\_ID时表示无效idle。
+         *
+         */
+        get: function () {
+            return idle_info_t_get_prop_id(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TIdleInfo;
+}(TObject));
+exports.TIdleInfo = TIdleInfo;
 ;
 /**
  * 原生窗口。
@@ -17540,51 +17545,326 @@ var TNativeWindow = /** @class */ (function (_super) {
 exports.TNativeWindow = TNativeWindow;
 ;
 /**
- * 单个idle的信息。
+ * 对话框。 对话框是一种特殊的窗口，大小和位置可以自由设置。
+ *
+ *AWTK中的对话框可以是模态的，也可以是非模态的。
+ *
+ *如果dialog有透明或半透效果则不支持窗口动画。
+ *
+ *> 由于浏览器中无法实现主循环嵌套，因此无法实现模态对话框。
+ *如果希望自己写的AWTK应用程序可以在浏览器(包括各种小程序)中运行或演示，
+ *请避免使用模态对话框。
+ *
+ *对话框通常由对话框标题和对话框客户区两部分组成：
+ *
+ *
+ *
+ *dialog\_t是[window\_base\_t](window_base_t.md)的子类控件，window\_base\_t的函数均适用于dialog\_t控件。
+ *
+ *在xml中使用"dialog"标签创建对话框。如：
+ *
+ *```xml
+ *<dialog anim_hint="center_scale(duration=300)" x="c" y="m" w="80%" h="160" text="Dialog">
+ *<dialog_title x="0" y="0" w="100%" h="30" text="Hello AWTK" />
+ *<dialog_client x="0" y="bottom" w="100%" h="-30">
+ *<label name="" x="center" y="middle:-20" w="200" h="30" text="Are you ready?"/>
+ *<button name="quit" x="10" y="bottom:10" w="40%" h="30" text="确定"/>
+ *<button name="quit" x="right:10" y="bottom:10" w="40%" h="30" text="取消"/>
+ *</dialog_client>
+ *</dialog>
+ *```
+ *
+ *如果你不需要对话框的标题，可以这样写：
+ *
+ *```xml
+ *<dialog anim_hint="center_scale(duration=300)" x="c" y="m" w="80%" h="160" text="Dialog">
+ *<label name="" x="center" y="middle:-20" w="200" h="30" text="Are you ready?"/>
+ *<button name="quit" x="10" y="bottom:10" w="40%" h="30" text="确定"/>
+ *<button name="quit" x="right:10" y="bottom:10" w="40%" h="30" text="取消"/>
+ *</dialog>
+ *```
+ *
+ *打开非模态对话框时，其用法与普通窗口一样。打开非模态对话框时，还需要调用dialog\_modal。
+ *
+ *
+ *关闭模态对话框用dialog\_quit
+ *
+ *
+ *关闭非模态对话框用window\_close。
+ *
+ *
+ *> 更多用法请参考：
+ *[dialog.xml](https://github.com/zlgopen/awtk/blob/master/demos/assets/default/raw/ui/)
+ *
+ *> 完整C代码示例请参考：
+ *
+ ** [非模态对话框](https://github.com/zlgopen/awtk-c-demos/blob/master/demos/dialog.c)
+ *
+ ** [模态对话框](https://github.com/zlgopen/awtk-c-demos/blob/master/demos/dialog_modal.c)
+ *
+ *可用通过style来设置控件的显示风格，如字体的大小和颜色等等。如：
+ *
+ *```xml
+ *<style name="default">
+ *<normal border_color="#606060" />
+ *</style>
+ *```
+ *
+ *> 更多用法请参考：
+ *[theme default]
+ *(https://github.com/zlgopen/awtk/blob/master/demos/assets/default/raw/styles/default.xml#L324)
  *
  */
-var TIdleInfo = /** @class */ (function (_super) {
-    __extends(TIdleInfo, _super);
-    function TIdleInfo(nativeObj) {
+var TDialog = /** @class */ (function (_super) {
+    __extends(TDialog, _super);
+    function TDialog(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
     /**
-     * 转换为idle_info对象(供脚本语言使用)。
+     * 创建dialog对象。
      *
-     * @param idle idle_info对象。
+     * @param parent 父控件
+     * @param x x坐标
+     * @param y y坐标
+     * @param w 宽度
+     * @param h 高度
      *
-     * @returns idle_info对象。
+     * @returns dialog对象。
      */
-    TIdleInfo.cast = function (idle) {
-        return new TIdleInfo(idle_info_cast(idle != null ? (idle.nativeObj || idle) : null));
+    TDialog.create = function (parent, x, y, w, h) {
+        return new TDialog(dialog_create(parent != null ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
-    Object.defineProperty(TIdleInfo.prototype, "ctx", {
+    /**
+     * 创建dialog对象，同时创建title/client。
+     *
+     * @param parent 父控件
+     * @param x x坐标
+     * @param y y坐标
+     * @param w 宽度
+     * @param h 高度
+     *
+     * @returns dialog对象。
+     */
+    TDialog.createSimple = function (parent, x, y, w, h) {
+        return new TDialog(dialog_create_simple(parent != null ? (parent.nativeObj || parent) : null, x, y, w, h));
+    };
+    /**
+     * 转换dialog对象(供脚本语言使用)。
+     *
+     * @param widget dialog对象。
+     *
+     * @returns dialog对象。
+     */
+    TDialog.cast = function (widget) {
+        return new TDialog(dialog_cast(widget != null ? (widget.nativeObj || widget) : null));
+    };
+    /**
+     * 获取title控件。
+     *
+     *
+     * @returns title对象。
+     */
+    TDialog.prototype.getTitle = function () {
+        return new TWidget(dialog_get_title(this != null ? (this.nativeObj || this) : null));
+    };
+    /**
+     * 获取client控件。
+     *
+     *
+     * @returns client对象。
+     */
+    TDialog.prototype.getClient = function () {
+        return new TWidget(dialog_get_client(this != null ? (this.nativeObj || this) : null));
+    };
+    /**
+     * 从资源文件中加载并创建Dialog对象。
+     *
+     *本函数在ui\_loader/ui\_builder_default里实现。
+     *
+     * @param name dialog的名称。
+     *
+     * @returns 对象。
+     */
+    TDialog.open = function (name) {
+        return new TDialog(dialog_open(name));
+    };
+    /**
+     * 设置对话框的标题文本。
+     *
+     * @param title 标题。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TDialog.prototype.setTitle = function (title) {
+        return dialog_set_title(this != null ? (this.nativeObj || this) : null, title);
+    };
+    /**
+     * 模态显示对话框。
+     *dialog_modal返回后，dialog对象将在下一个idle函数中回收。
+     *也就是在dialog_modal调用完成后仍然可以访问dialog中控件，直到本次事件结束。
+     *
+     *
+     * @returns 返回退出吗。
+     */
+    TDialog.prototype.modal = function () {
+        return dialog_modal(this != null ? (this.nativeObj || this) : null);
+    };
+    /**
+     * 退出模态显示，关闭对话框。
+     *
+     *> 比如，在对话框中关闭按钮的事件处理函数中，调用本函数关闭对话框。
+     *
+     * @param code 退出码，作为dialog_modal的返回值(参考：[dialog_quit_code_t](dialog_quit_code_t.md))。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TDialog.prototype.quit = function (code) {
+        return dialog_quit(this != null ? (this.nativeObj || this) : null, code);
+    };
+    /**
+     * 检查对话框是否已经退出模态。
+     *
+     *
+     * @returns 返回TRUE表示已经退出，否则表示没有。
+     */
+    TDialog.prototype.isQuited = function () {
+        return dialog_is_quited(this != null ? (this.nativeObj || this) : null);
+    };
+    /**
+     * 检查对话框是否为模态对话框。
+     *
+     *
+     * @returns 返回TRUE表示是模态对话框，否则表示不是。
+     */
+    TDialog.prototype.isModal = function () {
+        return dialog_is_modal(this != null ? (this.nativeObj || this) : null);
+    };
+    /**
+     * 显示『短暂提示信息』对话框。
+     *
+     *主题由dialog_toast.xml文件决定。
+     *
+     * @param text 文本内容。
+     * @param duration 显示时间(单位为毫秒)。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TDialog.toast = function (text, duration) {
+        return dialog_toast(text, duration);
+    };
+    /**
+     * 显示『提示信息』对话框。
+     *
+     *主题由dialog_info.xml文件决定。
+     *
+     * @param title 标题。
+     * @param text 文本内容。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TDialog.info = function (title, text) {
+        return dialog_info(title, text);
+    };
+    /**
+     * 显示『警告』对话框。
+     *
+     *主题由dialog_warn.xml文件决定。
+     *
+     * @param title 标题。
+     * @param text 文本内容。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TDialog.warn = function (title, text) {
+        return dialog_warn(title, text);
+    };
+    /**
+     * 显示『确认』对话框。
+     *
+     *主题由dialog_confirm.xml文件决定。
+     *
+     * @param title 标题。
+     * @param text 文本内容。
+     *
+     * @returns 返回RET_OK表示确认，否则表示取消。
+     */
+    TDialog.confirm = function (title, text) {
+        return dialog_confirm(title, text);
+    };
+    Object.defineProperty(TDialog.prototype, "highlight", {
         /**
-         * idle回调函数上下文。
+         * 对话框高亮策略。
+         *
+         *> 请参考 [对话框高亮策略](https://github.com/zlgopen/awtk/blob/master/docs/dialog_highlight.md)
          *
          */
         get: function () {
-            return idle_info_t_get_prop_ctx(this.nativeObj);
+            return dialog_t_get_prop_highlight(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TIdleInfo.prototype, "id", {
+    return TDialog;
+}(TWindowBase));
+exports.TDialog = TDialog;
+;
+/**
+ * 单个定时器的信息。
+ *
+ */
+var TTimerInfo = /** @class */ (function (_super) {
+    __extends(TTimerInfo, _super);
+    function TTimerInfo(nativeObj) {
+        return _super.call(this, nativeObj) || this;
+    }
+    /**
+     * 转换为timer_info对象(供脚本语言使用)。
+     *
+     * @param timer timer_info对象。
+     *
+     * @returns timer_info对象。
+     */
+    TTimerInfo.cast = function (timer) {
+        return new TTimerInfo(timer_info_cast(timer != null ? (timer.nativeObj || timer) : null));
+    };
+    Object.defineProperty(TTimerInfo.prototype, "ctx", {
         /**
-         * idle的ID
-         *
-         *> 为TK\_INVALID\_ID时表示无效idle。
+         * 定时器回调函数的上下文
          *
          */
         get: function () {
-            return idle_info_t_get_prop_id(this.nativeObj);
+            return timer_info_t_get_prop_ctx(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    return TIdleInfo;
+    Object.defineProperty(TTimerInfo.prototype, "id", {
+        /**
+         * 定时器的ID
+         *
+         *> 为TK\_INVALID\_ID时表示无效定时器。
+         *
+         */
+        get: function () {
+            return timer_info_t_get_prop_id(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TTimerInfo.prototype, "now", {
+        /**
+         * 当前时间(相对时间，单位为毫秒)。
+         *
+         */
+        get: function () {
+            return timer_info_t_get_prop_now(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TTimerInfo;
 }(TObject));
-exports.TIdleInfo = TIdleInfo;
+exports.TTimerInfo = TTimerInfo;
 ;
 /**
  * 软键盘。
@@ -17710,64 +17990,6 @@ var TKeyboard = /** @class */ (function (_super) {
 exports.TKeyboard = TKeyboard;
 ;
 /**
- * 单个定时器的信息。
- *
- */
-var TTimerInfo = /** @class */ (function (_super) {
-    __extends(TTimerInfo, _super);
-    function TTimerInfo(nativeObj) {
-        return _super.call(this, nativeObj) || this;
-    }
-    /**
-     * 转换为timer_info对象(供脚本语言使用)。
-     *
-     * @param timer timer_info对象。
-     *
-     * @returns timer_info对象。
-     */
-    TTimerInfo.cast = function (timer) {
-        return new TTimerInfo(timer_info_cast(timer != null ? (timer.nativeObj || timer) : null));
-    };
-    Object.defineProperty(TTimerInfo.prototype, "ctx", {
-        /**
-         * 定时器回调函数的上下文
-         *
-         */
-        get: function () {
-            return timer_info_t_get_prop_ctx(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TTimerInfo.prototype, "id", {
-        /**
-         * 定时器的ID
-         *
-         *> 为TK\_INVALID\_ID时表示无效定时器。
-         *
-         */
-        get: function () {
-            return timer_info_t_get_prop_id(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TTimerInfo.prototype, "now", {
-        /**
-         * 当前时间(相对时间，单位为毫秒)。
-         *
-         */
-        get: function () {
-            return timer_info_t_get_prop_now(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TTimerInfo;
-}(TObject));
-exports.TTimerInfo = TTimerInfo;
-;
-/**
  * 图片控件。
  *
  *用来显示一张静态图片，目前支持bmp/png/jpg等格式。
@@ -17881,85 +18103,60 @@ var TImage = /** @class */ (function (_super) {
 exports.TImage = TImage;
 ;
 /**
- * SVG图片控件。
+ * 简单的动态数组，内部存放value对象。
  *
- *svg\_image\_t是[image\_base\_t](image_base_t.md)的子类控件，image\_base\_t的函数均适用于svg\_image\_t控件。
+ *访问时属性名称为：
  *
- *在xml中使用"svg"标签创建SVG图片控件。如：
- *
- *```xml
- *<svg image="girl"/>
- *```
- *
- *>更多用法请参考：[svg image](
- *https://github.com/zlgopen/awtk/blob/master/demos/assets/default/raw/ui/svg_image.xml)
- *
- *在c代码中使用函数svg\_image\_create创建SVG图片控件。如：
- *
- *
- *> 创建之后: 需要用widget\_set\_image设置图片名称。
- *
- *> 完整示例请参考：[svg image demo](
- *https://github.com/zlgopen/awtk-c-demos/blob/master/demos/svg_image.c)
- *
- *可用通过style来设置控件的显示风格，如背景和边框等。如：
- *
- *```xml
- *<svg>
- *<style name="default">
- *<normal border_color="green" fg_color="red" />
- *</style>
- *</svg>
- *```
- *
- *> 更多用法请参考：[theme default](
- *https://github.com/zlgopen/awtk/blob/master/demos/assets/default/raw/styles/default.xml)
+ ** "size"/"length" 用于获取数组的长度。
+ ** index 用于访问属性，-1可以用来追加新元素。
  *
  */
-var TSvgImage = /** @class */ (function (_super) {
-    __extends(TSvgImage, _super);
-    function TSvgImage(nativeObj) {
+var TObjectArray = /** @class */ (function (_super) {
+    __extends(TObjectArray, _super);
+    function TObjectArray(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
     /**
-     * 创建svg_image对象
+     * 创建对象。
      *
-     * @param parent 父控件
-     * @param x x坐标
-     * @param y y坐标
-     * @param w 宽度
-     * @param h 高度
      *
-     * @returns 对象。
+     * @returns 返回object对象。
      */
-    TSvgImage.create = function (parent, x, y, w, h) {
-        return new TSvgImage(svg_image_create(parent != null ? (parent.nativeObj || parent) : null, x, y, w, h));
+    TObjectArray.create = function () {
+        return new TObjectArray(object_array_create());
     };
     /**
-     * 设置控件的图片名称。
+     * for script gc
      *
-     *> 如果需要显示文件系统中的图片，只需将图片名称换成实际的文件名，并加上"file://"前缀即可。
-     *
-     * @param name 图片名称，该图片必须存在于资源管理器。
      *
      * @returns 返回RET_OK表示成功，否则表示失败。
      */
-    TSvgImage.prototype.setImage = function (name) {
-        return svg_image_set_image(this != null ? (this.nativeObj || this) : null, name);
+    TObjectArray.prototype.unref = function () {
+        return object_array_unref(this != null ? (this.nativeObj || this) : null);
     };
     /**
-     * 转换为svg_image对象(供脚本语言使用)。
+     * 清除全部属性。
      *
-     * @param widget svg_image对象。
      *
-     * @returns svg_image对象。
+     * @returns 返回RET_OK表示成功，否则表示失败。
      */
-    TSvgImage.cast = function (widget) {
-        return new TSvgImage(svg_image_cast(widget != null ? (widget.nativeObj || widget) : null));
+    TObjectArray.prototype.clearProps = function () {
+        return object_array_clear_props(this != null ? (this.nativeObj || this) : null);
     };
-    return TSvgImage;
-}(TImageBase));
-exports.TSvgImage = TSvgImage;
+    Object.defineProperty(TObjectArray.prototype, "propsSize", {
+        /**
+         * 属性个数。
+         *
+         */
+        get: function () {
+            return object_array_t_get_prop_props_size(this.nativeObj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TObjectArray;
+}(TObject));
+exports.TObjectArray = TObjectArray;
 ;
 /**
  * overlay窗口。
@@ -18200,17 +18397,14 @@ var TPopup = /** @class */ (function (_super) {
 exports.TPopup = TPopup;
 ;
 /**
- * 简单的动态数组，内部存放value对象。
+ * 对象接口的缺省实现。
  *
- *访问时属性名称为：
- *
- ** "size"/"length" 用于获取数组的长度。
- ** index 用于访问属性，-1可以用来追加新元素。
+ *内部使用有序数组保存所有属性，可以快速查找指定名称的属性。
  *
  */
-var TObjectArray = /** @class */ (function (_super) {
-    __extends(TObjectArray, _super);
-    function TObjectArray(nativeObj) {
+var TObjectDefault = /** @class */ (function (_super) {
+    __extends(TObjectDefault, _super);
+    function TObjectDefault(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
     /**
@@ -18219,8 +18413,8 @@ var TObjectArray = /** @class */ (function (_super) {
      *
      * @returns 返回object对象。
      */
-    TObjectArray.create = function () {
-        return new TObjectArray(object_array_create());
+    TObjectDefault.create = function () {
+        return new TObjectDefault(object_default_create());
     };
     /**
      * for script gc
@@ -18228,8 +18422,8 @@ var TObjectArray = /** @class */ (function (_super) {
      *
      * @returns 返回RET_OK表示成功，否则表示失败。
      */
-    TObjectArray.prototype.unref = function () {
-        return object_array_unref(this != null ? (this.nativeObj || this) : null);
+    TObjectDefault.prototype.unref = function () {
+        return object_default_unref(this != null ? (this.nativeObj || this) : null);
     };
     /**
      * 清除全部属性。
@@ -18237,23 +18431,23 @@ var TObjectArray = /** @class */ (function (_super) {
      *
      * @returns 返回RET_OK表示成功，否则表示失败。
      */
-    TObjectArray.prototype.clearProps = function () {
-        return object_array_clear_props(this != null ? (this.nativeObj || this) : null);
+    TObjectDefault.prototype.clearProps = function () {
+        return object_default_clear_props(this != null ? (this.nativeObj || this) : null);
     };
-    Object.defineProperty(TObjectArray.prototype, "propsSize", {
+    Object.defineProperty(TObjectDefault.prototype, "propsSize", {
         /**
          * 属性个数。
          *
          */
         get: function () {
-            return object_array_t_get_prop_props_size(this.nativeObj);
+            return object_default_t_get_prop_props_size(this.nativeObj);
         },
         enumerable: true,
         configurable: true
     });
-    return TObjectArray;
+    return TObjectDefault;
 }(TObject));
-exports.TObjectArray = TObjectArray;
+exports.TObjectDefault = TObjectDefault;
 ;
 /**
  * 窗口。
@@ -18403,57 +18597,85 @@ var TWindow = /** @class */ (function (_super) {
 exports.TWindow = TWindow;
 ;
 /**
- * 对象接口的缺省实现。
+ * SVG图片控件。
  *
- *内部使用有序数组保存所有属性，可以快速查找指定名称的属性。
+ *svg\_image\_t是[image\_base\_t](image_base_t.md)的子类控件，image\_base\_t的函数均适用于svg\_image\_t控件。
+ *
+ *在xml中使用"svg"标签创建SVG图片控件。如：
+ *
+ *```xml
+ *<svg image="girl"/>
+ *```
+ *
+ *>更多用法请参考：[svg image](
+ *https://github.com/zlgopen/awtk/blob/master/demos/assets/default/raw/ui/svg_image.xml)
+ *
+ *在c代码中使用函数svg\_image\_create创建SVG图片控件。如：
+ *
+ *
+ *> 创建之后: 需要用widget\_set\_image设置图片名称。
+ *
+ *> 完整示例请参考：[svg image demo](
+ *https://github.com/zlgopen/awtk-c-demos/blob/master/demos/svg_image.c)
+ *
+ *可用通过style来设置控件的显示风格，如背景和边框等。如：
+ *
+ *```xml
+ *<svg>
+ *<style name="default">
+ *<normal border_color="green" fg_color="red" />
+ *</style>
+ *</svg>
+ *```
+ *
+ *> 更多用法请参考：[theme default](
+ *https://github.com/zlgopen/awtk/blob/master/demos/assets/default/raw/styles/default.xml)
  *
  */
-var TObjectDefault = /** @class */ (function (_super) {
-    __extends(TObjectDefault, _super);
-    function TObjectDefault(nativeObj) {
+var TSvgImage = /** @class */ (function (_super) {
+    __extends(TSvgImage, _super);
+    function TSvgImage(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
     /**
-     * 创建对象。
+     * 创建svg_image对象
      *
+     * @param parent 父控件
+     * @param x x坐标
+     * @param y y坐标
+     * @param w 宽度
+     * @param h 高度
      *
-     * @returns 返回object对象。
+     * @returns 对象。
      */
-    TObjectDefault.create = function () {
-        return new TObjectDefault(object_default_create());
+    TSvgImage.create = function (parent, x, y, w, h) {
+        return new TSvgImage(svg_image_create(parent != null ? (parent.nativeObj || parent) : null, x, y, w, h));
     };
     /**
-     * for script gc
+     * 设置控件的图片名称。
      *
+     *> 如果需要显示文件系统中的图片，只需将图片名称换成实际的文件名，并加上"file://"前缀即可。
+     *
+     * @param name 图片名称，该图片必须存在于资源管理器。
      *
      * @returns 返回RET_OK表示成功，否则表示失败。
      */
-    TObjectDefault.prototype.unref = function () {
-        return object_default_unref(this != null ? (this.nativeObj || this) : null);
+    TSvgImage.prototype.setImage = function (name) {
+        return svg_image_set_image(this != null ? (this.nativeObj || this) : null, name);
     };
     /**
-     * 清除全部属性。
+     * 转换为svg_image对象(供脚本语言使用)。
      *
+     * @param widget svg_image对象。
      *
-     * @returns 返回RET_OK表示成功，否则表示失败。
+     * @returns svg_image对象。
      */
-    TObjectDefault.prototype.clearProps = function () {
-        return object_default_clear_props(this != null ? (this.nativeObj || this) : null);
+    TSvgImage.cast = function (widget) {
+        return new TSvgImage(svg_image_cast(widget != null ? (widget.nativeObj || widget) : null));
     };
-    Object.defineProperty(TObjectDefault.prototype, "propsSize", {
-        /**
-         * 属性个数。
-         *
-         */
-        get: function () {
-            return object_default_t_get_prop_props_size(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TObjectDefault;
-}(TObject));
-exports.TObjectDefault = TObjectDefault;
+    return TSvgImage;
+}(TImageBase));
+exports.TSvgImage = TSvgImage;
 ;
 /**
  * spinbox控件。
@@ -19023,268 +19245,46 @@ var TGifImage = /** @class */ (function (_super) {
 exports.TGifImage = TGifImage;
 ;
 /**
- * 对话框。 对话框是一种特殊的窗口，大小和位置可以自由设置。
+ * mutable图片控件。
  *
- *AWTK中的对话框可以是模态的，也可以是非模态的。
+ *像摄像头和视频的图像是变化的，每一帧都不同，我们把这类图片称为mutable image。
  *
- *如果dialog有透明或半透效果则不支持窗口动画。
+ *本控件辅助实现摄像头和视频的显示功能。
  *
- *> 由于浏览器中无法实现主循环嵌套，因此无法实现模态对话框。
- *如果希望自己写的AWTK应用程序可以在浏览器(包括各种小程序)中运行或演示，
- *请避免使用模态对话框。
+ *mutable\_image\_t是[image\_base\_t](image_base_t.md)的子类控件，image\_base\_t的函数均适用于mutable\_image\_t控件。
  *
- *对话框通常由对话框标题和对话框客户区两部分组成：
- *
- *
- *
- *dialog\_t是[window\_base\_t](window_base_t.md)的子类控件，window\_base\_t的函数均适用于dialog\_t控件。
- *
- *在xml中使用"dialog"标签创建对话框。如：
+ *在xml中使用"mutable\_image"标签创建mutable图片控件。如：
  *
  *```xml
- *<dialog anim_hint="center_scale(duration=300)" x="c" y="m" w="80%" h="160" text="Dialog">
- *<dialog_title x="0" y="0" w="100%" h="30" text="Hello AWTK" />
- *<dialog_client x="0" y="bottom" w="100%" h="-30">
- *<label name="" x="center" y="middle:-20" w="200" h="30" text="Are you ready?"/>
- *<button name="quit" x="10" y="bottom:10" w="40%" h="30" text="确定"/>
- *<button name="quit" x="right:10" y="bottom:10" w="40%" h="30" text="取消"/>
- *</dialog_client>
- *</dialog>
+ *<mutable_image w="100%" h="100%"/>
  *```
  *
- *如果你不需要对话框的标题，可以这样写：
+ *>更多用法请参考：
+ *[mutable
+ *image](https://github.com/zlgopen/awtk/blob/master/demos/assets/default/raw/ui/mutable_image.xml)
  *
- *```xml
- *<dialog anim_hint="center_scale(duration=300)" x="c" y="m" w="80%" h="160" text="Dialog">
- *<label name="" x="center" y="middle:-20" w="200" h="30" text="Are you ready?"/>
- *<button name="quit" x="10" y="bottom:10" w="40%" h="30" text="确定"/>
- *<button name="quit" x="right:10" y="bottom:10" w="40%" h="30" text="取消"/>
- *</dialog>
- *```
- *
- *打开非模态对话框时，其用法与普通窗口一样。打开非模态对话框时，还需要调用dialog\_modal。
+ *在c代码中使用函数mutable\_image\_create创建mutable图片控件。如：
  *
  *
- *关闭模态对话框用dialog\_quit
+ *> 创建之后:
+ *>
+ *> 需要用mutable\_image\_set\_create\_image设置创建图片的回调函数。
+ *> 需要用mutable\_image\_set\_prepare\_image设置准备图片的回调函数。
  *
+ *> 完整示例请参考：[mutable image demo](
+ *https://github.com/zlgopen/awtk-c-demos/blob/master/demos/mutable_image.c)
  *
- *关闭非模态对话框用window\_close。
- *
- *
- *> 更多用法请参考：
- *[dialog.xml](https://github.com/zlgopen/awtk/blob/master/demos/assets/default/raw/ui/)
- *
- *> 完整C代码示例请参考：
- *
- ** [非模态对话框](https://github.com/zlgopen/awtk-c-demos/blob/master/demos/dialog.c)
- *
- ** [模态对话框](https://github.com/zlgopen/awtk-c-demos/blob/master/demos/dialog_modal.c)
- *
- *可用通过style来设置控件的显示风格，如字体的大小和颜色等等。如：
- *
- *```xml
- *<style name="default">
- *<normal border_color="#606060" />
- *</style>
- *```
- *
- *> 更多用法请参考：
- *[theme default]
- *(https://github.com/zlgopen/awtk/blob/master/demos/assets/default/raw/styles/default.xml#L324)
+ *一般不需通过style来设置控件的显示风格，如果在特殊情况下需要，可以参考其它控件。
  *
  */
-var TDialog = /** @class */ (function (_super) {
-    __extends(TDialog, _super);
-    function TDialog(nativeObj) {
+var TMutableImage = /** @class */ (function (_super) {
+    __extends(TMutableImage, _super);
+    function TMutableImage(nativeObj) {
         return _super.call(this, nativeObj) || this;
     }
-    /**
-     * 创建dialog对象。
-     *
-     * @param parent 父控件
-     * @param x x坐标
-     * @param y y坐标
-     * @param w 宽度
-     * @param h 高度
-     *
-     * @returns dialog对象。
-     */
-    TDialog.create = function (parent, x, y, w, h) {
-        return new TDialog(dialog_create(parent != null ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    /**
-     * 创建dialog对象，同时创建title/client。
-     *
-     * @param parent 父控件
-     * @param x x坐标
-     * @param y y坐标
-     * @param w 宽度
-     * @param h 高度
-     *
-     * @returns dialog对象。
-     */
-    TDialog.createSimple = function (parent, x, y, w, h) {
-        return new TDialog(dialog_create_simple(parent != null ? (parent.nativeObj || parent) : null, x, y, w, h));
-    };
-    /**
-     * 转换dialog对象(供脚本语言使用)。
-     *
-     * @param widget dialog对象。
-     *
-     * @returns dialog对象。
-     */
-    TDialog.cast = function (widget) {
-        return new TDialog(dialog_cast(widget != null ? (widget.nativeObj || widget) : null));
-    };
-    /**
-     * 获取title控件。
-     *
-     *
-     * @returns title对象。
-     */
-    TDialog.prototype.getTitle = function () {
-        return new TWidget(dialog_get_title(this != null ? (this.nativeObj || this) : null));
-    };
-    /**
-     * 获取client控件。
-     *
-     *
-     * @returns client对象。
-     */
-    TDialog.prototype.getClient = function () {
-        return new TWidget(dialog_get_client(this != null ? (this.nativeObj || this) : null));
-    };
-    /**
-     * 从资源文件中加载并创建Dialog对象。
-     *
-     *本函数在ui\_loader/ui\_builder_default里实现。
-     *
-     * @param name dialog的名称。
-     *
-     * @returns 对象。
-     */
-    TDialog.open = function (name) {
-        return new TDialog(dialog_open(name));
-    };
-    /**
-     * 设置对话框的标题文本。
-     *
-     * @param title 标题。
-     *
-     * @returns 返回RET_OK表示成功，否则表示失败。
-     */
-    TDialog.prototype.setTitle = function (title) {
-        return dialog_set_title(this != null ? (this.nativeObj || this) : null, title);
-    };
-    /**
-     * 模态显示对话框。
-     *dialog_modal返回后，dialog对象将在下一个idle函数中回收。
-     *也就是在dialog_modal调用完成后仍然可以访问dialog中控件，直到本次事件结束。
-     *
-     *
-     * @returns 返回退出吗。
-     */
-    TDialog.prototype.modal = function () {
-        return dialog_modal(this != null ? (this.nativeObj || this) : null);
-    };
-    /**
-     * 退出模态显示，关闭对话框。
-     *
-     *> 比如，在对话框中关闭按钮的事件处理函数中，调用本函数关闭对话框。
-     *
-     * @param code 退出码，作为dialog_modal的返回值(参考：[dialog_quit_code_t](dialog_quit_code_t.md))。
-     *
-     * @returns 返回RET_OK表示成功，否则表示失败。
-     */
-    TDialog.prototype.quit = function (code) {
-        return dialog_quit(this != null ? (this.nativeObj || this) : null, code);
-    };
-    /**
-     * 检查对话框是否已经退出模态。
-     *
-     *
-     * @returns 返回TRUE表示已经退出，否则表示没有。
-     */
-    TDialog.prototype.isQuited = function () {
-        return dialog_is_quited(this != null ? (this.nativeObj || this) : null);
-    };
-    /**
-     * 检查对话框是否为模态对话框。
-     *
-     *
-     * @returns 返回TRUE表示是模态对话框，否则表示不是。
-     */
-    TDialog.prototype.isModal = function () {
-        return dialog_is_modal(this != null ? (this.nativeObj || this) : null);
-    };
-    /**
-     * 显示『短暂提示信息』对话框。
-     *
-     *主题由dialog_toast.xml文件决定。
-     *
-     * @param text 文本内容。
-     * @param duration 显示时间(单位为毫秒)。
-     *
-     * @returns 返回RET_OK表示成功，否则表示失败。
-     */
-    TDialog.toast = function (text, duration) {
-        return dialog_toast(text, duration);
-    };
-    /**
-     * 显示『提示信息』对话框。
-     *
-     *主题由dialog_info.xml文件决定。
-     *
-     * @param title 标题。
-     * @param text 文本内容。
-     *
-     * @returns 返回RET_OK表示成功，否则表示失败。
-     */
-    TDialog.info = function (title, text) {
-        return dialog_info(title, text);
-    };
-    /**
-     * 显示『警告』对话框。
-     *
-     *主题由dialog_warn.xml文件决定。
-     *
-     * @param title 标题。
-     * @param text 文本内容。
-     *
-     * @returns 返回RET_OK表示成功，否则表示失败。
-     */
-    TDialog.warn = function (title, text) {
-        return dialog_warn(title, text);
-    };
-    /**
-     * 显示『确认』对话框。
-     *
-     *主题由dialog_confirm.xml文件决定。
-     *
-     * @param title 标题。
-     * @param text 文本内容。
-     *
-     * @returns 返回RET_OK表示确认，否则表示取消。
-     */
-    TDialog.confirm = function (title, text) {
-        return dialog_confirm(title, text);
-    };
-    Object.defineProperty(TDialog.prototype, "highlight", {
-        /**
-         * 对话框高亮策略。
-         *
-         *> 请参考 [对话框高亮策略](https://github.com/zlgopen/awtk/blob/master/docs/dialog_highlight.md)
-         *
-         */
-        get: function () {
-            return dialog_t_get_prop_highlight(this.nativeObj);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return TDialog;
-}(TWindowBase));
-exports.TDialog = TDialog;
+    return TMutableImage;
+}(TImageBase));
+exports.TMutableImage = TMutableImage;
 ;
 /**
  * 可滚动的combo_box控件。
