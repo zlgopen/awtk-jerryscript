@@ -213,9 +213,9 @@ static ret_t awtk_jerryscript_get_module(const char* name, jerry_value_t* module
 static ret_t awtk_jerryscript_wrap_mudule(str_t* str, const char* filename, const char* script,
                                           uint32_t size) {
   str_append_more(str, "this." STR_MODULES "[\"", filename, "\"] = {};\n", NULL);
-  str_append(str, "(function module(exports) {");
+  str_append(str, "(function module(exports, global) {");
   str_append_with_len(str, script, size);
-  str_append_more(str, "})(this." STR_MODULES "[\"", filename, "\"])\n", NULL);
+  str_append_more(str, "})(this." STR_MODULES "[\"", filename, "\"], this)\n", NULL);
 
   return RET_OK;
 }
@@ -252,7 +252,9 @@ ret_t jerry_script_eval_buff(const char* script, uint32_t size, const char* file
   if (jerry_value_check(parsed_code) == RET_OK) {
     jerry_value_t ret_value = jerry_run(parsed_code);
     ret = jerry_value_check(ret_value);
-    jerry_release_value(ret_value);
+    if(ret == RET_OK) {
+      jerry_release_value(ret_value);
+    }
   }
 
   jerry_release_value(parsed_code);
