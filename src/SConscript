@@ -5,7 +5,8 @@ env=DefaultEnvironment().Clone()
 BIN_DIR=os.environ['BIN_DIR'];
 LIB_DIR=os.environ['LIB_DIR'];
 
-env.Library(os.path.join(LIB_DIR, 'awtk-jerryscript'), ['c/utils.c','c/tk_jerryscript.c'])
+env.Library(os.path.join(LIB_DIR, 'awtk-jerryscript'), ['c/utils.c', 'c/jerry_script_helper.c', 
+  'c/tk_jerryscript.c'])
 env.Program(os.path.join(BIN_DIR, 'awtkRun'), ['c/main.c', Glob('assets*.c')])
 
 

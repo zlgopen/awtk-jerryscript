@@ -34,10 +34,16 @@ sys.path.insert(0, '../awtk-linux-fb/')
 ## 运行
 
 ```
-./bin/awtkRun demos/xxxx.js
+./bin/awtkRun xxxx
 ```
 
-> 请把 xxxx.js 换成具体的 js 文件。
+> 请把 xxxx 换成具体的 js 文件, xxxx对应的js文件需要放在assets/default/raw/scripts目录下。
+
+如：
+
+```
+./bin/awtkRun basic
+```
 
 ## 更新绑定(由本项目的维护人员完成)
 
