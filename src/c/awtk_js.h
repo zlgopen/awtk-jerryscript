@@ -31,8 +31,8 @@ ret_t awtk_js_init(void);
 ret_t awtk_jerryscript_init(void);
 ret_t awtk_jerryscript_deinit(void);
 ret_t awtk_iotjs_jerryscript_init(void);
-ret_t awtk_jerryscript_eval(const char* filename);
 ret_t awtk_jerryscript_eval_awtk_js(const char* filename);
+ret_t awtk_jerryscript_eval(const char* filename, bool_t global);
 ret_t awtk_jerryscript_eval_script(const char* script, uint32_t size);
 
 END_C_DECLS

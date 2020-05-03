@@ -27,7 +27,7 @@
 const char* script_file = NULL;
 
 static ret_t on_cmd_line(int argc, char* argv[]) {
-  script_file = argc == 2 ? argv[1] : "./demos/demoui.js";
+  script_file = argc == 2 ? argv[1] : "demoui";
 
   return RET_OK;
 }
@@ -35,8 +35,8 @@ static ret_t on_cmd_line(int argc, char* argv[]) {
 static ret_t application_init() {
   awtk_jerryscript_init();
   awtk_jerryscript_eval_script(STR_BOOT_JS, strlen(STR_BOOT_JS));
-  return_value_if_fail(awtk_jerryscript_eval_awtk_js("src/js/awtk.js") == RET_OK, RET_FAIL);
-  return_value_if_fail(awtk_jerryscript_eval(script_file) == RET_OK, RET_FAIL);
+  return_value_if_fail(awtk_jerryscript_eval_awtk_js("awtk") == RET_OK, RET_FAIL);
+  return_value_if_fail(awtk_jerryscript_eval(script_file, FALSE) == RET_OK, RET_FAIL);
 
   return RET_OK;
 }

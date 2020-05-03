@@ -24,10 +24,11 @@
 #include "jerryscript-port.h"
 #include "jerryscript-core.h"
 #include "jerryscript-ext/handler.h"
-
 #include "tkc/fs.h"
+#include "tkc/str.h"
 #include "tkc/mem.h"
 #include "awtk_js.h"
+#include "base/assets_manager.h"
 
 #define JERRY_BUFFER_SIZE (40 * 1024)
 #define SYNTAX_ERROR_CONTEXT_SIZE 2
@@ -176,12 +177,53 @@ static void print_unhandled_exception(jerry_value_t error_value) /**< error valu
   jerry_release_value(err_str_val);
 } /* print_unhandled_exception */
 
-ret_t awtk_jerryscript_eval_script(const char* script, uint32_t size) {
+ret_t awtk_jerryscript_get_module(const char* name, jerry_value_t* module) {
+  ret_t ret = RET_OK;
+  jerry_value_t obj = jerry_get_global_object();
+  jerry_value_t prop_name = jerry_create_string((const jerry_char_t*)name);
+  jerry_value_t has_prop_js = jerry_has_property(obj, prop_name);
+
+  if (jerry_get_boolean_value(has_prop_js)) {
+    *module = jerry_get_property(obj, prop_name);
+    ret = RET_OK;
+  } else {
+    ret = RET_FAIL;
+  }
+
+  jerry_release_value(has_prop_js);
+  jerry_release_value(prop_name);
+
+  return ret;
+}
+
+static ret_t awtk_jerryscript_wrap_mudule(str_t* str, const char* filename, const char* script,
+                                          uint32_t size) {
+  str_append_more(str, "this[\"", filename, "\"] = {};\n", NULL);
+  str_append(str, "(function module(exports) {");
+  str_append_with_len(str, script, size);
+  str_append_more(str, "})(this[\"", filename, "\"])\n", NULL);
+
+  return RET_OK;
+}
+
+ret_t awtk_jerryscript_eval_script_ex(const char* script, uint32_t size, const char* filename,
+                                      bool_t global) {
   ret_t ret = RET_FAIL;
   jerry_value_t parsed_code;
   return_value_if_fail(script != NULL && size > 0, RET_NOT_FOUND);
 
-  parsed_code = jerry_parse(NULL, 0, (jerry_char_t*)script, size, JERRY_PARSE_NO_OPTS);
+  if (global) {
+    parsed_code = jerry_parse(NULL, 0, (jerry_char_t*)script, size, JERRY_PARSE_NO_OPTS);
+    log_debug("load %s into global\n", filename);
+  } else {
+    str_t str;
+    str_init(&str, size + 100);
+    awtk_jerryscript_wrap_mudule(&str, filename, script, size);
+    parsed_code = jerry_parse(NULL, 0, (jerry_char_t*)str.str, str.size, JERRY_PARSE_NO_OPTS);
+    str_reset(&str);
+    log_debug("load %s as module\n", filename);
+  }
+
   if (!jerry_value_is_error(parsed_code)) {
     jerry_value_t ret_value = jerry_run(parsed_code);
     if (jerry_value_is_error(ret_value)) {
@@ -202,53 +244,32 @@ ret_t awtk_jerryscript_eval_script(const char* script, uint32_t size) {
   return ret;
 }
 
-ret_t awtk_jerryscript_try_eval(const char* filename) {
-  uint32_t size = 0;
-  char* script = NULL;
+ret_t awtk_jerryscript_eval_script(const char* script, uint32_t size) {
+  return awtk_jerryscript_eval_script_ex(script, size, "<>", TRUE);
+}
+
+ret_t awtk_jerryscript_try_eval_ex(const char* filename, bool_t global) {
   ret_t ret = RET_FAIL;
-  return_value_if_fail(filename != NULL, RET_BAD_PARAMS);
-  script = file_read(filename, &size);
-  return_value_if_fail(script != NULL && size > 0, RET_NOT_FOUND);
-
-  ret = awtk_jerryscript_eval_script(script, size);
-
-  TKMEM_FREE(script);
+  const asset_info_t* info = assets_manager_ref(assets_manager(), ASSET_TYPE_SCRIPT, filename);
+  return_value_if_fail(info != NULL, RET_BAD_PARAMS);
+  ret = awtk_jerryscript_eval_script_ex((const char*)info->data, info->size, filename, global);
+  assets_manager_unref(assets_manager(), info);
 
   log_debug("awtk_jerryscript_try_eval %s ret=%d\n", filename, ret);
 
   return ret;
 }
 
+ret_t awtk_jerryscript_try_eval(const char* filename) {
+  return awtk_jerryscript_try_eval_ex(filename, TRUE);
+}
+
 ret_t awtk_jerryscript_eval_awtk_js(const char* filename) {
-  if (file_exist(filename)) {
-    return awtk_jerryscript_try_eval(filename);
-  } else if (file_exist("./awtk.js")) {
-    return awtk_jerryscript_try_eval("./awtk.js");
-  } else if (file_exist("./js/awtk.js")) {
-    return awtk_jerryscript_try_eval("./js/awtk.js");
-  } else {
-    log_debug("not found awtk.js: %s\n", filename);
-    return RET_FAIL;
-  }
+  return awtk_jerryscript_try_eval(filename);
 }
 
-ret_t awtk_jerryscript_eval(const char* filename) {
-  if (file_exist(filename)) {
-    return awtk_jerryscript_try_eval(filename);
-  } else {
-    log_debug("Not found: %s\n", filename);
-    return RET_FAIL;
-  }
-}
-
-ret_t awtk_jerryscript_init(void) {
-  jerry_init(JERRY_INIT_EMPTY);
-  jerryx_handler_register_global((const jerry_char_t*)"gc", jerryx_handler_gc);
-  jerryx_handler_register_global((const jerry_char_t*)"print", jerryx_handler_print);
-
-  awtk_js_init();
-
-  return RET_OK;
+ret_t awtk_jerryscript_eval(const char* filename, bool_t global) {
+  return awtk_jerryscript_try_eval_ex(filename, global);
 }
 
 ret_t awtk_iotjs_jerryscript_init(void) {
@@ -261,6 +282,47 @@ ret_t awtk_iotjs_jerryscript_init(void) {
 
 ret_t awtk_jerryscript_deinit(void) {
   jerry_cleanup();
+
+  return RET_OK;
+}
+
+jerry_value_t wrap_require(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                           const jerry_value_t argv[], const jerry_length_t argc) {
+  jerry_value_t jret = 0;
+
+  if (argc >= 1) {
+    char filename[MAX_PATH + 1];
+    jerry_size_t size = jerry_get_utf8_string_size(argv[0]);
+    assert(size < MAX_PATH);
+    jerry_string_to_utf8_char_buffer(argv[0], (jerry_char_t*)filename, size);
+    filename[size] = '\0';
+
+    if (awtk_jerryscript_get_module(filename, &jret) == RET_OK) {
+      log_debug("load %s success(cache)\n", filename);
+      return jret;
+    }
+
+    if (awtk_jerryscript_try_eval_ex(filename, FALSE) == RET_OK) {
+      log_debug("load %s success\n", filename);
+      if (awtk_jerryscript_get_module(filename, &jret) == RET_OK) {
+        return jret;
+      }
+    } else {
+      log_debug("load %s fail\n", filename);
+    }
+  }
+  jret = jerry_create_null();
+
+  return jret;
+}
+
+ret_t awtk_jerryscript_init(void) {
+  jerry_init(JERRY_INIT_EMPTY);
+  jerryx_handler_register_global((const jerry_char_t*)"gc", jerryx_handler_gc);
+  jerryx_handler_register_global((const jerry_char_t*)"print", jerryx_handler_print);
+  jerryx_handler_register_global((const jerry_char_t*)"require", wrap_require);
+
+  awtk_js_init();
 
   return RET_OK;
 }

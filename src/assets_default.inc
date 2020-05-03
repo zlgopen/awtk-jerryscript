@@ -446,7 +446,7 @@
 #include "assets/default/inc/fonts/ap.res"
 #include "assets/default/inc/fonts/default_full.res"
 #include "assets/default/inc/fonts/default.res"
-#else /*WITH_STB_FONT or WITH_FT_FONT*/
+#else/*WITH_STB_FONT or WITH_FT_FONT*/
 #include "assets/default/inc/fonts/default_20.data"
 #include "assets/default/inc/fonts/default_16.data"
 #include "assets/default/inc/fonts/default_18.data"
@@ -454,7 +454,39 @@
 #include "assets/default/inc/fonts/default_32.data"
 #include "assets/default/inc/fonts/default_24.data"
 #endif /*WITH_STB_FONT or WITH_FT_FONT*/
+#include "assets/default/inc/scripts/check_button.res"
+#include "assets/default/inc/scripts/time_now.res"
+#include "assets/default/inc/scripts/foo_demo.res"
+#include "assets/default/inc/scripts/value.res"
+#include "assets/default/inc/scripts/rect.res"
+#include "assets/default/inc/scripts/idle.res"
+#include "assets/default/inc/scripts/label.res"
+#include "assets/default/inc/scripts/add_and_remove.res"
 #include "assets/default/inc/scripts/dummy.res"
+#include "assets/default/inc/scripts/awtk.res"
+#include "assets/default/inc/scripts/demoui.res"
+#include "assets/default/inc/scripts/tab_top_compact.res"
+#include "assets/default/inc/scripts/slider.res"
+#include "assets/default/inc/scripts/named_value.res"
+#include "assets/default/inc/scripts/cube.res"
+#include "assets/default/inc/scripts/emitter.res"
+#include "assets/default/inc/scripts/basic.res"
+#include "assets/default/inc/scripts/rich_text.res"
+#include "assets/default/inc/scripts/canvas.res"
+#include "assets/default/inc/scripts/combo_box.res"
+#include "assets/default/inc/scripts/button.res"
+#include "assets/default/inc/scripts/spin_box.res"
+#include "assets/default/inc/scripts/native_window.res"
+#include "assets/default/inc/scripts/image.res"
+#include "assets/default/inc/scripts/edit.res"
+#include "assets/default/inc/scripts/foo.res"
+#include "assets/default/inc/scripts/file_chooser.res"
+#include "assets/default/inc/scripts/color.res"
+#include "assets/default/inc/scripts/timer.res"
+#include "assets/default/inc/scripts/combo_box_ex.res"
+#include "assets/default/inc/scripts/progress_bar.res"
+#include "assets/default/inc/scripts/object.res"
+#include "assets/default/inc/scripts/dialog.res"
 #endif /*WITH_FS_RES*/
 
 ret_t assets_init_default(void) {
@@ -764,7 +796,7 @@ ret_t assets_init_default(void) {
   assets_manager_add(am, font_ap);
   assets_manager_add(am, font_default_full);
   assets_manager_add(am, font_default);
-#else  /*WITH_STB_FONT or WITH_FT_FONT*/
+#else /*WITH_STB_FONT or WITH_FT_FONT*/
   assets_manager_add(am, font_default_20);
   assets_manager_add(am, font_default_16);
   assets_manager_add(am, font_default_18);
@@ -781,7 +813,39 @@ ret_t assets_init_default(void) {
   assets_manager_add(am, image_pointer);
   assets_manager_add(am, image_girl);
 #endif /*WITH_VGCANVAS*/
+  assets_manager_add(am, script_check_button);
+  assets_manager_add(am, script_time_now);
+  assets_manager_add(am, script_foo_demo);
+  assets_manager_add(am, script_value);
+  assets_manager_add(am, script_rect);
+  assets_manager_add(am, script_idle);
+  assets_manager_add(am, script_label);
+  assets_manager_add(am, script_add_and_remove);
   assets_manager_add(am, script_dummy);
+  assets_manager_add(am, script_awtk);
+  assets_manager_add(am, script_demoui);
+  assets_manager_add(am, script_tab_top_compact);
+  assets_manager_add(am, script_slider);
+  assets_manager_add(am, script_named_value);
+  assets_manager_add(am, script_cube);
+  assets_manager_add(am, script_emitter);
+  assets_manager_add(am, script_basic);
+  assets_manager_add(am, script_rich_text);
+  assets_manager_add(am, script_canvas);
+  assets_manager_add(am, script_combo_box);
+  assets_manager_add(am, script_button);
+  assets_manager_add(am, script_spin_box);
+  assets_manager_add(am, script_native_window);
+  assets_manager_add(am, script_image);
+  assets_manager_add(am, script_edit);
+  assets_manager_add(am, script_foo);
+  assets_manager_add(am, script_file_chooser);
+  assets_manager_add(am, script_color);
+  assets_manager_add(am, script_timer);
+  assets_manager_add(am, script_combo_box_ex);
+  assets_manager_add(am, script_progress_bar);
+  assets_manager_add(am, script_object);
+  assets_manager_add(am, script_dialog);
 #endif
 
   tk_init_assets();
