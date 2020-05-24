@@ -6023,10 +6023,11 @@ jsvalue_t get_WIDGET_PROP_CLOSABLE(const jerry_value_t func_obj_val, const jerry
   return jsvalue_create_string(ctx, WIDGET_PROP_CLOSABLE);
 }
 
-jsvalue_t get_WIDGET_PROP_CURSOR(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                                 const jerry_value_t argv[], const jerry_length_t argc) {
+jsvalue_t get_WIDGET_PROP_POINTER_CURSOR(const jerry_value_t func_obj_val,
+                                         const jerry_value_t this_p, const jerry_value_t argv[],
+                                         const jerry_length_t argc) {
   void* ctx = NULL;
-  return jsvalue_create_string(ctx, WIDGET_PROP_CURSOR);
+  return jsvalue_create_string(ctx, WIDGET_PROP_POINTER_CURSOR);
 }
 
 jsvalue_t get_WIDGET_PROP_VALUE(const jerry_value_t func_obj_val, const jerry_value_t this_p,
@@ -6174,6 +6175,12 @@ jsvalue_t get_WIDGET_PROP_MIN(const jerry_value_t func_obj_val, const jerry_valu
                               const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
   return jsvalue_create_string(ctx, WIDGET_PROP_MIN);
+}
+
+jsvalue_t get_WIDGET_PROP_ACTION_TEXT(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                      const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_PROP_ACTION_TEXT);
 }
 
 jsvalue_t get_WIDGET_PROP_TIPS(const jerry_value_t func_obj_val, const jerry_value_t this_p,
@@ -6736,7 +6743,8 @@ ret_t widget_prop_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_TYPE", get_WIDGET_PROP_TYPE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CLOSABLE",
                                  get_WIDGET_PROP_CLOSABLE);
-  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CURSOR", get_WIDGET_PROP_CURSOR);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_POINTER_CURSOR",
+                                 get_WIDGET_PROP_POINTER_CURSOR);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_VALUE", get_WIDGET_PROP_VALUE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_LENGTH", get_WIDGET_PROP_LENGTH);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_TEXT", get_WIDGET_PROP_TEXT);
@@ -6777,6 +6785,8 @@ ret_t widget_prop_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CLOSE_ANIM_HINT",
                                  get_WIDGET_PROP_CLOSE_ANIM_HINT);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_MIN", get_WIDGET_PROP_MIN);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ACTION_TEXT",
+                                 get_WIDGET_PROP_ACTION_TEXT);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_TIPS", get_WIDGET_PROP_TIPS);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_TR_TIPS",
                                  get_WIDGET_PROP_TR_TIPS);
@@ -7535,6 +7545,14 @@ jsvalue_t get_WIDGET_STATE_OVER_OF_CHECKED(const jerry_value_t func_obj_val,
   return jsvalue_create_string(ctx, WIDGET_STATE_OVER_OF_CHECKED);
 }
 
+jsvalue_t get_WIDGET_STATE_DISABLE_OF_CHECKED(const jerry_value_t func_obj_val,
+                                              const jerry_value_t this_p,
+                                              const jerry_value_t argv[],
+                                              const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_STATE_DISABLE_OF_CHECKED);
+}
+
 jsvalue_t get_WIDGET_STATE_FOCUSED_OF_CHECKED(const jerry_value_t func_obj_val,
                                               const jerry_value_t this_p,
                                               const jerry_value_t argv[],
@@ -7562,6 +7580,13 @@ jsvalue_t get_WIDGET_STATE_OVER_OF_ACTIVE(const jerry_value_t func_obj_val,
                                           const jerry_length_t argc) {
   void* ctx = NULL;
   return jsvalue_create_string(ctx, WIDGET_STATE_OVER_OF_ACTIVE);
+}
+
+jsvalue_t get_WIDGET_STATE_DISABLE_OF_ACTIVE(const jerry_value_t func_obj_val,
+                                             const jerry_value_t this_p, const jerry_value_t argv[],
+                                             const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_STATE_DISABLE_OF_ACTIVE);
 }
 
 jsvalue_t get_WIDGET_STATE_FOCUSED_OF_ACTIVE(const jerry_value_t func_obj_val,
@@ -7598,6 +7623,8 @@ ret_t widget_state_t_init(JSContext* ctx) {
                                  get_WIDGET_STATE_PRESSED_OF_CHECKED);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_OVER_OF_CHECKED",
                                  get_WIDGET_STATE_OVER_OF_CHECKED);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_DISABLE_OF_CHECKED",
+                                 get_WIDGET_STATE_DISABLE_OF_CHECKED);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_FOCUSED_OF_CHECKED",
                                  get_WIDGET_STATE_FOCUSED_OF_CHECKED);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_NORMAL_OF_ACTIVE",
@@ -7606,8 +7633,99 @@ ret_t widget_state_t_init(JSContext* ctx) {
                                  get_WIDGET_STATE_PRESSED_OF_ACTIVE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_OVER_OF_ACTIVE",
                                  get_WIDGET_STATE_OVER_OF_ACTIVE);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_DISABLE_OF_ACTIVE",
+                                 get_WIDGET_STATE_DISABLE_OF_ACTIVE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_STATE_FOCUSED_OF_ACTIVE",
                                  get_WIDGET_STATE_FOCUSED_OF_ACTIVE);
+
+  return RET_OK;
+}
+
+jsvalue_t get_WIDGET_CURSOR_DEFAULT(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                    const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_CURSOR_DEFAULT);
+}
+
+jsvalue_t get_WIDGET_CURSOR_EDIT(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                 const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_CURSOR_EDIT);
+}
+
+jsvalue_t get_WIDGET_CURSOR_HAND(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                 const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_CURSOR_HAND);
+}
+
+jsvalue_t get_WIDGET_CURSOR_WAIT(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                 const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_CURSOR_WAIT);
+}
+
+jsvalue_t get_WIDGET_CURSOR_CROSS(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                  const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_CURSOR_CROSS);
+}
+
+jsvalue_t get_WIDGET_CURSOR_NO(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                               const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_CURSOR_NO);
+}
+
+jsvalue_t get_WIDGET_CURSOR_SIZENWSE(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                     const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_CURSOR_SIZENWSE);
+}
+
+jsvalue_t get_WIDGET_CURSOR_SIZENESW(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                     const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_CURSOR_SIZENESW);
+}
+
+jsvalue_t get_WIDGET_CURSOR_SIZEWE(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                   const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_CURSOR_SIZEWE);
+}
+
+jsvalue_t get_WIDGET_CURSOR_SIZENS(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                   const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_CURSOR_SIZENS);
+}
+
+jsvalue_t get_WIDGET_CURSOR_SIZEALL(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                    const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_CURSOR_SIZEALL);
+}
+
+ret_t widget_cursor_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_CURSOR_DEFAULT",
+                                 get_WIDGET_CURSOR_DEFAULT);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_CURSOR_EDIT", get_WIDGET_CURSOR_EDIT);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_CURSOR_HAND", get_WIDGET_CURSOR_HAND);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_CURSOR_WAIT", get_WIDGET_CURSOR_WAIT);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_CURSOR_CROSS",
+                                 get_WIDGET_CURSOR_CROSS);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_CURSOR_NO", get_WIDGET_CURSOR_NO);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_CURSOR_SIZENWSE",
+                                 get_WIDGET_CURSOR_SIZENWSE);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_CURSOR_SIZENESW",
+                                 get_WIDGET_CURSOR_SIZENESW);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_CURSOR_SIZEWE",
+                                 get_WIDGET_CURSOR_SIZEWE);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_CURSOR_SIZENS",
+                                 get_WIDGET_CURSOR_SIZENS);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_CURSOR_SIZEALL",
+                                 get_WIDGET_CURSOR_SIZEALL);
 
   return RET_OK;
 }
@@ -8903,6 +9021,18 @@ jsvalue_t wrap_widget_t_get_prop_name(const jerry_value_t func_obj_val, const je
   return jret;
 }
 
+jsvalue_t wrap_widget_t_get_prop_pointer_cursor(const jerry_value_t func_obj_val,
+                                                const jerry_value_t this_p,
+                                                const jerry_value_t argv[],
+                                                const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  widget_t* obj = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+
+  jret = jsvalue_create_string(ctx, obj->pointer_cursor);
+  return jret;
+}
+
 jsvalue_t wrap_widget_t_get_prop_tr_text(const jerry_value_t func_obj_val,
                                          const jerry_value_t this_p, const jerry_value_t argv[],
                                          const jerry_length_t argc) {
@@ -9231,6 +9361,8 @@ ret_t widget_t_init(JSContext* ctx) {
                                  wrap_widget_t_get_prop_h);
   jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_name",
                                  wrap_widget_t_get_prop_name);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_pointer_cursor",
+                                 wrap_widget_t_get_prop_pointer_cursor);
   jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_tr_text",
                                  wrap_widget_t_get_prop_tr_text);
   jerryx_handler_register_global((const jerry_char_t*)"widget_t_get_prop_style",
@@ -19889,6 +20021,22 @@ jsvalue_t wrap_edit_set_input_type(const jerry_value_t func_obj_val, const jerry
   return jret;
 }
 
+jsvalue_t wrap_edit_set_action_text(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                    const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    char* action_text = (char*)jsvalue_get_utf8_string(ctx, argv[1]);
+    ret = (ret_t)edit_set_action_text(widget, action_text);
+    TKMEM_FREE(action_text);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_edit_set_tips(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                              const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -20105,6 +20253,17 @@ jsvalue_t wrap_edit_t_get_prop_tr_tips(const jerry_value_t func_obj_val, const j
   return jret;
 }
 
+jsvalue_t wrap_edit_t_get_prop_action_text(const jerry_value_t func_obj_val,
+                                           const jerry_value_t this_p, const jerry_value_t argv[],
+                                           const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  edit_t* obj = (edit_t*)jsvalue_get_pointer(ctx, argv[0], "edit_t*");
+
+  jret = jsvalue_create_string(ctx, obj->action_text);
+  return jret;
+}
+
 jsvalue_t wrap_edit_t_get_prop_keyboard(const jerry_value_t func_obj_val,
                                         const jerry_value_t this_p, const jerry_value_t argv[],
                                         const jerry_length_t argc) {
@@ -20178,6 +20337,8 @@ ret_t edit_t_init(JSContext* ctx) {
                                  wrap_edit_set_open_im_when_focused);
   jerryx_handler_register_global((const jerry_char_t*)"edit_set_input_type",
                                  wrap_edit_set_input_type);
+  jerryx_handler_register_global((const jerry_char_t*)"edit_set_action_text",
+                                 wrap_edit_set_action_text);
   jerryx_handler_register_global((const jerry_char_t*)"edit_set_tips", wrap_edit_set_tips);
   jerryx_handler_register_global((const jerry_char_t*)"edit_set_tr_tips", wrap_edit_set_tr_tips);
   jerryx_handler_register_global((const jerry_char_t*)"edit_set_keyboard", wrap_edit_set_keyboard);
@@ -20207,6 +20368,8 @@ ret_t edit_t_init(JSContext* ctx) {
                                  wrap_edit_t_get_prop_tips);
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_tr_tips",
                                  wrap_edit_t_get_prop_tr_tips);
+  jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_action_text",
+                                 wrap_edit_t_get_prop_action_text);
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_keyboard",
                                  wrap_edit_t_get_prop_keyboard);
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_input_type",
@@ -21536,6 +21699,24 @@ jsvalue_t wrap_native_window_set_fullscreen(const jerry_value_t func_obj_val,
   return jret;
 }
 
+jsvalue_t wrap_native_window_set_cursor(const jerry_value_t func_obj_val,
+                                        const jerry_value_t this_p, const jerry_value_t argv[],
+                                        const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 3) {
+    ret_t ret = (ret_t)0;
+    native_window_t* win = (native_window_t*)jsvalue_get_pointer(ctx, argv[0], "native_window_t*");
+    const char* name = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
+    bitmap_t* img = (bitmap_t*)jsvalue_get_pointer(ctx, argv[2], "bitmap_t*");
+    ret = (ret_t)native_window_set_cursor(win, name, img);
+    TKMEM_FREE(name);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 ret_t native_window_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"native_window_move",
                                  wrap_native_window_move);
@@ -21553,6 +21734,8 @@ ret_t native_window_t_init(JSContext* ctx) {
                                  wrap_native_window_show_border);
   jerryx_handler_register_global((const jerry_char_t*)"native_window_set_fullscreen",
                                  wrap_native_window_set_fullscreen);
+  jerryx_handler_register_global((const jerry_char_t*)"native_window_set_cursor",
+                                 wrap_native_window_set_cursor);
 
   return RET_OK;
 }
@@ -22962,6 +23145,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   window_stage_t_init(ctx);
   window_closable_t_init(ctx);
   widget_state_t_init(ctx);
+  widget_cursor_t_init(ctx);
   widget_t_init(ctx);
   ret_t_init(ctx);
   timer_manager_t_init(ctx);

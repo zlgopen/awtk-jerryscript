@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -4431,7 +4431,7 @@ var TWidgetProp;
      * 鼠标指针。
      *
      */
-    TWidgetProp[TWidgetProp["CURSOR"] = WIDGET_PROP_CURSOR()] = "CURSOR";
+    TWidgetProp[TWidgetProp["POINTER_CURSOR"] = WIDGET_PROP_POINTER_CURSOR()] = "POINTER_CURSOR";
     /**
      * 值。
      *
@@ -4552,6 +4552,11 @@ var TWidgetProp;
      *
      */
     TWidgetProp[TWidgetProp["MIN"] = WIDGET_PROP_MIN()] = "MIN";
+    /**
+     * 软键盘上action按钮的文本。
+     *
+     */
+    TWidgetProp[TWidgetProp["ACTION_TEXT"] = WIDGET_PROP_ACTION_TEXT()] = "ACTION_TEXT";
     /**
      * 提示信息。
      *
@@ -5382,6 +5387,11 @@ var TWidgetState;
      */
     TWidgetState[TWidgetState["STATE_OVER_OF_CHECKED"] = WIDGET_STATE_OVER_OF_CHECKED()] = "STATE_OVER_OF_CHECKED";
     /**
+     * 禁用状态(选中项)。
+     *
+     */
+    TWidgetState[TWidgetState["STATE_DISABLE_OF_CHECKED"] = WIDGET_STATE_DISABLE_OF_CHECKED()] = "STATE_DISABLE_OF_CHECKED";
+    /**
      * 焦点状态(选中项)。
      *
      */
@@ -5402,11 +5412,79 @@ var TWidgetState;
      */
     TWidgetState[TWidgetState["STATE_OVER_OF_ACTIVE"] = WIDGET_STATE_OVER_OF_ACTIVE()] = "STATE_OVER_OF_ACTIVE";
     /**
+     * 禁用状态(当前项)。
+     *
+     */
+    TWidgetState[TWidgetState["STATE_DISABLE_OF_ACTIVE"] = WIDGET_STATE_DISABLE_OF_ACTIVE()] = "STATE_DISABLE_OF_ACTIVE";
+    /**
      * 焦点状态(当前项)。
      *
      */
     TWidgetState[TWidgetState["STATE_FOCUSED_OF_ACTIVE"] = WIDGET_STATE_FOCUSED_OF_ACTIVE()] = "STATE_FOCUSED_OF_ACTIVE";
 })(TWidgetState = exports.TWidgetState || (exports.TWidgetState = {}));
+;
+/**
+ * 控件鼠标光标常量定义。
+ *
+ */
+var TWidgetCursor;
+(function (TWidgetCursor) {
+    /**
+     * 默认光标。
+     *
+     */
+    TWidgetCursor[TWidgetCursor["CURSOR_DEFAULT"] = WIDGET_CURSOR_DEFAULT()] = "CURSOR_DEFAULT";
+    /**
+     * 文本选择光标。
+     *
+     */
+    TWidgetCursor[TWidgetCursor["CURSOR_EDIT"] = WIDGET_CURSOR_EDIT()] = "CURSOR_EDIT";
+    /**
+     * 手指光标。
+     *
+     */
+    TWidgetCursor[TWidgetCursor["CURSOR_HAND"] = WIDGET_CURSOR_HAND()] = "CURSOR_HAND";
+    /**
+     * 等待光标。
+     *
+     */
+    TWidgetCursor[TWidgetCursor["CURSOR_WAIT"] = WIDGET_CURSOR_WAIT()] = "CURSOR_WAIT";
+    /**
+     * 叉光标。
+     *
+     */
+    TWidgetCursor[TWidgetCursor["CURSOR_CROSS"] = WIDGET_CURSOR_CROSS()] = "CURSOR_CROSS";
+    /**
+     * Slashed circle or crossbones。
+     *
+     */
+    TWidgetCursor[TWidgetCursor["CURSOR_NO"] = WIDGET_CURSOR_NO()] = "CURSOR_NO";
+    /**
+     * Double arrow pointing northwest and southeast。
+     *
+     */
+    TWidgetCursor[TWidgetCursor["CURSOR_SIZENWSE"] = WIDGET_CURSOR_SIZENWSE()] = "CURSOR_SIZENWSE";
+    /**
+     * Double arrow pointing northeast and southwest。
+     *
+     */
+    TWidgetCursor[TWidgetCursor["CURSOR_SIZENESW"] = WIDGET_CURSOR_SIZENESW()] = "CURSOR_SIZENESW";
+    /**
+     * Double arrow pointing west and east。
+     *
+     */
+    TWidgetCursor[TWidgetCursor["CURSOR_SIZEWE"] = WIDGET_CURSOR_SIZEWE()] = "CURSOR_SIZEWE";
+    /**
+     * Double arrow pointing north and south。
+     *
+     */
+    TWidgetCursor[TWidgetCursor["CURSOR_SIZENS"] = WIDGET_CURSOR_SIZENS()] = "CURSOR_SIZENS";
+    /**
+     * Four pointed arrow pointing north, south, east, and west。
+     *
+     */
+    TWidgetCursor[TWidgetCursor["CURSOR_SIZEALL"] = WIDGET_CURSOR_SIZEALL()] = "CURSOR_SIZEALL";
+})(TWidgetCursor = exports.TWidgetCursor || (exports.TWidgetCursor = {}));
 ;
 /**
  * widget_t* button = button_create(win, 10, 10, 128, 30);
@@ -6341,6 +6419,20 @@ var TWidget = /** @class */ (function () {
         },
         set: function (v) {
             this.setName(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TWidget.prototype, "pointerCursor", {
+        /**
+         * 鼠标光标图片名称。
+         *
+         */
+        get: function () {
+            return widget_t_get_prop_pointer_cursor(this.nativeObj);
+        },
+        set: function (v) {
+            this.setPointerCursor(v);
         },
         enumerable: true,
         configurable: true
@@ -15796,6 +15888,16 @@ var TEdit = /** @class */ (function (_super) {
         return edit_set_input_type(this != null ? (this.nativeObj || this) : null, type);
     };
     /**
+     * 设置软键盘上action按钮的文本。
+     *
+     * @param action_text 软键盘上action按钮的文本。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TEdit.prototype.setActionText = function (action_text) {
+        return edit_set_action_text(this != null ? (this.nativeObj || this) : null, action_text);
+    };
+    /**
      * 设置编辑器的输入提示。
      *
      * @param tips 输入提示。
@@ -15997,6 +16099,25 @@ var TEdit = /** @class */ (function (_super) {
         },
         set: function (v) {
             this.setTrTips(v);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TEdit.prototype, "actionText", {
+        /**
+         * 软键盘上action按钮的文本。内置取值有：
+         *
+         ** next 将焦点切换到下一个控件。
+         ** done 完成，关闭软键盘。
+         *
+         *也可以使用其它文本，比如send表示发送。这个需要自己实现相应的功能，处理EVT\_IM\_ACTION事件即可。
+         *
+         */
+        get: function () {
+            return edit_t_get_prop_action_text(this.nativeObj);
+        },
+        set: function (v) {
+            this.setActionText(v);
         },
         enumerable: true,
         configurable: true
@@ -17539,6 +17660,17 @@ var TNativeWindow = /** @class */ (function (_super) {
      */
     TNativeWindow.prototype.setFullscreen = function (fullscreen) {
         return native_window_set_fullscreen(this != null ? (this.nativeObj || this) : null, fullscreen);
+    };
+    /**
+     * 设置鼠标光标。
+     *
+     * @param name 鼠标光标的名称。
+     * @param img 鼠标光标的图片。
+     *
+     * @returns 返回RET_OK表示成功，否则表示失败。
+     */
+    TNativeWindow.prototype.setCursor = function (name, img) {
+        return native_window_set_cursor(this != null ? (this.nativeObj || this) : null, name, img != null ? (img.nativeObj || img) : null);
     };
     return TNativeWindow;
 }(TObject));
