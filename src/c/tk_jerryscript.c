@@ -9434,35 +9434,6 @@ jsvalue_t wrap_app_conf_save(const jerry_value_t func_obj_val, const jerry_value
   return jret;
 }
 
-jsvalue_t wrap_app_conf_on_changed(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                                   const jerry_value_t argv[], const jerry_length_t argc) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 2) {
-    uint32_t ret = (uint32_t)0;
-    event_func_t on_event = (event_func_t)jsvalue_get_pointer(ctx, argv[0], "event_func_t");
-    void* ctx = NULL;
-    ret = (uint32_t)app_conf_on_changed(on_event, ctx);
-
-    jret = jsvalue_create_int(ctx, ret);
-  }
-  return jret;
-}
-
-jsvalue_t wrap_app_conf_off_changed(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                                    const jerry_value_t argv[], const jerry_length_t argc) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 1) {
-    ret_t ret = (ret_t)0;
-    uint32_t id = (uint32_t)jsvalue_get_int_value(ctx, argv[0]);
-    ret = (ret_t)app_conf_off_changed(id);
-
-    jret = jsvalue_create_int(ctx, ret);
-  }
-  return jret;
-}
-
 jsvalue_t wrap_app_conf_deinit(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -9670,10 +9641,6 @@ jsvalue_t wrap_app_conf_remove(const jerry_value_t func_obj_val, const jerry_val
 
 ret_t app_conf_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"app_conf_save", wrap_app_conf_save);
-  jerryx_handler_register_global((const jerry_char_t*)"app_conf_on_changed",
-                                 wrap_app_conf_on_changed);
-  jerryx_handler_register_global((const jerry_char_t*)"app_conf_off_changed",
-                                 wrap_app_conf_off_changed);
   jerryx_handler_register_global((const jerry_char_t*)"app_conf_deinit", wrap_app_conf_deinit);
   jerryx_handler_register_global((const jerry_char_t*)"app_conf_exist", wrap_app_conf_exist);
   jerryx_handler_register_global((const jerry_char_t*)"app_conf_set_int", wrap_app_conf_set_int);
