@@ -2746,6 +2746,30 @@ jsvalue_t get_INPUT_PHONE(const jerry_value_t func_obj_val, const jerry_value_t 
   return jsvalue_create_int(ctx, INPUT_PHONE);
 }
 
+jsvalue_t get_INPUT_IPV4(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                         const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, INPUT_IPV4);
+}
+
+jsvalue_t get_INPUT_DATE(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                         const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, INPUT_DATE);
+}
+
+jsvalue_t get_INPUT_TIME(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                         const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, INPUT_TIME);
+}
+
+jsvalue_t get_INPUT_TIME_FULL(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                              const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, INPUT_TIME_FULL);
+}
+
 jsvalue_t get_INPUT_CUSTOM(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                            const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -2768,6 +2792,10 @@ ret_t input_type_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_EMAIL", get_INPUT_EMAIL);
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_PASSWORD", get_INPUT_PASSWORD);
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_PHONE", get_INPUT_PHONE);
+  jerryx_handler_register_global((const jerry_char_t*)"INPUT_IPV4", get_INPUT_IPV4);
+  jerryx_handler_register_global((const jerry_char_t*)"INPUT_DATE", get_INPUT_DATE);
+  jerryx_handler_register_global((const jerry_char_t*)"INPUT_TIME", get_INPUT_TIME);
+  jerryx_handler_register_global((const jerry_char_t*)"INPUT_TIME_FULL", get_INPUT_TIME_FULL);
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_CUSTOM", get_INPUT_CUSTOM);
   jerryx_handler_register_global((const jerry_char_t*)"INPUT_CUSTOM_PASSWORD",
                                  get_INPUT_CUSTOM_PASSWORD);
