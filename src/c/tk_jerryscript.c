@@ -2565,6 +2565,22 @@ jsvalue_t wrap_font_manager_unload_font(const jerry_value_t func_obj_val,
   return jret;
 }
 
+jsvalue_t wrap_font_manager_shrink_cache(const jerry_value_t func_obj_val,
+                                         const jerry_value_t this_p, const jerry_value_t argv[],
+                                         const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    font_manager_t* fm = (font_manager_t*)jsvalue_get_pointer(ctx, argv[0], "font_manager_t*");
+    uint32_t cache_size = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
+    ret = (ret_t)font_manager_shrink_cache(fm, cache_size);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_font_manager_unload_all(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                        const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -2582,6 +2598,8 @@ jsvalue_t wrap_font_manager_unload_all(const jerry_value_t func_obj_val, const j
 ret_t font_manager_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"font_manager_unload_font",
                                  wrap_font_manager_unload_font);
+  jerryx_handler_register_global((const jerry_char_t*)"font_manager_shrink_cache",
+                                 wrap_font_manager_shrink_cache);
   jerryx_handler_register_global((const jerry_char_t*)"font_manager_unload_all",
                                  wrap_font_manager_unload_all);
 
