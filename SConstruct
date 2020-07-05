@@ -53,8 +53,8 @@ TK_JS_JERRYSCRIPT_DIRS = [
 APP_LIBS = ['awtk-jerryscript', 'jerryscript']
 APP_LIBPATH = [APP_LIB_DIR]
 APP_CPPPATH = TK_JS_JERRYSCRIPT_DIRS
-APP_CFLAGS = '-DRES_ROOT=\"\\\"'+RES_ROOT+'\\\"\" -DPATH_MAX=256 '
-APP_CCFLAGS = '-DRES_ROOT=\"\\\"'+RES_ROOT+'\\\"\" -DPATH_MAX=256 '
+APP_CFLAGS = '-DRES_ROOT=\"\\\"'+RES_ROOT+'\\\"\" -DPATH_MAX=256 -DJERRY_ESNEXT=0 '
+APP_CCFLAGS = '-DRES_ROOT=\"\\\"'+RES_ROOT+'\\\"\" -DPATH_MAX=256 -DJERRY_ESNEXT=0 '
 
 if hasattr(awtk, 'CC'):
   DefaultEnvironment(
