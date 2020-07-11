@@ -5873,6 +5873,12 @@ jsvalue_t get_WIDGET_PROP_DIRTY_RECT_TOLERANCE(const jerry_value_t func_obj_val,
   return jsvalue_create_string(ctx, WIDGET_PROP_DIRTY_RECT_TOLERANCE);
 }
 
+jsvalue_t get_WIDGET_PROP_BIDI(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                               const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_PROP_BIDI);
+}
+
 jsvalue_t get_WIDGET_PROP_CANVAS(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                  const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -6674,6 +6680,7 @@ ret_t widget_prop_t_init(JSContext* ctx) {
                                  get_WIDGET_PROP_CARET_Y);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_DIRTY_RECT_TOLERANCE",
                                  get_WIDGET_PROP_DIRTY_RECT_TOLERANCE);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_BIDI", get_WIDGET_PROP_BIDI);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CANVAS", get_WIDGET_PROP_CANVAS);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_LOCALIZE_OPTIONS",
                                  get_WIDGET_PROP_LOCALIZE_OPTIONS);
@@ -9975,6 +9982,18 @@ jsvalue_t get_BIDI_TYPE_RTL(const jerry_value_t func_obj_val, const jerry_value_
   return jsvalue_create_int(ctx, BIDI_TYPE_RTL);
 }
 
+jsvalue_t get_BIDI_TYPE_LRO(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                            const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, BIDI_TYPE_LRO);
+}
+
+jsvalue_t get_BIDI_TYPE_RLO(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                            const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, BIDI_TYPE_RLO);
+}
+
 jsvalue_t get_BIDI_TYPE_WLTR(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                              const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -9991,6 +10010,8 @@ ret_t bidi_type_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_AUTO", get_BIDI_TYPE_AUTO);
   jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_LTR", get_BIDI_TYPE_LTR);
   jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_RTL", get_BIDI_TYPE_RTL);
+  jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_LRO", get_BIDI_TYPE_LRO);
+  jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_RLO", get_BIDI_TYPE_RLO);
   jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_WLTR", get_BIDI_TYPE_WLTR);
   jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_WRTL", get_BIDI_TYPE_WRTL);
 

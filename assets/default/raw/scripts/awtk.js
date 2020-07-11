@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -4303,6 +4303,11 @@ var TWidgetProp;
      */
     TWidgetProp[TWidgetProp["DIRTY_RECT_TOLERANCE"] = WIDGET_PROP_DIRTY_RECT_TOLERANCE()] = "DIRTY_RECT_TOLERANCE";
     /**
+     * bidi type(rtl,ltr,auto,wrtl,wltr,lro,rlo)。
+     *
+     */
+    TWidgetProp[TWidgetProp["BIDI"] = WIDGET_PROP_BIDI()] = "BIDI";
+    /**
      * Canvas。
      *
      */
@@ -7033,6 +7038,16 @@ var TBidiType;
      *
      */
     TBidiType[TBidiType["RTL"] = BIDI_TYPE_RTL()] = "RTL";
+    /**
+     * Left-To-Right letter Override。
+     *
+     */
+    TBidiType[TBidiType["LRO"] = BIDI_TYPE_LRO()] = "LRO";
+    /**
+     * Right-To-Left letter Override。
+     *
+     */
+    TBidiType[TBidiType["RLO"] = BIDI_TYPE_RLO()] = "RLO";
     /**
      * Weak Left To Right paragraph。
      *
