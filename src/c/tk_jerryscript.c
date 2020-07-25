@@ -128,8 +128,6 @@ static jerry_object_native_info_t s_emitter_destroy_info = {
     (jerry_object_native_free_callback_t)emitter_destroy};
 static jerry_object_native_info_t s_bitmap_destroy_info = {
     (jerry_object_native_free_callback_t)bitmap_destroy};
-static jerry_object_native_info_t s_bitmap_get_bpp_of_format_info = {
-    (jerry_object_native_free_callback_t)bitmap_get_bpp_of_format};
 static jerry_object_native_info_t s_value_destroy_info = {
     (jerry_object_native_free_callback_t)value_destroy};
 static jerry_object_native_info_t s_object_unref_info = {
@@ -462,7 +460,7 @@ jsvalue_t wrap_bitmap_create(const jerry_value_t func_obj_val, const jerry_value
     bitmap_t* ret = NULL;
     ret = (bitmap_t*)bitmap_create();
 
-    jret = jsvalue_create_object(ctx, ret, "bitmap_t*", &s_bitmap_get_bpp_of_format_info);
+    jret = jsvalue_create_object(ctx, ret, "bitmap_t*", &s_bitmap_destroy_info);
   }
   return jret;
 }
@@ -479,7 +477,7 @@ jsvalue_t wrap_bitmap_create_ex(const jerry_value_t func_obj_val, const jerry_va
     bitmap_format_t format = (bitmap_format_t)jsvalue_get_int_value(ctx, argv[3]);
     ret = (bitmap_t*)bitmap_create_ex(w, h, line_length, format);
 
-    jret = jsvalue_create_object(ctx, ret, "bitmap_t*", &s_bitmap_get_bpp_of_format_info);
+    jret = jsvalue_create_object(ctx, ret, "bitmap_t*", &s_bitmap_destroy_info);
   }
   return jret;
 }
@@ -492,6 +490,21 @@ jsvalue_t wrap_bitmap_get_bpp(const jerry_value_t func_obj_val, const jerry_valu
     uint32_t ret = (uint32_t)0;
     bitmap_t* bitmap = (bitmap_t*)jsvalue_get_pointer(ctx, argv[0], "bitmap_t*");
     ret = (uint32_t)bitmap_get_bpp(bitmap);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_bitmap_get_bpp_of_format(const jerry_value_t func_obj_val,
+                                        const jerry_value_t this_p, const jerry_value_t argv[],
+                                        const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    uint32_t ret = (uint32_t)0;
+    bitmap_format_t format = (bitmap_format_t)jsvalue_get_int_value(ctx, argv[0]);
+    ret = (uint32_t)bitmap_get_bpp_of_format(format);
 
     jret = jsvalue_create_int(ctx, ret);
   }
@@ -564,6 +577,8 @@ ret_t bitmap_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_create", wrap_bitmap_create);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_create_ex", wrap_bitmap_create_ex);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_get_bpp", wrap_bitmap_get_bpp);
+  jerryx_handler_register_global((const jerry_char_t*)"bitmap_get_bpp_of_format",
+                                 wrap_bitmap_get_bpp_of_format);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_t_get_prop_w",
                                  wrap_bitmap_t_get_prop_w);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_t_get_prop_h",
@@ -8743,6 +8758,37 @@ jsvalue_t wrap_widget_is_window_opened(const jerry_value_t func_obj_val, const j
   return jret;
 }
 
+jsvalue_t wrap_widget_is_parent_of(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                   const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    bool_t ret = (bool_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    widget_t* child = (widget_t*)jsvalue_get_pointer(ctx, argv[1], "widget_t*");
+    ret = (bool_t)widget_is_parent_of(widget, child);
+
+    jret = jsvalue_create_bool(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_widget_is_direct_parent_of(const jerry_value_t func_obj_val,
+                                          const jerry_value_t this_p, const jerry_value_t argv[],
+                                          const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    bool_t ret = (bool_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    widget_t* child = (widget_t*)jsvalue_get_pointer(ctx, argv[1], "widget_t*");
+    ret = (bool_t)widget_is_direct_parent_of(widget, child);
+
+    jret = jsvalue_create_bool(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_widget_is_window(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                 const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -9624,6 +9670,10 @@ ret_t widget_t_init(JSContext* ctx) {
                                  wrap_widget_get_prop_bool);
   jerryx_handler_register_global((const jerry_char_t*)"widget_is_window_opened",
                                  wrap_widget_is_window_opened);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_is_parent_of",
+                                 wrap_widget_is_parent_of);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_is_direct_parent_of",
+                                 wrap_widget_is_direct_parent_of);
   jerryx_handler_register_global((const jerry_char_t*)"widget_is_window", wrap_widget_is_window);
   jerryx_handler_register_global((const jerry_char_t*)"widget_is_designing_window",
                                  wrap_widget_is_designing_window);
@@ -13132,6 +13182,18 @@ jsvalue_t wrap_cmd_exec_event_t_get_prop_result(const jerry_value_t func_obj_val
   return jret;
 }
 
+jsvalue_t wrap_cmd_exec_event_t_get_prop_can_exec(const jerry_value_t func_obj_val,
+                                                  const jerry_value_t this_p,
+                                                  const jerry_value_t argv[],
+                                                  const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  cmd_exec_event_t* obj = (cmd_exec_event_t*)jsvalue_get_pointer(ctx, argv[0], "cmd_exec_event_t*");
+
+  jret = jsvalue_create_bool(ctx, obj->can_exec);
+  return jret;
+}
+
 ret_t cmd_exec_event_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"cmd_exec_event_cast",
                                  wrap_cmd_exec_event_cast);
@@ -13141,6 +13203,8 @@ ret_t cmd_exec_event_t_init(JSContext* ctx) {
                                  wrap_cmd_exec_event_t_get_prop_args);
   jerryx_handler_register_global((const jerry_char_t*)"cmd_exec_event_t_get_prop_result",
                                  wrap_cmd_exec_event_t_get_prop_result);
+  jerryx_handler_register_global((const jerry_char_t*)"cmd_exec_event_t_get_prop_can_exec",
+                                 wrap_cmd_exec_event_t_get_prop_can_exec);
 
   return RET_OK;
 }
