@@ -437,6 +437,21 @@ jsvalue_t wrap_emitter_cast(const jerry_value_t func_obj_val, const jerry_value_
   return jret;
 }
 
+jsvalue_t wrap_emitter_forward(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                               const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    void* ctx = NULL;
+    event_t* e = (event_t*)jsvalue_get_pointer(ctx, argv[1], "event_t*");
+    ret = (ret_t)emitter_forward(ctx, e);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 ret_t emitter_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"emitter_create", wrap_emitter_create);
   jerryx_handler_register_global((const jerry_char_t*)"emitter_dispatch", wrap_emitter_dispatch);
@@ -448,6 +463,7 @@ ret_t emitter_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"emitter_disable", wrap_emitter_disable);
   jerryx_handler_register_global((const jerry_char_t*)"emitter_size", wrap_emitter_size);
   jerryx_handler_register_global((const jerry_char_t*)"emitter_cast", wrap_emitter_cast);
+  jerryx_handler_register_global((const jerry_char_t*)"emitter_forward", wrap_emitter_forward);
 
   return RET_OK;
 }
@@ -2300,6 +2316,12 @@ jsvalue_t get_EVT_DRAG_END(const jerry_value_t func_obj_val, const jerry_value_t
   return jsvalue_create_int(ctx, EVT_DRAG_END);
 }
 
+jsvalue_t get_EVT_RESET(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                        const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_RESET);
+}
+
 jsvalue_t get_EVT_SCREEN_SAVER(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -2550,6 +2572,7 @@ ret_t event_type_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"EVT_DRAG_START", get_EVT_DRAG_START);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_DRAG", get_EVT_DRAG);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_DRAG_END", get_EVT_DRAG_END);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_RESET", get_EVT_RESET);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_SCREEN_SAVER", get_EVT_SCREEN_SAVER);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_LOW_MEMORY", get_EVT_LOW_MEMORY);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_OUT_OF_MEMORY", get_EVT_OUT_OF_MEMORY);
@@ -5870,6 +5893,12 @@ jsvalue_t get_WIDGET_PROP_H(const jerry_value_t func_obj_val, const jerry_value_
   return jsvalue_create_string(ctx, WIDGET_PROP_H);
 }
 
+jsvalue_t get_WIDGET_PROP_INPUTING(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                   const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_PROP_INPUTING);
+}
+
 jsvalue_t get_WIDGET_PROP_CARET_X(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                   const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -6691,6 +6720,8 @@ ret_t widget_prop_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_Y", get_WIDGET_PROP_Y);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_W", get_WIDGET_PROP_W);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_H", get_WIDGET_PROP_H);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_INPUTING",
+                                 get_WIDGET_PROP_INPUTING);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CARET_X",
                                  get_WIDGET_PROP_CARET_X);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CARET_Y",
@@ -8934,6 +8965,20 @@ jsvalue_t wrap_widget_destroy(const jerry_value_t func_obj_val, const jerry_valu
   return jret;
 }
 
+jsvalue_t wrap_widget_destroy_async(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                    const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (ret_t)widget_destroy_async(widget);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_widget_unref(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                             const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -9688,6 +9733,8 @@ ret_t widget_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_equal", wrap_widget_equal);
   jerryx_handler_register_global((const jerry_char_t*)"widget_cast", wrap_widget_cast);
   jerryx_handler_register_global((const jerry_char_t*)"widget_destroy", wrap_widget_destroy);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_destroy_async",
+                                 wrap_widget_destroy_async);
   jerryx_handler_register_global((const jerry_char_t*)"widget_unref", wrap_widget_unref);
   jerryx_handler_register_global((const jerry_char_t*)"widget_is_keyboard",
                                  wrap_widget_is_keyboard);
