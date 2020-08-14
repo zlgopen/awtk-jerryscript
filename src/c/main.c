@@ -47,6 +47,6 @@ static ret_t application_exit() {
 
 #define APP_NAME "AWTK-JS"
 #define ON_CMD_LINE on_cmd_line
-#define APP_DEFAULT_FONT "default_full"
 
+#include "../../res/assets.inc"
 #include "awtk_main.inc"

@@ -1,25 +1,10 @@
-import os
-import sys
-import platform
+﻿import os
+import scripts.app_helper as app
 
-#for pc
-sys.path.insert(0, '../awtk/')
+ARGUMENTS['FONT'] = 'default_full'
+helper = app.Helper(ARGUMENTS);
 
-#for linux-fb
-#sys.path.insert(0, '../awtk-linux-fb/')
-
-import awtk_config as awtk
-
-APP_ROOT    = os.path.normpath(os.getcwd())
-APP_BIN_DIR = os.path.join(APP_ROOT, 'bin')
-APP_LIB_DIR = os.path.join(APP_ROOT, 'lib')
-RES_ROOT    = awtk.TK_DEMO_ROOT.replace("\\", "\\\\")
-TK_JS_ROOT  = os.path.normpath(os.getcwd())
-TK_JERRYSCRIPT_ROOT = os.path.join(TK_JS_ROOT, '3rd/jerryscript/')
-
-os.environ['APP_ROOT'] = APP_ROOT;
-os.environ['BIN_DIR'] = APP_BIN_DIR;
-os.environ['LIB_DIR'] = APP_LIB_DIR;
+TK_JERRYSCRIPT_ROOT = os.path.join(helper.APP_ROOT, '3rd/jerryscript/')
 
 TK_JS_JERRYSCRIPT_DIRS = [
   TK_JERRYSCRIPT_ROOT,
@@ -50,41 +35,11 @@ TK_JS_JERRYSCRIPT_DIRS = [
   os.path.join(TK_JERRYSCRIPT_ROOT, 'jerryscript/jerry-core/ecma/builtin-objects/typedarray'),
 ]
 
-APP_LIBS = ['awtk-jerryscript', 'jerryscript']
-APP_LIBPATH = [APP_LIB_DIR]
 APP_CPPPATH = TK_JS_JERRYSCRIPT_DIRS
-APP_CFLAGS = '-DRES_ROOT=\"\\\"'+RES_ROOT+'\\\"\" -DPATH_MAX=256 -DJERRY_ESNEXT=0 '
-APP_CCFLAGS = '-DRES_ROOT=\"\\\"'+RES_ROOT+'\\\"\" -DPATH_MAX=256 -DJERRY_ESNEXT=0 '
+APP_LIBS = ['awtk-jerryscript', 'jerryscript']
+APP_CCFLAGS = '-DPATH_MAX=256 -DJERRY_ESNEXT=0 '
 
-if hasattr(awtk, 'CC'):
-  DefaultEnvironment(
-    CC=awtk.CC,
-    CXX=awtk.CXX,
-    LD=awtk.LD,
-    AR=awtk.AR,
-    STRIP=awtk.STRIP,
-    
-    CPPPATH   = APP_CPPPATH + awtk.CPPPATH,
-    LINKFLAGS = awtk.LINKFLAGS,
-    LIBS      = APP_LIBS + awtk.LIBS,
-    LIBPATH   = APP_LIBPATH + awtk.LIBPATH,
-    CFLAGS    = APP_CFLAGS + awtk.CFLAGS, 
-    CCFLAGS   = APP_CCFLAGS + awtk.CCFLAGS, 
-    OS_SUBSYSTEM_CONSOLE=awtk.OS_SUBSYSTEM_CONSOLE,
-    OS_SUBSYSTEM_WINDOWS=awtk.OS_SUBSYSTEM_WINDOWS)
-else:
-  DefaultEnvironment(
-    CPPPATH   = APP_CPPPATH + awtk.CPPPATH,
-    LINKFLAGS = awtk.LINKFLAGS,
-    LIBS      = APP_LIBS + awtk.LIBS,
-    LIBPATH   = APP_LIBPATH + awtk.LIBPATH,
-    CFLAGS    = APP_CFLAGS + awtk.CFLAGS, 
-    CCFLAGS   = APP_CCFLAGS + awtk.CCFLAGS, 
-    OS_SUBSYSTEM_CONSOLE=awtk.OS_SUBSYSTEM_CONSOLE,
-    OS_SUBSYSTEM_WINDOWS=awtk.OS_SUBSYSTEM_WINDOWS)
+helper.add_libs(APP_LIBS).add_ccflags(APP_CCFLAGS).add_cpppath(APP_CPPPATH).call(DefaultEnvironment)
 
-
-SConscript([
-  '3rd/jerryscript/SConscript', 
-  'src/SConscript']);
-
+SConscriptFiles = ['3rd/jerryscript/SConscript', 'src/SConscript']
+SConscript(SConscriptFiles)

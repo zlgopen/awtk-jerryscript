@@ -1,12 +1,9 @@
 #!/bin/bash
 
-cp -rf ../awtk/demos/assets .
-cp -rf ../awtk/scripts/update_res_app.py scripts/update_res.py
+cp -rf ../awtk-quickjs/design .
 
-rm -rf src/assets*.*
+cp -vf ../awtk-binding/demos/js/* design/default/scripts
+cp -vf ../awtk-binding/tools/code_gen/js/output/awtk.js* design/default/scripts
 
-cp -vf ../awtk-binding/demos/js/* assets/default/raw/scripts
-cp -vf ../awtk-binding/tools/code_gen/js/output/awtk.js* assets/default/raw/scripts
-
-python scripts/update_res.py clean
-python scripts/update_res.py all
+python3 scripts/update_res.py clean
+python3 scripts/update_res.py all
