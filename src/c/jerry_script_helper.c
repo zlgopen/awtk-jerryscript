@@ -29,6 +29,7 @@
 #include "tkc/str.h"
 #include "tkc/mem.h"
 #include "base/assets_manager.h"
+#include "utils.h"
 
 #define STR_MODULES "modules"
 #ifndef NDEBUG
@@ -264,11 +265,20 @@ ret_t jerry_script_eval_buff(const char* script, uint32_t size, const char* file
 
 ret_t jerry_script_eval_file(const char* filename, bool_t global) {
   ret_t ret = RET_FAIL;
-  const asset_info_t* info = assets_manager_ref(assets_manager(), ASSET_TYPE_SCRIPT, filename);
+  if (file_exist(filename)) {
+    uint32_t size = 0;
+    char* data = (char*)file_read(filename, &size);
+    if (data != NULL) {
+      ret = jerry_script_eval_buff(data, size, filename, global);
+      TKMEM_FREE(data);
+    }
+  } else {
+    const asset_info_t* info = assets_manager_ref(assets_manager(), ASSET_TYPE_SCRIPT, filename);
 
-  return_value_if_fail(info != NULL, RET_BAD_PARAMS);
-  ret = jerry_script_eval_buff((const char*)info->data, info->size, filename, global);
-  assets_manager_unref(assets_manager(), info);
+    return_value_if_fail(info != NULL, RET_BAD_PARAMS);
+    ret = jerry_script_eval_buff((const char*)info->data, info->size, filename, global);
+    assets_manager_unref(assets_manager(), info);
+  }
 
   log_debug("jerry_script_eval_file: %s ret=%d\n", filename, ret);
 
@@ -307,10 +317,44 @@ jerry_value_t wrap_require(const jerry_value_t func_obj_val, const jerry_value_t
 #define STR_BOOT_JS "var exports = {};\nthis." STR_MODULES "={};\n"
 
 ret_t jerry_script_register_builtins(void) {
-  jerryx_handler_register_global((const jerry_char_t*)"gc", jerryx_handler_gc);
-  jerryx_handler_register_global((const jerry_char_t*)"print", jerryx_handler_print);
+  jerryx_handler_register_global((const jerry_char_t*)"gc", jerryx_handler_my_gc);
+  jerryx_handler_register_global((const jerry_char_t*)"print", jerryx_handler_my_print);
   jerryx_handler_register_global((const jerry_char_t*)"require", wrap_require);
   jerry_script_eval_buff(STR_BOOT_JS, strlen(STR_BOOT_JS), "boot.js", TRUE);
+
+  return RET_OK;
+}
+
+#include <string.h>
+#include "jerryscript.h"
+#include "jerryscript-port.h"
+#include "jerryscript-core.h"
+#include "jerryscript-ext/handler.h"
+#include "awtk_js.h"
+
+#include "tkc/fs.h"
+#include "tkc/str.h"
+#include "tkc/mem.h"
+
+ret_t awtk_iotjs_jerryscript_init(void) {
+  jerryx_handler_register_global((const jerry_char_t*)"gc", jerryx_handler_my_gc);
+  jerryx_handler_register_global((const jerry_char_t*)"print", jerryx_handler_my_print);
+  awtk_js_init();
+
+  return RET_OK;
+}
+
+ret_t awtk_jerryscript_deinit(void) {
+  jerry_cleanup();
+
+  return RET_OK;
+}
+
+ret_t awtk_jerryscript_init(void) {
+  jerry_init(JERRY_INIT_EMPTY);
+  jerry_script_register_builtins();
+
+  awtk_js_init();
 
   return RET_OK;
 }

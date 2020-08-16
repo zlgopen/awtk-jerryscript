@@ -437,21 +437,6 @@ jsvalue_t wrap_emitter_cast(const jerry_value_t func_obj_val, const jerry_value_
   return jret;
 }
 
-jsvalue_t wrap_emitter_forward(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                               const jerry_value_t argv[], const jerry_length_t argc) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 2) {
-    ret_t ret = (ret_t)0;
-    void* ctx = NULL;
-    event_t* e = (event_t*)jsvalue_get_pointer(ctx, argv[1], "event_t*");
-    ret = (ret_t)emitter_forward(ctx, e);
-
-    jret = jsvalue_create_int(ctx, ret);
-  }
-  return jret;
-}
-
 ret_t emitter_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"emitter_create", wrap_emitter_create);
   jerryx_handler_register_global((const jerry_char_t*)"emitter_dispatch", wrap_emitter_dispatch);
@@ -463,7 +448,6 @@ ret_t emitter_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"emitter_disable", wrap_emitter_disable);
   jerryx_handler_register_global((const jerry_char_t*)"emitter_size", wrap_emitter_size);
   jerryx_handler_register_global((const jerry_char_t*)"emitter_cast", wrap_emitter_cast);
-  jerryx_handler_register_global((const jerry_char_t*)"emitter_forward", wrap_emitter_forward);
 
   return RET_OK;
 }
