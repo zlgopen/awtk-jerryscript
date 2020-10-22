@@ -1,0 +1,6 @@
+{
+  "name":"demouijs",
+  "version":"1.0",
+  "app_type":"js",
+  "sources":["./design/default/scripts/demoui.js"]
+}
