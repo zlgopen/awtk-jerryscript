@@ -10,7 +10,6 @@
 #include "tkc/object.h"
 #include "tkc/value.h"
 #include "src/awtk_global.h"
-#include "base/assets_manager.h"
 #include "base/bidi.h"
 #include "base/canvas_offline.h"
 #include "base/canvas.h"
@@ -44,6 +43,7 @@
 #include "tkc/time_now.h"
 #include "tkc/timer_manager.h"
 #include "tkc/types_def.h"
+#include "base/assets_manager.h"
 #include "base/image_base.h"
 #include "base/style_mutable.h"
 #include "base/window_base.h"
@@ -2028,83 +2028,6 @@ ret_t global_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
-jsvalue_t wrap_assets_manager(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                              const jerry_value_t argv[], const jerry_length_t argc) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 0) {
-    assets_manager_t* ret = NULL;
-    ret = (assets_manager_t*)assets_manager();
-
-    jret = jsvalue_create_pointer(ctx, ret, "assets_manager_t*");
-  }
-  return jret;
-}
-
-jsvalue_t wrap_assets_manager_set_theme(const jerry_value_t func_obj_val,
-                                        const jerry_value_t this_p, const jerry_value_t argv[],
-                                        const jerry_length_t argc) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 2) {
-    ret_t ret = (ret_t)0;
-    assets_manager_t* am =
-        (assets_manager_t*)jsvalue_get_pointer(ctx, argv[0], "assets_manager_t*");
-    const char* theme = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
-    ret = (ret_t)assets_manager_set_theme(am, theme);
-    TKMEM_FREE(theme);
-
-    jret = jsvalue_create_int(ctx, ret);
-  }
-  return jret;
-}
-
-jsvalue_t wrap_assets_manager_ref(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                                  const jerry_value_t argv[], const jerry_length_t argc) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 3) {
-    asset_info_t* ret = NULL;
-    assets_manager_t* am =
-        (assets_manager_t*)jsvalue_get_pointer(ctx, argv[0], "assets_manager_t*");
-    asset_type_t type = (asset_type_t)jsvalue_get_int_value(ctx, argv[1]);
-    char* name = (char*)jsvalue_get_utf8_string(ctx, argv[2]);
-    ret = (asset_info_t*)assets_manager_ref(am, type, name);
-    TKMEM_FREE(name);
-
-    jret = jsvalue_create_pointer(ctx, ret, "asset_info_t*");
-  }
-  return jret;
-}
-
-jsvalue_t wrap_assets_manager_unref(const jerry_value_t func_obj_val, const jerry_value_t this_p,
-                                    const jerry_value_t argv[], const jerry_length_t argc) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 2) {
-    ret_t ret = (ret_t)0;
-    assets_manager_t* am =
-        (assets_manager_t*)jsvalue_get_pointer(ctx, argv[0], "assets_manager_t*");
-    asset_info_t* info = (asset_info_t*)jsvalue_get_pointer(ctx, argv[1], "asset_info_t*");
-    ret = (ret_t)assets_manager_unref(am, info);
-
-    jret = jsvalue_create_int(ctx, ret);
-  }
-  return jret;
-}
-
-ret_t assets_manager_t_init(JSContext* ctx) {
-  jerryx_handler_register_global((const jerry_char_t*)"assets_manager", wrap_assets_manager);
-  jerryx_handler_register_global((const jerry_char_t*)"assets_manager_set_theme",
-                                 wrap_assets_manager_set_theme);
-  jerryx_handler_register_global((const jerry_char_t*)"assets_manager_ref",
-                                 wrap_assets_manager_ref);
-  jerryx_handler_register_global((const jerry_char_t*)"assets_manager_unref",
-                                 wrap_assets_manager_unref);
-
-  return RET_OK;
-}
-
 jsvalue_t get_BIDI_TYPE_AUTO(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                              const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -3481,6 +3404,27 @@ jsvalue_t get_EVT_PAGE_CHANGED(const jerry_value_t func_obj_val, const jerry_val
   return jsvalue_create_int(ctx, EVT_PAGE_CHANGED);
 }
 
+jsvalue_t get_EVT_ASSET_MANAGER_LOAD_ASSET(const jerry_value_t func_obj_val,
+                                           const jerry_value_t this_p, const jerry_value_t argv[],
+                                           const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_ASSET_MANAGER_LOAD_ASSET);
+}
+
+jsvalue_t get_EVT_ASSET_MANAGER_UNLOAD_ASSET(const jerry_value_t func_obj_val,
+                                             const jerry_value_t this_p, const jerry_value_t argv[],
+                                             const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_ASSET_MANAGER_UNLOAD_ASSET);
+}
+
+jsvalue_t get_EVT_ASSET_MANAGER_CLEAR_CACHE(const jerry_value_t func_obj_val,
+                                            const jerry_value_t this_p, const jerry_value_t argv[],
+                                            const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_ASSET_MANAGER_CLEAR_CACHE);
+}
+
 jsvalue_t get_EVT_REQ_START(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                             const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -3678,6 +3622,12 @@ ret_t event_type_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"EVT_SCROLL_END", get_EVT_SCROLL_END);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_MULTI_GESTURE", get_EVT_MULTI_GESTURE);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_PAGE_CHANGED", get_EVT_PAGE_CHANGED);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_ASSET_MANAGER_LOAD_ASSET",
+                                 get_EVT_ASSET_MANAGER_LOAD_ASSET);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_ASSET_MANAGER_UNLOAD_ASSET",
+                                 get_EVT_ASSET_MANAGER_UNLOAD_ASSET);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_ASSET_MANAGER_CLEAR_CACHE",
+                                 get_EVT_ASSET_MANAGER_CLEAR_CACHE);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_REQ_START", get_EVT_REQ_START);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_USER_START", get_EVT_USER_START);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_NONE", get_EVT_NONE);
@@ -6978,6 +6928,13 @@ jsvalue_t get_WIDGET_PROP_INPUTING(const jerry_value_t func_obj_val, const jerry
   return jsvalue_create_string(ctx, WIDGET_PROP_INPUTING);
 }
 
+jsvalue_t get_WIDGET_PROP_ALWAYS_ON_TOP(const jerry_value_t func_obj_val,
+                                        const jerry_value_t this_p, const jerry_value_t argv[],
+                                        const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_PROP_ALWAYS_ON_TOP);
+}
+
 jsvalue_t get_WIDGET_PROP_CARET_X(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                   const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -7881,6 +7838,8 @@ ret_t widget_prop_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_H", get_WIDGET_PROP_H);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_INPUTING",
                                  get_WIDGET_PROP_INPUTING);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_ALWAYS_ON_TOP",
+                                 get_WIDGET_PROP_ALWAYS_ON_TOP);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CARET_X",
                                  get_WIDGET_PROP_CARET_X);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CARET_Y",
@@ -11267,6 +11226,12 @@ jsvalue_t get_ASSET_TYPE_SCRIPT(const jerry_value_t func_obj_val, const jerry_va
   return jsvalue_create_int(ctx, ASSET_TYPE_SCRIPT);
 }
 
+jsvalue_t get_ASSET_TYPE_FLOW(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                              const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, ASSET_TYPE_FLOW);
+}
+
 jsvalue_t get_ASSET_TYPE_DATA(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                               const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -11282,6 +11247,7 @@ ret_t asset_type_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"ASSET_TYPE_XML", get_ASSET_TYPE_XML);
   jerryx_handler_register_global((const jerry_char_t*)"ASSET_TYPE_STRINGS", get_ASSET_TYPE_STRINGS);
   jerryx_handler_register_global((const jerry_char_t*)"ASSET_TYPE_SCRIPT", get_ASSET_TYPE_SCRIPT);
+  jerryx_handler_register_global((const jerry_char_t*)"ASSET_TYPE_FLOW", get_ASSET_TYPE_FLOW);
   jerryx_handler_register_global((const jerry_char_t*)"ASSET_TYPE_DATA", get_ASSET_TYPE_DATA);
 
   return RET_OK;
@@ -13467,6 +13433,83 @@ ret_t value_type_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
+jsvalue_t wrap_assets_manager(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                              const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 0) {
+    assets_manager_t* ret = NULL;
+    ret = (assets_manager_t*)assets_manager();
+
+    jret = jsvalue_create_pointer(ctx, ret, "assets_manager_t*");
+  }
+  return jret;
+}
+
+jsvalue_t wrap_assets_manager_set_theme(const jerry_value_t func_obj_val,
+                                        const jerry_value_t this_p, const jerry_value_t argv[],
+                                        const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    assets_manager_t* am =
+        (assets_manager_t*)jsvalue_get_pointer(ctx, argv[0], "assets_manager_t*");
+    const char* theme = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
+    ret = (ret_t)assets_manager_set_theme(am, theme);
+    TKMEM_FREE(theme);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_assets_manager_ref(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                  const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 3) {
+    asset_info_t* ret = NULL;
+    assets_manager_t* am =
+        (assets_manager_t*)jsvalue_get_pointer(ctx, argv[0], "assets_manager_t*");
+    asset_type_t type = (asset_type_t)jsvalue_get_int_value(ctx, argv[1]);
+    char* name = (char*)jsvalue_get_utf8_string(ctx, argv[2]);
+    ret = (asset_info_t*)assets_manager_ref(am, type, name);
+    TKMEM_FREE(name);
+
+    jret = jsvalue_create_pointer(ctx, ret, "asset_info_t*");
+  }
+  return jret;
+}
+
+jsvalue_t wrap_assets_manager_unref(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                                    const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    assets_manager_t* am =
+        (assets_manager_t*)jsvalue_get_pointer(ctx, argv[0], "assets_manager_t*");
+    asset_info_t* info = (asset_info_t*)jsvalue_get_pointer(ctx, argv[1], "asset_info_t*");
+    ret = (ret_t)assets_manager_unref(am, info);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+ret_t assets_manager_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"assets_manager", wrap_assets_manager);
+  jerryx_handler_register_global((const jerry_char_t*)"assets_manager_set_theme",
+                                 wrap_assets_manager_set_theme);
+  jerryx_handler_register_global((const jerry_char_t*)"assets_manager_ref",
+                                 wrap_assets_manager_ref);
+  jerryx_handler_register_global((const jerry_char_t*)"assets_manager_unref",
+                                 wrap_assets_manager_unref);
+
+  return RET_OK;
+}
+
 jsvalue_t wrap_wheel_event_cast(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                 const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -14008,19 +14051,6 @@ jsvalue_t wrap_multi_gesture_event_cast(const jerry_value_t func_obj_val,
   return jret;
 }
 
-jsvalue_t wrap_multi_gesture_event_t_get_prop_touch_id(const jerry_value_t func_obj_val,
-                                                       const jerry_value_t this_p,
-                                                       const jerry_value_t argv[],
-                                                       const jerry_length_t argc) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  multi_gesture_event_t* obj =
-      (multi_gesture_event_t*)jsvalue_get_pointer(ctx, argv[0], "multi_gesture_event_t*");
-
-  jret = jsvalue_create_int(ctx, obj->touch_id);
-  return jret;
-}
-
 jsvalue_t wrap_multi_gesture_event_t_get_prop_x(const jerry_value_t func_obj_val,
                                                 const jerry_value_t this_p,
                                                 const jerry_value_t argv[],
@@ -14073,24 +14103,9 @@ jsvalue_t wrap_multi_gesture_event_t_get_prop_distance(const jerry_value_t func_
   return jret;
 }
 
-jsvalue_t wrap_multi_gesture_event_t_get_prop_fingers(const jerry_value_t func_obj_val,
-                                                      const jerry_value_t this_p,
-                                                      const jerry_value_t argv[],
-                                                      const jerry_length_t argc) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  multi_gesture_event_t* obj =
-      (multi_gesture_event_t*)jsvalue_get_pointer(ctx, argv[0], "multi_gesture_event_t*");
-
-  jret = jsvalue_create_int(ctx, obj->fingers);
-  return jret;
-}
-
 ret_t multi_gesture_event_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"multi_gesture_event_cast",
                                  wrap_multi_gesture_event_cast);
-  jerryx_handler_register_global((const jerry_char_t*)"multi_gesture_event_t_get_prop_touch_id",
-                                 wrap_multi_gesture_event_t_get_prop_touch_id);
   jerryx_handler_register_global((const jerry_char_t*)"multi_gesture_event_t_get_prop_x",
                                  wrap_multi_gesture_event_t_get_prop_x);
   jerryx_handler_register_global((const jerry_char_t*)"multi_gesture_event_t_get_prop_y",
@@ -14099,8 +14114,38 @@ ret_t multi_gesture_event_t_init(JSContext* ctx) {
                                  wrap_multi_gesture_event_t_get_prop_rotation);
   jerryx_handler_register_global((const jerry_char_t*)"multi_gesture_event_t_get_prop_distance",
                                  wrap_multi_gesture_event_t_get_prop_distance);
-  jerryx_handler_register_global((const jerry_char_t*)"multi_gesture_event_t_get_prop_fingers",
-                                 wrap_multi_gesture_event_t_get_prop_fingers);
+
+  return RET_OK;
+}
+
+jsvalue_t wrap_assets_event_t_get_prop_type(const jerry_value_t func_obj_val,
+                                            const jerry_value_t this_p, const jerry_value_t argv[],
+                                            const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  assets_event_t* obj = (assets_event_t*)jsvalue_get_pointer(ctx, argv[0], "assets_event_t*");
+
+  jret = jsvalue_create_pointer(ctx, obj->type, "asset_type_t*");
+  return jret;
+}
+
+jsvalue_t wrap_assets_event_t_get_prop_asset_info(const jerry_value_t func_obj_val,
+                                                  const jerry_value_t this_p,
+                                                  const jerry_value_t argv[],
+                                                  const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  assets_event_t* obj = (assets_event_t*)jsvalue_get_pointer(ctx, argv[0], "assets_event_t*");
+
+  jret = jsvalue_create_pointer(ctx, obj->asset_info, "asset_info_t*");
+  return jret;
+}
+
+ret_t assets_event_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"assets_event_t_get_prop_type",
+                                 wrap_assets_event_t_get_prop_type);
+  jerryx_handler_register_global((const jerry_char_t*)"assets_event_t_get_prop_asset_info",
+                                 wrap_assets_event_t_get_prop_asset_info);
 
   return RET_OK;
 }
@@ -16584,7 +16629,7 @@ jsvalue_t wrap_image_value_set_click_add_delta(const jerry_value_t func_obj_val,
   if (argc >= 2) {
     ret_t ret = (ret_t)0;
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
-    float_t delta = (float_t)jsvalue_get_number_value(ctx, argv[1]);
+    double delta = (double)jsvalue_get_number_value(ctx, argv[1]);
     ret = (ret_t)image_value_set_click_add_delta(widget, delta);
 
     jret = jsvalue_create_int(ctx, ret);
@@ -16599,7 +16644,7 @@ jsvalue_t wrap_image_value_set_value(const jerry_value_t func_obj_val, const jer
   if (argc >= 2) {
     ret_t ret = (ret_t)0;
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
-    float_t value = (float_t)jsvalue_get_number_value(ctx, argv[1]);
+    double value = (double)jsvalue_get_number_value(ctx, argv[1]);
     ret = (ret_t)image_value_set_value(widget, value);
 
     jret = jsvalue_create_int(ctx, ret);
@@ -16614,7 +16659,7 @@ jsvalue_t wrap_image_value_set_min(const jerry_value_t func_obj_val, const jerry
   if (argc >= 2) {
     ret_t ret = (ret_t)0;
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
-    float_t min = (float_t)jsvalue_get_number_value(ctx, argv[1]);
+    double min = (double)jsvalue_get_number_value(ctx, argv[1]);
     ret = (ret_t)image_value_set_min(widget, min);
 
     jret = jsvalue_create_int(ctx, ret);
@@ -16629,7 +16674,7 @@ jsvalue_t wrap_image_value_set_max(const jerry_value_t func_obj_val, const jerry
   if (argc >= 2) {
     ret_t ret = (ret_t)0;
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
-    float_t max = (float_t)jsvalue_get_number_value(ctx, argv[1]);
+    double max = (double)jsvalue_get_number_value(ctx, argv[1]);
     ret = (ret_t)image_value_set_max(widget, max);
 
     jret = jsvalue_create_int(ctx, ret);
@@ -19794,6 +19839,23 @@ jsvalue_t wrap_slide_view_set_active(const jerry_value_t func_obj_val, const jer
   return jret;
 }
 
+jsvalue_t wrap_slide_view_set_active_ex(const jerry_value_t func_obj_val,
+                                        const jerry_value_t this_p, const jerry_value_t argv[],
+                                        const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 3) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    uint32_t index = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
+    bool_t animate = (bool_t)jsvalue_get_boolean_value(ctx, argv[2]);
+    ret = (ret_t)slide_view_set_active_ex(widget, index, animate);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_slide_view_set_vertical(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                                        const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -19895,6 +19957,8 @@ ret_t slide_view_t_init(JSContext* ctx) {
                                  wrap_slide_view_set_auto_play);
   jerryx_handler_register_global((const jerry_char_t*)"slide_view_set_active",
                                  wrap_slide_view_set_active);
+  jerryx_handler_register_global((const jerry_char_t*)"slide_view_set_active_ex",
+                                 wrap_slide_view_set_active_ex);
   jerryx_handler_register_global((const jerry_char_t*)"slide_view_set_vertical",
                                  wrap_slide_view_set_vertical);
   jerryx_handler_register_global((const jerry_char_t*)"slide_view_set_anim_hint",
@@ -20289,18 +20353,6 @@ jsvalue_t wrap_text_selector_t_get_prop_options(const jerry_value_t func_obj_val
   return jret;
 }
 
-jsvalue_t wrap_text_selector_t_get_prop_localize_options(const jerry_value_t func_obj_val,
-                                                         const jerry_value_t this_p,
-                                                         const jerry_value_t argv[],
-                                                         const jerry_length_t argc) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  text_selector_t* obj = (text_selector_t*)jsvalue_get_pointer(ctx, argv[0], "text_selector_t*");
-
-  jret = jsvalue_create_bool(ctx, obj->localize_options);
-  return jret;
-}
-
 jsvalue_t wrap_text_selector_t_get_prop_yspeed_scale(const jerry_value_t func_obj_val,
                                                      const jerry_value_t this_p,
                                                      const jerry_value_t argv[],
@@ -20310,6 +20362,18 @@ jsvalue_t wrap_text_selector_t_get_prop_yspeed_scale(const jerry_value_t func_ob
   text_selector_t* obj = (text_selector_t*)jsvalue_get_pointer(ctx, argv[0], "text_selector_t*");
 
   jret = jsvalue_create_number(ctx, obj->yspeed_scale);
+  return jret;
+}
+
+jsvalue_t wrap_text_selector_t_get_prop_localize_options(const jerry_value_t func_obj_val,
+                                                         const jerry_value_t this_p,
+                                                         const jerry_value_t argv[],
+                                                         const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  text_selector_t* obj = (text_selector_t*)jsvalue_get_pointer(ctx, argv[0], "text_selector_t*");
+
+  jret = jsvalue_create_bool(ctx, obj->localize_options);
   return jret;
 }
 
@@ -20364,10 +20428,10 @@ ret_t text_selector_t_init(JSContext* ctx) {
                                  wrap_text_selector_t_get_prop_selected_index);
   jerryx_handler_register_global((const jerry_char_t*)"text_selector_t_get_prop_options",
                                  wrap_text_selector_t_get_prop_options);
-  jerryx_handler_register_global((const jerry_char_t*)"text_selector_t_get_prop_localize_options",
-                                 wrap_text_selector_t_get_prop_localize_options);
   jerryx_handler_register_global((const jerry_char_t*)"text_selector_t_get_prop_yspeed_scale",
                                  wrap_text_selector_t_get_prop_yspeed_scale);
+  jerryx_handler_register_global((const jerry_char_t*)"text_selector_t_get_prop_localize_options",
+                                 wrap_text_selector_t_get_prop_localize_options);
   jerryx_handler_register_global((const jerry_char_t*)"text_selector_t_get_prop_loop_options",
                                  wrap_text_selector_t_get_prop_loop_options);
 
@@ -25131,6 +25195,22 @@ jsvalue_t wrap_overlay_set_click_through(const jerry_value_t func_obj_val,
   return jret;
 }
 
+jsvalue_t wrap_overlay_set_always_on_top(const jerry_value_t func_obj_val,
+                                         const jerry_value_t this_p, const jerry_value_t argv[],
+                                         const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    bool_t always_on_top = (bool_t)jsvalue_get_boolean_value(ctx, argv[1]);
+    ret = (ret_t)overlay_set_always_on_top(widget, always_on_top);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_overlay_cast(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                             const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -25157,13 +25237,29 @@ jsvalue_t wrap_overlay_t_get_prop_click_through(const jerry_value_t func_obj_val
   return jret;
 }
 
+jsvalue_t wrap_overlay_t_get_prop_always_on_top(const jerry_value_t func_obj_val,
+                                                const jerry_value_t this_p,
+                                                const jerry_value_t argv[],
+                                                const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  overlay_t* obj = (overlay_t*)jsvalue_get_pointer(ctx, argv[0], "overlay_t*");
+
+  jret = jsvalue_create_bool(ctx, obj->always_on_top);
+  return jret;
+}
+
 ret_t overlay_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"overlay_create", wrap_overlay_create);
   jerryx_handler_register_global((const jerry_char_t*)"overlay_set_click_through",
                                  wrap_overlay_set_click_through);
+  jerryx_handler_register_global((const jerry_char_t*)"overlay_set_always_on_top",
+                                 wrap_overlay_set_always_on_top);
   jerryx_handler_register_global((const jerry_char_t*)"overlay_cast", wrap_overlay_cast);
   jerryx_handler_register_global((const jerry_char_t*)"overlay_t_get_prop_click_through",
                                  wrap_overlay_t_get_prop_click_through);
+  jerryx_handler_register_global((const jerry_char_t*)"overlay_t_get_prop_always_on_top",
+                                 wrap_overlay_t_get_prop_always_on_top);
 
   return RET_OK;
 }
@@ -25417,7 +25513,6 @@ ret_t awtk_js_init(JSContext* ctx) {
   object_t_init(ctx);
   value_t_init(ctx);
   global_t_init(ctx);
-  assets_manager_t_init(ctx);
   bidi_type_t_init(ctx);
   image_draw_type_t_init(ctx);
   canvas_offline_t_init(ctx);
@@ -25470,6 +25565,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   timer_manager_t_init(ctx);
   ret_t_init(ctx);
   value_type_t_init(ctx);
+  assets_manager_t_init(ctx);
   wheel_event_t_init(ctx);
   orientation_event_t_init(ctx);
   value_change_event_t_init(ctx);
@@ -25478,6 +25574,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   paint_event_t_init(ctx);
   window_event_t_init(ctx);
   multi_gesture_event_t_init(ctx);
+  assets_event_t_init(ctx);
   image_base_t_init(ctx);
   style_mutable_t_init(ctx);
   window_base_t_init(ctx);
