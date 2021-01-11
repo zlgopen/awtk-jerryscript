@@ -3410,6 +3410,12 @@ jsvalue_t get_EVT_ASSET_MANAGER_CLEAR_CACHE(const jerry_value_t func_obj_val,
   return jsvalue_create_int(ctx, EVT_ASSET_MANAGER_CLEAR_CACHE);
 }
 
+jsvalue_t get_EVT_TIMER(const jerry_value_t func_obj_val, const jerry_value_t this_p,
+                        const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, EVT_TIMER);
+}
+
 jsvalue_t get_EVT_REQ_START(const jerry_value_t func_obj_val, const jerry_value_t this_p,
                             const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -3613,6 +3619,7 @@ ret_t event_type_t_init(JSContext* ctx) {
                                  get_EVT_ASSET_MANAGER_UNLOAD_ASSET);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_ASSET_MANAGER_CLEAR_CACHE",
                                  get_EVT_ASSET_MANAGER_CLEAR_CACHE);
+  jerryx_handler_register_global((const jerry_char_t*)"EVT_TIMER", get_EVT_TIMER);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_REQ_START", get_EVT_REQ_START);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_USER_START", get_EVT_USER_START);
   jerryx_handler_register_global((const jerry_char_t*)"EVT_NONE", get_EVT_NONE);
