@@ -13,7 +13,7 @@ typedef jerry_value_t jsvalue_const_t;
   jerry_call_function(func, this_value, argv, argc)
 
 #define JSFUNC_DECL(func_name)                                                      \
-  jsvalue_t func_name(const jerry_value_t func_obj_val, const jerry_value_t this_p, \
+  jsvalue_t func_name(const jerry_call_info_t *call_info_p, \
                       const jerry_value_t argv[], const jerry_length_t argc) {      \
     void* ctx = NULL;
 
