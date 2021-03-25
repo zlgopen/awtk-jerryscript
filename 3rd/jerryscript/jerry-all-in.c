@@ -50,6 +50,8 @@
 #include "jerryscript/jerry-core/ecma/base/ecma-literal-storage.c"
 #include "jerryscript/jerry-core/ecma/base/ecma-module.c"
 #include "jerryscript/jerry-core/ecma/base/ecma-property-hashmap.c"
+#include "jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-aggregateerror.c"
+#include "jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-aggregateerror-prototype.c"
 #include "jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-array-iterator-prototype.c"
 #include "jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-array-prototype-unscopables.c"
 #include "jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-array-prototype.c"
