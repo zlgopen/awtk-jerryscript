@@ -12,9 +12,9 @@ typedef jerry_value_t jsvalue_const_t;
 #define jsfunc_call(ctx, func, this_value, argc, argv) \
   jerry_call_function(func, this_value, argv, argc)
 
-#define JSFUNC_DECL(func_name)                                                      \
-  jsvalue_t func_name(const jerry_call_info_t *call_info_p, \
-                      const jerry_value_t argv[], const jerry_length_t argc) {      \
+#define JSFUNC_DECL(func_name)                                                          \
+  jsvalue_t func_name(const jerry_call_info_t* call_info_p, const jerry_value_t argv[], \
+                      const jerry_length_t argc) {                                      \
     void* ctx = NULL;
 
 static inline jsvalue_t jsvalue_create_string(JSContext* ctx, const char* str) {

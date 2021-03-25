@@ -18,7 +18,7 @@ static ret_t jerry_script_eval(const char* script, uint32_t size, const char* fi
   jerry_value_t parsed_code;
   return_value_if_fail(script != NULL && size > 0, RET_NOT_FOUND);
 
-  parsed_code = jerry_parse(NULL, 0, (jerry_char_t*)script, size, JERRY_PARSE_NO_OPTS);
+  parsed_code = jerry_parse((jerry_char_t*)script, size, NULL);
 
   if (jerry_value_check(parsed_code) == RET_OK) {
     uint32_t i = 0;

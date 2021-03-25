@@ -30,7 +30,6 @@
 #include "./jerryscript/jerry-port/default/default-date.c"
 #include "./jerryscript/jerry-port/default/default-io.c"
 #include "./jerryscript/jerry-port/default/default-debugger.c"
-#include "./jerryscript/jerry-port/default/default-promise.c"
 #include "jerryscript/jerry-core/api/jerry-debugger-transport.c"
 #include "jerryscript/jerry-core/api/jerry-debugger.c"
 #include "jerryscript/jerry-core/api/jerry-snapshot.c"
