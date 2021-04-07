@@ -54,8 +54,8 @@
 #include "features/draggable.h"
 #include "file_browser/file_browser_view.h"
 #include "file_browser/file_chooser.h"
-#include "guage/guage_pointer.h"
-#include "guage/guage.h"
+#include "gauge/gauge_pointer.h"
+#include "gauge/gauge.h"
 #include "image_animation/image_animation.h"
 #include "image_value/image_value.h"
 #include "keyboard/candidates.h"
@@ -16482,7 +16482,7 @@ ret_t file_chooser_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
-jsvalue_t wrap_guage_pointer_create(const jerry_call_info_t* call_info_p,
+jsvalue_t wrap_gauge_pointer_create(const jerry_call_info_t* call_info_p,
                                     const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -16493,28 +16493,28 @@ jsvalue_t wrap_guage_pointer_create(const jerry_call_info_t* call_info_p,
     xy_t y = (xy_t)jsvalue_get_int_value(ctx, argv[2]);
     wh_t w = (wh_t)jsvalue_get_int_value(ctx, argv[3]);
     wh_t h = (wh_t)jsvalue_get_int_value(ctx, argv[4]);
-    ret = (widget_t*)guage_pointer_create(parent, x, y, w, h);
+    ret = (widget_t*)gauge_pointer_create(parent, x, y, w, h);
 
-    jret = jsvalue_create_pointer(ctx, ret, "guage_pointer_t*");
+    jret = jsvalue_create_pointer(ctx, ret, "gauge_pointer_t*");
   }
   return jret;
 }
 
-jsvalue_t wrap_guage_pointer_cast(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+jsvalue_t wrap_gauge_pointer_cast(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
                                   const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
   if (argc >= 1) {
     widget_t* ret = NULL;
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
-    ret = (widget_t*)guage_pointer_cast(widget);
+    ret = (widget_t*)gauge_pointer_cast(widget);
 
-    jret = jsvalue_create_pointer(ctx, ret, "guage_pointer_t*");
+    jret = jsvalue_create_pointer(ctx, ret, "gauge_pointer_t*");
   }
   return jret;
 }
 
-jsvalue_t wrap_guage_pointer_set_angle(const jerry_call_info_t* call_info_p,
+jsvalue_t wrap_gauge_pointer_set_angle(const jerry_call_info_t* call_info_p,
                                        const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -16522,14 +16522,14 @@ jsvalue_t wrap_guage_pointer_set_angle(const jerry_call_info_t* call_info_p,
     ret_t ret = (ret_t)0;
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
     int32_t angle = (int32_t)jsvalue_get_int_value(ctx, argv[1]);
-    ret = (ret_t)guage_pointer_set_angle(widget, angle);
+    ret = (ret_t)gauge_pointer_set_angle(widget, angle);
 
     jret = jsvalue_create_int(ctx, ret);
   }
   return jret;
 }
 
-jsvalue_t wrap_guage_pointer_set_image(const jerry_call_info_t* call_info_p,
+jsvalue_t wrap_gauge_pointer_set_image(const jerry_call_info_t* call_info_p,
                                        const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -16537,7 +16537,7 @@ jsvalue_t wrap_guage_pointer_set_image(const jerry_call_info_t* call_info_p,
     ret_t ret = (ret_t)0;
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
     const char* image = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
-    ret = (ret_t)guage_pointer_set_image(widget, image);
+    ret = (ret_t)gauge_pointer_set_image(widget, image);
     TKMEM_FREE(image);
 
     jret = jsvalue_create_int(ctx, ret);
@@ -16545,7 +16545,7 @@ jsvalue_t wrap_guage_pointer_set_image(const jerry_call_info_t* call_info_p,
   return jret;
 }
 
-jsvalue_t wrap_guage_pointer_set_anchor(const jerry_call_info_t* call_info_p,
+jsvalue_t wrap_gauge_pointer_set_anchor(const jerry_call_info_t* call_info_p,
                                         const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -16554,7 +16554,7 @@ jsvalue_t wrap_guage_pointer_set_anchor(const jerry_call_info_t* call_info_p,
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
     const char* anchor_x = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
     const char* anchor_y = (const char*)jsvalue_get_utf8_string(ctx, argv[2]);
-    ret = (ret_t)guage_pointer_set_anchor(widget, anchor_x, anchor_y);
+    ret = (ret_t)gauge_pointer_set_anchor(widget, anchor_x, anchor_y);
     TKMEM_FREE(anchor_x);
     TKMEM_FREE(anchor_y);
 
@@ -16563,74 +16563,74 @@ jsvalue_t wrap_guage_pointer_set_anchor(const jerry_call_info_t* call_info_p,
   return jret;
 }
 
-jsvalue_t wrap_guage_pointer_t_get_prop_angle(const jerry_call_info_t* call_info_p,
+jsvalue_t wrap_gauge_pointer_t_get_prop_angle(const jerry_call_info_t* call_info_p,
                                               const jerry_value_t argv[],
                                               const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
-  guage_pointer_t* obj = (guage_pointer_t*)jsvalue_get_pointer(ctx, argv[0], "guage_pointer_t*");
+  gauge_pointer_t* obj = (gauge_pointer_t*)jsvalue_get_pointer(ctx, argv[0], "gauge_pointer_t*");
 
   jret = jsvalue_create_int(ctx, obj->angle);
   return jret;
 }
 
-jsvalue_t wrap_guage_pointer_t_get_prop_image(const jerry_call_info_t* call_info_p,
+jsvalue_t wrap_gauge_pointer_t_get_prop_image(const jerry_call_info_t* call_info_p,
                                               const jerry_value_t argv[],
                                               const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
-  guage_pointer_t* obj = (guage_pointer_t*)jsvalue_get_pointer(ctx, argv[0], "guage_pointer_t*");
+  gauge_pointer_t* obj = (gauge_pointer_t*)jsvalue_get_pointer(ctx, argv[0], "gauge_pointer_t*");
 
   jret = jsvalue_create_string(ctx, obj->image);
   return jret;
 }
 
-jsvalue_t wrap_guage_pointer_t_get_prop_anchor_x(const jerry_call_info_t* call_info_p,
+jsvalue_t wrap_gauge_pointer_t_get_prop_anchor_x(const jerry_call_info_t* call_info_p,
                                                  const jerry_value_t argv[],
                                                  const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
-  guage_pointer_t* obj = (guage_pointer_t*)jsvalue_get_pointer(ctx, argv[0], "guage_pointer_t*");
+  gauge_pointer_t* obj = (gauge_pointer_t*)jsvalue_get_pointer(ctx, argv[0], "gauge_pointer_t*");
 
   jret = jsvalue_create_string(ctx, obj->anchor_x);
   return jret;
 }
 
-jsvalue_t wrap_guage_pointer_t_get_prop_anchor_y(const jerry_call_info_t* call_info_p,
+jsvalue_t wrap_gauge_pointer_t_get_prop_anchor_y(const jerry_call_info_t* call_info_p,
                                                  const jerry_value_t argv[],
                                                  const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
-  guage_pointer_t* obj = (guage_pointer_t*)jsvalue_get_pointer(ctx, argv[0], "guage_pointer_t*");
+  gauge_pointer_t* obj = (gauge_pointer_t*)jsvalue_get_pointer(ctx, argv[0], "gauge_pointer_t*");
 
   jret = jsvalue_create_string(ctx, obj->anchor_y);
   return jret;
 }
 
-ret_t guage_pointer_t_init(JSContext* ctx) {
-  jerryx_handler_register_global((const jerry_char_t*)"guage_pointer_create",
-                                 wrap_guage_pointer_create);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_pointer_cast",
-                                 wrap_guage_pointer_cast);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_pointer_set_angle",
-                                 wrap_guage_pointer_set_angle);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_pointer_set_image",
-                                 wrap_guage_pointer_set_image);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_pointer_set_anchor",
-                                 wrap_guage_pointer_set_anchor);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_pointer_t_get_prop_angle",
-                                 wrap_guage_pointer_t_get_prop_angle);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_pointer_t_get_prop_image",
-                                 wrap_guage_pointer_t_get_prop_image);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_pointer_t_get_prop_anchor_x",
-                                 wrap_guage_pointer_t_get_prop_anchor_x);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_pointer_t_get_prop_anchor_y",
-                                 wrap_guage_pointer_t_get_prop_anchor_y);
+ret_t gauge_pointer_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_pointer_create",
+                                 wrap_gauge_pointer_create);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_pointer_cast",
+                                 wrap_gauge_pointer_cast);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_pointer_set_angle",
+                                 wrap_gauge_pointer_set_angle);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_pointer_set_image",
+                                 wrap_gauge_pointer_set_image);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_pointer_set_anchor",
+                                 wrap_gauge_pointer_set_anchor);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_pointer_t_get_prop_angle",
+                                 wrap_gauge_pointer_t_get_prop_angle);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_pointer_t_get_prop_image",
+                                 wrap_gauge_pointer_t_get_prop_image);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_pointer_t_get_prop_anchor_x",
+                                 wrap_gauge_pointer_t_get_prop_anchor_x);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_pointer_t_get_prop_anchor_y",
+                                 wrap_gauge_pointer_t_get_prop_anchor_y);
 
   return RET_OK;
 }
 
-jsvalue_t wrap_guage_create(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+jsvalue_t wrap_gauge_create(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
                             const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -16641,28 +16641,28 @@ jsvalue_t wrap_guage_create(const jerry_call_info_t* call_info_p, const jerry_va
     xy_t y = (xy_t)jsvalue_get_int_value(ctx, argv[2]);
     wh_t w = (wh_t)jsvalue_get_int_value(ctx, argv[3]);
     wh_t h = (wh_t)jsvalue_get_int_value(ctx, argv[4]);
-    ret = (widget_t*)guage_create(parent, x, y, w, h);
+    ret = (widget_t*)gauge_create(parent, x, y, w, h);
 
-    jret = jsvalue_create_pointer(ctx, ret, "guage_t*");
+    jret = jsvalue_create_pointer(ctx, ret, "gauge_t*");
   }
   return jret;
 }
 
-jsvalue_t wrap_guage_cast(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+jsvalue_t wrap_gauge_cast(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
                           const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
   if (argc >= 1) {
     widget_t* ret = NULL;
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
-    ret = (widget_t*)guage_cast(widget);
+    ret = (widget_t*)gauge_cast(widget);
 
-    jret = jsvalue_create_pointer(ctx, ret, "guage_t*");
+    jret = jsvalue_create_pointer(ctx, ret, "gauge_t*");
   }
   return jret;
 }
 
-jsvalue_t wrap_guage_set_image(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+jsvalue_t wrap_gauge_set_image(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
                                const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -16670,7 +16670,7 @@ jsvalue_t wrap_guage_set_image(const jerry_call_info_t* call_info_p, const jerry
     ret_t ret = (ret_t)0;
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
     char* name = (char*)jsvalue_get_utf8_string(ctx, argv[1]);
-    ret = (ret_t)guage_set_image(widget, name);
+    ret = (ret_t)gauge_set_image(widget, name);
     TKMEM_FREE(name);
 
     jret = jsvalue_create_int(ctx, ret);
@@ -16678,7 +16678,7 @@ jsvalue_t wrap_guage_set_image(const jerry_call_info_t* call_info_p, const jerry
   return jret;
 }
 
-jsvalue_t wrap_guage_set_draw_type(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+jsvalue_t wrap_gauge_set_draw_type(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
                                    const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -16686,43 +16686,43 @@ jsvalue_t wrap_guage_set_draw_type(const jerry_call_info_t* call_info_p, const j
     ret_t ret = (ret_t)0;
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
     image_draw_type_t draw_type = (image_draw_type_t)jsvalue_get_int_value(ctx, argv[1]);
-    ret = (ret_t)guage_set_draw_type(widget, draw_type);
+    ret = (ret_t)gauge_set_draw_type(widget, draw_type);
 
     jret = jsvalue_create_int(ctx, ret);
   }
   return jret;
 }
 
-jsvalue_t wrap_guage_t_get_prop_image(const jerry_call_info_t* call_info_p,
+jsvalue_t wrap_gauge_t_get_prop_image(const jerry_call_info_t* call_info_p,
                                       const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
-  guage_t* obj = (guage_t*)jsvalue_get_pointer(ctx, argv[0], "guage_t*");
+  gauge_t* obj = (gauge_t*)jsvalue_get_pointer(ctx, argv[0], "gauge_t*");
 
   jret = jsvalue_create_string(ctx, obj->image);
   return jret;
 }
 
-jsvalue_t wrap_guage_t_get_prop_draw_type(const jerry_call_info_t* call_info_p,
+jsvalue_t wrap_gauge_t_get_prop_draw_type(const jerry_call_info_t* call_info_p,
                                           const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
-  guage_t* obj = (guage_t*)jsvalue_get_pointer(ctx, argv[0], "guage_t*");
+  gauge_t* obj = (gauge_t*)jsvalue_get_pointer(ctx, argv[0], "gauge_t*");
 
   jret = jsvalue_create_number(ctx, obj->draw_type);
   return jret;
 }
 
-ret_t guage_t_init(JSContext* ctx) {
-  jerryx_handler_register_global((const jerry_char_t*)"guage_create", wrap_guage_create);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_cast", wrap_guage_cast);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_set_image", wrap_guage_set_image);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_set_draw_type",
-                                 wrap_guage_set_draw_type);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_t_get_prop_image",
-                                 wrap_guage_t_get_prop_image);
-  jerryx_handler_register_global((const jerry_char_t*)"guage_t_get_prop_draw_type",
-                                 wrap_guage_t_get_prop_draw_type);
+ret_t gauge_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_create", wrap_gauge_create);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_cast", wrap_gauge_cast);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_set_image", wrap_gauge_set_image);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_set_draw_type",
+                                 wrap_gauge_set_draw_type);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_t_get_prop_image",
+                                 wrap_gauge_t_get_prop_image);
+  jerryx_handler_register_global((const jerry_char_t*)"gauge_t_get_prop_draw_type",
+                                 wrap_gauge_t_get_prop_draw_type);
 
   return RET_OK;
 }
@@ -16943,6 +16943,37 @@ jsvalue_t wrap_image_animation_set_unload_after_paint(const jerry_call_info_t* c
   return jret;
 }
 
+jsvalue_t wrap_image_animation_set_reverse(const jerry_call_info_t* call_info_p,
+                                           const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    bool_t reverse = (bool_t)jsvalue_get_boolean_value(ctx, argv[1]);
+    ret = (ret_t)image_animation_set_reverse(widget, reverse);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_image_animation_set_show_when_done(const jerry_call_info_t* call_info_p,
+                                                  const jerry_value_t argv[],
+                                                  const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    bool_t show_when_done = (bool_t)jsvalue_get_boolean_value(ctx, argv[1]);
+    ret = (ret_t)image_animation_set_show_when_done(widget, show_when_done);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_image_animation_cast(const jerry_call_info_t* call_info_p,
                                     const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -17019,6 +17050,18 @@ jsvalue_t wrap_image_animation_t_get_prop_end_index(const jerry_call_info_t* cal
   return jret;
 }
 
+jsvalue_t wrap_image_animation_t_get_prop_reverse(const jerry_call_info_t* call_info_p,
+                                                  const jerry_value_t argv[],
+                                                  const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  image_animation_t* obj =
+      (image_animation_t*)jsvalue_get_pointer(ctx, argv[0], "image_animation_t*");
+
+  jret = jsvalue_create_bool(ctx, obj->reverse);
+  return jret;
+}
+
 jsvalue_t wrap_image_animation_t_get_prop_loop(const jerry_call_info_t* call_info_p,
                                                const jerry_value_t argv[],
                                                const jerry_length_t argc) {
@@ -17091,6 +17134,18 @@ jsvalue_t wrap_image_animation_t_get_prop_delay(const jerry_call_info_t* call_in
   return jret;
 }
 
+jsvalue_t wrap_image_animation_t_get_prop_show_when_done(const jerry_call_info_t* call_info_p,
+                                                         const jerry_value_t argv[],
+                                                         const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  image_animation_t* obj =
+      (image_animation_t*)jsvalue_get_pointer(ctx, argv[0], "image_animation_t*");
+
+  jret = jsvalue_create_bool(ctx, obj->show_when_done);
+  return jret;
+}
+
 ret_t image_animation_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_create",
                                  wrap_image_animation_create);
@@ -17120,6 +17175,10 @@ ret_t image_animation_t_init(JSContext* ctx) {
                                  wrap_image_animation_set_format);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_set_unload_after_paint",
                                  wrap_image_animation_set_unload_after_paint);
+  jerryx_handler_register_global((const jerry_char_t*)"image_animation_set_reverse",
+                                 wrap_image_animation_set_reverse);
+  jerryx_handler_register_global((const jerry_char_t*)"image_animation_set_show_when_done",
+                                 wrap_image_animation_set_show_when_done);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_cast",
                                  wrap_image_animation_cast);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_is_playing",
@@ -17132,6 +17191,8 @@ ret_t image_animation_t_init(JSContext* ctx) {
                                  wrap_image_animation_t_get_prop_start_index);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_end_index",
                                  wrap_image_animation_t_get_prop_end_index);
+  jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_reverse",
+                                 wrap_image_animation_t_get_prop_reverse);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_loop",
                                  wrap_image_animation_t_get_prop_loop);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_auto_play",
@@ -17145,6 +17206,8 @@ ret_t image_animation_t_init(JSContext* ctx) {
                                  wrap_image_animation_t_get_prop_interval);
   jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_delay",
                                  wrap_image_animation_t_get_prop_delay);
+  jerryx_handler_register_global((const jerry_char_t*)"image_animation_t_get_prop_show_when_done",
+                                 wrap_image_animation_t_get_prop_show_when_done);
 
   return RET_OK;
 }
@@ -26085,8 +26148,8 @@ ret_t awtk_js_init(JSContext* ctx) {
   draggable_t_init(ctx);
   file_browser_view_t_init(ctx);
   file_chooser_t_init(ctx);
-  guage_pointer_t_init(ctx);
-  guage_t_init(ctx);
+  gauge_pointer_t_init(ctx);
+  gauge_t_init(ctx);
   image_animation_t_init(ctx);
   image_value_t_init(ctx);
   candidates_t_init(ctx);
