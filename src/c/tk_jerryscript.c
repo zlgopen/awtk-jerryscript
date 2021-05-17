@@ -9386,6 +9386,34 @@ jsvalue_t wrap_widget_close_window(const jerry_call_info_t* call_info_p, const j
   return jret;
 }
 
+jsvalue_t wrap_widget_back(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+                           const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (ret_t)widget_back(widget);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_widget_back_to_home(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+                                   const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (ret_t)widget_back_to_home(widget);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_widget_move(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
                            const jerry_length_t argc) {
   void* ctx = NULL;
@@ -11228,6 +11256,9 @@ ret_t widget_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_index_of", wrap_widget_index_of);
   jerryx_handler_register_global((const jerry_char_t*)"widget_close_window",
                                  wrap_widget_close_window);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_back", wrap_widget_back);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_back_to_home",
+                                 wrap_widget_back_to_home);
   jerryx_handler_register_global((const jerry_char_t*)"widget_move", wrap_widget_move);
   jerryx_handler_register_global((const jerry_char_t*)"widget_resize", wrap_widget_resize);
   jerryx_handler_register_global((const jerry_char_t*)"widget_move_resize",
@@ -17927,6 +17958,21 @@ jsvalue_t wrap_mledit_set_max_lines(const jerry_call_info_t* call_info_p,
   return jret;
 }
 
+jsvalue_t wrap_mledit_set_max_chars(const jerry_call_info_t* call_info_p,
+                                    const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    uint32_t max_chars = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
+    ret = (ret_t)mledit_set_max_chars(widget, max_chars);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_mledit_set_tips(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
                                const jerry_length_t argc) {
   void* ctx = NULL;
@@ -18150,6 +18196,16 @@ jsvalue_t wrap_mledit_t_get_prop_max_lines(const jerry_call_info_t* call_info_p,
   return jret;
 }
 
+jsvalue_t wrap_mledit_t_get_prop_max_chars(const jerry_call_info_t* call_info_p,
+                                           const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  mledit_t* obj = (mledit_t*)jsvalue_get_pointer(ctx, argv[0], "mledit_t*");
+
+  jret = jsvalue_create_int(ctx, obj->max_chars);
+  return jret;
+}
+
 jsvalue_t wrap_mledit_t_get_prop_wrap_word(const jerry_call_info_t* call_info_p,
                                            const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -18224,6 +18280,8 @@ ret_t mledit_t_init(JSContext* ctx) {
                                  wrap_mledit_set_wrap_word);
   jerryx_handler_register_global((const jerry_char_t*)"mledit_set_max_lines",
                                  wrap_mledit_set_max_lines);
+  jerryx_handler_register_global((const jerry_char_t*)"mledit_set_max_chars",
+                                 wrap_mledit_set_max_chars);
   jerryx_handler_register_global((const jerry_char_t*)"mledit_set_tips", wrap_mledit_set_tips);
   jerryx_handler_register_global((const jerry_char_t*)"mledit_set_tr_tips",
                                  wrap_mledit_set_tr_tips);
@@ -18251,6 +18309,8 @@ ret_t mledit_t_init(JSContext* ctx) {
                                  wrap_mledit_t_get_prop_keyboard);
   jerryx_handler_register_global((const jerry_char_t*)"mledit_t_get_prop_max_lines",
                                  wrap_mledit_t_get_prop_max_lines);
+  jerryx_handler_register_global((const jerry_char_t*)"mledit_t_get_prop_max_chars",
+                                 wrap_mledit_t_get_prop_max_chars);
   jerryx_handler_register_global((const jerry_char_t*)"mledit_t_get_prop_wrap_word",
                                  wrap_mledit_t_get_prop_wrap_word);
   jerryx_handler_register_global((const jerry_char_t*)"mledit_t_get_prop_scroll_line",
