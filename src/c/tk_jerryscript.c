@@ -5671,6 +5671,18 @@ jsvalue_t get_STYLE_ID_SELF_LAYOUT(const jerry_call_info_t* call_info_p, const j
   return jsvalue_create_string(ctx, STYLE_ID_SELF_LAYOUT);
 }
 
+jsvalue_t get_STYLE_ID_FOCUSABLE(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+                                 const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, STYLE_ID_FOCUSABLE);
+}
+
+jsvalue_t get_STYLE_ID_FEEDBACK(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+                                const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, STYLE_ID_FEEDBACK);
+}
+
 ret_t style_id_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_BG_COLOR", get_STYLE_ID_BG_COLOR);
   jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_FG_COLOR", get_STYLE_ID_FG_COLOR);
@@ -5741,6 +5753,8 @@ ret_t style_id_t_init(JSContext* ctx) {
                                  get_STYLE_ID_CHILDREN_LAYOUT);
   jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_SELF_LAYOUT",
                                  get_STYLE_ID_SELF_LAYOUT);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_FOCUSABLE", get_STYLE_ID_FOCUSABLE);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_FEEDBACK", get_STYLE_ID_FEEDBACK);
 
   return RET_OK;
 }
@@ -7470,6 +7484,12 @@ jsvalue_t get_WIDGET_PROP_SINGLE_INSTANCE(const jerry_call_info_t* call_info_p,
   return jsvalue_create_string(ctx, WIDGET_PROP_SINGLE_INSTANCE);
 }
 
+jsvalue_t get_WIDGET_PROP_STRONGLY_FOCUS(const jerry_call_info_t* call_info_p,
+                                         const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_PROP_STRONGLY_FOCUS);
+}
+
 jsvalue_t get_WIDGET_PROP_CHILDREN_LAYOUT(const jerry_call_info_t* call_info_p,
                                           const jerry_value_t argv[], const jerry_length_t argc) {
   void* ctx = NULL;
@@ -8292,6 +8312,8 @@ ret_t widget_prop_t_init(JSContext* ctx) {
                                  get_WIDGET_PROP_AUTO_ADJUST_SIZE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_SINGLE_INSTANCE",
                                  get_WIDGET_PROP_SINGLE_INSTANCE);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_STRONGLY_FOCUS",
+                                 get_WIDGET_PROP_STRONGLY_FOCUS);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CHILDREN_LAYOUT",
                                  get_WIDGET_PROP_CHILDREN_LAYOUT);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_LAYOUT", get_WIDGET_PROP_LAYOUT);
@@ -9338,6 +9360,20 @@ jsvalue_t wrap_widget_get_child(const jerry_call_info_t* call_info_p, const jerr
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
     int32_t index = (int32_t)jsvalue_get_int_value(ctx, argv[1]);
     ret = (widget_t*)widget_get_child(widget, index);
+
+    jret = jsvalue_create_pointer(ctx, ret, "widget_t*");
+  }
+  return jret;
+}
+
+jsvalue_t wrap_widget_get_focused_widget(const jerry_call_info_t* call_info_p,
+                                         const jerry_value_t argv[], const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    widget_t* ret = NULL;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (widget_t*)widget_get_focused_widget(widget);
 
     jret = jsvalue_create_pointer(ctx, ret, "widget_t*");
   }
@@ -11251,6 +11287,8 @@ ret_t widget_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"widget_count_children",
                                  wrap_widget_count_children);
   jerryx_handler_register_global((const jerry_char_t*)"widget_get_child", wrap_widget_get_child);
+  jerryx_handler_register_global((const jerry_char_t*)"widget_get_focused_widget",
+                                 wrap_widget_get_focused_widget);
   jerryx_handler_register_global((const jerry_char_t*)"widget_get_native_window",
                                  wrap_widget_get_native_window);
   jerryx_handler_register_global((const jerry_char_t*)"widget_index_of", wrap_widget_index_of);
@@ -15355,6 +15393,17 @@ jsvalue_t wrap_window_base_t_get_prop_single_instance(const jerry_call_info_t* c
   return jret;
 }
 
+jsvalue_t wrap_window_base_t_get_prop_strongly_focus(const jerry_call_info_t* call_info_p,
+                                                     const jerry_value_t argv[],
+                                                     const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  window_base_t* obj = (window_base_t*)jsvalue_get_pointer(ctx, argv[0], "window_base_t*");
+
+  jret = jsvalue_create_bool(ctx, obj->strongly_focus);
+  return jret;
+}
+
 ret_t window_base_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"window_base_cast", wrap_window_base_cast);
   jerryx_handler_register_global((const jerry_char_t*)"window_base_t_get_prop_theme",
@@ -15397,6 +15446,8 @@ ret_t window_base_t_init(JSContext* ctx) {
                                  wrap_window_base_t_get_prop_move_focus_right_key);
   jerryx_handler_register_global((const jerry_char_t*)"window_base_t_get_prop_single_instance",
                                  wrap_window_base_t_get_prop_single_instance);
+  jerryx_handler_register_global((const jerry_char_t*)"window_base_t_get_prop_strongly_focus",
+                                 wrap_window_base_t_get_prop_strongly_focus);
 
   return RET_OK;
 }
@@ -16634,7 +16685,7 @@ jsvalue_t wrap_gauge_pointer_set_angle(const jerry_call_info_t* call_info_p,
   if (argc >= 2) {
     ret_t ret = (ret_t)0;
     widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
-    int32_t angle = (int32_t)jsvalue_get_int_value(ctx, argv[1]);
+    float_t angle = (float_t)jsvalue_get_number_value(ctx, argv[1]);
     ret = (ret_t)gauge_pointer_set_angle(widget, angle);
 
     jret = jsvalue_create_int(ctx, ret);
@@ -16683,7 +16734,7 @@ jsvalue_t wrap_gauge_pointer_t_get_prop_angle(const jerry_call_info_t* call_info
   jsvalue_t jret = JS_NULL;
   gauge_pointer_t* obj = (gauge_pointer_t*)jsvalue_get_pointer(ctx, argv[0], "gauge_pointer_t*");
 
-  jret = jsvalue_create_int(ctx, obj->angle);
+  jret = jsvalue_create_number(ctx, obj->angle);
   return jret;
 }
 
@@ -25231,6 +25282,48 @@ jsvalue_t wrap_gif_image_create(const jerry_call_info_t* call_info_p, const jerr
   return jret;
 }
 
+jsvalue_t wrap_gif_image_play(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+                              const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (ret_t)gif_image_play(widget);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_gif_image_stop(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+                              const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (ret_t)gif_image_stop(widget);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+jsvalue_t wrap_gif_image_pause(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
+                               const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (ret_t)gif_image_pause(widget);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_gif_image_cast(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
                               const jerry_length_t argc) {
   void* ctx = NULL;
@@ -25247,6 +25340,9 @@ jsvalue_t wrap_gif_image_cast(const jerry_call_info_t* call_info_p, const jerry_
 
 ret_t gif_image_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"gif_image_create", wrap_gif_image_create);
+  jerryx_handler_register_global((const jerry_char_t*)"gif_image_play", wrap_gif_image_play);
+  jerryx_handler_register_global((const jerry_char_t*)"gif_image_stop", wrap_gif_image_stop);
+  jerryx_handler_register_global((const jerry_char_t*)"gif_image_pause", wrap_gif_image_pause);
   jerryx_handler_register_global((const jerry_char_t*)"gif_image_cast", wrap_gif_image_cast);
 
   return RET_OK;
