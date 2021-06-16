@@ -21244,6 +21244,22 @@ jsvalue_t wrap_text_selector_set_yspeed_scale(const jerry_call_info_t* call_info
   return jret;
 }
 
+jsvalue_t wrap_text_selector_set_animating_time(const jerry_call_info_t* call_info_p,
+                                                const jerry_value_t argv[],
+                                                const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    uint32_t animating_time = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
+    ret = (ret_t)text_selector_set_animating_time(widget, animating_time);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 jsvalue_t wrap_text_selector_t_get_prop_visible_nr(const jerry_call_info_t* call_info_p,
                                                    const jerry_value_t argv[],
                                                    const jerry_length_t argc) {
@@ -21285,6 +21301,17 @@ jsvalue_t wrap_text_selector_t_get_prop_yspeed_scale(const jerry_call_info_t* ca
   text_selector_t* obj = (text_selector_t*)jsvalue_get_pointer(ctx, argv[0], "text_selector_t*");
 
   jret = jsvalue_create_number(ctx, obj->yspeed_scale);
+  return jret;
+}
+
+jsvalue_t wrap_text_selector_t_get_prop_animating_time(const jerry_call_info_t* call_info_p,
+                                                       const jerry_value_t argv[],
+                                                       const jerry_length_t argc) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  text_selector_t* obj = (text_selector_t*)jsvalue_get_pointer(ctx, argv[0], "text_selector_t*");
+
+  jret = jsvalue_create_int(ctx, obj->animating_time);
   return jret;
 }
 
@@ -21345,6 +21372,8 @@ ret_t text_selector_t_init(JSContext* ctx) {
                                  wrap_text_selector_set_loop_options);
   jerryx_handler_register_global((const jerry_char_t*)"text_selector_set_yspeed_scale",
                                  wrap_text_selector_set_yspeed_scale);
+  jerryx_handler_register_global((const jerry_char_t*)"text_selector_set_animating_time",
+                                 wrap_text_selector_set_animating_time);
   jerryx_handler_register_global((const jerry_char_t*)"text_selector_t_get_prop_visible_nr",
                                  wrap_text_selector_t_get_prop_visible_nr);
   jerryx_handler_register_global((const jerry_char_t*)"text_selector_t_get_prop_selected_index",
@@ -21353,6 +21382,8 @@ ret_t text_selector_t_init(JSContext* ctx) {
                                  wrap_text_selector_t_get_prop_options);
   jerryx_handler_register_global((const jerry_char_t*)"text_selector_t_get_prop_yspeed_scale",
                                  wrap_text_selector_t_get_prop_yspeed_scale);
+  jerryx_handler_register_global((const jerry_char_t*)"text_selector_t_get_prop_animating_time",
+                                 wrap_text_selector_t_get_prop_animating_time);
   jerryx_handler_register_global((const jerry_char_t*)"text_selector_t_get_prop_localize_options",
                                  wrap_text_selector_t_get_prop_localize_options);
   jerryx_handler_register_global((const jerry_char_t*)"text_selector_t_get_prop_loop_options",
