@@ -14,7 +14,6 @@
 #include "base/canvas_offline.h"
 #include "base/canvas.h"
 #include "base/clip_board.h"
-#include "base/date_time_format.h"
 #include "base/dialog.h"
 #include "base/events.h"
 #include "base/font_manager.h"
@@ -3172,10 +3171,6 @@ ret_t clip_board_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"clip_board_get_text",
                                  wrap_clip_board_get_text);
 
-  return RET_OK;
-}
-
-ret_t data_time_format_init(JSContext* ctx) {
   return RET_OK;
 }
 
@@ -26681,7 +26676,6 @@ ret_t awtk_js_init(JSContext* ctx) {
   canvas_t_init(ctx);
   clip_board_data_type_t_init(ctx);
   clip_board_t_init(ctx);
-  data_time_format_init(ctx);
   dialog_quit_code_t_init(ctx);
   event_type_t_init(ctx);
   font_manager_t_init(ctx);
