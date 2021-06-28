@@ -195,7 +195,7 @@ static ret_t awtk_jerryscript_get_module(const char* name, jerry_value_t* module
   jerry_value_t prop_name = jerry_create_string((const jerry_char_t*)name);
   jerry_value_t has_prop_js = jerry_has_property(modules, prop_name);
 
-  if (jerry_get_boolean_value(has_prop_js)) {
+  if (jerry_value_to_boolean(has_prop_js)) {
     *module = jerry_get_property(modules, prop_name);
     ret = RET_OK;
   } else {
