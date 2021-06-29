@@ -86,3 +86,16 @@ scons LINUX_FB=true
 * 避免使用动态 GIF 图片。
 
 * 避免直接使用 value\_t/color\_t/bitmap\_t/object\_t 等类。
+
+
+# for iotjs
+
+```
+download jerryscript-2.4.0.tar.gz
+
+tar xvf jerryscript-2.4.0.tar.gz -C 3rd/jerryscript/
+mv 3rd/jerryscript/jerryscript-2.4.0 3rd/jerryscript/jerryscript
+```
+
+
+
