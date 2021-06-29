@@ -19,20 +19,16 @@
  *
  */
 
-#include "jerryscript-ext/handler.h"
+#include "utils.h"
 
 /**
  * Expose garbage collector to scripts.
  *
  * @return undefined.
  */
-jerry_value_t jerryx_handler_my_gc(
-    const jerry_call_info_t* call_info_p, /**< function object */
-    const jerry_value_t args_p[],         /**< function arguments */
-    const jerry_length_t args_cnt)        /**< number of function arguments */
-{
+HANDLER_PROTO(jerryx_handler_my_gc) {
   jerry_gc_mode_t mode =
-      ((args_cnt > 0 && jerry_value_to_boolean(args_p[0])) ? JERRY_GC_PRESSURE_HIGH
+      ((argc > 0 && jerry_value_to_boolean(argv[0])) ? JERRY_GC_PRESSURE_HIGH
                                                            : JERRY_GC_PRESSURE_LOW);
 
   jerry_gc(mode);
@@ -62,22 +58,18 @@ jerry_value_t jerryx_handler_my_gc(
  * @return undefined - if all arguments could be converted to strings,
  *         error - otherwise.
  */
-jerry_value_t jerryx_handler_my_print(
-    const jerry_call_info_t* call_info_p, /**< function object */
-    const jerry_value_t args_p[],         /**< function arguments */
-    const jerry_length_t args_cnt)        /**< number of function arguments */
-{
+HANDLER_PROTO(jerryx_handler_my_print) {
   const char* const null_str = "\\u0000";
 
   jerry_value_t ret_val = jerry_create_undefined();
 
-  for (jerry_length_t arg_index = 0; arg_index < args_cnt; arg_index++) {
+  for (jerry_length_t arg_index = 0; arg_index < argc; arg_index++) {
     jerry_value_t str_val;
 
-    if (jerry_value_is_symbol(args_p[arg_index])) {
-      str_val = jerry_get_symbol_descriptive_string(args_p[arg_index]);
+    if (jerry_value_is_symbol(argv[arg_index])) {
+      str_val = jerry_get_symbol_descriptive_string(argv[arg_index]);
     } else {
-      str_val = jerry_value_to_string(args_p[arg_index]);
+      str_val = jerry_value_to_string(argv[arg_index]);
     }
 
     if (jerry_value_is_error(str_val)) {
@@ -105,7 +97,7 @@ jerry_value_t jerryx_handler_my_print(
       }
 
       if (substr_pos == length) {
-        *buf_end_p++ = (arg_index < args_cnt - 1) ? ' ' : '\n';
+        *buf_end_p++ = (arg_index < argc - 1) ? ' ' : '\n';
       }
 
       for (jerry_char_t* buf_p = substr_buf; buf_p < buf_end_p; buf_p++) {
@@ -125,7 +117,7 @@ jerry_value_t jerryx_handler_my_print(
     jerry_release_value(str_val);
   }
 
-  if (args_cnt == 0 || jerry_value_is_error(ret_val)) {
+  if (argc == 0 || jerry_value_is_error(ret_val)) {
     jerry_port_print_char('\n');
   }
 

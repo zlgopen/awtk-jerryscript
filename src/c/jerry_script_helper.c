@@ -239,13 +239,13 @@ ret_t jerry_script_eval_buff(const char* script, uint32_t size, const char* file
   return_value_if_fail(script != NULL && size > 0, RET_NOT_FOUND);
 
   if (global) {
-    parsed_code = jerry_parse((jerry_char_t*)script, size, NULL);
+    parsed_code = JERRY_PARSE((jerry_char_t*)script, size, NULL);
     log_debug("load %s into global\n", filename);
   } else {
     str_t str;
     str_init(&str, size + 100);
     awtk_jerryscript_wrap_mudule(&str, filename, script, size);
-    parsed_code = jerry_parse((jerry_char_t*)str.str, str.size, NULL);
+    parsed_code = JERRY_PARSE((jerry_char_t*)str.str, str.size, NULL);
     str_reset(&str);
     log_debug("load %s as module\n", filename);
   }
@@ -285,8 +285,7 @@ ret_t jerry_script_eval_file(const char* filename, bool_t global) {
   return ret;
 }
 
-jerry_value_t wrap_require(const jerry_call_info_t* call_info_p, const jerry_value_t argv[],
-                           const jerry_length_t argc) {
+HANDLER_PROTO(wrap_require) {
   jerry_value_t jret = 0;
 
   if (argc >= 1) {
