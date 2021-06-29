@@ -41,5 +41,8 @@ APP_CCFLAGS = '-DPATH_MAX=256 -DJERRY_ESNEXT=0 '
 
 helper.add_libs(APP_LIBS).add_ccflags(APP_CCFLAGS).add_cpppath(APP_CPPPATH).call(DefaultEnvironment)
 
+#for iotjs
+#SConscriptFiles = ['src/SConscript']
+
 SConscriptFiles = ['3rd/jerryscript/SConscript', 'src/SConscript']
 helper.SConscript(SConscriptFiles)

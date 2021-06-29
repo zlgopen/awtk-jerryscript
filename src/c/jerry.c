@@ -1,8 +1,4 @@
 #include <string.h>
-#include "jerryscript.h"
-#include "jerryscript-port.h"
-#include "jerryscript-core.h"
-#include "jerryscript-ext/handler.h"
 #include "jerry_script_helper.h"
 
 #include "tkc/fs.h"
@@ -18,7 +14,7 @@ static ret_t jerry_script_eval(const char* script, uint32_t size, const char* fi
   jerry_value_t parsed_code;
   return_value_if_fail(script != NULL && size > 0, RET_NOT_FOUND);
 
-  parsed_code = jerry_parse((jerry_char_t*)script, size, NULL);
+  parsed_code = JERRY_PARSE((jerry_char_t*)script, size, NULL);
 
   if (jerry_value_check(parsed_code) == RET_OK) {
     uint32_t i = 0;
