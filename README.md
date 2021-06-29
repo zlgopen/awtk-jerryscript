@@ -20,6 +20,7 @@ cd awtk-jerryscript
 git clone https://github.com/jerryscript-project/jerryscript.git 3rd/jerryscript/jerryscript
 ```
 
+
 * 生成资源
 
 ```
@@ -88,14 +89,11 @@ scons LINUX_FB=true
 * 避免直接使用 value\_t/color\_t/bitmap\_t/object\_t 等类。
 
 
-# for iotjs
+# build for awtk-iotjs
 
 ```
-download jerryscript-2.4.0.tar.gz
-
-tar xvf jerryscript-2.4.0.tar.gz -C 3rd/jerryscript/
-mv 3rd/jerryscript/jerryscript-2.4.0 3rd/jerryscript/jerryscript
+cd 3rd/jerryscript/jerryscript && git checkout 8ba0d1b6ee5a065a42f3b306771ad8e3c0d819bc && cd -
+scons IOTJS=true
 ```
-
 
 
