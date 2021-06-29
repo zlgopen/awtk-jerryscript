@@ -22,6 +22,7 @@
 #include "tkc/utils.h"
 #include "jerryscript.h"
 #include "jerryscript-core.h"
+#include "jerryscript-ext/handler.h"
 
 #ifndef JERRY_SCRIPT_HELPER_H
 #define JERRY_SCRIPT_HELPER_H
