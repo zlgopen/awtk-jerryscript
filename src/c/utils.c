@@ -27,9 +27,8 @@
  * @return undefined.
  */
 HANDLER_PROTO(jerryx_handler_my_gc) {
-  jerry_gc_mode_t mode =
-      ((argc > 0 && jerry_value_to_boolean(argv[0])) ? JERRY_GC_PRESSURE_HIGH
-                                                           : JERRY_GC_PRESSURE_LOW);
+  jerry_gc_mode_t mode = ((argc > 0 && jerry_value_to_boolean(argv[0])) ? JERRY_GC_PRESSURE_HIGH
+                                                                        : JERRY_GC_PRESSURE_LOW);
 
   jerry_gc(mode);
   return jerry_create_undefined();
