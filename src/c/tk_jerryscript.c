@@ -349,6 +349,55 @@ ret_t pointf_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
+static HANDLER_PROTO(wrap_rectf_t_get_prop_x) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  rectf_t* obj = (rectf_t*)jsvalue_get_pointer(ctx, argv[0], "rectf_t*");
+
+  jret = jsvalue_create_number(ctx, obj->x);
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_rectf_t_get_prop_y) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  rectf_t* obj = (rectf_t*)jsvalue_get_pointer(ctx, argv[0], "rectf_t*");
+
+  jret = jsvalue_create_number(ctx, obj->y);
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_rectf_t_get_prop_w) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  rectf_t* obj = (rectf_t*)jsvalue_get_pointer(ctx, argv[0], "rectf_t*");
+
+  jret = jsvalue_create_number(ctx, obj->w);
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_rectf_t_get_prop_h) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  rectf_t* obj = (rectf_t*)jsvalue_get_pointer(ctx, argv[0], "rectf_t*");
+
+  jret = jsvalue_create_number(ctx, obj->h);
+  return jret;
+}
+
+ret_t rectf_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"rectf_t_get_prop_x",
+                                 wrap_rectf_t_get_prop_x);
+  jerryx_handler_register_global((const jerry_char_t*)"rectf_t_get_prop_y",
+                                 wrap_rectf_t_get_prop_y);
+  jerryx_handler_register_global((const jerry_char_t*)"rectf_t_get_prop_w",
+                                 wrap_rectf_t_get_prop_w);
+  jerryx_handler_register_global((const jerry_char_t*)"rectf_t_get_prop_h",
+                                 wrap_rectf_t_get_prop_h);
+
+  return RET_OK;
+}
+
 static HANDLER_PROTO(wrap_rect_create) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -24288,6 +24337,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   emitter_t_init(ctx);
   point_t_init(ctx);
   pointf_t_init(ctx);
+  rectf_t_init(ctx);
   rect_t_init(ctx);
   bitmap_t_init(ctx);
   object_t_init(ctx);
