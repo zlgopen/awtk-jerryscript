@@ -18929,6 +18929,20 @@ static HANDLER_PROTO(wrap_slide_view_set_loop) {
   return jret;
 }
 
+static HANDLER_PROTO(wrap_slide_view_remove_index) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    uint32_t index = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
+    ret = (ret_t)slide_view_remove_index(widget, index);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 static HANDLER_PROTO(wrap_slide_view_t_get_prop_vertical) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -18980,6 +18994,8 @@ ret_t slide_view_t_init(JSContext* ctx) {
                                  wrap_slide_view_set_anim_hint);
   jerryx_handler_register_global((const jerry_char_t*)"slide_view_set_loop",
                                  wrap_slide_view_set_loop);
+  jerryx_handler_register_global((const jerry_char_t*)"slide_view_remove_index",
+                                 wrap_slide_view_remove_index);
   jerryx_handler_register_global((const jerry_char_t*)"slide_view_t_get_prop_vertical",
                                  wrap_slide_view_t_get_prop_vertical);
   jerryx_handler_register_global((const jerry_char_t*)"slide_view_t_get_prop_auto_play",
@@ -23515,6 +23531,34 @@ static HANDLER_PROTO(wrap_object_array_push) {
   return jret;
 }
 
+static HANDLER_PROTO(wrap_object_array_index_of) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    int32_t ret = (int32_t)0;
+    object_t* obj = (object_t*)jsvalue_get_pointer(ctx, argv[0], "object_t*");
+    const value_t* v = (const value_t*)jsvalue_get_pointer(ctx, argv[1], "const value_t*");
+    ret = (int32_t)object_array_index_of(obj, v);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_object_array_last_index_of) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    int32_t ret = (int32_t)0;
+    object_t* obj = (object_t*)jsvalue_get_pointer(ctx, argv[0], "object_t*");
+    const value_t* v = (const value_t*)jsvalue_get_pointer(ctx, argv[1], "const value_t*");
+    ret = (int32_t)object_array_last_index_of(obj, v);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 static HANDLER_PROTO(wrap_object_array_remove) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -23523,6 +23567,21 @@ static HANDLER_PROTO(wrap_object_array_remove) {
     object_t* obj = (object_t*)jsvalue_get_pointer(ctx, argv[0], "object_t*");
     uint32_t index = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
     ret = (ret_t)object_array_remove(obj, index);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_object_array_get_and_remove) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 3) {
+    ret_t ret = (ret_t)0;
+    object_t* obj = (object_t*)jsvalue_get_pointer(ctx, argv[0], "object_t*");
+    uint32_t index = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
+    value_t* v = (value_t*)jsvalue_get_pointer(ctx, argv[2], "value_t*");
+    ret = (ret_t)object_array_get_and_remove(obj, index, v);
 
     jret = jsvalue_create_int(ctx, ret);
   }
@@ -23546,8 +23605,14 @@ ret_t object_array_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"object_array_insert",
                                  wrap_object_array_insert);
   jerryx_handler_register_global((const jerry_char_t*)"object_array_push", wrap_object_array_push);
+  jerryx_handler_register_global((const jerry_char_t*)"object_array_index_of",
+                                 wrap_object_array_index_of);
+  jerryx_handler_register_global((const jerry_char_t*)"object_array_last_index_of",
+                                 wrap_object_array_last_index_of);
   jerryx_handler_register_global((const jerry_char_t*)"object_array_remove",
                                  wrap_object_array_remove);
+  jerryx_handler_register_global((const jerry_char_t*)"object_array_get_and_remove",
+                                 wrap_object_array_get_and_remove);
   jerryx_handler_register_global((const jerry_char_t*)"object_array_t_get_prop_size",
                                  wrap_object_array_t_get_prop_size);
 
