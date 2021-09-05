@@ -13101,11 +13101,24 @@ static HANDLER_PROTO(wrap_orientation_event_t_get_prop_orientation) {
   return jret;
 }
 
+static HANDLER_PROTO(wrap_orientation_event_t_get_prop_old_orientation) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  orientation_event_t* obj =
+      (orientation_event_t*)jsvalue_get_pointer(ctx, argv[0], "orientation_event_t*");
+
+  jret = jsvalue_create_int(ctx, obj->old_orientation);
+  return jret;
+}
+
 ret_t orientation_event_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"orientation_event_cast",
                                  wrap_orientation_event_cast);
   jerryx_handler_register_global((const jerry_char_t*)"orientation_event_t_get_prop_orientation",
                                  wrap_orientation_event_t_get_prop_orientation);
+  jerryx_handler_register_global(
+      (const jerry_char_t*)"orientation_event_t_get_prop_old_orientation",
+      wrap_orientation_event_t_get_prop_old_orientation);
 
   return RET_OK;
 }
@@ -23097,6 +23110,21 @@ static HANDLER_PROTO(wrap_native_window_resize) {
   return jret;
 }
 
+static HANDLER_PROTO(wrap_native_window_set_orientation) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 3) {
+    ret_t ret = (ret_t)0;
+    native_window_t* win = (native_window_t*)jsvalue_get_pointer(ctx, argv[0], "native_window_t*");
+    lcd_orientation_t old_orientation = (lcd_orientation_t)jsvalue_get_int_value(ctx, argv[1]);
+    lcd_orientation_t new_orientation = (lcd_orientation_t)jsvalue_get_int_value(ctx, argv[2]);
+    ret = (ret_t)native_window_set_orientation(win, old_orientation, new_orientation);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 static HANDLER_PROTO(wrap_native_window_minimize) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -23198,6 +23226,8 @@ ret_t native_window_t_init(JSContext* ctx) {
                                  wrap_native_window_move);
   jerryx_handler_register_global((const jerry_char_t*)"native_window_resize",
                                  wrap_native_window_resize);
+  jerryx_handler_register_global((const jerry_char_t*)"native_window_set_orientation",
+                                 wrap_native_window_set_orientation);
   jerryx_handler_register_global((const jerry_char_t*)"native_window_minimize",
                                  wrap_native_window_minimize);
   jerryx_handler_register_global((const jerry_char_t*)"native_window_maximize",
@@ -23785,22 +23815,11 @@ static HANDLER_PROTO(wrap_object_default_clear_props) {
   return jret;
 }
 
-static HANDLER_PROTO(wrap_object_default_t_get_prop_props_size) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  object_default_t* obj = (object_default_t*)jsvalue_get_pointer(ctx, argv[0], "object_default_t*");
-
-  jret = jsvalue_create_int(ctx, obj->props_size);
-  return jret;
-}
-
 ret_t object_default_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"object_default_create",
                                  wrap_object_default_create);
   jerryx_handler_register_global((const jerry_char_t*)"object_default_clear_props",
                                  wrap_object_default_clear_props);
-  jerryx_handler_register_global((const jerry_char_t*)"object_default_t_get_prop_props_size",
-                                 wrap_object_default_t_get_prop_props_size);
 
   return RET_OK;
 }
