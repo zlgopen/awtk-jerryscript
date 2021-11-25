@@ -31,8 +31,17 @@ static ret_t on_cmd_line(int argc, char* argv[]) {
   return RET_OK;
 }
 
+#define BOOT_SCRIPT "\
+if (this['console'] === undefined) { \
+  this.console = {};\
+  this.console.log = function (str) {\
+    print(str);\
+  };\
+}"
+
 static ret_t application_init() {
   awtk_jerryscript_init();
+  jerry_script_eval_buff(BOOT_SCRIPT, strlen(BOOT_SCRIPT), "console.js", TRUE);
   return_value_if_fail(jerry_script_eval_file("awtk", TRUE) == RET_OK, RET_FAIL);
   return_value_if_fail(jerry_script_eval_file(script_file, FALSE) == RET_OK, RET_FAIL);
 

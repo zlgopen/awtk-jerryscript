@@ -5169,9 +5169,9 @@ static HANDLER_PROTO(get_STYLE_ID_ROUND_RADIUS) {
   return jsvalue_create_string(ctx, STYLE_ID_ROUND_RADIUS);
 }
 
-static HANDLER_PROTO(get_STYLE_ID_ROUND_RADIUS_TOP_LETF) {
+static HANDLER_PROTO(get_STYLE_ID_ROUND_RADIUS_TOP_LEFT) {
   void* ctx = NULL;
-  return jsvalue_create_string(ctx, STYLE_ID_ROUND_RADIUS_TOP_LETF);
+  return jsvalue_create_string(ctx, STYLE_ID_ROUND_RADIUS_TOP_LEFT);
 }
 
 static HANDLER_PROTO(get_STYLE_ID_ROUND_RADIUS_TOP_RIGHT) {
@@ -5179,9 +5179,9 @@ static HANDLER_PROTO(get_STYLE_ID_ROUND_RADIUS_TOP_RIGHT) {
   return jsvalue_create_string(ctx, STYLE_ID_ROUND_RADIUS_TOP_RIGHT);
 }
 
-static HANDLER_PROTO(get_STYLE_ID_ROUND_RADIUS_BOTTOM_LETF) {
+static HANDLER_PROTO(get_STYLE_ID_ROUND_RADIUS_BOTTOM_LEFT) {
   void* ctx = NULL;
-  return jsvalue_create_string(ctx, STYLE_ID_ROUND_RADIUS_BOTTOM_LETF);
+  return jsvalue_create_string(ctx, STYLE_ID_ROUND_RADIUS_BOTTOM_LEFT);
 }
 
 static HANDLER_PROTO(get_STYLE_ID_ROUND_RADIUS_BOTTOM_RIGHT) {
@@ -5267,12 +5267,12 @@ ret_t style_id_t_init(JSContext* ctx) {
                                  get_STYLE_ID_SELECTED_TEXT_COLOR);
   jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_ROUND_RADIUS",
                                  get_STYLE_ID_ROUND_RADIUS);
-  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_ROUND_RADIUS_TOP_LETF",
-                                 get_STYLE_ID_ROUND_RADIUS_TOP_LETF);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_ROUND_RADIUS_TOP_LEFT",
+                                 get_STYLE_ID_ROUND_RADIUS_TOP_LEFT);
   jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_ROUND_RADIUS_TOP_RIGHT",
                                  get_STYLE_ID_ROUND_RADIUS_TOP_RIGHT);
-  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_ROUND_RADIUS_BOTTOM_LETF",
-                                 get_STYLE_ID_ROUND_RADIUS_BOTTOM_LETF);
+  jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_ROUND_RADIUS_BOTTOM_LEFT",
+                                 get_STYLE_ID_ROUND_RADIUS_BOTTOM_LEFT);
   jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_ROUND_RADIUS_BOTTOM_RIGHT",
                                  get_STYLE_ID_ROUND_RADIUS_BOTTOM_RIGHT);
   jerryx_handler_register_global((const jerry_char_t*)"STYLE_ID_CHILDREN_LAYOUT",
@@ -6116,7 +6116,7 @@ static HANDLER_PROTO(wrap_vgcanvas_clip_rect) {
   return jret;
 }
 
-static HANDLER_PROTO(wrap_vgcanvas_is_rectf_int_clip_rect) {
+static HANDLER_PROTO(wrap_vgcanvas_is_rectf_in_clip_rect) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
   if (argc >= 5) {
@@ -6126,7 +6126,7 @@ static HANDLER_PROTO(wrap_vgcanvas_is_rectf_int_clip_rect) {
     float_t top = (float_t)jsvalue_get_number_value(ctx, argv[2]);
     float_t right = (float_t)jsvalue_get_number_value(ctx, argv[3]);
     float_t bottom = (float_t)jsvalue_get_number_value(ctx, argv[4]);
-    ret = (bool_t)vgcanvas_is_rectf_int_clip_rect(vg, left, top, right, bottom);
+    ret = (bool_t)vgcanvas_is_rectf_in_clip_rect(vg, left, top, right, bottom);
 
     jret = jsvalue_create_bool(ctx, ret);
   }
@@ -6653,8 +6653,8 @@ ret_t vgcanvas_t_init(JSContext* ctx) {
                                  wrap_vgcanvas_clip_path);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_clip_rect",
                                  wrap_vgcanvas_clip_rect);
-  jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_is_rectf_int_clip_rect",
-                                 wrap_vgcanvas_is_rectf_int_clip_rect);
+  jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_is_rectf_in_clip_rect",
+                                 wrap_vgcanvas_is_rectf_in_clip_rect);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_intersect_clip_rect",
                                  wrap_vgcanvas_intersect_clip_rect);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_fill", wrap_vgcanvas_fill);
