@@ -31,7 +31,8 @@ static ret_t on_cmd_line(int argc, char* argv[]) {
   return RET_OK;
 }
 
-#define BOOT_SCRIPT "\
+#define BOOT_SCRIPT \
+  "\
 if (this['console'] === undefined) { \
   this.console = {};\
   this.console.log = function (str) {\
