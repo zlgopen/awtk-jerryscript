@@ -19597,33 +19597,6 @@ static HANDLER_PROTO(wrap_serial_widget_t_get_prop_flowcontrol) {
   return jret;
 }
 
-static HANDLER_PROTO(wrap_serial_widget_t_get_prop_istream) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  serial_widget_t* obj = (serial_widget_t*)jsvalue_get_pointer(ctx, argv[0], "serial_widget_t*");
-
-  jret = jsvalue_create_pointer(ctx, obj->istream, "tk_istream_t*");
-  return jret;
-}
-
-static HANDLER_PROTO(wrap_serial_widget_t_get_prop_ostream) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  serial_widget_t* obj = (serial_widget_t*)jsvalue_get_pointer(ctx, argv[0], "serial_widget_t*");
-
-  jret = jsvalue_create_pointer(ctx, obj->ostream, "tk_ostream_t*");
-  return jret;
-}
-
-static HANDLER_PROTO(wrap_serial_widget_t_get_prop_iostream) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  serial_widget_t* obj = (serial_widget_t*)jsvalue_get_pointer(ctx, argv[0], "serial_widget_t*");
-
-  jret = jsvalue_create_pointer(ctx, obj->iostream, "tk_iostream_t*");
-  return jret;
-}
-
 static HANDLER_PROTO(wrap_serial_widget_t_get_prop_check_interval) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -19664,12 +19637,6 @@ ret_t serial_widget_t_init(JSContext* ctx) {
                                  wrap_serial_widget_t_get_prop_stopbits);
   jerryx_handler_register_global((const jerry_char_t*)"serial_widget_t_get_prop_flowcontrol",
                                  wrap_serial_widget_t_get_prop_flowcontrol);
-  jerryx_handler_register_global((const jerry_char_t*)"serial_widget_t_get_prop_istream",
-                                 wrap_serial_widget_t_get_prop_istream);
-  jerryx_handler_register_global((const jerry_char_t*)"serial_widget_t_get_prop_ostream",
-                                 wrap_serial_widget_t_get_prop_ostream);
-  jerryx_handler_register_global((const jerry_char_t*)"serial_widget_t_get_prop_iostream",
-                                 wrap_serial_widget_t_get_prop_iostream);
   jerryx_handler_register_global((const jerry_char_t*)"serial_widget_t_get_prop_check_interval",
                                  wrap_serial_widget_t_get_prop_check_interval);
 
