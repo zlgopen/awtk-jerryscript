@@ -198,7 +198,7 @@ if (argc >= 2) {
 return jsvalue_create_int(ctx, ret);
 }
 
-JSFUNC_DECL(wrap_locale_infos_on) 
-  assert(!"not supported");
-  return jsvalue_create_int(ctx, 0);
+JSFUNC_DECL(wrap_locale_infos_on)
+assert(!"not supported");
+return jsvalue_create_int(ctx, 0);
 }
