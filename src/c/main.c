@@ -50,13 +50,12 @@ static ret_t application_init() {
 }
 
 static ret_t application_exit() {
-  awtk_jerryscript_deinit();
-
   return RET_OK;
 }
 
 #define APP_NAME "AWTK-JS"
 #define ON_CMD_LINE on_cmd_line
+#define FINAL_EXIT() awtk_jerryscript_deinit()
 
 #include "../../res/assets.inc"
 #include "awtk_main.inc"
