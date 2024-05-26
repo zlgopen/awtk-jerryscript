@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp -rf ../awtk-quickjs/design .
+cp -rf ../awtk/design .
 
 cp -vf ../awtk-binding/demos/js/* design/default/scripts
 cp -vf ../awtk-binding/tools/code_gen/js/output/awtk.js* design/default/scripts
