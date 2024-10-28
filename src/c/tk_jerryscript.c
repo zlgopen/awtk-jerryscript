@@ -80,6 +80,7 @@
 #include "time_clock/time_clock.h"
 #include "timer_widget/timer_widget.h"
 #include "tkc/event.h"
+#include "tkc/named_value_hash.h"
 #include "widgets/app_bar.h"
 #include "widgets/button_group.h"
 #include "widgets/button.h"
@@ -115,6 +116,7 @@
 #include "tkc/idle_info.h"
 #include "tkc/object_array.h"
 #include "tkc/object_default.h"
+#include "tkc/object_hash.h"
 #include "tkc/timer_info.h"
 #include "widgets/calibration_win.h"
 #include "widgets/combo_box.h"
@@ -144,6 +146,8 @@ static jerry_object_native_info_t s_date_time_destroy_info = {
     (jerry_object_native_free_callback_t)date_time_destroy};
 static jerry_object_native_info_t s_named_value_destroy_info = {
     (jerry_object_native_free_callback_t)named_value_destroy};
+static jerry_object_native_info_t s_named_value_hash_destroy_info = {
+    (jerry_object_native_free_callback_t)named_value_hash_destroy};
 static jerry_object_native_info_t s_object_array_unref_info = {
     (jerry_object_native_free_callback_t)object_array_unref};
 static jerry_object_native_info_t s_object_default_unref_info = {
@@ -1487,6 +1491,19 @@ static HANDLER_PROTO(wrap_object_set_prop_uint64) {
   return jret;
 }
 
+static HANDLER_PROTO(wrap_object_clear_props) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    object_t* obj = (object_t*)jsvalue_get_pointer(ctx, argv[0], "object_t*");
+    ret = (ret_t)object_clear_props(obj);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 static HANDLER_PROTO(wrap_object_t_get_prop_ref_count) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -1614,6 +1631,8 @@ ret_t object_t_init(JSContext* ctx) {
                                  wrap_object_get_prop_uint64);
   jerryx_handler_register_global((const jerry_char_t*)"object_set_prop_uint64",
                                  wrap_object_set_prop_uint64);
+  jerryx_handler_register_global((const jerry_char_t*)"object_clear_props",
+                                 wrap_object_clear_props);
   jerryx_handler_register_global((const jerry_char_t*)"object_t_get_prop_ref_count",
                                  wrap_object_t_get_prop_ref_count);
   jerryx_handler_register_global((const jerry_char_t*)"object_t_get_prop_name",
@@ -3892,6 +3911,35 @@ static HANDLER_PROTO(wrap_event_from_name) {
   return jret;
 }
 
+static HANDLER_PROTO(wrap_event_register_custom_name) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    int32_t event_type = (int32_t)jsvalue_get_int_value(ctx, argv[0]);
+    const char* name = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
+    ret = (ret_t)event_register_custom_name(event_type, name);
+    TKMEM_FREE(name);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_event_unregister_custom_name) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    const char* name = (const char*)jsvalue_get_utf8_string(ctx, argv[0]);
+    ret = (ret_t)event_unregister_custom_name(name);
+    TKMEM_FREE(name);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 static HANDLER_PROTO(wrap_event_cast) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -3969,6 +4017,10 @@ static HANDLER_PROTO(wrap_event_t_get_prop_target) {
 
 ret_t event_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"event_from_name", wrap_event_from_name);
+  jerryx_handler_register_global((const jerry_char_t*)"event_register_custom_name",
+                                 wrap_event_register_custom_name);
+  jerryx_handler_register_global((const jerry_char_t*)"event_unregister_custom_name",
+                                 wrap_event_unregister_custom_name);
   jerryx_handler_register_global((const jerry_char_t*)"event_cast", wrap_event_cast);
   jerryx_handler_register_global((const jerry_char_t*)"event_get_type", wrap_event_get_type);
   jerryx_handler_register_global((const jerry_char_t*)"event_create", wrap_event_create);
@@ -15000,6 +15052,33 @@ ret_t ui_load_event_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
+static HANDLER_PROTO(wrap_font_manager_set_standard_font_size) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    font_manager_t* fm = (font_manager_t*)jsvalue_get_pointer(ctx, argv[0], "font_manager_t*");
+    bool_t is_standard = (bool_t)jsvalue_get_boolean_value(ctx, argv[1]);
+    ret = (ret_t)font_manager_set_standard_font_size(fm, is_standard);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_font_manager_get_standard_font_size) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    bool_t ret = (bool_t)0;
+    font_manager_t* fm = (font_manager_t*)jsvalue_get_pointer(ctx, argv[0], "font_manager_t*");
+    ret = (bool_t)font_manager_get_standard_font_size(fm);
+
+    jret = jsvalue_create_bool(ctx, ret);
+  }
+  return jret;
+}
+
 static HANDLER_PROTO(wrap_font_manager_unload_font) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -15044,6 +15123,10 @@ static HANDLER_PROTO(wrap_font_manager_unload_all) {
 }
 
 ret_t font_manager_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"font_manager_set_standard_font_size",
+                                 wrap_font_manager_set_standard_font_size);
+  jerryx_handler_register_global((const jerry_char_t*)"font_manager_get_standard_font_size",
+                                 wrap_font_manager_get_standard_font_size);
   jerryx_handler_register_global((const jerry_char_t*)"font_manager_unload_font",
                                  wrap_font_manager_unload_font);
   jerryx_handler_register_global((const jerry_char_t*)"font_manager_shrink_cache",
@@ -22972,6 +23055,75 @@ ret_t log_message_event_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
+static HANDLER_PROTO(wrap_named_value_hash_create) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 0) {
+    named_value_hash_t* ret = NULL;
+    ret = (named_value_hash_t*)named_value_hash_create();
+
+    jret = jsvalue_create_object(ctx, ret, "named_value_hash_t*", &s_named_value_hash_destroy_info);
+  }
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_named_value_hash_set_name) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    named_value_hash_t* nvh =
+        (named_value_hash_t*)jsvalue_get_pointer(ctx, argv[0], "named_value_hash_t*");
+    const char* name = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
+    ret = (ret_t)named_value_hash_set_name(nvh, name);
+    TKMEM_FREE(name);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_named_value_hash_clone) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    named_value_hash_t* ret = NULL;
+    named_value_hash_t* nvh =
+        (named_value_hash_t*)jsvalue_get_pointer(ctx, argv[0], "named_value_hash_t*");
+    ret = (named_value_hash_t*)named_value_hash_clone(nvh);
+
+    jret = jsvalue_create_pointer(ctx, ret, "named_value_hash_t*");
+  }
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_named_value_hash_get_hash_from_str) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    uint64_t ret = (uint64_t)0;
+    const char* str = (const char*)jsvalue_get_utf8_string(ctx, argv[0]);
+    ret = (uint64_t)named_value_hash_get_hash_from_str(str);
+    TKMEM_FREE(str);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+ret_t named_value_hash_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"named_value_hash_create",
+                                 wrap_named_value_hash_create);
+  jerryx_handler_register_global((const jerry_char_t*)"named_value_hash_set_name",
+                                 wrap_named_value_hash_set_name);
+  jerryx_handler_register_global((const jerry_char_t*)"named_value_hash_clone",
+                                 wrap_named_value_hash_clone);
+  jerryx_handler_register_global((const jerry_char_t*)"named_value_hash_get_hash_from_str",
+                                 wrap_named_value_hash_get_hash_from_str);
+
+  return RET_OK;
+}
+
 static HANDLER_PROTO(wrap_app_bar_create) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -27153,6 +27305,56 @@ ret_t object_default_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
+static HANDLER_PROTO(wrap_object_hash_create) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 0) {
+    object_t* ret = NULL;
+    ret = (object_t*)object_hash_create();
+
+    jret = jsvalue_create_pointer(ctx, ret, "object_hash_t*");
+  }
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_object_hash_create_ex) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    object_t* ret = NULL;
+    bool_t enable_path = (bool_t)jsvalue_get_boolean_value(ctx, argv[0]);
+    ret = (object_t*)object_hash_create_ex(enable_path);
+
+    jret = jsvalue_create_pointer(ctx, ret, "object_hash_t*");
+  }
+  return jret;
+}
+
+static HANDLER_PROTO(wrap_object_hash_set_keep_prop_type) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    object_t* obj = (object_t*)jsvalue_get_pointer(ctx, argv[0], "object_t*");
+    bool_t keep_prop_type = (bool_t)jsvalue_get_boolean_value(ctx, argv[1]);
+    ret = (ret_t)object_hash_set_keep_prop_type(obj, keep_prop_type);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
+ret_t object_hash_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"object_hash_create",
+                                 wrap_object_hash_create);
+  jerryx_handler_register_global((const jerry_char_t*)"object_hash_create_ex",
+                                 wrap_object_hash_create_ex);
+  jerryx_handler_register_global((const jerry_char_t*)"object_hash_set_keep_prop_type",
+                                 wrap_object_hash_set_keep_prop_type);
+
+  return RET_OK;
+}
+
 static HANDLER_PROTO(wrap_timer_info_cast) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -28254,6 +28456,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   cmd_exec_event_t_init(ctx);
   value_change_event_t_init(ctx);
   log_message_event_t_init(ctx);
+  named_value_hash_t_init(ctx);
   app_bar_t_init(ctx);
   button_group_t_init(ctx);
   button_t_init(ctx);
@@ -28290,6 +28493,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   idle_info_t_init(ctx);
   object_array_t_init(ctx);
   object_default_t_init(ctx);
+  object_hash_t_init(ctx);
   timer_info_t_init(ctx);
   calibration_win_t_init(ctx);
   combo_box_t_init(ctx);
