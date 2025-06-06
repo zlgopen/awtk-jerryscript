@@ -440,44 +440,6 @@ static HANDLER_PROTO(wrap_bitmap_create_ex) {
   return jret;
 }
 
-static HANDLER_PROTO(wrap_bitmap_create_ex2) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 6) {
-    bitmap_t* ret = NULL;
-    uint32_t w = (uint32_t)jsvalue_get_int_value(ctx, argv[0]);
-    uint32_t h = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
-    uint32_t line_length = (uint32_t)jsvalue_get_int_value(ctx, argv[2]);
-    bitmap_format_t format = (bitmap_format_t)jsvalue_get_int_value(ctx, argv[3]);
-    uint8_t* data = (uint8_t*)jsvalue_get_pointer(ctx, argv[4], "uint8_t*");
-    bool_t should_free_data = (bool_t)jsvalue_get_boolean_value(ctx, argv[5]);
-    ret = (bitmap_t*)bitmap_create_ex2(w, h, line_length, format, data, should_free_data);
-
-    jret = jsvalue_create_object(ctx, ret, "bitmap_t*", &s_bitmap_destroy_with_self_info);
-  }
-  return jret;
-}
-
-static HANDLER_PROTO(wrap_bitmap_create_ex3) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 7) {
-    bitmap_t* ret = NULL;
-    uint32_t w = (uint32_t)jsvalue_get_int_value(ctx, argv[0]);
-    uint32_t h = (uint32_t)jsvalue_get_int_value(ctx, argv[1]);
-    uint32_t line_length = (uint32_t)jsvalue_get_int_value(ctx, argv[2]);
-    bitmap_format_t format = (bitmap_format_t)jsvalue_get_int_value(ctx, argv[3]);
-    uint8_t* data = (uint8_t*)jsvalue_get_pointer(ctx, argv[4], "uint8_t*");
-    uint8_t* physical_data_addr = (uint8_t*)jsvalue_get_pointer(ctx, argv[5], "uint8_t*");
-    bool_t should_free_data = (bool_t)jsvalue_get_boolean_value(ctx, argv[6]);
-    ret = (bitmap_t*)bitmap_create_ex3(w, h, line_length, format, data, physical_data_addr,
-                                       should_free_data);
-
-    jret = jsvalue_create_object(ctx, ret, "bitmap_t*", &s_bitmap_destroy_with_self_info);
-  }
-  return jret;
-}
-
 static HANDLER_PROTO(wrap_bitmap_get_bpp) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -561,8 +523,6 @@ static HANDLER_PROTO(wrap_bitmap_t_get_prop_name) {
 ret_t bitmap_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_create", wrap_bitmap_create);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_create_ex", wrap_bitmap_create_ex);
-  jerryx_handler_register_global((const jerry_char_t*)"bitmap_create_ex2", wrap_bitmap_create_ex2);
-  jerryx_handler_register_global((const jerry_char_t*)"bitmap_create_ex3", wrap_bitmap_create_ex3);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_get_bpp", wrap_bitmap_get_bpp);
   jerryx_handler_register_global((const jerry_char_t*)"bitmap_get_bpp_of_format",
                                  wrap_bitmap_get_bpp_of_format);
@@ -4144,24 +4104,9 @@ static HANDLER_PROTO(wrap_idle_remove) {
   return jret;
 }
 
-static HANDLER_PROTO(wrap_idle_remove_all_by_ctx) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 1) {
-    ret_t ret = (ret_t)0;
-    void* ctx = NULL;
-    ret = (ret_t)idle_remove_all_by_ctx(ctx);
-
-    jret = jsvalue_create_int(ctx, ret);
-  }
-  return jret;
-}
-
 ret_t idle_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"idle_add", wrap_idle_add);
   jerryx_handler_register_global((const jerry_char_t*)"idle_remove", wrap_idle_remove);
-  jerryx_handler_register_global((const jerry_char_t*)"idle_remove_all_by_ctx",
-                                 wrap_idle_remove_all_by_ctx);
 
   return RET_OK;
 }
@@ -6087,19 +6032,6 @@ static HANDLER_PROTO(wrap_timer_remove) {
   return jret;
 }
 
-static HANDLER_PROTO(wrap_timer_remove_all_by_ctx) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 1) {
-    ret_t ret = (ret_t)0;
-    void* ctx = NULL;
-    ret = (ret_t)timer_remove_all_by_ctx(ctx);
-
-    jret = jsvalue_create_int(ctx, ret);
-  }
-  return jret;
-}
-
 static HANDLER_PROTO(wrap_timer_reset) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -6156,8 +6088,6 @@ static HANDLER_PROTO(wrap_timer_modify) {
 ret_t timer_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"timer_add", wrap_timer_add);
   jerryx_handler_register_global((const jerry_char_t*)"timer_remove", wrap_timer_remove);
-  jerryx_handler_register_global((const jerry_char_t*)"timer_remove_all_by_ctx",
-                                 wrap_timer_remove_all_by_ctx);
   jerryx_handler_register_global((const jerry_char_t*)"timer_reset", wrap_timer_reset);
   jerryx_handler_register_global((const jerry_char_t*)"timer_suspend", wrap_timer_suspend);
   jerryx_handler_register_global((const jerry_char_t*)"timer_resume", wrap_timer_resume);
@@ -10602,22 +10532,6 @@ static HANDLER_PROTO(wrap_widget_get_prop_str) {
   return jret;
 }
 
-static HANDLER_PROTO(wrap_widget_set_prop_pointer) {
-  void* ctx = NULL;
-  jsvalue_t jret = JS_NULL;
-  if (argc >= 3) {
-    ret_t ret = (ret_t)0;
-    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
-    const char* name = (const char*)jsvalue_get_utf8_string(ctx, argv[1]);
-    void* v = (void*)jsvalue_get_pointer(ctx, argv[2], "void*");
-    ret = (ret_t)widget_set_prop_pointer(widget, name, v);
-    TKMEM_FREE(name);
-
-    jret = jsvalue_create_int(ctx, ret);
-  }
-  return jret;
-}
-
 static HANDLER_PROTO(wrap_widget_get_prop_pointer) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -11707,8 +11621,6 @@ ret_t widget_t_init(JSContext* ctx) {
                                  wrap_widget_set_prop_str);
   jerryx_handler_register_global((const jerry_char_t*)"widget_get_prop_str",
                                  wrap_widget_get_prop_str);
-  jerryx_handler_register_global((const jerry_char_t*)"widget_set_prop_pointer",
-                                 wrap_widget_set_prop_pointer);
   jerryx_handler_register_global((const jerry_char_t*)"widget_get_prop_pointer",
                                  wrap_widget_get_prop_pointer);
   jerryx_handler_register_global((const jerry_char_t*)"widget_set_prop_float",

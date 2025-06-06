@@ -346,37 +346,6 @@ var TBitmap = /** @class */ (function () {
         return new TBitmap(bitmap_create_ex(w, h, line_length, format));
     };
     /**
-     * 创建图片对象。
-     *
-     * @param w 宽度。
-     * @param h 高度。
-     * @param line_length line_length。
-     * @param format 格式。
-     * @param data 图像数据。
-     * @param should_free_data 是否释放数据。
-     *
-     * @returns 返回bitmap对象。
-     */
-    TBitmap.createEx2 = function (w, h, line_length, format, data, should_free_data) {
-        return new TBitmap(bitmap_create_ex2(w, h, line_length, format, data, should_free_data));
-    };
-    /**
-     * 创建图片对象。
-     *
-     * @param w 宽度。
-     * @param h 高度。
-     * @param line_length line_length。
-     * @param format 格式。
-     * @param data 图像数据。
-     * @param physical_data_addr 物理地址(部分硬件加速需要)。
-     * @param should_free_data 是否释放数据。
-     *
-     * @returns 返回bitmap对象。
-     */
-    TBitmap.createEx3 = function (w, h, line_length, format, data, physical_data_addr, should_free_data) {
-        return new TBitmap(bitmap_create_ex3(w, h, line_length, format, data, physical_data_addr, should_free_data));
-    };
-    /**
      * 获取图片一个像素占用的字节数。
      *
      *
@@ -3153,16 +3122,6 @@ var TIdle = /** @class */ (function () {
     TIdle.remove = function (idle_id) {
         return idle_remove(idle_id);
     };
-    /**
-     * 根据上下文删除所有对应的idle。
-     *
-     * @param ctx idle回调函数的上下文
-     *
-     * @returns 返回RET_OK表示成功，否则表示失败。
-     */
-    TIdle.removeAllByCtx = function (ctx) {
-        return idle_remove_all_by_ctx(ctx);
-    };
     return TIdle;
 }());
 exports.TIdle = TIdle;
@@ -4748,16 +4707,6 @@ var TTimer = /** @class */ (function () {
      */
     TTimer.remove = function (timer_id) {
         return timer_remove(timer_id);
-    };
-    /**
-     * 根据上下文删除所有对应的timer。
-     *
-     * @param ctx timer回调函数的上下文。
-     *
-     * @returns 返回RET_OK表示成功，否则表示失败。
-     */
-    TTimer.removeAllByCtx = function (ctx) {
-        return timer_remove_all_by_ctx(ctx);
     };
     /**
      * 重置指定的timer，重置之后定时器重新开始计时。
@@ -8289,17 +8238,6 @@ var TWidget = /** @class */ (function () {
      */
     TWidget.prototype.getPropStr = function (name, defval) {
         return widget_get_prop_str(this != null ? (this.nativeObj || this) : null, name, defval);
-    };
-    /**
-     * 设置指针格式的属性。
-     *
-     * @param name 属性的名称。
-     * @param v 属性的值。
-     *
-     * @returns 返回RET_OK表示成功，否则表示失败。
-     */
-    TWidget.prototype.setPropPointer = function (name, v) {
-        return widget_set_prop_pointer(this != null ? (this.nativeObj || this) : null, name, v);
     };
     /**
      * 获取指针格式的属性。
