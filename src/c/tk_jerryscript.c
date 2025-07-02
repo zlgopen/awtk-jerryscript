@@ -6317,6 +6317,32 @@ ret_t bitmap_flag_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
+static HANDLER_PROTO(get_VGCANVAS_FILL_MODE_ALL_FILL) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, VGCANVAS_FILL_MODE_ALL_FILL);
+}
+
+static HANDLER_PROTO(get_VGCANVAS_FILL_MODE_NON_ZERO) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, VGCANVAS_FILL_MODE_NON_ZERO);
+}
+
+static HANDLER_PROTO(get_VGCANVAS_FILL_MODE_EVEN_ODD) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, VGCANVAS_FILL_MODE_EVEN_ODD);
+}
+
+ret_t vgcanvas_fill_mode_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"VGCANVAS_FILL_MODE_ALL_FILL",
+                                 get_VGCANVAS_FILL_MODE_ALL_FILL);
+  jerryx_handler_register_global((const jerry_char_t*)"VGCANVAS_FILL_MODE_NON_ZERO",
+                                 get_VGCANVAS_FILL_MODE_NON_ZERO);
+  jerryx_handler_register_global((const jerry_char_t*)"VGCANVAS_FILL_MODE_EVEN_ODD",
+                                 get_VGCANVAS_FILL_MODE_EVEN_ODD);
+
+  return RET_OK;
+}
+
 static HANDLER_PROTO(wrap_vgcanvas_cast) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -6539,14 +6565,14 @@ static HANDLER_PROTO(wrap_vgcanvas_close_path) {
   return jret;
 }
 
-static HANDLER_PROTO(wrap_vgcanvas_path_winding) {
+static HANDLER_PROTO(wrap_vgcanvas_set_fill_mode) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
   if (argc >= 2) {
     ret_t ret = (ret_t)0;
     vgcanvas_t* vg = (vgcanvas_t*)jsvalue_get_pointer(ctx, argv[0], "vgcanvas_t*");
-    bool_t dir = (bool_t)jsvalue_get_boolean_value(ctx, argv[1]);
-    ret = (ret_t)vgcanvas_path_winding(vg, dir);
+    vgcanvas_fill_mode_t fill_mode = (vgcanvas_fill_mode_t)jsvalue_get_int_value(ctx, argv[1]);
+    ret = (ret_t)vgcanvas_set_fill_mode(vg, fill_mode);
 
     jret = jsvalue_create_int(ctx, ret);
   }
@@ -7188,8 +7214,8 @@ ret_t vgcanvas_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_ellipse", wrap_vgcanvas_ellipse);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_close_path",
                                  wrap_vgcanvas_close_path);
-  jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_path_winding",
-                                 wrap_vgcanvas_path_winding);
+  jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_set_fill_mode",
+                                 wrap_vgcanvas_set_fill_mode);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_rotate", wrap_vgcanvas_rotate);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_scale", wrap_vgcanvas_scale);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_translate",
@@ -13712,6 +13738,29 @@ ret_t object_prop_t_init(JSContext* ctx) {
                                  get_OBJECT_PROP_CHECKED);
   jerryx_handler_register_global((const jerry_char_t*)"OBJECT_PROP_SELECTED_INDEX",
                                  get_OBJECT_PROP_SELECTED_INDEX);
+
+  return RET_OK;
+}
+
+static HANDLER_PROTO(get_OBJECT_LIFE_NONE) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, OBJECT_LIFE_NONE);
+}
+
+static HANDLER_PROTO(get_OBJECT_LIFE_OWN) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, OBJECT_LIFE_OWN);
+}
+
+static HANDLER_PROTO(get_OBJECT_LIFE_HOLD) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, OBJECT_LIFE_HOLD);
+}
+
+ret_t object_life_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"OBJECT_LIFE_NONE", get_OBJECT_LIFE_NONE);
+  jerryx_handler_register_global((const jerry_char_t*)"OBJECT_LIFE_OWN", get_OBJECT_LIFE_OWN);
+  jerryx_handler_register_global((const jerry_char_t*)"OBJECT_LIFE_HOLD", get_OBJECT_LIFE_HOLD);
 
   return RET_OK;
 }
@@ -20424,6 +20473,19 @@ static HANDLER_PROTO(wrap_scroll_view_set_virtual_h) {
   return jret;
 }
 
+static HANDLER_PROTO(wrap_scroll_view_fix_offset) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 1) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    ret = (ret_t)scroll_view_fix_offset(widget);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 static HANDLER_PROTO(wrap_scroll_view_set_xslidable) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -20700,6 +20762,8 @@ ret_t scroll_view_t_init(JSContext* ctx) {
                                  wrap_scroll_view_set_virtual_w);
   jerryx_handler_register_global((const jerry_char_t*)"scroll_view_set_virtual_h",
                                  wrap_scroll_view_set_virtual_h);
+  jerryx_handler_register_global((const jerry_char_t*)"scroll_view_fix_offset",
+                                 wrap_scroll_view_fix_offset);
   jerryx_handler_register_global((const jerry_char_t*)"scroll_view_set_xslidable",
                                  wrap_scroll_view_set_xslidable);
   jerryx_handler_register_global((const jerry_char_t*)"scroll_view_set_yslidable",
@@ -28770,6 +28834,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   app_type_t_init(ctx);
   bitmap_format_t_init(ctx);
   bitmap_flag_t_init(ctx);
+  vgcanvas_fill_mode_t_init(ctx);
   vgcanvas_t_init(ctx);
   vgcanvas_line_cap_t_init(ctx);
   vgcanvas_line_join_t_init(ctx);
@@ -28793,6 +28858,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   MIME_TYPE_init(ctx);
   object_cmd_t_init(ctx);
   object_prop_t_init(ctx);
+  object_life_t_init(ctx);
   rlog_t_init(ctx);
   time_now_t_init(ctx);
   timer_manager_t_init(ctx);
