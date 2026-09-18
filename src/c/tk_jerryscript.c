@@ -8,7 +8,6 @@
 #include "tkc/object.h"
 #include "tkc/value.h"
 #include "src/awtk_global.h"
-#include "base/bidi.h"
 #include "base/canvas_offline.h"
 #include "base/canvas.h"
 #include "base/clip_board.h"
@@ -2349,53 +2348,6 @@ ret_t global_t_init(JSContext* ctx) {
   return RET_OK;
 }
 
-static HANDLER_PROTO(get_BIDI_TYPE_AUTO) {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, BIDI_TYPE_AUTO);
-}
-
-static HANDLER_PROTO(get_BIDI_TYPE_LTR) {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, BIDI_TYPE_LTR);
-}
-
-static HANDLER_PROTO(get_BIDI_TYPE_RTL) {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, BIDI_TYPE_RTL);
-}
-
-static HANDLER_PROTO(get_BIDI_TYPE_LRO) {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, BIDI_TYPE_LRO);
-}
-
-static HANDLER_PROTO(get_BIDI_TYPE_RLO) {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, BIDI_TYPE_RLO);
-}
-
-static HANDLER_PROTO(get_BIDI_TYPE_WLTR) {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, BIDI_TYPE_WLTR);
-}
-
-static HANDLER_PROTO(get_BIDI_TYPE_WRTL) {
-  void* ctx = NULL;
-  return jsvalue_create_int(ctx, BIDI_TYPE_WRTL);
-}
-
-ret_t bidi_type_t_init(JSContext* ctx) {
-  jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_AUTO", get_BIDI_TYPE_AUTO);
-  jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_LTR", get_BIDI_TYPE_LTR);
-  jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_RTL", get_BIDI_TYPE_RTL);
-  jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_LRO", get_BIDI_TYPE_LRO);
-  jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_RLO", get_BIDI_TYPE_RLO);
-  jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_WLTR", get_BIDI_TYPE_WLTR);
-  jerryx_handler_register_global((const jerry_char_t*)"BIDI_TYPE_WRTL", get_BIDI_TYPE_WRTL);
-
-  return RET_OK;
-}
-
 static HANDLER_PROTO(get_IMAGE_DRAW_DEFAULT) {
   void* ctx = NULL;
   return jsvalue_create_int(ctx, IMAGE_DRAW_DEFAULT);
@@ -4084,6 +4036,56 @@ ret_t event_t_init(JSContext* ctx) {
                                  wrap_event_t_get_prop_time);
   jerryx_handler_register_global((const jerry_char_t*)"event_t_get_prop_target",
                                  wrap_event_t_get_prop_target);
+
+  return RET_OK;
+}
+
+static HANDLER_PROTO(get_FONT_BIDI_TYPE_AUTO) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, FONT_BIDI_TYPE_AUTO);
+}
+
+static HANDLER_PROTO(get_FONT_BIDI_TYPE_LTR) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, FONT_BIDI_TYPE_LTR);
+}
+
+static HANDLER_PROTO(get_FONT_BIDI_TYPE_RTL) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, FONT_BIDI_TYPE_RTL);
+}
+
+static HANDLER_PROTO(get_FONT_BIDI_TYPE_LRO) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, FONT_BIDI_TYPE_LRO);
+}
+
+static HANDLER_PROTO(get_FONT_BIDI_TYPE_RLO) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, FONT_BIDI_TYPE_RLO);
+}
+
+static HANDLER_PROTO(get_FONT_BIDI_TYPE_WLTR) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, FONT_BIDI_TYPE_WLTR);
+}
+
+static HANDLER_PROTO(get_FONT_BIDI_TYPE_WRTL) {
+  void* ctx = NULL;
+  return jsvalue_create_int(ctx, FONT_BIDI_TYPE_WRTL);
+}
+
+ret_t font_bidi_type_t_init(JSContext* ctx) {
+  jerryx_handler_register_global((const jerry_char_t*)"FONT_BIDI_TYPE_AUTO",
+                                 get_FONT_BIDI_TYPE_AUTO);
+  jerryx_handler_register_global((const jerry_char_t*)"FONT_BIDI_TYPE_LTR", get_FONT_BIDI_TYPE_LTR);
+  jerryx_handler_register_global((const jerry_char_t*)"FONT_BIDI_TYPE_RTL", get_FONT_BIDI_TYPE_RTL);
+  jerryx_handler_register_global((const jerry_char_t*)"FONT_BIDI_TYPE_LRO", get_FONT_BIDI_TYPE_LRO);
+  jerryx_handler_register_global((const jerry_char_t*)"FONT_BIDI_TYPE_RLO", get_FONT_BIDI_TYPE_RLO);
+  jerryx_handler_register_global((const jerry_char_t*)"FONT_BIDI_TYPE_WLTR",
+                                 get_FONT_BIDI_TYPE_WLTR);
+  jerryx_handler_register_global((const jerry_char_t*)"FONT_BIDI_TYPE_WRTL",
+                                 get_FONT_BIDI_TYPE_WRTL);
 
   return RET_OK;
 }
@@ -6891,6 +6893,25 @@ static HANDLER_PROTO(wrap_vgcanvas_fill_text) {
   return jret;
 }
 
+static HANDLER_PROTO(wrap_vgcanvas_fill_text_by_glyphs) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 7) {
+    ret_t ret = (ret_t)0;
+    vgcanvas_t* vg = (vgcanvas_t*)jsvalue_get_pointer(ctx, argv[0], "vgcanvas_t*");
+    glyphs_t* glyphs = (glyphs_t*)jsvalue_get_pointer(ctx, argv[1], "glyphs_t*");
+    uint32_t start = (uint32_t)jsvalue_get_int_value(ctx, argv[2]);
+    uint32_t len = (uint32_t)jsvalue_get_int_value(ctx, argv[3]);
+    xy_t x = (xy_t)jsvalue_get_int_value(ctx, argv[4]);
+    xy_t y = (xy_t)jsvalue_get_int_value(ctx, argv[5]);
+    float_t max_width = (float_t)jsvalue_get_number_value(ctx, argv[6]);
+    ret = (ret_t)vgcanvas_fill_text_by_glyphs(vg, glyphs, start, len, x, y, max_width);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 static HANDLER_PROTO(wrap_vgcanvas_measure_text) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -7292,6 +7313,8 @@ ret_t vgcanvas_t_init(JSContext* ctx) {
                                  wrap_vgcanvas_set_text_baseline);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_fill_text",
                                  wrap_vgcanvas_fill_text);
+  jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_fill_text_by_glyphs",
+                                 wrap_vgcanvas_fill_text_by_glyphs);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_measure_text",
                                  wrap_vgcanvas_measure_text);
   jerryx_handler_register_global((const jerry_char_t*)"vgcanvas_draw_image",
@@ -7495,6 +7518,11 @@ static HANDLER_PROTO(get_WIDGET_PROP_DIRTY_RECT_TOLERANCE) {
 static HANDLER_PROTO(get_WIDGET_PROP_BIDI) {
   void* ctx = NULL;
   return jsvalue_create_string(ctx, WIDGET_PROP_BIDI);
+}
+
+static HANDLER_PROTO(get_WIDGET_PROP_SHAPING) {
+  void* ctx = NULL;
+  return jsvalue_create_string(ctx, WIDGET_PROP_SHAPING);
 }
 
 static HANDLER_PROTO(get_WIDGET_PROP_CANVAS) {
@@ -8369,6 +8397,8 @@ ret_t widget_prop_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_DIRTY_RECT_TOLERANCE",
                                  get_WIDGET_PROP_DIRTY_RECT_TOLERANCE);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_BIDI", get_WIDGET_PROP_BIDI);
+  jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_SHAPING",
+                                 get_WIDGET_PROP_SHAPING);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_CANVAS", get_WIDGET_PROP_CANVAS);
   jerryx_handler_register_global((const jerry_char_t*)"WIDGET_PROP_LOCALIZE_OPTIONS",
                                  get_WIDGET_PROP_LOCALIZE_OPTIONS);
@@ -22412,6 +22442,15 @@ static HANDLER_PROTO(wrap_slide_view_t_get_prop_animating_time) {
   return jret;
 }
 
+static HANDLER_PROTO(wrap_slide_view_t_get_prop_active) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  slide_view_t* obj = (slide_view_t*)jsvalue_get_pointer(ctx, argv[0], "slide_view_t*");
+
+  jret = jsvalue_create_int(ctx, obj->active);
+  return jret;
+}
+
 ret_t slide_view_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"slide_view_create", wrap_slide_view_create);
   jerryx_handler_register_global((const jerry_char_t*)"slide_view_cast", wrap_slide_view_cast);
@@ -22445,6 +22484,8 @@ ret_t slide_view_t_init(JSContext* ctx) {
                                  wrap_slide_view_t_get_prop_drag_threshold);
   jerryx_handler_register_global((const jerry_char_t*)"slide_view_t_get_prop_animating_time",
                                  wrap_slide_view_t_get_prop_animating_time);
+  jerryx_handler_register_global((const jerry_char_t*)"slide_view_t_get_prop_active",
+                                 wrap_slide_view_t_get_prop_active);
 
   return RET_OK;
 }
@@ -25440,6 +25481,20 @@ static HANDLER_PROTO(wrap_edit_set_focus_next_when_enter) {
   return jret;
 }
 
+static HANDLER_PROTO(wrap_edit_set_scroll_to_begin_on_blur) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  if (argc >= 2) {
+    ret_t ret = (ret_t)0;
+    widget_t* widget = (widget_t*)jsvalue_get_pointer(ctx, argv[0], "widget_t*");
+    bool_t scroll_to_begin_on_blur = (bool_t)jsvalue_get_boolean_value(ctx, argv[1]);
+    ret = (ret_t)edit_set_scroll_to_begin_on_blur(widget, scroll_to_begin_on_blur);
+
+    jret = jsvalue_create_int(ctx, ret);
+  }
+  return jret;
+}
+
 static HANDLER_PROTO(wrap_edit_t_get_prop_tips) {
   void* ctx = NULL;
   jsvalue_t jret = JS_NULL;
@@ -25593,6 +25648,15 @@ static HANDLER_PROTO(wrap_edit_t_get_prop_focus_next_when_enter) {
   return jret;
 }
 
+static HANDLER_PROTO(wrap_edit_t_get_prop_scroll_to_begin_on_blur) {
+  void* ctx = NULL;
+  jsvalue_t jret = JS_NULL;
+  edit_t* obj = (edit_t*)jsvalue_get_pointer(ctx, argv[0], "edit_t*");
+
+  jret = jsvalue_create_bool(ctx, obj->scroll_to_begin_on_blur);
+  return jret;
+}
+
 ret_t edit_t_init(JSContext* ctx) {
   jerryx_handler_register_global((const jerry_char_t*)"edit_create", wrap_edit_create);
   jerryx_handler_register_global((const jerry_char_t*)"edit_cast", wrap_edit_cast);
@@ -25636,6 +25700,8 @@ ret_t edit_t_init(JSContext* ctx) {
                                  wrap_edit_get_selected_text);
   jerryx_handler_register_global((const jerry_char_t*)"edit_set_focus_next_when_enter",
                                  wrap_edit_set_focus_next_when_enter);
+  jerryx_handler_register_global((const jerry_char_t*)"edit_set_scroll_to_begin_on_blur",
+                                 wrap_edit_set_scroll_to_begin_on_blur);
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_tips",
                                  wrap_edit_t_get_prop_tips);
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_tr_tips",
@@ -25670,6 +25736,8 @@ ret_t edit_t_init(JSContext* ctx) {
                                  wrap_edit_t_get_prop_cancelable);
   jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_focus_next_when_enter",
                                  wrap_edit_t_get_prop_focus_next_when_enter);
+  jerryx_handler_register_global((const jerry_char_t*)"edit_t_get_prop_scroll_to_begin_on_blur",
+                                 wrap_edit_t_get_prop_scroll_to_begin_on_blur);
 
   return RET_OK;
 }
@@ -29711,7 +29779,6 @@ ret_t awtk_js_init(JSContext* ctx) {
   object_t_init(ctx);
   value_t_init(ctx);
   global_t_init(ctx);
-  bidi_type_t_init(ctx);
   image_draw_type_t_init(ctx);
   canvas_offline_t_init(ctx);
   canvas_t_init(ctx);
@@ -29720,6 +29787,7 @@ ret_t awtk_js_init(JSContext* ctx) {
   dialog_quit_code_t_init(ctx);
   event_type_t_init(ctx);
   event_t_init(ctx);
+  font_bidi_type_t_init(ctx);
   glyph_format_t_init(ctx);
   idle_t_init(ctx);
   image_manager_t_init(ctx);
